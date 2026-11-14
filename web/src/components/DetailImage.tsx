@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import type { AnalogSite, Body, Homologue } from '../data/types'
 import { BODIES } from '../planet/bodies'
 import PlanetGlobe from './PlanetGlobe'
+import { useLang } from '../i18n/useLang'
+import { BODY_NAMES } from '../i18n/strings'
 
 const SNAPSHOT = 'https://wvs.earthdata.nasa.gov/api/v1/snapshot'
 
@@ -39,6 +41,7 @@ interface Props {
 }
 
 export default function DetailImage({ body, site, homologue }: Props) {
+  const { lang, t } = useLang()
   const [loadedUrl, setLoadedUrl] = useState<string | null>(null)
   const [failedUrl, setFailedUrl] = useState<string | null>(null)
   const [relief, setRelief] = useState(false)
@@ -55,14 +58,14 @@ export default function DetailImage({ body, site, homologue }: Props) {
     const snap = earthSnapshotUrl(site)
     return (
       <figure className="detail-image">
-        {loadedUrl !== snap.url && failedUrl !== snap.url && <div className="image-loading">Cargando imagen…</div>}
+        {loadedUrl !== snap.url && failedUrl !== snap.url && <div className="image-loading">{t('image.loading')}</div>}
         {failedUrl === snap.url ? (
-          <div className="image-loading">No se pudo cargar la imagen satelital.</div>
+          <div className="image-loading">{t('image.failed')}</div>
         ) : (
           <img
             key={snap.url}
             src={snap.url}
-            alt={`Imagen satelital de ${site.name}`}
+            alt={t('image.alt', { name: site.name })}
             onLoad={() => setLoadedUrl(snap.url)}
             onError={() => setFailedUrl(snap.url)}
           />
@@ -70,7 +73,7 @@ export default function DetailImage({ body, site, homologue }: Props) {
         <figcaption>
           <strong>{site.name}</strong>
           <span>
-            {snap.label} · ≈{snap.widthKm} km de lado · NASA GIBS
+            {snap.label} · {t('image.side', { km: snap.widthKm })} · NASA GIBS
           </span>
         </figcaption>
       </figure>
@@ -80,7 +83,7 @@ export default function DetailImage({ body, site, homologue }: Props) {
   if (!homologue || !point) {
     return (
       <figure className="detail-image empty">
-        <div className="image-loading">Este sitio no tiene homólogo en {BODIES[body].label}.</div>
+        <div className="image-loading">{t('image.noHomologue', { body: BODY_NAMES[lang][body] })}</div>
       </figure>
     )
   }
@@ -94,26 +97,22 @@ export default function DetailImage({ body, site, homologue }: Props) {
     <figure className="detail-image">
       <PlanetGlobe body={body} markers={markers} focus={point} variant="closeup" relief={relief} closeupHeight={height} />
       {cfg.createReliefLayer && (
-        <div className="view-toggle" role="group" aria-label="Tipo de vista">
+        <div className="view-toggle" role="group" aria-label={t('image.view')}>
           <button className={!relief ? 'active' : ''} onClick={() => setRelief(false)}>
-            Imagen
+            {t('image.imagery')}
           </button>
           <button className={relief ? 'active' : ''} onClick={() => setRelief(true)}>
-            Relieve
+            {t('image.relief')}
           </button>
         </div>
       )}
       <figcaption>
         <strong>
           {homologue.name}
-          {homologue.approximate && <em> (ubicación aproximada)</em>}
+          {homologue.approximate && <em> {t('image.approximate')}</em>}
         </strong>
         <span>{relief && cfg.reliefCredit ? cfg.reliefCredit : cfg.imageryCredit}</span>
-        {polar && (
-          <span className="polar-note">
-            Cerca del polo el mosaico global se deforma; la vista se aleja para mostrar la región polar completa.
-          </span>
-        )}
+        {polar && <span className="polar-note">{t('image.polar')}</span>}
       </figcaption>
     </figure>
   )

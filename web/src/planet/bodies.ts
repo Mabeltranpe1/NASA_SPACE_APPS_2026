@@ -75,7 +75,7 @@ export const BODIES: Record<Body, BodyConfig> = {
       trekLayer('Mars', 'Mars_Viking_MDIM21_ClrMosaic_global_232m', Ellipsoid.MARS, 7, 'NASA Mars Trek · Viking MDIM 2.1 (232 m/px)'),
     createReliefLayer: () =>
       trekLayer('Mars', 'Mars_MGS_MOLA_ClrShade_merge_global_463m', Ellipsoid.MARS, 6, 'NASA Mars Trek · MGS MOLA (463 m/px)'),
-    reliefCredit: 'NASA Mars Trek · MOLA relieve coloreado por altura',
+    reliefCredit: 'NASA Mars Trek · MGS MOLA (463 m/px)',
   },
 }
 
