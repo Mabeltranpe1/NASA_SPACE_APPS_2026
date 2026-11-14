@@ -1,0 +1,6 @@
+# SYNTHETIC SAMPLE DATA - FAKE VALUES FOR TESTING src/compare.py ONLY. NOT REAL MEASUREMENTS.
+# Empty precip_mm means "this body has no rain", so that feature is skipped for that target.
+name,body,elev_m,slope_deg,roughness,temp_mean_K,temp_range_K,albedo,precip_mm
+Shackleton rim (fake),Moon,1500,10.0,0.50,200,120,0.15,
+Jezero crater (fake),Mars,-2500,5.0,0.40,215,80,0.18,
+Gale crater (fake),Mars,-4500,7.0,0.45,220,85,0.20,
