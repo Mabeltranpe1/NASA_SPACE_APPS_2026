@@ -44,9 +44,20 @@ flowchart LR
 ## Componentes
 
 ### 1. Pipeline de datos (`src/`, `notebooks/`) · *en construcción*
-- **Lenguaje:** Python (GDAL/rasterio, numpy, pandas, geopandas).
-- **Entrada:** datos planetarios (PDS) y terrestres (Earthdata, Copernicus, CSA, JAXA).
-- **Salida:** un archivo de sitios con sus puntajes por dimensión, que la web consume como dato estático.
+- **Lenguaje:** Python 3.12 (GDAL/rasterio, numpy, pandas, geopandas, scikit-learn). Entorno: `environment.yml` (conda) o `requirements.txt` (uv/pip).
+- **Entrada:** datos planetarios (PDS) y terrestres (Earthdata, Copernicus, CSA, JAXA), resumidos en CSV por celda/sitio (Santiago: descarga; Marco: vectorización).
+- **`src/compare.py`** (Marco): índice de similitud entre celdas de la Tierra y sitios de la Luna/Marte. Escala robusta común, similitud por característica `s = exp(−|d|)`, puntaje `S = exp(−√(Σ w·d² / Σ w))`, mejor y peor característica, y análisis de sensibilidad a los pesos. Tests en `tests/test_compare.py`.
+- **`src/export_web.py`**: convierte la salida de `compare.py` en `web/public/data/comparisons.json` (contrato en [VISUALIZACION_COMPARACION.md](VISUALIZACION_COMPARACION.md)). Enlaza celdas con el catálogo por palabras clave en `place_hint`.
+
+```mermaid
+flowchart LR
+    CSV["CSV Tierra + CSV objetivos<br/>(data/)"] --> CMP["src/compare.py"]
+    CMP --> EXP["src/export_web.py"]
+    EXP --> JSON["web/public/data/<br/>comparisons.json"]
+    JSON --> PANEL["ComparisonPanel<br/>(web)"]
+```
+
+- **Salida actual:** datos **sintéticos** de muestra (`data/sample_*.csv`), marcados en la interfaz.
 - **Reglas:**
   - Los datos crudos van en `data/raw/` y los procesados en `data/processed/`. **No se suben a git.**
   - Cada dataset debe tener un script de descarga reproducible.
@@ -69,19 +80,32 @@ flowchart LR
 Estructura:
 ```
 web/src/
-├── App.tsx              # Modos de comparación, filtros, globos lado a lado y ficha
+├── App.tsx                  # Modos de comparación, filtros, globos lado a lado, ficha y recorrido
+├── main.tsx                 # Punto de entrada (envuelve la app en LanguageProvider)
+├── theme.ts                 # Colores de identidad validados (Tierra, Luna, Marte) y de similitud
 ├── components/
-│   ├── PlanetGlobe.tsx  # Visor Cesium genérico (globo completo o vista de detalle)
-│   └── DetailImage.tsx  # Imagen de detalle: snapshot Landsat/MODIS o vista cercana Luna/Marte
+│   ├── PlanetGlobe.tsx      # Visor Cesium genérico (globo completo o vista de detalle)
+│   ├── DetailImage.tsx      # Imagen de detalle: snapshot Landsat/MODIS o vista cercana Luna/Marte
+│   ├── ComparisonPanel.tsx  # Comparación detallada: puntaje, pesos, valores, ranking, límites
+│   └── GuidedTour.tsx       # Recorrido guiado de 6 pasos
 ├── planet/
-│   └── bodies.ts        # Configuración por cuerpo: elipsoide, imágenes, alturas de cámara
+│   └── bodies.ts            # Configuración por cuerpo: elipsoide, imágenes, alturas de cámara
 ├── map/
-│   └── gibs.ts          # Capas NASA GIBS de la Tierra y URLs de teselas
-├── App.css          # Estilos de la app
-├── index.css        # Variables de color (modo claro/oscuro)
-└── data/
-    ├── types.ts     # Tipos: AnalogSite, Target, Environment, Dimension
-    └── sites.ts     # Catálogo de sitios (preliminar)
+│   └── gibs.ts              # Capas NASA GIBS de la Tierra y URLs de teselas
+├── i18n/
+│   ├── strings.ts           # Textos de la interfaz en español e inglés
+│   ├── LanguageContext.tsx  # Proveedor de idioma (navegador, localStorage, ?lang=)
+│   ├── context.ts / useLang.ts
+├── data/
+│   ├── types.ts             # Tipos: AnalogSite, Homologue, Target, Environment, Dimension
+│   ├── sites.ts             # Catálogo de 12 sitios con sus homólogos (español)
+│   ├── sites.en.ts          # Textos del catálogo en inglés
+│   ├── comparisons.ts       # Tipos del JSON, carga y recálculo del puntaje con pesos
+│   └── tour.ts              # Pasos del recorrido guiado (ES/EN)
+├── App.css                  # Estilos de la app
+└── index.css                # Variables de color (tema oscuro)
+
+web/public/data/comparisons.json   # Generado por src/export_web.py
 ```
 
 **Modelo de datos (`AnalogSite`):**
@@ -92,13 +116,16 @@ web/src/
 | `name`, `country` | string | Nombre y país |
 | `lat`, `lng` | number | Coordenadas WGS84 |
 | `environments` | Environment[] | Tipos de ambiente |
-| `targets` | Target[] | `luna` y/o `marte` |
+| `homologues` | Homologue[] | Lugares homólogos en la Luna y/o Marte (`id`, `body`, `name`, `lat`, `lng`, `note`, `approximate?`) |
 | `analogOf` | string | Lugar o ambiente planetario del que es análogo |
 | `dimensions` | Record<Dimension, Level> | Similitud por dimensión (`alta`, `media`, `baja`); pasará a puntaje 0–100 |
 | `similarities` | string | En qué se parece |
 | `limitations` | string | Dónde deja de valer la analogía |
 | `missionUse` | string | Para qué sirve en una misión |
 | `wellKnown` | boolean | Si ya es un análogo muy estudiado |
+| `earthImage?` | objeto | Capa y fecha alternativas para la imagen de detalle (sitios polares sin Landsat) |
+
+**Idiomas:** español e inglés. El idioma inicial es el del navegador; se guarda en `localStorage` y se puede forzar con `?lang=es` / `?lang=en`. Para agregar un texto: clave en `i18n/strings.ts` (ambos idiomas) y `t('clave')`.
 
 **Variables de entorno:** ninguna. NASA GIBS y NASA Trek son públicos y no requieren API key.
 
