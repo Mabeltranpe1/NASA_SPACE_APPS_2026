@@ -1,0 +1,12 @@
+# SYNTHETIC SAMPLE DATA - FAKE VALUES FOR TESTING src/compare.py ONLY. NOT REAL MEASUREMENTS.
+lat,lon,place_hint,elev_m,slope_deg,roughness,temp_mean_K,temp_range_K,albedo,precip_mm
+-23.9,-69.1,Atacama Desert (fake),2400,4.0,0.30,288,30,0.30,2
+-77.5,161.8,McMurdo Dry Valleys (fake),1200,12.0,0.55,253,45,0.25,10
+75.4,-89.8,Devon Island (fake),300,8.0,0.45,257,35,0.22,150
+38.4,-110.8,Utah MDRS area (fake),1400,6.0,0.35,284,28,0.28,220
+19.8,-155.5,Mauna Kea summit (fake),4100,15.0,0.60,276,12,0.12,250
+64.0,-16.5,Iceland lava field (fake),700,5.0,0.70,275,15,0.10,900
+23.4,25.6,Sahara plain (fake),500,1.0,0.10,300,25,0.35,5
+-3.1,-60.0,Amazon rainforest (fake),50,2.0,0.20,300,8,0.13,2300
+46.5,9.8,Alps high slope (fake),2800,30.0,0.80,268,20,0.40,1500
+-89.9,0.0,Antarctic plateau (fake),2800,0.5,0.05,224,40,0.80,20

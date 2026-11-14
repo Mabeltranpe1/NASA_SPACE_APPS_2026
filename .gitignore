@@ -15,6 +15,9 @@ data/processed/*
 *.zip
 *.tar.gz
 
+# Entornos locales (conda)
+ambientes/
+
 # Python
 __pycache__/
 *.py[cod]

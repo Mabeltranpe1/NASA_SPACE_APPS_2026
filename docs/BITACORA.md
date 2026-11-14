@@ -14,6 +14,23 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Release v0.1.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionaron los PR #1 (estructura y git flow), #2 (plataforma web e infraestructura) y #3 (mapa con NASA GIBS) en `develop`.
+- Se creó el release `v0.1.0` con git flow (`develop` → `main`), que despliega en producción: https://icy-flower-03890400f.5.azurestaticapps.net
+- Contenido de la versión:
+  - mapa (globo 3D) con capas de NASA GIBS;
+  - filtros por objetivo, ambiente y dimensión;
+  - 12 sitios con valores cualitativos preliminares;
+  - enlace a Google Earth.
+- Se agregó [GOOGLE_MAPS_API_KEY.md](GOOGLE_MAPS_API_KEY.md) para que Marco (Mabeltranpe1) pruebe una key con su cuenta de Google Cloud.
+- **Pendientes:**
+  - Resultado de la prueba de la key de Marco.
+  - Borrar el secret `VITE_GOOGLE_MAPS_API_KEY` y la key anterior si no se usan.
+  - Poner `develop` como rama por defecto y proteger `main` y `develop` (requiere admin).
+  - Empezar el pipeline de puntajes de similitud con datos reales.
+
 ## 2026-11-14 · Google Maps bloqueado por la facturación: se pasa a NASA GIBS
 **Autor:** @Ssalazarp420
 

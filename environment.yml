@@ -1,0 +1,15 @@
+name: analogos
+channels:
+  - defaults
+dependencies:
+  - scikit-learn
+  - python=3.12
+  - folium
+  - matplotlib
+  - rasterio
+  - pandas
+  - jupyter
+  - geopandas
+  - xarray
+  - numpy
+prefix: /home/marcop/miniconda3/envs/analogos
