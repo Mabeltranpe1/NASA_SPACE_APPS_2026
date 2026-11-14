@@ -22,6 +22,7 @@ Formato sugerido:
   - `https://icy-flower-03890400f.5.azurestaticapps.net/*`
   - `https://*.eastus2.5.azurestaticapps.net/*`
 - **Problema:** Google rechaza comodines en medio de un dominio (`icy-flower-03890400f-*.eastus2...`). **Solución:** usar `*.eastus2.5.azurestaticapps.net`, que cubre las vistas previas de los PRs.
+- Restricción de API: **solo Maps JavaScript API**. Antes había 32 APIs habilitadas en la key; se redujeron a una para que, si alguien copia la key desde el navegador, no pueda usarla en otros servicios con facturación.
 - **Pendiente:**
   - quitar el referrer genérico `https://*.azurestaticapps.net/*`, que es demasiado amplio;
   - confirmar el límite diario de cuota y la alerta de presupuesto.
