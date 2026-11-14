@@ -14,6 +14,14 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Recorrido guiado
+**Autor:** @Ssalazarp420
+
+- Botón **▶ Recorrido guiado**: la app recorre sola 6 paradas (introducción, Haughton ≈ Shackleton, Atacama ≈ Phoenix, la Tatacoa, tubos de lava en la Luna y Marte, y la comparación detallada), 12 s por paso.
+- Controles: anterior, pausa, siguiente y cerrar; teclado: ← →, espacio y Esc.
+- **Uso previsto:** demo en vivo ante el jurado y grabación del video del proyecto.
+- Los textos están en `web/src/data/tour.ts` para que el equipo los ajuste.
+
 ## 2026-11-14 · Prototipo de la comparación detallada
 **Autor:** @Ssalazarp420
 
