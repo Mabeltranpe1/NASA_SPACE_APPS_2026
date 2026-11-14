@@ -14,6 +14,24 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Release v0.2.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionaron en `develop` los PR #5 (entorno de Python), #6 (globos 3D), #7 (comparación detallada), #8 (recorrido guiado) y #9 (inglés), y se publicó el release `v0.2.0` en `main`.
+- **Producción:** https://icy-flower-03890400f.5.azurestaticapps.net (inglés: `?lang=en`).
+- **Contenido de la versión:**
+  - Globos 3D lado a lado de la Tierra, la Luna y Marte, con homólogos.
+  - Imágenes de detalle.
+  - Comparación detallada con datos de muestra.
+  - Recorrido guiado.
+  - Español e inglés.
+- **Documentación actualizada:** ARQUITECTURA (pipeline `compare.py` → `export_web.py` → web, estructura del código, idiomas) y README (enlace y guía de uso).
+- **Pendientes:**
+  - Datos reales de Santiago y Marco para reemplazar los sintéticos.
+  - Mapa de calor global de similitud.
+  - Proteger `main` y `develop` (requiere admin).
+  - Cargar Cesium bajo demanda (la app pesa 1,2 MB comprimida).
+
 ## 2026-11-14 · Versión en inglés (ES | EN)
 **Autor:** @Ssalazarp420
 

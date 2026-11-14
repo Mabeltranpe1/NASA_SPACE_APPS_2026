@@ -80,6 +80,15 @@ En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analo
 
 ## Plataforma web
 
+👉 **Ver la app:** https://icy-flower-03890400f.5.azurestaticapps.net (versión en inglés: agrega `?lang=en`)
+
+**Cómo usarla:**
+1. Elige una comparación arriba: **Tierra ↔ Luna**, **Tierra ↔ Marte** o **Luna ↔ Marte**.
+2. Filtra por tipo de ambiente o por la dimensión en la que debe parecerse.
+3. Haz clic en un sitio (lista o globo): los dos globos vuelan al lugar y debajo aparecen las imágenes de cerca.
+4. Baja para ver la **comparación detallada** (puntaje, pesos ajustables, valores reales y límites).
+5. O pulsa **▶ Recorrido guiado** para una demo automática.
+
 Comparación lado a lado en **globos 3D de la Tierra, la Luna y Marte** (modos Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte), con filtros por tipo de ambiente y dimensión de similitud. Al elegir un sitio, ambos globos vuelan al lugar y debajo aparecen sus imágenes de detalle: Landsat de la Tierra y los mosaicos de NASA Moon Trek y Mars Trek. Todo con datos abiertos de la NASA, sin API keys. Disponible en **español e inglés** (`?lang=es` / `?lang=en`). Incluye un **recorrido guiado** y una **comparación detallada** con puntajes, pesos ajustables y límites de la analogía. Cada sitio se puede abrir en Google Earth.
 
 ```bash
