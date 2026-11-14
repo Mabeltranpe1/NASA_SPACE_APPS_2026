@@ -1,7 +1,39 @@
-ambientes/
-data/raw/
+# Datos (pesados, se descargan con scripts)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Formatos de datos geoespaciales/planetarios grandes
 *.tif
+*.tiff
+*.img
+*.IMG
 *.nc
 *.hdf
+*.h5
+*.zip
+*.tar.gz
+
+# Entornos locales (conda)
+ambientes/
+
+# Python
 __pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
 .ipynb_checkpoints/
+*.egg-info/
+
+# Credenciales
+.env
+.netrc
+*.key
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
