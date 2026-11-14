@@ -24,6 +24,7 @@ Formato sugerido:
   - `LanguageContext.tsx` + `useLang.ts`: contexto y hook.
   - `web/src/data/sites.en.ts`: textos en inglés del catálogo.
 - **Para agregar un texto nuevo:** crear la clave en `strings.ts` en los dos idiomas y usar `t('clave')`.
+- **Límite del plan Free:** Azure Static Web Apps admite solo **3 entornos de vista previa**. Con 4 PRs abiertos, el despliegue del #9 falló; se borró el entorno del #6 (`az staticwebapp environment delete ... --environment-name 6`), cuyo contenido ya está incluido en #9. **Recomendación:** fusionar los PRs pronto para no acumular más de 3 abiertos con cambios en `web/`.
 
 ## 2026-11-14 · Recorrido guiado
 **Autor:** @Ssalazarp420
