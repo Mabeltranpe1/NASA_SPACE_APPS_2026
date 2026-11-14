@@ -72,6 +72,20 @@ BODY_WEIGHTS = {}
 # more than the step from 2000 to 2050 mm. log(1 + x) makes that true.
 LOG_FEATURES = ["precip_mm"]
 
+# How big a difference is "a lot" for each feature (used by the default
+# "tolerance" scaling). A difference of exactly this size gives that
+# feature a similarity of exp(-1) = 0.37; half of it gives 0.61.
+# These are physical choices you can defend in front of the judges.
+TOLERANCE = {
+    "elev_m": 1000.0,      # 1 km of height
+    "slope_deg": 5.0,      # 5 degrees of slope
+    "roughness": 5.0,      # 5 m of local height variation
+    "temp_mean_K": 30.0,   # 30 K of mean temperature
+    "temp_range_K": 30.0,  # 30 K of temperature swing
+    "albedo": 0.10,        # 0.10 of reflectance
+    "precip_mm": 1.0,      # in log scale: about 2.7 times more or less rain
+}
+
 # Values outside these limits are probably a unit mistake (e.g. Celsius
 # instead of Kelvin). We only print a warning; we do not stop.
 VALID_RANGES = {
@@ -210,9 +224,17 @@ def to_matrix(df):
     return matrix
 
 
-def scale_together(earth, targets):
+def scale_together(earth, targets, method="tolerance"):
     """
-    Scale Earth and targets with ONE RobustScaler fitted on both together.
+    Put Earth and targets on the same scale, so features can be compared.
+
+    method="tolerance" (default): divide every difference by TOLERANCE.
+        The ruler is physical ("30 K is a big difference"), so a score of
+        0.4 means the same thing for every target and every region.
+    method="robust": ONE RobustScaler fitted on Earth and targets together.
+        Problem we saw in the first real test: with 80,000 Earth cells and
+        a few Moon sites, the ruler is set almost only by Earth. Moon
+        temperatures are then "100 rulers away" and every score is ~0.
 
     Why scale: elevation is in thousands of metres and albedo is between 0
     and 1. Without scaling, elevation would dominate the distance.
@@ -225,6 +247,11 @@ def scale_together(earth, targets):
     """
     earth_matrix = to_matrix(earth)
     targets_matrix = to_matrix(targets)
+    if method == "tolerance":
+        tol = np.array([TOLERANCE[f] for f in FEATURES], dtype=float)
+        return earth_matrix / tol, targets_matrix / tol
+    if method != "robust":
+        raise ValueError(f"Unknown scaling '{method}'. Use 'tolerance' or 'robust'.")
     with warnings.catch_warnings():
         # A column that is empty in BOTH files makes numpy complain. That is
         # fine: the column stays empty and is simply not used.
@@ -237,13 +264,13 @@ def scale_together(earth, targets):
 # 5. The similarity maths
 # ---------------------------------------------------------------------------
 
-def score_cells(earth_scaled, target_scaled, w):
+def score_cells(earth_scaled, target_scaled, w, min_coverage=1.0):
     """
     Compare ONE target (1D array) with EVERY Earth cell (2D array).
 
     Returns:
         score : one overall similarity per Earth cell (0..1). NaN if the cell
-                has no usable data at all.
+                misses too much data (see min_coverage).
         sims  : one similarity per Earth cell per feature (0..1). NaN where
                 the feature is not used or the value is missing.
     """
@@ -264,9 +291,15 @@ def score_cells(earth_scaled, target_scaled, w):
     # Weighted Euclidean distance. Dividing by the sum of the weights keeps
     # scores comparable between targets that use a different number of features.
     weight_sum = cell_w.sum(axis=1)
+
+    # A cell with missing data must not win just because its bad feature was
+    # skipped (we saw this in the first test). By default a cell needs ALL the
+    # features the target uses; min_coverage=0.8 would accept 80% of the weight.
+    coverage = weight_sum / w.sum()
+    weight_sum = np.where(coverage >= min_coverage - 1e-9, weight_sum, np.nan)
     weighted_squares = (cell_w * np.nan_to_num(diff) ** 2).sum(axis=1)
     with np.errstate(invalid="ignore", divide="ignore"):
-        dist = np.sqrt(weighted_squares / weight_sum)  # NaN when weight_sum is 0
+        dist = np.sqrt(weighted_squares / weight_sum)  # NaN = not enough data
 
     # Turn distance into a score: distance 0 -> score 1, large distance -> ~0.
     return np.exp(-dist), sims
@@ -281,7 +314,8 @@ def best_and_worst(sims):
     return np.where(no_data, "", best), np.where(no_data, "", worst)
 
 
-def compare_all(earth, targets, weights=None, body_weights=None, top=None):
+def compare_all(earth, targets, weights=None, body_weights=None, top=None,
+                scaling="tolerance", min_coverage=1.0):
     """
     Compare every target with every Earth cell.
 
@@ -290,14 +324,14 @@ def compare_all(earth, targets, weights=None, body_weights=None, top=None):
     Use top=N to keep only the N best cells per target (saves memory when
     the Earth grid is very big).
     """
-    earth_scaled, targets_scaled = scale_together(earth, targets)
+    earth_scaled, targets_scaled = scale_together(earth, targets, scaling)
 
     results = []
     # enumerate gives the row POSITION, which is what the scaled array needs.
     for pos, (_, target) in enumerate(targets.iterrows()):
         w = build_weights(weights, target["body"], body_weights)
         try:
-            score, sims = score_cells(earth_scaled, targets_scaled[pos], w)
+            score, sims = score_cells(earth_scaled, targets_scaled[pos], w, min_coverage)
         except ValueError as err:
             raise ValueError(f"Target '{target['name']}': {err}") from None
 
@@ -326,7 +360,8 @@ def compare_all(earth, targets, weights=None, body_weights=None, top=None):
 # ---------------------------------------------------------------------------
 
 def weight_sensitivity(earth, targets, weights=None, body_weights=None,
-                       top=5, runs=200, spread=0.5, seed=0):
+                       top=5, runs=200, spread=0.5, seed=0,
+                       scaling="tolerance", min_coverage=1.0):
     """
     Repeat the ranking many times with randomly changed weights.
 
@@ -345,12 +380,12 @@ def weight_sensitivity(earth, targets, weights=None, body_weights=None,
         raise ValueError("runs must be at least 1.")
 
     rng = np.random.default_rng(seed)  # fixed seed -> same result every time
-    earth_scaled, targets_scaled = scale_together(earth, targets)
+    earth_scaled, targets_scaled = scale_together(earth, targets, scaling)
 
     results = []
     for pos, (_, target) in enumerate(targets.iterrows()):
         base_w = build_weights(weights, target["body"], body_weights)
-        base_score, _ = score_cells(earth_scaled, targets_scaled[pos], base_w)
+        base_score, _ = score_cells(earth_scaled, targets_scaled[pos], base_w, min_coverage)
         base_order = np.argsort(-np.nan_to_num(base_score, nan=-1.0), kind="stable")
         base_rank = np.empty(len(earth), dtype=int)
         base_rank[base_order] = np.arange(1, len(earth) + 1)
@@ -358,7 +393,7 @@ def weight_sensitivity(earth, targets, weights=None, body_weights=None,
         times_in_top = np.zeros(len(earth))
         for _run in range(runs):
             factors = rng.uniform(1 - spread, 1 + spread, size=len(FEATURES))
-            score, _ = score_cells(earth_scaled, targets_scaled[pos], base_w * factors)
+            score, _ = score_cells(earth_scaled, targets_scaled[pos], base_w * factors, min_coverage)
             order = np.argsort(-np.nan_to_num(score, nan=-1.0), kind="stable")
             times_in_top[order[:top]] += 1
 
@@ -382,7 +417,7 @@ def weight_sensitivity(earth, targets, weights=None, body_weights=None,
 def print_by_target(table, columns, title, limit=None):
     """Print one small table per target."""
     with pd.option_context("display.width", 250, "display.max_columns", None,
-                           "display.float_format", "{:.2f}".format):
+                           "display.float_format", "{:.3f}".format):
         for name, group in table.groupby("target", sort=False):
             print(f"\n=== {name} ({group['body'].iloc[0]}) - {title} ===")
             print(group[columns].head(limit).to_string(index=False, na_rep="-"))
@@ -409,12 +444,17 @@ def main(argv=None):
                         help="Also run the weight sensitivity check with this many runs (e.g. 200)")
     parser.add_argument("--spread", type=float, default=0.5,
                         help="How much the weights change in the sensitivity check (default 0.5 = +-50%%)")
+    parser.add_argument("--scaling", choices=["tolerance", "robust"], default="tolerance",
+                        help="How features are put on one scale (default: tolerance, see TOLERANCE)")
+    parser.add_argument("--min-coverage", type=float, default=1.0,
+                        help="Share of the weight an Earth cell must have data for (default 1.0 = all)")
     args = parser.parse_args(argv)
 
     try:
         weights = parse_weights(args.weight)
         earth, targets = load_inputs(args.earth, args.targets)
-        results = compare_all(earth, targets, weights)
+        results = compare_all(earth, targets, weights, scaling=args.scaling,
+                              min_coverage=args.min_coverage)
 
         # Show the place name too, if the Earth file has one.
         place = ["place_hint"] if "place_hint" in results.columns else []
@@ -428,7 +468,8 @@ def main(argv=None):
 
         if args.sensitivity:
             stability = weight_sensitivity(earth, targets, weights, top=args.top,
-                                           runs=args.sensitivity, spread=args.spread)
+                                           runs=args.sensitivity, spread=args.spread,
+                                           scaling=args.scaling, min_coverage=args.min_coverage)
             columns = ["rank", "lat", "lon"] + place + ["score", "top_share"]
             print_by_target(stability, columns,
                             f"share of {args.sensitivity} runs inside the top {args.top} "
