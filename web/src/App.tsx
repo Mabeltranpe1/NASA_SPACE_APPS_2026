@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { SITES } from './data/sites'
 import {
   BODY_LABELS,
@@ -16,6 +16,8 @@ import PlanetGlobe, { type GlobeMarker } from './components/PlanetGlobe'
 import DetailImage from './components/DetailImage'
 import ComparisonPanel from './components/ComparisonPanel'
 import { BODY_COLORS } from './theme'
+import GuidedTour from './components/GuidedTour'
+import type { TourStep } from './data/tour'
 import { BASE_LAYERS, OVERLAY_LAYERS, type BaseLayerId, type OverlayLayerId } from './map/gibs'
 import './App.css'
 
@@ -91,6 +93,24 @@ export default function App() {
     setDimensions([])
     setOnlyLesserKnown(false)
   }
+
+  const [touring, setTouring] = useState(false)
+  const mainRef = useRef<HTMLElement>(null)
+  const applyTourStep = useCallback((step: TourStep) => {
+    setMode(step.mode)
+    setEnvironments([])
+    setDimensions([])
+    setOnlyLesserKnown(false)
+    setSelectedId(step.siteId)
+    const main = mainRef.current
+    if (!main) return
+    if (step.showComparison) {
+      window.setTimeout(() => main.querySelector('.comparison')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 2500)
+    } else {
+      main.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [])
+  const closeTour = useCallback(() => setTouring(false), [])
 
   return (
     <div className="app">
@@ -175,8 +195,11 @@ export default function App() {
         </footer>
       </aside>
 
-      <main className="main">
+      <main className="main" ref={mainRef}>
         <div className="topbar">
+          <button className="tour-button" onClick={() => setTouring(true)} disabled={touring}>
+            ▶ Recorrido guiado
+          </button>
           <div className="mode-switch" role="tablist" aria-label="Comparación">
             {(Object.keys(MODES) as Mode[]).map((m) => (
               <button key={m} role="tab" aria-selected={mode === m} className={mode === m ? 'active' : ''} onClick={() => setMode(m)}>
@@ -257,6 +280,7 @@ export default function App() {
 
         {selected &&
           requires.map((body) => <ComparisonPanel key={`${selected.id}-${body}`} site={selected} body={body} />)}
+        {touring && <GuidedTour onApply={applyTourStep} onClose={closeTour} />}
       </main>
     </div>
   )
