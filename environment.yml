@@ -12,4 +12,4 @@ dependencies:
   - geopandas
   - xarray
   - numpy
-prefix: /home/marcop/miniconda3/envs/analogos
+  - pytest
