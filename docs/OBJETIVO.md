@@ -24,11 +24,13 @@ La plataforma reúne los sitios en un **mapa interactivo filtrable** y muestra *
 
 | Funcionalidad | Descripción |
 |---|---|
-| Filtro por objetivo | Luna, Marte o ambos |
+| Modos de comparación | **Tierra ↔ Luna**, **Tierra ↔ Marte** y **Luna ↔ Marte**, con dos globos 3D lado a lado |
 | Filtro por tipo de ambiente | Desértico, polar/ártico, volcánico, cráter de impacto, cuevas/tubos de lava, salar |
 | Filtro por dimensión | Muestra solo los sitios con similitud **alta o media** en todas las dimensiones elegidas (geología, terreno, temperatura, agua/hielo, polvo/viento, habitabilidad, subsuelo, operaciones) |
 | Solo poco estudiados | Oculta los análogos ya muy conocidos, como pide el reto |
-| Mapa satelital | Globo 3D con imágenes de **NASA GIBS** y marcadores por color: gris = Luna, naranja = Marte, morado = ambos |
+| Globos 3D | CesiumJS con imágenes de **NASA GIBS** (Tierra) y **NASA Moon Trek / Mars Trek**; colores fijos: azul = Tierra, gris = Luna, naranja = Marte |
+| Homólogos | Cada sitio terrestre tiene su lugar homólogo en la Luna y/o Marte (sitios de misiones: Shackleton, Jezero, Gale, Phoenix, Meridiani…) |
+| Imágenes de detalle | Debajo de los globos: Landsat 30 m (o MODIS en sitios polares) del sitio terrestre junto a la vista cercana del homólogo; en Marte se puede cambiar a relieve MOLA |
 | Capas NASA | Blue Marble, satélite reciente (VIIRS NOAA-20), relieve (ASTER GDEM) y temperatura superficial (MODIS) |
 | Ficha del sitio | Similitud por dimensión, en qué se parece, **dónde deja de valer la analogía** y para qué sirve en una misión |
 | Ver en Google Earth | Enlace directo a la vista 3D del sitio |

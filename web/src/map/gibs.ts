@@ -9,6 +9,8 @@ export interface GibsLayer {
   id: string
   label: string
   description: string
+  labelEn: string
+  descriptionEn: string
   /** GIBS layer identifier. */
   gibsId: string
   /** 'default' for static layers, or how many days back to request for daily layers. */
@@ -34,6 +36,8 @@ export const BASE_LAYERS = [
   {
     id: 'bluemarble',
     label: 'Blue Marble',
+    labelEn: 'Blue Marble',
+    descriptionEn: 'Cloud-free global mosaic with relief and bathymetry (NASA).',
     description: 'Mosaico global sin nubes con relieve y batimetría (NASA).',
     gibsId: 'BlueMarble_ShadedRelief_Bathymetry',
     time: 'default',
@@ -44,6 +48,8 @@ export const BASE_LAYERS = [
   {
     id: 'viirs',
     label: 'Satélite reciente',
+    labelEn: 'Recent satellite',
+    descriptionEn: 'VIIRS (NOAA-20) true color from 2 days ago.',
     description: 'Color verdadero VIIRS (NOAA-20) de hace 2 días.',
     gibsId: 'VIIRS_NOAA20_CorrectedReflectance_TrueColor',
     time: { daysAgo: 2 },
@@ -54,6 +60,8 @@ export const BASE_LAYERS = [
   {
     id: 'relief',
     label: 'Relieve (ASTER)',
+    labelEn: 'Relief (ASTER)',
+    descriptionEn: 'Shaded relief from the ASTER GDEM global elevation model.',
     description: 'Relieve sombreado del modelo de elevación global ASTER GDEM.',
     gibsId: 'ASTER_GDEM_Greyscale_Shaded_Relief',
     time: 'default',
@@ -67,6 +75,8 @@ export const OVERLAY_LAYERS = [
   {
     id: 'lst',
     label: 'Temperatura superficial (MODIS)',
+    labelEn: 'Surface temperature (MODIS)',
+    descriptionEn: 'Daytime land surface temperature, MODIS Terra, 3 days ago. Gaps where there were clouds.',
     description: 'Temperatura de la superficie terrestre de día, MODIS Terra, hace 3 días. Hay huecos donde había nubes.',
     gibsId: 'MODIS_Terra_Land_Surface_Temp_Day',
     time: { daysAgo: 3 },
@@ -78,6 +88,8 @@ export const OVERLAY_LAYERS = [
   {
     id: 'labels',
     label: 'Fronteras y nombres',
+    labelEn: 'Borders and names',
+    descriptionEn: 'Reference labels (OpenStreetMap, via GIBS).',
     description: 'Etiquetas de referencia (OpenStreetMap, vía GIBS).',
     gibsId: 'Reference_Labels_15m',
     time: 'default',

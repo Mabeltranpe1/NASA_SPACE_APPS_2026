@@ -14,6 +14,83 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Release v0.2.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionaron en `develop` los PR #5 (entorno de Python), #6 (globos 3D), #7 (comparación detallada), #8 (recorrido guiado) y #9 (inglés), y se publicó el release `v0.2.0` en `main`.
+- **Producción:** https://icy-flower-03890400f.5.azurestaticapps.net (inglés: `?lang=en`).
+- **Contenido de la versión:**
+  - Globos 3D lado a lado de la Tierra, la Luna y Marte, con homólogos.
+  - Imágenes de detalle.
+  - Comparación detallada con datos de muestra.
+  - Recorrido guiado.
+  - Español e inglés.
+- **Documentación actualizada:** ARQUITECTURA (pipeline `compare.py` → `export_web.py` → web, estructura del código, idiomas) y README (enlace y guía de uso).
+- **Pendientes:**
+  - Datos reales de Santiago y Marco para reemplazar los sintéticos.
+  - Mapa de calor global de similitud.
+  - Proteger `main` y `develop` (requiere admin).
+  - Cargar Cesium bajo demanda (la app pesa 1,2 MB comprimida).
+
+## 2026-11-14 · Versión en inglés (ES | EN)
+**Autor:** @Ssalazarp420
+
+- Selector **ES | EN** en la barra lateral. Toda la app está traducida: interfaz, fichas de los 12 sitios, homólogos, capas NASA, comparación detallada, límites físicos y recorrido guiado.
+- **Idioma inicial:** el del navegador (inglés salvo que prefiera español), pensado para el jurado internacional. Se recuerda la elección y se puede forzar con `?lang=en` o `?lang=es`, útil para compartir enlaces.
+- **Implementación** sin librerías:
+  - `web/src/i18n/strings.ts`: diccionario.
+  - `LanguageContext.tsx` + `useLang.ts`: contexto y hook.
+  - `web/src/data/sites.en.ts`: textos en inglés del catálogo.
+- **Para agregar un texto nuevo:** crear la clave en `strings.ts` en los dos idiomas y usar `t('clave')`.
+- **Límite del plan Free:** Azure Static Web Apps admite solo **3 entornos de vista previa**. Con 4 PRs abiertos, el despliegue del #9 falló; se borró el entorno del #6 (`az staticwebapp environment delete ... --environment-name 6`), cuyo contenido ya está incluido en #9. **Recomendación:** fusionar los PRs pronto para no acumular más de 3 abiertos con cambios en `web/`.
+
+## 2026-11-14 · Recorrido guiado
+**Autor:** @Ssalazarp420
+
+- Botón **▶ Recorrido guiado**: la app recorre sola 6 paradas (introducción, Haughton ≈ Shackleton, Atacama ≈ Phoenix, la Tatacoa, tubos de lava en la Luna y Marte, y la comparación detallada), 12 s por paso.
+- Controles: anterior, pausa, siguiente y cerrar; teclado: ← →, espacio y Esc.
+- **Uso previsto:** demo en vivo ante el jurado y grabación del video del proyecto.
+- Los textos están en `web/src/data/tour.ts` para que el equipo los ajuste.
+
+## 2026-11-14 · Prototipo de la comparación detallada
+**Autor:** @Ssalazarp420
+
+- **`src/export_web.py`:** convierte la salida de `compare.py` (de Marco) en `web/public/data/comparisons.json` siguiendo el contrato de datos. No cambia la fórmula: llama a `compare_all` y `weight_sensitivity`.
+- **`ComparisonPanel`** (debajo de las imágenes):
+  - Puntaje 0–100, posición en el ranking y estabilidad ante cambios de pesos.
+  - Barras de similitud por característica, con "✓ más parecido" y "⚠ rompe la analogía" (icono y texto, no solo color).
+  - Pesos ajustables con recálculo exacto en el navegador (misma fórmula de `compare.py`).
+  - Valores reales Tierra vs. Luna/Marte, cada variable con su escala física fija.
+  - Ranking de los mejores lugares de la Tierra, incluidos los que no están en el catálogo.
+  - Límites físicos (gravedad, atmósfera, campo magnético, duración del día), fuentes previstas y tabla de datos.
+- **Colores de identidad validados** con el verificador de paletas (daltonismo, luminosidad y contraste): Tierra `#3d8ef0`, Luna `#b08f24`, Marte `#cf4a3c`. El gris anterior de la Luna fallaba por leerse como gris de "desactivado".
+- **Datos:** todavía son los **sintéticos** de `data/sample_*.csv`; la interfaz lo indica con una etiqueta visible. Con esos datos hay comparación para Haughton, Atacama, McMurdo y Mauna Kea.
+
+## 2026-11-14 · Globos 3D lado a lado (Tierra, Luna y Marte)
+**Autor:** @Ssalazarp420
+
+- **Contexto del equipo:**
+  - Marco trabaja en el código Python para vectorizar la información.
+  - Santiago descarga las bases de datos para comparar a mayor escala y detalle.
+  - Mientras tanto se avanza en la visualización.
+- **Cambio:** MapLibre se reemplazó por **CesiumJS** (código abierto, sin Cesium ion).
+  - **Motivo:** la proyección Mercator de MapLibre no muestra más allá de ±85°, y la base lunar candidata (cráter Shackleton) está a −89,7°.
+  - Cesium permite un visor por cuerpo con su elipsoide real.
+- **Nuevas funciones:**
+  - **Modos de comparación:** Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte, con dos globos lado a lado.
+  - **Homólogos:** cada sitio terrestre tiene su lugar en la Luna y/o Marte, con coordenadas de sitios de misiones (Shackleton, Apolo 11, Marius Hills, Phoenix, Viking 2, Gale, Jezero, Meridiani, Gusev, Arsia Mons, Eberswalde). Medusae Fossae y Terra Sirenum están marcados como ubicaciones aproximadas.
+  - **Imágenes de detalle debajo de los globos:**
+    - Tierra: Landsat WELD (30 m/px) desde la GIBS Snapshot API. Para McMurdo y Svalbard, que Landsat no cubre, se usa MODIS Terra en una fecha de verano.
+    - Luna: LRO WAC (NASA Moon Trek).
+    - Marte: Viking MDIM 2.1 (NASA Mars Trek), con botón para cambiar a relieve MOLA.
+- **Problemas resueltos:**
+  - `vite-plugin-static-copy` v4 copiaba los assets de Cesium con la ruta completa (`node_modules/...`), así que el cielo y los logos fallaban y el render se detenía. Se corrigió con `rename: { stripBase: 4 }`.
+  - Suomi NPP ya no publica imágenes recientes en GIBS; se usa NOAA-20.
+  - El mosaico WAC se deforma cerca del polo; la vista de detalle se aleja en sitios con latitud mayor a 80°.
+  - No se encontró en Trek un relieve LOLA global con el nombre esperado; queda pendiente para la Luna.
+- **Verificación:** capturas automáticas con Chromium (Playwright) de los tres modos, sin errores en consola.
+- **Plan:** [VISUALIZACION_COMPARACION.md](VISUALIZACION_COMPARACION.md) describe la vista de comparación detallada, el contrato de datos JSON para el pipeline y las mejoras propuestas para el jurado.
+
 ## 2026-11-14 · Release v0.1.0 a producción
 **Autor:** @Ssalazarp420
 

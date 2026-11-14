@@ -44,18 +44,52 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 │   └── processed/    # Datos procesados (no se suben a git)
 ├── docs/             # Objetivo, arquitectura y bitácora del proyecto
 ├── notebooks/        # Jupyter notebooks de exploración y análisis
-├── src/              # Código reutilizable (descarga, procesamiento, métricas)
+├── src/              # Código reutilizable (compare.py: índice de similitud)
+├── tests/            # Tests de Python (pytest)
 ├── outputs/          # Mapas, figuras y resultados finales
-├── web/              # Plataforma web (React + Vite + MapLibre + NASA GIBS)
+├── web/              # Plataforma web (React + Vite + CesiumJS + NASA GIBS/Trek)
 ├── infra/            # Infraestructura en Azure con Terraform (solo planes Free)
 ├── .github/workflows # Despliegue automático a Azure Static Web Apps
 ├── RECURSOS.md       # Catálogo de fuentes de datos
 └── CONTRIBUTING.md   # Flujo de trabajo con git flow
 ```
 
+## Entorno de Python (análisis y comparador)
+
+El comparador de similitud (`src/compare.py`) y los notebooks usan Python 3.12. Hay dos formas de instalar el entorno:
+
+**Con conda** (`environment.yml`):
+```bash
+conda env create -f environment.yml
+conda activate analogos
+```
+
+**Con uv o pip** (`requirements.txt`):
+```bash
+uv venv --python 3.12 && uv pip install -r requirements.txt
+source .venv/bin/activate
+```
+
+Verificar:
+```bash
+pytest -q tests
+python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --top 5
+```
+
+En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analogos`.
+
 ## Plataforma web
 
-Mapa interactivo para filtrar análogos terrestres por objetivo (Luna o Marte), tipo de ambiente (desértico, polar, volcánico, cráter, cuevas, salar) y dimensión de similitud. El mapa es un globo 3D con imágenes de la NASA (GIBS): Blue Marble, satélite reciente, relieve y temperatura superficial. Cada sitio se puede abrir en Google Earth.
+👉 **Ver la app:** https://icy-flower-03890400f.5.azurestaticapps.net (versión en inglés: agrega `?lang=en`)
+
+**Cómo usarla:**
+1. Elige una comparación arriba: **Tierra ↔ Luna**, **Tierra ↔ Marte** o **Luna ↔ Marte**.
+2. Filtra por tipo de ambiente o por la dimensión en la que debe parecerse.
+3. Haz clic en un sitio (lista o globo): los dos globos vuelan al lugar y debajo aparecen las imágenes de cerca.
+4. Baja para ver la **comparación detallada** (puntaje, pesos ajustables, valores reales y límites).
+5. O pulsa **▶ Recorrido guiado** para una demo automática.
+
+Comparación lado a lado en **globos 3D de la Tierra, la Luna y Marte** (modos Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte), con filtros por tipo de ambiente y dimensión de similitud. Al elegir un sitio, ambos globos vuelan al lugar y debajo aparecen sus imágenes de detalle: Landsat de la Tierra y los mosaicos de NASA Moon Trek y Mars Trek. Todo con datos abiertos de la NASA, sin API keys. Disponible en **español e inglés** (`?lang=es` / `?lang=en`). Incluye un **recorrido guiado** y una **comparación detallada** con puntajes, pesos ajustables y límites de la analogía. Cada sitio se puede abrir en Google Earth.
 
 ```bash
 cd web
@@ -71,6 +105,7 @@ El despliegue en Azure se explica en [infra/README.md](infra/README.md).
 - [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): componentes, CI/CD, seguridad y costos
 - [docs/BITACORA.md](docs/BITACORA.md): registro de decisiones y avances
 - [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): guía para crear y probar una API key de Google Maps
+- [docs/VISUALIZACION_COMPARACION.md](docs/VISUALIZACION_COMPARACION.md): plan de la vista de comparación detallada, contrato de datos y mejoras para el jurado
 
 ## Cómo colaborar
 
