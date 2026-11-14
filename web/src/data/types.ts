@@ -23,6 +23,8 @@ export type Level = 'alta' | 'media' | 'baja'
 
 /** A place on the Moon or Mars that an Earth site is an analog of. */
 export interface Homologue {
+  /** Stable id; matches the target ids in public/data/comparisons.json. */
+  id: string
   body: Target
   name: string
   /** Planetocentric latitude, degrees. */

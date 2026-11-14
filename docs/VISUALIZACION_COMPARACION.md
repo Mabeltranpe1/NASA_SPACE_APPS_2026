@@ -1,6 +1,6 @@
 # Plan: visualizar en detalle por qué dos lugares son homólogos
 
-Estado: **planificación**. Depende de los datos que generen el comparador (`src/compare.py`, Marco) y la descarga de datasets (Santiago).
+Estado: **prototipo funcionando con datos sintéticos** (`src/export_web.py` → `web/public/data/comparisons.json` → `ComparisonPanel`). Depende de los datos que generen el comparador (`src/compare.py`, Marco) y la descarga de datasets (Santiago).
 
 Objetivo: que cualquier persona, y en especial el jurado, entienda **con datos** por qué un lugar de la Tierra es análogo a uno de la Luna o de Marte, **cuánto** se parece y **dónde deja de valer** la analogía.
 
@@ -48,7 +48,7 @@ Se abre debajo de las imágenes de detalle (o como panel a pantalla completa) al
 |---|---|---|
 | Puntaje total | **Número grande** (≥ 48 px) + texto de estabilidad | Un solo valor no necesita gráfico |
 | Similitud por característica | **Lista de barras** (nombre + barra + cifra por fila), un solo tono; la peor fila lleva icono ⚠ y la etiqueta "rompe la analogía" | Compara varias razones 0–1, cada una contra el máximo; es más legible que un gráfico de radar |
-| Valores reales | **Mancuernas (dumbbell) en múltiplos pequeños**: una fila por variable, cada una con su propio eje y unidad | Las variables tienen escalas distintas (K, m, grados, albedo): **nunca** un solo eje compartido ni dos ejes en un mismo gráfico |
+| Valores reales | **Mancuernas (dumbbell) en múltiplos pequeños**: una fila por variable, cada una con su propio eje físico fijo (`range` en el JSON) y unidad | Las variables tienen escalas distintas (K, m, grados, albedo): **nunca** un solo eje compartido ni dos ejes en un mismo gráfico |
 | Ranking de candidatos | **Barras horizontales ordenadas**, un tono, el sitio actual resaltado | Comparar magnitudes entre candidatos |
 | Mapa de similitud | **Mapa de calor secuencial** (un tono, claro → oscuro) superpuesto al globo de la Tierra | Magnitud en el espacio; nada de arcoíris |
 | Tabla | Tabla con todos los valores, siempre disponible | Accesibilidad y verificación |
@@ -60,7 +60,7 @@ Reglas de color (guía de visualización):
 - La paleta se valida con el script de daltonismo antes de publicarla.
 
 ### Interacción
-- **Pesos ajustables:** un control por característica. El puntaje se recalcula en el navegador con `S = Σ w·s / Σ w`, porque el JSON ya trae la similitud de cada característica.
+- **Pesos ajustables:** un control por característica. El puntaje se recalcula **exactamente** en el navegador con la misma fórmula de `compare.py`: como `s_f = exp(−|d_f|)`, se recupera `|d_f| = −ln s_f` y `S = exp(−√(Σ w·d² / Σ w))`.
 - **Al cambiar de par**, todas las vistas se actualizan juntas: globos, imágenes y comparación.
 - **Clic en una celda del mapa de calor:** abre la comparación de esa celda aunque no esté en el catálogo, para descubrir análogos nuevos.
 
@@ -128,12 +128,12 @@ Si el archivo resulta muy pesado (más de 5 MB), se cambia a teselas PNG, que Ce
 | Persona | Entrega |
 |---|---|
 | Santiago | Datasets descargados, recortados y documentados en [RECURSOS.md](../RECURSOS.md) (fuente, resolución, fecha) |
-| Marco | `compare.py` con salida `--format json` siguiendo este contrato |
+| Marco | Datos reales en los CSV de entrada de `compare.py`. El JSON lo genera `python src/export_web.py --earth <csv> --targets <csv>`, que usa las funciones de `compare.py` sin cambiarlas. Para enlazar celdas con el catálogo, `place_hint` debe contener el nombre del sitio (ver `SITE_KEYWORDS`) |
 | Web | Componentes de la sección 2, que leen el JSON; mientras tanto, prototipo con los datos sintéticos de `data/sample_*.csv`, marcados como **"datos de muestra"** |
 
 ## 4. Fases
 
-1. **Prototipo con datos sintéticos:** convertir la salida actual de `compare.py` al JSON y construir la vista con la etiqueta "datos de muestra".
+1. ✅ **Prototipo con datos sintéticos:** `src/export_web.py` y `ComparisonPanel` con la etiqueta "datos de muestra".
 2. **Datos reales para 2 objetivos** (Shackleton y Jezero) y los 12 sitios del catálogo.
 3. **Mapa de calor global** y descubrimiento de análogos nuevos.
 4. **Pesos ajustables** y análisis de estabilidad.

@@ -14,6 +14,8 @@ import {
 } from './data/types'
 import PlanetGlobe, { type GlobeMarker } from './components/PlanetGlobe'
 import DetailImage from './components/DetailImage'
+import ComparisonPanel from './components/ComparisonPanel'
+import { BODY_COLORS } from './theme'
 import { BASE_LAYERS, OVERLAY_LAYERS, type BaseLayerId, type OverlayLayerId } from './map/gibs'
 import './App.css'
 
@@ -25,11 +27,6 @@ const MODES: Record<Mode, { label: string; left: Body; right: Body; requires: Ta
   'luna-marte': { label: 'Luna ↔ Marte', left: 'luna', right: 'marte', requires: ['luna', 'marte'] },
 }
 
-const BODY_COLORS: Record<Body, string> = {
-  tierra: '#4ea8ff',
-  luna: '#c9ced6',
-  marte: '#e2673f',
-}
 
 function googleEarthUrl(site: AnalogSite) {
   return `https://earth.google.com/web/@${site.lat},${site.lng},1000a,20000d,35y,0h,45t,0r`
@@ -189,9 +186,13 @@ export default function App() {
           </div>
           {selected && (
             <p className="pair-title">
-              <span style={{ color: BODY_COLORS[left] }}>{leftFocus?.name}</span>
+              <span>
+                <span className="swatch" style={{ background: BODY_COLORS[left] }} /> {leftFocus?.name}
+              </span>
               <span className="vs">≈</span>
-              <span style={{ color: BODY_COLORS[right] }}>{rightFocus?.name}</span>
+              <span>
+                <span className="swatch" style={{ background: BODY_COLORS[right] }} /> {rightFocus?.name}
+              </span>
             </p>
           )}
         </div>
@@ -253,6 +254,9 @@ export default function App() {
             </div>
           )}
         </section>
+
+        {selected &&
+          requires.map((body) => <ComparisonPanel key={`${selected.id}-${body}`} site={selected} body={body} />)}
       </main>
     </div>
   )

@@ -14,6 +14,20 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Prototipo de la comparación detallada
+**Autor:** @Ssalazarp420
+
+- **`src/export_web.py`:** convierte la salida de `compare.py` (de Marco) en `web/public/data/comparisons.json` siguiendo el contrato de datos. No cambia la fórmula: llama a `compare_all` y `weight_sensitivity`.
+- **`ComparisonPanel`** (debajo de las imágenes):
+  - Puntaje 0–100, posición en el ranking y estabilidad ante cambios de pesos.
+  - Barras de similitud por característica, con "✓ más parecido" y "⚠ rompe la analogía" (icono y texto, no solo color).
+  - Pesos ajustables con recálculo exacto en el navegador (misma fórmula de `compare.py`).
+  - Valores reales Tierra vs. Luna/Marte, cada variable con su escala física fija.
+  - Ranking de los mejores lugares de la Tierra, incluidos los que no están en el catálogo.
+  - Límites físicos (gravedad, atmósfera, campo magnético, duración del día), fuentes previstas y tabla de datos.
+- **Colores de identidad validados** con el verificador de paletas (daltonismo, luminosidad y contraste): Tierra `#3d8ef0`, Luna `#b08f24`, Marte `#cf4a3c`. El gris anterior de la Luna fallaba por leerse como gris de "desactivado".
+- **Datos:** todavía son los **sintéticos** de `data/sample_*.csv`; la interfaz lo indica con una etiqueta visible. Con esos datos hay comparación para Haughton, Atacama, McMurdo y Mauna Kea.
+
 ## 2026-11-14 · Globos 3D lado a lado (Tierra, Luna y Marte)
 **Autor:** @Ssalazarp420
 
