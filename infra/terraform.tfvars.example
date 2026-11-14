@@ -1,0 +1,2 @@
+# Copia este archivo como terraform.tfvars (no se sube a git)
+subscription_id = "00000000-0000-0000-0000-000000000000"
