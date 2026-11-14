@@ -14,6 +14,35 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Google Maps bloqueado por la facturación: se pasa a NASA GIBS
+**Autor:** @Ssalazarp420
+
+**Intento:**
+- Se creó una API key de Google Maps en un proyecto nuevo de Google Cloud ("My First Project").
+- Se restringió por referrer y por API (solo Maps JavaScript API) y se cargó como secret en GitHub.
+- Al intentar crear la alerta de presupuesto, la consola quedó en un bucle de *Enable billing*.
+
+**Hallazgos:**
+- La cuenta de facturación es una **"Cuenta de prueba gratuita"** (90 días), pero aparece **"cerrada"**.
+- En Colombia, Google Cloud exige un **prepago (100.000 COP)** para activar la cuenta de facturación, incluso en la prueba gratuita. El prepago queda como saldo a favor, pero es dinero adelantado.
+- Mientras la cuenta esté cerrada, el proyecto **no puede usar la Maps JavaScript API**: el mapa no carga y no se pueden crear presupuestos ni alertas.
+- Costo real a la fecha: **USD 0**.
+
+**Decisión:**
+- **No hacer el prepago**, por la regla del proyecto de usar solo servicios gratuitos.
+- Reemplazar Google Maps por **MapLibre GL JS** (código abierto) con capas de **NASA GIBS**: Blue Marble, VIIRS color verdadero, relieve ASTER GDEM y temperatura superficial MODIS. No requiere key ni facturación, y el mapa base pasa a ser **datos abiertos de la NASA**, lo que refuerza la propuesta ante el reto.
+- Se mantiene el botón **"Ver en Google Earth"**: es un enlace y no requiere API.
+- Si más adelante el equipo decide hacer el prepago, se puede volver a Google Maps (el mapa está aislado en un solo componente).
+
+**Evaluado y pospuesto:** Google AI Studio (API de Gemini).
+- No reemplaza al mapa, pero podría servir para búsqueda en lenguaje natural o para redactar las fichas.
+- Su key no puede ir en el frontend: requeriría un backend (Azure Functions, incluido en Static Web Apps Free).
+- Queda como mejora futura.
+
+**Pendientes:**
+- Eliminar el secret `VITE_GOOGLE_MAPS_API_KEY` de GitHub.
+- Borrar o desactivar la API key en Google Cloud.
+
 ## 2026-11-14 · Restricciones de la API key de Google Maps
 **Autor:** @Ssalazarp420
 
