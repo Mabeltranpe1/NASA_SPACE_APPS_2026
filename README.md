@@ -4,6 +4,30 @@ NASA Space Apps Challenge 2026: **"Identify Earth Locations that Analog the Perm
 
 The goal is to find places on Earth that look like the places where we want to build bases on the Moon and Mars, so that these Earth places can be used to test equipment, habitats and procedures. The challenge text is in `docs/NASA Space Apps Challenge.pdf`.
 
+### What the challenge expects
+- **Looking similar is not enough.** We must show with data *why* a place is a good analog.
+- **An analogy does not have to be total.** We explain where it is similar, how similar, and **where it stops working**.
+- **Look beyond the well-known analogs** (Antarctica, Atacama, Iceland, Hawaii) and find less-studied places.
+- **Think about processes, not only places:** sedimentation, dust storms, volcanism, erosion, ice dynamics.
+- **Scale matters:** a crater, a valley or a volcanic field can be a better analog than a whole desert.
+- **Connect to exploration:** how the analog helps to test instruments, prepare operations, find resources or reduce risks.
+- **Accept the limits of Earth:** reduced gravity, lunar vacuum, the thin Martian atmosphere and radiation cannot be reproduced.
+
+### Analysis dimensions
+| Dimension | Example variables |
+|---|---|
+| Geology and materials | Mineralogy, rock type, regolith |
+| Terrain | Elevation, slope, roughness, craters |
+| Extreme environment | Temperature, illumination, thermal range |
+| Water and resources | Ice, permafrost, hydration |
+| Atmospheric processes | Dust, wind, wind erosion |
+| Habitability | Extremophiles, biosignatures |
+| Subsurface | Caves, lava tubes |
+| Operations | Landing, mobility, navigation, construction |
+
+Other data sources (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, etc.) are listed in [RECURSOS.md](RECURSOS.md).
+
+
 ---
 
 ## 1. How it works (the idea)
@@ -43,7 +67,7 @@ Missing data is handled like this:
 | **MCD43C3** v061 | surface albedo (daily product) | 0.05 degree, global | 12 files (the 15th of each month) |
 | **GPM_3IMERGM** v07 | precipitation, monthly | 0.1 degree, global | 12 files (one per month) |
 
-The Moon and Mars target values are not downloaded by a script yet (see "Status and next steps").
+The Moon and Mars target values are not downloaded by a script yet (see "Status and next steps"). More data sources are listed in [RECURSOS.md](RECURSOS.md).
 
 ---
 
@@ -52,34 +76,62 @@ The Moon and Mars target values are not downloaded by a script yet (see "Status 
 ```
 NASA_SPACE_APPS_2026/
 ├── README.md              <- this file
+├── RECURSOS.md            <- catalog of data sources
+├── CONTRIBUTING.md        <- git flow workflow (read before working)
 ├── environment.yml        <- conda environment "analogos"
 ├── .gitignore             <- ignores data/raw/, *.hdf, *.tif, *.nc, __pycache__/ ...
+├── .github/workflows/     <- automatic deploy to Azure Static Web Apps
 ├── docs/
-│   └── NASA Space Apps Challenge.pdf   <- the challenge description
+│   ├── NASA Space Apps Challenge.pdf   <- the challenge description
+│   ├── OBJETIVO.md        <- detailed goal of the platform and challenge criteria
+│   ├── ARQUITECTURA.md    <- components, CI/CD, security and costs
+│   ├── BITACORA.md        <- log of decisions and progress
+│   └── GOOGLE_MAPS_API_KEY.md  <- how to create and test a Google Maps API key
 ├── data/
 │   ├── sample_earth.csv   <- FAKE Earth cells, only for testing
 │   ├── sample_targets.csv <- FAKE Moon/Mars sites, only for testing
-│   └── raw/               <- downloaded NASA files (not in git, can be many GB)
-│       ├── NASADEM_HGT/
-│       ├── MOD11C3/
-│       ├── MCD43C3/
-│       └── GPM_3IMERGM/
+│   ├── raw/               <- downloaded NASA files (not in git, can be many GB)
+│   │   ├── NASADEM_HGT/
+│   │   ├── MOD11C3/
+│   │   ├── MCD43C3/
+│   │   └── GPM_3IMERGM/
+│   └── processed/         <- processed data (not in git)
+├── notebooks/             <- Jupyter notebooks for exploration and analysis
 ├── src/
 │   ├── compare.py         <- the similarity index (main script)
 │   └── download_earth.py  <- downloads the NASA Earth data
-└── tests/
-    └── test_compare.py    <- automatic checks for compare.py
+├── tests/
+│   └── test_compare.py    <- automatic checks for compare.py
+├── outputs/               <- maps, figures and final results
+├── web/                   <- web platform (React + Vite + MapLibre + NASA GIBS)
+└── infra/                 <- Azure infrastructure with Terraform (Free plans only)
 ```
 
 > **Important: the sample CSV files are FAKE.** `data/sample_earth.csv` and `data/sample_targets.csv` contain invented numbers. They exist only to test that `compare.py` works. The place names have "(fake)" in them, and the script prints a `SYNTHETIC sample data` warning when you use them. Do not use their results in the final presentation.
 
 ---
 
-## 4. Install the environment
+## 4. Web platform (`web/`)
+
+An interactive map to filter Earth analogs by target (Moon or Mars), type of environment (desert, polar, volcanic, crater, caves, salt flat) and similarity dimension. The map is a 3D globe with NASA imagery (GIBS): Blue Marble, recent satellite images, relief and land surface temperature. Each site can be opened in Google Earth.
+
+You need Node.js and npm:
+
+```fish
+cd web
+npm install
+npm run dev                  # http://localhost:5173
+```
+
+Deployment to Azure is explained in [infra/README.md](infra/README.md).
+
+---
+
+## 5. Install the environment
 
 All commands below work in the **fish** shell (and also in bash).
 
-### 4.1 Install Miniconda (only once)
+### 5.1 Install Miniconda (only once)
 
 If you do not have `conda` yet, install Miniconda from https://docs.conda.io/en/latest/miniconda.html.
 
@@ -91,7 +143,7 @@ conda init fish
 
 Then close the terminal and open a new one.
 
-### 4.2 Create the `analogos` environment
+### 5.2 Create the `analogos` environment
 
 From the project folder:
 
@@ -105,7 +157,7 @@ This installs Python 3.12 with numpy, pandas, scikit-learn, xarray, rasterio, ge
 
 > Note: `environment.yml` has a `prefix:` line at the end with a path from one computer (`/home/marcop/miniconda3/envs/analogos`). On another computer you can delete that line; conda will then use its normal folder.
 
-### 4.3 Extra packages for downloading and reading NASA files
+### 5.3 Extra packages for downloading and reading NASA files
 
 `download_earth.py` needs **earthaccess**, which is not in `environment.yml` yet. To read the NASA files later you will probably also need **pyhdf** (for the `.hdf` files of MOD11C3 and MCD43C3) and **h5py** (for the GPM files). Install them with:
 
@@ -116,13 +168,13 @@ conda install -c conda-forge earthaccess pyhdf h5py
 
 If conda cannot solve it, you can try `pip install earthaccess h5py` instead (pyhdf is easier to install with conda).
 
-### 4.4 Check that it works
+### 5.4 Check that it works
 
 ```fish
 python -c "import numpy, pandas, sklearn, earthaccess; print('OK')"
 ```
 
-### 4.5 Update the environment later
+### 5.5 Update the environment later
 
 If someone adds a package to `environment.yml`:
 
@@ -132,11 +184,11 @@ conda env update -f environment.yml --prune
 
 ---
 
-## 5. Run the similarity index (`src/compare.py`)
+## 6. Run the similarity index (`src/compare.py`)
 
 Always run the commands **from the project folder** (the paths are relative to it), with the environment active.
 
-### 5.1 Try it with the fake sample data
+### 6.1 Try it with the fake sample data
 
 ```fish
 python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --top 5
@@ -146,7 +198,7 @@ For each target you get a small table: rank, lat, lon, place_hint, score, the `s
 
 > If you run `python src/compare.py` with no `--earth` / `--targets`, it looks for `data/earth.csv` and `data/targets.csv`. These files do **not** exist yet, so for now always give the sample files.
 
-### 5.2 All options
+### 6.2 All options
 
 | Option | Default | What it does |
 |---|---|---|
@@ -158,7 +210,7 @@ For each target you get a small table: rank, lat, lon, place_hint, score, the `s
 | `--sensitivity RUNS` | (off) | also run the weight sensitivity check, e.g. `200` runs |
 | `--spread X` | `0.5` | how much weights change in the sensitivity check (0.5 = +-50%) |
 
-### 5.3 Examples
+### 6.3 Examples
 
 Switch elevation off and save everything to a file:
 
@@ -178,7 +230,7 @@ Change two weights at the same time:
 python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --weight temp_mean_K=3 --weight albedo=0.5
 ```
 
-### 5.4 Input file format
+### 6.4 Input file format
 
 Both files are CSV. Lines that start with `#` are comments.
 
@@ -187,7 +239,7 @@ Both files are CSV. Lines that start with `#` are comments.
 
 The script stops with a clear `ERROR:` if a column is missing or contains text instead of numbers. It prints a `WARNING:` (but continues) if values look like a unit mistake, for example a temperature in Celsius instead of Kelvin.
 
-### 5.5 Settings inside the code
+### 6.5 Settings inside the code
 
 At the top of `src/compare.py` you can edit:
 - `FEATURES` (which columns are compared),
@@ -198,7 +250,7 @@ At the top of `src/compare.py` you can edit:
 
 ---
 
-## 6. Run the tests
+## 7. Run the tests
 
 ```fish
 python tests/test_compare.py
@@ -210,9 +262,9 @@ They also work with pytest, if you install it (`conda install pytest`, then `pyt
 
 ---
 
-## 7. Download the NASA Earth data (`src/download_earth.py`)
+## 8. Download the NASA Earth data (`src/download_earth.py`)
 
-### 7.1 Before the first download (only once)
+### 8.1 Before the first download (only once)
 
 1. Create a **free NASA Earthdata Login** account: https://urs.earthdata.nasa.gov/users/new
 2. For **GPM** (precipitation) you must also approve one application: go to https://urs.earthdata.nasa.gov/profile, open **Authorized Apps**, click **Approve More Applications**, and approve **NASA GESDISC DATA ARCHIVE**. Without this, the GPM download is skipped (the script tells you).
@@ -222,7 +274,7 @@ They also work with pytest, if you install it (`conda install pytest`, then `pyt
    python -c "import earthaccess; earthaccess.login(persist=True)"
    ```
 
-### 7.2 Step 1: see the plan (no login needed)
+### 8.2 Step 1: see the plan (no login needed)
 
 ```fish
 python src/download_earth.py --region -80 -5 -66 13
@@ -232,7 +284,7 @@ The region is **WEST SOUTH EAST NORTH** in degrees (longitude, latitude, longitu
 
 This shows how many files and how many GB each dataset needs, and how much free disk space you have. Nothing is downloaded.
 
-### 7.3 Step 2: really download
+### 8.3 Step 2: really download
 
 ```fish
 python src/download_earth.py --region -80 -5 -66 13 --download
@@ -252,7 +304,7 @@ Size guide: the 12 MCD43C3 albedo files are about 2.4 GB and the 12 MOD11C3 file
 
 ---
 
-## 8. Status and next steps
+## 9. Status and next steps
 
 **Done**
 - `src/compare.py`: similarity index, per-feature explanation, weight sensitivity check.
@@ -261,8 +313,22 @@ Size guide: the 12 MCD43C3 albedo files are about 2.4 GB and the 12 MOD11C3 file
 - Data for 2023 already in `data/raw/`: NASADEM tiles for the region about 81°W-66°W, 6°S-13°N, 12 MOD11C3 files and 12 MCD43C3 files.
 
 **Not done yet**
-- `data/raw/GPM_3IMERGM/` is still empty: approve "NASA GESDISC DATA ARCHIVE" (section 7.1) and run the download again.
+- `data/raw/GPM_3IMERGM/` is still empty: approve "NASA GESDISC DATA ARCHIVE" (section 8.1) and run the download again.
 - Add `earthaccess` (and `pyhdf`, `h5py` if used) to `environment.yml`.
 - Write a script that turns the raw files into `data/earth.csv`: unzip and mosaic the NASADEM tiles, compute slope and roughness, compute mean and range of temperature, mean albedo and yearly precipitation, all on one common grid.
 - Build `data/targets.csv` with **real** Moon and Mars values for the base candidate sites (for example from LRO/LOLA, Diviner for the Moon and MOLA, THEMIS, TES for Mars).
 - Make maps of the results (folium / matplotlib are already installed).
+
+---
+
+## 10. Documentation
+
+- [docs/OBJETIVO.md](docs/OBJETIVO.md): detailed goal of the platform and challenge criteria
+- [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): components, CI/CD, security and costs
+- [docs/BITACORA.md](docs/BITACORA.md): log of decisions and progress
+- [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): how to create and test a Google Maps API key
+- [RECURSOS.md](RECURSOS.md): data sources
+
+## 11. How to collaborate
+
+We use **git flow**. Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start working.
