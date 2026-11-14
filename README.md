@@ -44,7 +44,8 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 │   └── processed/    # Datos procesados (no se suben a git)
 ├── docs/             # Objetivo, arquitectura y bitácora del proyecto
 ├── notebooks/        # Jupyter notebooks de exploración y análisis
-├── src/              # Código reutilizable (descarga, procesamiento, métricas)
+├── src/              # Código reutilizable (compare.py: índice de similitud)
+├── tests/            # Tests de Python (pytest)
 ├── outputs/          # Mapas, figuras y resultados finales
 ├── web/              # Plataforma web (React + Vite + MapLibre + NASA GIBS)
 ├── infra/            # Infraestructura en Azure con Terraform (solo planes Free)
@@ -52,6 +53,30 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 ├── RECURSOS.md       # Catálogo de fuentes de datos
 └── CONTRIBUTING.md   # Flujo de trabajo con git flow
 ```
+
+## Entorno de Python (análisis y comparador)
+
+El comparador de similitud (`src/compare.py`) y los notebooks usan Python 3.12. Hay dos formas de instalar el entorno:
+
+**Con conda** (`environment.yml`):
+```bash
+conda env create -f environment.yml
+conda activate analogos
+```
+
+**Con uv o pip** (`requirements.txt`):
+```bash
+uv venv --python 3.12 && uv pip install -r requirements.txt
+source .venv/bin/activate
+```
+
+Verificar:
+```bash
+pytest -q tests
+python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --top 5
+```
+
+En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analogos`.
 
 ## Plataforma web
 

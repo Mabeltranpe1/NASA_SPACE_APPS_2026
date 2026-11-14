@@ -1,0 +1,13 @@
+# Dependencias de Python del proyecto (equivalente a environment.yml para quien no usa conda)
+# Instalación con uv:  uv venv --python 3.12 && uv pip install -r requirements.txt
+# Instalación con pip: python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
+numpy
+pandas
+scikit-learn
+matplotlib
+rasterio
+geopandas
+xarray
+folium
+jupyter
+pytest
