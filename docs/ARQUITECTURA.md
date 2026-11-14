@@ -19,7 +19,7 @@ flowchart LR
 
     subgraph Web["Plataforma web (React)"]
         APP["web/ — React + Vite + TS"]
-        MAPS["MapLibre GL<br/>+ capas NASA GIBS"]
+        MAPS["CesiumJS<br/>globos Tierra · Luna · Marte"]
         GE["Google Earth<br/>(enlace)"]
     end
 
@@ -34,7 +34,8 @@ flowchart LR
     COP --> DL
     OTROS --> DL
     DL --> PROC --> OUT --> APP
-    GIBS["NASA GIBS<br/>Blue Marble, VIIRS,<br/>ASTER, MODIS LST"] --> MAPS
+    GIBS["NASA GIBS<br/>Blue Marble, VIIRS, ASTER,<br/>MODIS LST, Landsat"] --> MAPS
+    TREK["NASA Moon Trek / Mars Trek<br/>LRO WAC, Viking, MOLA"] --> MAPS
     APP --> MAPS
     APP --> GE
     APP --> GH -->|deploy| SWA
@@ -57,7 +58,9 @@ flowchart LR
 |---|---|
 | Framework | React 19 + TypeScript |
 | Build | Vite |
-| Mapa | **MapLibre GL JS** (código abierto) con proyección de globo 3D |
+| Globos 3D | **CesiumJS** (Apache 2.0, sin Cesium ion ni token): un visor por cuerpo con su elipsoide real (`Ellipsoid.WGS84`, `MOON`, `MARS`). Maneja los polos, necesario para el polo sur lunar |
+| Luna y Marte | **NASA Moon Trek** (LRO WAC, ~100 m/px) y **Mars Trek** (Viking MDIM 2.1 color, ~232 m/px; relieve MOLA, ~463 m/px), teselas geográficas `default028mm` |
+| Imagen de detalle (Tierra) | **NASA GIBS Snapshot API**: Landsat WELD (30 m/px); MODIS Terra en sitios polares sin cobertura Landsat |
 | Imágenes | **NASA GIBS** (WMTS): Blue Marble, VIIRS NOAA-20 color verdadero, relieve ASTER GDEM, temperatura superficial MODIS, etiquetas de referencia. Sin key ni costo. |
 | Lint | oxlint |
 | Estado | `useState` y `useMemo` locales (sin librería de estado global) |
@@ -66,11 +69,14 @@ flowchart LR
 Estructura:
 ```
 web/src/
-├── App.tsx          # Layout, filtros, selector de capas y ficha del sitio
+├── App.tsx              # Modos de comparación, filtros, globos lado a lado y ficha
 ├── components/
-│   └── SiteMap.tsx  # Mapa MapLibre: globo, capas GIBS, marcadores y popup
+│   ├── PlanetGlobe.tsx  # Visor Cesium genérico (globo completo o vista de detalle)
+│   └── DetailImage.tsx  # Imagen de detalle: snapshot Landsat/MODIS o vista cercana Luna/Marte
+├── planet/
+│   └── bodies.ts        # Configuración por cuerpo: elipsoide, imágenes, alturas de cámara
 ├── map/
-│   └── gibs.ts      # Definición de capas NASA GIBS y URLs de teselas
+│   └── gibs.ts          # Capas NASA GIBS de la Tierra y URLs de teselas
 ├── App.css          # Estilos de la app
 ├── index.css        # Variables de color (modo claro/oscuro)
 └── data/
@@ -94,9 +100,11 @@ web/src/
 | `missionUse` | string | Para qué sirve en una misión |
 | `wellKnown` | boolean | Si ya es un análogo muy estudiado |
 
-**Variables de entorno:** ninguna. El mapa usa NASA GIBS, que no requiere API key.
+**Variables de entorno:** ninguna. NASA GIBS y NASA Trek son públicos y no requieren API key.
 
-> Historial: la primera versión usaba Google Maps, pero se reemplazó porque Google Cloud exige un prepago para activar la facturación (ver [BITACORA.md](BITACORA.md)). El mapa está aislado en `SiteMap.tsx`, así que se podría volver a cambiar sin tocar el resto de la app.
+**Assets de Cesium:** `vite-plugin-static-copy` copia `Workers`, `Assets`, `ThirdParty` y `Widgets` a `dist/cesium/` (con `rename.stripBase: 4`), y `CESIUM_BASE_URL` apunta a `/cesium`.
+
+> Historial: la primera versión usaba Google Maps, pero se reemplazó porque Google Cloud exige un prepago para activar la facturación (ver [BITACORA.md](BITACORA.md)). Después se usó MapLibre, que se cambió por CesiumJS porque la proyección Mercator no muestra los polos (el cráter Shackleton está a −89,7°) y porque permite globos de la Luna y Marte.
 
 ### 3. Infraestructura (`infra/`)
 
@@ -148,7 +156,7 @@ Ver [CONTRIBUTING.md](../CONTRIBUTING.md). Resumen: `feature/*` → PR → `deve
 
 ## Seguridad
 
-- **El frontend no contiene secretos:** NASA GIBS es público y no usa key.
+- **El frontend no contiene secretos:** NASA GIBS y NASA Trek son públicos y no usan key. Cesium se usa sin Cesium ion.
 - El token de despliegue de Azure solo existe en el estado de Terraform y en el secret de GitHub. Si se filtra, se regenera en el portal (*Administrar token de implementación → Restablecer*) y se actualiza el secret.
 - `terraform.tfvars` y `*.tfstate` están en `.gitignore`.
 
@@ -159,7 +167,9 @@ Ver [CONTRIBUTING.md](../CONTRIBUTING.md). Resumen: `feature/*` → PR → `deve
 | Servicio | Plan | Límite gratuito | Protección |
 |---|---|---|---|
 | Azure Static Web Apps | Free | 100 GB/mes de ancho de banda, 3 vistas previas | — |
-| NASA GIBS (mapa) | Público | Sin límite de uso publicado | — |
+| NASA GIBS (Tierra) | Público | Sin límite de uso publicado | — |
+| NASA Moon Trek / Mars Trek | Público | Sin límite de uso publicado | — |
+| CesiumJS | Código abierto (Apache 2.0) | Sin Cesium ion: costo cero | — |
 | Google Earth (enlace) | Gratis | — | — |
 | GitHub Actions | Repositorio público | Minutos ilimitados | — |
 | Estado remoto de Terraform | *No usado* | — | Requeriría un Storage Account (costo mínimo) |

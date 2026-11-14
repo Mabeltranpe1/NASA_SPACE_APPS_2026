@@ -14,6 +14,31 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Globos 3D lado a lado (Tierra, Luna y Marte)
+**Autor:** @Ssalazarp420
+
+- **Contexto del equipo:**
+  - Marco trabaja en el código Python para vectorizar la información.
+  - Santiago descarga las bases de datos para comparar a mayor escala y detalle.
+  - Mientras tanto se avanza en la visualización.
+- **Cambio:** MapLibre se reemplazó por **CesiumJS** (código abierto, sin Cesium ion).
+  - **Motivo:** la proyección Mercator de MapLibre no muestra más allá de ±85°, y la base lunar candidata (cráter Shackleton) está a −89,7°.
+  - Cesium permite un visor por cuerpo con su elipsoide real.
+- **Nuevas funciones:**
+  - **Modos de comparación:** Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte, con dos globos lado a lado.
+  - **Homólogos:** cada sitio terrestre tiene su lugar en la Luna y/o Marte, con coordenadas de sitios de misiones (Shackleton, Apolo 11, Marius Hills, Phoenix, Viking 2, Gale, Jezero, Meridiani, Gusev, Arsia Mons, Eberswalde). Medusae Fossae y Terra Sirenum están marcados como ubicaciones aproximadas.
+  - **Imágenes de detalle debajo de los globos:**
+    - Tierra: Landsat WELD (30 m/px) desde la GIBS Snapshot API. Para McMurdo y Svalbard, que Landsat no cubre, se usa MODIS Terra en una fecha de verano.
+    - Luna: LRO WAC (NASA Moon Trek).
+    - Marte: Viking MDIM 2.1 (NASA Mars Trek), con botón para cambiar a relieve MOLA.
+- **Problemas resueltos:**
+  - `vite-plugin-static-copy` v4 copiaba los assets de Cesium con la ruta completa (`node_modules/...`), así que el cielo y los logos fallaban y el render se detenía. Se corrigió con `rename: { stripBase: 4 }`.
+  - Suomi NPP ya no publica imágenes recientes en GIBS; se usa NOAA-20.
+  - El mosaico WAC se deforma cerca del polo; la vista de detalle se aleja en sitios con latitud mayor a 80°.
+  - No se encontró en Trek un relieve LOLA global con el nombre esperado; queda pendiente para la Luna.
+- **Verificación:** capturas automáticas con Chromium (Playwright) de los tres modos, sin errores en consola.
+- **Plan:** [VISUALIZACION_COMPARACION.md](VISUALIZACION_COMPARACION.md) describe la vista de comparación detallada, el contrato de datos JSON para el pipeline y las mejoras propuestas para el jurado.
+
 ## 2026-11-14 · Release v0.1.0 a producción
 **Autor:** @Ssalazarp420
 
