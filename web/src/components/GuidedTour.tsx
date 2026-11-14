@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { TOUR_STEPS, type TourStep } from '../data/tour'
+import { useLang } from '../i18n/useLang'
 
 const STEP_SECONDS = 12
 
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export default function GuidedTour({ onApply, onClose }: Props) {
+  const { lang, t } = useLang()
   const [index, setIndex] = useState(0)
   const [playing, setPlaying] = useState(true)
   const onApplyRef = useRef(onApply)
@@ -47,34 +49,34 @@ export default function GuidedTour({ onApply, onClose }: Props) {
   }, [onClose])
 
   return (
-    <div className="tour" role="dialog" aria-label="Recorrido guiado" aria-live="polite">
+    <div className="tour" role="dialog" aria-label={t('tour.label')} aria-live="polite">
       <div className="tour-progress" aria-hidden="true">
         {TOUR_STEPS.map((s, i) => (
-          <span key={s.title} className={i < index ? 'done' : i === index ? `active ${playing ? 'playing' : ''}` : ''}>
+          <span key={s.title.es} className={i < index ? 'done' : i === index ? `active ${playing ? 'playing' : ''}` : ''}>
             {i === index && <i style={{ animationDuration: `${STEP_SECONDS}s` }} />}
           </span>
         ))}
       </div>
       <p className="tour-count">
-        Recorrido guiado · {index + 1} de {TOUR_STEPS.length}
+        {t('tour.count', { i: index + 1, n: TOUR_STEPS.length })}
       </p>
-      <h2>{step.title}</h2>
-      <p className="tour-text">{step.text}</p>
+      <h2>{step.title[lang]}</h2>
+      <p className="tour-text">{step.text[lang]}</p>
       <div className="tour-controls">
-        <button onClick={() => setIndex((i) => Math.max(i - 1, 0))} disabled={index === 0} aria-label="Paso anterior">
+        <button onClick={() => setIndex((i) => Math.max(i - 1, 0))} disabled={index === 0} aria-label={t('tour.prev')}>
           ←
         </button>
-        <button onClick={() => setPlaying((p) => !p)} disabled={last} aria-label={playing ? 'Pausar' : 'Reanudar'}>
-          {playing && !last ? 'Pausa' : 'Reanudar'}
+        <button onClick={() => setPlaying((p) => !p)} disabled={last} aria-label={playing ? t('tour.pause') : t('tour.resume')}>
+          {playing && !last ? t('tour.pause') : t('tour.resume')}
         </button>
         <button
           className="primary"
           onClick={() => (last ? onClose() : setIndex((i) => i + 1))}
-          aria-label={last ? 'Terminar recorrido' : 'Siguiente paso'}
+          aria-label={last ? t('tour.finishLabel') : t('tour.nextLabel')}
         >
-          {last ? 'Explorar por mi cuenta' : 'Siguiente →'}
+          {last ? t('tour.finish') : t('tour.next')}
         </button>
-        <button className="tour-close" onClick={onClose} aria-label="Cerrar recorrido">
+        <button className="tour-close" onClick={onClose} aria-label={t('tour.close')}>
           ✕
         </button>
       </div>

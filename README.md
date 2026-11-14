@@ -55,7 +55,7 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 
 ## Plataforma web
 
-Comparación lado a lado en **globos 3D de la Tierra, la Luna y Marte** (modos Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte), con filtros por tipo de ambiente y dimensión de similitud. Al elegir un sitio, ambos globos vuelan al lugar y debajo aparecen sus imágenes de detalle: Landsat de la Tierra y los mosaicos de NASA Moon Trek y Mars Trek. Todo con datos abiertos de la NASA, sin API keys. Cada sitio se puede abrir en Google Earth.
+Comparación lado a lado en **globos 3D de la Tierra, la Luna y Marte** (modos Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte), con filtros por tipo de ambiente y dimensión de similitud. Al elegir un sitio, ambos globos vuelan al lugar y debajo aparecen sus imágenes de detalle: Landsat de la Tierra y los mosaicos de NASA Moon Trek y Mars Trek. Todo con datos abiertos de la NASA, sin API keys. Disponible en **español e inglés** (`?lang=es` / `?lang=en`). Incluye un **recorrido guiado** y una **comparación detallada** con puntajes, pesos ajustables y límites de la analogía. Cada sitio se puede abrir en Google Earth.
 
 ```bash
 cd web

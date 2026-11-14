@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { SITES } from './data/sites'
 import {
-  BODY_LABELS,
   DIMENSION_LABELS,
   ENVIRONMENT_LABELS,
   homologueFor,
@@ -19,14 +18,17 @@ import { BODY_COLORS } from './theme'
 import GuidedTour from './components/GuidedTour'
 import type { TourStep } from './data/tour'
 import { BASE_LAYERS, OVERLAY_LAYERS, type BaseLayerId, type OverlayLayerId } from './map/gibs'
+import { localizeSite } from './data/sites.en'
+import { useLang } from './i18n/useLang'
+import { BODY_NAMES, DIMENSION_NAMES, ENVIRONMENT_NAMES, MODE_NAMES } from './i18n/strings'
 import './App.css'
 
 type Mode = 'tierra-luna' | 'tierra-marte' | 'luna-marte'
 
-const MODES: Record<Mode, { label: string; left: Body; right: Body; requires: Target[] }> = {
-  'tierra-luna': { label: 'Tierra ↔ Luna', left: 'tierra', right: 'luna', requires: ['luna'] },
-  'tierra-marte': { label: 'Tierra ↔ Marte', left: 'tierra', right: 'marte', requires: ['marte'] },
-  'luna-marte': { label: 'Luna ↔ Marte', left: 'luna', right: 'marte', requires: ['luna', 'marte'] },
+const MODES: Record<Mode, { left: Body; right: Body; requires: Target[] }> = {
+  'tierra-luna': { left: 'tierra', right: 'luna', requires: ['luna'] },
+  'tierra-marte': { left: 'tierra', right: 'marte', requires: ['marte'] },
+  'luna-marte': { left: 'luna', right: 'marte', requires: ['luna', 'marte'] },
 }
 
 
@@ -58,6 +60,8 @@ function markersFor(sites: AnalogSite[], body: Body): GlobeMarker[] {
 }
 
 export default function App() {
+  const { lang, setLang, t } = useLang()
+  const sites = useMemo(() => SITES.map((s) => localizeSite(s, lang)), [lang])
   const [mode, setMode] = useState<Mode>('tierra-marte')
   const [environments, setEnvironments] = useState<Environment[]>([])
   const [dimensions, setDimensions] = useState<Dimension[]>([])
@@ -70,7 +74,7 @@ export default function App() {
 
   const filtered = useMemo(
     () =>
-      SITES.filter((s) => {
+      sites.filter((s) => {
         const targets = siteTargets(s)
         if (!requires.every((t) => targets.includes(t))) return false
         if (environments.length && !environments.some((e) => s.environments.includes(e))) return false
@@ -79,7 +83,7 @@ export default function App() {
         if (onlyLesserKnown && s.wellKnown) return false
         return true
       }),
-    [requires, environments, dimensions, onlyLesserKnown],
+    [sites, requires, environments, dimensions, onlyLesserKnown],
   )
 
   const selected = filtered.find((s) => s.id === selectedId) ?? null
@@ -116,13 +120,22 @@ export default function App() {
     <div className="app">
       <aside className="sidebar">
         <header className="brand">
-          <p className="eyebrow">NASA Space Apps 2026</p>
-          <h1>Análogos terrestres</h1>
-          <p className="subtitle">Lugares de la Tierra que nos preparan para vivir en la Luna y en Marte</p>
+          <div className="brand-top">
+            <p className="eyebrow">{t('brand.eyebrow')}</p>
+            <div className="lang-switch" role="group" aria-label={t('lang.label')}>
+              {(['es', 'en'] as const).map((l) => (
+                <button key={l} className={lang === l ? 'active' : ''} aria-pressed={lang === l} onClick={() => setLang(l)}>
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+          <h1>{t('brand.title')}</h1>
+          <p className="subtitle">{t('brand.subtitle')}</p>
         </header>
 
         <section className="filter-group">
-          <h2>Tipo de ambiente</h2>
+          <h2>{t('filters.environment')}</h2>
           <div className="chips">
             {(Object.keys(ENVIRONMENT_LABELS) as Environment[]).map((e) => (
               <button
@@ -130,14 +143,14 @@ export default function App() {
                 className={`chip ${environments.includes(e) ? 'active' : ''}`}
                 onClick={() => setEnvironments((prev) => toggle(prev, e))}
               >
-                {ENVIRONMENT_LABELS[e]}
+                {ENVIRONMENT_NAMES[lang][e]}
               </button>
             ))}
           </div>
         </section>
 
         <section className="filter-group">
-          <h2>Debe parecerse en…</h2>
+          <h2>{t('filters.dimension')}</h2>
           <div className="chips">
             {(Object.keys(DIMENSION_LABELS) as Dimension[]).map((d) => (
               <button
@@ -145,7 +158,7 @@ export default function App() {
                 className={`chip ${dimensions.includes(d) ? 'active' : ''}`}
                 onClick={() => setDimensions((prev) => toggle(prev, d))}
               >
-                {DIMENSION_LABELS[d]}
+                {DIMENSION_NAMES[lang][d]}
               </button>
             ))}
           </div>
@@ -153,15 +166,13 @@ export default function App() {
 
         <label className="checkbox">
           <input type="checkbox" checked={onlyLesserKnown} onChange={(e) => setOnlyLesserKnown(e.target.checked)} />
-          Solo análogos poco estudiados
+          {t('filters.lesserKnown')}
         </label>
 
         <div className="results-header">
-          <span>
-            {filtered.length} sitios en {MODES[mode].label}
-          </span>
+          <span>{t('results.count', { n: filtered.length, mode: MODE_NAMES[lang][mode] })}</span>
           <button className="link" onClick={resetFilters}>
-            Limpiar filtros
+            {t('filters.reset')}
           </button>
         </div>
 
@@ -176,7 +187,7 @@ export default function App() {
                   <span>
                     <strong>
                       {s.name}
-                      {!s.wellKnown && <span className="badge">Poco estudiado</span>}
+                      {!s.wellKnown && <span className="badge">{t('badge.lesserKnown')}</span>}
                     </strong>
                     <small>
                       {s.country} → {s.homologues.map((h) => h.name).join(' · ')}
@@ -185,25 +196,22 @@ export default function App() {
                 </button>
               </li>
             ))}
-            {filtered.length === 0 && <li className="empty">Ningún sitio cumple estos filtros.</li>}
+            {filtered.length === 0 && <li className="empty">{t('results.empty')}</li>}
           </ul>
         )}
 
-        <footer className="note">
-          Similitudes preliminares (cualitativas). Se reemplazarán por puntajes calculados con datos de NASA, ESA,
-          JAXA y CSA. Imágenes: NASA GIBS, NASA Moon Trek y Mars Trek.
-        </footer>
+        <footer className="note">{t('footer.note')}</footer>
       </aside>
 
       <main className="main" ref={mainRef}>
         <div className="topbar">
           <button className="tour-button" onClick={() => setTouring(true)} disabled={touring}>
-            ▶ Recorrido guiado
+            {t('tour.button')}
           </button>
-          <div className="mode-switch" role="tablist" aria-label="Comparación">
+          <div className="mode-switch" role="tablist" aria-label={t('mode.aria')}>
             {(Object.keys(MODES) as Mode[]).map((m) => (
               <button key={m} role="tab" aria-selected={mode === m} className={mode === m ? 'active' : ''} onClick={() => setMode(m)}>
-                {MODES[m].label}
+                {MODE_NAMES[lang][m]}
               </button>
             ))}
           </div>
@@ -225,7 +233,7 @@ export default function App() {
             <div className="globe-card" key={`${mode}-${body}`}>
               <div className="globe-label">
                 <span className="dot" style={{ background: BODY_COLORS[body] }} />
-                {BODY_LABELS[body]}
+                {BODY_NAMES[lang][body]}
               </div>
               <PlanetGlobe
                 body={body}
@@ -238,21 +246,21 @@ export default function App() {
               />
               {body === 'tierra' && (
                 <details className="layer-panel">
-                  <summary>Capas NASA</summary>
+                  <summary>{t('layers.title')}</summary>
                   {BASE_LAYERS.map((l) => (
-                    <label key={l.id} title={l.description}>
+                    <label key={l.id} title={lang === 'en' ? l.descriptionEn : l.description}>
                       <input type="radio" name="base-layer" checked={baseLayer === l.id} onChange={() => setBaseLayer(l.id)} />
-                      {l.label}
+                      {lang === 'en' ? l.labelEn : l.label}
                     </label>
                   ))}
                   {OVERLAY_LAYERS.map((l) => (
-                    <label key={l.id} title={l.description}>
+                    <label key={l.id} title={lang === 'en' ? l.descriptionEn : l.description}>
                       <input
                         type="checkbox"
                         checked={overlays.includes(l.id)}
                         onChange={() => setOverlays((prev) => toggle(prev, l.id))}
                       />
-                      {l.label}
+                      {lang === 'en' ? l.labelEn : l.label}
                     </label>
                   ))}
                 </details>
@@ -272,9 +280,7 @@ export default function App() {
               />
             ))
           ) : (
-            <div className="details-empty">
-              Selecciona un sitio en la lista o en el globo para comparar sus imágenes de cerca.
-            </div>
+            <div className="details-empty">{t('details.empty')}</div>
           )}
         </section>
 
@@ -287,56 +293,57 @@ export default function App() {
 }
 
 function SiteDetail({ site, onClose }: { site: AnalogSite; onClose: () => void }) {
+  const { lang, t } = useLang()
   return (
     <article className="detail">
       <button className="link" onClick={onClose}>
-        ← Volver a la lista
+        {t('detail.back')}
       </button>
       <h2>{site.name}</h2>
       <p className="meta">
         {site.country} · {site.lat.toFixed(2)}°, {site.lng.toFixed(2)}°
-        {!site.wellKnown && <span className="badge">Poco estudiado</span>}
+        {!site.wellKnown && <span className="badge">{t('badge.lesserKnown')}</span>}
       </p>
 
-      <h3>Homólogos</h3>
+      <h3>{t('detail.homologues')}</h3>
       <ul className="homologues">
         {site.homologues.map((h) => (
           <li key={h.body}>
             <span className="dot" style={{ background: BODY_COLORS[h.body] }} />
             <span>
               <strong>
-                {BODY_LABELS[h.body]}: {h.name}
+                {BODY_NAMES[lang][h.body]}: {h.name}
               </strong>
               <small>
                 {h.note}
-                {h.approximate && ' (ubicación aproximada)'}
+                {h.approximate && t('detail.approximate')}
               </small>
             </span>
           </li>
         ))}
       </ul>
 
-      <h3>Similitud por dimensión (preliminar)</h3>
+      <h3>{t('detail.dimensions')}</h3>
       <ul className="dims">
         {(Object.keys(DIMENSION_LABELS) as Dimension[])
           .filter((d) => site.dimensions[d])
           .map((d) => (
             <li key={d}>
-              <span>{DIMENSION_LABELS[d]}</span>
-              <span className={`level ${site.dimensions[d]}`}>{site.dimensions[d]}</span>
+              <span>{DIMENSION_NAMES[lang][d]}</span>
+              <span className={`level ${site.dimensions[d]}`}>{t(`level.${site.dimensions[d]}` as 'level.alta')}</span>
             </li>
           ))}
       </ul>
 
-      <h3>En qué se parece</h3>
+      <h3>{t('detail.similarities')}</h3>
       <p>{site.similarities}</p>
-      <h3>Dónde deja de valer la analogía</h3>
+      <h3>{t('detail.limitations')}</h3>
       <p>{site.limitations}</p>
-      <h3>Para qué sirve en una misión</h3>
+      <h3>{t('detail.missionUse')}</h3>
       <p>{site.missionUse}</p>
 
       <a className="earth-button" href={googleEarthUrl(site)} target="_blank" rel="noreferrer">
-        Ver en Google Earth ↗
+        {t('detail.googleEarth')}
       </a>
     </article>
   )

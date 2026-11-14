@@ -7,11 +7,30 @@ import {
   type ComparisonTarget,
   type FeatureMeta,
 } from '../data/comparisons'
-import { BODY_LABELS, homologueFor, type AnalogSite, type Target } from '../data/types'
+import { homologueFor, type AnalogSite, type Target } from '../data/types'
 import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
+import { useLang } from '../i18n/useLang'
+import { BODY_NAMES, FEATURE_NAMES_EN, SOURCE_PHRASES_EN, type Lang } from '../i18n/strings'
 
 /** Physical conditions Earth cannot reproduce. Always shown: the analogy breaks here for every site. */
-const PHYSICAL_LIMITS: Record<Target, { label: string; earth: string; body: string }[]> = {
+type Limit = { label: string; earth: string; body: string }
+
+const PHYSICAL_LIMITS_EN: Record<Target, Limit[]> = {
+  luna: [
+    { label: 'Gravity', earth: '9.81 m/s² (1 g)', body: '1.62 m/s² (0.17 g)' },
+    { label: 'Atmosphere', earth: '1013 hPa', body: 'Practically a vacuum (exosphere)' },
+    { label: 'Global magnetic field', earth: 'Yes: shields from radiation', body: 'No' },
+    { label: 'Length of day', earth: '24 h', body: '≈ 29.5 Earth days' },
+  ],
+  marte: [
+    { label: 'Gravity', earth: '9.81 m/s² (1 g)', body: '3.71 m/s² (0.38 g)' },
+    { label: 'Atmosphere', earth: '1013 hPa, with oxygen', body: '≈ 6 hPa, 95% CO₂' },
+    { label: 'Global magnetic field', earth: 'Yes: shields from radiation', body: 'No' },
+    { label: 'Length of day', earth: '24 h', body: '24 h 40 min (sol)' },
+  ],
+}
+
+const PHYSICAL_LIMITS: Record<Target, Limit[]> = {
   luna: [
     { label: 'Gravedad', earth: '9,81 m/s² (1 g)', body: '1,62 m/s² (0,17 g)' },
     { label: 'Atmósfera', earth: '1013 hPa', body: 'Prácticamente vacío (exosfera)' },
@@ -32,11 +51,22 @@ interface Tooltip {
   text: string
 }
 
-function fmt(value: number | null | undefined, unit = '') {
-  if (value == null) return '—'
-  const abs = Math.abs(value)
-  const digits = abs >= 100 ? 0 : abs >= 10 ? 1 : 2
-  return `${value.toLocaleString('es', { maximumFractionDigits: digits })}${unit ? ` ${unit}` : ''}`
+function makeFmt(locale: string) {
+  return (value: number | null | undefined, unit = '') => {
+    if (value == null) return '—'
+    const abs = Math.abs(value)
+    const digits = abs >= 100 ? 0 : abs >= 10 ? 1 : 2
+    return `${value.toLocaleString(locale, { maximumFractionDigits: digits })}${unit ? ` ${unit}` : ''}`
+  }
+}
+
+function featureLabel(f: FeatureMeta, lang: Lang) {
+  return lang === 'en' ? (FEATURE_NAMES_EN[f.id] ?? f.label) : f.label
+}
+
+function sourceText(text: string | undefined, lang: Lang) {
+  if (!text) return '—'
+  return lang === 'en' ? (SOURCE_PHRASES_EN[text] ?? text) : text
 }
 
 interface Props {
@@ -46,15 +76,19 @@ interface Props {
 
 export default function ComparisonPanel({ site, body }: Props) {
   const state = useComparisons()
+  const { t } = useLang()
 
-  if (state.status === 'loading') return <section className="comparison muted-box">Cargando datos de comparación…</section>
-  if (state.status === 'error')
-    return <section className="comparison muted-box">No se pudieron cargar los datos de comparación.</section>
+  if (state.status === 'loading') return <section className="comparison muted-box">{t('cmp.loading')}</section>
+  if (state.status === 'error') return <section className="comparison muted-box">{t('cmp.error')}</section>
 
   return <ComparisonContent key={`${site.id}-${body}`} data={state.data} site={site} body={body} />
 }
 
 function ComparisonContent({ data, site, body }: { data: ComparisonData; site: AnalogSite; body: Target }) {
+  const { lang, t } = useLang()
+  const fmt = makeFmt(lang)
+  const bodyName = BODY_NAMES[lang][body]
+  const limits = lang === 'en' ? PHYSICAL_LIMITS_EN : PHYSICAL_LIMITS
   const entry = data.sites.find((s) => s.id === site.id)
   const homologue = homologueFor(site, body)
 
@@ -78,16 +112,12 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
   if (!entry || !target || !result) {
     return (
       <section className="comparison muted-box">
-        <h2>Comparación detallada</h2>
+        <h2>{t('cmp.title')}</h2>
         <p>
-          Aún no hay datos calculados para <strong>{site.name}</strong> frente a {BODY_LABELS[body]}
-          {homologue ? ` (${homologue.name})` : ''}. Se generarán con el pipeline de datos (<code>src/compare.py</code> →{' '}
-          <code>src/export_web.py</code>).
+          {t('cmp.noData', { site: site.name, body: bodyName, homologue: homologue ? ` (${homologue.name})` : '' })}{' '}
+          (<code>src/compare.py</code> → <code>src/export_web.py</code>)
         </p>
-        <p className="hint">
-          Con los datos de muestra actuales, prueba con <strong>Cráter Haughton</strong>, <strong>Atacama</strong>,{' '}
-          <strong>McMurdo</strong> o <strong>Mauna Kea</strong>.
-        </p>
+        <p className="hint">{t('cmp.noDataHint')}</p>
       </section>
     )
   }
@@ -108,28 +138,29 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
   const hideTip = () => setTooltip(null)
 
   return (
-    <section className="comparison" aria-label="Comparación detallada">
+    <section className="comparison" aria-label={t('cmp.title')}>
       <header className="comparison-header">
         <div>
-          <h2>Comparación detallada</h2>
+          <h2>{t('cmp.title')}</h2>
           <p className="pair">
-            <span className="swatch" style={{ background: BODY_COLORS.tierra }} /> {site.name} <span className="muted">frente a</span>{' '}
-            <span className="swatch" style={{ background: BODY_COLORS[body] }} /> {target.name} ({BODY_LABELS[body]})
+            <span className="swatch" style={{ background: BODY_COLORS.tierra }} /> {site.name}{' '}
+            <span className="muted">{t('cmp.versus')}</span> <span className="swatch" style={{ background: BODY_COLORS[body] }} />{' '}
+            {target.name} ({bodyName})
           </p>
         </div>
         {data.synthetic && (
-          <span className="synthetic-badge" title="Valores inventados para probar la visualización; no son mediciones reales">
-            ⚠ Datos de muestra sintéticos
+          <span className="synthetic-badge" title={t('cmp.syntheticTitle')}>
+            {t('cmp.synthetic')}
           </span>
         )}
       </header>
 
       {available.length > 1 && (
-        <div className="chips target-chips" role="group" aria-label="Objetivo de la comparación">
-          {available.map((t: ComparisonTarget) => (
-            <button key={t.id} className={`chip ${t.id === targetId ? 'active' : ''}`} onClick={() => setTargetId(t.id)}>
-              {t.name}
-              {t.id === homologue?.id ? ' · homólogo' : ''}
+        <div className="chips target-chips" role="group" aria-label={t('cmp.targetAria')}>
+          {available.map((tg: ComparisonTarget) => (
+            <button key={tg.id} className={`chip ${tg.id === targetId ? 'active' : ''}`} onClick={() => setTargetId(tg.id)}>
+              {tg.name}
+              {tg.id === homologue?.id ? t('cmp.homologueTag') : ''}
             </button>
           ))}
         </div>
@@ -145,40 +176,48 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
             </div>
             <div className="hero-meta">
               <p>
-                <strong>
-                  #{position} de {ranking.length}
-                </strong>{' '}
-                lugares para {target.name}
+                <strong>{t('cmp.rank', { pos: position, n: ranking.length })}</strong> {t('cmp.rankFor', { target: target.name })}
               </p>
               <p className="muted">
                 {usingDefaults && result.stability != null
-                  ? `En el top ${data.stability_top} en el ${Math.round(result.stability * 100)} % de ${data.stability_runs} variaciones de pesos`
-                  : 'Recalculado con tus pesos'}
+                  ? t('cmp.stability', {
+                      top: data.stability_top,
+                      pct: Math.round(result.stability * 100),
+                      runs: data.stability_runs,
+                    })
+                  : t('cmp.reweighted')}
               </p>
             </div>
           </div>
 
-          <h3>Similitud por característica</h3>
+          <h3>{t('cmp.similarity')}</h3>
           <ul className="meter-list">
             {features.map((f) => {
               const s = result.sim[f.id]
               const off = s == null || (weights[f.id] ?? 0) === 0
               return (
                 <li key={f.id} className={off ? 'off' : ''}>
-                  <span className="meter-name">{f.label}</span>
+                  <span className="meter-name">{featureLabel(f, lang)}</span>
                   <span
                     className="meter-track"
-                    onMouseMove={(e) => showTip(e, off ? `${f.label}: no se usa` : `${f.label}: similitud ${fmt(s)} (1 = idénticos)`)}
+                    onMouseMove={(e) =>
+                      showTip(
+                        e,
+                        off
+                          ? t('cmp.notUsedTip', { feature: featureLabel(f, lang) })
+                          : t('cmp.simTip', { feature: featureLabel(f, lang), value: fmt(s) }),
+                      )
+                    }
                     onMouseLeave={hideTip}
                   >
                     {!off && <span className="meter-fill" style={{ width: `${(s ?? 0) * 100}%`, background: SIMILARITY_COLOR }} />}
                   </span>
                   <span className="meter-value">{s == null ? '—' : fmt(s)}</span>
                   <span className="meter-tag">
-                    {s == null && <span className="tag muted">no aplica en {BODY_LABELS[body]}</span>}
-                    {s != null && off && <span className="tag muted">sin peso</span>}
-                    {!off && f.id === best?.id && <span className="tag good">✓ más parecido</span>}
-                    {!off && f.id === worst?.id && <span className="tag bad">⚠ rompe la analogía</span>}
+                    {s == null && <span className="tag muted">{t('cmp.notApplicable', { body: bodyName })}</span>}
+                    {s != null && off && <span className="tag muted">{t('cmp.noWeight')}</span>}
+                    {!off && f.id === best?.id && <span className="tag good">{t('cmp.best')}</span>}
+                    {!off && f.id === worst?.id && <span className="tag bad">{t('cmp.worst')}</span>}
                   </span>
                 </li>
               )
@@ -186,10 +225,10 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
           </ul>
 
           <details className="weights">
-            <summary>Ajustar pesos (qué importa más)</summary>
+            <summary>{t('cmp.weights')}</summary>
             {features.map((f) => (
               <label key={f.id}>
-                <span>{f.label}</span>
+                <span>{featureLabel(f, lang)}</span>
                 <input
                   type="range"
                   min={0}
@@ -202,22 +241,22 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
               </label>
             ))}
             <button className="link" onClick={() => setWeights(defaults)} disabled={usingDefaults}>
-              Restaurar pesos del modelo
+              {t('cmp.resetWeights')}
             </button>
           </details>
         </div>
 
         {/* ---------- Real values, one scale per variable ---------- */}
         <div className="card">
-          <h3>Valores reales</h3>
+          <h3>{t('cmp.values')}</h3>
           <p className="legend">
             <span>
-              <span className="swatch" style={{ background: BODY_COLORS.tierra }} /> Tierra
+              <span className="swatch" style={{ background: BODY_COLORS.tierra }} /> {BODY_NAMES[lang].tierra}
             </span>
             <span>
-              <span className="swatch" style={{ background: BODY_COLORS[body] }} /> {BODY_LABELS[body]}
+              <span className="swatch" style={{ background: BODY_COLORS[body] }} /> {bodyName}
             </span>
-            <span className="muted">Escala física fija por variable</span>
+            <span className="muted">{t('cmp.valuesScale')}</span>
           </p>
           <ul className="dumbbells">
             {features.map((f) => (
@@ -227,7 +266,8 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
                 earth={entry.values[f.id]}
                 other={target.values[f.id]}
                 otherColor={BODY_COLORS[body]}
-                otherLabel={BODY_LABELS[body]}
+                otherLabel={bodyName}
+                lang={lang}
                 onTip={showTip}
                 onLeave={hideTip}
               />
@@ -237,7 +277,7 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
 
         {/* ---------- Ranking ---------- */}
         <div className="card">
-          <h3>Mejores lugares de la Tierra para {target.name}</h3>
+          <h3>{t('cmp.ranking', { target: target.name })}</h3>
           <ol className="ranking">
             {ranking.slice(0, 8).map((r, i) => {
               const current = r.site.id === site.id
@@ -251,7 +291,7 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
                   <span className="rank-pos">{i + 1}</span>
                   <span className="rank-name">
                     {r.site.name}
-                    {r.site.id.startsWith('cell_') && <small> · fuera del catálogo</small>}
+                    {r.site.id.startsWith('cell_') && <small>{t('cmp.outside')}</small>}
                   </span>
                   <span className="rank-track">
                     <span
@@ -268,17 +308,17 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
 
         {/* ---------- Limits + sources ---------- */}
         <div className="card">
-          <h3>Lo que la Tierra no puede reproducir</h3>
+          <h3>{t('cmp.limits')}</h3>
           <table className="limits">
             <thead>
               <tr>
                 <th />
-                <th>Tierra</th>
-                <th>{BODY_LABELS[body]}</th>
+                <th>{BODY_NAMES[lang].tierra}</th>
+                <th>{bodyName}</th>
               </tr>
             </thead>
             <tbody>
-              {PHYSICAL_LIMITS[body].map((l) => (
+              {limits[body].map((l) => (
                 <tr key={l.label}>
                   <th scope="row">{l.label}</th>
                   <td>{l.earth}</td>
@@ -288,11 +328,12 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
             </tbody>
           </table>
 
-          <h3>Fuentes previstas por variable</h3>
+          <h3>{t('cmp.sources')}</h3>
           <ul className="sources">
             {features.map((f) => (
               <li key={f.id}>
-                <strong>{f.label}:</strong> {f.source_earth} <span className="muted">frente a</span> {f.source_target[body] ?? '—'}
+                <strong>{featureLabel(f, lang)}:</strong> {sourceText(f.source_earth, lang)}{' '}
+                <span className="muted">{t('cmp.versus')}</span> {sourceText(f.source_target[body], lang)}
               </li>
             ))}
           </ul>
@@ -300,21 +341,21 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
       </div>
 
       <details className="data-table">
-        <summary>Ver tabla de datos</summary>
+        <summary>{t('cmp.table')}</summary>
         <table>
           <thead>
             <tr>
-              <th>Variable</th>
-              <th>Tierra</th>
-              <th>{BODY_LABELS[body]}</th>
-              <th>Similitud</th>
-              <th>Peso</th>
+              <th>{t('cmp.variable')}</th>
+              <th>{BODY_NAMES[lang].tierra}</th>
+              <th>{bodyName}</th>
+              <th>{t('cmp.similarity')}</th>
+              <th>{t('cmp.weight')}</th>
             </tr>
           </thead>
           <tbody>
             {features.map((f) => (
               <tr key={f.id}>
-                <th scope="row">{f.label}</th>
+                <th scope="row">{featureLabel(f, lang)}</th>
                 <td>{fmt(entry.values[f.id], f.unit)}</td>
                 <td>{fmt(target.values[f.id], f.unit)}</td>
                 <td>{fmt(result.sim[f.id])}</td>
@@ -324,8 +365,7 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
           </tbody>
         </table>
         <p className="muted">
-          Generado {new Date(data.generated_at).toLocaleString('es')} · {data.n_cells} celdas de la Tierra · fórmula de{' '}
-          <code>src/compare.py</code>
+          {t('cmp.generated', { date: new Date(data.generated_at).toLocaleString(lang), n: data.n_cells })}
         </p>
       </details>
 
@@ -344,6 +384,7 @@ function Dumbbell({
   other,
   otherColor,
   otherLabel,
+  lang,
   onTip,
   onLeave,
 }: {
@@ -352,14 +393,26 @@ function Dumbbell({
   other: number | null
   otherColor: string
   otherLabel: string
+  lang: Lang
   onTip: (e: MouseEvent, text: string) => void
   onLeave: () => void
 }) {
+  const fmt = makeFmt(lang)
+  const label = featureLabel(feature, lang)
+  const earthName = BODY_NAMES[lang].tierra
   if (earth == null || other == null) {
     return (
       <li className="dumbbell off">
-        <span className="dumbbell-name">{feature.label}</span>
-        <span className="muted">{other == null ? `No aplica en ${otherLabel}` : 'Sin dato en la Tierra'}</span>
+        <span className="dumbbell-name">{label}</span>
+        <span className="muted">
+          {other == null
+            ? lang === 'en'
+              ? `Not applicable on ${otherLabel}`
+              : `No aplica en ${otherLabel}`
+            : lang === 'en'
+              ? 'No Earth data'
+              : 'Sin dato en la Tierra'}
+        </span>
       </li>
     )
   }
@@ -370,12 +423,12 @@ function Dumbbell({
   const pct = (v: number) => (hi === lo ? 50 : ((v - lo) / (hi - lo)) * 100)
   const pe = pct(earth)
   const po = pct(other)
-  const tip = `${feature.label}: Tierra ${fmt(earth, feature.unit)} · ${otherLabel} ${fmt(other, feature.unit)}`
+  const tip = `${label}: ${earthName} ${fmt(earth, feature.unit)} · ${otherLabel} ${fmt(other, feature.unit)}`
 
   return (
     <li className="dumbbell" onMouseMove={(e) => onTip(e, tip)} onMouseLeave={onLeave} aria-label={tip}>
       <span className="dumbbell-name">
-        {feature.label}
+        {label}
         {feature.unit && <small> ({feature.unit})</small>}
       </span>
       <span className="dumbbell-plot">

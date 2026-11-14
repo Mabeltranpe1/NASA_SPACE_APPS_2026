@@ -38,7 +38,7 @@ export const SITES: AnalogSite[] = [
     similarities: 'Frío extremo, muy seco, con permafrost, hielo enterrado y erosión por viento.',
     limitations: 'Presión atmosférica alta y presencia ocasional de agua líquida estacional.',
     missionUse: 'Estudio del hielo subsuperficial, de la vida en el permafrost y pruebas de instrumentos en frío extremo.',
-    earthImage: { layer: 'MODIS_Terra_CorrectedReflectance_TrueColor', time: '2024-01-10', label: 'MODIS Terra · 10 ene 2024' },
+    earthImage: { layer: 'MODIS_Terra_CorrectedReflectance_TrueColor', time: '2024-01-10', label: 'MODIS Terra · 2024-01-10' },
     wellKnown: true,
   },
   {
@@ -212,7 +212,7 @@ export const SITES: AnalogSite[] = [
     similarities: 'Volcanes y manantiales termales en un ambiente ártico, con carbonatos similares a los del meteorito ALH84001.',
     limitations: 'Hay vegetación y agua líquida abundante.',
     missionUse: 'Pruebas de instrumentos de rovers (expediciones AMASE).',
-    earthImage: { layer: 'MODIS_Terra_CorrectedReflectance_TrueColor', time: '2024-07-20', label: 'MODIS Terra · 20 jul 2024' },
+    earthImage: { layer: 'MODIS_Terra_CorrectedReflectance_TrueColor', time: '2024-07-20', label: 'MODIS Terra · 2024-07-20' },
     wellKnown: true,
   },
 ]

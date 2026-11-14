@@ -14,6 +14,17 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Versión en inglés (ES | EN)
+**Autor:** @Ssalazarp420
+
+- Selector **ES | EN** en la barra lateral. Toda la app está traducida: interfaz, fichas de los 12 sitios, homólogos, capas NASA, comparación detallada, límites físicos y recorrido guiado.
+- **Idioma inicial:** el del navegador (inglés salvo que prefiera español), pensado para el jurado internacional. Se recuerda la elección y se puede forzar con `?lang=en` o `?lang=es`, útil para compartir enlaces.
+- **Implementación** sin librerías:
+  - `web/src/i18n/strings.ts`: diccionario.
+  - `LanguageContext.tsx` + `useLang.ts`: contexto y hook.
+  - `web/src/data/sites.en.ts`: textos en inglés del catálogo.
+- **Para agregar un texto nuevo:** crear la clave en `strings.ts` en los dos idiomas y usar `t('clave')`.
+
 ## 2026-11-14 · Recorrido guiado
 **Autor:** @Ssalazarp420
 
