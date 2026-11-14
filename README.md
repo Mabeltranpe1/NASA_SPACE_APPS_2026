@@ -42,13 +42,35 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 ├── data/
 │   ├── raw/          # Datos descargados sin modificar (no se suben a git)
 │   └── processed/    # Datos procesados (no se suben a git)
-├── docs/             # Reportes, notas y documentación
+├── docs/             # Objetivo, arquitectura y bitácora del proyecto
 ├── notebooks/        # Jupyter notebooks de exploración y análisis
 ├── src/              # Código reutilizable (descarga, procesamiento, métricas)
 ├── outputs/          # Mapas, figuras y resultados finales
+├── web/              # Plataforma web (React + Vite + Google Maps)
+├── infra/            # Infraestructura en Azure con Terraform (solo planes Free)
+├── .github/workflows # Despliegue automático a Azure Static Web Apps
 ├── RECURSOS.md       # Catálogo de fuentes de datos
 └── CONTRIBUTING.md   # Flujo de trabajo con git flow
 ```
+
+## Plataforma web
+
+Mapa interactivo para filtrar análogos terrestres por objetivo (Luna o Marte), tipo de ambiente (desértico, polar, volcánico, cráter, cuevas, salar) y dimensión de similitud. Cada sitio se puede ver en Google Earth.
+
+```bash
+cd web
+cp .env.example .env.local   # pon tu VITE_GOOGLE_MAPS_API_KEY
+npm install
+npm run dev                  # http://localhost:5173
+```
+
+El despliegue en Azure se explica en [infra/README.md](infra/README.md).
+
+## Documentación
+
+- [docs/OBJETIVO.md](docs/OBJETIVO.md): objetivo detallado de la plataforma y criterios del reto
+- [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): componentes, CI/CD, seguridad y costos
+- [docs/BITACORA.md](docs/BITACORA.md): registro de decisiones y avances
 
 ## Cómo colaborar
 
