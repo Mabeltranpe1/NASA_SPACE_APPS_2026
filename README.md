@@ -46,7 +46,7 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 ├── notebooks/        # Jupyter notebooks de exploración y análisis
 ├── src/              # Código reutilizable (descarga, procesamiento, métricas)
 ├── outputs/          # Mapas, figuras y resultados finales
-├── web/              # Plataforma web (React + Vite + Google Maps)
+├── web/              # Plataforma web (React + Vite + MapLibre + NASA GIBS)
 ├── infra/            # Infraestructura en Azure con Terraform (solo planes Free)
 ├── .github/workflows # Despliegue automático a Azure Static Web Apps
 ├── RECURSOS.md       # Catálogo de fuentes de datos
@@ -55,11 +55,10 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 
 ## Plataforma web
 
-Mapa interactivo para filtrar análogos terrestres por objetivo (Luna o Marte), tipo de ambiente (desértico, polar, volcánico, cráter, cuevas, salar) y dimensión de similitud. Cada sitio se puede ver en Google Earth.
+Mapa interactivo para filtrar análogos terrestres por objetivo (Luna o Marte), tipo de ambiente (desértico, polar, volcánico, cráter, cuevas, salar) y dimensión de similitud. El mapa es un globo 3D con imágenes de la NASA (GIBS): Blue Marble, satélite reciente, relieve y temperatura superficial. Cada sitio se puede abrir en Google Earth.
 
 ```bash
 cd web
-cp .env.example .env.local   # pon tu VITE_GOOGLE_MAPS_API_KEY
 npm install
 npm run dev                  # http://localhost:5173
 ```
@@ -71,6 +70,7 @@ El despliegue en Azure se explica en [infra/README.md](infra/README.md).
 - [docs/OBJETIVO.md](docs/OBJETIVO.md): objetivo detallado de la plataforma y criterios del reto
 - [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): componentes, CI/CD, seguridad y costos
 - [docs/BITACORA.md](docs/BITACORA.md): registro de decisiones y avances
+- [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): guía para crear y probar una API key de Google Maps
 
 ## Cómo colaborar
 

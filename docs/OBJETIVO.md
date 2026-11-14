@@ -28,7 +28,8 @@ La plataforma reúne los sitios en un **mapa interactivo filtrable** y muestra *
 | Filtro por tipo de ambiente | Desértico, polar/ártico, volcánico, cráter de impacto, cuevas/tubos de lava, salar |
 | Filtro por dimensión | Muestra solo los sitios con similitud **alta o media** en todas las dimensiones elegidas (geología, terreno, temperatura, agua/hielo, polvo/viento, habitabilidad, subsuelo, operaciones) |
 | Solo poco estudiados | Oculta los análogos ya muy conocidos, como pide el reto |
-| Mapa satelital | Google Maps con marcadores por color: gris = Luna, naranja = Marte, morado = ambos |
+| Mapa satelital | Globo 3D con imágenes de **NASA GIBS** y marcadores por color: gris = Luna, naranja = Marte, morado = ambos |
+| Capas NASA | Blue Marble, satélite reciente (VIIRS NOAA-20), relieve (ASTER GDEM) y temperatura superficial (MODIS) |
 | Ficha del sitio | Similitud por dimensión, en qué se parece, **dónde deja de valer la analogía** y para qué sirve en una misión |
 | Ver en Google Earth | Enlace directo a la vista 3D del sitio |
 

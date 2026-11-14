@@ -35,18 +35,15 @@ El workflow [`.github/workflows/deploy-web.yml`](../.github/workflows/deploy-web
 - **Push a `main`** → producción.
 - **Pull Requests hacia `develop` o `main`** → entorno de vista previa con su propia URL.
 
-En GitHub, en *Settings → Secrets and variables → Actions*, crea estos secrets:
+En GitHub, en *Settings → Secrets and variables → Actions*, crea este secret:
 
 | Secret | Valor |
 |---|---|
 | `AZURE_STATIC_WEB_APPS_API_TOKEN` | `terraform output -raw static_web_app_deployment_token` |
-| `VITE_GOOGLE_MAPS_API_KEY` | API key de Google Maps |
-| `VITE_GOOGLE_MAPS_MAP_ID` | (Opcional) Map ID de Google Cloud |
 
 Con `gh` (requiere permisos de admin en el repo):
 ```bash
 terraform output -raw static_web_app_deployment_token | gh secret set AZURE_STATIC_WEB_APPS_API_TOKEN
-gh secret set VITE_GOOGLE_MAPS_API_KEY
 ```
 
 ## Estado de Terraform
