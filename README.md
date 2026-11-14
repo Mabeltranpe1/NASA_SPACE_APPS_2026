@@ -70,6 +70,7 @@ El despliegue en Azure se explica en [infra/README.md](infra/README.md).
 - [docs/OBJETIVO.md](docs/OBJETIVO.md): objetivo detallado de la plataforma y criterios del reto
 - [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): componentes, CI/CD, seguridad y costos
 - [docs/BITACORA.md](docs/BITACORA.md): registro de decisiones y avances
+- [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): guía para crear y probar una API key de Google Maps
 
 ## Cómo colaborar
 
