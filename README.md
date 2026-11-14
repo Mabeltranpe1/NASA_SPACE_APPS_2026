@@ -46,7 +46,7 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 ├── notebooks/        # Jupyter notebooks de exploración y análisis
 ├── src/              # Código reutilizable (descarga, procesamiento, métricas)
 ├── outputs/          # Mapas, figuras y resultados finales
-├── web/              # Plataforma web (React + Vite + MapLibre + NASA GIBS)
+├── web/              # Plataforma web (React + Vite + CesiumJS + NASA GIBS/Trek)
 ├── infra/            # Infraestructura en Azure con Terraform (solo planes Free)
 ├── .github/workflows # Despliegue automático a Azure Static Web Apps
 ├── RECURSOS.md       # Catálogo de fuentes de datos
@@ -55,7 +55,7 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 
 ## Plataforma web
 
-Mapa interactivo para filtrar análogos terrestres por objetivo (Luna o Marte), tipo de ambiente (desértico, polar, volcánico, cráter, cuevas, salar) y dimensión de similitud. El mapa es un globo 3D con imágenes de la NASA (GIBS): Blue Marble, satélite reciente, relieve y temperatura superficial. Cada sitio se puede abrir en Google Earth.
+Comparación lado a lado en **globos 3D de la Tierra, la Luna y Marte** (modos Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte), con filtros por tipo de ambiente y dimensión de similitud. Al elegir un sitio, ambos globos vuelan al lugar y debajo aparecen sus imágenes de detalle: Landsat de la Tierra y los mosaicos de NASA Moon Trek y Mars Trek. Todo con datos abiertos de la NASA, sin API keys. Cada sitio se puede abrir en Google Earth.
 
 ```bash
 cd web
@@ -71,6 +71,7 @@ El despliegue en Azure se explica en [infra/README.md](infra/README.md).
 - [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): componentes, CI/CD, seguridad y costos
 - [docs/BITACORA.md](docs/BITACORA.md): registro de decisiones y avances
 - [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): guía para crear y probar una API key de Google Maps
+- [docs/VISUALIZACION_COMPARACION.md](docs/VISUALIZACION_COMPARACION.md): plan de la vista de comparación detallada, contrato de datos y mejoras para el jurado
 
 ## Cómo colaborar
 
