@@ -14,7 +14,7 @@ export const SITES: AnalogSite[] = [
     lng: -70.02,
     environments: ['desertico'],
     homologues: [
-      { body: 'marte', name: 'Sitio de Phoenix (Vastitas Borealis)', lat: 68.22, lng: -125.75, note: 'Suelo con percloratos y hielo de agua a pocos centímetros.' },
+      { id: 'phoenix', body: 'marte', name: 'Sitio de Phoenix (Vastitas Borealis)', lat: 68.22, lng: -125.75, note: 'Suelo con percloratos y hielo de agua a pocos centímetros.' },
     ],
     analogOf: 'Suelos hiperáridos de Marte',
     dimensions: { geologia: 'media', temperatura: 'baja', agua_hielo: 'alta', habitabilidad: 'alta', polvo: 'media', operaciones: 'alta' },
@@ -31,7 +31,7 @@ export const SITES: AnalogSite[] = [
     lng: 161.85,
     environments: ['polar', 'desertico'],
     homologues: [
-      { body: 'marte', name: 'Utopia Planitia (Viking 2)', lat: 47.64, lng: -134.29, note: 'Llanura fría de latitudes medias con hielo subsuperficial.' },
+      { id: 'utopia', body: 'marte', name: 'Utopia Planitia (Viking 2)', lat: 47.64, lng: -134.29, note: 'Llanura fría de latitudes medias con hielo subsuperficial.' },
     ],
     analogOf: 'Latitudes medias y altas de Marte',
     dimensions: { temperatura: 'alta', agua_hielo: 'alta', polvo: 'alta', terreno: 'media', habitabilidad: 'alta' },
@@ -49,8 +49,8 @@ export const SITES: AnalogSite[] = [
     lng: -89.67,
     environments: ['crater', 'polar'],
     homologues: [
-      { body: 'luna', name: 'Cráter Shackleton (polo sur)', lat: -89.67, lng: 129.78, note: 'Región candidata de Artemis; interior en sombra permanente con posibles trampas frías de hielo.' },
-      { body: 'marte', name: 'Cráter Gale (Curiosity)', lat: -5.4, lng: 137.8, note: 'Cráter de impacto con sedimentos de un antiguo lago.' },
+      { id: 'shackleton', body: 'luna', name: 'Cráter Shackleton (polo sur)', lat: -89.67, lng: 129.78, note: 'Región candidata de Artemis; interior en sombra permanente con posibles trampas frías de hielo.' },
+      { id: 'gale', body: 'marte', name: 'Cráter Gale (Curiosity)', lat: -5.4, lng: 137.8, note: 'Cráter de impacto con sedimentos de un antiguo lago.' },
     ],
     analogOf: 'Cráteres de impacto polares',
     dimensions: { geologia: 'alta', terreno: 'alta', temperatura: 'media', agua_hielo: 'media', operaciones: 'alta' },
@@ -67,7 +67,7 @@ export const SITES: AnalogSite[] = [
     lng: -116.87,
     environments: ['desertico', 'salar'],
     homologues: [
-      { body: 'marte', name: 'Delta de Eberswalde', lat: -23.8, lng: -33.4, note: 'Abanico sedimentario formado por agua.' },
+      { id: 'eberswalde', body: 'marte', name: 'Delta de Eberswalde', lat: -23.8, lng: -33.4, note: 'Abanico sedimentario formado por agua.' },
     ],
     analogOf: 'Depósitos evaporíticos y abanicos aluviales de Marte',
     dimensions: { geologia: 'alta', terreno: 'alta', polvo: 'media', temperatura: 'baja' },
@@ -84,7 +84,7 @@ export const SITES: AnalogSite[] = [
     lng: -155.47,
     environments: ['volcanico'],
     homologues: [
-      { body: 'luna', name: 'Mare Tranquillitatis (Apolo 11)', lat: 0.674, lng: 23.473, note: 'Llanura de basalto: el regolito de los mares lunares.' },
+      { id: 'tranquillitatis', body: 'luna', name: 'Mare Tranquillitatis (Apolo 11)', lat: 0.674, lng: 23.473, note: 'Llanura de basalto: el regolito de los mares lunares.' },
     ],
     analogOf: 'Regolito basáltico lunar',
     dimensions: { geologia: 'alta', terreno: 'media', operaciones: 'alta' },
@@ -101,7 +101,7 @@ export const SITES: AnalogSite[] = [
     lng: -6.6,
     environments: ['volcanico'],
     homologues: [
-      { body: 'marte', name: 'Meridiani Planum (Opportunity)', lat: -1.946, lng: -5.527, note: 'Jarosita y sulfatos de hierro formados en agua ácida.' },
+      { id: 'meridiani', body: 'marte', name: 'Meridiani Planum (Opportunity)', lat: -1.946, lng: -5.527, note: 'Jarosita y sulfatos de hierro formados en agua ácida.' },
     ],
     analogOf: 'Meridiani Planum (sulfatos de hierro)',
     dimensions: { geologia: 'alta', habitabilidad: 'alta', agua_hielo: 'media' },
@@ -118,7 +118,7 @@ export const SITES: AnalogSite[] = [
     lng: -75.17,
     environments: ['desertico'],
     homologues: [
-      { body: 'marte', name: 'Formación Medusae Fossae', lat: -5.0, lng: -170.0, note: 'Sedimentos finos tallados por el viento (yardangs).', approximate: true },
+      { id: 'medusae', body: 'marte', name: 'Formación Medusae Fossae', lat: -5.0, lng: -170.0, note: 'Sedimentos finos tallados por el viento (yardangs).', approximate: true },
     ],
     analogOf: 'Terrenos erosionados (badlands) de Marte',
     dimensions: { terreno: 'alta', geologia: 'media', polvo: 'media', temperatura: 'baja' },
@@ -135,8 +135,8 @@ export const SITES: AnalogSite[] = [
     lng: -13.78,
     environments: ['volcanico'],
     homologues: [
-      { body: 'luna', name: 'Pozo de Marius Hills', lat: 14.09, lng: -56.77, note: 'Tragaluz (skylight) que da acceso a un posible tubo de lava.' },
-      { body: 'marte', name: 'Arsia Mons', lat: -8.26, lng: -120.09, note: 'Volcán con tragaluces de cuevas en sus flancos.' },
+      { id: 'marius', body: 'luna', name: 'Pozo de Marius Hills', lat: 14.09, lng: -56.77, note: 'Tragaluz (skylight) que da acceso a un posible tubo de lava.' },
+      { id: 'arsia', body: 'marte', name: 'Arsia Mons', lat: -8.26, lng: -120.09, note: 'Volcán con tragaluces de cuevas en sus flancos.' },
     ],
     analogOf: 'Campos de lava y conos volcánicos',
     dimensions: { geologia: 'alta', terreno: 'alta', subsuelo: 'media', operaciones: 'alta' },
@@ -153,7 +153,7 @@ export const SITES: AnalogSite[] = [
     lng: -67.49,
     environments: ['salar', 'desertico'],
     homologues: [
-      { body: 'marte', name: 'Terra Sirenum (depósitos de cloruros)', lat: -33.0, lng: -170.0, note: 'Depósitos de sales cloruradas en cuencas.', approximate: true },
+      { id: 'sirenum', body: 'marte', name: 'Terra Sirenum (depósitos de cloruros)', lat: -33.0, lng: -170.0, note: 'Depósitos de sales cloruradas en cuencas.', approximate: true },
     ],
     analogOf: 'Depósitos de cloruros de Marte',
     dimensions: { geologia: 'alta', terreno: 'alta', temperatura: 'media', operaciones: 'media' },
@@ -170,8 +170,8 @@ export const SITES: AnalogSite[] = [
     lng: -121.51,
     environments: ['subsuelo', 'volcanico'],
     homologues: [
-      { body: 'luna', name: 'Pozo de Marius Hills', lat: 14.09, lng: -56.77, note: 'Tragaluz (skylight) que da acceso a un posible tubo de lava.' },
-      { body: 'marte', name: 'Arsia Mons', lat: -8.26, lng: -120.09, note: 'Volcán con tragaluces de cuevas en sus flancos.' },
+      { id: 'marius', body: 'luna', name: 'Pozo de Marius Hills', lat: 14.09, lng: -56.77, note: 'Tragaluz (skylight) que da acceso a un posible tubo de lava.' },
+      { id: 'arsia', body: 'marte', name: 'Arsia Mons', lat: -8.26, lng: -120.09, note: 'Volcán con tragaluces de cuevas en sus flancos.' },
     ],
     analogOf: 'Tubos de lava lunares y marcianos',
     dimensions: { subsuelo: 'alta', geologia: 'alta', operaciones: 'alta', temperatura: 'media' },
@@ -188,7 +188,7 @@ export const SITES: AnalogSite[] = [
     lng: 119.42,
     environments: ['desertico'],
     homologues: [
-      { body: 'marte', name: 'Home Plate, cráter Gusev (Spirit)', lat: -14.64, lng: 175.53, note: 'Depósitos de sílice de origen hidrotermal.' },
+      { id: 'gusev', body: 'marte', name: 'Home Plate, cráter Gusev (Spirit)', lat: -14.64, lng: 175.53, note: 'Depósitos de sílice de origen hidrotermal.' },
     ],
     analogOf: 'Ambientes hidrotermales antiguos de Marte',
     dimensions: { habitabilidad: 'alta', geologia: 'alta' },
@@ -205,7 +205,7 @@ export const SITES: AnalogSite[] = [
     lng: 13.33,
     environments: ['polar', 'volcanico'],
     homologues: [
-      { body: 'marte', name: 'Cráter Jezero (Perseverance)', lat: 18.38, lng: 77.58, note: 'Delta y carbonatos en un antiguo lago.' },
+      { id: 'jezero', body: 'marte', name: 'Cráter Jezero (Perseverance)', lat: 18.38, lng: 77.58, note: 'Delta y carbonatos en un antiguo lago.' },
     ],
     analogOf: 'Vulcanismo en ambientes fríos de Marte',
     dimensions: { geologia: 'alta', temperatura: 'media', agua_hielo: 'alta', habitabilidad: 'media' },
