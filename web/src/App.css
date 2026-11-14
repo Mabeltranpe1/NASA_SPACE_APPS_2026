@@ -220,14 +220,7 @@
 
 .map-area {
   position: relative;
-}
-
-.info {
-  color: #1b1b1f;
-}
-
-.info p {
-  margin: 0 0 6px;
+  min-height: 0;
 }
 
 .legend {
@@ -251,20 +244,75 @@
   margin-right: 4px;
 }
 
-.missing-key {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
-  text-align: center;
+.site-map {
+  position: absolute;
+  inset: 0;
 }
 
-.missing-key pre {
-  background: var(--hover);
-  padding: 8px 12px;
-  border-radius: 6px;
+.site-marker {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: width 0.15s, height 0.15s;
+}
+
+.site-marker.selected {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+}
+
+.popup {
+  color: #1b1b1f;
+  font-size: 0.85rem;
+}
+
+.popup p {
+  margin: 4px 0 6px;
+}
+
+.popup a {
+  color: #c8502e;
+}
+
+.layer-panel {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  max-width: 240px;
+}
+
+.layer-panel h2 {
+  margin: 4px 0 2px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.layer-panel label {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.layer-panel small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.7rem;
 }
 
 @media (max-width: 800px) {

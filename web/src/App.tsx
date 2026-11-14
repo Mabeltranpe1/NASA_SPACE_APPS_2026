@@ -1,11 +1,4 @@
-import { useMemo, useState } from 'react'
-import {
-  APIProvider,
-  AdvancedMarker,
-  InfoWindow,
-  Map,
-  Pin,
-} from '@vis.gl/react-google-maps'
+import { useCallback, useMemo, useState } from 'react'
 import { SITES } from './data/sites'
 import {
   DIMENSION_LABELS,
@@ -16,10 +9,9 @@ import {
   type Environment,
   type Target,
 } from './data/types'
+import SiteMap from './components/SiteMap'
+import { BASE_LAYERS, OVERLAY_LAYERS, type BaseLayerId, type OverlayLayerId } from './map/gibs'
 import './App.css'
-
-const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined
-const MAP_ID = (import.meta.env.VITE_GOOGLE_MAPS_MAP_ID as string | undefined) ?? 'DEMO_MAP_ID'
 
 const TARGET_COLORS: Record<Target | 'ambos', string> = {
   luna: '#9aa4b2',
@@ -46,6 +38,9 @@ export default function App() {
   const [dimensions, setDimensions] = useState<Dimension[]>([])
   const [onlyLesserKnown, setOnlyLesserKnown] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [baseLayer, setBaseLayer] = useState<BaseLayerId>('bluemarble')
+  const [overlays, setOverlays] = useState<OverlayLayerId[]>(['labels'])
+  const selectSite = useCallback((id: string | null) => setSelectedId(id), [])
 
   const filtered = useMemo(
     () =>
@@ -171,58 +166,41 @@ export default function App() {
       </aside>
 
       <main className="map-area">
-        {API_KEY ? (
-          <APIProvider apiKey={API_KEY} language="es">
-            <Map
-              mapId={MAP_ID}
-              defaultCenter={{ lat: 15, lng: -20 }}
-              defaultZoom={2}
-              mapTypeId="hybrid"
-              gestureHandling="greedy"
-              disableDefaultUI={false}
-            >
-              {filtered.map((s) => (
-                <AdvancedMarker
-                  key={s.id}
-                  position={{ lat: s.lat, lng: s.lng }}
-                  title={s.name}
-                  onClick={() => setSelectedId(s.id)}
-                >
-                  <Pin
-                    background={siteColor(s)}
-                    borderColor="#1b1b1f"
-                    glyphColor="#ffffff"
-                    scale={s.id === selectedId ? 1.4 : 1}
-                  />
-                </AdvancedMarker>
-              ))}
-              {selected && (
-                <InfoWindow
-                  position={{ lat: selected.lat, lng: selected.lng }}
-                  pixelOffset={[0, -40]}
-                  onCloseClick={() => setSelectedId(null)}
-                  headerContent={<strong>{selected.name}</strong>}
-                >
-                  <div className="info">
-                    <p>{selected.analogOf}</p>
-                    <a href={googleEarthUrl(selected)} target="_blank" rel="noreferrer">
-                      Ver en Google Earth ↗
-                    </a>
-                  </div>
-                </InfoWindow>
-              )}
-            </Map>
-          </APIProvider>
-        ) : (
-          <div className="missing-key">
-            <h2>Falta la API key de Google Maps</h2>
-            <p>
-              Crea <code>web/.env.local</code> con:
-            </p>
-            <pre>VITE_GOOGLE_MAPS_API_KEY=tu_api_key</pre>
-            <p>y reinicia <code>npm run dev</code>.</p>
-          </div>
-        )}
+        <SiteMap
+          sites={filtered}
+          selectedId={selected?.id ?? null}
+          onSelect={selectSite}
+          baseLayer={baseLayer}
+          overlays={overlays}
+          colorFor={siteColor}
+          earthUrlFor={googleEarthUrl}
+        />
+        <div className="layer-panel">
+          <h2>Capa base</h2>
+          {BASE_LAYERS.map((l) => (
+            <label key={l.id} title={l.description}>
+              <input
+                type="radio"
+                name="base-layer"
+                checked={baseLayer === l.id}
+                onChange={() => setBaseLayer(l.id)}
+              />
+              {l.label}
+            </label>
+          ))}
+          <h2>Capas</h2>
+          {OVERLAY_LAYERS.map((l) => (
+            <label key={l.id} title={l.description}>
+              <input
+                type="checkbox"
+                checked={overlays.includes(l.id)}
+                onChange={() => setOverlays((prev) => toggle(prev, l.id))}
+              />
+              {l.label}
+            </label>
+          ))}
+          <small>Datos: NASA GIBS</small>
+        </div>
         <div className="legend">
           <span>
             <i style={{ background: TARGET_COLORS.luna }} /> Luna

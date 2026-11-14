@@ -19,7 +19,7 @@ flowchart LR
 
     subgraph Web["Plataforma web (React)"]
         APP["web/ — React + Vite + TS"]
-        MAPS["Google Maps<br/>JavaScript API"]
+        MAPS["MapLibre GL<br/>+ capas NASA GIBS"]
         GE["Google Earth<br/>(enlace)"]
     end
 
@@ -34,6 +34,7 @@ flowchart LR
     COP --> DL
     OTROS --> DL
     DL --> PROC --> OUT --> APP
+    GIBS["NASA GIBS<br/>Blue Marble, VIIRS,<br/>ASTER, MODIS LST"] --> MAPS
     APP --> MAPS
     APP --> GE
     APP --> GH -->|deploy| SWA
@@ -56,7 +57,8 @@ flowchart LR
 |---|---|
 | Framework | React 19 + TypeScript |
 | Build | Vite |
-| Mapa | `@vis.gl/react-google-maps` (Google Maps JavaScript API, vista `hybrid`, `AdvancedMarker`) |
+| Mapa | **MapLibre GL JS** (código abierto) con proyección de globo 3D |
+| Imágenes | **NASA GIBS** (WMTS): Blue Marble, VIIRS NOAA-20 color verdadero, relieve ASTER GDEM, temperatura superficial MODIS, etiquetas de referencia. Sin key ni costo. |
 | Lint | oxlint |
 | Estado | `useState` y `useMemo` locales (sin librería de estado global) |
 | Datos | Por ahora en `web/src/data/sites.ts`; se reemplazará por el archivo generado por el pipeline |
@@ -64,7 +66,11 @@ flowchart LR
 Estructura:
 ```
 web/src/
-├── App.tsx          # Layout, filtros, mapa y ficha del sitio
+├── App.tsx          # Layout, filtros, selector de capas y ficha del sitio
+├── components/
+│   └── SiteMap.tsx  # Mapa MapLibre: globo, capas GIBS, marcadores y popup
+├── map/
+│   └── gibs.ts      # Definición de capas NASA GIBS y URLs de teselas
 ├── App.css          # Estilos de la app
 ├── index.css        # Variables de color (modo claro/oscuro)
 └── data/
@@ -88,14 +94,9 @@ web/src/
 | `missionUse` | string | Para qué sirve en una misión |
 | `wellKnown` | boolean | Si ya es un análogo muy estudiado |
 
-**Variables de entorno** (se inyectan al compilar, *build time*):
+**Variables de entorno:** ninguna. El mapa usa NASA GIBS, que no requiere API key.
 
-| Variable | Uso |
-|---|---|
-| `VITE_GOOGLE_MAPS_API_KEY` | API key de Google Maps |
-| `VITE_GOOGLE_MAPS_MAP_ID` | (Opcional) Map ID; si no se define se usa `DEMO_MAP_ID` |
-
-En local van en `web/.env.local` (ignorado por git). En CI se toman de los secrets de GitHub.
+> Historial: la primera versión usaba Google Maps, pero se reemplazó porque Google Cloud exige un prepago para activar la facturación (ver [BITACORA.md](BITACORA.md)). El mapa está aislado en `SiteMap.tsx`, así que se podría volver a cambiar sin tocar el resto de la app.
 
 ### 3. Infraestructura (`infra/`)
 
@@ -132,7 +133,6 @@ Pasos del job: `npm ci` → `npm run lint` → `npm run build` → `Azure/static
 | Secret | Origen |
 |---|---|
 | `AZURE_STATIC_WEB_APPS_API_TOKEN` | `terraform output -raw static_web_app_deployment_token` |
-| `VITE_GOOGLE_MAPS_API_KEY` | Google Cloud Console |
 
 ### 5. Flujo de trabajo (git flow)
 
@@ -148,12 +148,9 @@ Ver [CONTRIBUTING.md](../CONTRIBUTING.md). Resumen: `feature/*` → PR → `deve
 
 ## Seguridad
 
-- **La API key de Google Maps queda visible en el navegador** (es inevitable en una app web). Está protegida por:
-  - restricción por referrer: `localhost:5173`, el dominio de producción y `*.eastus2.5.azurestaticapps.net`;
-  - restricción de API: solo *Maps JavaScript API*;
-  - límite diario de cuota.
+- **El frontend no contiene secretos:** NASA GIBS es público y no usa key.
 - El token de despliegue de Azure solo existe en el estado de Terraform y en el secret de GitHub. Si se filtra, se regenera en el portal (*Administrar token de implementación → Restablecer*) y se actualiza el secret.
-- `terraform.tfvars`, `*.tfstate` y `.env.local` están en `.gitignore`.
+- `terraform.tfvars` y `*.tfstate` están en `.gitignore`.
 
 ## Costos
 
@@ -162,6 +159,7 @@ Ver [CONTRIBUTING.md](../CONTRIBUTING.md). Resumen: `feature/*` → PR → `deve
 | Servicio | Plan | Límite gratuito | Protección |
 |---|---|---|---|
 | Azure Static Web Apps | Free | 100 GB/mes de ancho de banda, 3 vistas previas | — |
-| Google Maps JavaScript API | Pago por uso con cuota gratuita | Cuota mensual gratuita de cargas de mapa | Límite diario de cuota + alerta de presupuesto |
+| NASA GIBS (mapa) | Público | Sin límite de uso publicado | — |
+| Google Earth (enlace) | Gratis | — | — |
 | GitHub Actions | Repositorio público | Minutos ilimitados | — |
 | Estado remoto de Terraform | *No usado* | — | Requeriría un Storage Account (costo mínimo) |
