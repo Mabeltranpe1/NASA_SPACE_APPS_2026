@@ -1,0 +1,7 @@
+ambientes/
+data/raw/
+*.tif
+*.nc
+*.hdf
+__pycache__/
+.ipynb_checkpoints/
