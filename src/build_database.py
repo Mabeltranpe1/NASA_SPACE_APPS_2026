@@ -5,7 +5,7 @@ It reads data/regions_catalog.csv (one row per region) and, for each region:
     1. downloads the elevation tiles it needs (only the missing ones),
     2. builds data/regions/<name>.csv with src/build_earth.py (skipped if the
        file already exists; use --rebuild to force it),
-then joins every region into ONE table: data/earth_all.csv.
+then joins every region into ONE table: data/earth_all.csv.gz (compressed).
 
 The temperature, albedo and rain files in data/raw/ are global, so new
 regions only need new elevation tiles.
@@ -27,7 +27,7 @@ import pandas as pd
 
 CATALOG = Path("data/regions_catalog.csv")
 REGIONS_DIR = Path("data/regions")
-OUT = Path("data/earth_all.csv")
+OUT = Path("data/earth_all.csv.gz")   # gzip: the full table is ~62 MB, ~15 MB compressed
 SRC = Path(__file__).parent
 
 

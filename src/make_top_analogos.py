@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import compare  # noqa: E402
 import make_results as mr  # noqa: E402
 N, SEP = 100, 300   # places per body, minimum distance between places (km)
-earth, targets = compare.load_inputs("data/earth_all.csv", "data/targets.csv")
+earth, targets = compare.load_inputs("data/earth_all.csv.gz", "data/targets.csv")
 cat = pd.read_csv("data/regions_catalog.csv", comment="#").set_index("name")
 FEATS = [f for f in compare.FEATURES if f != "elev_m"] + ["elev_m"]
 rows, js = [], {"generated": "2026-11-15", "method": "Earth database: 727 regions (worldwide drylands grid, 0.05 deg cells). "

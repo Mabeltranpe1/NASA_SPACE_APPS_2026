@@ -63,11 +63,11 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
-EARTH = ROOT / "data" / "earth_all.csv"
+EARTH = ROOT / "data" / "earth_all.csv.gz"
 TARGET_FILES = [ROOT / "data" / f for f in ("targets.csv", "targets_moon.csv", "targets_mars.csv")]
 SITE_TABLE = ROOT / "data" / "composition_targets.csv"
 
-# Earth anchors: (region in earth_all.csv, lithology, laboratory CF in um)
+# Earth anchors: (region in earth_all.csv.gz, lithology, laboratory CF in um)
 ANCHORS = {
     "basalt": ("iceland_highlands", "fresh basaltic lava and tephra", 8.25),
     "quartz_sand": ("rub_al_khali", "quartz-dominated dune sand", 7.45),

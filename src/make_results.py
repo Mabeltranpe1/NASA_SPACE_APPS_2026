@@ -51,7 +51,7 @@ def spread_out(table, n, min_km):
 
 
 def main():
-    earth, targets = compare.load_inputs("data/earth_all.csv", "data/targets.csv")
+    earth, targets = compare.load_inputs("data/earth_all.csv.gz", "data/targets.csv")
     earth = earth[earth["known"] != "yes"].reset_index(drop=True)
     print(f"Comparing {len(earth):,} little-known Earth places with {len(targets)} Moon/Mars sites ...")
     results = compare.compare_all(earth, targets, weights=WEIGHTS)

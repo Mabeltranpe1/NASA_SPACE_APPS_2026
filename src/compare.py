@@ -29,6 +29,7 @@ Examples:
 """
 
 import argparse
+import gzip
 import sys
 import warnings
 
@@ -125,7 +126,8 @@ def load_table(path, id_columns):
     text where a number should be, no rows). Prints a warning when values
     look suspicious but the file can still be used.
     """
-    with open(path, encoding="utf-8") as f:
+    opener = gzip.open if str(path).endswith(".gz") else open   # data/earth_all.csv.gz is compressed
+    with opener(path, "rt", encoding="utf-8") as f:
         if "SYNTHETIC" in f.readline().upper():
             warn(f"{path} is SYNTHETIC sample data. The results are not real.")
 
@@ -490,7 +492,7 @@ def positive_int(text):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Rank Earth cells as analogs of Moon/Mars sites.")
-    parser.add_argument("--earth", default="data/earth_all.csv", help="Earth cells CSV")
+    parser.add_argument("--earth", default="data/earth_all.csv.gz", help="Earth cells CSV")
     parser.add_argument("--targets", default="data/targets.csv", help="Moon/Mars sites CSV")
     parser.add_argument("--top", type=positive_int, default=5,
                         help="How many analogs to print per target (default 5)")

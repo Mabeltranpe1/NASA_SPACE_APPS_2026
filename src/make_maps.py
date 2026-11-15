@@ -181,7 +181,7 @@ def best_places(pairs_file, per_target, earth_file, targets_file):
 
 def main():
     parser = argparse.ArgumentParser(description="Relief maps of Earth analogs and their Moon/Mars twins.")
-    parser.add_argument("--earth", default="data/earth_all.csv")
+    parser.add_argument("--earth", default="data/earth_all.csv.gz")
     parser.add_argument("--targets", default="data/targets.csv")
     parser.add_argument("--catalog", default="data/regions_catalog.csv")
     parser.add_argument("--per-target", type=int, default=3,
