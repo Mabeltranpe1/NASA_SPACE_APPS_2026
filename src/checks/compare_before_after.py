@@ -1,16 +1,17 @@
-"""Rankings before (no composition) and after (calibrated em_contrast). Run from the repo root."""
+"""Rankings before (no composition) and after (calibrated em_contrast). Run: python src/checks/compare_before_after.py"""
 import sys
 from pathlib import Path
 import numpy as np
 import pandas as pd
-sys.path.insert(0, "src")
+ROOT = Path(__file__).resolve().parents[2]   # project root
+sys.path.insert(0, str(ROOT / "src"))
 import compare  # noqa: E402
 
-OUT = Path("outputs/composition")
+OUT = ROOT / "outputs/composition"
 WEIGHTS = {"elev_m": 0}
 LEAVE_OUT = {"Moon": ["Shackleton floor (shadow)"]}
 
-earth, targets = compare.load_inputs("data/earth_all.csv", "data/targets.csv")
+earth, targets = compare.load_inputs(ROOT / "data/earth_all.csv.gz", ROOT / "data/targets.csv")
 earth = earth[earth["known"] != "yes"].reset_index(drop=True)
 before_t = targets.copy(); before_t["em_contrast"] = np.nan
 

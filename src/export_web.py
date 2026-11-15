@@ -5,7 +5,7 @@ It joins, for every Moon/Mars site:
     - its measured features (data/targets.csv)
     - its rock composition (data/composition_targets.csv, src/composition.py)
       plus a TYPICAL oxide composition for that rock type (literature values)
-    - its 5 best Earth analogs, one per region (data/results_per_target_top_regions.csv),
+    - its 5 best Earth analogs, one per region (outputs/results/results_per_target_top_regions.csv),
       with the Earth values, the similarity of every feature and the Earth
       rock class read from ASTER em_contrast
     - every image that belongs to it (relief maps and photos in maps/,
@@ -152,7 +152,7 @@ def image(src, kind, title, credit=None, source=None, lat=None, lon=None, **extr
 def main():
     targets = pd.read_csv(ROOT / "data/targets.csv")
     comp = pd.read_csv(ROOT / "data/composition_targets.csv").set_index("name")
-    top = pd.read_csv(ROOT / "data/results_per_target_top_regions.csv")
+    top = pd.read_csv(ROOT / "outputs/results/results_per_target_top_regions.csv")
     catalog = pd.read_csv(ROOT / "data/regions_catalog.csv", comment="#").set_index("name")
     maps = pd.read_csv(ROOT / "maps/index.csv")
     photo_src = pd.read_csv(ROOT / "maps/photo_sources.csv").set_index("image")["source"].to_dict()
@@ -265,7 +265,7 @@ def main():
 
     overall = {}
     for body in ("Moon", "Mars"):
-        per_region = pd.read_csv(ROOT / f"data/results_{body.lower()}_new_per_region.csv")
+        per_region = pd.read_csv(ROOT / f"outputs/results/results_{body.lower()}_new_per_region.csv")
         rows = []
         for _, r in per_region.iterrows():
             rows.append(dict(rank=int(r["rank"]), region=r["region"], lat=num(r["lat"], 3), lon=num(r["lon"], 3),

@@ -50,3 +50,9 @@ data/regions/*_[0-9][0-9][ns]_[0-9][0-9][0-9][ew].csv
 
 # The Earth table lives compressed in data/earth_all.csv.gz; never commit an uncompressed copy.
 data/earth_all.csv
+
+# Intermediate files of the worldwide grid search (src/grid_search/README.md)
+outputs/grid_search/cells.parquet
+outputs/grid_search/tiles.csv
+outputs/grid_search/grid_catalog_rows.csv
+outputs/grid_search/ne/

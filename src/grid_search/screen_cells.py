@@ -1,6 +1,9 @@
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[2]      # project root
+WORK = ROOT / "outputs" / "grid_search"          # intermediate files of the grid search
 import sys, numpy as np, pandas as pd
-sys.path.insert(0, "/root/work/src")
-import os; os.chdir("/root/work")
+sys.path.insert(0, str(ROOT / "src"))
+import os; os.chdir(ROOT)
 import screen_global as sg, compare
 t = pd.read_csv("data/targets.csv", comment="#")
 parts = []
@@ -15,4 +18,4 @@ for north in range(90, -90, -sg.BAND):
             for n in sg.USED: out[n] = layers[n][land]
         out[f"s_{body.lower()}"] = score
     parts.append(out.astype("float32")); print(north, len(out), flush=True)
-pd.concat(parts, ignore_index=True).to_parquet("/root/cells.parquet")
+pd.concat(parts, ignore_index=True).to_parquet(WORK / "cells.parquet")

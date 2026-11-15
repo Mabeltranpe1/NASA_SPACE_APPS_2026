@@ -27,91 +27,237 @@ The goal is to find places on Earth that look like the places where we want to b
 
 Other data sources (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, etc.) are listed in [RECURSOS.md](RECURSOS.md).
 
+---
+
+## 1. The result in short
+
+- **Earth database:** 691,035 places (cells of 0.05° ≈ 5.5 km) in **727 regions** of the world's drylands, polar deserts and high plateaus (`data/earth_all.csv.gz`). 133 regions are famous analogs (Atacama, Devon Island, Dry Valleys, Iceland…); they are kept as **controls** and left out of the rankings.
+- **Targets:** 6 Moon south pole sites (Shackleton rim, de Gerlache rim, Haworth rim, Faustini rim, Mons Mouton summit, and the shadowed Shackleton floor as a contrast site) and 9 Mars sites (the landing sites of Perseverance, Curiosity, InSight, Opportunity, Spirit, Viking 1 and 2, Phoenix, plus Arcadia Planitia, a candidate for human missions) in `data/targets.csv`.
+- **Every place is described by the same 9 numbers** (section 2), measured the same way on the three bodies.
+- **Outputs:** for every Moon/Mars site its best Earth analogs in 5 different parts of the world, a top 100 for the Moon and a top 100 for Mars (`outputs/results/top200_analogos.csv/.json`), the best months for a field campaign, side by side relief maps and photos (`maps/`), and one JSON file for the web app (`web/public/data/analogos.json`).
 
 ---
 
-## 1. How it works (the idea)
+## 2. The vector: 9 variables per place
 
-We describe every place (an Earth grid cell or a Moon/Mars site) with the same 7 numbers, called **features**:
+Every place (an Earth cell or a Moon/Mars site) becomes a vector of 9 numbers, called **features**. The column names are the same in every file.
 
-| Feature | What it means | Unit |
-|---|---|---|
-| `elev_m` | elevation | metres |
-| `slope_deg` | terrain slope | degrees |
-| `roughness` | how rough the terrain is | no unit |
-| `temp_mean_K` | mean surface temperature | Kelvin |
-| `temp_range_K` | day-night / seasonal temperature range | Kelvin |
-| `albedo` | how much sunlight the surface reflects | 0 to 1 |
-| `precip_mm` | yearly precipitation | mm |
+| Feature | What it means | Unit | Earth source | Moon source | Mars source |
+|---|---|---|---|---|---|
+| `elev_m` | mean elevation | m | NASADEM / Copernicus DEM | LOLA (above the 1737.4 km sphere) | HRSC+MOLA (above the areoid) |
+| `slope_deg` | mean terrain slope | degrees | NASADEM / Copernicus DEM | LOLA 80 m | HRSC+MOLA 200 m |
+| `roughness` | std. dev. of elevation in a 3 × 3 window | m | same DEM | LOLA | HRSC+MOLA |
+| `temp_mean_K` | yearly mean surface temperature (day and night) | K | MODIS MOD11C3 | Diviner | Mars Climate Database |
+| `temp_range_K` | warmest moment of the year minus the yearly mean | K | MODIS MOD11C3 | Diviner | Mars Climate Database |
+| `albedo` | share of sunlight the surface reflects | 0–1 | MODIS MCD43C3 (white-sky, shortwave) | LOLA normal albedo (1064 nm) | TES albedo |
+| `precip_mm` | yearly precipitation | mm | GPM IMERG (60°S–60°N), MERRA-2 (poles) | 0 | 0 |
+| `ndvi` | vegetation index (≈0 = no plants) | –1…1 | MODIS MOD13C2 | 0 | 0 |
+| `em_contrast` | rock type from thermal emissivity (big = silica-rich, ≈0 = basalt) | — | ASTER GED | calibrated estimate | calibrated estimate |
 
-Then `src/compare.py` does this:
-
-1. **Same scale for everybody.** Elevation is in thousands of metres and albedo is between 0 and 1, so we must rescale them. We use **one** `RobustScaler` (from scikit-learn) fitted on Earth and targets **together**, so Earth, Moon and Mars are measured with the same ruler. `precip_mm` is first changed with `log(1 + x)`, because the step from 2 mm to 50 mm (desert to not desert) matters much more than 2000 mm to 2050 mm.
-2. **Distance.** For each target and each Earth cell we compute a **weighted Euclidean distance**. Weights say how important each feature is (default: `temp_mean_K` = 1.5, `elev_m` = 0.5, the rest = 1.0). A weight of 0 switches a feature off.
-3. **Score.** The distance becomes a score between 0 and 1 with `score = exp(-distance)`. 1 means identical, near 0 means very different.
-4. **Explanation.** For every feature we also give a similarity `sim_<feature>` (0 to 1), plus `best_match` (where the analogy is strongest) and `worst_match` (where the analogy **breaks**). So you can see **why** a place got its score.
-5. **Sensitivity check (optional).** We repeat the ranking many times with randomly changed weights (default +-50%) and count how often each Earth cell stays in the top N (`top_share`). A value of 1.0 means the place is a robust analog, not just a lucky result of one choice of weights.
-
-Missing data is handled like this:
-- If a **target** has an empty value (for example no rain on the Moon), that feature is not used for that target.
-- If an **Earth cell** has an empty value, that feature is not used for that cell only.
+Important details that make the comparison fair:
+- **Same terrain ruler on every body.** Slope and roughness depend on pixel size, so every elevation map (Earth 30–90 m, Moon 80 m, Mars 200 m) is first brought to **200 m pixels** (`src/terrain_common.py`), the coarsest of the three.
+- **Same temperature definition.** `temp_range_K` = warmest monthly daytime value minus the yearly mean on Earth, Diviner yearly max minus mean on the Moon, and hottest moment minus yearly mean on Mars.
+- **Precipitation at the poles.** GPM IMERG gives 0 mm over ice above 60°, which would make Greenland look as dry as the Moon. Above 60° we use MERRA-2 instead.
+- **Rock type on the Moon and Mars.** There is no ASTER outside Earth. `src/composition.py` converts each site's lithology into the value an Earth rock of the same composition would give to ASTER, using the Christiansen feature (CF) as a bridge: `em_contrast = 2.1639 − 0.2625 · CF`, fitted with two anchors from our own ASTER data (Iceland basalt and Rub' al Khali quartz sand) and checked on the Puna. Moon CF comes from Diviner highland values in the literature, Mars CF from TES surface types plus rover ground truth. Uncertainty is ±0.026–0.039, about the size of the tolerance, so this variable gets a **half weight**. Full method: [docs/COMPOSICION.md](docs/COMPOSICION.md).
+- `water_frac` (share of water in the cell) is also in the Earth table; cells that are mostly water are removed. It is not compared.
 
 ---
 
-## 2. Data sources (NASA Earthdata, all free)
+## 3. How the comparison works (`src/compare.py`)
 
-| Dataset | Gives us | Resolution | Downloaded part |
+1. **Read and check the files.** Missing columns or text instead of numbers stop the script with a clear `ERROR:`. Values that look like a unit mistake (for example Celsius instead of Kelvin) only give a `WARNING:`.
+2. **Rain on a log scale.** `precip_mm` becomes `log(1 + mm)`, because going from 2 mm to 50 mm (desert to not desert) matters much more than 2000 mm to 2050 mm.
+3. **Same scale for every feature (tolerances).** Every difference is divided by a **tolerance**: the difference we call "a lot". A difference of exactly one tolerance gives that feature a similarity of exp(–1) = 0.37; half a tolerance gives 0.61. Because the ruler is physical, a score means the same for every target and every region.
+
+   | Feature | Tolerance |
+   |---|---|
+   | `elev_m` | 1000 m |
+   | `slope_deg` | 5° |
+   | `roughness` | 5 m |
+   | `temp_mean_K` | 30 K |
+   | `temp_range_K` | 30 K |
+   | `albedo` | 0.10 |
+   | `precip_mm` | 1.0 in log scale (≈ 2.7 times more or less rain) |
+   | `ndvi` | 0.10 |
+   | `em_contrast` | 0.03 |
+
+   The first version used **one `RobustScaler` (scikit-learn) fitted on Earth and targets together** (median and interquartile range). With 80,000 Earth cells and a few Moon sites the ruler was set almost only by Earth, Moon temperatures were "100 rulers away" and every score was ~0. It is still available with `--scaling robust`, but tolerance scaling is the default.
+4. **Weighted distance.** For each target and each Earth cell: `distance = sqrt( Σ wᵢ · dᵢ² / Σ wᵢ )`, where `dᵢ` is the scaled difference of feature *i* and `wᵢ` its weight. Dividing by the sum of the weights keeps targets with fewer features comparable.
+
+   | Weights | `elev_m` | `temp_mean_K` | `em_contrast` | all others |
+   |---|---|---|---|---|
+   | `compare.py` defaults (`DEFAULT_WEIGHTS`) | 0.5 | 1.5 | 1.0 | 1.0 |
+   | **Used for all official results** (`make_results.py`, `WEIGHTS`) | **0** | 1.5 | **0.5** | 1.0 |
+
+   Elevation is switched off in the official results because each body measures height from a different zero level. `em_contrast` gets 0.5 because the Moon/Mars values are estimates.
+5. **Score.** `score = exp(–distance)`: 1 = identical, near 0 = very different.
+6. **Explanation per variable.** For every feature `sim_<feature> = exp(–|dᵢ|)` (0–1), plus `best_match` (where the analogy is strongest) and `worst_match` (where it **breaks**). This is how we show *why* a place got its score and *where the analogy stops*.
+7. **Missing data.** If a target has no value for a feature, that feature is not used for that target. An Earth cell must have data for **all** the features the target uses (`--min-coverage 1.0`); otherwise a cell could win only because its bad feature was skipped.
+8. **Famous analogs left out.** Earth places in regions with `known = yes` in `data/regions_catalog.csv` are removed before ranking (the challenge asks for less-studied places). `--include-known` puts them back, for example to use them as controls.
+9. **Overall ranking.** `overall_ranking()` averages over all sites of one body: `mean_score`, mean `sim_*`, and `conditions_met` = how many features have a mean similarity ≥ 0.5 (for example "5 of 8"). Places that meet more conditions come first. The shadowed Shackleton floor is left out of the Moon average (it is a contrast site, not a base site).
+10. **Sensitivity check (optional).** `--sensitivity 200` repeats the ranking 200 times with every weight multiplied by a random factor between 0.5 and 1.5 (`--spread 0.5`) and reports `top_share`: the share of runs in which the place stays in the top N. 1.0 = robust analog, not a lucky choice of weights.
+11. **Variety in the results.** The best 20 cells of a site are often all in the same desert. `make_results.py` therefore also keeps the best place of each region and picks **5 regions at least 800 km apart** for every site (`MIN_SEPARATION_KM`). The top 100 lists keep places **at least 300 km apart**.
+
+---
+
+## 4. Input files: what the code accepts
+
+Both inputs are CSV files. **`.csv.gz` (gzip) is read directly**, which is how the big Earth table is stored. Lines starting with `#` are comments. Extra columns are allowed and are carried into the outputs.
+
+**Earth file** (default `data/earth_all.csv.gz`)
+- required: `lat`, `lon`, and the 9 feature columns (a missing feature column is treated as empty).
+- optional: `region` (region name, used for the per-region tables), `place_hint` (a readable name), `known` (`yes`/`no`, famous analog), `water_frac`.
+
+**Targets file** (default `data/targets.csv`)
+- required: `name` (unique), `body` (`Moon` or `Mars`), and the 9 feature columns. Leave a cell empty when a feature does not apply.
+- optional: `site_lat`, `site_lon` (where the site is on the Moon/Mars; copied to the outputs as `target_lat`, `target_lon`), `area`, `n_dem_pixels`, `n_temp_points`.
+- `data/targets_moon.csv` and `data/targets_mars.csv` are the same rows split by body (written by the target builders). `data/targets.csv` is both joined.
+
+**Region catalog** `data/regions_catalog.csv`: `name, west, south, east, north, dem (nasadem | cop90), known (yes | no), why`. Add a row and run `python src/build_database.py` to add a region.
+
+> **The sample files are FAKE.** `data/sample_earth.csv` and `data/sample_targets.csv` contain invented numbers ("(fake)" in the names, a `SYNTHETIC` header) and only 7 features. They exist only for the tests and to try the code. Never use their results.
+
+---
+
+## 5. The pipeline, step by step
+
+Always run from the project folder, with the environment active.
+
+| # | Command | Reads | Writes |
 |---|---|---|---|
-| **NASADEM_HGT** v001 | elevation, later slope and roughness | 30 m tiles (1 x 1 degree) | only the tiles inside your region |
-| **MOD11C3** v061 | land surface temperature, monthly | 0.05 degree, global | 12 files (one per month) |
-| **MCD43C3** v061 | surface albedo (daily product) | 0.05 degree, global | 12 files (the 15th of each month) |
-| **GPM_3IMERGM** v07 | precipitation, monthly | 0.1 degree, global | 12 files (one per month) |
+| 1 | `python src/download_earth.py --region W S E N --download` | NASA Earthdata (login) | `data/raw/NASADEM_HGT`, `MOD11C3`, `MCD43C3`, `GPM_3IMERGM` |
+| 1b | `python src/download_earth.py --dem cop90 --region W S E N --download` | Copernicus DEM on AWS (no login) | `data/raw/COP90/` |
+| 2 | `python src/build_earth.py --dem cop90 --name NAME --region W S E N --out data/regions/NAME.csv` | `data/raw/` | one region file |
+| 3 | `python src/build_database.py` | `data/regions_catalog.csv` | `data/regions/*.csv` (missing ones) and **`data/earth_all.csv.gz`** |
+| 4 | `python src/build_moon_targets.py` | LOLA + Diviner (PDS, downloaded once to `data/raw/moon/`) | `data/targets_moon.csv` |
+| 5 | `python src/build_mars_targets.py` | HRSC+MOLA DEM (read over the internet), TES albedo, Mars Climate Database | `data/targets_mars.csv` |
+| 6 | `python src/composition.py --write` | `data/earth_all.csv.gz` (ASTER anchors) | `em_contrast` in `data/targets*.csv`, `data/composition_targets.csv` |
+| 7 | `python src/make_results.py` | `data/earth_all.csv.gz`, `data/targets.csv` | `outputs/results/results_*.csv`, `seasons_*.csv` (calls `src/seasons.py`) |
+| 8 | `python src/make_top_analogos.py` | results of step 7 | `outputs/results/top200_analogos.csv` and `.json` |
+| 9 | `python src/make_maps.py` then `python src/make_photos.py` | DEMs, Sentinel-2, CTX, LROC | `maps/*.png`, `maps/index.csv`, `maps/photo_sources.csv` |
+| 10 | `python src/export_web.py` | targets, composition, results, maps, photos | `web/public/data/analogos.json` (format: [web/DATOS.md](web/DATOS.md)) |
 
-The Moon and Mars target values are not downloaded by a script yet (see "Status and next steps"). More data sources are listed in [RECURSOS.md](RECURSOS.md).
+Helpers and one-off tools:
+- `src/compare.py`: the similarity index itself (section 3); also usable alone (section 7).
+- `src/terrain_common.py`: 200 m resampling, slope and roughness, shared by all builders.
+- `src/seasons.py`: month by month score (MOD11C3 day/night temperature + monthly rain) for the best place of each region, with daylight hours, to choose the best month for a field campaign.
+- `src/screen_global.py`: fast worldwide screening on the 0.05° climate grids (temperature, albedo, rain, vegetation; no terrain) to find candidate areas → `outputs/discovery/`.
+- `src/grid_search/`: the worldwide drylands grid search that grew the database from 43 to 727 regions (see its [README](src/grid_search/README.md)).
+- `src/checks/compare_before_after.py`: rankings before and after adding rock composition → `outputs/composition/`.
+
+### Outputs (`outputs/results/`)
+| File | Content |
+|---|---|
+| `results_pairs_top20.csv` | **most complete**: for every site its 20 best little-known Earth cells, with Earth values, site values (`target_*`), score, `sim_*`, best/worst match |
+| `results_per_target_top_regions.csv` | best cell of the 5 best regions (≥ 800 km apart) for every site; used by the maps and the web app |
+| `results_moon_overall.csv`, `results_mars_overall.csv` | top 1000 places for all sites of that body together |
+| `results_moon_new_per_region.csv`, `results_mars_new_per_region.csv` | best place of each region |
+| `seasons_moon.csv`, `seasons_mars.csv` | month by month score for those places |
+| `top200_analogos.csv` / `.json` | top 100 Moon + top 100 Mars places (one per region, ≥ 300 km apart), each with its best site and all variables |
 
 ---
 
-## 3. Folder structure
+## 6. Data sources
+
+All data is free. Versions and years are the ones in `data/raw/`.
+
+### Earth
+| Dataset | Used for | Version / period | Link |
+|---|---|---|---|
+| NASADEM_HGT | elevation, slope, roughness of the first test region (`northern_andes`) | v001, 1 arc-second | https://lpdaac.usgs.gov/products/nasadem_hgtv001/ |
+| Copernicus DEM GLO-90 | elevation, slope, roughness for the other 726 regions (whole Earth, also above 60°N) | 3 arc-seconds (90 m), AWS open data | https://registry.opendata.aws/copernicus-dem/ |
+| MODIS MOD11C3 | land surface temperature (mean and range; monthly day/night for seasons) | v061, 12 months of 2023, 0.05° | https://lpdaac.usgs.gov/products/mod11c3v061/ |
+| MODIS MCD43C3 | white-sky shortwave albedo | v061, 15th of each month of 2023, 0.05° | https://lpdaac.usgs.gov/products/mcd43c3v061/ |
+| GPM IMERG monthly (GPM_3IMERGM) | precipitation 60°S–60°N | V07B, 12 months of 2023, 0.1° | https://disc.gsfc.nasa.gov/datasets/GPM_3IMERGM_07/summary |
+| MERRA-2 tavgM_2d_flx_Nx (M2TMNXFLX) | precipitation above 60° | 5.12.4, 12 months of 2023, 0.5° × 0.625° | https://disc.gsfc.nasa.gov/datasets/M2TMNXFLX_5.12.4/summary |
+| MODIS MOD13C2 | NDVI (vegetation) | v061, 4 months of 2023 (one per season), 0.05° | https://lpdaac.usgs.gov/products/mod13c2v061/ |
+| ASTER GED AG5KMMOH | emissivity bands 10–14 → `em_contrast` | v041 (GED v4.1), 5 km | https://lpdaac.usgs.gov/products/ag5kmmohv041/ |
+| Sentinel-2 L2A (ESA Copernicus) | true colour photos of Earth analogs (`maps/*_photo.png`) | 10 m, via Element 84 Earth Search STAC | https://earth-search.aws.element84.com/v1 |
+| Natural Earth admin 0 countries | country names in the grid search | 1:50m | https://www.naturalearthdata.com/ |
+
+The download script covers NASADEM, MOD11C3, MCD43C3, GPM IMERG and Copernicus. MOD13C2, MERRA-2 and ASTER GED were downloaded from the same Earthdata archives (LP DAAC / GES DISC) into `data/raw/MOD13C2`, `data/raw/MERRA2_FLX` and `data/raw/AG5KMMOH`.
+
+### Moon
+| Dataset | Used for | Link |
+|---|---|---|
+| LRO LOLA GDR polar `ldem_80s_80m` | elevation, slope, roughness (80 m) | https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/float_img/ |
+| LRO LOLA `ldam_50s_1000m` | normal albedo at 1064 nm | same folder |
+| LRO Diviner polar resource product (PRP) south | yearly mean and max temperature (~500 m) | https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/ |
+| Diviner Christiansen feature (literature: Greenhagen et al. 2010) | rock type (`em_contrast`) | [docs/COMPOSICION.md](docs/COMPOSICION.md) |
+| LROC WAC south pole mosaic (100 m) | grey image of each site (`maps/*_B_moon_photo.png`) | https://pds.lroc.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/ |
+| USGS Gazetteer of Planetary Nomenclature | site centres and crater diameters | https://planetarynames.wr.usgs.gov/ |
+| LROC NAC oblique image, Apollo 12/15/16/17 Hasselblad photos | surface photos in the web app | https://www.lroc.asu.edu/ and https://images.nasa.gov/ |
+
+### Mars
+| Dataset | Used for | Link |
+|---|---|---|
+| HRSC + MOLA blended DEM, 200 m, v2 (USGS) | elevation, slope, roughness, relief maps (read over the internet, the file is 11 GB) | https://planetarymaps.usgs.gov/mosaic/Mars/HRSC_MOLA_Blend/ |
+| MGS TES albedo mosaic, 7.4 km (USGS) | albedo | https://planetarymaps.usgs.gov/mosaic/Mars_MGS_TES_Albedo_mosaic_global_7410m.tif |
+| Mars Climate Database v6.2 (LMD) | surface temperature for every season and hour | https://www-mars.lmd.jussieu.fr/ |
+| TES surface types (Bandfield et al. 2000) + rover results; THEMIS/TES olivine at Nili Fossae (literature only) | rock type (`em_contrast`) | [docs/COMPOSICION.md](docs/COMPOSICION.md) |
+| CTX global mosaic, 5 m (NASA/JPL/MSSS, Caltech Murray Lab), via Esri OnMars tiles | grey image of each site (`maps/*_B_mars_photo.png`) | https://murray-lab.caltech.edu/CTX/ |
+| Rover photos from NASA Photojournal: Perseverance Mastcam-Z, Curiosity Mastcam, Opportunity and Spirit Pancam, Pathfinder IMP | surface photos in the web app (`experiments/fotos_analogos/`) | https://science.nasa.gov/photojournal/ |
+| Mars 2020 / MSL waypoints (MMGIS) | exact coordinates of the rover photos | https://mars.nasa.gov/maps/ |
+
+Credits and licences of every photo are in `experiments/fotos_analogos/imagenes/fotos.csv`, `experiments/fotos_analogos/sites.csv` and `maps/photo_sources.csv`, and are copied into the web JSON. HiRISE images are **not** used.
+
+---
+
+## 7. Limits of the analogy (be honest with the judges)
+
+- **Earth cannot reproduce** reduced gravity, the lunar vacuum, the thin CO₂ atmosphere of Mars, cosmic and solar radiation, or the lunar day/night cycle (two weeks each). No Earth place is cold enough for the Moon: Moon scores are low (below 0.1) and `temp_mean_K` is often the `worst_match`. Moon analogs are "the least different places", useful for terrain, rock and operations, not for thermal tests.
+- **Mars sites have no rain** but every Earth place has some; even the driest deserts lose some similarity in `precip_mm`.
+- **Rock type on the Moon/Mars is an estimate** (±0.03), so it has half weight. It is a "rock-type equivalent", not what ASTER would measure there (regolith, dust and space weathering change the spectra).
+- **Elevation is switched off**: heights on each body use a different reference.
+- **One year of climate (2023)** and yearly means; `seasons.py` helps to choose the month.
+- **Results reflect where we looked**: 727 regions of drylands, polar deserts and plateaus. China, Russia, the Middle East and Afghanistan were not included in the grid search.
+- The **sample CSV files are fake** (section 4).
+
+---
+
+## 8. Folder structure
 
 ```
 NASA_SPACE_APPS_2026/
 ├── README.md              <- this file
-├── RECURSOS.md            <- catalog of data sources
+├── RECURSOS.md            <- catalog of possible data sources
 ├── CONTRIBUTING.md        <- git flow workflow (read before working)
 ├── environment.yml        <- conda environment "analogos"
-├── .gitignore             <- ignores data/raw/, *.hdf, *.tif, *.nc, __pycache__/ ...
-├── .github/workflows/     <- automatic deploy to Azure Static Web Apps
+├── .github/workflows/     <- automatic deploy of web/ to Azure Static Web Apps
 ├── docs/
 │   ├── NASA Space Apps Challenge.pdf   <- the challenge description
+│   ├── COMPOSICION.md     <- how rock type (em_contrast) is calibrated for Moon and Mars
 │   ├── OBJETIVO.md        <- detailed goal of the platform and challenge criteria
 │   ├── ARQUITECTURA.md    <- components, CI/CD, security and costs
 │   ├── BITACORA.md        <- log of decisions and progress
-│   └── GOOGLE_MAPS_API_KEY.md  <- how to create and test a Google Maps API key
-├── data/
-│   ├── sample_earth.csv   <- FAKE Earth cells, only for testing
-│   ├── sample_targets.csv <- FAKE Moon/Mars sites, only for testing
-│   ├── raw/               <- downloaded NASA files (not in git, can be many GB)
-│   │   ├── NASADEM_HGT/
-│   │   ├── MOD11C3/
-│   │   ├── MCD43C3/
-│   │   └── GPM_3IMERGM/
-│   └── processed/         <- processed data (not in git)
-├── notebooks/             <- Jupyter notebooks for exploration and analysis
-├── src/
-│   ├── compare.py         <- the similarity index (main script)
-│   └── download_earth.py  <- downloads the NASA Earth data
-├── tests/
-│   └── test_compare.py    <- automatic checks for compare.py
-├── outputs/               <- maps, figures and final results
+│   └── GOOGLE_MAPS_API_KEY.md
+├── data/                  <- INPUTS (see data/README.md)
+│   ├── earth_all.csv.gz   <- the Earth database (727 regions, 691k places)
+│   ├── regions/           <- one CSV per region (grid regions are not in git)
+│   ├── regions_catalog.csv
+│   ├── targets.csv, targets_moon.csv, targets_mars.csv
+│   ├── composition_targets.csv
+│   ├── sample_earth.csv, sample_targets.csv   <- FAKE, only for tests
+│   └── raw/               <- downloaded files (not in git, ~9 GB)
+├── src/                   <- all the code (section 5)
+│   ├── grid_search/       <- worldwide grid search scripts
+│   └── checks/            <- before/after comparisons
+├── outputs/               <- RESULTS (see outputs/README.md)
+│   ├── results/           <- rankings, seasons, top 200
+│   ├── discovery/         <- global screening candidates
+│   ├── composition/       <- effect of rock composition on the rankings
+│   └── grid_search/       <- tiles selected by the grid search
+├── maps/                  <- relief maps and photos, Earth analog next to its Moon/Mars site
+├── experiments/fotos_analogos/  <- surface photos of the Moon/Mars sites with credits
+├── tests/test_compare.py  <- automatic checks for compare.py
+├── notebooks/             <- Jupyter notebooks
 ├── web/                   <- web platform (React + Vite + MapLibre + NASA GIBS)
 └── infra/                 <- Azure infrastructure with Terraform (Free plans only)
 ```
 
-> **Important: the sample CSV files are FAKE.** `data/sample_earth.csv` and `data/sample_targets.csv` contain invented numbers. They exist only to test that `compare.py` works. The place names have "(fake)" in them, and the script prints a `SYNTHETIC sample data` warning when you use them. Do not use their results in the final presentation.
-
 ---
 
-## 4. Web platform (`web/`)
+## 9. Web platform (`web/`)
 
 An interactive map to filter Earth analogs by target (Moon or Mars), type of environment (desert, polar, volcanic, crater, caves, salt flat) and similarity dimension. The map is a 3D globe with NASA imagery (GIBS): Blue Marble, recent satellite images, relief and land surface temperature. Each site can be opened in Google Earth.
 
@@ -127,15 +273,16 @@ Deployment to Azure is explained in [infra/README.md](infra/README.md).
 
 The analysis results for the app (sites, Earth analogs, rock composition, images) are in
 `web/public/data/analogos.json`, made with `python src/export_web.py` after `python src/make_results.py`.
+`npm run dev` / `npm run build` first copy the images listed in the JSON into `web/public/data/img/` (`web/scripts/copy-data-images.mjs`).
 Format and usage: [web/DATOS.md](web/DATOS.md). Rock composition method: [docs/COMPOSICION.md](docs/COMPOSICION.md).
 
 ---
 
-## 5. Install the environment
+## 10. Install the environment
 
 All commands below work in the **fish** shell (and also in bash).
 
-### 5.1 Install Miniconda (only once)
+### 10.1 Install Miniconda (only once)
 
 If you do not have `conda` yet, install Miniconda from https://docs.conda.io/en/latest/miniconda.html.
 
@@ -147,7 +294,7 @@ conda init fish
 
 Then close the terminal and open a new one.
 
-### 5.2 Create the `analogos` environment
+### 10.2 Create the `analogos` environment
 
 From the project folder:
 
@@ -161,26 +308,24 @@ This installs Python 3.12 with numpy, pandas, scikit-learn, xarray, rasterio, ge
 
 > Note: `environment.yml` has a `prefix:` line at the end with a path from one computer (`/home/marcop/miniconda3/envs/analogos`). On another computer you can delete that line; conda will then use its normal folder.
 
-### 5.3 Extra packages for downloading and reading NASA files
+### 10.3 Extra packages
 
-`download_earth.py` needs **earthaccess**, which is not in `environment.yml` yet. To read the NASA files later you will probably also need **pyhdf** (for the `.hdf` files of MOD11C3 and MCD43C3) and **h5py** (for the GPM files). Install them with:
+Only `compare.py` and the tests run with the base environment. The builders and map scripts also need packages that are not in `environment.yml` yet:
 
 ```fish
 conda activate analogos
-conda install -c conda-forge earthaccess pyhdf h5py
+conda install -c conda-forge earthaccess pyhdf h5py pyproj scipy pillow requests shapely pyshp
 ```
 
-If conda cannot solve it, you can try `pip install earthaccess h5py` instead (pyhdf is easier to install with conda).
+| Package | Needed by |
+|---|---|
+| earthaccess | `download_earth.py` |
+| pyhdf, h5py | `build_earth.py`, `seasons.py`, `screen_global.py` through `build_earth.py` (MODIS `.hdf`, IMERG/ASTER `.h5`, MERRA-2 `.nc4`) |
+| pyproj, scipy | `build_moon_targets.py`, `terrain_common.py`, `make_maps.py`, `make_photos.py` |
+| pillow, requests | `make_photos.py`, `experiments/fotos_analogos/build_images.py` |
+| shapely, pyshp | `make_photos.py`, `src/grid_search/tiles.py` |
 
-### 5.4 Check that it works
-
-```fish
-python -c "import numpy, pandas, sklearn, earthaccess; print('OK')"
-```
-
-### 5.5 Update the environment later
-
-If someone adds a package to `environment.yml`:
+### 10.4 Update the environment later
 
 ```fish
 conda env update -f environment.yml --prune
@@ -188,151 +333,101 @@ conda env update -f environment.yml --prune
 
 ---
 
-## 6. Run the similarity index (`src/compare.py`)
+## 11. Run the similarity index alone (`src/compare.py`)
 
-Always run the commands **from the project folder** (the paths are relative to it), with the environment active.
+With no options it compares the real database with the real targets:
 
-### 6.1 Try it with the fake sample data
+```fish
+python src/compare.py --top 5
+```
+
+Try it with the fake sample data:
 
 ```fish
 python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --top 5
 ```
 
-For each target you get a small table: rank, lat, lon, place_hint, score, the `sim_*` columns and `worst_match`.
-
-> If you run `python src/compare.py` with no `--earth` / `--targets`, it looks for `data/earth.csv` and `data/targets.csv`. These files do **not** exist yet, so for now always give the sample files.
-
-### 6.2 All options
-
 | Option | Default | What it does |
 |---|---|---|
-| `--earth FILE` | `data/earth.csv` | CSV with the Earth cells |
-| `--targets FILE` | `data/targets.csv` | CSV with the Moon/Mars sites |
+| `--earth FILE` | `data/earth_all.csv.gz` | Earth cells (CSV or CSV.GZ) |
+| `--targets FILE` | `data/targets.csv` | Moon/Mars sites |
 | `--top N` | `5` | how many analogs to print per target |
-| `--out FILE` | (none) | save the **full** results table to a CSV file |
-| `--weight FEATURE=VALUE` | (none) | change one weight, e.g. `--weight precip_mm=0`. You can repeat it. |
-| `--sensitivity RUNS` | (off) | also run the weight sensitivity check, e.g. `200` runs |
-| `--spread X` | `0.5` | how much weights change in the sensitivity check (0.5 = +-50%) |
+| `--out FILE` | (none) | save the **full** results table |
+| `--out-overall FILE` | (none) | save the overall table (all targets together) |
+| `--weight FEATURE=VALUE` | (none) | change one weight, e.g. `--weight elev_m=0`. Can repeat. |
+| `--scaling tolerance\|robust` | `tolerance` | how features are put on one scale (section 3) |
+| `--include-known` | off | also rank famous analog regions |
+| `--exclude TARGET` | (none) | leave a target out of the overall table. Can repeat. |
+| `--min-coverage X` | `1.0` | share of the weight a cell must have data for |
+| `--sensitivity RUNS` | off | weight sensitivity check, e.g. `200` |
+| `--spread X` | `0.5` | how much weights change in the sensitivity check (±50%) |
 
-### 6.3 Examples
-
-Switch elevation off and save everything to a file:
-
-```fish
-python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --weight elev_m=0 --out results.csv
-```
-
-Check if the ranking is stable when the weights change:
+To get the same numbers as the official results:
 
 ```fish
-python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --sensitivity 200
+python src/compare.py --weight elev_m=0 --weight em_contrast=0.5 --exclude "Shackleton floor (shadow)"
 ```
 
-Change two weights at the same time:
-
-```fish
-python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --weight temp_mean_K=3 --weight albedo=0.5
-```
-
-### 6.4 Input file format
-
-Both files are CSV. Lines that start with `#` are comments.
-
-- **Earth file:** columns `lat`, `lon`, plus the 7 feature columns. An optional `place_hint` column (a name) is shown in the output.
-- **Targets file:** columns `name`, `body` (`Moon` or `Mars`), plus the 7 feature columns. Names must be unique. Leave a cell empty when a body does not have that feature (for example `precip_mm` on the Moon and Mars).
-
-The script stops with a clear `ERROR:` if a column is missing or contains text instead of numbers. It prints a `WARNING:` (but continues) if values look like a unit mistake, for example a temperature in Celsius instead of Kelvin.
-
-### 6.5 Settings inside the code
-
-At the top of `src/compare.py` you can edit:
-- `FEATURES` (which columns are compared),
-- `DEFAULT_WEIGHTS`,
-- `BODY_WEIGHTS` (different weights for Moon or Mars only, e.g. `{"Moon": {"precip_mm": 0.0}}`),
-- `LOG_FEATURES`,
-- `VALID_RANGES` (limits used for the unit warnings).
+Settings at the top of `src/compare.py`: `FEATURES`, `DEFAULT_WEIGHTS`, `BODY_WEIGHTS`, `LOG_FEATURES`, `TOLERANCE`, `VALID_RANGES`.
 
 ---
 
-## 7. Run the tests
+## 12. Run the tests
 
 ```fish
 python tests/test_compare.py
 ```
 
-You should see `ok` for each test and then `All 10 tests passed.` The tests use invented numbers and only check that the maths behaves correctly (for example: a cell identical to the target gets score 1, weight 0 switches a feature off, empty values do not break anything).
-
-They also work with pytest, if you install it (`conda install pytest`, then `pytest tests/`).
+You should see `ok` for each test and then `All 13 tests passed.` The tests use invented numbers and check the maths (a cell identical to the target gets score 1, weight 0 switches a feature off, empty values do not break anything, the worst match names the broken feature…). They also work with `pytest tests/`.
 
 ---
 
-## 8. Download the NASA Earth data (`src/download_earth.py`)
+## 13. Download the NASA Earth data (`src/download_earth.py`)
 
-### 8.1 Before the first download (only once)
+### 13.1 Before the first download (only once)
 
 1. Create a **free NASA Earthdata Login** account: https://urs.earthdata.nasa.gov/users/new
-2. For **GPM** (precipitation) you must also approve one application: go to https://urs.earthdata.nasa.gov/profile, open **Authorized Apps**, click **Approve More Applications**, and approve **NASA GESDISC DATA ARCHIVE**. Without this, the GPM download is skipped (the script tells you).
-3. Optional: save your login so you are not asked every time. This writes it to `~/.netrc`:
+2. For **GPM** and **MERRA-2** you must also approve one application: go to https://urs.earthdata.nasa.gov/profile, open **Authorized Apps**, click **Approve More Applications**, and approve **NASA GESDISC DATA ARCHIVE**.
+3. Optional: save your login so you are not asked every time (writes `~/.netrc`):
 
    ```fish
    python -c "import earthaccess; earthaccess.login(persist=True)"
    ```
 
-### 8.2 Step 1: see the plan (no login needed)
+### 13.2 See the plan, then download
 
 ```fish
-python src/download_earth.py --region -80 -5 -66 13
+python src/download_earth.py --region -80 -5 -66 13              # plan only, no login
+python src/download_earth.py --region -80 -5 -66 13 --download   # really download
+python src/download_earth.py --dem cop90 --region -10 20 0 30 --download   # Copernicus tiles only
 ```
 
-The region is **WEST SOUTH EAST NORTH** in degrees (longitude, latitude, longitude, latitude). West and south are negative numbers. The region only controls the elevation tiles (NASADEM); the other three datasets are global files.
-
-This shows how many files and how many GB each dataset needs, and how much free disk space you have. Nothing is downloaded.
-
-### 8.3 Step 2: really download
-
-```fish
-python src/download_earth.py --region -80 -5 -66 13 --download
-```
-
-Options:
+The region is **WEST SOUTH EAST NORTH** in degrees. It only controls the elevation tiles; the other datasets are global files.
 
 | Option | Default | What it does |
 |---|---|---|
 | `--region WEST SOUTH EAST NORTH` | (required) | area for the elevation tiles |
-| `--year YEAR` | `2023` | year for the monthly data (2001 to last year) |
-| `--download` | (off) | really download; without it you only see the plan |
+| `--year YEAR` | `2023` | year for the monthly data |
+| `--dem nasadem\|cop90` | `nasadem` | `nasadem`: NASADEM + MOD11C3 + MCD43C3 + GPM. `cop90`: only Copernicus DEM tiles (no login) |
+| `--download` | off | really download; without it you only see the plan |
 
-Files go to `data/raw/<dataset>/`. Git ignores this folder. Files that already exist are skipped, so you can stop the script and run it again at any time. If one dataset fails, the others continue; just run the script again later.
-
-Size guide: the 12 MCD43C3 albedo files are about 2.4 GB and the 12 MOD11C3 files about 0.9 GB. The NASADEM tiles are about 5-20 MB each.
-
----
-
-## 9. Status and next steps
-
-**Done**
-- `src/compare.py`: similarity index, per-feature explanation, weight sensitivity check.
-- `tests/test_compare.py`: 10 tests, all passing.
-- `src/download_earth.py`: downloads the four Earth datasets.
-- Data for 2023 already in `data/raw/`: NASADEM tiles for the region about 81°W-66°W, 6°S-13°N, 12 MOD11C3 files and 12 MCD43C3 files.
-
-**Not done yet**
-- `data/raw/GPM_3IMERGM/` is still empty: approve "NASA GESDISC DATA ARCHIVE" (section 8.1) and run the download again.
-- Add `earthaccess` (and `pyhdf`, `h5py` if used) to `environment.yml`.
-- Write a script that turns the raw files into `data/earth.csv`: unzip and mosaic the NASADEM tiles, compute slope and roughness, compute mean and range of temperature, mean albedo and yearly precipitation, all on one common grid.
-- Build `data/targets.csv` with **real** Moon and Mars values for the base candidate sites (for example from LRO/LOLA, Diviner for the Moon and MOLA, THEMIS, TES for Mars).
-- Make maps of the results (folium / matplotlib are already installed).
+Files go to `data/raw/<dataset>/` (ignored by git). Files that already exist are skipped. Size guide: 12 MCD43C3 files ≈ 2.4 GB, 12 MOD11C3 files ≈ 0.9 GB, a NASADEM tile 5–20 MB.
 
 ---
 
-## 10. Documentation
+## 14. Documentation
 
+- [docs/COMPOSICION.md](docs/COMPOSICION.md): rock type (`em_contrast`) for the Moon and Mars
+- [data/README.md](data/README.md): every input file
+- [outputs/README.md](outputs/README.md): every result file
+- [src/grid_search/README.md](src/grid_search/README.md): the worldwide grid search
+- [web/DATOS.md](web/DATOS.md): the JSON for the web app
 - [docs/OBJETIVO.md](docs/OBJETIVO.md): detailed goal of the platform and challenge criteria
 - [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): components, CI/CD, security and costs
 - [docs/BITACORA.md](docs/BITACORA.md): log of decisions and progress
 - [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): how to create and test a Google Maps API key
 - [RECURSOS.md](RECURSOS.md): data sources
 
-## 11. How to collaborate
+## 15. How to collaborate
 
 We use **git flow**. Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start working.

@@ -6,6 +6,11 @@ Datasets (all from NASA Earthdata, all free):
     MOD11C3      -> land surface temperature, monthly     (0.05 deg, global)
     MCD43C3      -> surface albedo, one day per month     (0.05 deg, global)
     GPM_3IMERGM  -> precipitation, monthly                (0.1 deg, global)
+With --dem cop90 it downloads only Copernicus DEM GLO-90 tiles (90 m, whole
+Earth, free, no login) for the region.
+MOD13C2 (vegetation), MERRA-2 (polar rain) and ASTER GED (rock type), also
+used by build_earth.py, come from the same Earthdata archives but are not
+downloaded by this script (see README.md, section 6).
 
 Step 1 - see what would be downloaded and how big it is (no login needed):
     python src/download_earth.py --region -80 -5 -66 13

@@ -1,5 +1,8 @@
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[2]      # project root
+WORK = ROOT / "outputs" / "grid_search"          # intermediate files of the grid search
 import pandas as pd, numpy as np, re
-T = pd.read_csv("/root/tiles.csv")
+T = pd.read_csv(WORK / "tiles.csv")
 SKIP = {"China","Russia","Iran","Iraq","Syria","Yemen","Afghanistan","Saudi Arabia","United Arab Emirates","Oman","Kuwait","Qatar","Jordan","Israel","Lebanon","Bahrain","Palestine","North Korea","Antarctica"}
 T["skip"] = T.country.isin(SKIP) | T.known.str.contains("avoid", na=False)
 base = ~T.skip & ~T.covered & (T.albedo < 0.55)
@@ -24,6 +27,6 @@ for k, (w, s, e, n) in NAMED.items():
     sel[m[m].index] += f"named_{k};"
 T["why"] = sel
 S = T[sel != ""].copy()
-S.to_csv("/root/selected_tiles.csv", index=False)
+S.to_csv(WORK / "selected_tiles.csv", index=False)
 print("tiles", len(S)); print(S.why.str.split(";").explode().str.replace(r"named_.*","named",regex=True).value_counts().to_string())
 print(S.country.value_counts().head(40).to_string())

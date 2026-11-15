@@ -3,7 +3,7 @@ make_top_analogos.py - Top 100 Earth places for the Moon and 100 for Mars (one p
 region, >= 300 km apart), each with its best Moon/Mars site and all the variables.
 
 Run from the project root:  python src/make_top_analogos.py
-Writes data/top200_analogos.csv and data/top200_analogos.json.
+Writes outputs/results/top200_analogos.csv and .json.
 """
 import json
 import sys
@@ -24,7 +24,7 @@ rows, js = [], {"generated": "2026-11-15", "method": "Earth database: 727 region
       f"{SEP} km apart. mean_score = mean over all sites of that body; best_site = the site with the highest score.",
       "features": compare.FEATURES, "places": []}
 for body in ["Moon", "Mars"]:
-    per_region = pd.read_csv(f"data/results_{body.lower()}_new_per_region.csv")
+    per_region = pd.read_csv(f"outputs/results/results_{body.lower()}_new_per_region.csv")
     top = mr.spread_out(per_region, N, SEP).reset_index(drop=True)
     tg = targets[(targets.body == body) & ~targets.name.isin(mr.LEAVE_OUT_OF_OVERALL.get(body, []))].reset_index(drop=True)
     cells = top[["region", "lat", "lon"]].merge(earth, on=["region", "lat", "lon"], how="left")
@@ -49,7 +49,7 @@ for body in ["Moon", "Mars"]:
         js["places"].append({**{k: (None if isinstance(v, float) and np.isnan(v) else v) for k, v in row.items()},
                              "score_per_site": {t: round(s, 4) for t, s in zip(r.target, r.score)}})
 out = pd.DataFrame(rows)
-out.to_csv("data/top200_analogos.csv", index=False)
-json.dump(js, open("data/top200_analogos.json", "w"), ensure_ascii=False, indent=1, default=float)
+out.to_csv("outputs/results/top200_analogos.csv", index=False)
+json.dump(js, open("outputs/results/top200_analogos.json", "w"), ensure_ascii=False, indent=1, default=float)
 pd.set_option("display.width", 250)
 print(out[["body","rank","earth_region","earth_lat","earth_lon","mean_score_all_sites","conditions_met","best_site","score_best_site"]].to_string(index=False))

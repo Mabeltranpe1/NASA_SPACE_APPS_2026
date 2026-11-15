@@ -5,7 +5,7 @@ Run it after the database changes (new regions, new variables, new terrain).
 Famous analog regions (known = yes in the catalog) are left out, because the
 challenge asks for little-known places.
 
-It writes, in data/:
+It writes, in outputs/results/:
     results_pairs_top20.csv         20 best Earth places for each Moon/Mars site,
                                     with the values of both places side by side
     results_per_target_top_regions.csv  best place of the 5 best REGIONS for each
@@ -51,6 +51,7 @@ def spread_out(table, n, min_km):
 
 
 def main():
+    Path("outputs/results").mkdir(parents=True, exist_ok=True)
     earth, targets = compare.load_inputs("data/earth_all.csv.gz", "data/targets.csv")
     earth = earth[earth["known"] != "yes"].reset_index(drop=True)
     print(f"Comparing {len(earth):,} little-known Earth places with {len(targets)} Moon/Mars sites ...")
@@ -59,7 +60,7 @@ def main():
     pairs = results[results["rank"] <= 20].drop(
         columns=["water_frac", "known", "sim_elev_m",
                  "target_elev_m"], errors="ignore")
-    pairs.round(4).to_csv("data/results_pairs_top20.csv", index=False)
+    pairs.round(4).to_csv("outputs/results/results_pairs_top20.csv", index=False)
 
     # Best place of each Earth REGION for every Moon/Mars site (top 5 regions).
     # The top 20 cells are often all in one region; this table gives variety
@@ -71,26 +72,26 @@ def main():
     by_region = pd.concat([spread_out(g, 5, MIN_SEPARATION_KM) for _, g in best.groupby("target", sort=False)])
     by_region = by_region.drop(
         columns=["water_frac", "known", "sim_elev_m", "target_elev_m"], errors="ignore")
-    by_region.round(4).to_csv("data/results_per_target_top_regions.csv", index=False)
+    by_region.round(4).to_csv("outputs/results/results_per_target_top_regions.csv", index=False)
 
     for body in ("Mars", "Moon"):
         overall = compare.overall_ranking(results[results["body"] == body],
                                           exclude=LEAVE_OUT_OF_OVERALL.get(body, []))
         overall.drop(columns="n_met").head(1000).round(4).to_csv(
-            f"data/results_{body.lower()}_overall.csv", index=False)
+            f"outputs/results/results_{body.lower()}_overall.csv", index=False)
         per_region = (overall.sort_values(["n_met", "mean_score"], ascending=False)
                       .groupby("region", sort=False).first().reset_index().drop(columns="n_met"))
-        per_region.round(4).to_csv(f"data/results_{body.lower()}_new_per_region.csv", index=False)
+        per_region.round(4).to_csv(f"outputs/results/results_{body.lower()}_new_per_region.csv", index=False)
         print(f"\n{body}: best little-known place of each region")
         print(per_region[["region", "lat", "lon", "mean_score", "conditions_met", "weakest"]]
               .head(10).round(3).to_string(index=False))
 
         subprocess.run([sys.executable, str(Path(__file__).parent / "seasons.py"),
-                        "--overall", f"data/results_{body.lower()}_new_per_region.csv",
+                        "--overall", f"outputs/results/results_{body.lower()}_new_per_region.csv",
                         "--targets", f"data/targets_{body.lower()}.csv",
-                        "--out", f"data/seasons_{body.lower()}.csv"],
+                        "--out", f"outputs/results/seasons_{body.lower()}.csv"],
                        stdout=subprocess.DEVNULL, check=True)
-    print("\nAll result tables saved in data/")
+    print("\nAll result tables saved in outputs/results/")
 
 
 if __name__ == "__main__":

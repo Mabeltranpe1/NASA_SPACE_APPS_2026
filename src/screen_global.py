@@ -16,7 +16,7 @@ For each body (Moon, Mars) it:
        tolerances as src/compare.py) and keeps the mean score,
     2. groups the best cells into areas of 2 x 2 degrees,
     3. marks the areas that are already famous analogs (so you can skip them),
-    4. writes the best areas to data/discovery_<body>.csv, with a ready
+    4. writes the best areas to outputs/discovery/discovery_<body>.csv, with a ready
        "west south east north" box to add to data/regions_catalog.csv.
 
 Example:
@@ -162,15 +162,16 @@ def main():
     args = parser.parse_args()
 
     targets = pd.read_csv(args.targets, comment="#")
+    Path("outputs/discovery").mkdir(parents=True, exist_ok=True)
     for body, group in targets.groupby("body", sort=False):
         areas, n_cells = screen(group, body, args.top)
-        out = f"data/discovery_{body.lower()}.csv"
+        out = f"outputs/discovery/discovery_{body.lower()}.csv"
         areas.round(4).to_csv(out, index=False)
         new = new_candidates(areas)
-        new.round(4).to_csv(f"data/discovery_{body.lower()}_new.csv", index=False)
+        new.round(4).to_csv(f"outputs/discovery/discovery_{body.lower()}_new.csv", index=False)
         print(f"\n{body}: scored {n_cells:,} land cells. Saved the best {len(areas)} areas to {out}")
         print(f"Best NEW areas (famous analogs and avoided zones left out, one per 10 x 10 degrees),")
-        print(f"also saved to data/discovery_{body.lower()}_new.csv:")
+        print(f"also saved to outputs/discovery/discovery_{body.lower()}_new.csv:")
         show = ["rank", "south", "west", "score_top10pct", "temp_mean_K", "temp_range_K",
                 "albedo", "precip_mm", "box_west_south_east_north"]
         with pd.option_context("display.width", 200, "display.float_format", "{:.3f}".format):
