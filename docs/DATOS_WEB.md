@@ -1,4 +1,4 @@
-# Datos de la app: de dónde salen y cómo se actualizan
+# Datos de GeoAnalog: de dónde salen y cómo se actualizan
 
 Este documento explica cómo los datos de Marco y de Santiago llegan a la app, qué reglas se aplican en el camino y cómo regenerar todo.
 
@@ -171,6 +171,7 @@ Las claves de `gallery_sources.json` son los id de los objetivos (`jezero`, `sha
 
 | Pendiente | Quién | Detalle |
 |---|---|---|
+| Catálogo de regiones | — | La rama de Santiago traía un `regions_catalog.csv` sin algunos cuadros de Patagonia y Tierra del Fuego. Se usa el de Marco, que es el que generó `earth_all.csv.gz` (las celdas de esos cuadros están en la base) |
 | Lava Beds no tiene datos | Marco | Está fuera de las regiones de `regions_catalog.csv` (Timanfaya ya entró con la búsqueda mundial) |
 | Regiones en países excluidos | Marco | La grilla mundial omite China, Rusia, Medio Oriente y Afganistán, pero siguen regiones nombradas de antes (Tíbet, Taklamakán, Gobi, Lut, Rub al-Jali, Kamchatka…). Decidir si se quitan |
 | Homólogos de Colombia | Santiago | Los homólogos de `sites.ts` salieron del PAI. Si el homólogo no está en la base (Tatacoa → Medusae Fossae), la app compara con el objetivo más parecido |

@@ -3,9 +3,9 @@ export type Lang = 'es' | 'en'
 /** UI strings. Use {name} placeholders for variables. */
 export const STRINGS = {
   es: {
-    'app.title': 'Análogos terrestres · Luna y Marte',
+    'app.title': 'GeoAnalog · Análogos de la Luna y Marte en la Tierra',
     'brand.eyebrow': 'NASA Space Apps 2026',
-    'brand.title': 'Análogos terrestres',
+    'brand.title': 'GeoAnalog',
     'brand.subtitle': 'Lugares de la Tierra que nos preparan para vivir en la Luna y en Marte',
     'filters.environment': 'Tipo de ambiente',
     'filters.lesserKnown': 'Solo análogos poco estudiados',
@@ -218,9 +218,9 @@ export const STRINGS = {
     'image.scaleNote': 'Imágenes reales de la NASA y la ESA (Copernicus Sentinel-2). Cada una tiene su propia escala. Usa ← → para pasar de imagen; la última de la Luna o Marte es una vista 3D que puedes mover.',
   },
   en: {
-    'app.title': 'Earth Analogs · Moon and Mars',
+    'app.title': 'GeoAnalog · Earth analogs of the Moon and Mars',
     'brand.eyebrow': 'NASA Space Apps 2026',
-    'brand.title': 'Earth Analogs',
+    'brand.title': 'GeoAnalog',
     'brand.subtitle': 'Places on Earth that prepare us to live on the Moon and Mars',
     'filters.environment': 'Environment type',
     'filters.lesserKnown': 'Only lesser-studied analogs',

@@ -69,6 +69,7 @@ const TEXT = {
     best: '✓ más parecido',
     worst: '⚠ rompe la analogía',
     map: 'Dónde están',
+    globe: 'Ver en el globo 3D',
     googleEarth: 'Ver en Google Earth ↗',
     checkPoint: 'A qué se parece este lugar',
     download: 'Descargar',
@@ -119,6 +120,7 @@ const TEXT = {
     best: '✓ most similar',
     worst: '⚠ breaks the analogy',
     map: 'Where they are',
+    globe: 'Show on the 3D globe',
     googleEarth: 'View in Google Earth ↗',
     checkPoint: 'What does this place resemble',
     download: 'Download',
@@ -230,7 +232,7 @@ function formFromHash(db: ComparatorDB): Partial<Form> | null {
   }
 }
 
-export default function AnalogFinder() {
+export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place: { lat: number; lng: number; name: string }) => void } = {}) {
   const { lang } = useLang()
   const t = (k: Key, vars?: Record<string, string | number>) => fill(TEXT[lang][k], vars)
   const [db, setDb] = useState<ComparatorDB | null>(null)
@@ -460,7 +462,7 @@ export default function AnalogFinder() {
               </details>
 
               <div className="finder-actions">
-                <button className="tour-button" onClick={() => run(db, form)}>{t('search')}</button>
+                <button className="btn primary" onClick={() => run(db, form)}>{t('search')}</button>
                 <button className="link" onClick={() => pickSite(form.site || db.meta.sites[0].id)}>{t('reset')}</button>
               </div>
             </div>
@@ -545,6 +547,11 @@ export default function AnalogFinder() {
                   ))}
                 </ul>
                 <p className="finder-downloads">
+                  {onShowOnGlobe && (
+                    <button className="link" onClick={() => onShowOnGlobe({ lat: sel.lat, lng: sel.lon, name: regionLabel(db, sel.region, lang, sel.lat, sel.lon) })}>
+                      {t('globe')}
+                    </button>
+                  )}
                   <a className="link" href={earthUrl(sel.lat, sel.lon)} target="_blank" rel="noreferrer">{t('googleEarth')}</a>
                   <button className="link" onClick={() => {
                     setTab('point')
@@ -598,7 +605,7 @@ export default function AnalogFinder() {
               ))}
             </div>
             <div className="finder-actions">
-              <button className="tour-button"
+              <button className="btn primary"
                 onClick={() => runPoint(db, Number(point.lat.replace(',', '.')), Number(point.lon.replace(',', '.')))}>
                 {t('pointSearch')}
               </button>
