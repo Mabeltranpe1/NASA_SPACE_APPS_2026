@@ -13,8 +13,8 @@ Sources (all free, no login):
 Output: data/targets_mars.csv, with the same columns as data/earth.csv.
     elev_m        mean height above the Mars reference (areoid)
     slope_deg     mean slope between 200 m pixels
-    roughness     mean standard deviation of height in a 3 x 3 pixel window (m),
-                  rescaled to the 90 m pixel size used on Earth
+    roughness     mean standard deviation of height in a 3 x 3 pixel window (m)
+    (slope and roughness use 200 m pixels on every body, see terrain_common.py)
     temp_mean_K   mean surface temperature over all seasons and hours
     temp_range_K  hottest moment of the year minus the yearly mean
     albedo        TES albedo
@@ -23,8 +23,6 @@ Output: data/targets_mars.csv, with the same columns as data/earth.csv.
     em_contrast   empty for now: needs a calibration with TES spectra, so it
                   is not compared yet
 
-Note: Mars pixels are 200 m but Earth pixels are ~90 m. Bigger pixels make
-slopes look a little gentler, so the terrain match is approximate.
 
 Example:
     python src/build_mars_targets.py
@@ -32,6 +30,7 @@ Example:
 
 import argparse
 import re
+import sys
 import time
 import urllib.parse
 import urllib.request
@@ -42,7 +41,9 @@ import pandas as pd
 import rasterio
 from rasterio.windows import Window
 
-EARTH_PIXEL_M = 90.0   # pixel size used for the Earth terrain (see build_earth.py)
+
+sys.path.insert(0, str(Path(__file__).parent))
+import terrain_common  # noqa: E402  (same 200 m terrain for every body)
 RAW = Path("data/raw/mars")
 DEM_URL = ("/vsicurl/https://planetarymaps.usgs.gov/mosaic/Mars/HRSC_MOLA_Blend/"
            "Mars_HRSC_MOLA_BlendDEM_Global_200mp_v2.tif")
@@ -80,15 +81,13 @@ def terrain_features(dem, lat, lon):
     z = dem.read(1, window=Window(col - half_c, row - half_r, 2 * half_c + 1, 2 * half_r + 1)).astype(float)
     z[z == dem.nodata] = np.nan
 
-    dz_dy, dz_dx = np.gradient(z, px_y, px_x)
-    slope = np.degrees(np.arctan(np.hypot(dz_dx, dz_dy)))
-    windows = np.lib.stride_tricks.sliding_window_view(np.pad(z, 1, mode="edge"), (3, 3))
-    # Roughness grows with pixel size. Earth is measured at ~90 m pixels, so we
-    # rescale to 90 m to compare like with like.
-    rough = windows.std(axis=(2, 3)) * (EARTH_PIXEL_M / px_y)
+    # Map pixels are 200 m north-south but narrower east-west away from the
+    # equator; bring them to square 200 m pixels, like Earth and the Moon.
+    z, _ = terrain_common.resample_to_200m(z, px_x, px_y)
+    slope, rough = terrain_common.slope_and_roughness(z)
 
-    rows, cols = np.mgrid[-half_r:half_r + 1, -half_c:half_c + 1]
-    inside = np.hypot(rows * px_y, cols * px_x) <= RADIUS_KM * 1000
+    dy_km, dx_km = terrain_common.pixel_offsets_km(z.shape)
+    inside = np.hypot(dy_km, dx_km) <= RADIUS_KM
     return {"elev_m": np.nanmean(z[inside]), "slope_deg": np.nanmean(slope[inside]),
             "roughness": np.nanmean(rough[inside])}
 

@@ -13,8 +13,8 @@ The columns are the same as in data/earth.csv, so src/compare.py can use it.
 How each feature is measured (kept the same as on Earth on purpose):
     elev_m        mean height above the Moon reference sphere (1737.4 km)
     slope_deg     mean slope between 80 m pixels
-    roughness     mean standard deviation of height in a 3 x 3 pixel window (m),
-                  rescaled to the 90 m pixel size used on Earth
+    roughness     mean standard deviation of height in a 3 x 3 pixel window (m)
+    (slope and roughness use 200 m pixels on every body, see terrain_common.py)
     temp_mean_K   Diviner yearly mean temperature
     temp_range_K  Diviner yearly max temperature minus the yearly mean
     albedo        LOLA normal albedo (laser, 1064 nm)
@@ -38,7 +38,9 @@ import rasterio
 from pyproj import CRS, Transformer
 from rasterio.windows import Window
 
-EARTH_PIXEL_M = 90.0   # pixel size used for the Earth terrain (see build_earth.py)
+
+sys.path.insert(0, str(Path(__file__).parent))
+import terrain_common  # noqa: E402  (same 200 m terrain for every body)
 RAW = Path("data/raw/moon")
 LOLA = "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/float_img/"
 DIVINER = "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/"
@@ -131,17 +133,13 @@ def terrain_features(dem, site):
     z = height_km * 1000                     # km -> m
     px = abs(dem.res[0])                     # 80 m
 
-    dz_dy, dz_dx = np.gradient(z, px, px)
-    slope = np.degrees(np.arctan(np.hypot(dz_dx, dz_dy)))
+    # Bring the 80 m map to 200 m pixels, like Earth and Mars.
+    z, _ = terrain_common.resample_to_200m(z, px, px)
+    slope, rough = terrain_common.slope_and_roughness(z)
 
-    # Standard deviation of height in each 3 x 3 window (same as on Earth).
-    pad = np.pad(z, 1, mode="edge")
-    windows = np.lib.stride_tricks.sliding_window_view(pad, (3, 3))
-    # Roughness grows with pixel size. Earth is measured at ~90 m pixels, so we
-    # rescale to 90 m to compare like with like.
-    rough = windows.std(axis=(2, 3)) * (EARTH_PIXEL_M / px)
-
-    inside = site_mask(xs, ys, cx, cy, shape, size)
+    # The window is centred on the site, so distances are measured from its middle.
+    dy_km, dx_km = terrain_common.pixel_offsets_km(z.shape)
+    inside = site_mask(dx_km * 1000, dy_km * 1000, 0.0, 0.0, shape, size)
     return {"elev_m": np.nanmean(z[inside]), "slope_deg": np.nanmean(slope[inside]),
             "roughness": np.nanmean(rough[inside]), "n_dem_pixels": int(inside.sum())}
 
