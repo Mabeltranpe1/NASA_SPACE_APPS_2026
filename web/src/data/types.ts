@@ -61,6 +61,11 @@ export interface AnalogSite {
   missionUse: string
   /** Already widely studied analog (the challenge asks to look beyond these). */
   wellKnown: boolean
+  /**
+   * Colombian case study (Santiago): chosen by hand and compared by terrain
+   * only. The app's main answer are the discoveries of the global search.
+   */
+  caseStudy?: boolean
   earthImage?: EarthImageOverride
 }
 

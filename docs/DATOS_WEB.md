@@ -61,6 +61,13 @@ El puntaje es el de `compare.py` (Marco), sin cambios en la fórmula. El exporta
 
 ## Qué muestra la app
 
+La **respuesta principal es la búsqueda global de Marco**. Los sitios de Santiago son un **caso de estudio de Colombia** comparado por relieve.
+
+- **Barra lateral, en este orden:**
+  1. **Lugares poco estudiados encontrados:** el mejor lugar de cada región poco conocida para el cuerpo del modo elegido (Luna o Marte). Al hacer clic, el globo de la Tierra vuela al lugar, el otro globo vuela al sitio objetivo y se enciende el mapa de similitud.
+  2. **Análogos de referencia:** el catálogo curado.
+  3. **Caso de estudio: Colombia:** los 6 sitios de Santiago, con la etiqueta "Caso de estudio".
+- **Sitios del caso de estudio:** su homólogo es el objetivo con mejor índice topográfico (PAI) de Santiago **entre los que ya están en la base de datos**. Si su mejor parecido absoluto todavía no está en la base (por ejemplo, Connecting Ridge), el texto lo dice. La ficha y el panel aclaran que la similitud es solo de relieve y que con el puntaje completo quedan lejos.
 - **Comparación detallada:**
   - Botones **"Comparar por: Todo · Relieve · Superficie · Clima y agua"**, que recalculan el puntaje en el navegador con la misma fórmula. Sirven para mostrar las dos miradas del equipo: el puntaje completo y el solo topográfico, como el PAI de Santiago.
   - La posición del sitio entre todas las celdas de la Tierra (por ejemplo, "#709 de 163 999").
@@ -73,7 +80,7 @@ El puntaje es el de `compare.py` (Marco), sin cambios en la fórmula. El exporta
 | Pendiente | Quién | Detalle |
 |---|---|---|
 | Timanfaya y Lava Beds no tienen datos | Marco | Están fuera de las regiones de `regions_catalog.csv`. Basta con agregar una región que las contenga |
-| Lluvia en latitudes altas | Marco | IMERG es menos confiable por encima de 60°. El norte de Groenlandia sale como gran análogo de Marte en parte por eso |
+| Lluvia en latitudes altas | Marco | Comparación con ERA5-Land en 2023 (Earth Engine, 6 celdas por región): IMERG da **0 mm en las 4 regiones de la Antártida** (ERA5-Land: 23–94 mm), probablemente porque falta el dato y se guarda como 0, y **20 mm en el norte de Groenlandia frente a 137 mm** (×7). Entre 60° S y 60° N los dos coinciden en orden de magnitud. Propuesta: usar ERA5-Land por encima de 60° y no guardar como 0 lo que falta |
 | La Guajira | Santiago | Su ventana puede incluir mar: está marcada como provisional en la ficha |
 | Sitios lunares de Artemis de Santiago | Marco + Santiago | Connecting Ridge, Peak near Shackleton, Leibnitz Beta y Malapert solo tienen relieve. Falta la temperatura de Diviner para sumarlos a `targets.csv` |
 | Mineralogía EMIT | Santiago | Hay escenas, pero falta la descarga y el procesamiento. La ficha lo muestra como "pendiente" |

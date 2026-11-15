@@ -36,6 +36,13 @@ Formato sugerido:
   - Posición del sitio entre todas las celdas de la Tierra.
   - Caracterización de Santiago en la ficha de los sitios colombianos.
 - **Corrección:** los marcadores del otro lado del planeta se veían a través del globo; ahora quedan ocultos.
+- **Decisión: la búsqueda global de Marco es la respuesta principal (opción A).**
+  - La barra lateral muestra primero los lugares poco estudiados encontrados.
+  - Los 6 sitios de Santiago pasan a una sección "Caso de estudio: Colombia", comparados solo por relieve.
+  - Sus homólogos se eligieron con el mismo criterio: mejor índice PAI entre los objetivos con datos. Se corrigió el del Nevado del Ruiz, que pasa de Shackleton (24) a de Gerlache (47).
+  - El motivo es que antes la ficha decía "se parece a Shackleton" mientras el puntaje completo daba 2/100.
+- **Precipitación:** la tolerancia estricta es intencional. Marco busca lugares casi sin lluvia, como la Luna y Marte.
+- **Calidad de IMERG en latitudes altas** (comparación con ERA5-Land en 2023 hecha con Earth Engine): IMERG da 0 mm en toda la Antártida (ERA5-Land: 23–94 mm) y 20 mm en el norte de Groenlandia frente a 137 mm. Esto infla la posición de Groenlandia como análogo de Marte. Propuesta para Marco: ERA5-Land por encima de 60°.
 - **Entorno:** se agregaron a `requirements.txt` y `environment.yml` las librerías que usan los scripts (`scipy`, `pyproj`, `requests`, `h5py`, `pyhdf`, `earthaccess`). Earth Engine (API de Python) quedó configurado en la máquina de @Ssalazarp420.
 - **Pendientes** (detalle en [DATOS_WEB.md](DATOS_WEB.md#pendientes-conocidos)):
   - Regiones para Timanfaya y Lava Beds.

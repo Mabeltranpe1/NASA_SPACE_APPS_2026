@@ -199,6 +199,8 @@ function ComparisonContent({
         )}
       </header>
 
+      {site.caseStudy && <p className="case-note">{t('cmp.caseStudy')}</p>}
+
       {available.length > 1 && (
         <div className="chips target-chips" role="group" aria-label={t('cmp.targetAria')}>
           {available.map((tg: ComparisonTarget) => (

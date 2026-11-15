@@ -105,21 +105,81 @@ export default function App() {
   const visibleMap = mapTarget && requires.includes(mapTarget.body) ? mapTarget : null
   const heatCells = visibleMap && heat?.target === visibleMap.id ? heat.cells : null
 
-  // A place of the ranking the Earth globe flies to (only while the same site is selected).
-  const [place, setPlace] = useState<(Place & { siteId: string }) | null>(null)
-  const earthPlace = place && selected && place.siteId === selected.id ? place : null
+  // A place the Earth globe flies to: from a site's ranking (siteId = that site,
+  // valid while it stays selected) or from the discoveries list (siteId = null).
+  // `other` = the Moon/Mars site of a discovery, so the second globe flies there too.
+  const [place, setPlace] = useState<(Place & { siteId: string | null; other?: Place & { body: Target } }) | null>(null)
+  const earthPlace = place && place.siteId === (selected?.id ?? null) ? place : null
+
+  // Discoveries of the global search for the body shown next to the Earth.
+  const comparisons = useComparisons()
+  const discoveryBody: Target | null = left === 'tierra' && right !== 'tierra' ? right : null
+  const discoveries = useMemo(() => {
+    if (comparisons.status !== 'ready' || !discoveryBody) return []
+    const { data } = comparisons
+    const targets = new Map(data.targets.filter((tg) => tg.body === discoveryBody).map((tg) => [tg.id, tg]))
+    const best = new Map<string, { site: (typeof data.sites)[number]; target: (typeof data.targets)[number]; score: number }>()
+    for (const site of data.sites) {
+      if (site.kind !== 'discovery' || !site.region) continue
+      for (const r of site.results) {
+        const target = targets.get(r.target)
+        if (!target || r.score == null) continue
+        const prev = best.get(site.region)
+        if (!prev || r.score > prev.score) best.set(site.region, { site, target, score: r.score })
+      }
+    }
+    return [...best.values()].sort((a, b) => b.score - a.score).slice(0, 8)
+  }, [comparisons, discoveryBody])
+  const showDiscovery = (d: (typeof discoveries)[number]) => {
+    setSelectedId(null)
+    const other =
+      d.target.lat != null && d.target.lng != null
+        ? { lat: d.target.lat, lng: d.target.lng, name: d.target.name, body: d.target.body }
+        : undefined
+    setPlace({ lat: d.site.lat, lng: d.site.lng, name: d.site.name, siteId: null, other })
+    setMapTarget({ id: d.target.id, name: d.target.name, body: d.target.body })
+  }
+  const mainSites = filtered.filter((s) => !s.caseStudy)
+  const caseStudies = filtered.filter((s) => s.caseStudy)
+  const renderSite = (s: AnalogSite) => (
+    <li key={s.id}>
+      <button onClick={() => setSelectedId(s.id)}>
+        <span className="dot" style={{ background: BODY_COLORS.tierra }} />
+        <span>
+          <strong>
+            {s.name}
+            {s.caseStudy ? (
+              <span className="badge case">{t('badge.caseStudy')}</span>
+            ) : (
+              !s.wellKnown && <span className="badge">{t('badge.lesserKnown')}</span>
+            )}
+          </strong>
+          <small>
+            {s.country} → {s.homologues.map((h) => h.name).join(' · ')}
+          </small>
+        </span>
+      </button>
+    </li>
+  )
 
   const markersOn = useCallback(
     (body: Body) => {
       const list = markersFor(filtered, body)
       if (body === 'tierra' && earthPlace)
         list.push({ id: `place-${earthPlace.lat}-${earthPlace.lng}`, lat: earthPlace.lat, lng: earthPlace.lng, color: '#ffffff', label: earthPlace.name })
+      const other = earthPlace?.other
+      if (other && other.body === body)
+        list.push({ id: `place-${other.lat}-${other.lng}`, lat: other.lat, lng: other.lng, color: '#ffffff', label: other.name })
       return list
     },
     [filtered, earthPlace],
   )
   const focusOn = useCallback(
-    (body: Body) => (body === 'tierra' && earthPlace ? earthPlace : selected ? locationOn(selected, body) : null),
+    (body: Body) => {
+      if (body === 'tierra' && earthPlace) return earthPlace
+      if (earthPlace?.other && earthPlace.other.body === body) return earthPlace.other
+      return selected ? locationOn(selected, body) : null
+    },
     [selected, earthPlace],
   )
   const leftMarkers = useMemo(() => markersOn(left), [markersOn, left])
@@ -149,7 +209,7 @@ export default function App() {
       main.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }, [])
-  const closeTour = useCallback(() => setTouring(false), [])
+  const closeTour = useCallback(() => setTouring(false), [setTouring])
 
   return (
     <div className="app">
@@ -214,25 +274,51 @@ export default function App() {
         {selected ? (
           <SiteDetail site={selected} onClose={() => setSelectedId(null)} />
         ) : (
-          <ul className="site-list">
-            {filtered.map((s) => (
-              <li key={s.id}>
-                <button onClick={() => setSelectedId(s.id)}>
-                  <span className="dot" style={{ background: BODY_COLORS.tierra }} />
-                  <span>
-                    <strong>
-                      {s.name}
-                      {!s.wellKnown && <span className="badge">{t('badge.lesserKnown')}</span>}
-                    </strong>
-                    <small>
-                      {s.country} → {s.homologues.map((h) => h.name).join(' · ')}
-                    </small>
-                  </span>
-                </button>
-              </li>
-            ))}
-            {filtered.length === 0 && <li className="empty">{t('results.empty')}</li>}
-          </ul>
+          <>
+            {discoveries.length > 0 && discoveryBody && (
+              <section className="side-section">
+                <h2>{t('side.discoveries')}</h2>
+                <p className="hint">{t('side.discoveriesHint', { body: BODY_NAMES[lang][discoveryBody] })}</p>
+                <ul className="site-list">
+                  {discoveries.map((d) => {
+                    const active = earthPlace?.lat === d.site.lat && earthPlace?.lng === d.site.lng
+                    return (
+                      <li key={d.site.region}>
+                        <button
+                          className={active ? 'active' : ''}
+                          aria-pressed={active}
+                          title={d.site.note ?? undefined}
+                          onClick={() => showDiscovery(d)}
+                        >
+                          <span className="dot" style={{ background: SIMILARITY_COLOR }} />
+                          <span>
+                            <strong>{d.site.name}</strong>
+                            <small>
+                              {t('side.discoveryFor', { score: Math.round(d.score * 100), target: d.target.name })}
+                            </small>
+                          </span>
+                        </button>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </section>
+            )}
+            <section className="side-section">
+              <h2>{t('side.catalog')}</h2>
+              <ul className="site-list">
+                {mainSites.map(renderSite)}
+                {filtered.length === 0 && <li className="empty">{t('results.empty')}</li>}
+              </ul>
+            </section>
+            {caseStudies.length > 0 && (
+              <section className="side-section">
+                <h2>{t('side.caseStudy')}</h2>
+                <p className="hint">{t('side.caseStudyHint')}</p>
+                <ul className="site-list">{caseStudies.map(renderSite)}</ul>
+              </section>
+            )}
+          </>
         )}
 
         <footer className="note">{t('footer.note')}</footer>
