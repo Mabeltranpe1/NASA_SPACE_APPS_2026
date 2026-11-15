@@ -125,7 +125,7 @@ export function useScientificStudy(reference: ScienceReference | null | undefine
   return state.url === url ? state : { status: 'loading' }
 }
 
-/** web/public/data/science/index.json, written by src/export_science.py (Santiago). */
+/** web/public/data/science/index.json, written by src/export_science.py. */
 export interface ScienceIndex {
   version: string
   studies: { id: string; region: string; planet: 'earth' | 'moon' | 'mars'; site_id?: string; name: Localized; url: string }[]
@@ -151,7 +151,7 @@ export function useScienceIndex(): ScienceIndex | null {
   return data
 }
 
-/** Santiago's study of an Earth catalog site (the Colombian case study), if any. */
+/** Regional study of an Earth catalog site (the Colombian case study), if any. */
 export function studyForSite(index: ScienceIndex | null, siteId: string): ScienceReference | null {
   const study = index?.studies.find((s) => s.site_id === siteId)
   return study ? { id: study.id, url: study.url, name: study.name } : null

@@ -44,7 +44,7 @@ import './App.css'
 
 type View = 'discover' | 'sites' | 'analysis' | 'finder' | 'method'
 
-// Marco's "Find analogs": loaded only when opened (it brings its own ~7 MB Earth database).
+// "Find analogs": loaded only when opened (it brings its own ~7 MB Earth database).
 const AnalogFinder = lazy(() => import('./components/AnalogFinder'))
 type GlobeView = 'discover' | 'sites'
 

@@ -131,7 +131,7 @@ export default function SiteCard({ site, discovery = false, onBack, onBody, comp
   )
 }
 
-/** Santiago's detailed 10 x 10 km characterization, when the site has one. Descriptive: not part of the score. */
+/** Detailed 10 x 10 km characterization, when the site has one. Descriptive: not part of the score. */
 function SiteCharacterization({ siteId }: { siteId: string }) {
   const state = useComparisons()
   const { lang, t } = useLang()
@@ -193,7 +193,7 @@ function SiteCharacterization({ siteId }: { siteId: string }) {
   )
 }
 
-/** Santiago's full study when it exists (Colombia), else the summary of his characterization. */
+/** The full regional study when it exists (Colombia), else the summary of the characterization. */
 function RegionalResearch({ siteId }: { siteId: string }) {
   const study = studyForSite(useScienceIndex(), siteId)
   return study ? <ScientificPanel key={siteId} reference={study} /> : <SiteCharacterization siteId={siteId} />

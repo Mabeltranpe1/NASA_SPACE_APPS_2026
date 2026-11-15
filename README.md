@@ -1,136 +1,93 @@
 # GeoAnalog
 
-**Análogos terrestres de bases en la Luna y Marte** · NASA Space Apps 2026. App: https://icy-flower-03890400f.5.azurestaticapps.net
+**Análogos terrestres de las bases en la Luna y Marte** · NASA Space Apps Challenge 2026
 
-Proyecto para el reto **Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars** del NASA Space Apps Challenge 2026.
+👉 **App:** https://icy-flower-03890400f.5.azurestaticapps.net (en inglés: `?lang=en`)
 
-## El reto
+GeoAnalog encuentra lugares de la Tierra que se parecen a los sitios donde se planean bases en la Luna y misiones a Marte, y explica con datos **en qué se parecen, cuánto y dónde deja de valer la analogía**. Responde al reto *Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars*.
 
-Elegir sitios de aterrizaje o de bases permanentes en la Luna y en Marte depende de la topografía, la geología, el ambiente y los recursos disponibles. En la Tierra hay lugares con características parecidas (el desierto de Atacama, el cráter Haughton, el Valle de la Muerte) donde se prueban equipos y métodos antes de volar. Aun así, muchos de esos **análogos terrestres** no están bien caracterizados.
+## Qué hace
 
-**Objetivo:** usar datos abiertos de la Tierra, la Luna y Marte (de la NASA y de otras agencias espaciales) para **identificar y caracterizar análogos terrestres nuevos** de sitios candidatos para bases lunares o para aterrizar y explorar en Marte. Los resultados se presentan como un mapa, una visualización u otra herramienta.
+- **Búsqueda mundial:** compara **691 035 lugares** de la Tierra (celdas de ~5 km en 727 regiones áridas y frías del mundo) con **31 sitios**: las 16 regiones candidatas de Artemis en el polo sur lunar, 6 sitios a escala de cráter en la Luna y 9 sitios de Marte (Jezero, Gale, Meridiani, Gusev, Elysium, Chryse, Utopia, Vastitas Borealis y Arcadia).
+- **Lugares poco estudiados:** para cada cuerpo lista los **100 mejores análogos** que no son ya conocidos, uno por región y separados al menos 300 km. Los análogos famosos (Atacama, los Valles Secos, Islandia…) se usan como control.
+- **Similitud por dimensión:** además del puntaje general, cada lugar tiene un puntaje de **relieve, temperatura, superficie y roca, y aridez**. Así se ve, por ejemplo, que un lugar es un buen análogo de relieve aunque su clima no lo sea.
+- **Resultados robustos:** cada lugar se prueba con 100 variaciones aleatorias de los pesos; la app marca los que se mantienen entre los mejores.
+- **Globo 3D** de la Tierra, la Luna y Marte: al elegir un lugar, el globo vuela a su par en el otro cuerpo.
+- **Fotos reales, lado a lado:** imágenes Sentinel-2 del lugar exacto junto a fotos de rovers, módulos de aterrizaje y órbita de la NASA.
+- **Análisis detallado:** valores reales de cada variable, ranking mundial, pesos ajustables y lo que la Tierra no puede reproducir (gravedad, vacío, radiación).
+- **Estudios regionales:** caracterización detallada de 18 ventanas de 10 × 10 km en Colombia, la Luna y Marte (geología, minerales, temperatura, hielo), como contexto descriptivo.
+- **Buscador y API abierta:** busca análogos de cualquier sitio o de valores propios y descarga los resultados en GeoJSON, KML o waypoints para drones. Los mismos datos están en `/data/api/v1/`.
+- **Español e inglés**, enlaces que se pueden compartir y un recorrido guiado.
 
-### Qué se espera
-- **No basta con que se parezca visualmente.** Hay que demostrar con datos *por qué* un lugar es un buen análogo.
-- **Una analogía no tiene que ser total.** Hay que explicar en qué se parece, cuánto se parece y **dónde deja de valer**.
-- **Buscar más allá de los análogos conocidos** (Antártida, Atacama, Islandia, Hawái) y descubrir lugares poco estudiados.
-- **Pensar en procesos además de lugares:** sedimentación, tormentas de polvo, vulcanismo, erosión, dinámica del hielo.
-- **Tener en cuenta la escala:** un cráter, un valle o un campo volcánico puede ser mejor análogo que un desierto entero.
-- **Conectar con la exploración:** cómo el análogo ayuda a probar instrumentos, preparar operaciones, buscar recursos o reducir riesgos.
-- **Reconocer los límites de la Tierra:** gravedad reducida, vacío lunar, atmósfera marciana tenue y radiación no se pueden reproducir.
+## Cómo medimos el parecido
 
-### Dimensiones de análisis
-| Dimensión | Ejemplos de variables |
-|---|---|
-| Geología y materiales | Mineralogía, tipo de roca, regolito |
-| Terreno | Elevación, pendiente, rugosidad, cráteres |
-| Ambiente extremo | Temperatura, iluminación, amplitud térmica |
-| Agua y recursos | Hielo, permafrost, hidratación |
-| Procesos atmosféricos | Polvo, viento, erosión eólica |
-| Habitabilidad | Extremófilos, biofirmas |
-| Subsuelo | Cuevas, tubos de lava |
-| Operaciones | Aterrizaje, movilidad, navegación, construcción |
-
-### Posibles enfoques
-Reporte escrito, mapa interactivo, visualización, app, sistema de ranking por similitud, métricas de similitud, machine learning, SIG o cualquier enfoque innovador.
-
-## Recursos
-
-Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, etc.) están descritas en [RECURSOS.md](RECURSOS.md).
-
-## Estructura del repositorio
+Cada lugar de la Tierra, la Luna y Marte se describe con las mismas variables: pendiente, rugosidad, temperatura media, amplitud térmica, albedo, tipo de roca, precipitación y vegetación. Cada diferencia se divide por una tolerancia física y se convierte en una similitud de 0 a 1:
 
 ```
-├── data/
-│   ├── raw/          # Datos descargados sin modificar (no se suben a git)
-│   └── processed/    # Datos procesados (no se suben a git)
-├── docs/             # Objetivo, arquitectura y bitácora del proyecto
-├── notebooks/        # Jupyter notebooks de exploración y análisis
-├── src/              # Descarga, procesamiento, comparador (compare.py) y exportación a la web (export_web.py)
-├── tests/            # Tests de Python (pytest)
-├── outputs/          # Mapas, figuras y resultados finales
-├── web/              # Plataforma web (React + Vite + CesiumJS + NASA GIBS/Trek)
-├── infra/            # Infraestructura en Azure con Terraform (solo planes Free)
-├── .github/workflows # Despliegue automático a Azure Static Web Apps
-├── RECURSOS.md       # Catálogo de fuentes de datos
-└── CONTRIBUTING.md   # Flujo de trabajo con git flow
+d = (x_Tierra − x_sitio) / tolerancia        s = e^(−|d|)        S = e^(−√(Σ w·d² / Σ w))
 ```
 
-## Entorno de Python (análisis y comparador)
+Reglas para una comparación honesta:
+- **La elevación no se compara:** cada cuerpo mide la altura desde un cero distinto.
+- **Lo que la Tierra no alcanza no decide el puntaje:** ningún lugar de la Tierra llega a los 50–150 K de la Luna; esa variable se muestra como límite de la analogía.
+- **Un lugar por región y a 300 km o más**, para que una sola zona no llene la lista.
+- **Los puntajes sirven para comparar lugares entre sí**, no son un porcentaje de parecido: ningún lugar de la Tierra es la Luna o Marte.
 
-El comparador de similitud (`src/compare.py`) y los notebooks usan Python 3.12. Hay dos formas de instalar el entorno:
+El detalle está en la vista **Método** de la app y en [docs/DATOS_WEB.md](docs/DATOS_WEB.md).
 
-**Con conda** (`environment.yml`):
-```bash
-conda env create -f environment.yml
-conda activate analogos
-```
+## Datos
 
-**Con uv o pip** (`requirements.txt`):
-```bash
-uv venv --python 3.12 && uv pip install -r requirements.txt
-source .venv/bin/activate
-```
+| Variable | Tierra | Luna | Marte |
+|---|---|---|---|
+| Relieve (pendiente, rugosidad) a 200 m | NASADEM, Copernicus DEM | LRO LOLA | HRSC + MOLA |
+| Temperatura | MODIS (LST) | LRO Diviner | Mars Climate Database |
+| Albedo | MODIS | LRO LOLA | MGS TES |
+| Tipo de roca | ASTER GED | Diviner (calibrado) | TES (calibrado) |
+| Precipitación y vegetación | GPM IMERG, MODIS NDVI | — | — |
 
-Verificar:
-```bash
-pytest -q tests
-python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --top 5
+Imágenes: NASA GIBS, Moon Trek y Mars Trek (globo), Sentinel-2 vía Microsoft Planetary Computer (vista de cerca) y la NASA Image and Video Library (fotos). Ubicación de las regiones de Artemis: Wueller et al. (2026). Catálogo completo de fuentes: [RECURSOS.md](RECURSOS.md).
 
-# Regenerar los datos reales que muestra la app (~12 min, ~1 GB de memoria)
-python src/export_web.py
+## Cómo correrlo
 
-# Imágenes de cerca de la Tierra (Sentinel-2: las que falten; borra las que sobran)
-python src/export_images.py --prune --size 768
-
-# Galería de fotos de la NASA (lista curada en data/gallery_sources.json)
-python src/export_gallery.py
-```
-
-En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analogos`.
-
-## Plataforma web
-
-👉 **Ver la app:** https://icy-flower-03890400f.5.azurestaticapps.net (versión en inglés: agrega `?lang=en`)
-
-**Cómo usarla:**
-1. Al entrar, la pantalla de bienvenida ofrece el **▶ Recorrido guiado** (demo automática de 7 pasos) o **Explorar**.
-2. La barra de la izquierda tiene cuatro secciones:
-   - **Descubrir:** los lugares poco estudiados que encontró la búsqueda global.
-   - **Análogos:** el catálogo de referencia y el caso de estudio de Colombia.
-   - **Análisis:** la comparación detallada.
-   - **Método:** cómo se calcula el puntaje.
-3. Elige un lugar en la lista, en el globo o con el buscador. El globo vuela al lugar y aparecen dos paneles:
-   - a la izquierda, la ficha; al hacer clic en su imagen (o en **Ver galería** del panel derecho) se abre una ventana con **carruseles de fotos reales**: la Tierra a la izquierda y la Luna o Marte a la derecha (fotos de rovers, orbitales y la vista 3D);
-   - a la derecha, las miniaturas de la Tierra, la Luna y Marte, y el **índice de similitud**.
-4. Con los botones **Tierra · Luna · Marte** el globo cambia de cuerpo y vuela al homólogo. Si el lugar no tiene homólogo en un cuerpo, ese botón queda bloqueado (🔒).
-5. **Ver análisis completo** abre el puntaje, los pesos ajustables, los valores reales, el ranking y los límites.
-
-Un solo **globo 3D** que cambia entre la Tierra, la Luna y Marte, con imágenes de NASA GIBS, Moon Trek y Mars Trek, sin API keys. Las imágenes de cerca de la Tierra son de **Sentinel-2 (10 m)**, pregeneradas con Microsoft Planetary Computer. Disponible en **español e inglés** (`?lang=es` / `?lang=en`). Los enlaces se pueden compartir: la URL guarda la sección y el sitio, por ejemplo `?view=sites&site=tatacoa`. Cada lugar se puede abrir en Google Earth.
-
+**App web** (React, Vite y CesiumJS):
 ```bash
 cd web
 npm install
-npm run dev                  # http://localhost:5173
+npm run dev          # http://localhost:5173
 ```
 
-El despliegue en Azure se explica en [infra/README.md](infra/README.md).
+**Datos** (Python 3.12, con `environment.yml` o `requirements.txt`):
+```bash
+uv venv --python 3.12 && uv pip install -r requirements.txt
+source .venv/bin/activate
+pytest -q tests                                  # pruebas
+python src/export_web.py                         # datos de la app (~12 min)
+python src/export_images.py --prune --size 768   # imágenes Sentinel-2
+python src/export_science.py                     # estudios regionales
+python src/analog_api.py export-web              # base del buscador
+python src/analog_api.py export-static           # API estática
+```
+
+La app se publica en Azure Static Web Apps (plan gratuito) con Terraform y GitHub Actions: [infra/README.md](infra/README.md).
+
+## Estructura
+
+```
+├── data/        # Base de datos de la Tierra, sitios de la Luna y Marte, estudios regionales
+├── src/         # Descarga, comparador (compare.py), exportación a la web y API
+├── tests/       # Pruebas (pytest)
+├── web/         # Aplicación web
+├── infra/       # Infraestructura en Azure (Terraform)
+└── docs/        # Documentación técnica
+```
 
 ## Documentación
 
-- [docs/OBJETIVO.md](docs/OBJETIVO.md): objetivo detallado de la plataforma y criterios del reto
-- [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): componentes, CI/CD, seguridad y costos
-- [docs/BITACORA.md](docs/BITACORA.md): registro de decisiones y avances
-- [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): guía para crear y probar una API key de Google Maps
-- [docs/VISUALIZACION_COMPARACION.md](docs/VISUALIZACION_COMPARACION.md): plan de la vista de comparación detallada, contrato de datos y mejoras para el jurado
-- [docs/PIPELINE_COMPARADOR.md](docs/PIPELINE_COMPARADOR.md): cómo funciona el comparador (`compare.py`), fuentes de datos de la Tierra, la Luna y Marte, y cómo correrlo (Marco)
-- [docs/VIDEO.md](docs/VIDEO.md): cómo grabar el video de 30 segundos con el modo video del recorrido (tecla D)
-- [docs/API.md](docs/API.md): API de análogos y apartado «Buscar» (Marco)
-- [docs/SCIENTIFIC_DATA_CONTRACT.md](docs/SCIENTIFIC_DATA_CONTRACT.md): estudios científicos regionales (Santiago)
-- [docs/DATOS_Y_METODO.md](docs/DATOS_Y_METODO.md): la base de datos mundial, los 22 sitios de la Luna (regiones de Artemis III), los 9 de Marte, las variables y cómo regenerar los resultados (Marco, en inglés)
-- [docs/CONTEXTO_TECNICO_SANTIAGO.md](docs/CONTEXTO_TECNICO_SANTIAGO.md): caracterización de los sitios de Colombia, índice topográfico PAI, Sentinel-2, EMIT y plan científico (Santiago)
-- [docs/DATOS_WEB.md](docs/DATOS_WEB.md): cómo llegan los datos a la app, reglas aplicadas y cómo regenerarlos
-
-## Cómo colaborar
-
-Usamos **git flow**. Lee [CONTRIBUTING.md](CONTRIBUTING.md) antes de empezar a trabajar.
+- [docs/DATOS_WEB.md](docs/DATOS_WEB.md): cómo llegan los datos a la app y qué reglas se aplican
+- [docs/DATOS_Y_METODO.md](docs/DATOS_Y_METODO.md): la base de datos mundial, los sitios de la Luna y Marte y las variables (en inglés)
+- [docs/PIPELINE_COMPARADOR.md](docs/PIPELINE_COMPARADOR.md): el comparador de similitud
+- [docs/COMPOSICION.md](docs/COMPOSICION.md): cómo se estima el tipo de roca en la Luna y Marte
+- [docs/SCIENTIFIC_DATA_CONTRACT.md](docs/SCIENTIFIC_DATA_CONTRACT.md): estudios científicos regionales
+- [docs/API.md](docs/API.md): API de análogos y buscador
+- [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): arquitectura, despliegue y costos
+- [docs/OBJETIVO.md](docs/OBJETIVO.md): el reto y los criterios
