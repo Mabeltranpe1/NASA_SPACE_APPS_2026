@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { SITES } from './data/sites'
 import {
   DIMENSION_LABELS,
@@ -13,8 +13,9 @@ import {
 } from './data/types'
 import PlanetGlobe, { type GlobeMarker } from './components/PlanetGlobe'
 import DetailImage from './components/DetailImage'
-import ComparisonPanel from './components/ComparisonPanel'
-import { BODY_COLORS } from './theme'
+import ComparisonPanel, { type Place } from './components/ComparisonPanel'
+import { loadHeatmap, useComparisons, type Characterization, type Heatmap } from './data/comparisons'
+import { BODY_COLORS, SIMILARITY_COLOR } from './theme'
 import GuidedTour from './components/GuidedTour'
 import type { TourStep } from './data/tour'
 import { BASE_LAYERS, OVERLAY_LAYERS, type BaseLayerId, type OverlayLayerId } from './map/gibs'
@@ -87,10 +88,104 @@ export default function App() {
   )
 
   const selected = filtered.find((s) => s.id === selectedId) ?? null
-  const leftMarkers = useMemo(() => markersFor(filtered, left), [filtered, left])
-  const rightMarkers = useMemo(() => markersFor(filtered, right), [filtered, right])
-  const leftFocus = useMemo(() => (selected ? locationOn(selected, left) : null), [selected, left])
-  const rightFocus = useMemo(() => (selected ? locationOn(selected, right) : null), [selected, right])
+
+  // Similarity map on the Earth globe for one Moon/Mars target.
+  const [mapTarget, setMapTarget] = useState<{ id: string; name: string; body: Target } | null>(null)
+  const [heat, setHeat] = useState<Heatmap | null>(null)
+  useEffect(() => {
+    if (!mapTarget) return
+    let alive = true
+    loadHeatmap(mapTarget.id)
+      .then((h) => alive && setHeat(h))
+      .catch(() => alive && setHeat(null))
+    return () => {
+      alive = false
+    }
+  }, [mapTarget])
+  const visibleMap = mapTarget && requires.includes(mapTarget.body) ? mapTarget : null
+  const heatCells = visibleMap && heat?.target === visibleMap.id ? heat.cells : null
+
+  // A place the Earth globe flies to: from a site's ranking (siteId = that site,
+  // valid while it stays selected) or from the discoveries list (siteId = null).
+  // `other` = the Moon/Mars site of a discovery, so the second globe flies there too.
+  const [place, setPlace] = useState<(Place & { siteId: string | null; other?: Place & { body: Target } }) | null>(null)
+  const earthPlace = place && place.siteId === (selected?.id ?? null) ? place : null
+
+  // Discoveries of the global search for the body shown next to the Earth.
+  const comparisons = useComparisons()
+  const discoveryBody: Target | null = left === 'tierra' && right !== 'tierra' ? right : null
+  const discoveries = useMemo(() => {
+    if (comparisons.status !== 'ready' || !discoveryBody) return []
+    const { data } = comparisons
+    const targets = new Map(data.targets.filter((tg) => tg.body === discoveryBody).map((tg) => [tg.id, tg]))
+    const best = new Map<string, { site: (typeof data.sites)[number]; target: (typeof data.targets)[number]; score: number }>()
+    for (const site of data.sites) {
+      if (site.kind !== 'discovery' || !site.region) continue
+      for (const r of site.results) {
+        const target = targets.get(r.target)
+        if (!target || r.score == null) continue
+        const prev = best.get(site.region)
+        if (!prev || r.score > prev.score) best.set(site.region, { site, target, score: r.score })
+      }
+    }
+    return [...best.values()].sort((a, b) => b.score - a.score).slice(0, 8)
+  }, [comparisons, discoveryBody])
+  const showDiscovery = (d: (typeof discoveries)[number]) => {
+    setSelectedId(null)
+    const other =
+      d.target.lat != null && d.target.lng != null
+        ? { lat: d.target.lat, lng: d.target.lng, name: d.target.name, body: d.target.body }
+        : undefined
+    setPlace({ lat: d.site.lat, lng: d.site.lng, name: d.site.name, siteId: null, other })
+    setMapTarget({ id: d.target.id, name: d.target.name, body: d.target.body })
+  }
+  const mainSites = filtered.filter((s) => !s.caseStudy)
+  const caseStudies = filtered.filter((s) => s.caseStudy)
+  const renderSite = (s: AnalogSite) => (
+    <li key={s.id}>
+      <button onClick={() => setSelectedId(s.id)}>
+        <span className="dot" style={{ background: BODY_COLORS.tierra }} />
+        <span>
+          <strong>
+            {s.name}
+            {s.caseStudy ? (
+              <span className="badge case">{t('badge.caseStudy')}</span>
+            ) : (
+              !s.wellKnown && <span className="badge">{t('badge.lesserKnown')}</span>
+            )}
+          </strong>
+          <small>
+            {s.country} → {s.homologues.map((h) => h.name).join(' · ')}
+          </small>
+        </span>
+      </button>
+    </li>
+  )
+
+  const markersOn = useCallback(
+    (body: Body) => {
+      const list = markersFor(filtered, body)
+      if (body === 'tierra' && earthPlace)
+        list.push({ id: `place-${earthPlace.lat}-${earthPlace.lng}`, lat: earthPlace.lat, lng: earthPlace.lng, color: '#ffffff', label: earthPlace.name })
+      const other = earthPlace?.other
+      if (other && other.body === body)
+        list.push({ id: `place-${other.lat}-${other.lng}`, lat: other.lat, lng: other.lng, color: '#ffffff', label: other.name })
+      return list
+    },
+    [filtered, earthPlace],
+  )
+  const focusOn = useCallback(
+    (body: Body) => {
+      if (body === 'tierra' && earthPlace) return earthPlace
+      if (earthPlace?.other && earthPlace.other.body === body) return earthPlace.other
+      return selected ? locationOn(selected, body) : null
+    },
+    [selected, earthPlace],
+  )
+  const leftMarkers = useMemo(() => markersOn(left), [markersOn, left])
+  const rightMarkers = useMemo(() => markersOn(right), [markersOn, right])
+  const leftFocus = useMemo(() => focusOn(left), [focusOn, left])
+  const rightFocus = useMemo(() => focusOn(right), [focusOn, right])
 
   const resetFilters = () => {
     setEnvironments([])
@@ -114,7 +209,7 @@ export default function App() {
       main.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }, [])
-  const closeTour = useCallback(() => setTouring(false), [])
+  const closeTour = useCallback(() => setTouring(false), [setTouring])
 
   return (
     <div className="app">
@@ -179,25 +274,51 @@ export default function App() {
         {selected ? (
           <SiteDetail site={selected} onClose={() => setSelectedId(null)} />
         ) : (
-          <ul className="site-list">
-            {filtered.map((s) => (
-              <li key={s.id}>
-                <button onClick={() => setSelectedId(s.id)}>
-                  <span className="dot" style={{ background: BODY_COLORS.tierra }} />
-                  <span>
-                    <strong>
-                      {s.name}
-                      {!s.wellKnown && <span className="badge">{t('badge.lesserKnown')}</span>}
-                    </strong>
-                    <small>
-                      {s.country} → {s.homologues.map((h) => h.name).join(' · ')}
-                    </small>
-                  </span>
-                </button>
-              </li>
-            ))}
-            {filtered.length === 0 && <li className="empty">{t('results.empty')}</li>}
-          </ul>
+          <>
+            {discoveries.length > 0 && discoveryBody && (
+              <section className="side-section">
+                <h2>{t('side.discoveries')}</h2>
+                <p className="hint">{t('side.discoveriesHint', { body: BODY_NAMES[lang][discoveryBody] })}</p>
+                <ul className="site-list">
+                  {discoveries.map((d) => {
+                    const active = earthPlace?.lat === d.site.lat && earthPlace?.lng === d.site.lng
+                    return (
+                      <li key={d.site.region}>
+                        <button
+                          className={active ? 'active' : ''}
+                          aria-pressed={active}
+                          title={d.site.note ?? undefined}
+                          onClick={() => showDiscovery(d)}
+                        >
+                          <span className="dot" style={{ background: SIMILARITY_COLOR }} />
+                          <span>
+                            <strong>{d.site.name}</strong>
+                            <small>
+                              {t('side.discoveryFor', { score: Math.round(d.score * 100), target: d.target.name })}
+                            </small>
+                          </span>
+                        </button>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </section>
+            )}
+            <section className="side-section">
+              <h2>{t('side.catalog')}</h2>
+              <ul className="site-list">
+                {mainSites.map(renderSite)}
+                {filtered.length === 0 && <li className="empty">{t('results.empty')}</li>}
+              </ul>
+            </section>
+            {caseStudies.length > 0 && (
+              <section className="side-section">
+                <h2>{t('side.caseStudy')}</h2>
+                <p className="hint">{t('side.caseStudyHint')}</p>
+                <ul className="site-list">{caseStudies.map(renderSite)}</ul>
+              </section>
+            )}
+          </>
         )}
 
         <footer className="note">{t('footer.note')}</footer>
@@ -240,10 +361,26 @@ export default function App() {
                 markers={i === 0 ? leftMarkers : rightMarkers}
                 selectedId={selected?.id ?? null}
                 focus={i === 0 ? leftFocus : rightFocus}
-                onSelect={setSelectedId}
+                onSelect={(id) => (id.startsWith('place-') ? undefined : setSelectedId(id))}
                 earthBase={baseLayer}
                 earthOverlays={overlays}
+                heat={body === 'tierra' ? heatCells : null}
+                heatColor={SIMILARITY_COLOR}
               />
+              {body === 'tierra' && visibleMap && heatCells && (
+                <div className="heat-legend" role="note">
+                  <strong>{t('heat.legend', { target: visibleMap.name })}</strong>
+                  <span className="heat-scale">
+                    <span>{t('heat.low')}</span>
+                    <span className="heat-bar" style={{ background: `linear-gradient(90deg, ${SIMILARITY_COLOR}33, ${SIMILARITY_COLOR})` }} />
+                    <span>{t('heat.high')}</span>
+                  </span>
+                  <small>{t('heat.cells', { n: heatCells.length.toLocaleString(lang) })}</small>
+                  <button className="link" onClick={() => setMapTarget(null)}>
+                    {t('cmp.hideMap')}
+                  </button>
+                </div>
+              )}
               {body === 'tierra' && (
                 <details className="layer-panel">
                   <summary>{t('layers.title')}</summary>
@@ -285,7 +422,19 @@ export default function App() {
         </section>
 
         {selected &&
-          requires.map((body) => <ComparisonPanel key={`${selected.id}-${body}`} site={selected} body={body} />)}
+          requires.map((body) => (
+            <ComparisonPanel
+              key={`${selected.id}-${body}`}
+              site={selected}
+              body={body}
+              mapTargetId={visibleMap?.id ?? null}
+              onShowMap={(target) => setMapTarget(target ? { ...target, body } : null)}
+              onGoTo={(p) => {
+                setPlace({ ...p, siteId: selected.id })
+                mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
+            />
+          ))}
         {touring && <GuidedTour onApply={applyTourStep} onClose={closeTour} />}
       </main>
     </div>
@@ -323,6 +472,8 @@ function SiteDetail({ site, onClose }: { site: AnalogSite; onClose: () => void }
         ))}
       </ul>
 
+      <SiteCharacterization siteId={site.id} />
+
       <h3>{t('detail.dimensions')}</h3>
       <ul className="dims">
         {(Object.keys(DIMENSION_LABELS) as Dimension[])
@@ -346,5 +497,81 @@ function SiteDetail({ site, onClose }: { site: AnalogSite; onClose: () => void }
         {t('detail.googleEarth')}
       </a>
     </article>
+  )
+}
+
+/** Santiago's detailed 10 x 10 km characterization, when the site has one. */
+function SiteCharacterization({ siteId }: { siteId: string }) {
+  const state = useComparisons()
+  const { lang, t } = useLang()
+  if (state.status !== 'ready') return null
+  const c: Characterization | undefined = state.data.sites.find((s) => s.id === siteId)?.characterization
+  if (!c) return null
+  const n = (v: number | string | null | undefined, unit = '', digits = 1) =>
+    typeof v === 'number' ? `${v.toLocaleString(lang, { maximumFractionDigits: digits })}${unit}` : '—'
+  const rows: [string, string][] = []
+  if (c.topography) {
+    rows.push([t('char.slope'), n(c.topography.slope_mean_deg, '°')])
+    rows.push([t('char.relief'), n(c.topography.relief_p90_p10_m, ' m', 0)])
+    rows.push([t('char.flat'), n(c.topography.flat_terrain_pct, ' %', 0)])
+  }
+  const env: [string, string][] = c.environment
+    ? [
+        [t('char.lstDay'), n(c.environment.lst_day_mean_K, ' K', 0)],
+        [t('char.lstNight'), n(c.environment.lst_night_mean_K, ' K', 0)],
+        [t('char.rain'), n(c.environment.annual_precipitation_mm, ' mm', 0)],
+        [t('char.ndvi'), n(c.environment.ndvi_mean, '', 2)],
+        [t('char.bare'), n(c.environment.bare_ground_pct, ' %', 0)],
+      ]
+    : []
+  const spec: [string, string][] = c.spectral
+    ? [
+        [t('char.iron'), n(c.spectral.iron_oxide_ratio, '', 2)],
+        [t('char.hydroxyl'), n(c.spectral.hydroxyl_ratio, '', 2)],
+      ]
+    : []
+  const block = (title: string, list: [string, string][]) =>
+    list.length > 0 && (
+      <>
+        <h4>{title}</h4>
+        <dl className="char-list">
+          {list.map(([k, v]) => (
+            <div key={k}>
+              <dt>{k}</dt>
+              <dd>{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </>
+    )
+  return (
+    <section className="characterization">
+      <h3>{t('char.title')}</h3>
+      <p className="hint">{t('char.note')}</p>
+      {c.quality_flags?.map((f) => (
+        <p key={f} className="tag bad">
+          ⚠ {f}
+        </p>
+      ))}
+      {block(t('char.topography'), rows)}
+      {block(t('char.environment'), env)}
+      {block(t('char.spectral'), spec)}
+      {c.topographic_index && c.topographic_index.length > 0 && (
+        <>
+          <h4>{t('char.pai')}</h4>
+          <dl className="char-list">
+            {c.topographic_index.map((p) => (
+              <div key={p.target}>
+                <dt>
+                  {BODY_NAMES[lang][p.body]}: {p.target}
+                </dt>
+                <dd>{n(p.pai, ' / 100', 0)}</dd>
+              </div>
+            ))}
+          </dl>
+        </>
+      )}
+      {c.mineralogy && <p className="hint">{t('char.mineralogy', { n: c.mineralogy.emit_granules })}</p>}
+    </section>
   )
 }

@@ -81,8 +81,8 @@ export const TOUR_STEPS: TourStep[] = [
       en: 'Measuring how similar they are',
     },
     text: {
-      es: 'Cada par tiene un puntaje calculado con elevación, pendiente, rugosidad, temperatura y albedo. La vista muestra en qué se parecen, dónde se rompe la analogía y qué no puede reproducir la Tierra: la gravedad, el vacío y la radiación.',
-      en: 'Each pair gets a score computed from elevation, slope, roughness, temperature and albedo. The view shows what is similar, where the analogy breaks down, and what Earth cannot reproduce: gravity, vacuum and radiation.',
+      es: 'Cada par tiene un puntaje calculado con datos reales: pendiente, rugosidad, temperatura, albedo, lluvia y vegetación, frente a unas 164 000 celdas de la Tierra. La vista muestra en qué se parecen, dónde se rompe la analogía y qué no puede reproducir la Tierra: la gravedad, el vacío y la radiación.',
+      en: 'Each pair gets a score computed from real data: slope, roughness, temperature, albedo, rain and vegetation, against about 164,000 Earth cells. The view shows what is similar, where the analogy breaks down, and what Earth cannot reproduce: gravity, vacuum and radiation.',
     },
     showComparison: true,
   },

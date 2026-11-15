@@ -44,7 +44,7 @@ Las fuentes de datos (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, e
 │   └── processed/    # Datos procesados (no se suben a git)
 ├── docs/             # Objetivo, arquitectura y bitácora del proyecto
 ├── notebooks/        # Jupyter notebooks de exploración y análisis
-├── src/              # Código reutilizable (compare.py: índice de similitud)
+├── src/              # Descarga, procesamiento, comparador (compare.py) y exportación a la web (export_web.py)
 ├── tests/            # Tests de Python (pytest)
 ├── outputs/          # Mapas, figuras y resultados finales
 ├── web/              # Plataforma web (React + Vite + CesiumJS + NASA GIBS/Trek)
@@ -74,6 +74,9 @@ Verificar:
 ```bash
 pytest -q tests
 python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --top 5
+
+# Regenerar los datos reales que muestra la app (~2 min)
+python src/export_web.py
 ```
 
 En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analogos`.
@@ -106,6 +109,9 @@ El despliegue en Azure se explica en [infra/README.md](infra/README.md).
 - [docs/BITACORA.md](docs/BITACORA.md): registro de decisiones y avances
 - [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): guía para crear y probar una API key de Google Maps
 - [docs/VISUALIZACION_COMPARACION.md](docs/VISUALIZACION_COMPARACION.md): plan de la vista de comparación detallada, contrato de datos y mejoras para el jurado
+- [docs/PIPELINE_COMPARADOR.md](docs/PIPELINE_COMPARADOR.md): cómo funciona el comparador (`compare.py`), fuentes de datos de la Tierra, la Luna y Marte, y cómo correrlo (Marco)
+- [docs/CONTEXTO_TECNICO_SANTIAGO.md](docs/CONTEXTO_TECNICO_SANTIAGO.md): caracterización de los sitios de Colombia, índice topográfico PAI, Sentinel-2, EMIT y plan científico (Santiago)
+- [docs/DATOS_WEB.md](docs/DATOS_WEB.md): cómo llegan los datos a la app, reglas aplicadas y cómo regenerarlos
 
 ## Cómo colaborar
 

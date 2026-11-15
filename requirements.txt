@@ -11,3 +11,11 @@ xarray
 folium
 jupyter
 pytest
+
+# Descarga y lectura de datos (scripts de src/ de Marco y Santiago)
+scipy
+pyproj
+requests
+h5py
+pyhdf          # MODIS en HDF4 (build_earth.py); si falla con pip, instalar con conda
+earthaccess    # descargas de NASA Earthdata (EMIT, NASADEM)

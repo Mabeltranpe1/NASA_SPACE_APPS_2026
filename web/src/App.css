@@ -1094,3 +1094,95 @@
   background: var(--accent);
   color: #10131c;
 }
+
+/* ---------- Similarity map, presets and characterization ---------- */
+.heat-legend {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  display: grid;
+  gap: 4px;
+  max-width: 260px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(11, 14, 23, 0.85);
+  font-size: 12px;
+  z-index: 2;
+}
+.heat-scale {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.heat-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+}
+.chips.presets {
+  align-items: center;
+  margin: 12px 0 4px;
+}
+.map-toggle {
+  margin-top: 10px;
+  padding: 6px 10px;
+  border: 1px solid #2fa58f;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.map-toggle.active {
+  background: #2fa58f33;
+}
+.ranking .rank-name .link {
+  padding: 0;
+  text-align: left;
+}
+.characterization h4 {
+  margin: 10px 0 4px;
+  font-size: 13px;
+}
+.char-list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+}
+.char-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+}
+.char-list dt {
+  opacity: 0.8;
+}
+.char-list dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.side-section {
+  margin-top: 14px;
+}
+.side-section > h2 {
+  margin: 0 0 4px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.site-list button.active {
+  outline: 1px solid #2fa58f;
+}
+.badge.case {
+  background: #2fa58f33;
+  color: inherit;
+}
+.case-note {
+  margin: 8px 0 12px;
+  padding: 8px 10px;
+  border-left: 3px solid #2fa58f;
+  background: #2fa58f14;
+  font-size: 13px;
+}

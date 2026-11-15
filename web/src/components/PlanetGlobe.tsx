@@ -7,6 +7,7 @@ import {
   ImageryLayer,
   LabelStyle,
   NearFarScalar,
+  PointPrimitiveCollection,
   ScreenSpaceEventHandler,
   ScreenSpaceEventType,
   VerticalOrigin,
@@ -40,7 +41,13 @@ interface Props {
   relief?: boolean
   /** Overrides the close-up camera height (m). */
   closeupHeight?: number
+  /** Similarity map: [lat, lng, score] cells drawn as points (one hue, opacity by score). */
+  heat?: [number, number, number][] | null
+  heatColor?: string
 }
+
+/** Height (m) of markers and map points above the smooth globe, so the ground does not cover them. */
+const MARKER_HEIGHT_M = 3000
 
 function setLayerShown(layer: ImageryLayer, shown: boolean) {
   layer.show = shown
@@ -64,11 +71,14 @@ export default function PlanetGlobe({
   earthOverlays = [],
   relief = false,
   closeupHeight,
+  heat = null,
+  heatColor = '#2fa58f',
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
   const viewerRef = useRef<Viewer | null>(null)
   const earthLayersRef = useRef<Map<string, ImageryLayer> | null>(null)
   const reliefLayerRef = useRef<ImageryLayer | null>(null)
+  const heatRef = useRef<PointPrimitiveCollection | null>(null)
   const onSelectRef = useRef(onSelect)
 
   useEffect(() => {
@@ -126,8 +136,13 @@ export default function PlanetGlobe({
       if (defined(picked) && picked.id?.id) onSelectRef.current?.(String(picked.id.id))
     }, ScreenSpaceEventType.LEFT_CLICK)
 
+    const heatPoints = new PointPrimitiveCollection()
+    scene.primitives.add(heatPoints)
+    heatRef.current = heatPoints
+
     viewerRef.current = viewer
     return () => {
+      heatRef.current = null
       handler.destroy()
       viewer.destroy()
       viewerRef.current = null
@@ -153,6 +168,34 @@ export default function PlanetGlobe({
     viewerRef.current?.scene.requestRender()
   }, [relief, body, variant])
 
+  // Similarity map. Scores are stretched between the lowest and highest cell
+  // shown, so the gradient is visible for every target.
+  useEffect(() => {
+    const points = heatRef.current
+    const viewer = viewerRef.current
+    if (!points || !viewer) return
+    points.removeAll()
+    if (heat && heat.length) {
+      const ellipsoid = BODIES[body].ellipsoid
+      const scores = heat.map((c) => c[2])
+      const lo = Math.min(...scores)
+      const span = Math.max(Math.max(...scores) - lo, 1e-9)
+      const base = Color.fromCssColorString(heatColor)
+      // Draw the weakest first so the best cells end up on top.
+      for (const [lat, lng, score] of [...heat].sort((a, b) => a[2] - b[2])) {
+        const k = (score - lo) / span
+        points.add({
+          // A little above the ground so the globe does not hide it; depth test
+          // stays on so cells on the far side of the planet are not drawn.
+          position: Cartesian3.fromDegrees(lng, lat, MARKER_HEIGHT_M, ellipsoid),
+          pixelSize: 5 + 6 * k,
+          color: base.withAlpha(0.35 + 0.65 * k),
+        })
+      }
+    }
+    viewer.scene.requestRender()
+  }, [heat, heatColor, body, variant])
+
   // Markers.
   useEffect(() => {
     const viewer = viewerRef.current
@@ -164,13 +207,13 @@ export default function PlanetGlobe({
       const color = Color.fromCssColorString(m.color)
       viewer.entities.add({
         id: m.id,
-        position: Cartesian3.fromDegrees(m.lng, m.lat, 0, ellipsoid),
+        // Slightly above the ground; the depth test hides markers on the far side of the planet.
+        position: Cartesian3.fromDegrees(m.lng, m.lat, MARKER_HEIGHT_M, ellipsoid),
         point: {
           pixelSize: isSelected ? 16 : 10,
           color,
           outlineColor: Color.WHITE,
           outlineWidth: isSelected ? 3 : 2,
-          disableDepthTestDistance: Number.POSITIVE_INFINITY,
         },
         label:
           variant === 'globe'
@@ -186,7 +229,6 @@ export default function PlanetGlobe({
                 pixelOffset: new Cartesian2(12, 0),
                 show: isSelected || markers.length <= 6,
                 translucencyByDistance: new NearFarScalar(1.5e6, 1, 4e7, 0.6),
-                disableDepthTestDistance: Number.POSITIVE_INFINITY,
               }
             : undefined,
       })
