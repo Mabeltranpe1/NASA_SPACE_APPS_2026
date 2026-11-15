@@ -7,6 +7,7 @@ export function makeFmt(locale: string) {
     if (value == null) return '—'
     const abs = Math.abs(value)
     const digits = abs >= 100 ? 0 : abs >= 10 ? 1 : 2
+    if (abs < 0.5 * 10 ** -digits) value = 0 // never "-0"
     return `${value.toLocaleString(locale, { maximumFractionDigits: digits })}${unit ? ` ${unit}` : ''}`
   }
 }

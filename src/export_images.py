@@ -241,6 +241,8 @@ def main(argv=None):
     parser.add_argument("--max-cloud", type=float, default=20, help="Max scene cloud cover in %% (default 20)")
     parser.add_argument("--only", nargs="*", help="Only these place ids")
     parser.add_argument("--force", action="store_true", help="Redo images that already exist")
+    parser.add_argument("--prune", action="store_true",
+                        help="Delete the images of places that are no longer in the app data")
     parser.add_argument("--redo-saturated", action="store_true",
                         help="Redo the existing images that are burnt out (bright sand or salt)")
     args = parser.parse_args(argv)
@@ -252,6 +254,12 @@ def main(argv=None):
     images = index.get("images", {})
 
     todo = places(args.sites_ts, args.comparisons)
+    if args.prune:
+        wanted = {p["id"] for p in todo}
+        stale = sorted(pid for pid in images if pid not in wanted)
+        for pid in stale:
+            (out / images.pop(pid)["file"]).unlink(missing_ok=True)
+        print(f"Pruned {len(stale)} images of places no longer in the data")
     if args.only:
         todo = [p for p in todo if p["id"] in set(args.only)]
     if args.redo_saturated:

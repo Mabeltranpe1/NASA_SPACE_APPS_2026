@@ -2,23 +2,25 @@
 export_web.py - Turn the comparison results into the JSON files the web app reads.
 
 It does NOT change how similarity is computed: it calls compare.py (Marco's
-comparator) and only decides WHAT goes to the web and in which format.
-Data contract: docs/VISUALIZACION_COMPARACION.md.
+comparator, with the weights of make_results.py) and only decides WHAT goes to
+the web and in which format. Data contract: docs/DATOS_WEB.md.
 
 Inputs (defaults):
-    data/earth_all.csv        Earth grid, one row per 0.05 deg cell (Marco)
-    data/targets.csv          Moon and Mars sites (Marco)
+    data/earth_all.csv.gz     Earth grid, one row per 0.05 deg cell, 727 regions (Marco)
+    data/targets.csv          Moon and Mars sites, with rock composition (Marco)
     data/regions_catalog.csv  description of each Earth region (Marco)
     web/src/data/sites.ts     catalog sites shown in the app (their lat/lng)
     data/features/*.csv       detailed characterization of the Colombian
-                              sites at 200 m (Santiago)
+                              sites at 200 m (Santiago, descriptive only)
 
 Outputs (web/public/data/):
     comparisons.json          catalog sites + best little-known places
-                              ("discoveries"), with every target's result
+                              ("discoveries"), with every target's result,
+                              the score of each DIMENSION and the ranked lists
     heatmap/<target>.json     the best Earth cells for one target (map layer)
 
-Rules applied here (explained in docs/DATOS_WEB.md):
+One scoring for everything (catalog, Colombia and discoveries). Rules
+(explained in docs/DATOS_WEB.md):
     1. Elevation is never compared: each body measures height from a
        different zero level (sea level, areoid, reference sphere).
     2. A feature is switched off for a body (Moon or Mars) when the typical
@@ -26,8 +28,12 @@ Rules applied here (explained in docs/DATOS_WEB.md):
        one tolerance (e.g. the Moon at 125 K). Earth cannot reproduce it, so
        the app shows it as a limit of the analogy instead of letting it
        decide the score.
-    3. Discoveries are chosen per REGION (best cell of each little-known
-       region), so one very good region cannot fill the whole list.
+    3. Discoveries: best cell of each little-known region, then places at
+       least SPREAD_KM apart (Marco's rule in make_top_analogos.py), so one
+       very good area cannot fill the whole list.
+    4. Besides the overall score, every result has one score per DIMENSION
+       (relief, temperature, surface, aridity), computed with the same
+       formula on that dimension's features only.
 
 Example:
     python src/export_web.py
@@ -46,6 +52,8 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import compare  # noqa: E402
+from make_results import LEAVE_OUT_OF_OVERALL, WEIGHTS, spread_out  # noqa: E402
+from region_names import region_names  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -53,14 +61,31 @@ ROOT = Path(__file__).resolve().parent.parent
 # 1. Settings
 # ---------------------------------------------------------------------------
 
-# Weights used for the web, on top of compare.DEFAULT_WEIGHTS.
-WEB_WEIGHTS = {"elev_m": 0.0}
+# Weights: the same as Marco's results (make_results.WEIGHTS): no elevation,
+# rock composition at half weight (it is a calibrated estimate on the Moon/Mars).
+WEB_WEIGHTS = dict(WEIGHTS)
 
 # A target value further than this many tolerances outside Earth's range
 # switches that feature off for that body (rule 2).
 OUT_OF_RANGE_TOLERANCES = 1.0
 
-DISCOVERIES_PER_TARGET = 6      # best little-known regions kept per target
+# Dimensions shown in the app (rule 4). Every compared feature is in one.
+DIMENSIONS = {
+    "relieve": ["slope_deg", "roughness"],
+    "temperatura": ["temp_mean_K", "temp_range_K"],
+    "superficie": ["albedo", "em_contrast"],
+    "aridez": ["precip_mm", "ndvi"],
+}
+DIMENSION_LABELS = {
+    "relieve": {"es": "Relieve", "en": "Relief"},
+    "temperatura": {"es": "Temperatura", "en": "Temperature"},
+    "superficie": {"es": "Superficie y roca", "en": "Surface and rock"},
+    "aridez": {"es": "Aridez", "en": "Aridity"},
+}
+
+TOP_GENERAL = 100               # best places per body (overall score)
+TOP_PER_DIMENSION = 25          # best places per body and dimension
+SPREAD_KM = 300                 # minimum distance between listed places
 HEATMAP_CELLS = 2500            # best cells per target in the map layer
 CATALOG_MAX_DEG = 0.1           # catalog site -> nearest grid cell (~11 km)
 STABILITY_RUNS = 100            # random weight variations
@@ -102,13 +127,13 @@ SANTIAGO_SITES = {
 # "range" is the fixed axis used to draw the real values.
 EARTH_DEM = "NASADEM / Copernicus, a 200 m"
 FEATURE_META = {
-    "elev_m": {"label": "Elevación", "unit": "m", "dimension": "terreno", "range": [-6000, 6000],
+    "elev_m": {"label": "Elevación", "unit": "m", "dimension": "relieve", "range": [-6000, 6000],
                "source_earth": EARTH_DEM,
                "source_target": {"luna": "LRO LOLA", "marte": "HRSC + MOLA, 200 m"}},
-    "slope_deg": {"label": "Pendiente", "unit": "°", "dimension": "terreno", "range": [0, 30],
+    "slope_deg": {"label": "Pendiente", "unit": "°", "dimension": "relieve", "range": [0, 30],
                   "source_earth": EARTH_DEM,
                   "source_target": {"luna": "LRO LOLA, a 200 m", "marte": "HRSC + MOLA, 200 m"}},
-    "roughness": {"label": "Rugosidad", "unit": "m", "dimension": "terreno", "range": [0, 40],
+    "roughness": {"label": "Rugosidad", "unit": "m", "dimension": "relieve", "range": [0, 40],
                   "source_earth": EARTH_DEM,
                   "source_target": {"luna": "LRO LOLA, a 200 m", "marte": "HRSC + MOLA, 200 m"}},
     "temp_mean_K": {"label": "Temperatura media", "unit": "K", "dimension": "temperatura", "range": [0, 350],
@@ -117,18 +142,19 @@ FEATURE_META = {
     "temp_range_K": {"label": "Amplitud térmica", "unit": "K", "dimension": "temperatura", "range": [0, 160],
                      "source_earth": "MODIS MOD11C3 (LST)",
                      "source_target": {"luna": "LRO Diviner", "marte": "Mars Climate Database v6.2 (modelo)"}},
-    "albedo": {"label": "Albedo", "unit": "", "dimension": "geologia", "range": [0, 1],
+    "albedo": {"label": "Albedo", "unit": "", "dimension": "superficie", "range": [0, 1],
                "source_earth": "MODIS MCD43C3",
                "source_target": {"luna": "LRO LOLA (albedo normal)", "marte": "MGS TES"}},
-    "precip_mm": {"label": "Precipitación anual", "unit": "mm", "dimension": "agua_hielo", "range": [0, 3000],
+    "precip_mm": {"label": "Precipitación anual", "unit": "mm", "dimension": "aridez", "range": [0, 3000],
                   "source_earth": "GPM IMERG",
                   "source_target": {"luna": "0 (no llueve)", "marte": "0 (no llueve)"}},
-    "ndvi": {"label": "Vegetación (NDVI)", "unit": "", "dimension": "habitabilidad", "range": [-0.2, 1],
+    "ndvi": {"label": "Vegetación (NDVI)", "unit": "", "dimension": "aridez", "range": [-0.2, 1],
              "source_earth": "MODIS MOD13C2",
              "source_target": {"luna": "0 (sin plantas)", "marte": "0 (sin plantas)"}},
-    "em_contrast": {"label": "Tipo de roca (emisividad)", "unit": "", "dimension": "geologia", "range": [-0.1, 0.3],
+    "em_contrast": {"label": "Tipo de roca (emisividad)", "unit": "", "dimension": "superficie", "range": [-0.1, 0.3],
                     "source_earth": "ASTER GED",
-                    "source_target": {"luna": "Aún no comparable", "marte": "Aún no comparable"}},
+                    "source_target": {"luna": "LRO Diviner (estimación calibrada, ±0,03)",
+                                      "marte": "MGS TES (estimación calibrada, ±0,03)"}},
 }
 
 
@@ -236,6 +262,28 @@ def score_target(earth_scaled, target_scaled, weights):
     return compare.score_cells(earth_scaled, target_scaled, w)
 
 
+def dimension_scores(sims, weights):
+    """
+    Score of each dimension for every cell, from the per-feature similarities:
+    the same formula as compare.score_cells, s = exp(-|d|) so d = -ln(s),
+    restricted to the dimension's features. NaN when the dimension has no
+    usable feature (e.g. temperature on the Moon, rule 2).
+    Returns {dimension: array}.
+    """
+    w = compare.build_weights(weights)
+    out = {}
+    with np.errstate(divide="ignore", invalid="ignore"):
+        d2 = np.log(sims) ** 2
+    for dim, feats in DIMENSIONS.items():
+        cols = [compare.FEATURES.index(f) for f in feats]
+        cw = np.where(np.isnan(sims[:, cols]), 0.0, w[cols])
+        wsum = cw.sum(axis=1)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            dist = np.sqrt((cw * np.nan_to_num(d2[:, cols])).sum(axis=1) / wsum)
+        out[dim] = np.where(wsum > 0, np.exp(-dist), np.nan).astype(np.float32)
+    return out
+
+
 def global_rank(score):
     """Rank 1 = best cell. Cells without a score get the last ranks."""
     order = np.argsort(-np.nan_to_num(score, nan=-1.0), kind="stable")
@@ -279,7 +327,6 @@ def santiago_characterization(features_dir):
     env = read_csv_if_exists(features_dir / "environmental_features.csv")
     spec = read_csv_if_exists(features_dir / "spectral_features.csv")
     emit = read_csv_if_exists(features_dir / "emit_availability.csv")
-    pai = read_csv_if_exists(features_dir.parent / "results" / "analog_ranking.csv")
 
     def row(df, region, planet="earth"):
         if df is None:
@@ -329,15 +376,6 @@ def santiago_characterization(features_dir):
         m = row(emit, region)
         if m is not None:
             info["mineralogy"] = {"status": "pendiente", "emit_granules": int(m["emit_granules"])}
-        if pai is not None:
-            best = (pai[pai["candidate"] == f"earth_{region}"]
-                    .sort_values("PAI", ascending=False)
-                    .assign(body=lambda d: d["target"].str.split("_").str[0]))
-            info["topographic_index"] = [
-                {"target": r["target"].split("_", 1)[1].replace("_", " "),
-                 "body": BODY_IDS.get(r["body"], r["body"]), "pai": num(r["PAI"], 1)}
-                for _, r in best.groupby("body", sort=False).head(1).iterrows()
-            ]
         if region == "La_Guajira":
             info["quality_flags"] = ["ventana costera: puede incluir mar (provisional)"]
         out[site_id] = info
@@ -349,8 +387,32 @@ def santiago_characterization(features_dir):
 # ---------------------------------------------------------------------------
 
 def is_synthetic(path):
-    with open(path, encoding="utf-8") as f:
+    opener = __import__("gzip").open if str(path).endswith(".gz") else open
+    with opener(path, "rt", encoding="utf-8") as f:
         return "SYNTHETIC" in f.readline().upper()
+
+
+def ranked_places(earth, region_col, pool, score, best_target, n, tiebreak=None):
+    """
+    Best cell of each region in `pool` by `score`, then places at least
+    SPREAD_KM apart (rule 3). Returns [(cell index, target position, score)].
+    A dimension with only two features often reaches 1.00 in many places:
+    those ties are ordered by `tiebreak` (the overall score), so the places on
+    top also look alike in everything else.
+    """
+    ok = pool & np.isfinite(score)
+    idx = np.flatnonzero(ok)
+    table = pd.DataFrame({"i": idx, "region": region_col[ok], "score": score[ok],
+                          "key": np.round(score[ok], 3),
+                          "tie": np.nan_to_num(tiebreak[ok], nan=-1.0) if tiebreak is not None else 0.0})
+    table = (table.sort_values(["key", "tie"], ascending=False, kind="stable")
+             .drop_duplicates("region"))
+    table["lat"] = earth["lat"].to_numpy()[table["i"]]
+    table["lon"] = earth["lon"].to_numpy()[table["i"]]
+    # spread_out compares each row with the kept ones: only the best few
+    # hundred regions can ever be picked, so cut the table first.
+    picked = spread_out(table.head(max(n * 6, 200)).reset_index(drop=True), n, SPREAD_KM)
+    return [(int(i), int(best_target[i]), float(sc)) for i, sc in zip(picked["i"], picked["score"])]
 
 
 def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0):
@@ -359,15 +421,62 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
     region_why = dict(zip(regions["name"], regions["why"])) if regions is not None else {}
     known = (earth["known"] == "yes").to_numpy() if "known" in earth.columns else np.zeros(len(earth), bool)
     region_col = earth["region"].to_numpy() if "region" in earth.columns else np.full(len(earth), "")
+    n_cells = len(earth)
 
     earth_scaled, targets_scaled = compare.scale_together(earth, targets)
     rng = np.random.default_rng(seed)
+    per_body = body_weights(targets, earth)
 
-    # Catalog sites -> nearest grid cell.
+    # ---- Pass 1: score every cell for every target (overall + dimensions).
+    per_target = []
+    heatmaps = {}
+    for pos, (_, t) in enumerate(targets.iterrows()):
+        weights, excluded = per_body[t["body"]]
+        score, sims = score_target(earth_scaled, targets_scaled[pos], weights)
+        dims = dimension_scores(sims, weights)
+        del sims
+        tid = target_id(t["name"])
+        top = np.argsort(-np.nan_to_num(score, nan=-1.0), kind="stable")[:HEATMAP_CELLS]
+        heatmaps[tid] = [[num(earth["lat"].iat[i], 3), num(earth["lon"].iat[i], 3), num(score[i], 3)]
+                         for i in top]
+        per_target.append({"pos": pos, "id": tid, "row": t, "body": str(t["body"]), "weights": weights,
+                           "excluded": excluded, "score": score.astype(np.float32), "dims": dims,
+                           "rank": global_rank(score)})
+        print(f"  scored {tid}")
+
+    # ---- Ranked lists per body: overall and per dimension (rules 3 and 4).
+    pool = ~known
+    lists = {}
+    listed = {}          # cell index -> first list that brought it (for the JSON)
+    for body in sorted({tg["body"] for tg in per_target}):
+        leave_out = set(LEAVE_OUT_OF_OVERALL.get(body, []))
+        group = [tg for tg in per_target if tg["body"] == body and str(tg["row"]["name"]) not in leave_out]
+        web_body = BODY_IDS.get(body.lower(), body.lower())
+
+        def best_of(arrays):
+            stack = np.vstack([np.nan_to_num(a, nan=-1.0) for a in arrays])
+            arg = stack.argmax(axis=0)
+            best = stack.max(axis=0)
+            return np.where(best < 0, np.nan, best), np.array([group[k]["pos"] for k in range(len(group))])[arg]
+
+        body_lists = {}
+        score, who = best_of([tg["score"] for tg in group])
+        overall = score
+        body_lists["general"] = ranked_places(earth, region_col, pool, score, who, TOP_GENERAL)
+        for dim in DIMENSIONS:
+            arrays = [tg["dims"][dim] for tg in group]
+            if all(np.isnan(a).all() for a in arrays):
+                continue           # not comparable for this body (rule 2)
+            score, who = best_of(arrays)
+            body_lists[dim] = ranked_places(earth, region_col, pool, score, who, TOP_PER_DIMENSION, tiebreak=overall)
+        lists[web_body] = body_lists
+        for items in body_lists.values():
+            for i, _, _ in items:
+                listed.setdefault(i, True)
+
+    # ---- Exported sites: catalog sites + every listed place.
     catalog = read_catalog_sites(sites_ts)
-    site_cells = {}      # site id -> cell index
-    site_info = {}       # site id -> fields for the JSON
-    unmatched = []
+    site_cells, site_info, unmatched = {}, {}, []
     for s in catalog:
         i = nearest_cell(earth, s["lat"], s["lng"], CATALOG_MAX_DEG)
         if i is None:
@@ -375,55 +484,48 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
             continue
         site_cells[s["id"]] = i
         site_info[s["id"]] = {"kind": "catalog", "name": s["name"]}
+    cell_to_site = {}
+    for i in listed:
+        sid = cell_id(earth["lat"].iat[i], earth["lon"].iat[i])
+        cell_to_site[i] = sid
+        if sid in site_cells:
+            continue
+        region = str(region_col[i])
+        names = region_names(region)
+        site_info[sid] = {
+            "kind": "discovery",
+            "name": names["name"]["es"],
+            "name_en": names["name"]["en"],
+            "country": names["country"]["es"],
+            "country_en": names["country"]["en"],
+            "grid": names["grid"],
+            "note": None if names["grid"] else region_why.get(region),
+        }
+        site_cells[sid] = i
 
-    per_body = body_weights(targets, earth)
-    per_target = []
-    heatmaps = {}
-    for pos, (_, t) in enumerate(targets.iterrows()):
-        weights, excluded = per_body[t["body"]]
-        score, sims = score_target(earth_scaled, targets_scaled[pos], weights)
-        rank = global_rank(score)
-        tid = target_id(t["name"])
-
-        # Discoveries: best cell of each little-known region (rule 3).
-        free = ~known & np.isfinite(score)
-        best_by_region = (pd.DataFrame({"i": np.flatnonzero(free), "region": region_col[free],
-                                        "score": score[free]})
-                          .sort_values("score", ascending=False)
-                          .drop_duplicates("region")
-                          .head(DISCOVERIES_PER_TARGET))
-        for i, region in zip(best_by_region["i"], best_by_region["region"]):
-            sid = cell_id(earth["lat"].iat[i], earth["lon"].iat[i])
-            site_cells.setdefault(sid, int(i))
-            site_info.setdefault(sid, {"kind": "discovery", "name": region_label(region),
-                                       "note": region_why.get(region)})
-
-        top = np.argsort(-np.nan_to_num(score, nan=-1.0), kind="stable")[:HEATMAP_CELLS]
-        heatmaps[tid] = [[num(earth["lat"].iat[i], 3), num(earth["lon"].iat[i], 3), num(score[i], 3)]
-                         for i in top]
-        per_target.append({"pos": pos, "id": tid, "row": t, "weights": weights, "excluded": excluded,
-                           "score": score, "sims": sims, "rank": rank})
-
-    # Results of every exported site for every target.
-    cells = np.array(list(site_cells.values()))
-    ids = list(site_cells.keys())
+    # ---- Pass 2: full results (similarities, dimensions, rank, stability) of the exported sites.
+    ids = list(site_cells)
+    cells = np.array([site_cells[sid] for sid in ids])
     results = {sid: [] for sid in ids}
     for tg in per_target:
+        _, sims = score_target(earth_scaled[cells], targets_scaled[tg["pos"]], tg["weights"])
         stab = stability(earth_scaled, targets_scaled[tg["pos"]], tg["weights"], cells, rng)
         for k, (sid, i) in enumerate(zip(ids, cells)):
             if not np.isfinite(tg["score"][i]):
                 continue
-            sim = {f: num(tg["sims"][i, j]) for j, f in enumerate(compare.FEATURES)}
+            sim = {f: num(sims[k, j]) for j, f in enumerate(compare.FEATURES)}
             used = {f: v for f, v in sim.items() if v is not None}
             results[sid].append({
                 "target": tg["id"],
                 "score": num(tg["score"][i]),
+                "dims": {d: num(tg["dims"][d][i]) for d in DIMENSIONS},
                 "sim": sim,
                 "best_match": max(used, key=used.get) if used else None,
                 "worst_match": min(used, key=used.get) if used else None,
                 "rank": int(tg["rank"][i]),
                 "stability": num(stab[k], 3),
             })
+        print(f"  results {tg['id']}")
 
     characterization = santiago_characterization(features_dir)
     sites = []
@@ -444,6 +546,12 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
         entry = {k: v for k, v in entry.items() if v is not None}
         sites.append(entry)
 
+    pos_to_id = {tg["pos"]: tg["id"] for tg in per_target}
+    rankings = {body: {name: [{"site": cell_to_site[i], "target": pos_to_id[p], "score": num(sc)}
+                              for i, p, sc in items]
+                       for name, items in body_lists.items()}
+                for body, body_lists in lists.items()}
+
     target_list = [{
         "id": tg["id"],
         "body": BODY_IDS.get(str(tg["row"]["body"]).lower(), str(tg["row"]["body"]).lower()),
@@ -458,20 +566,23 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
 
     weights = {**compare.DEFAULT_WEIGHTS, **WEB_WEIGHTS}
     data = {
-        "version": "2",
+        "version": "3",
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "synthetic": is_synthetic(earth_path) or is_synthetic(targets_path),
-        "n_cells": int(len(earth)),
+        "n_cells": int(n_cells),
         "n_regions": int(len(set(region_col))),
         "stability_runs": STABILITY_RUNS,
         "stability_top": STABILITY_TOP,
+        "spread_km": SPREAD_KM,
         "features": [
-            {"id": f, **FEATURE_META.get(f, {"label": f, "unit": "", "dimension": "terreno"}),
+            {"id": f, **FEATURE_META.get(f, {"label": f, "unit": "", "dimension": "relieve"}),
              "default_weight": float(weights.get(f, 0.0))}
             for f in compare.FEATURES
         ],
+        "dimensions": [{"id": d, "features": feats, "label": DIMENSION_LABELS[d]} for d, feats in DIMENSIONS.items()],
         "targets": target_list,
         "sites": sites,
+        "rankings": rankings,
     }
     return data, heatmaps, unmatched
 
@@ -485,7 +596,7 @@ def write_json(path, payload):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--earth", default=str(ROOT / "data/earth_all.csv"))
+    parser.add_argument("--earth", default=str(ROOT / "data/earth_all.csv.gz"))
     parser.add_argument("--targets", default=str(ROOT / "data/targets.csv"))
     parser.add_argument("--regions", default=str(ROOT / "data/regions_catalog.csv"))
     parser.add_argument("--sites-ts", default=str(ROOT / "web/src/data/sites.ts"))
@@ -511,6 +622,8 @@ def main(argv=None):
             print(f"  {body}: switched off (outside Earth's range): {', '.join(excluded)}")
     if unmatched:
         print(f"Catalog sites outside the Earth grid (no data yet): {', '.join(unmatched)}")
+    for body, body_lists in data["rankings"].items():
+        print(f"  {body}: " + ", ".join(f"{k} {len(v)}" for k, v in body_lists.items()))
 
 
 if __name__ == "__main__":

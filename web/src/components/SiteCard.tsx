@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { DIMENSION_LABELS, type AnalogSite, type Body, type Dimension, type Target } from '../data/types'
+import type { AnalogSite, Body, Target } from '../data/types'
 import { useComparisons, type Characterization } from '../data/comparisons'
 import { googleEarthUrl } from '../data/focus'
 import { shownImage, useEarthImage } from '../map/earthImages'
 import { BODY_COLORS } from '../theme'
 import { useLang } from '../i18n/useLang'
-import { BODY_NAMES, DIMENSION_NAMES, ENVIRONMENT_NAMES } from '../i18n/strings'
+import { BODY_NAMES, ENVIRONMENT_NAMES } from '../i18n/strings'
 import { IconExpand, IconExternal } from './Icons'
 import ImageCompareModal from './ImageCompareModal'
 
@@ -119,21 +119,6 @@ export default function SiteCard({ site, discovery = false, onBack, onBody, comp
           <h3 className="panel-sub">{t('detail.missionUse')}</h3>
           <p>{site.missionUse}</p>
           <SiteCharacterization siteId={site.id} />
-          {Object.keys(site.dimensions).length > 0 && (
-            <details className="fold">
-              <summary>{t('card.more')}</summary>
-              <ul className="dims">
-                {(Object.keys(DIMENSION_LABELS) as Dimension[])
-                  .filter((d) => site.dimensions[d])
-                  .map((d) => (
-                    <li key={d}>
-                      <span>{DIMENSION_NAMES[lang][d]}</span>
-                      <span className={`level ${site.dimensions[d]}`}>{t(`level.${site.dimensions[d]}` as 'level.alta')}</span>
-                    </li>
-                  ))}
-              </ul>
-            </details>
-          )}
         </>
       )}
 
@@ -201,21 +186,6 @@ function SiteCharacterization({ siteId }: { siteId: string }) {
       {block(t('char.topography'), topo)}
       {block(t('char.environment'), env)}
       {block(t('char.spectral'), spec)}
-      {c.topographic_index && c.topographic_index.length > 0 && (
-        <>
-          <h4>{t('char.pai')}</h4>
-          <dl className="char-list">
-            {c.topographic_index.map((p) => (
-              <div key={p.target}>
-                <dt>
-                  {BODY_NAMES[lang][p.body]}: {p.target}
-                </dt>
-                <dd>{n(p.pai, ' / 100', 0)}</dd>
-              </div>
-            ))}
-          </dl>
-        </>
-      )}
       {c.mineralogy && <p className="hint">{t('char.mineralogy', { n: c.mineralogy.emit_granules })}</p>}
     </details>
   )

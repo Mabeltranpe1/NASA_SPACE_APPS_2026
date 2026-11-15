@@ -45,10 +45,10 @@ flowchart LR
 
 ### 1. Pipeline de datos (`src/`, `notebooks/`) · *con datos reales*
 - **Lenguaje:** Python 3.12 (GDAL/rasterio, numpy, pandas, geopandas, scikit-learn). Entorno: `environment.yml` (conda) o `requirements.txt` (uv/pip).
-- **Entrada (Marco):** base de datos global de la Tierra (`data/earth_all.csv`, ~164 000 celdas de 0,05° en 43 regiones, de NASADEM/Copernicus, MODIS, IMERG y ASTER) y sitios de la Luna y Marte (`data/targets.csv`, de LOLA, Diviner, HRSC+MOLA, TES y el Mars Climate Database). Scripts: `download_earth.py`, `build_earth.py`, `build_database.py`, `build_moon_targets.py`, `build_mars_targets.py`, `screen_global.py`. Detalle en [PIPELINE_COMPARADOR.md](PIPELINE_COMPARADOR.md).
-- **Entrada (Santiago):** caracterización de 6 sitios de Colombia en ventanas de 10 × 10 km a 200 m (relieve, ambiente con GEE, Sentinel-2, NASA POWER, disponibilidad de EMIT) en `data/features/`, e índice topográfico PAI en `data/results/`. Scripts: `resample.py`, `process_planetary.py`, `extract_features.py`, `similarity.py`, `extract_climate.py`, `search_emit.py`, `download_emit.py`. Detalle en [CONTEXTO_TECNICO_SANTIAGO.md](CONTEXTO_TECNICO_SANTIAGO.md).
+- **Entrada (Marco):** base de datos global de la Tierra (`data/earth_all.csv.gz`, ~691 000 celdas de 0,05° en 727 regiones de las zonas áridas y frías del mundo, de NASADEM/Copernicus, MODIS, IMERG y ASTER) y sitios de la Luna y Marte (`data/targets.csv`, de LOLA, Diviner, HRSC+MOLA, TES y el Mars Climate Database, con el tipo de roca calibrado por `src/composition.py`). Su búsqueda mundial y su top 200 están en `outputs/grid_search/` y `src/make_top_analogos.py`; su export propio (`analogos.json`) es `src/export_analogos.py`, que la app aún no usa. Scripts: `download_earth.py`, `build_earth.py`, `build_database.py`, `build_moon_targets.py`, `build_mars_targets.py`, `screen_global.py`. Detalle en [PIPELINE_COMPARADOR.md](PIPELINE_COMPARADOR.md).
+- **Entrada (Santiago):** caracterización de 6 sitios de Colombia en ventanas de 10 × 10 km a 200 m (relieve, ambiente con GEE, Sentinel-2, NASA POWER, disponibilidad de EMIT) en `data/features/` (descriptiva: no entra en el puntaje). Su índice PAI ya no se muestra en la app. Scripts: `resample.py`, `process_planetary.py`, `extract_features.py`, `similarity.py`, `extract_climate.py`, `search_emit.py`, `download_emit.py`. Detalle en [CONTEXTO_TECNICO_SANTIAGO.md](CONTEXTO_TECNICO_SANTIAGO.md).
 - **`src/compare.py`** (Marco): índice de similitud entre celdas de la Tierra y sitios de la Luna/Marte. Escala por tolerancias físicas (`TOLERANCE`), similitud por característica `s = exp(−|d|)`, puntaje `S = exp(−√(Σ w·d² / Σ w))`, mejor y peor característica, y análisis de sensibilidad a los pesos. Tests en `tests/test_compare.py`.
-- **`src/export_web.py`**: usa `compare.py` sobre toda la base y genera `web/public/data/comparisons.json` y `web/public/data/heatmap/<objetivo>.json` (contrato en [VISUALIZACION_COMPARACION.md](VISUALIZACION_COMPARACION.md)). Toma las coordenadas del catálogo de `web/src/data/sites.ts`, elige descubrimientos por región y agrega la caracterización de Santiago. Reglas y cómo regenerar: [DATOS_WEB.md](DATOS_WEB.md). Tests en `tests/test_export_web.py`.
+- **`src/export_web.py`**: usa `compare.py` sobre toda la base y genera `web/public/data/comparisons.json` y `web/public/data/heatmap/<objetivo>.json` (contrato en [VISUALIZACION_COMPARACION.md](VISUALIZACION_COMPARACION.md)). Usa los pesos de `make_results.py`, calcula un puntaje por dimensión (relieve, temperatura, superficie y roca, aridez), arma las listas de 100 lugares por cuerpo y de 25 por dimensión (uno por región, a 300 km o más), nombra las regiones con `src/region_names.py` y agrega la caracterización de Santiago. Reglas y cómo regenerar: [DATOS_WEB.md](DATOS_WEB.md). Tests en `tests/test_export_web.py`.
 
 ```mermaid
 flowchart LR
@@ -94,7 +94,8 @@ web/src/
 │   ├── PlanetGlobe.tsx      # Visor Cesium genérico (globo, vista de detalle o miniatura; giro lento en reposo)
 │   ├── SiteCard.tsx         # Ficha del lugar (panel izquierdo) y caracterización de Santiago
 │   ├── EarthThumb.tsx       # Miniatura de Sentinel-2 de un lugar (lista de análogos y mejores lugares)
-│   ├── InsightPanel.tsx     # Panel derecho: miniaturas con candados, índice, valores reales y mejores lugares de la Tierra
+│   ├── DiscoverList.tsx     # Vista Descubrir: 100 lugares por cuerpo, pestañas por dimensión, filtro por país
+│   ├── InsightPanel.tsx     # Panel derecho: miniaturas con candados, índice, barras por dimensión, valores reales y mejores lugares de la Tierra
 │   ├── DetailImage.tsx      # Imagen de detalle: snapshot Landsat/MODIS o vista cercana Luna/Marte
 │   ├── ImageCompareModal.tsx # Ventana emergente: carrusel de la Tierra a la izquierda y del homólogo a la derecha
 │   ├── Carousel.tsx         # Carrusel genérico: flechas, puntos, teclado, deslizamiento, tipo de imagen y crédito
@@ -119,7 +120,7 @@ web/src/
 │   ├── sites.ts             # Catálogo de 12 sitios con sus homólogos (español)
 │   ├── sites.en.ts          # Textos del catálogo en inglés
 │   ├── comparisons.ts       # Tipos del JSON, carga y recálculo del puntaje con pesos
-│   ├── focus.ts             # Descubrimientos por cuerpo y conversión de un descubrimiento en «sitio»; `comparedTarget`/`bestScore` (índice con el que se ordenan los análogos)
+│   ├── focus.ts             # Listas por cuerpo y dimensión, nombres de los lugares, conversión en «sitio»; `comparedTarget`/`bestScore` (homólogo o el objetivo más parecido)
 │   ├── format.ts            # Formato de números y coordenadas; escala fija de los gráficos de valores reales
 │   ├── gallery.ts           # Carga de gallery.json e imágenes de cada lugar
 │   └── tour.ts              # Pasos del recorrido guiado (ES/EN)

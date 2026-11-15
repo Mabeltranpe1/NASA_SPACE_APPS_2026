@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T13:44:37+00:00",
+ "generated_at": "2026-11-15T18:45:06+00:00",
  "images": {
   "atacama-yungay": {
    "file": "atacama-yungay.jpg",
@@ -17,6 +17,1338 @@
     -24.2,
     -69.91045,
     -24.0
+   ]
+  },
+  "cell_-11.275_-77.475": {
+   "file": "cell_-11.275_-77.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20230727T152649_R025_T18LTN_20241018T211515",
+   "date": "2023-07-27",
+   "cloud_cover": 0.28,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -77.57697,
+    -11.375,
+    -77.37303,
+    -11.175
+   ]
+  },
+  "cell_-11.325_-77.525": {
+   "file": "cell_-11.325_-77.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20230727T152649_R025_T18LTN_20241018T211515",
+   "date": "2023-07-27",
+   "cloud_cover": 0.28,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -77.62699,
+    -11.425,
+    -77.42301,
+    -11.225
+   ]
+  },
+  "cell_-13.375_-70.325": {
+   "file": "cell_-13.375_-70.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20240910T145729_R039_T19LCF_20240910T184826",
+   "date": "2024-09-10",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -70.42779,
+    -13.475,
+    -70.22221,
+    -13.275
+   ]
+  },
+  "cell_-13.975_-71.975": {
+   "file": "cell_-13.975_-71.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250722T145751_R039_T18LZK_20250722T193420",
+   "date": "2025-07-22",
+   "cloud_cover": 0.4,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -72.07805,
+    -14.075,
+    -71.87195,
+    -13.875
+   ]
+  },
+  "cell_-14.125_-76.225": {
+   "file": "cell_-14.125_-76.225.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251215T151731_R125_T18LUK_20251215T182317",
+   "date": "2025-12-15",
+   "cloud_cover": 0.82,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -76.32812,
+    -14.225,
+    -76.12188,
+    -14.025
+   ]
+  },
+  "cell_-15.175_-67.175": {
+   "file": "cell_-15.175_-67.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250914T143801_R096_T19LFD_20250914T213828",
+   "date": "2025-09-14",
+   "cloud_cover": 4.92,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -67.27861,
+    -15.275,
+    -67.07139,
+    -15.075
+   ]
+  },
+  "cell_-16.575_-72.475": {
+   "file": "cell_-16.575_-72.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251129T145731_R039_T18KYG_20251129T175014",
+   "date": "2025-11-29",
+   "cloud_cover": 0.06,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -72.57934,
+    -16.675,
+    -72.37066,
+    -16.475
+   ]
+  },
+  "cell_-16.625_-72.625": {
+   "file": "cell_-16.625_-72.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251129T145731_R039_T18KYG_20251129T175014",
+   "date": "2025-11-29",
+   "cloud_cover": 0.06,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -72.72936,
+    -16.725,
+    -72.52064,
+    -16.525
+   ]
+  },
+  "cell_-16.625_11.725": {
+   "file": "cell_-16.625_11.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250613T090611_R050_T32KQG_20250613T130016",
+   "date": "2025-06-13",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    11.62064,
+    -16.725,
+    11.82936,
+    -16.525
+   ]
+  },
+  "cell_-16.675_-71.075": {
+   "file": "cell_-16.675_-71.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T145731_R039_T19KBB_20251229T174309",
+   "date": "2025-12-29",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -71.17939,
+    -16.775,
+    -70.97061,
+    -16.575
+   ]
+  },
+  "cell_-17.125_12.075": {
+   "file": "cell_-17.125_12.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251130T091341_R050_T32KRG_20251130T122009",
+   "date": "2025-11-30",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    11.97036,
+    -17.225,
+    12.17964,
+    -17.025
+   ]
+  },
+  "cell_-19.475_12.775": {
+   "file": "cell_-19.475_12.775.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250710T085621_R007_T33KTU_20250710T142913",
+   "date": "2025-07-10",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    12.66893,
+    -19.575,
+    12.88107,
+    -19.375
+   ]
+  },
+  "cell_-19.925_14.025": {
+   "file": "cell_-19.925_14.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250928T085751_R007_T33KUU_20250928T142818 + S2C_MSIL2A_20250928T085751_R007_T33KUT_20250928T142818",
+   "date": "2025-09-28",
+   "cloud_cover": 0.53,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    13.91863,
+    -20.025,
+    14.13137,
+    -19.825
+   ]
+  },
+  "cell_-22.125_113.925": {
+   "file": "cell_-22.125_113.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250928T024341_R003_T49KGR_20250928T064312 + S2C_MSIL2A_20250928T024341_R003_T49KHR_20250928T064312",
+   "date": "2025-09-28",
+   "cloud_cover": 0.11,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    113.81705,
+    -22.225,
+    114.03295,
+    -22.025
+   ]
+  },
+  "cell_-23.825_18.225": {
+   "file": "cell_-23.825_18.225.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251208T083341_R021_T34KBU_20251208T120609",
+   "date": "2025-12-08",
+   "cloud_cover": 0.37,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    18.11568,
+    -23.925,
+    18.33432,
+    -23.725
+   ]
+  },
+  "cell_-24.425_113.575": {
+   "file": "cell_-24.425_113.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251107T024331_R003_T49KGP_20251107T050108 + S2C_MSIL2A_20251107T024331_R003_T49JGN_20251107T050108",
+   "date": "2025-11-07",
+   "cloud_cover": 0.73,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    113.46517,
+    -24.525,
+    113.68483,
+    -24.325
+   ]
+  },
+  "cell_-25.025_-67.025": {
+   "file": "cell_-25.025_-67.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20240404T142709_R053_T19JFN_20240404T221701 + S2B_MSIL2A_20240404T142709_R053_T19JGN_20240404T221828",
+   "date": "2024-04-04",
+   "cloud_cover": 2.94,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -67.13536,
+    -25.125,
+    -66.91464,
+    -24.925
+   ]
+  },
+  "cell_-25.575_-67.625": {
+   "file": "cell_-25.575_-67.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250921T142731_R053_T19JFM_20250921T193415",
+   "date": "2025-09-21",
+   "cloud_cover": 1.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -67.73586,
+    -25.675,
+    -67.51414,
+    -25.475
+   ]
+  },
+  "cell_-25.575_-67.925": {
+   "file": "cell_-25.575_-67.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251123T143751_R096_T19JFM_20251123T180513 + S2C_MSIL2A_20251123T143751_R096_T19JEM_20251123T180513",
+   "date": "2025-11-23",
+   "cloud_cover": 0.88,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -68.03586,
+    -25.675,
+    -67.81414,
+    -25.475
+   ]
+  },
+  "cell_-25.725_-67.975": {
+   "file": "cell_-25.725_-67.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251123T143751_R096_T19JEM_20251123T180513 + S2C_MSIL2A_20251123T143751_R096_T19JFM_20251123T180513",
+   "date": "2025-11-23",
+   "cloud_cover": 0.88,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -68.086,
+    -25.825,
+    -67.864,
+    -25.625
+   ]
+  },
+  "cell_-26.225_127.475": {
+   "file": "cell_-26.225_127.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251219T013701_R031_T52JCS_20251219T043909 + S2C_MSIL2A_20251219T013701_R031_T52JCR_20251219T043909",
+   "date": "2025-12-19",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    127.36353,
+    -26.325,
+    127.58647,
+    -26.125
+   ]
+  },
+  "cell_-26.275_-67.975": {
+   "file": "cell_-26.275_-67.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251123T143751_R096_T19JEL_20251123T180513 + S2C_MSIL2A_20251123T143751_R096_T19JEM_20251123T180513 + S2C_MSIL2A_20251123T143751_R096_T19JFL_20251123T180513 + S2C_MSIL2A_20251123T143751_R096_T19JFM_20251123T180513",
+   "date": "2025-11-23",
+   "cloud_cover": 0.95,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -68.08652,
+    -26.375,
+    -67.86348,
+    -26.175
+   ]
+  },
+  "cell_-26.775_113.675": {
+   "file": "cell_-26.775_113.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250925T023301_R103_T49JGL_20250925T064515",
+   "date": "2025-09-25",
+   "cloud_cover": 0.82,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    113.56299,
+    -26.875,
+    113.78701,
+    -26.675
+   ]
+  },
+  "cell_-28.025_17.525": {
+   "file": "cell_-28.025_17.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T083401_R021_T33JYK_20251228T120712 + S2C_MSIL2A_20251228T083401_R021_T33JYJ_20251228T120712",
+   "date": "2025-12-28",
+   "cloud_cover": 0.2,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    17.41172,
+    -28.125,
+    17.63828,
+    -27.925
+   ]
+  },
+  "cell_-28.325_137.475": {
+   "file": "cell_-28.325_137.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250610T005731_R002_T53JQJ_20250610T034215",
+   "date": "2025-06-10",
+   "cloud_cover": 1.63,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    137.3614,
+    -28.425,
+    137.5886,
+    -28.225
+   ]
+  },
+  "cell_-28.325_17.975": {
+   "file": "cell_-28.325_17.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T083401_R021_T33JYJ_20251228T120712",
+   "date": "2025-12-28",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    17.8614,
+    -28.425,
+    18.0886,
+    -28.225
+   ]
+  },
+  "cell_-28.475_137.625": {
+   "file": "cell_-28.475_137.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250610T005731_R002_T53JQJ_20250610T034215",
+   "date": "2025-06-10",
+   "cloud_cover": 1.63,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    137.51124,
+    -28.575,
+    137.73876,
+    -28.375
+   ]
+  },
+  "cell_-29.075_116.175": {
+   "file": "cell_-29.075_116.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251221T021221_R060_T50JMN_20251221T061609",
+   "date": "2025-12-21",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    116.06058,
+    -29.175,
+    116.28942,
+    -28.975
+   ]
+  },
+  "cell_-29.075_122.425": {
+   "file": "cell_-29.075_122.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T014551_R074_T51JVH_20251222T053608",
+   "date": "2025-12-22",
+   "cloud_cover": 0.21,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    122.31058,
+    -29.175,
+    122.53942,
+    -28.975
+   ]
+  },
+  "cell_-29.375_120.625": {
+   "file": "cell_-29.375_120.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251205T015411_R117_T51JTH_20251205T054911",
+   "date": "2025-12-05",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    120.51025,
+    -29.475,
+    120.73975,
+    -29.275
+   ]
+  },
+  "cell_-29.425_130.975": {
+   "file": "cell_-29.425_130.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T011731_R088_T52JFN_20251223T041308",
+   "date": "2025-12-23",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    130.86019,
+    -29.525,
+    131.08981,
+    -29.325
+   ]
+  },
+  "cell_-30.175_21.525": {
+   "file": "cell_-30.175_21.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T082351_R121_T34JEM_20251225T120311",
+   "date": "2025-12-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    21.40933,
+    -30.275,
+    21.64067,
+    -30.075
+   ]
+  },
+  "cell_-30.275_21.125": {
+   "file": "cell_-30.275_21.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T082351_R121_T34JEM_20251225T120311",
+   "date": "2025-12-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    21.00921,
+    -30.375,
+    21.24079,
+    -30.175
+   ]
+  },
+  "cell_-30.375_-70.975": {
+   "file": "cell_-30.375_-70.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250706T143811_R096_T19JCG_20250706T200416 + S2C_MSIL2A_20250706T143811_R096_T19JBG_20250706T200416",
+   "date": "2025-07-06",
+   "cloud_cover": 0.05,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -71.09091,
+    -30.475,
+    -70.85909,
+    -30.275
+   ]
+  },
+  "cell_-30.525_127.425": {
+   "file": "cell_-30.525_127.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251216T012721_R131_T52JCM_20251216T041812",
+   "date": "2025-12-16",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    127.30891,
+    -30.625,
+    127.54109,
+    -30.425
+   ]
+  },
+  "cell_-30.525_139.875": {
+   "file": "cell_-30.525_139.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T004711_R102_T54JUM_20251224T042811",
+   "date": "2025-12-24",
+   "cloud_cover": 0.41,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    139.75891,
+    -30.625,
+    139.99109,
+    -30.425
+   ]
+  },
+  "cell_-30.575_-70.125": {
+   "file": "cell_-30.575_-70.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T143751_R096_T19JCG_20251223T181410",
+   "date": "2025-12-23",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -70.24115,
+    -30.675,
+    -70.00885,
+    -30.475
+   ]
+  },
+  "cell_-30.975_139.275": {
+   "file": "cell_-30.975_139.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T004711_R102_T54JUL_20251224T042811",
+   "date": "2025-12-24",
+   "cloud_cover": 0.22,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    139.15837,
+    -31.075,
+    139.39163,
+    -30.875
+   ]
+  },
+  "cell_-31.075_126.625": {
+   "file": "cell_-31.075_126.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251030T013731_R031_T52JBL_20251030T040526",
+   "date": "2025-10-30",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    126.50824,
+    -31.175,
+    126.74176,
+    -30.975
+   ]
+  },
+  "cell_-31.625_128.875": {
+   "file": "cell_-31.625_128.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251216T012721_R131_T52JDL_20251216T041812",
+   "date": "2025-12-16",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    128.75756,
+    -31.725,
+    128.99244,
+    -31.525
+   ]
+  },
+  "cell_-31.925_-69.175": {
+   "file": "cell_-31.925_-69.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251220T142721_R053_T19HDE_20251220T181210",
+   "date": "2025-12-20",
+   "cloud_cover": 0.43,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -69.29282,
+    -32.025,
+    -69.05718,
+    -31.825
+   ]
+  },
+  "cell_-32.375_-68.825": {
+   "file": "cell_-32.375_-68.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251220T142721_R053_T19HEE_20251220T181210",
+   "date": "2025-12-20",
+   "cloud_cover": 0.3,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -68.9434,
+    -32.475,
+    -68.7066,
+    -32.275
+   ]
+  },
+  "cell_-32.625_-70.075": {
+   "file": "cell_-32.625_-70.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T143751_R096_T19HCD_20251223T181410 + S2C_MSIL2A_20251223T143751_R096_T19HCE_20251223T181410",
+   "date": "2025-12-23",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -70.19373,
+    -32.725,
+    -69.95627,
+    -32.525
+   ]
+  },
+  "cell_-36.225_-68.275": {
+   "file": "cell_-36.225_-68.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T141721_R010_T19HEV_20251227T174919 + S2C_MSIL2A_20251227T141721_R010_T19HEA_20251227T174919",
+   "date": "2025-12-27",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -68.39896,
+    -36.325,
+    -68.15104,
+    -36.125
+   ]
+  },
+  "cell_-36.675_-68.825": {
+   "file": "cell_-36.675_-68.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251230T142721_R053_T19HEV_20251230T180410",
+   "date": "2025-12-30",
+   "cloud_cover": 0.05,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -68.94968,
+    -36.775,
+    -68.70032,
+    -36.575
+   ]
+  },
+  "cell_-37.125_-69.725": {
+   "file": "cell_-37.125_-69.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251230T142721_R053_T19HDU_20251230T180410 + S2C_MSIL2A_20251230T142721_R053_T19HDV_20251230T180410",
+   "date": "2025-12-30",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -69.85042,
+    -37.225,
+    -69.59958,
+    -37.025
+   ]
+  },
+  "cell_-40.325_-70.325": {
+   "file": "cell_-40.325_-70.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250713T142811_R053_T19GCR_20250713T195215",
+   "date": "2025-07-13",
+   "cloud_cover": 0.28,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -70.45617,
+    -40.425,
+    -70.19383,
+    -40.225
+   ]
+  },
+  "cell_-40.575_-70.175": {
+   "file": "cell_-40.575_-70.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250213T142821_R053_T19GCR_20250213T175756 + S2C_MSIL2A_20250213T142821_R053_T19GDR_20250213T175756",
+   "date": "2025-02-13",
+   "cloud_cover": 0.77,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -70.30666,
+    -40.675,
+    -70.04334,
+    -40.475
+   ]
+  },
+  "cell_-40.975_-66.025": {
+   "file": "cell_-40.975_-66.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T140711_R110_T20GKV_20251224T174210",
+   "date": "2025-12-24",
+   "cloud_cover": 0.21,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -66.15745,
+    -41.075,
+    -65.89255,
+    -40.875
+   ]
+  },
+  "cell_-42.975_-67.625": {
+   "file": "cell_-42.975_-67.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251104T141101_R110_T19GFN_20251104T171509",
+   "date": "2025-11-04",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -67.76168,
+    -43.075,
+    -67.48832,
+    -42.875
+   ]
+  },
+  "cell_-44.575_-71.575": {
+   "file": "cell_-44.575_-71.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250404T142811_R053_T18GYR_20250404T211312",
+   "date": "2025-04-04",
+   "cloud_cover": 0.94,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -71.71538,
+    -44.675,
+    -71.43462,
+    -44.475
+   ]
+  },
+  "cell_-44.925_-71.275": {
+   "file": "cell_-44.925_-71.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251018T141721_R010_T19GCL_20251018T222016",
+   "date": "2025-10-18",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -71.41624,
+    -45.025,
+    -71.13376,
+    -44.825
+   ]
+  },
+  "cell_-45.225_-66.875": {
+   "file": "cell_-45.225_-66.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251104T141101_R110_T19GFK_20251104T171509 + S2C_MSIL2A_20251104T141101_R110_T19GFL_20251104T171509",
+   "date": "2025-11-04",
+   "cloud_cover": 0.26,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -67.01698,
+    -45.325,
+    -66.73302,
+    -45.125
+   ]
+  },
+  "cell_-47.875_-68.025": {
+   "file": "cell_-47.875_-68.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250727T141111_R110_T19GEH_20250727T172014 + S2C_MSIL2A_20250727T141111_R110_T19FEG_20250727T172014",
+   "date": "2025-07-27",
+   "cloud_cover": 0.05,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -68.17409,
+    -47.975,
+    -67.87591,
+    -47.775
+   ]
+  },
+  "cell_-48.025_-69.925": {
+   "file": "cell_-48.025_-69.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251104T141101_R110_T19FDG_20251104T171509",
+   "date": "2025-11-04",
+   "cloud_cover": 0.88,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -70.07452,
+    -48.125,
+    -69.77548,
+    -47.925
+   ]
+  },
+  "cell_-48.075_-69.925": {
+   "file": "cell_-48.075_-69.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251104T141101_R110_T19FDG_20251104T171509",
+   "date": "2025-11-04",
+   "cloud_cover": 0.88,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -70.07467,
+    -48.175,
+    -69.77533,
+    -47.975
+   ]
+  },
+  "cell_-48.475_-71.825": {
+   "file": "cell_-48.475_-71.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20241227T141709_R010_T18FYM_20241227T192500",
+   "date": "2024-12-27",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -71.97584,
+    -48.575,
+    -71.67416,
+    -48.375
+   ]
+  },
+  "cell_-48.575_-71.825": {
+   "file": "cell_-48.575_-71.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20241227T141709_R010_T18FYM_20241227T192500",
+   "date": "2024-12-27",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -71.97614,
+    -48.675,
+    -71.67386,
+    -48.475
+   ]
+  },
+  "cell_-50.425_-72.975": {
+   "file": "cell_-50.425_-72.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20240524T142709_R053_T18FXK_20240524T212754",
+   "date": "2024-05-24",
+   "cloud_cover": 0.41,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -73.13196,
+    -50.525,
+    -72.81804,
+    -50.325
+   ]
+  },
+  "cell_-54.725_-69.175": {
+   "file": "cell_-54.725_-69.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20240525T135659_R067_T19FDV_20240525T190429",
+   "date": "2024-05-25",
+   "cloud_cover": 7.15,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -69.34816,
+    -54.825,
+    -69.00184,
+    -54.625
+   ]
+  },
+  "cell_-54.875_-65.975": {
+   "file": "cell_-54.875_-65.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20250107T140729_R024_T19FFV_20250107T185312",
+   "date": "2025-01-07",
+   "cloud_cover": 10.57,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -66.1488,
+    -54.975,
+    -65.8012,
+    -54.775
+   ]
+  },
+  "cell_11.475_49.875": {
+   "file": "cell_11.475_49.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251201T070251_R063_T39PUN_20251201T102116",
+   "date": "2025-12-01",
+   "cloud_cover": 0.05,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    49.77296,
+    11.375,
+    49.97704,
+    11.575
+   ]
+  },
+  "cell_11.475_49.975": {
+   "file": "cell_11.475_49.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251201T070251_R063_T39PUN_20251201T102116",
+   "date": "2025-12-01",
+   "cloud_cover": 0.05,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    49.87296,
+    11.375,
+    50.07704,
+    11.575
+   ]
+  },
+  "cell_15.875_11.425": {
+   "file": "cell_15.875_11.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251109T094231_R036_T32PQC_20251109T134310",
+   "date": "2025-11-09",
+   "cloud_cover": 0.18,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    11.32103,
+    15.775,
+    11.52897,
+    15.975
+   ]
+  },
+  "cell_15.925_11.375": {
+   "file": "cell_15.925_11.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251109T094231_R036_T32PQC_20251109T134310",
+   "date": "2025-11-09",
+   "cloud_cover": 0.18,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    11.27101,
+    15.825,
+    11.47899,
+    16.025
+   ]
+  },
+  "cell_16.575_16.575": {
+   "file": "cell_16.575_16.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250914T092041_R093_T33QXU_20250914T160815",
+   "date": "2025-09-14",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    16.47066,
+    16.475,
+    16.67934,
+    16.675
+   ]
+  },
+  "cell_16.625_16.625": {
+   "file": "cell_16.625_16.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250914T092041_R093_T33QXU_20250914T160815",
+   "date": "2025-09-14",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    16.52064,
+    16.525,
+    16.72936,
+    16.725
+   ]
+  },
+  "cell_17.725_33.025": {
+   "file": "cell_17.725_33.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T081351_R078_T36QVE_20251222T112616 + S2C_MSIL2A_20251222T081351_R078_T36QWE_20251222T112616",
+   "date": "2025-12-22",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    32.92002,
+    17.625,
+    33.12998,
+    17.825
+   ]
+  },
+  "cell_17.875_27.125": {
+   "file": "cell_17.875_27.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251201T084331_R064_T35QNV_20251201T124515",
+   "date": "2025-12-01",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    27.01993,
+    17.775,
+    27.23007,
+    17.975
+   ]
+  },
+  "cell_17.975_31.175": {
+   "file": "cell_17.975_31.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T082351_R121_T36QUE_20251225T122115 + S2C_MSIL2A_20251225T082351_R121_T36QTE_20251225T122115",
+   "date": "2025-12-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    31.06987,
+    17.875,
+    31.28013,
+    18.075
+   ]
+  },
+  "cell_18.025_-7.975": {
+   "file": "cell_18.025_-7.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T110501_R094_T29QPV_20251223T144610 + S2C_MSIL2A_20251223T110501_R094_T29QPA_20251223T144610 + S2C_MSIL2A_20251223T110501_R094_T29QNV_20251223T144610 + S2C_MSIL2A_20251223T110501_R094_T29QNA_20251223T144610",
+   "date": "2025-12-23",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -8.08016,
+    17.925,
+    -7.86984,
+    18.125
+   ]
+  },
+  "cell_18.275_-11.075": {
+   "file": "cell_18.275_-11.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251226T111501_R137_T29QKA_20251226T143313",
+   "date": "2025-12-26",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -11.18031,
+    18.175,
+    -10.96969,
+    18.375
+   ]
+  },
+  "cell_18.725_12.925": {
+   "file": "cell_18.725_12.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251027T093121_R136_T33QTA_20251027T130920",
+   "date": "2025-10-27",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    12.81941,
+    18.625,
+    13.03059,
+    18.825
+   ]
+  },
+  "cell_18.825_9.425": {
+   "file": "cell_18.825_9.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251112T095251_R079_T32QNF_20251112T134718",
+   "date": "2025-11-12",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    9.31935,
+    18.725,
+    9.53065,
+    18.925
    ]
   },
   "cell_18.875_9.625": {
@@ -37,62 +1369,62 @@
     18.975
    ]
   },
-  "cell_19.025_9.425": {
-   "file": "cell_19.025_9.425.jpg",
+  "cell_18.975_22.175": {
+   "file": "cell_18.975_22.175.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251102T095201_R079_T32QNG_20251102T130456",
-   "date": "2025-11-02",
+   "item": "S2C_MSIL2A_20251227T090411_R007_T34QFG_20251227T130722 + S2C_MSIL2A_20251227T090411_R007_T34QFF_20251227T130722",
+   "date": "2025-12-27",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    9.31922,
-    18.925,
-    9.53078,
-    19.125
+    22.06925,
+    18.875,
+    22.28075,
+    19.075
    ]
   },
-  "cell_19.275_9.175": {
-   "file": "cell_19.275_9.175.jpg",
+  "cell_19.375_-16.475": {
+   "file": "cell_19.375_-16.475.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251102T095201_R079_T32QNG_20251102T130456",
-   "date": "2025-11-02",
-   "cloud_cover": 0.0,
+   "item": "S2C_MSIL2A_20251023T113331_R080_T28QCG_20251023T144708",
+   "date": "2025-10-23",
+   "cloud_cover": 0.07,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    9.06906,
-    19.175,
-    9.28094,
-    19.375
-   ]
-  },
-  "cell_19.375_18.675": {
-   "file": "cell_19.375_18.675.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251230T091411_R050_T34QBG_20251230T125217",
-   "date": "2025-12-30",
-   "cloud_cover": 0.72,
-   "gsd_m": 10,
-   "stretch": "B04-B03-B02 1000-9000",
-   "width_km": 22,
-   "bbox": [
-    18.569,
+    -16.581,
     19.275,
-    18.781,
+    -16.369,
     19.475
    ]
   },
-  "cell_19.475_18.925": {
-   "file": "cell_19.475_18.925.jpg",
+  "cell_19.625_19.175": {
+   "file": "cell_19.625_19.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251220T091411_R050_T34QCG_20251220T131210 + S2C_MSIL2A_20251220T091411_R050_T34QBG_20251220T131210",
+   "date": "2025-12-20",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    19.06883,
+    19.525,
+    19.28117,
+    19.725
+   ]
+  },
+  "cell_19.675_18.825": {
+   "file": "cell_19.675_18.825.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
@@ -100,67 +1432,71 @@
    "date": "2025-12-30",
    "cloud_cover": 0.72,
    "gsd_m": 10,
+   "stretch": "visual",
    "width_km": 22,
    "bbox": [
-    18.81893,
-    19.375,
-    19.03107,
-    19.575
+    18.7188,
+    19.575,
+    18.9312,
+    19.775
    ]
   },
-  "cell_19.475_18.975": {
-   "file": "cell_19.475_18.975.jpg",
+  "cell_19.825_18.375": {
+   "file": "cell_19.825_18.375.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251230T091411_R050_T34QBG_20251230T125217",
-   "date": "2025-12-30",
-   "cloud_cover": 0.72,
+   "item": "S2C_MSIL2A_20251220T091411_R050_T34QBG_20251220T131210 + S2C_MSIL2A_20251220T091411_R050_T33QZC_20251220T131210",
+   "date": "2025-12-20",
+   "cloud_cover": 0.0,
    "gsd_m": 10,
+   "stretch": "visual",
    "width_km": 22,
    "bbox": [
-    18.86893,
-    19.375,
-    19.08107,
-    19.575
+    18.2687,
+    19.725,
+    18.4813,
+    19.925
    ]
   },
-  "cell_19.525_18.925": {
-   "file": "cell_19.525_18.925.jpg",
+  "cell_19.875_30.375": {
+   "file": "cell_19.875_30.375.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251230T091411_R050_T34QBG_20251230T125217",
-   "date": "2025-12-30",
-   "cloud_cover": 0.72,
+   "item": "S2C_MSIL2A_20251228T083401_R021_T35QRC_20251228T123812",
+   "date": "2025-12-28",
+   "cloud_cover": 0.0,
    "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    18.8189,
-    19.425,
-    19.0311,
-    19.625
+    30.26867,
+    19.775,
+    30.48133,
+    19.975
    ]
   },
-  "cell_19.525_18.975": {
-   "file": "cell_19.525_18.975.jpg",
+  "cell_19.875_32.075": {
+   "file": "cell_19.875_32.075.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251230T091411_R050_T34QBG_20251230T125217",
-   "date": "2025-12-30",
-   "cloud_cover": 0.72,
+   "item": "S2C_MSIL2A_20251225T082351_R121_T36QUH_20251225T122115 + S2C_MSIL2A_20251225T082351_R121_T36QVH_20251225T122115 + S2C_MSIL2A_20251225T082351_R121_T36QUG_20251225T122115 + S2C_MSIL2A_20251225T082351_R121_T36QVG_20251225T122115",
+   "date": "2025-12-25",
+   "cloud_cover": 0.0,
    "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    18.8689,
-    19.425,
-    19.0811,
-    19.625
+    31.96867,
+    19.775,
+    32.18133,
+    19.975
    ]
   },
-  "cell_19.875_9.775": {
-   "file": "cell_19.875_9.775.jpg",
+  "cell_19.875_9.875": {
+   "file": "cell_19.875_9.875.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
@@ -171,32 +1507,158 @@
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    9.66867,
+    9.76867,
     19.775,
-    9.88133,
+    9.98133,
     19.975
    ]
   },
-  "cell_19.925_19.475": {
-   "file": "cell_19.925_19.475.jpg",
+  "cell_19.925_-0.675": {
+   "file": "cell_19.925_-0.675.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251220T091411_R050_T34QCH_20251220T130410",
-   "date": "2025-12-20",
+   "item": "S2C_MSIL2A_20251025T103131_R108_T30QYH_20251025T154718",
+   "date": "2025-10-25",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    19.36863,
+    -0.78137,
     19.825,
-    19.58137,
+    -0.56863,
     20.025
    ]
   },
-  "cell_19.975_19.475": {
-   "file": "cell_19.975_19.475.jpg",
+  "cell_19.975_12.475": {
+   "file": "cell_19.975_12.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251109T094231_R036_T33QTC_20251109T134310",
+   "date": "2025-11-09",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    12.3686,
+    19.875,
+    12.5814,
+    20.075
+   ]
+  },
+  "cell_19.975_23.625": {
+   "file": "cell_19.975_23.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T085411_R107_T34QGH_20251224T130210",
+   "date": "2025-12-24",
+   "cloud_cover": 0.77,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    23.5186,
+    19.875,
+    23.7314,
+    20.075
+   ]
+  },
+  "cell_19.975_3.925": {
+   "file": "cell_19.975_3.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251108T101241_R022_T31QEC_20251108T142958",
+   "date": "2025-11-08",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    3.8186,
+    19.875,
+    4.0314,
+    20.075
+   ]
+  },
+  "cell_19.975_4.475": {
+   "file": "cell_19.975_4.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251108T101241_R022_T31QFC_20251108T142958",
+   "date": "2025-11-08",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    4.3686,
+    19.875,
+    4.5814,
+    20.075
+   ]
+  },
+  "cell_20.025_36.875": {
+   "file": "cell_20.025_36.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T080341_R035_T37QBC_20251229T111413",
+   "date": "2025-12-29",
+   "cloud_cover": 0.83,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    36.76857,
+    19.925,
+    36.98143,
+    20.125
+   ]
+  },
+  "cell_20.125_22.075": {
+   "file": "cell_20.125_22.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T090411_R007_T34QFH_20251227T130722",
+   "date": "2025-12-27",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    21.9685,
+    20.025,
+    22.1815,
+    20.225
+   ]
+  },
+  "cell_20.475_36.925": {
+   "file": "cell_20.475_36.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T080341_R035_T37QBC_20251229T111413",
+   "date": "2025-12-29",
+   "cloud_cover": 0.83,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    36.81826,
+    20.375,
+    37.03174,
+    20.575
+   ]
+  },
+  "cell_20.525_19.225": {
+   "file": "cell_20.525_19.225.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
@@ -207,120 +1669,572 @@
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    19.3686,
-    19.875,
-    19.5814,
-    20.075
+    19.11822,
+    20.425,
+    19.33178,
+    20.625
    ]
   },
-  "cell_19.975_8.575": {
-   "file": "cell_19.975_8.575.jpg",
+  "cell_20.625_20.575": {
+   "file": "cell_20.625_20.575.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251212T095421_R079_T32QMH_20251212T133816",
+   "item": "S2C_MSIL2A_20251230T091411_R050_T34QDH_20251230T125217",
+   "date": "2025-12-30",
+   "cloud_cover": 0.66,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    20.46815,
+    20.525,
+    20.68185,
+    20.725
+   ]
+  },
+  "cell_20.775_34.125": {
+   "file": "cell_20.775_34.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251212T081341_R078_T36QXJ_20251212T111610 + S2C_MSIL2A_20251212T081341_R078_T36QXH_20251212T111610",
    "date": "2025-12-12",
    "cloud_cover": 0.0,
    "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    8.4686,
-    19.875,
-    8.6814,
-    20.075
+    34.01805,
+    20.675,
+    34.23195,
+    20.875
    ]
   },
-  "cell_20.525_18.925": {
-   "file": "cell_20.525_18.925.jpg",
+  "cell_20.925_-12.225": {
+   "file": "cell_20.925_-12.225.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251220T091411_R050_T34QBH_20251220T130410",
-   "date": "2025-12-20",
+   "item": "S2C_MSIL2A_20251209T112501_R037_T28QGJ_20251209T142410",
+   "date": "2025-12-09",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    18.81822,
-    20.425,
-    19.03178,
-    20.625
+    -12.33206,
+    20.825,
+    -12.11794,
+    21.025
    ]
   },
-  "cell_20.525_18.975": {
-   "file": "cell_20.525_18.975.jpg",
+  "cell_21.125_-12.125": {
+   "file": "cell_21.125_-12.125.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251220T091411_R050_T34QBH_20251220T130410",
-   "date": "2025-12-20",
+   "item": "S2C_MSIL2A_20251209T112501_R037_T28QGJ_20251209T142410",
+   "date": "2025-12-09",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    18.86822,
-    20.425,
-    19.08178,
-    20.625
+    -12.2322,
+    21.025,
+    -12.0178,
+    21.225
    ]
   },
-  "cell_23.275_2.675": {
-   "file": "cell_23.275_2.675.jpg",
+  "cell_21.125_32.825": {
+   "file": "cell_21.125_32.825.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251221T102441_R065_T31QDF_20251221T142411",
-   "date": "2025-12-21",
-   "cloud_cover": 0.17,
+   "item": "S2C_MSIL2A_20251215T082351_R121_T36QVJ_20251215T121810",
+   "date": "2025-12-15",
+   "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    2.56614,
-    23.175,
-    2.78386,
-    23.375
+    32.7178,
+    21.025,
+    32.9322,
+    21.225
    ]
   },
-  "cell_23.675_2.775": {
-   "file": "cell_23.675_2.775.jpg",
+  "cell_21.175_3.925": {
+   "file": "cell_21.175_3.925.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251221T102441_R065_T31QDG_20251221T142411",
-   "date": "2025-12-21",
-   "cloud_cover": 0.89,
+   "item": "S2C_MSIL2A_20251228T101441_R022_T31QED_20251228T140410",
+   "date": "2025-12-28",
+   "cloud_cover": 0.81,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    2.66581,
+    3.81776,
+    21.075,
+    4.03224,
+    21.275
+   ]
+  },
+  "cell_21.375_6.525": {
+   "file": "cell_21.375_6.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251205T100421_R122_T32QKJ_20251205T134513",
+   "date": "2025-12-05",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    6.41761,
+    21.275,
+    6.63239,
+    21.475
+   ]
+  },
+  "cell_21.625_-0.725": {
+   "file": "cell_21.625_-0.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251204T103421_R108_T30QYJ_20251204T141413 + S2C_MSIL2A_20251204T103421_R108_T30QYK_20251204T141413",
+   "date": "2025-12-04",
+   "cloud_cover": 0.23,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -0.83257,
+    21.525,
+    -0.61743,
+    21.725
+   ]
+  },
+  "cell_21.675_-4.775": {
+   "file": "cell_21.675_-4.775.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251210T105451_R051_T30QUK_20251210T144811 + S2C_MSIL2A_20251210T105451_R051_T30QUJ_20251210T144811",
+   "date": "2025-12-10",
+   "cloud_cover": 0.66,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -4.88261,
+    21.575,
+    -4.66739,
+    21.775
+   ]
+  },
+  "cell_21.675_13.675": {
+   "file": "cell_21.675_13.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251027T093121_R136_T33QUE_20251027T130920 + S2C_MSIL2A_20251027T093121_R136_T33QUD_20251027T130920",
+   "date": "2025-10-27",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    13.56739,
+    21.575,
+    13.78261,
+    21.775
+   ]
+  },
+  "cell_21.925_25.825": {
+   "file": "cell_21.925_25.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T085411_R107_T35QLE_20251224T130210",
+   "date": "2025-12-24",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    25.7172,
+    21.825,
+    25.9328,
+    22.025
+   ]
+  },
+  "cell_21.925_25.875": {
+   "file": "cell_21.925_25.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T085411_R107_T35QLE_20251224T130210",
+   "date": "2025-12-24",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    25.7672,
+    21.825,
+    25.9828,
+    22.025
+   ]
+  },
+  "cell_21.975_-4.075": {
+   "file": "cell_21.975_-4.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T104451_R008_T30QUK_20251227T143012",
+   "date": "2025-12-27",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -4.18283,
+    21.875,
+    -3.96717,
+    22.075
+   ]
+  },
+  "cell_21.975_15.175": {
+   "file": "cell_21.975_15.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251126T093341_R136_T33QWE_20251126T145709",
+   "date": "2025-11-26",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    15.06717,
+    21.875,
+    15.28283,
+    22.075
+   ]
+  },
+  "cell_21.975_29.525": {
+   "file": "cell_21.975_29.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T083401_R021_T35QQE_20251228T123812",
+   "date": "2025-12-28",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    29.41717,
+    21.875,
+    29.63283,
+    22.075
+   ]
+  },
+  "cell_22.175_24.675": {
+   "file": "cell_22.175_24.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T085411_R107_T35QKE_20251224T130210",
+   "date": "2025-12-24",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    24.56701,
+    22.075,
+    24.78299,
+    22.275
+   ]
+  },
+  "cell_22.225_24.625": {
+   "file": "cell_22.225_24.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T085411_R107_T35QKE_20251224T130210",
+   "date": "2025-12-24",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    24.51697,
+    22.125,
+    24.73303,
+    22.325
+   ]
+  },
+  "cell_22.375_20.875": {
+   "file": "cell_22.375_20.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251220T091411_R050_T34QDK_20251220T130410",
+   "date": "2025-12-20",
+   "cloud_cover": 0.26,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    20.76686,
+    22.275,
+    20.98314,
+    22.475
+   ]
+  },
+  "cell_22.375_31.975": {
+   "file": "cell_22.375_31.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251215T082351_R121_T36QUK_20251215T121810",
+   "date": "2025-12-15",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    31.86686,
+    22.275,
+    32.08314,
+    22.475
+   ]
+  },
+  "cell_22.475_28.675": {
+   "file": "cell_22.475_28.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251111T084221_R064_T35QPE_20251111T121910",
+   "date": "2025-11-11",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    28.56678,
+    22.375,
+    28.78322,
+    22.575
+   ]
+  },
+  "cell_22.525_11.375": {
+   "file": "cell_22.525_11.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251219T094421_R036_T32QQK_20251219T135010 + S2C_MSIL2A_20251219T094421_R036_T32QQL_20251219T135010",
+   "date": "2025-12-19",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    11.26674,
+    22.425,
+    11.48326,
+    22.625
+   ]
+  },
+  "cell_22.675_1.975": {
+   "file": "cell_22.675_1.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251221T102441_R065_T31QCF_20251221T142411",
+   "date": "2025-12-21",
+   "cloud_cover": 0.11,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    1.86662,
+    22.575,
+    2.08338,
+    22.775
+   ]
+  },
+  "cell_22.675_4.575": {
+   "file": "cell_22.675_4.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251108T101241_R022_T31QFF_20251108T142958",
+   "date": "2025-11-08",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    4.46662,
+    22.575,
+    4.68338,
+    22.775
+   ]
+  },
+  "cell_22.925_0.275": {
+   "file": "cell_22.925_0.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251025T103131_R108_T31QBF_20251025T154718",
+   "date": "2025-10-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    0.16642,
+    22.825,
+    0.38358,
+    23.025
+   ]
+  },
+  "cell_23.325_-8.075": {
+   "file": "cell_23.325_-8.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251213T110501_R094_T29QNF_20251213T150114",
+   "date": "2025-12-13",
+   "cloud_cover": 0.16,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -8.1839,
+    23.225,
+    -7.9661,
+    23.425
+   ]
+  },
+  "cell_23.325_10.825": {
+   "file": "cell_23.325_10.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251212T095421_R079_T32QPL_20251212T133816",
+   "date": "2025-12-12",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    10.7161,
+    23.225,
+    10.9339,
+    23.425
+   ]
+  },
+  "cell_23.375_-7.675": {
+   "file": "cell_23.375_-7.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251213T110501_R094_T29QPF_20251213T150114",
+   "date": "2025-12-13",
+   "cloud_cover": 0.22,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -7.78394,
+    23.275,
+    -7.56606,
+    23.475
+   ]
+  },
+  "cell_23.375_14.275": {
+   "file": "cell_23.375_14.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251126T093341_R136_T33QVF_20251126T145709",
+   "date": "2025-11-26",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    14.16606,
+    23.275,
+    14.38394,
+    23.475
+   ]
+  },
+  "cell_23.675_-15.825": {
+   "file": "cell_23.675_-15.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251023T113331_R080_T28QDM_20251023T144708",
+   "date": "2025-10-23",
+   "cloud_cover": 0.06,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -15.93419,
     23.575,
-    2.88419,
+    -15.71581,
     23.775
    ]
   },
-  "cell_23.875_-15.825": {
-   "file": "cell_23.875_-15.825.jpg",
+  "cell_23.675_-6.475": {
+   "file": "cell_23.675_-6.475.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251023T113331_R080_T28QDM_20251023T144708",
-   "date": "2025-10-23",
-   "cloud_cover": 0.06,
+   "item": "S2C_MSIL2A_20251213T110501_R094_T29QQG_20251213T150114",
+   "date": "2025-12-13",
+   "cloud_cover": 0.73,
    "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    -15.93436,
-    23.775,
-    -15.71564,
-    23.975
+    -6.58419,
+    23.575,
+    -6.36581,
+    23.775
    ]
   },
-  "cell_23.925_-15.775": {
-   "file": "cell_23.925_-15.775.jpg",
+  "cell_23.675_32.875": {
+   "file": "cell_23.675_32.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251125T082311_R121_T36QVM_20251125T115809",
+   "date": "2025-11-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    32.76581,
+    23.575,
+    32.98419,
+    23.775
+   ]
+  },
+  "cell_23.775_-15.575": {
+   "file": "cell_23.775_-15.575.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
@@ -331,139 +2245,338 @@
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    -15.8844,
+    -15.68427,
+    23.675,
+    -15.46573,
+    23.875
+   ]
+  },
+  "cell_23.775_-15.725": {
+   "file": "cell_23.775_-15.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251023T113331_R080_T28QDM_20251023T144708",
+   "date": "2025-10-23",
+   "cloud_cover": 0.06,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -15.83427,
+    23.675,
+    -15.61573,
+    23.875
+   ]
+  },
+  "cell_23.775_-2.175": {
+   "file": "cell_23.775_-2.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T104451_R008_T30QWM_20251227T143012",
+   "date": "2025-12-27",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -2.28427,
+    23.675,
+    -2.06573,
+    23.875
+   ]
+  },
+  "cell_23.775_25.325": {
+   "file": "cell_23.775_25.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251025T085051_R107_T35QLG_20251025T120822",
+   "date": "2025-10-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    25.21573,
+    23.675,
+    25.43427,
+    23.875
+   ]
+  },
+  "cell_23.825_32.925": {
+   "file": "cell_23.825_32.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251125T082311_R121_T36QVM_20251125T115809",
+   "date": "2025-11-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    32.81568,
+    23.725,
+    33.03432,
+    23.925
+   ]
+  },
+  "cell_23.925_35.425": {
+   "file": "cell_23.925_35.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251023T081021_R078_T36QYM_20251023T115313",
+   "date": "2025-10-23",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    35.3156,
     23.825,
-    -15.6656,
+    35.5344,
     24.025
    ]
   },
-  "cell_24.375_14.925": {
-   "file": "cell_24.375_14.925.jpg",
+  "cell_23.925_8.475": {
+   "file": "cell_23.925_8.475.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251027T093121_R136_T33RVH_20251027T130920 + S2C_MSIL2A_20251027T093121_R136_T33QVG_20251027T130920",
-   "date": "2025-10-27",
+   "item": "S2C_MSIL2A_20251115T100311_R122_T32QMM_20251115T132710",
+   "date": "2025-11-15",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    14.81521,
+    8.3656,
+    23.825,
+    8.5844,
+    24.025
+   ]
+  },
+  "cell_23.975_-102.525": {
+   "file": "cell_23.975_-102.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T172741_R012_T13QGG_20251227T204410",
+   "date": "2025-12-27",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -102.63444,
+    23.875,
+    -102.41556,
+    24.075
+   ]
+  },
+  "cell_23.975_-4.975": {
+   "file": "cell_23.975_-4.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251210T105451_R051_T30QTM_20251210T144811",
+   "date": "2025-12-10",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -5.08444,
+    23.875,
+    -4.86556,
+    24.075
+   ]
+  },
+  "cell_23.975_10.625": {
+   "file": "cell_23.975_10.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251212T095421_R079_T32QPM_20251212T133816",
+   "date": "2025-12-12",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    10.51556,
+    23.875,
+    10.73444,
+    24.075
+   ]
+  },
+  "cell_24.125_32.125": {
+   "file": "cell_24.125_32.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251125T082311_R121_T36QVM_20251125T115809",
+   "date": "2025-11-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    32.01543,
+    24.025,
+    32.23457,
+    24.225
+   ]
+  },
+  "cell_24.225_19.325": {
+   "file": "cell_24.225_19.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251230T091411_R050_T34QCM_20251230T125309",
+   "date": "2025-12-30",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    19.21534,
+    24.125,
+    19.43466,
+    24.325
+   ]
+  },
+  "cell_24.375_-5.275": {
+   "file": "cell_24.375_-5.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251210T105451_R051_T29RRH_20251210T144811",
+   "date": "2025-12-10",
+   "cloud_cover": 0.21,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -5.38479,
     24.275,
-    15.03479,
+    -5.16521,
     24.475
    ]
   },
-  "cell_24.375_14.975": {
-   "file": "cell_24.375_14.975.jpg",
+  "cell_24.425_-111.825": {
+   "file": "cell_24.425_-111.825.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251027T093121_R136_T33RVH_20251027T130920 + S2C_MSIL2A_20251027T093121_R136_T33QVG_20251027T130920",
-   "date": "2025-10-27",
-   "cloud_cover": 0.0,
+   "item": "S2C_MSIL2A_20251219T180801_R041_T12RVN_20251219T203508",
+   "date": "2025-12-19",
+   "cloud_cover": 0.19,
    "gsd_m": 10,
-   "stretch": "B04-B03-B02 1000-9000",
+   "stretch": "visual",
    "width_km": 22,
    "bbox": [
-    14.86521,
-    24.275,
-    15.08479,
-    24.475
-   ]
-  },
-  "cell_24.425_14.975": {
-   "file": "cell_24.425_14.975.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251027T093121_R136_T33RVH_20251027T130920",
-   "date": "2025-10-27",
-   "cloud_cover": 0.0,
-   "gsd_m": 10,
-   "stretch": "B04-B03-B02 1000-9000",
-   "width_km": 22,
-   "bbox": [
-    14.86517,
+    -111.93483,
     24.325,
-    15.08483,
+    -111.71517,
     24.525
    ]
   },
-  "cell_24.525_14.975": {
-   "file": "cell_24.525_14.975.jpg",
+  "cell_24.425_15.025": {
+   "file": "cell_24.425_15.025.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251027T093121_R136_T33RVH_20251027T130920",
+   "item": "S2C_MSIL2A_20251027T093121_R136_T33RVH_20251027T130920 + S2C_MSIL2A_20251027T093121_R136_T33RWH_20251027T130920",
    "date": "2025-10-27",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    14.86508,
-    24.425,
-    15.08492,
-    24.625
+    14.91517,
+    24.325,
+    15.13483,
+    24.525
    ]
   },
-  "cell_24.775_2.425": {
-   "file": "cell_24.775_2.425.jpg",
+  "cell_24.625_-111.775": {
+   "file": "cell_24.625_-111.775.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251221T102441_R065_T31RDH_20251221T142411",
-   "date": "2025-12-21",
-   "cloud_cover": 0.58,
+   "item": "S2C_MSIL2A_20251219T180801_R041_T12RVN_20251219T203508",
+   "date": "2025-12-19",
+   "cloud_cover": 0.19,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -111.885,
+    24.525,
+    -111.665,
+    24.725
+   ]
+  },
+  "cell_24.675_25.925": {
+   "file": "cell_24.675_25.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251025T085051_R107_T35RLH_20251025T120822",
+   "date": "2025-10-25",
+   "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    2.31486,
-    24.675,
-    2.53514,
-    24.875
+    25.81495,
+    24.575,
+    26.03505,
+    24.775
    ]
   },
-  "cell_24.825_2.775": {
-   "file": "cell_24.825_2.775.jpg",
+  "cell_24.725_-2.025": {
+   "file": "cell_24.725_-2.025.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251221T102441_R065_T31RDH_20251221T142411",
-   "date": "2025-12-21",
-   "cloud_cover": 0.58,
-   "gsd_m": 10,
-   "width_km": 22,
-   "bbox": [
-    2.66482,
-    24.725,
-    2.88518,
-    24.925
-   ]
-  },
-  "cell_24.925_12.025": {
-   "file": "cell_24.925_12.025.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251229T094421_R036_T32RRN_20251229T134611 + S2C_MSIL2A_20251229T094421_R036_T32RQN_20251229T134611",
-   "date": "2025-12-29",
-   "cloud_cover": 0.95,
+   "item": "S2C_MSIL2A_20251227T104451_R008_T30RWN_20251227T143012",
+   "date": "2025-12-27",
+   "cloud_cover": 0.09,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    11.91473,
+    -2.13509,
+    24.625,
+    -1.91491,
+    24.825
+   ]
+  },
+  "cell_24.925_15.425": {
+   "file": "cell_24.925_15.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251206T093411_R136_T33RWH_20251206T133416",
+   "date": "2025-12-06",
+   "cloud_cover": 0.49,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    15.31473,
     24.825,
-    12.13527,
+    15.53527,
     25.025
    ]
   },
-  "cell_24.925_12.375": {
-   "file": "cell_24.925_12.375.jpg",
+  "cell_24.975_12.875": {
+   "file": "cell_24.975_12.875.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
@@ -474,118 +2587,100 @@
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    12.26473,
-    24.825,
-    12.48527,
-    25.025
-   ]
-  },
-  "cell_24.975_2.875": {
-   "file": "cell_24.975_2.875.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251221T102441_R065_T31RDH_20251221T142411",
-   "date": "2025-12-21",
-   "cloud_cover": 0.58,
-   "gsd_m": 10,
-   "stretch": "B04-B03-B02 1000-9000",
-   "width_km": 22,
-   "bbox": [
-    2.76468,
+    12.76468,
     24.875,
-    2.98532,
+    12.98532,
     25.075
    ]
   },
-  "cell_25.175_28.725": {
-   "file": "cell_25.175_28.725.jpg",
+  "cell_24.975_18.375": {
+   "file": "cell_24.975_18.375.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251211T084351_R064_T35RPH_20251211T122815",
-   "date": "2025-12-11",
+   "item": "S2C_MSIL2A_20251213T092411_R093_T34RBN_20251213T130111",
+   "date": "2025-12-13",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    28.6145,
-    25.075,
-    28.8355,
-    25.275
+    18.26468,
+    24.875,
+    18.48532,
+    25.075
    ]
   },
-  "cell_25.225_12.325": {
-   "file": "cell_25.225_12.325.jpg",
+  "cell_25.025_-3.275": {
+   "file": "cell_25.025_-3.275.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251229T094421_R036_T33RTH_20251229T134611 + S2C_MSIL2A_20251229T094421_R036_T32RRN_20251229T134611 + S2C_MSIL2A_20251229T094421_R036_T32RRP_20251229T134611",
-   "date": "2025-12-29",
-   "cloud_cover": 0.19,
+   "item": "S2C_MSIL2A_20251227T104451_R008_T30RVN_20251227T143012",
+   "date": "2025-12-27",
+   "cloud_cover": 0.03,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    12.21446,
+    -3.38536,
+    24.925,
+    -3.16464,
+    25.125
+   ]
+  },
+  "cell_25.075_-3.675": {
+   "file": "cell_25.075_-3.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251210T105451_R051_T30RVN_20251210T144811",
+   "date": "2025-12-10",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -3.78541,
+    24.975,
+    -3.56459,
+    25.175
+   ]
+  },
+  "cell_25.225_29.675": {
+   "file": "cell_25.225_29.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T083401_R021_T35RQH_20251228T123812 + S2C_MSIL2A_20251228T083401_R021_T35RQJ_20251228T123812",
+   "date": "2025-12-28",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    29.56446,
     25.125,
-    12.43554,
+    29.78554,
     25.325
    ]
   },
-  "cell_25.325_29.675": {
-   "file": "cell_25.325_29.675.jpg",
+  "cell_25.225_7.775": {
+   "file": "cell_25.225_7.775.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251228T083401_R021_T35RQJ_20251228T123812",
-   "date": "2025-12-28",
+   "item": "S2C_MSIL2A_20251115T100311_R122_T32RLN_20251115T132710 + S2C_MSIL2A_20251115T100311_R122_T32RLP_20251115T132710",
+   "date": "2025-11-15",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    29.56437,
-    25.225,
-    29.78563,
-    25.425
-   ]
-  },
-  "cell_25.325_30.075": {
-   "file": "cell_25.325_30.075.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251228T083401_R021_T35RRJ_20251228T123812 + S2C_MSIL2A_20251228T083401_R021_T36RTP_20251228T123812 + S2C_MSIL2A_20251228T083401_R021_T35RQJ_20251228T123812",
-   "date": "2025-12-28",
-   "cloud_cover": 0.0,
-   "gsd_m": 10,
-   "stretch": "B04-B03-B02 1000-9000",
-   "width_km": 22,
-   "bbox": [
-    29.96437,
-    25.225,
-    30.18563,
-    25.425
-   ]
-  },
-  "cell_25.375_29.575": {
-   "file": "cell_25.375_29.575.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251228T083401_R021_T35RQJ_20251228T123812",
-   "date": "2025-12-28",
-   "cloud_cover": 0.0,
-   "gsd_m": 10,
-   "stretch": "B04-B03-B02 1000-9000",
-   "width_km": 22,
-   "bbox": [
-    29.46432,
-    25.275,
-    29.68568,
-    25.475
+    7.66446,
+    25.125,
+    7.88554,
+    25.325
    ]
   },
   "cell_25.375_30.025": {
@@ -606,80 +2701,818 @@
     25.475
    ]
   },
-  "cell_25.375_30.075": {
-   "file": "cell_25.375_30.075.jpg",
+  "cell_25.425_17.225": {
+   "file": "cell_25.425_17.225.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251228T083401_R021_T35RRJ_20251228T123812 + S2C_MSIL2A_20251228T083401_R021_T36RTP_20251228T123812 + S2C_MSIL2A_20251228T083401_R021_T35RQJ_20251228T123812",
-   "date": "2025-12-28",
+   "item": "S2C_MSIL2A_20251223T092421_R093_T33RYJ_20251223T130317",
+   "date": "2025-12-23",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    29.96432,
-    25.275,
-    30.18568,
-    25.475
-   ]
-  },
-  "cell_25.425_29.425": {
-   "file": "cell_25.425_29.425.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251228T083401_R021_T35RQJ_20251228T123812",
-   "date": "2025-12-28",
-   "cloud_cover": 0.0,
-   "gsd_m": 10,
-   "stretch": "B04-B03-B02 1000-9000",
-   "width_km": 22,
-   "bbox": [
-    29.31428,
+    17.11428,
     25.325,
-    29.53572,
+    17.33572,
     25.525
    ]
   },
-  "cell_25.525_30.125": {
-   "file": "cell_25.525_30.125.jpg",
+  "cell_25.425_30.025": {
+   "file": "cell_25.425_30.025.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251228T083401_R021_T35RRJ_20251228T123812",
+   "item": "S2C_MSIL2A_20251228T083401_R021_T35RQJ_20251228T123812 + S2C_MSIL2A_20251228T083401_R021_T35RRJ_20251228T123812",
    "date": "2025-12-28",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    30.01418,
+    29.91428,
+    25.325,
+    30.13572,
+    25.525
+   ]
+  },
+  "cell_25.425_65.675": {
+   "file": "cell_25.425_65.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251216T061301_R134_T41RQJ_20251216T093012",
+   "date": "2025-12-16",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    65.56428,
+    25.325,
+    65.78572,
+    25.525
+   ]
+  },
+  "cell_25.475_65.075": {
+   "file": "cell_25.475_65.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251216T061301_R134_T41RQJ_20251216T093012 + S2C_MSIL2A_20251216T061301_R134_T41RPJ_20251216T093012",
+   "date": "2025-12-16",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    64.96423,
+    25.375,
+    65.18577,
+    25.575
+   ]
+  },
+  "cell_25.525_33.075": {
+   "file": "cell_25.525_33.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251115T082231_R121_T36RWP_20251115T111858 + S2C_MSIL2A_20251115T082231_R121_T36RVP_20251115T111858",
+   "date": "2025-11-15",
+   "cloud_cover": 0.07,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    32.96418,
     25.425,
-    30.23582,
+    33.18582,
     25.625
    ]
   },
-  "cell_25.775_30.375": {
-   "file": "cell_25.775_30.375.jpg",
+  "cell_25.575_-11.175": {
+   "file": "cell_25.575_-11.175.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251228T083401_R021_T36RTP_20251228T123812",
+   "item": "S2C_MSIL2A_20251219T112511_R037_T29RKJ_20251219T142518",
+   "date": "2025-12-19",
+   "cloud_cover": 0.6,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -11.28586,
+    25.475,
+    -11.06414,
+    25.675
+   ]
+  },
+  "cell_25.575_3.875": {
+   "file": "cell_25.575_3.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251221T102441_R065_T31REJ_20251221T142411",
+   "date": "2025-12-21",
+   "cloud_cover": 0.28,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    3.76414,
+    25.475,
+    3.98586,
+    25.675
+   ]
+  },
+  "cell_25.675_23.675": {
+   "file": "cell_25.675_23.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251207T090351_R007_T34RGP_20251207T124509",
+   "date": "2025-12-07",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    23.56404,
+    25.575,
+    23.78596,
+    25.775
+   ]
+  },
+  "cell_25.725_23.575": {
+   "file": "cell_25.725_23.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251207T090351_R007_T34RGP_20251207T124509",
+   "date": "2025-12-07",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    23.464,
+    25.625,
+    23.686,
+    25.825
+   ]
+  },
+  "cell_25.775_11.075": {
+   "file": "cell_25.775_11.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T095431_R079_T32RQP_20251222T133610 + S2C_MSIL2A_20251222T095431_R079_T32RPP_20251222T133610",
+   "date": "2025-12-22",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    10.96395,
+    25.675,
+    11.18605,
+    25.875
+   ]
+  },
+  "cell_25.925_-11.425": {
+   "file": "cell_25.925_-11.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251219T112511_R037_T29RKJ_20251219T142518",
+   "date": "2025-12-19",
+   "cloud_cover": 0.6,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -11.53619,
+    25.825,
+    -11.31381,
+    26.025
+   ]
+  },
+  "cell_25.975_27.875": {
+   "file": "cell_25.975_27.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251211T084351_R064_T35RNJ_20251211T122815",
+   "date": "2025-12-11",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    27.76376,
+    25.875,
+    27.98624,
+    26.075
+   ]
+  },
+  "cell_26.125_14.725": {
+   "file": "cell_26.125_14.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T094421_R036_T33RVJ_20251229T134611 + S2C_MSIL2A_20251229T094421_R036_T33RVK_20251229T134611",
+   "date": "2025-12-29",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    14.61362,
+    26.025,
+    14.83638,
+    26.225
+   ]
+  },
+  "cell_26.225_34.125": {
+   "file": "cell_26.225_34.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251105T082141_R121_T36RXQ_20251105T112609",
+   "date": "2025-11-05",
+   "cloud_cover": 0.14,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    34.01353,
+    26.125,
+    34.23647,
+    26.325
+   ]
+  },
+  "cell_26.325_2.375": {
+   "file": "cell_26.325_2.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251221T102441_R065_T31RDK_20251221T142411",
+   "date": "2025-12-21",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    2.26343,
+    26.225,
+    2.48657,
+    26.425
+   ]
+  },
+  "cell_26.325_33.925": {
+   "file": "cell_26.325_33.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251215T082351_R121_T36RWQ_20251215T121810",
+   "date": "2025-12-15",
+   "cloud_cover": 0.43,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    33.81343,
+    26.225,
+    34.03657,
+    26.425
+   ]
+  },
+  "cell_26.325_34.175": {
+   "file": "cell_26.325_34.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251105T082141_R121_T36RXQ_20251105T112609",
+   "date": "2025-11-05",
+   "cloud_cover": 0.14,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    34.06343,
+    26.225,
+    34.28657,
+    26.425
+   ]
+  },
+  "cell_26.375_2.675": {
+   "file": "cell_26.375_2.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251221T102441_R065_T31RDK_20251221T142411",
+   "date": "2025-12-21",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    2.56338,
+    26.275,
+    2.78662,
+    26.475
+   ]
+  },
+  "cell_26.475_12.775": {
+   "file": "cell_26.475_12.775.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T094421_R036_T33RTK_20251229T134611",
+   "date": "2025-12-29",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    12.66328,
+    26.375,
+    12.88672,
+    26.575
+   ]
+  },
+  "cell_26.625_2.075": {
+   "file": "cell_26.625_2.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T103451_R108_T31RDK_20251224T141812 + S2C_MSIL2A_20251224T103451_R108_T31RCK_20251224T141812",
+   "date": "2025-12-24",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    1.96314,
+    26.525,
+    2.18686,
+    26.725
+   ]
+  },
+  "cell_26.675_-7.525": {
+   "file": "cell_26.675_-7.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T110501_R094_T29RPK_20251223T144610",
+   "date": "2025-12-23",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -7.63691,
+    26.575,
+    -7.41309,
+    26.775
+   ]
+  },
+  "cell_26.875_-113.325": {
+   "file": "cell_26.875_-113.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251209T180751_R041_T12RTQ_20251209T203109",
+   "date": "2025-12-09",
+   "cloud_cover": 0.04,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -113.43711,
+    26.775,
+    -113.21289,
+    26.975
+   ]
+  },
+  "cell_26.925_-113.575": {
+   "file": "cell_26.925_-113.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251209T180751_R041_T12RTQ_20251209T203109",
+   "date": "2025-12-09",
+   "cloud_cover": 0.04,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -113.68716,
+    26.825,
+    -113.46284,
+    27.025
+   ]
+  },
+  "cell_26.925_10.625": {
+   "file": "cell_26.925_10.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251112T095251_R079_T32RPQ_20251112T134718",
+   "date": "2025-11-12",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    10.51284,
+    26.825,
+    10.73716,
+    27.025
+   ]
+  },
+  "cell_26.975_10.675": {
+   "file": "cell_26.975_10.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251112T095251_R079_T32RPQ_20251112T134718",
+   "date": "2025-11-12",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    10.56279,
+    26.875,
+    10.78721,
+    27.075
+   ]
+  },
+  "cell_27.025_14.425": {
+   "file": "cell_27.025_14.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T094421_R036_T33RVK_20251229T134611",
+   "date": "2025-12-29",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    14.31274,
+    26.925,
+    14.53726,
+    27.125
+   ]
+  },
+  "cell_27.075_-6.425": {
+   "file": "cell_27.075_-6.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T110501_R094_T29RQL_20251223T144610 + S2C_MSIL2A_20251223T110501_R094_T29RQK_20251223T144610",
+   "date": "2025-12-23",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -6.53731,
+    26.975,
+    -6.31269,
+    27.175
+   ]
+  },
+  "cell_27.075_13.775": {
+   "file": "cell_27.075_13.775.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T094421_R036_T33RUL_20251229T134611 + S2C_MSIL2A_20251229T094421_R036_T33RUK_20251229T134611",
+   "date": "2025-12-29",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    13.66269,
+    26.975,
+    13.88731,
+    27.175
+   ]
+  },
+  "cell_27.075_31.875": {
+   "file": "cell_27.075_31.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T083401_R021_T36RUR_20251228T123812 + S2C_MSIL2A_20251228T083401_R021_T36RUQ_20251228T123812",
    "date": "2025-12-28",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    30.26395,
-    25.675,
-    30.48605,
-    25.875
+    31.76269,
+    26.975,
+    31.98731,
+    27.175
    ]
   },
-  "cell_29.125_62.825": {
-   "file": "cell_29.125_62.825.jpg",
+  "cell_27.475_-3.125": {
+   "file": "cell_27.475_-3.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251230T105451_R051_T30RVR_20251230T143210",
+   "date": "2025-12-30",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -3.23771,
+    27.375,
+    -3.01229,
+    27.575
+   ]
+  },
+  "cell_27.775_-4.025": {
+   "file": "cell_27.775_-4.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251230T105451_R051_T30RUR_20251230T143210",
+   "date": "2025-12-30",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -4.13802,
+    27.675,
+    -3.91198,
+    27.875
+   ]
+  },
+  "cell_28.025_7.675": {
+   "file": "cell_28.025_7.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T101441_R022_T32RLS_20251228T140410 + S2C_MSIL2A_20251228T101441_R022_T32RLR_20251228T140410",
+   "date": "2025-12-28",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    7.56172,
+    27.925,
+    7.78828,
+    28.125
+   ]
+  },
+  "cell_28.075_29.975": {
+   "file": "cell_28.075_29.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251121T084301_R064_T35RQM_20251121T115516",
+   "date": "2025-11-21",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    29.86166,
+    27.975,
+    30.08834,
+    28.175
+   ]
+  },
+  "cell_28.275_18.175": {
+   "file": "cell_28.275_18.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T092421_R093_T34RBS_20251223T130317",
+   "date": "2025-12-23",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    18.06145,
+    28.175,
+    18.28855,
+    28.375
+   ]
+  },
+  "cell_28.325_7.625": {
+   "file": "cell_28.325_7.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T101441_R022_T32RLS_20251228T140410",
+   "date": "2025-12-28",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    7.5114,
+    28.225,
+    7.7386,
+    28.425
+   ]
+  },
+  "cell_28.375_20.075": {
+   "file": "cell_28.375_20.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T092421_R093_T34RDS_20251223T130317 + S2C_MSIL2A_20251223T092421_R093_T34RCS_20251223T130317",
+   "date": "2025-12-23",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    19.96135,
+    28.275,
+    20.18865,
+    28.475
+   ]
+  },
+  "cell_28.375_29.125": {
+   "file": "cell_28.375_29.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251121T084301_R064_T35RQM_20251121T115516 + S2C_MSIL2A_20251121T084301_R064_T35RPM_20251121T115516",
+   "date": "2025-11-21",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    29.01135,
+    28.275,
+    29.23865,
+    28.475
+   ]
+  },
+  "cell_28.475_29.025": {
+   "file": "cell_28.475_29.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251201T084331_R064_T35RPM_20251201T124515",
+   "date": "2025-12-01",
+   "cloud_cover": 0.79,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    28.91124,
+    28.375,
+    29.13876,
+    28.575
+   ]
+  },
+  "cell_28.475_7.975": {
+   "file": "cell_28.475_7.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251205T100421_R122_T32RLS_20251205T134513 + S2C_MSIL2A_20251205T100421_R122_T32RMS_20251205T134513",
+   "date": "2025-12-05",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    7.86124,
+    28.375,
+    8.08876,
+    28.575
+   ]
+  },
+  "cell_28.575_7.725": {
+   "file": "cell_28.575_7.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T101441_R022_T32RLS_20251228T140410",
+   "date": "2025-12-28",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    7.61113,
+    28.475,
+    7.83887,
+    28.675
+   ]
+  },
+  "cell_28.775_27.175": {
+   "file": "cell_28.775_27.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251214T085401_R107_T35RNM_20251214T125012",
+   "date": "2025-12-14",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    27.06091,
+    28.675,
+    27.28909,
+    28.875
+   ]
+  },
+  "cell_28.825_18.125": {
+   "file": "cell_28.825_18.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T092421_R093_T34RBS_20251223T130317 + S2C_MSIL2A_20251223T092421_R093_T33RYM_20251223T130317 + S2C_MSIL2A_20251223T092421_R093_T34RBT_20251223T130317",
+   "date": "2025-12-23",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    18.01086,
+    28.725,
+    18.23914,
+    28.925
+   ]
+  },
+  "cell_28.875_15.925": {
+   "file": "cell_28.875_15.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251206T093411_R136_T33RWM_20251206T133416 + S2C_MSIL2A_20251206T093411_R136_T33RWN_20251206T133416",
+   "date": "2025-12-06",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    15.8108,
+    28.775,
+    16.0392,
+    28.975
+   ]
+  },
+  "cell_28.875_63.125": {
+   "file": "cell_28.875_63.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T063311_R077_T41RNM_20251222T101518 + S2C_MSIL2A_20251222T063311_R077_T41RNN_20251222T101518",
+   "date": "2025-12-22",
+   "cloud_cover": 0.34,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    63.0108,
+    28.775,
+    63.2392,
+    28.975
+   ]
+  },
+  "cell_28.925_14.525": {
+   "file": "cell_28.925_14.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T094421_R036_T33RVN_20251229T134611 + S2C_MSIL2A_20251229T094421_R036_T33RVM_20251229T134611",
+   "date": "2025-12-29",
+   "cloud_cover": 0.33,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    14.41075,
+    28.825,
+    14.63925,
+    29.025
+   ]
+  },
+  "cell_28.975_62.825": {
+   "file": "cell_28.975_62.825.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
@@ -687,16 +3520,737 @@
    "date": "2025-12-22",
    "cloud_cover": 0.0,
    "gsd_m": 10,
+   "stretch": "visual",
    "width_km": 22,
    "bbox": [
-    62.71053,
-    29.025,
-    62.93947,
-    29.225
+    62.71069,
+    28.875,
+    62.93931,
+    29.075
    ]
   },
-  "cell_34.975_83.025": {
-   "file": "cell_34.975_83.025.jpg",
+  "cell_29.025_1.575": {
+   "file": "cell_29.025_1.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T103451_R108_T31RCN_20251224T141812",
+   "date": "2025-12-24",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    1.46064,
+    28.925,
+    1.68936,
+    29.125
+   ]
+  },
+  "cell_29.175_1.475": {
+   "file": "cell_29.175_1.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T103451_R108_T31RCN_20251224T141812",
+   "date": "2025-12-24",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    1.36047,
+    29.075,
+    1.58953,
+    29.275
+   ]
+  },
+  "cell_29.175_25.725": {
+   "file": "cell_29.175_25.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T085411_R107_T35RLN_20251224T130210",
+   "date": "2025-12-24",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    25.61047,
+    29.075,
+    25.83953,
+    29.275
+   ]
+  },
+  "cell_29.275_25.375": {
+   "file": "cell_29.275_25.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T090411_R007_T35RLN_20251227T130722",
+   "date": "2025-12-27",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    25.26036,
+    29.175,
+    25.48964,
+    29.375
+   ]
+  },
+  "cell_29.375_1.025": {
+   "file": "cell_29.375_1.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T103451_R108_T31RCN_20251224T141812 + S2C_MSIL2A_20251224T103451_R108_T31RBN_20251224T141812",
+   "date": "2025-12-24",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    0.91025,
+    29.275,
+    1.13975,
+    29.475
+   ]
+  },
+  "cell_29.475_-112.375": {
+   "file": "cell_29.475_-112.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251219T180801_R041_T12RUT_20251219T211610",
+   "date": "2025-12-19",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -112.48987,
+    29.375,
+    -112.26013,
+    29.575
+   ]
+  },
+  "cell_29.475_-8.275": {
+   "file": "cell_29.475_-8.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251126T111421_R137_T29RNN_20251126T151514",
+   "date": "2025-11-26",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -8.38987,
+    29.375,
+    -8.16013,
+    29.575
+   ]
+  },
+  "cell_29.575_63.375": {
+   "file": "cell_29.575_63.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T063311_R077_T41RNN_20251222T101518",
+   "date": "2025-12-22",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    63.26002,
+    29.475,
+    63.48998,
+    29.675
+   ]
+  },
+  "cell_29.675_-104.575": {
+   "file": "cell_29.675_-104.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251210T173741_R055_T13REN_20251210T203015",
+   "date": "2025-12-10",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -104.69009,
+    29.575,
+    -104.45991,
+    29.775
+   ]
+  },
+  "cell_29.675_-8.675": {
+   "file": "cell_29.675_-8.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251126T111421_R137_T29RNN_20251126T151514",
+   "date": "2025-11-26",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -8.79009,
+    29.575,
+    -8.55991,
+    29.775
+   ]
+  },
+  "cell_29.825_-114.475": {
+   "file": "cell_29.825_-114.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251202T181741_R084_T11RQP_20251202T205710",
+   "date": "2025-12-02",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -114.59027,
+    29.725,
+    -114.35973,
+    29.925
+   ]
+  },
+  "cell_29.925_57.875": {
+   "file": "cell_29.925_57.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251208T065301_R020_T40REU_20251208T100809",
+   "date": "2025-12-08",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    57.75962,
+    29.825,
+    57.99038,
+    30.025
+   ]
+  },
+  "cell_30.025_10.825": {
+   "file": "cell_30.025_10.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251112T095251_R079_T32RPU_20251112T134718",
+   "date": "2025-11-12",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    10.7095,
+    29.925,
+    10.9405,
+    30.125
+   ]
+  },
+  "cell_30.175_15.275": {
+   "file": "cell_30.175_15.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251129T094351_R036_T33RWP_20251129T134312",
+   "date": "2025-11-29",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    15.15933,
+    30.075,
+    15.39067,
+    30.275
+   ]
+  },
+  "cell_30.375_-105.725": {
+   "file": "cell_30.375_-105.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T174751_R098_T13RDP_20251223T203008",
+   "date": "2025-12-23",
+   "cloud_cover": 0.06,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -105.84091,
+    30.275,
+    -105.60909,
+    30.475
+   ]
+  },
+  "cell_30.575_22.825": {
+   "file": "cell_30.575_22.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251210T091411_R050_T34RFU_20251210T124815",
+   "date": "2025-12-10",
+   "cloud_cover": 0.31,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    22.70885,
+    30.475,
+    22.94115,
+    30.675
+   ]
+  },
+  "cell_30.675_10.575": {
+   "file": "cell_30.675_10.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T100441_R122_T32RPU_20251225T141015 + S2C_MSIL2A_20251225T100441_R122_T32RPV_20251225T141015",
+   "date": "2025-12-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    10.45873,
+    30.575,
+    10.69127,
+    30.775
+   ]
+  },
+  "cell_30.825_59.475": {
+   "file": "cell_30.825_59.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T064311_R120_T40RGV_20251225T102314",
+   "date": "2025-12-25",
+   "cloud_cover": 0.05,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    59.35855,
+    30.725,
+    59.59145,
+    30.925
+   ]
+  },
+  "cell_30.875_-105.775": {
+   "file": "cell_30.875_-105.775.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T174751_R098_T13RDQ_20251223T203008",
+   "date": "2025-12-23",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -105.89151,
+    30.775,
+    -105.65849,
+    30.975
+   ]
+  },
+  "cell_30.875_28.875": {
+   "file": "cell_30.875_28.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251221T084401_R064_T35RPQ_20251221T124111",
+   "date": "2025-12-21",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    28.75849,
+    30.775,
+    28.99151,
+    30.975
+   ]
+  },
+  "cell_30.925_20.125": {
+   "file": "cell_30.925_20.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T092421_R093_T34RDV_20251223T130317",
+   "date": "2025-12-23",
+   "cloud_cover": 0.07,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    20.00843,
+    30.825,
+    20.24157,
+    31.025
+   ]
+  },
+  "cell_30.925_59.325": {
+   "file": "cell_30.925_59.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T064311_R120_T40RGV_20251225T102314",
+   "date": "2025-12-25",
+   "cloud_cover": 0.05,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    59.20843,
+    30.825,
+    59.44157,
+    31.025
+   ]
+  },
+  "cell_31.025_13.975": {
+   "file": "cell_31.025_13.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T094421_R036_T33RUQ_20251229T134611 + S2C_MSIL2A_20251229T094421_R036_T33RVQ_20251229T134611",
+   "date": "2025-12-29",
+   "cloud_cover": 0.34,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    13.85831,
+    30.925,
+    14.09169,
+    31.125
+   ]
+  },
+  "cell_31.125_58.925": {
+   "file": "cell_31.125_58.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T064311_R120_T40RFV_20251225T102314",
+   "date": "2025-12-25",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    58.80818,
+    31.025,
+    59.04182,
+    31.225
+   ]
+  },
+  "cell_31.575_13.075": {
+   "file": "cell_31.575_13.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251112T095251_R079_T33RUQ_20251112T134718 + S2C_MSIL2A_20251112T095251_R079_T33SUR_20251112T134718",
+   "date": "2025-11-12",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    12.95762,
+    31.475,
+    13.19238,
+    31.675
+   ]
+  },
+  "cell_31.825_-106.525": {
+   "file": "cell_31.825_-106.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T174751_R098_T13SCR_20251223T203008",
+   "date": "2025-12-23",
+   "cloud_cover": 0.45,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -106.64269,
+    31.725,
+    -106.40731,
+    31.925
+   ]
+  },
+  "cell_31.875_-114.725": {
+   "file": "cell_31.875_-114.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251215T182801_R127_T11SQR_20251215T210308",
+   "date": "2025-12-15",
+   "cloud_cover": 0.17,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -114.84276,
+    31.775,
+    -114.60724,
+    31.975
+   ]
+  },
+  "cell_31.875_23.875": {
+   "file": "cell_31.875_23.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T090411_R007_T34SGA_20251227T130722",
+   "date": "2025-12-27",
+   "cloud_cover": 0.26,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    23.75724,
+    31.775,
+    23.99276,
+    31.975
+   ]
+  },
+  "cell_31.975_5.325": {
+   "file": "cell_31.975_5.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251221T102441_R065_T31SGR_20251221T142411",
+   "date": "2025-12-21",
+   "cloud_cover": 0.19,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    5.20711,
+    31.875,
+    5.44289,
+    32.075
+   ]
+  },
+  "cell_32.025_2.975": {
+   "file": "cell_32.025_2.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251204T103421_R108_T31SDR_20251204T141413",
+   "date": "2025-12-04",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    2.85705,
+    31.925,
+    3.09295,
+    32.125
+   ]
+  },
+  "cell_32.575_0.225": {
+   "file": "cell_32.575_0.225.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T104451_R008_T31SBS_20251227T143012",
+   "date": "2025-12-27",
+   "cloud_cover": 0.36,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    0.10633,
+    32.475,
+    0.34367,
+    32.675
+   ]
+  },
+  "cell_33.425_9.975": {
+   "file": "cell_33.425_9.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T100441_R122_T32SNC_20251225T141015 + S2C_MSIL2A_20251225T100441_R122_T32SNB_20251225T141015",
+   "date": "2025-12-25",
+   "cloud_cover": 0.17,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    9.85518,
+    33.325,
+    10.09482,
+    33.525
+   ]
+  },
+  "cell_33.575_-104.225": {
+   "file": "cell_33.575_-104.225.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251223T174751_R098_T13SET_20251224T175812",
+   "date": "2025-12-23",
+   "cloud_cover": 0.05,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -104.34502,
+    33.475,
+    -104.10498,
+    33.675
+   ]
+  },
+  "cell_33.675_7.925": {
+   "file": "cell_33.675_7.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250929T100821_R022_T32SLC_20250929T155516 + S2C_MSIL2A_20250929T100821_R022_T32SMC_20250929T155516",
+   "date": "2025-09-29",
+   "cloud_cover": 0.41,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    7.80484,
+    33.575,
+    8.04516,
+    33.775
+   ]
+  },
+  "cell_33.725_9.475": {
+   "file": "cell_33.725_9.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T100441_R122_T32SNC_20251225T141015",
+   "date": "2025-12-25",
+   "cloud_cover": 0.17,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    9.35477,
+    33.625,
+    9.59523,
+    33.825
+   ]
+  },
+  "cell_33.775_-106.325": {
+   "file": "cell_33.775_-106.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251103T174531_R098_T13SCT_20251103T204419",
+   "date": "2025-11-03",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -106.4453,
+    33.675,
+    -106.2047,
+    33.875
+   ]
+  },
+  "cell_34.525_84.975": {
+   "file": "cell_34.525_84.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T051231_R019_T45SUU_20251228T090010",
+   "date": "2025-12-28",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    84.85362,
+    34.425,
+    85.09638,
+    34.625
+   ]
+  },
+  "cell_34.575_-3.275": {
+   "file": "cell_34.575_-3.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251024T110141_R094_T30SVD_20251024T144316",
+   "date": "2025-10-24",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -3.39645,
+    34.475,
+    -3.15355,
+    34.675
+   ]
+  },
+  "cell_34.575_4.625": {
+   "file": "cell_34.575_4.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251221T102441_R065_T31SFU_20251221T142411",
+   "date": "2025-12-21",
+   "cloud_cover": 0.28,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    4.50355,
+    34.475,
+    4.74645,
+    34.675
+   ]
+  },
+  "cell_34.725_6.525": {
+   "file": "cell_34.725_6.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251211T102441_R065_T32SKD_20251211T142709",
+   "date": "2025-12-11",
+   "cloud_cover": 0.23,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    6.40333,
+    34.625,
+    6.64667,
+    34.825
+   ]
+  },
+  "cell_34.775_82.275": {
+   "file": "cell_34.775_82.275.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
@@ -707,68 +4261,176 @@
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    82.90296,
+    82.15326,
+    34.675,
+    82.39674,
+    34.875
+   ]
+  },
+  "cell_34.825_0.125": {
+   "file": "cell_34.825_0.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251207T104441_R008_T31SBU_20251207T142910",
+   "date": "2025-12-07",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    0.00318,
+    34.725,
+    0.24682,
+    34.925
+   ]
+  },
+  "cell_34.875_83.725": {
+   "file": "cell_34.875_83.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T051231_R019_T44SQD_20251228T090010",
+   "date": "2025-12-28",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    83.60311,
+    34.775,
+    83.84689,
+    34.975
+   ]
+  },
+  "cell_34.975_83.125": {
+   "file": "cell_34.975_83.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T051231_R019_T44SPD_20251228T090010",
+   "date": "2025-12-28",
+   "cloud_cover": 0.09,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    83.00296,
     34.875,
-    83.14704,
+    83.24704,
     35.075
    ]
   },
-  "cell_38.225_83.925": {
-   "file": "cell_38.225_83.925.jpg",
+  "cell_35.875_61.225": {
+   "file": "cell_35.875_61.225.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251118T051121_R019_T45STC_20251118T085417",
-   "date": "2025-11-18",
-   "cloud_cover": 0.0,
+   "item": "S2C_MSIL2A_20251225T064311_R120_T41SLV_20251225T102314",
+   "date": "2025-12-25",
+   "cloud_cover": 0.01,
    "gsd_m": 10,
-   "stretch": "B04-B03-B02 1000-9000",
+   "stretch": "visual",
    "width_km": 22,
    "bbox": [
-    83.79771,
-    38.125,
-    84.05229,
-    38.325
+    61.10159,
+    35.775,
+    61.34841,
+    35.975
    ]
   },
-  "cell_38.325_84.175": {
-   "file": "cell_38.325_84.175.jpg",
+  "cell_36.675_62.675": {
+   "file": "cell_36.675_62.675.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251118T051121_R019_T45STC_20251118T085417",
-   "date": "2025-11-18",
-   "cloud_cover": 0.0,
+   "item": "S2C_MSIL2A_20251222T063311_R077_T41SMA_20251222T101518",
+   "date": "2025-12-22",
+   "cloud_cover": 0.95,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    84.04753,
-    38.225,
-    84.30247,
-    38.425
+    62.55032,
+    36.575,
+    62.79968,
+    36.775
    ]
   },
-  "cell_38.375_84.125": {
-   "file": "cell_38.375_84.125.jpg",
+  "cell_37.075_73.825": {
+   "file": "cell_37.075_73.825.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251118T051121_R019_T45STC_20251118T085417",
-   "date": "2025-11-18",
+   "item": "S2C_MSIL2A_20251130T055221_R048_T43SCB_20251130T091809",
+   "date": "2025-11-30",
    "cloud_cover": 0.0,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    83.99744,
-    38.275,
-    84.25256,
-    38.475
+    73.69966,
+    36.975,
+    73.95034,
+    37.175
    ]
   },
-  "cell_38.675_84.625": {
-   "file": "cell_38.675_84.625.jpg",
+  "cell_37.375_73.275": {
+   "file": "cell_37.375_73.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251203T060231_R091_T43SCB_20251203T093719",
+   "date": "2025-12-03",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    73.14916,
+    37.275,
+    73.40084,
+    37.475
+   ]
+  },
+  "cell_37.575_65.025": {
+   "file": "cell_37.575_65.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251202T063241_R077_T41SPB_20251202T103810",
+   "date": "2025-12-02",
+   "cloud_cover": 0.3,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    64.89883,
+    37.475,
+    65.15117,
+    37.675
+   ]
+  },
+  "cell_37.825_65.675": {
+   "file": "cell_37.825_65.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251129T062231_R034_T41SQB_20251129T094419 + S2C_MSIL2A_20251129T062231_R034_T42STG_20251129T094419 + S2C_MSIL2A_20251129T062231_R034_T41SQC_20251129T094419",
+   "date": "2025-11-29",
+   "cloud_cover": 0.21,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    65.5484,
+    37.725,
+    65.8016,
+    37.925
+   ]
+  },
+  "cell_38.025_84.675": {
+   "file": "cell_38.025_84.675.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
@@ -779,10 +4441,442 @@
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    84.49691,
-    38.575,
-    84.75309,
-    38.775
+    84.54805,
+    37.925,
+    84.80195,
+    38.125
+   ]
+  },
+  "cell_38.575_84.875": {
+   "file": "cell_38.575_84.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251118T051121_R019_T45SUC_20251118T085417",
+   "date": "2025-11-18",
+   "cloud_cover": 0.04,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    84.74709,
+    38.475,
+    85.00291,
+    38.675
+   ]
+  },
+  "cell_38.625_61.375": {
+   "file": "cell_38.625_61.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251125T064231_R120_T41SLC_20251125T101914",
+   "date": "2025-11-25",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    61.247,
+    38.525,
+    61.503,
+    38.725
+   ]
+  },
+  "cell_38.725_64.675": {
+   "file": "cell_38.725_64.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251122T063211_R077_T41SPC_20251122T101215",
+   "date": "2025-11-22",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    64.54682,
+    38.625,
+    64.80318,
+    38.825
+   ]
+  },
+  "cell_39.025_-118.425": {
+   "file": "cell_39.025_-118.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251211T184811_R070_T11SLD_20251211T213609",
+   "date": "2025-12-11",
+   "cloud_cover": 0.05,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -118.55372,
+    38.925,
+    -118.29628,
+    39.125
+   ]
+  },
+  "cell_39.025_53.825": {
+   "file": "cell_39.025_53.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251107T072121_R006_T40SBJ_20251107T103717",
+   "date": "2025-11-07",
+   "cloud_cover": 0.26,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    53.69628,
+    38.925,
+    53.95372,
+    39.125
+   ]
+  },
+  "cell_39.075_73.525": {
+   "file": "cell_39.075_73.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251203T060231_R091_T43SCD_20251203T093719",
+   "date": "2025-12-03",
+   "cloud_cover": 0.34,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    73.39619,
+    38.975,
+    73.65381,
+    39.175
+   ]
+  },
+  "cell_39.125_55.875": {
+   "file": "cell_39.125_55.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251201T070251_R063_T40SCJ_20251201T101409 + S2C_MSIL2A_20251201T070251_R063_T40SDJ_20251201T101409",
+   "date": "2025-12-01",
+   "cloud_cover": 0.06,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    55.7461,
+    39.025,
+    56.0039,
+    39.225
+   ]
+  },
+  "cell_39.225_-118.075": {
+   "file": "cell_39.225_-118.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251211T184811_R070_T11SMD_20251211T213609 + S2C_MSIL2A_20251211T184811_R070_T11SLD_20251211T213609",
+   "date": "2025-12-11",
+   "cloud_cover": 0.39,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -118.20409,
+    39.125,
+    -117.94591,
+    39.325
+   ]
+  },
+  "cell_39.225_73.475": {
+   "file": "cell_39.225_73.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251203T060231_R091_T43SCD_20251203T093719",
+   "date": "2025-12-03",
+   "cloud_cover": 0.34,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    73.34591,
+    39.125,
+    73.60409,
+    39.325
+   ]
+  },
+  "cell_39.325_73.025": {
+   "file": "cell_39.325_73.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251203T060231_R091_T43SCD_20251203T093719",
+   "date": "2025-12-03",
+   "cloud_cover": 0.34,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    72.89573,
+    39.225,
+    73.15427,
+    39.425
+   ]
+  },
+  "cell_39.375_55.575": {
+   "file": "cell_39.375_55.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251124T071231_R106_T40SCJ_20251124T104215",
+   "date": "2025-11-24",
+   "cloud_cover": 0.67,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    55.44564,
+    39.275,
+    55.70436,
+    39.475
+   ]
+  },
+  "cell_39.375_65.275": {
+   "file": "cell_39.375_65.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251122T063211_R077_T41SPD_20251122T101215",
+   "date": "2025-11-22",
+   "cloud_cover": 0.13,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    65.14564,
+    39.275,
+    65.40436,
+    39.475
+   ]
+  },
+  "cell_39.675_-118.775": {
+   "file": "cell_39.675_-118.775.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251211T184811_R070_T11SLD_20251211T213609 + S2C_MSIL2A_20251211T184811_R070_T11TLE_20251211T213609",
+   "date": "2025-12-11",
+   "cloud_cover": 0.25,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -118.90492,
+    39.575,
+    -118.64508,
+    39.775
+   ]
+  },
+  "cell_40.025_52.975": {
+   "file": "cell_40.025_52.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251008T071821_R006_T39TXE_20251008T110617",
+   "date": "2025-10-08",
+   "cloud_cover": 0.98,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    52.84441,
+    39.925,
+    53.10559,
+    40.125
+   ]
+  },
+  "cell_40.125_76.875": {
+   "file": "cell_40.125_76.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251130T055221_R048_T43TFE_20251130T091809",
+   "date": "2025-11-30",
+   "cloud_cover": 0.04,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    76.74422,
+    40.025,
+    77.00578,
+    40.225
+   ]
+  },
+  "cell_40.475_57.025": {
+   "file": "cell_40.475_57.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251201T070251_R063_T40TDK_20251201T101409 + S2C_MSIL2A_20251201T070251_R063_T40TEK_20251201T101409",
+   "date": "2025-12-01",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    56.89354,
+    40.375,
+    57.15646,
+    40.575
+   ]
+  },
+  "cell_40.625_64.475": {
+   "file": "cell_40.625_64.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251125T064231_R120_T41TPF_20251125T101914 + S2C_MSIL2A_20251125T064231_R120_T41TPE_20251125T101914",
+   "date": "2025-11-25",
+   "cloud_cover": 0.32,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    64.34325,
+    40.525,
+    64.60675,
+    40.725
+   ]
+  },
+  "cell_40.925_63.275": {
+   "file": "cell_40.925_63.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251125T064231_R120_T41TNF_20251125T101914",
+   "date": "2025-11-25",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    63.14265,
+    40.825,
+    63.40735,
+    41.025
+   ]
+  },
+  "cell_40.975_56.725": {
+   "file": "cell_40.975_56.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251124T071231_R106_T40TDL_20251124T104215",
+   "date": "2025-11-24",
+   "cloud_cover": 0.87,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    56.59255,
+    40.875,
+    56.85745,
+    41.075
+   ]
+  },
+  "cell_40.975_76.275": {
+   "file": "cell_40.975_76.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251130T055221_R048_T43TFF_20251130T091809 + S2C_MSIL2A_20251130T055221_R048_T43TEF_20251130T091809",
+   "date": "2025-11-30",
+   "cloud_cover": 0.11,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    76.14255,
+    40.875,
+    76.40745,
+    41.075
+   ]
+  },
+  "cell_41.725_64.125": {
+   "file": "cell_41.725_64.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251125T064231_R120_T41TNG_20251125T101914",
+   "date": "2025-11-25",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    63.99101,
+    41.625,
+    64.25899,
+    41.825
+   ]
+  },
+  "cell_41.975_103.325": {
+   "file": "cell_41.975_103.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T040201_R004_T48TUM_20251227T072522",
+   "date": "2025-12-27",
+   "cloud_cover": 0.54,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    103.19049,
+    41.875,
+    103.45951,
+    42.075
+   ]
+  },
+  "cell_42.025_-119.025": {
+   "file": "cell_42.025_-119.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251214T185811_R113_T11TLG_20251214T214409",
+   "date": "2025-12-14",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -119.15962,
+    41.925,
+    -118.89038,
+    42.125
+   ]
+  },
+  "cell_42.025_61.125": {
+   "file": "cell_42.025_61.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251218T065321_R020_T41TLG_20251218T101710",
+   "date": "2025-12-18",
+   "cloud_cover": 0.06,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    60.99038,
+    41.925,
+    61.25962,
+    42.125
    ]
   },
   "cell_42.025_90.825": {
@@ -802,79 +4896,1250 @@
     42.125
    ]
   },
-  "cell_42.075_90.825": {
-   "file": "cell_42.075_90.825.jpg",
+  "cell_42.425_100.625": {
+   "file": "cell_42.425_100.625.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251202T045151_R076_T46TCM_20251202T082114",
-   "date": "2025-12-02",
-   "cloud_cover": 0.0,
-   "gsd_m": 10,
-   "width_km": 22,
-   "bbox": [
-    90.69028,
-    41.975,
-    90.95972,
-    42.175
-   ]
-  },
-  "cell_42.075_90.875": {
-   "file": "cell_42.075_90.875.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251202T045151_R076_T46TCM_20251202T082114",
-   "date": "2025-12-02",
-   "cloud_cover": 0.0,
+   "item": "S2C_MSIL2A_20251110T041511_R047_T47TPH_20251110T062715 + S2C_MSIL2A_20251110T041511_R047_T47TPG_20251110T062715",
+   "date": "2025-11-10",
+   "cloud_cover": 0.06,
    "gsd_m": 10,
    "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    90.74028,
-    41.975,
-    91.00972,
-    42.175
+    100.48953,
+    42.325,
+    100.76047,
+    42.525
    ]
   },
-  "cell_42.075_90.925": {
-   "file": "cell_42.075_90.925.jpg",
+  "cell_42.575_90.325": {
+   "file": "cell_42.575_90.325.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20251202T045151_R076_T46TCM_20251202T082114",
+   "item": "S2C_MSIL2A_20251202T045151_R076_T45TYH_20251202T082114",
    "date": "2025-12-02",
-   "cloud_cover": 0.0,
-   "gsd_m": 10,
-   "stretch": "B04-B03-B02 1000-9000",
-   "width_km": 22,
-   "bbox": [
-    90.79028,
-    41.975,
-    91.05972,
-    42.175
-   ]
-  },
-  "cell_81.275_-71.675": {
-   "file": "cell_81.275_-71.675.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2C_MSIL2A_20250819T203901_R014_T19XDL_20250820T013318",
-   "date": "2025-08-19",
-   "cloud_cover": 0.88,
+   "cloud_cover": 0.02,
    "gsd_m": 10,
    "stretch": "visual",
    "width_km": 22,
    "bbox": [
-    -72.33423,
-    81.175,
-    -71.01577,
-    81.375
+    90.1892,
+    42.475,
+    90.4608,
+    42.675
    ]
   },
-  "cell_82.225_-34.075": {
-   "file": "cell_82.225_-34.075.jpg",
+  "cell_43.025_105.275": {
+   "file": "cell_43.025_105.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T040201_R004_T48TWN_20251227T063010",
+   "date": "2025-12-27",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    105.13821,
+    42.925,
+    105.41179,
+    43.125
+   ]
+  },
+  "cell_43.075_105.375": {
+   "file": "cell_43.075_105.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T040201_R004_T48TWN_20251227T063010",
+   "date": "2025-12-27",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    105.2381,
+    42.975,
+    105.5119,
+    43.175
+   ]
+  },
+  "cell_43.475_103.925": {
+   "file": "cell_43.475_103.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251227T040201_R004_T48TVP_20251227T063010",
+   "date": "2025-12-27",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    103.7872,
+    43.375,
+    104.0628,
+    43.575
+   ]
+  },
+  "cell_43.475_90.025": {
+   "file": "cell_43.475_90.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251202T045151_R076_T45TYJ_20251202T082114",
+   "date": "2025-12-02",
+   "cloud_cover": 0.1,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    89.8872,
+    43.375,
+    90.1628,
+    43.575
+   ]
+  },
+  "cell_43.975_53.475": {
+   "file": "cell_43.975_53.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251107T072121_R006_T39TXJ_20251107T103717",
+   "date": "2025-11-07",
+   "cloud_cover": 0.34,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    53.33604,
+    43.875,
+    53.61396,
+    44.075
+   ]
+  },
+  "cell_43.975_59.225": {
+   "file": "cell_43.975_59.225.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250902T065641_R063_T40TFP_20250902T111117",
+   "date": "2025-09-02",
+   "cloud_cover": 0.57,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    59.08604,
+    43.875,
+    59.36396,
+    44.075
+   ]
+  },
+  "cell_44.075_97.125": {
+   "file": "cell_44.075_97.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251226T043221_R133_T47TLJ_20251226T074011",
+   "date": "2025-12-26",
+   "cloud_cover": 0.07,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    96.98581,
+    43.975,
+    97.26419,
+    44.175
+   ]
+  },
+  "cell_44.175_106.725": {
+   "file": "cell_44.175_106.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251204T035141_R104_T48TXP_20251204T073217 + S2C_MSIL2A_20251204T035141_R104_T48TXQ_20251204T073217",
+   "date": "2025-12-04",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    106.58557,
+    44.075,
+    106.86443,
+    44.275
+   ]
+  },
+  "cell_44.325_110.175": {
+   "file": "cell_44.325_110.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251121T034501_R061_T49TDK_20251121T061012",
+   "date": "2025-11-21",
+   "cloud_cover": 0.82,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    110.03522,
+    44.225,
+    110.31478,
+    44.425
+   ]
+  },
+  "cell_44.325_54.625": {
+   "file": "cell_44.325_54.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250829T071641_R006_T39TYK_20250829T110319",
+   "date": "2025-08-29",
+   "cloud_cover": 0.33,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    54.48522,
+    44.225,
+    54.76478,
+    44.425
+   ]
+  },
+  "cell_44.375_64.025": {
+   "file": "cell_44.375_64.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251016T063851_R120_T41TNK_20251016T100622",
+   "date": "2025-10-16",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    63.8851,
+    44.275,
+    64.1649,
+    44.475
+   ]
+  },
+  "cell_44.375_97.275": {
+   "file": "cell_44.375_97.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251226T043221_R133_T47TLK_20251226T074011",
+   "date": "2025-12-26",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    97.1351,
+    44.275,
+    97.4149,
+    44.475
+   ]
+  },
+  "cell_44.475_52.325": {
+   "file": "cell_44.475_52.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251110T073141_R049_T39TXK_20251110T105511 + S2C_MSIL2A_20251110T073141_R049_T39TWK_20251110T105511",
+   "date": "2025-11-10",
+   "cloud_cover": 1.5,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    52.18486,
+    44.375,
+    52.46514,
+    44.575
+   ]
+  },
+  "cell_44.525_94.575": {
+   "file": "cell_44.525_94.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T044221_R033_T46TFQ_20251229T075810",
+   "date": "2025-12-29",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    94.43474,
+    44.425,
+    94.71526,
+    44.625
+   ]
+  },
+  "cell_44.775_58.925": {
+   "file": "cell_44.775_58.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20230710T065629_R063_T40TFQ_20241021T062519",
+   "date": "2023-07-10",
+   "cloud_cover": 0.6,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    58.78413,
+    44.675,
+    59.06587,
+    44.875
+   ]
+  },
+  "cell_44.825_74.475": {
+   "file": "cell_44.825_74.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251014T055821_R091_T43TDK_20251014T095517",
+   "date": "2025-10-14",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    74.33401,
+    44.725,
+    74.61599,
+    44.925
+   ]
+  },
+  "cell_44.825_95.175": {
+   "file": "cell_44.825_95.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T044221_R033_T46TFQ_20251229T075810",
+   "date": "2025-12-29",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    95.03401,
+    44.725,
+    95.31599,
+    44.925
+   ]
+  },
+  "cell_44.925_100.325": {
+   "file": "cell_44.925_100.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251113T042111_R090_T47TNK_20251113T072909 + S2C_MSIL2A_20251113T042111_R090_T47TPK_20251113T072909",
+   "date": "2025-11-13",
+   "cloud_cover": 0.08,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    100.18376,
+    44.825,
+    100.46624,
+    45.025
+   ]
+  },
+  "cell_45.325_113.975": {
+   "file": "cell_45.325_113.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251118T033501_R018_T49TGL_20251118T060416",
+   "date": "2025-11-18",
+   "cloud_cover": 0.03,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    113.83277,
+    45.225,
+    114.11723,
+    45.425
+   ]
+  },
+  "cell_45.375_96.875": {
+   "file": "cell_45.375_96.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251226T043221_R133_T47TLL_20251226T064407",
+   "date": "2025-12-26",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    96.73264,
+    45.275,
+    97.01736,
+    45.475
+   ]
+  },
+  "cell_45.475_69.475": {
+   "file": "cell_45.475_69.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251109T062111_R034_T42TWR_20251109T095409",
+   "date": "2025-11-09",
+   "cloud_cover": 0.35,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    69.33239,
+    45.375,
+    69.61761,
+    45.575
+   ]
+  },
+  "cell_45.575_93.775": {
+   "file": "cell_45.575_93.775.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T044221_R033_T46TER_20251229T075810",
+   "date": "2025-12-29",
+   "cloud_cover": 0.21,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    93.63214,
+    45.475,
+    93.91786,
+    45.675
+   ]
+  },
+  "cell_45.625_73.525": {
+   "file": "cell_45.625_73.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251014T055821_R091_T43TCL_20251014T095517",
+   "date": "2025-10-14",
+   "cloud_cover": 0.02,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    73.38201,
+    45.525,
+    73.66799,
+    45.725
+   ]
+  },
+  "cell_45.675_113.225": {
+   "file": "cell_45.675_113.225.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251205T032131_R118_T49TFL_20251205T065212",
+   "date": "2025-12-05",
+   "cloud_cover": 0.26,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    113.08188,
+    45.575,
+    113.36812,
+    45.775
+   ]
+  },
+  "cell_45.925_93.925": {
+   "file": "cell_45.925_93.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T044221_R033_T46TER_20251229T075810",
+   "date": "2025-12-29",
+   "cloud_cover": 0.21,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    93.78124,
+    45.825,
+    94.06876,
+    46.025
+   ]
+  },
+  "cell_46.025_74.225": {
+   "file": "cell_46.025_74.225.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250904T055651_R091_T43TDM_20250904T095057 + S2C_MSIL2A_20250904T055651_R091_T43TDL_20250904T095057",
+   "date": "2025-09-04",
+   "cloud_cover": 0.12,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    74.08098,
+    45.925,
+    74.36902,
+    46.125
+   ]
+  },
+  "cell_46.325_98.025": {
+   "file": "cell_46.325_98.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251226T043221_R133_T47TMM_20251226T064407",
+   "date": "2025-12-26",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    97.88019,
+    46.225,
+    98.16981,
+    46.425
+   ]
+  },
+  "cell_46.575_100.175": {
+   "file": "cell_46.575_100.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251203T042151_R090_T47TNM_20251203T063910",
+   "date": "2025-12-03",
+   "cloud_cover": 0.81,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    100.02953,
+    46.475,
+    100.32047,
+    46.675
+   ]
+  },
+  "cell_46.675_92.025": {
+   "file": "cell_46.675_92.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251212T045221_R076_T46TDS_20251212T081316",
+   "date": "2025-12-12",
+   "cloud_cover": 0.88,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    91.87926,
+    46.575,
+    92.17074,
+    46.775
+   ]
+  },
+  "cell_47.025_99.525": {
+   "file": "cell_47.025_99.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251226T043221_R133_T47TNN_20251226T064407",
+   "date": "2025-12-26",
+   "cloud_cover": 0.07,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    99.3783,
+    46.925,
+    99.6717,
+    47.125
+   ]
+  },
+  "cell_47.075_93.375": {
+   "file": "cell_47.075_93.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T045221_R076_T46TET_20251222T082510",
+   "date": "2025-12-22",
+   "cloud_cover": 0.37,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    93.22817,
+    46.975,
+    93.52183,
+    47.175
+   ]
+  },
+  "cell_47.125_109.875": {
+   "file": "cell_47.125_109.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251121T034501_R061_T49TDN_20251121T061012",
+   "date": "2025-11-21",
+   "cloud_cover": 0.32,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    109.72803,
+    47.025,
+    110.02197,
+    47.225
+   ]
+  },
+  "cell_47.175_97.275": {
+   "file": "cell_47.175_97.275.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251229T044221_R033_T47TLN_20251229T065108",
+   "date": "2025-12-29",
+   "cloud_cover": 0.11,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    97.12789,
+    47.075,
+    97.42211,
+    47.275
+   ]
+  },
+  "cell_47.425_93.875": {
+   "file": "cell_47.425_93.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T045221_R076_T46TET_20251222T082510",
+   "date": "2025-12-22",
+   "cloud_cover": 0.37,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    93.72719,
+    47.325,
+    94.02281,
+    47.525
+   ]
+  },
+  "cell_47.625_93.575": {
+   "file": "cell_47.625_93.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T045221_R076_T46TET_20251222T082510",
+   "date": "2025-12-22",
+   "cloud_cover": 0.37,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    93.42663,
+    47.525,
+    93.72337,
+    47.725
+   ]
+  },
+  "cell_47.825_109.925": {
+   "file": "cell_47.825_109.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251204T035141_R104_T49UDP_20251204T073217 + S2C_MSIL2A_20251204T035141_R104_T49TDN_20251204T073217",
+   "date": "2025-12-04",
+   "cloud_cover": 0.12,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    109.77606,
+    47.725,
+    110.07394,
+    47.925
+   ]
+  },
+  "cell_47.925_109.875": {
+   "file": "cell_47.925_109.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251204T035141_R104_T49UDP_20251204T073217",
+   "date": "2025-12-04",
+   "cloud_cover": 0.1,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    109.72577,
+    47.825,
+    110.02423,
+    48.025
+   ]
+  },
+  "cell_48.275_92.425": {
+   "file": "cell_48.275_92.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T045221_R076_T46UDU_20251222T082510",
+   "date": "2025-12-22",
+   "cloud_cover": 0.79,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    92.27475,
+    48.175,
+    92.57525,
+    48.375
+   ]
+  },
+  "cell_48.325_94.425": {
+   "file": "cell_48.325_94.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251222T045221_R076_T46UFU_20251222T082510 + S2C_MSIL2A_20251222T045221_R076_T46UEU_20251222T082510",
+   "date": "2025-12-22",
+   "cloud_cover": 0.44,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    94.2746,
+    48.225,
+    94.5754,
+    48.425
+   ]
+  },
+  "cell_48.475_114.075": {
+   "file": "cell_48.475_114.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251009T032651_R018_T49UGP_20251009T102921",
+   "date": "2025-10-09",
+   "cloud_cover": 0.59,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    113.92416,
+    48.375,
+    114.22584,
+    48.575
+   ]
+  },
+  "cell_48.825_88.675": {
+   "file": "cell_48.825_88.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T051231_R019_T45UXQ_20251228T090010",
+   "date": "2025-12-28",
+   "cloud_cover": 0.08,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    88.52311,
+    48.725,
+    88.82689,
+    48.925
+   ]
+  },
+  "cell_49.575_89.625": {
+   "file": "cell_49.575_89.625.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251228T051231_R019_T45UXQ_20251228T090010 + S2C_MSIL2A_20251228T051231_R019_T45UXR_20251228T090010",
+   "date": "2025-12-28",
+   "cloud_cover": 0.34,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    89.47079,
+    49.475,
+    89.77921,
+    49.675
+   ]
+  },
+  "cell_49.675_91.075": {
+   "file": "cell_49.675_91.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251225T050231_R119_T46UCA_20251225T084813",
+   "date": "2025-12-25",
+   "cloud_cover": 0.31,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    90.92047,
+    49.575,
+    91.22953,
+    49.775
+   ]
+  },
+  "cell_5.975_47.525": {
+   "file": "cell_5.975_47.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251224T071321_R106_T38NQM_20251224T103315",
+   "date": "2025-12-24",
+   "cloud_cover": 0.67,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    47.42445,
+    5.875,
+    47.62555,
+    6.075
+   ]
+  },
+  "cell_50.375_92.725": {
+   "file": "cell_50.375_92.725.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250926T045711_R119_T46UDA_20250926T101614",
+   "date": "2025-09-26",
+   "cloud_cover": 0.06,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    92.5682,
+    50.275,
+    92.8818,
+    50.475
+   ]
+  },
+  "cell_50.925_92.025": {
+   "file": "cell_50.925_92.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250926T045711_R119_T46UDB_20250926T101614",
+   "date": "2025-09-26",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    91.86635,
+    50.825,
+    92.18365,
+    51.025
+   ]
+  },
+  "cell_50.975_-111.575": {
+   "file": "cell_50.975_-111.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251009T183311_R027_T12UVB_20251009T232916",
+   "date": "2025-10-09",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -111.73382,
+    50.875,
+    -111.41618,
+    51.075
+   ]
+  },
+  "cell_51.875_-110.125": {
+   "file": "cell_51.875_-110.125.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251125T182721_R127_T12UWC_20251126T004211",
+   "date": "2025-11-25",
+   "cloud_cover": 0.07,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -110.28698,
+    51.775,
+    -109.96302,
+    51.975
+   ]
+  },
+  "cell_55.475_159.975": {
+   "file": "cell_55.475_159.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20230517T003609_R002_T57UWB_20230517T042344",
+   "date": "2023-05-17",
+   "cloud_cover": 0.28,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    159.79856,
+    55.375,
+    160.15144,
+    55.575
+   ]
+  },
+  "cell_56.025_160.425": {
+   "file": "cell_56.025_160.425.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250528T002631_R102_T57VWC_20250528T034017",
+   "date": "2025-05-28",
+   "cloud_cover": 0.5,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    160.24606,
+    55.925,
+    160.60394,
+    56.125
+   ]
+  },
+  "cell_56.175_160.575": {
+   "file": "cell_56.175_160.575.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250528T002631_R102_T57VWC_20250528T034017",
+   "date": "2025-05-28",
+   "cloud_cover": 0.5,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    160.39536,
+    56.075,
+    160.75464,
+    56.275
+   ]
+  },
+  "cell_75.475_-107.075": {
+   "file": "cell_75.475_-107.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20230728T193909_R042_T13XDD_20241013T075725",
+   "date": "2023-07-28",
+   "cloud_cover": 0.39,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -107.47372,
+    75.375,
+    -106.67628,
+    75.575
+   ]
+  },
+  "cell_75.775_-107.925": {
+   "file": "cell_75.775_-107.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20250729T201849_R071_T13XDE_20250729T223939",
+   "date": "2025-07-29",
+   "cloud_cover": 0.98,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -108.33195,
+    75.675,
+    -107.51805,
+    75.875
+   ]
+  },
+  "cell_75.975_-106.825": {
+   "file": "cell_75.975_-106.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20250729T201849_R071_T13XDE_20250729T223939",
+   "date": "2025-07-29",
+   "cloud_cover": 0.98,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -107.23763,
+    75.875,
+    -106.41237,
+    76.075
+   ]
+  },
+  "cell_78.525_-109.975": {
+   "file": "cell_78.525_-109.975.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20230715T211039_R143_T12XWN_20240911T131524",
+   "date": "2023-07-15",
+   "cloud_cover": 0.01,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -110.47766,
+    78.425,
+    -109.47234,
+    78.625
+   ]
+  },
+  "cell_78.625_-68.075": {
+   "file": "cell_78.625_-68.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250725T180941_R084_T19XEH_20250725T225215",
+   "date": "2025-07-25",
+   "cloud_cover": 0.39,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -68.58202,
+    78.525,
+    -67.56798,
+    78.725
+   ]
+  },
+  "cell_78.775_-68.525": {
+   "file": "cell_78.775_-68.525.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250725T180941_R084_T19XEH_20250725T225215 + S2C_MSIL2A_20250725T180941_R084_T19XDH_20250725T225215",
+   "date": "2025-07-25",
+   "cloud_cover": 0.39,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -69.03871,
+    78.675,
+    -68.01129,
+    78.875
+   ]
+  },
+  "cell_78.825_-68.875": {
+   "file": "cell_78.825_-68.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250725T180941_R084_T19XDH_20250725T225215 + S2C_MSIL2A_20250725T180941_R084_T19XEH_20250725T225215",
+   "date": "2025-07-25",
+   "cloud_cover": 0.39,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -69.39098,
+    78.725,
+    -68.35902,
+    78.925
+   ]
+  },
+  "cell_8.725_48.325": {
+   "file": "cell_8.725_48.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251201T070251_R063_T38PRQ_20251201T102116",
+   "date": "2025-12-01",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    48.22383,
+    8.625,
+    48.42617,
+    8.825
+   ]
+  },
+  "cell_8.875_48.925": {
+   "file": "cell_8.875_48.925.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20251201T070251_R063_T39PTK_20251201T102116",
+   "date": "2025-12-01",
+   "cloud_cover": 0.0,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    48.82379,
+    8.775,
+    49.02621,
+    8.975
+   ]
+  },
+  "cell_80.425_-21.025": {
+   "file": "cell_80.425_-21.025.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250827T163921_R126_T27XVK_20250827T193412 + S2C_MSIL2A_20250827T163921_R126_T27XWK_20250827T193412",
+   "date": "2025-08-27",
+   "cloud_cover": 0.93,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -21.62618,
+    80.325,
+    -20.42382,
+    80.525
+   ]
+  },
+  "cell_80.425_-21.875": {
+   "file": "cell_80.425_-21.875.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250831T161921_R040_T27XVK_20250831T195215",
+   "date": "2025-08-31",
+   "cloud_cover": 0.35,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -22.47618,
+    80.325,
+    -21.27382,
+    80.525
+   ]
+  },
+  "cell_81.475_-61.075": {
+   "file": "cell_81.475_-61.075.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20240705T194909_R085_T21XVL_20240706T042814",
+   "date": "2024-07-05",
+   "cloud_cover": 0.85,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -61.74958,
+    81.375,
+    -60.40042,
+    81.575
+   ]
+  },
+  "cell_81.825_-68.775": {
+   "file": "cell_81.825_-68.775.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20240706T210029_R100_T18XWR_20240707T002421 + S2B_MSIL2A_20240706T210029_R100_T20XMR_20240707T002112 + S2B_MSIL2A_20240706T210029_R100_T19XDL_20240707T002259",
+   "date": "2024-07-06",
+   "cloud_cover": 0.48,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -69.47825,
+    81.725,
+    -68.07175,
+    81.925
+   ]
+  },
+  "cell_81.925_-66.375": {
+   "file": "cell_81.925_-66.375.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20230821T191919_R099_T19XEM_20241024T175144 + S2B_MSIL2A_20230821T191919_R099_T19XEL_20241024T175144",
+   "date": "2023-08-21",
+   "cloud_cover": 0.75,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -67.0869,
+    81.825,
+    -65.6631,
+    82.025
+   ]
+  },
+  "cell_81.925_-69.175": {
+   "file": "cell_81.925_-69.175.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20230705T192909_R142_T18XWS_20230706T011434",
+   "date": "2023-07-05",
+   "cloud_cover": 0.22,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -69.8869,
+    81.825,
+    -68.4631,
+    82.025
+   ]
+  },
+  "cell_81.975_-25.325": {
+   "file": "cell_81.975_-25.325.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250831T175931_R041_T26XNS_20250831T211915",
+   "date": "2025-08-31",
+   "cloud_cover": 0.28,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -26.04131,
+    81.875,
+    -24.60869,
+    82.075
+   ]
+  },
+  "cell_82.025_-36.525": {
+   "file": "cell_82.025_-36.525.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
@@ -882,131 +6147,121 @@
    "date": "2024-08-02",
    "cloud_cover": 0.58,
    "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
    "width_km": 22,
    "bbox": [
-    -34.81419,
+    -37.24577,
+    81.925,
+    -35.80423,
+    82.125
+   ]
+  },
+  "cell_82.075_-36.475": {
+   "file": "cell_82.075_-36.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20240802T190919_R056_T24XWS_20240806T070614",
+   "date": "2024-08-02",
+   "cloud_cover": 0.58,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -37.20029,
+    81.975,
+    -35.74971,
+    82.175
+   ]
+  },
+  "cell_82.125_-49.475": {
+   "file": "cell_82.125_-49.475.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2C_MSIL2A_20250819T185941_R013_T22XES_20250820T001514",
+   "date": "2025-08-19",
+   "cloud_cover": 1.44,
+   "gsd_m": 10,
+   "stretch": "visual",
+   "width_km": 22,
+   "bbox": [
+    -50.20486,
+    82.025,
+    -48.74514,
+    82.225
+   ]
+  },
+  "cell_82.175_-28.825": {
+   "file": "cell_82.175_-28.825.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20250819T194859_R085_T25XEM_20250819T220555",
+   "date": "2025-08-19",
+   "cloud_cover": 0.9,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -29.5595,
+    82.075,
+    -28.0905,
+    82.275
+   ]
+  },
+  "cell_82.225_-68.675": {
+   "file": "cell_82.225_-68.675.jpg",
+   "collection": "sentinel-2-l2a",
+   "source": "Sentinel-2 L2A",
+   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
+   "item": "S2B_MSIL2A_20230815T203849_R014_T18XWS_20241015T051350",
+   "date": "2023-08-15",
+   "cloud_cover": 1.66,
+   "gsd_m": 10,
+   "stretch": "B04-B03-B02 1000-9000",
+   "width_km": 22,
+   "bbox": [
+    -69.41419,
     82.125,
-    -33.33581,
+    -67.93581,
     82.325
    ]
   },
-  "cell_82.225_-34.125": {
-   "file": "cell_82.225_-34.125.jpg",
+  "cell_82.425_-26.975": {
+   "file": "cell_82.425_-26.975.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2B_MSIL2A_20240802T190919_R056_T24XWS_20240806T070614",
-   "date": "2024-08-02",
-   "cloud_cover": 0.58,
+   "item": "S2C_MSIL2A_20250723T172921_R055_T25XEM_20250723T200512",
+   "date": "2025-07-23",
+   "cloud_cover": 0.33,
    "gsd_m": 10,
+   "stretch": "visual",
    "width_km": 22,
    "bbox": [
-    -34.86419,
-    82.125,
-    -33.38581,
-    82.325
-   ]
-  },
-  "cell_82.225_-34.175": {
-   "file": "cell_82.225_-34.175.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2B_MSIL2A_20240802T190919_R056_T24XWS_20240806T070614",
-   "date": "2024-08-02",
-   "cloud_cover": 0.58,
-   "gsd_m": 10,
-   "width_km": 22,
-   "bbox": [
-    -34.91419,
-    82.125,
-    -33.43581,
-    82.325
-   ]
-  },
-  "cell_82.375_-34.175": {
-   "file": "cell_82.375_-34.175.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2B_MSIL2A_20240802T190919_R056_T24XWS_20240806T070614",
-   "date": "2024-08-02",
-   "cloud_cover": 0.58,
-   "gsd_m": 10,
-   "width_km": 22,
-   "bbox": [
-    -34.92864,
-    82.275,
-    -33.42136,
-    82.475
-   ]
-  },
-  "cell_82.425_-34.025": {
-   "file": "cell_82.425_-34.025.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2B_MSIL2A_20240802T190919_R056_T24XWS_20240806T070614",
-   "date": "2024-08-02",
-   "cloud_cover": 0.58,
-   "gsd_m": 10,
-   "width_km": 22,
-   "bbox": [
-    -34.78359,
+    -27.73359,
     82.325,
-    -33.26641,
+    -26.21641,
     82.525
    ]
   },
-  "cell_82.475_-34.025": {
-   "file": "cell_82.475_-34.025.jpg",
+  "cell_9.175_-71.775": {
+   "file": "cell_9.175_-71.775.jpg",
    "collection": "sentinel-2-l2a",
    "source": "Sentinel-2 L2A",
    "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2B_MSIL2A_20240802T190919_R056_T24XWS_20240806T070614",
-   "date": "2024-08-02",
-   "cloud_cover": 0.58,
+   "item": "S2B_MSIL2A_20231012T151709_R125_T18PZR_20231012T212747",
+   "date": "2023-10-12",
+   "cloud_cover": 8.63,
    "gsd_m": 10,
+   "stretch": "visual",
    "width_km": 22,
    "bbox": [
-    -34.7886,
-    82.375,
-    -33.2614,
-    82.575
-   ]
-  },
-  "cell_82.475_-34.075": {
-   "file": "cell_82.475_-34.075.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2B_MSIL2A_20240802T190919_R056_T24XWS_20240806T070614",
-   "date": "2024-08-02",
-   "cloud_cover": 0.58,
-   "gsd_m": 10,
-   "width_km": 22,
-   "bbox": [
-    -34.8386,
-    82.375,
-    -33.3114,
-    82.575
-   ]
-  },
-  "cell_82.575_-33.775": {
-   "file": "cell_82.575_-33.775.jpg",
-   "collection": "sentinel-2-l2a",
-   "source": "Sentinel-2 L2A",
-   "credit": "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer",
-   "item": "S2B_MSIL2A_20240802T190919_R056_T24XWS_20240806T070614",
-   "date": "2024-08-02",
-   "cloud_cover": 0.58,
-   "gsd_m": 10,
-   "width_km": 22,
-   "bbox": [
-    -34.54882,
-    82.475,
-    -33.00118,
-    82.675
+    -71.8763,
+    9.075,
+    -71.6737,
+    9.275
    ]
   },
   "death-valley": {

@@ -14,6 +14,34 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Búsqueda mundial (727 regiones) y un solo sistema de puntajes
+**Autor:** @Ssalazarp420
+
+- **Pedido:** implementar en la app los datos nuevos de Marco (búsqueda mundial y composición de la roca) y homogeneizar todo, para que los puntajes se manejen de una sola manera. Los sitios de Colombia salían muy bajos frente a los demás. Además, la sugerencia que recibió Marco: presentar los puntajes por dimensión («mejor análogo de relieve», «mejor análogo térmico») y mostrar el análisis de sensibilidad.
+- **Integración de la rama de Marco** (`feature/compare_analysis`, hasta `e75ecdb`):
+  - `data/earth_all.csv.gz`: ~691 000 celdas en 727 regiones (la grilla mundial de 2° sobre zonas áridas y frías), y `targets.csv` con el tipo de roca calibrado (`src/composition.py`, `docs/COMPOSICION.md`).
+  - Su `src/export_web.py` chocaba con el nuestro: pasó a `src/export_analogos.py` (escribe `analogos.json`, que la app aún no usa).
+  - Se quitaron los ganchos `predev`/`prebuild` que copiaban ~100 MB de PNG de `maps/` al despliegue; queda `npm run copy-images`.
+- **Export (`src/export_web.py`, versión 3 del contrato):**
+  - Mismos pesos que los resultados de Marco (`make_results.WEIGHTS`: sin elevación, tipo de roca a 0,5).
+  - **Puntaje por dimensión** con la misma fórmula: relieve (pendiente, rugosidad), temperatura, superficie y roca (albedo, emisividad), aridez (lluvia, vegetación). `null` si no es comparable (la temperatura en la Luna).
+  - **Listas (`rankings`)**: 100 lugares por cuerpo y 25 por dimensión, uno por región y separados al menos 300 km (regla de `make_top_analogos.py`). Sin la separación, la grilla llenaba la lista de cuadros vecinos de Egipto. Los empates en 1,00 de una dimensión se ordenan por el puntaje general.
+  - Nombres en español e inglés (`src/region_names.py`): los cuadros de la grilla se llaman como su país y la app agrega las coordenadas.
+  - Se quitó el índice PAI de Santiago de los datos de la app: un solo sistema de puntajes. Su caracterización sigue como dato descriptivo.
+  - Tarda ~12 minutos (casi todo es la prueba de robustez de 100 variaciones por sitio) y genera un `comparisons.json` de 2,1 MB (~350 KB comprimido).
+- **App:**
+  - **Descubrir**: los 100 lugares por cuerpo con miniatura, coordenadas, filtro por país, pestañas por dimensión y la etiqueta «resultado robusto» (sigue entre los 500 mejores en ≥ 80 % de las variaciones de pesos). Todos los lugares de la lista se ven en el globo.
+  - **Análogos**: «Ordenar por» general o por dimensión. Reemplaza el filtro «Debe parecerse en…», que usaba niveles cualitativos de la bibliografía, no cálculos. También se quitó de la ficha la «Similitud por dimensión (preliminar)».
+  - **Panel derecho**: barras «Por dimensión». **Análisis detallado**: «Comparar por» usa las mismas dimensiones.
+  - Si el homólogo de un sitio no está en la base, se compara con el **objetivo más parecido** de ese cuerpo (antes era el primero de la lista, al azar). Pasaba con la Tatacoa (homólogo Medusae Fossae, del PAI).
+  - Método, recorrido guiado e intro con las cifras nuevas, la regla de 300 km, los países que no cubre la búsqueda y la aclaración de que los puntajes sirven para comparar lugares entre sí.
+- **Resultados que cambian:**
+  - Mejor análogo general de Marte: Egipto (23,8° N, 32,9° E) ≈ Meridiani, 26/100; de la Luna: el Desierto Occidental de Egipto ≈ Mons Mouton, 64/100.
+  - North Greenland ≈ Gale ya no está arriba en general, pero Groenlandia y Canadá encabezan la lista de **temperatura** de Marte.
+  - **Colombia en las dimensiones**: La Guajira 97 en relieve; la Tatacoa 76 en relieve y 76 en superficie, pero 0 en aridez. El puntaje general sigue bajo por la lluvia y la vegetación, y ahora se ve por qué.
+- **Imágenes:** `export_images.py --prune --size 768` genera las de los lugares nuevos y borra las de los que ya no están.
+- **Pendientes:** Marco debe decidir si quita las regiones nombradas en países que la grilla excluye (Tíbet, Taklamakán, Gobi, Lut, Rub al-Jali, Kamchatka); Santiago está adaptando su trabajo al de Marco (sitios y homólogos de Colombia).
+
 ## 2026-11-15 · Release v0.4.2 a producción
 **Autor:** @Ssalazarp420
 
