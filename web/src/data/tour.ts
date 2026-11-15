@@ -1,7 +1,8 @@
 import type { Lang } from '../i18n/strings'
 import type { Body, Target } from './types'
+import type { RankingId } from './comparisons'
 
-export type TourView = 'discover' | 'sites' | 'analysis'
+export type TourView = 'discover' | 'sites' | 'analysis' | 'finder' | 'method'
 
 export interface TourStep {
   view: TourView
@@ -11,6 +12,17 @@ export interface TourStep {
   discovery?: Target
   /** Body the globe switches to after a few seconds on Earth. */
   body: Body
+  /** Delay before switching to `body` (ms, default 4500). */
+  bodyDelay?: number
+  /** Discover view: body and ranked list to show. */
+  discoverBody?: Target
+  list?: RankingId
+  /** Open the photo gallery of the selected place. */
+  gallery?: boolean
+  /** "Find" view: Moon/Mars site searched on arrival. */
+  finderSite?: string
+  /** Duration of the step in seconds (default 12). */
+  seconds?: number
   title: Record<Lang, string>
   text: Record<Lang, string>
 }
@@ -108,6 +120,111 @@ export const TOUR_STEPS: TourStep[] = [
     text: {
       es: 'Cada par tiene un puntaje calculado con datos reales: pendiente, rugosidad, temperatura, albedo, tipo de roca, lluvia y vegetación, frente a unas 690 000 celdas de la Tierra, y un puntaje por dimensión. La vista muestra en qué se parecen, dónde se rompe la analogía y qué no puede reproducir la Tierra: la gravedad, el vacío y la radiación.',
       en: 'Each pair gets a score computed from real data: slope, roughness, temperature, albedo, rock type, rain and vegetation, against about 690,000 Earth cells, plus one score per dimension. The view shows what is similar, where the analogy breaks down, and what Earth cannot reproduce: gravity, vacuum and radiation.',
+    },
+  },
+]
+
+/**
+ * Video mode (?demo=1): ~30 s that show as many features as possible, with short texts
+ * meant to be read on screen. Recorded for the NASA Space Apps presentation.
+ */
+export const DEMO_STEPS: TourStep[] = [
+  {
+    view: 'discover',
+    siteId: null,
+    body: 'tierra',
+    discoverBody: 'marte',
+    list: 'general',
+    seconds: 3.5,
+    title: { es: 'GeoAnalog', en: 'GeoAnalog' },
+    text: {
+      es: '691 000 lugares de la Tierra comparados con 31 sitios de la Luna y Marte, con datos abiertos de la NASA.',
+      en: '691,000 places on Earth compared with 31 Moon and Mars sites, using open NASA data.',
+    },
+  },
+  {
+    view: 'discover',
+    siteId: null,
+    body: 'tierra',
+    discoverBody: 'luna',
+    list: 'relieve',
+    seconds: 3.5,
+    title: { es: 'Los mejores análogos, por dimensión', en: 'The best analogs, by dimension' },
+    text: {
+      es: 'Relieve, temperatura, roca y aridez: 100 lugares poco estudiados por cuerpo.',
+      en: 'Relief, temperature, rock and aridity: 100 little-studied places per body.',
+    },
+  },
+  {
+    view: 'discover',
+    siteId: null,
+    discovery: 'marte',
+    body: 'marte',
+    bodyDelay: 2600,
+    seconds: 5,
+    title: { es: 'Cada lugar, con su par en Marte', en: 'Every place, with its Mars counterpart' },
+    text: {
+      es: 'Puntaje, dimensiones y mapa de similitud; luego el globo vuela a Marte.',
+      en: 'Score, dimensions and similarity map; then the globe flies to Mars.',
+    },
+  },
+  {
+    view: 'sites',
+    siteId: 'haughton-crater',
+    body: 'luna',
+    bodyDelay: 1600,
+    seconds: 4,
+    title: { es: 'Análogos conocidos y la Luna', en: 'Known analogs and the Moon' },
+    text: {
+      es: 'Haughton ≈ Shackleton, en el polo sur lunar donde Artemis planea su base.',
+      en: 'Haughton ≈ Shackleton, at the lunar south pole where Artemis plans its base.',
+    },
+  },
+  {
+    view: 'sites',
+    siteId: 'haughton-crater',
+    body: 'tierra',
+    gallery: true,
+    seconds: 4,
+    title: { es: 'Fotos reales, lado a lado', en: 'Real photos, side by side' },
+    text: {
+      es: 'Imágenes de la NASA y Sentinel-2 de la Tierra junto a la Luna o Marte.',
+      en: 'NASA and Sentinel-2 images of Earth next to the Moon or Mars.',
+    },
+  },
+  {
+    view: 'analysis',
+    siteId: null,
+    discovery: 'marte',
+    body: 'tierra',
+    seconds: 4,
+    title: { es: 'Análisis honesto', en: 'An honest analysis' },
+    text: {
+      es: 'Valores reales, ranking mundial y dónde deja de valer la analogía.',
+      en: 'Real values, world ranking and where the analogy breaks down.',
+    },
+  },
+  {
+    view: 'finder',
+    siteId: null,
+    body: 'tierra',
+    finderSite: 'mons-mouton',
+    seconds: 4,
+    title: { es: 'Busca tus propios análogos', en: 'Find your own analogs' },
+    text: {
+      es: 'Cualquier sitio o tus propios valores; descarga en GeoJSON, KML o para drones.',
+      en: 'Any site or your own values; download as GeoJSON, KML or drone waypoints.',
+    },
+  },
+  {
+    view: 'method',
+    siteId: null,
+    body: 'tierra',
+    seconds: 3,
+    title: { es: 'GeoAnalog · método abierto', en: 'GeoAnalog · open method' },
+    text: {
+      es: 'Fórmula, fuentes y límites a la vista. NASA Space Apps 2026.',
+      en: 'Formula, sources and limits in plain sight. NASA Space Apps 2026.',
     },
   },
 ]

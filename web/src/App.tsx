@@ -34,7 +34,7 @@ import { loadHeatmap, useComparisons, type ComparisonData, type Heatmap, type Ra
 import { bestScore, bodiesOf, discoveriesFor, discoveryAsSite, placeCountry, placeName, type Discovery } from './data/focus'
 import DiscoverList, { type DiscoverItem } from './components/DiscoverList'
 import { formatCoords } from './data/format'
-import type { TourStep } from './data/tour'
+import { DEMO_STEPS, type TourStep } from './data/tour'
 import { BODY_COLORS, SIMILARITY_COLOR } from './theme'
 import { BASE_LAYERS, OVERLAY_LAYERS, type BaseLayerId, type OverlayLayerId } from './map/gibs'
 import { localizeSite } from './data/sites.en'
@@ -132,8 +132,28 @@ export default function App() {
   const [discoverCountry, setDiscoverCountry] = useState('')
   const [sortList, setSortList] = useState<RankingId>('general')
   const [place, setPlace] = useState<Place | null>(null)
-  const [showIntro, setShowIntro] = useState(() => readStorage(INTRO_KEY) !== '1' && !startsOnSite)
-  const [touring, setTouring] = useState(false)
+  // Video mode (?demo=1): the ~30 s tour starts by itself, without the welcome screen.
+  const [demo, setDemo] = useState(() => initial.get('demo') === '1')
+  const [showIntro, setShowIntro] = useState(() => readStorage(INTRO_KEY) !== '1' && !startsOnSite && initial.get('demo') !== '1')
+  const [touring, setTouring] = useState(() => initial.get('demo') === '1')
+  const [galleryOpen, setGalleryOpen] = useState(false)
+  const [demoRun, setDemoRun] = useState(0)
+
+  // "D" starts (or restarts) the ~30 s video mode: open the app, let the globe load,
+  // start recording and press D.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null
+      if (e.key.toLowerCase() !== 'd' || e.ctrlKey || e.metaKey || e.altKey) return
+      if (target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) return
+      setShowIntro(false)
+      setDemo(true)
+      setTouring(true)
+      setDemoRun((n) => n + 1)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
   const [mapTarget, setMapTarget] = useState<{ id: string; name: string; body: Target } | null>(null)
   const [heat, setHeat] = useState<Heatmap | null>(null)
 
@@ -331,6 +351,10 @@ export default function App() {
     window.clearTimeout(tourTimer.current)
     setShowIntro(false)
     resetFilters()
+    setGalleryOpen(false)
+    if (step.discoverBody) setDiscoverBody(step.discoverBody)
+    if (step.list) setDiscoverList(step.list)
+    if (step.finderSite) window.location.hash = `#buscar?site=${step.finderSite}`
     if (step.discovery && data) {
       const d = discoveriesFor(data, step.discovery, 1)[0]
       setDiscoverList('general')
@@ -346,16 +370,20 @@ export default function App() {
     }
     setActiveBody('tierra')
     setView(step.view)
-    if (step.view !== 'analysis') setGlobeView(step.view)
+    if (step.view === 'discover' || step.view === 'sites') setGlobeView(step.view)
     pageRef.current?.scrollTo({ top: 0 })
     if (step.body !== 'tierra') {
       const body = step.body
-      tourTimer.current = window.setTimeout(() => chooseBody(body), 4500)
+      tourTimer.current = window.setTimeout(() => chooseBody(body), step.bodyDelay ?? 4500)
+    } else if (step.gallery) {
+      tourTimer.current = window.setTimeout(() => setGalleryOpen(true), 600)
     }
   }
   const closeTour = useCallback(() => {
     window.clearTimeout(tourTimer.current)
     setTouring(false)
+    setDemo(false)
+    setGalleryOpen(false)
   }, [])
   const closeIntro = useCallback(() => {
     setShowIntro(false)
@@ -631,6 +659,8 @@ export default function App() {
                   setPlace(p)
                   setActiveBody('tierra')
                 }}
+                galleryOpen={galleryOpen}
+                onGalleryClose={() => setGalleryOpen(false)}
               />
             )}
 
@@ -797,7 +827,9 @@ export default function App() {
       </div>
 
       {showIntro && <IntroOverlay onTour={startTour} onClose={closeIntro} />}
-      {touring && <GuidedTour onApply={applyTourStep} onClose={closeTour} />}
+      {touring && (
+        <GuidedTour key={demoRun} onApply={applyTourStep} onClose={closeTour} steps={demo ? DEMO_STEPS : undefined} demo={demo} />
+      )}
     </div>
   )
 }
