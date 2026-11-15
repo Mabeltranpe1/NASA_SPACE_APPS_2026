@@ -73,6 +73,14 @@ Estado de acceso verificado el 2026-11-14: ✅ carga bien · ⚠️ requiere rev
 - Datos de radar SAR terrestre, comparables con Mini-RF lunar y SHARAD de Marte.
 - ⚠️ Desde WSL falla la verificación del certificado SSL. En el navegador debería abrir sin problema.
 
+### Microsoft Planetary Computer ✅
+- Catálogo: https://planetarycomputer.microsoft.com/catalog · API STAC: https://planetarycomputer.microsoft.com/api/stac/v1
+- Unas 140 colecciones de la Tierra: Sentinel-2 L2A, Landsat Collection 2, Copernicus DEM, NASADEM, MODIS, ALOS, ESA WorldCover…
+- **Gratis, sin cuenta ni clave** para buscar y renderizar. Tiene CORS abierto.
+- La app lo usa para las **imágenes de cerca de la Tierra** (Sentinel-2, 10 m), generadas con `src/export_images.py`. Ver [docs/DATOS_WEB.md](docs/DATOS_WEB.md#imágenes-de-cerca-de-la-tierra).
+- Cita obligatoria: "Contiene datos modificados de Copernicus Sentinel" (ESA).
+- ⚠️ Comprobado el 2026-11-15: el renderizado de recortes de Landsat C2 devuelve error 500, así que solo se usa Sentinel-2.
+
 ### Tutorial SAR de la CSA ✅
 - URL: https://github.com/asc-csa/Synthetic_Aperture_Radar_Tutorial
 - Guía para principiantes sobre cómo cargar y graficar rasters SAR (RADARSAT/RCM) y shapefiles.
@@ -110,6 +118,7 @@ Las descargas se hacen con los scripts de `src/`. Detalle de versiones, resoluci
 | Tierra | Sentinel-2 L2A | Reflectancia, índices de óxidos de hierro e hidroxilos | Santiago |
 | Tierra | NASA POWER | Clima del aire y radiación solar | Santiago |
 | Tierra | EMIT L2B (EMITL2BMIN) | Mineralogía (pendiente de procesar) | Santiago |
+| Tierra | Sentinel-2 L2A (Microsoft Planetary Computer) | Imágenes de cerca en la app (no entran en el puntaje) | Web |
 | Luna | LRO LOLA (LDEM 80 m polar, 5 m en sitios de Artemis) | Elevación, pendiente, rugosidad, albedo | Marco, Santiago |
 | Luna | LRO Diviner PRP | Temperatura media y máxima | Marco |
 | Marte | HRSC + MOLA blend (200 m, USGS) | Elevación, pendiente, rugosidad | Marco, Santiago |

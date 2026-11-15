@@ -454,7 +454,7 @@ export default function App() {
               )}
             </div>
 
-            <aside className="panel panel-left glass" key={focus?.id ?? `list-${focusKind}`}>
+            <aside className="panel panel-left glass" key={focus ? `left-${focus.id}` : `left-list-${focusKind}`}>
               {focus ? (
                 <SiteCard
                   site={focus}
@@ -567,7 +567,7 @@ export default function App() {
 
             {focus && (
               <InsightPanel
-                key={`${focus.id}`}
+                key={`right-${focus.id}`}
                 site={focus}
                 activeBody={shownBody}
                 compareBody={compareBody}

@@ -77,6 +77,9 @@ python src/compare.py --earth data/sample_earth.csv --targets data/sample_target
 
 # Regenerar los datos reales que muestra la app (~2 min)
 python src/export_web.py
+
+# Imágenes de cerca de la Tierra (Sentinel-2, solo las que falten)
+python src/export_images.py
 ```
 
 En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analogos`.
@@ -98,7 +101,7 @@ En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analo
 4. Con los botones **Tierra · Luna · Marte** el globo cambia de cuerpo y vuela al homólogo. Si el lugar no tiene homólogo en un cuerpo, ese botón queda bloqueado (🔒).
 5. **Ver análisis completo** abre el puntaje, los pesos ajustables, los valores reales, el ranking y los límites.
 
-Un solo **globo 3D** que cambia entre la Tierra, la Luna y Marte, con imágenes de NASA GIBS, Moon Trek y Mars Trek, sin API keys. Disponible en **español e inglés** (`?lang=es` / `?lang=en`). Los enlaces se pueden compartir: la URL guarda la sección y el sitio, por ejemplo `?view=sites&site=tatacoa`. Cada lugar se puede abrir en Google Earth.
+Un solo **globo 3D** que cambia entre la Tierra, la Luna y Marte, con imágenes de NASA GIBS, Moon Trek y Mars Trek, sin API keys. Las imágenes de cerca de la Tierra son de **Sentinel-2 (10 m)**, pregeneradas con Microsoft Planetary Computer. Disponible en **español e inglés** (`?lang=es` / `?lang=en`). Los enlaces se pueden compartir: la URL guarda la sección y el sitio, por ejemplo `?view=sites&site=tatacoa`. Cada lugar se puede abrir en Google Earth.
 
 ```bash
 cd web
