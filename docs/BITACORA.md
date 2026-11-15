@@ -14,6 +14,11 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.4.2 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #17 (valores reales y lugares parecidos en la vista principal) y se publicó `v0.4.2` en `main`.
+
 ## 2026-11-15 · Valores reales y lugares parecidos en la vista principal
 **Autor:** @Ssalazarp420
 
