@@ -20,8 +20,8 @@ How each feature is measured (kept the same as on Earth on purpose):
     albedo        LOLA normal albedo (laser, 1064 nm)
     precip_mm     0 (it never rains on the Moon)
     ndvi          0 (no plants)
-    em_contrast   empty for now: the Moon's rock type is measured differently
-                  (Diviner Christiansen feature), so it is not compared yet
+    em_contrast   rock-type equivalent of the ASTER value, calibrated in
+                  src/composition.py (see docs/COMPOSICION.md)
 
 Example:
     python src/build_moon_targets.py
@@ -34,6 +34,9 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).parent))
+from composition import em_contrast_for  # noqa: E402
 import rasterio
 from pyproj import CRS, Transformer
 from rasterio.windows import Window
@@ -202,7 +205,7 @@ def main():
             row.update(albedo_feature(alb, site))
             row["precip_mm"] = 0.0
             row["ndvi"] = 0.0            # no plants
-            row["em_contrast"] = np.nan  # rock type: not yet measured in the same way (left empty = not used)
+            row["em_contrast"] = em_contrast_for(site[0])  # rock type, calibrated to ASTER (src/composition.py)
             rows.append(row)
             print(f"  {site[0]}: done")
 

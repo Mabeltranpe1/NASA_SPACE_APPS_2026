@@ -37,3 +37,9 @@ env/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Archivos descartados (revisar y borrar a mano)
+_to_delete/
+
+# Bloqueos de LibreOffice
+.~lock.*

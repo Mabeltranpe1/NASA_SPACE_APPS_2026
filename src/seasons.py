@@ -27,12 +27,16 @@ Example:
 import argparse
 import calendar
 import re
+import sys
 from pathlib import Path
 
 import h5py
 import numpy as np
 import pandas as pd
 from pyhdf.SD import SD, SDC
+
+sys.path.insert(0, str(Path(__file__).parent))
+import build_earth  # noqa: E402  (same precipitation rules as the database)
 
 RAW = Path("data/raw")
 CELL = 0.05
@@ -54,16 +58,8 @@ def monthly_temperature(lat, lon):
 
 
 def monthly_precipitation(lat, lon):
-    """12 monthly totals in mm."""
-    i_lon, i_lat = int((lon + 180) / 0.1), int((lat + 90) / 0.1)
-    values = []
-    for f in sorted((RAW / "GPM_3IMERGM").glob("*.HDF5")):
-        month = re.search(r"\.(\d{4})(\d{2})01-", f.name)
-        hours = 24 * calendar.monthrange(int(month[1]), int(month[2]))[1]
-        with h5py.File(f) as h:
-            rate = float(h["Grid/precipitation"][0, i_lon, i_lat])
-        values.append(rate * hours if rate >= 0 else np.nan)
-    return values
+    """12 monthly totals in mm (IMERG, or MERRA-2 above 60 degrees; see build_earth.py)."""
+    return list(build_earth.monthly_precipitation(np.array([lat]), np.array([lon]))[:, 0])
 
 
 def daylight_hours(lat, month):

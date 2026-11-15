@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galería de análogos</title>
+<style>
+:root { --bg:#f6f5f2; --card:#fff; --ink:#1d1d1f; --muted:#5f6368; --line:#e3e1dc; --accent:#b4441c; --known:#2b6cb0; }
+@media (prefers-color-scheme: dark) { :root { --bg:#141414; --card:#1f1f1f; --ink:#ececec; --muted:#a0a0a0; --line:#333; --accent:#f08a5d; --known:#7fb2ef; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, sans-serif; }
+header { max-width:1100px; margin:auto; padding:32px 16px 8px; }
+h1 { margin:0 0 6px; font-size:28px; }
+header p { color:var(--muted); margin:0; }
+main { max-width:1100px; margin:auto; padding:16px; display:grid; gap:24px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+img.site { width:100%; max-height:520px; object-fit:contain; background:#000; display:block; }
+img.site.lowres { image-rendering:auto; max-height:360px; }
+.body { padding:16px 20px 20px; }
+.kicker { margin:0; color:var(--accent); font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.04em; }
+h2 { margin:4px 0 6px; }
+h3 { margin:16px 0 6px; font-size:16px; }
+.meta, .sub, small { color:var(--muted); font-size:13px; }
+.note { font-size:13px; border-left:3px solid var(--line); padding-left:10px; }
+ul { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+li { border-top:1px solid var(--line); padding-top:8px; }
+.row { display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; }
+.tag { font-size:12px; font-weight:600; color:var(--accent); }
+li.known .tag { color:var(--known); }
+.score { margin-left:auto; font-variant-numeric:tabular-nums; }
+img.earth { margin-top:6px; width:100%; max-width:520px; border-radius:6px; display:block; }
+a { color:inherit; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Galería de análogos Luna / Marte – Tierra</h1>
+  <p>Una imagen de alta resolución por sitio (NASA) y sus 3 mejores regiones análogas en la Tierra
+  según <code>src/compare.py</code> (peso de elevación = 0), más el mejor análogo ya conocido.
+  Las imágenes de la Luna son vistas orbitales oblicuas del LRO: no existen fotos de superficie en el polo sur.</p>
+</header>
+<main>
+    <article class="card">
+      <a href="images/01_mars_jezero_perseverance.tif"><img class="site" loading="lazy" src="images/previews/01_mars_jezero_perseverance.jpg" alt="Mastcam-Z&#x27;s First 360-Degree Panorama"></a>
+      <div class="body">
+        <p class="kicker">Marte · Vista desde la superficie</p>
+        <h2>Jezero crater (Perseverance)</h2>
+        <p class="meta">18.44°, 77.45° · Mastcam-Z&#x27;s First 360-Degree Panorama (PIA24264)<br>
+          Mars 2020 Perseverance / Mastcam-Z · Sol 3 (2021-02-21)<br>
+          Crédito: NASA/JPL-Caltech/MSSS/ASU · 9238×2451 px, 49.37 MB ·
+          <a href="https://science.nasa.gov/photojournal/mastcam-zs-first-360-degree-panorama/" target="_blank" rel="noopener">fuente</a></p>
+        <p class="note">Surface 360° panorama. Copied from experiments/panorama_360/pia (not re-downloaded). The 640 MB PIA24264_hires.tif (36952x11570) exceeds 60 MB.</p>
+        <h3>Análogos terrestres</h3>
+        <ul>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #1</span>
+            <b>egypt western desert</b>
+            <span class="score">score 0.249</span></div>
+          <div class="sub">25.375, 29.575 · <a href="https://www.google.com/maps/@25.375,29.575,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: precipitación · peor: temperatura media</div>
+          <a href="../../maps/07_mars_jezero_crater_A1_earth_egypt_western_desert_photo.png"><img class="earth" loading="lazy" src="../../maps/07_mars_jezero_crater_A1_earth_egypt_western_desert_photo.png" alt="Foto de egypt_western_desert"></a><small></small>
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #2</span>
+            <b>fezzan libya</b>
+            <span class="score">score 0.247</span></div>
+          <div class="sub">24.375, 14.925 · <a href="https://www.google.com/maps/@24.375,14.925,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: pendiente · peor: temperatura media</div>
+          <a href="../../maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png"><img class="earth" loading="lazy" src="../../maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png" alt="Foto de fezzan_libya"></a><small></small>
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #3</span>
+            <b>taklamakan</b>
+            <span class="score">score 0.197</span></div>
+          <div class="sub">38.675, 84.625 · <a href="https://www.google.com/maps/@38.675,84.625,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: pendiente · peor: precipitación</div>
+          <a href="../../maps/07_mars_jezero_crater_A3_earth_taklamakan_photo.png"><img class="earth" loading="lazy" src="../../maps/07_mars_jezero_crater_A3_earth_taklamakan_photo.png" alt="Foto de taklamakan"></a><small></small>
+        </li>
+        <li class="known">
+          <div class="row"><span class="tag">Análogo conocido #1</span>
+            <b>transantarctic mts</b>
+            <span class="score">score 0.228</span></div>
+          <div class="sub">-85.125, 166.925 · <a href="https://www.google.com/maps/@-85.125,166.925,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: vegetación (NDVI) · peor: precipitación</div>
+          
+        </li>
+        </ul>
+      </div>
+    </article>
+    <article class="card">
+      <a href="images/02_mars_gale_mount_sharp.jpg"><img class="site" loading="lazy" src="images/previews/02_mars_gale_mount_sharp.jpg" alt="Mount Sharp Panorama in White-Balanced Colors"></a>
+      <div class="body">
+        <p class="kicker">Marte · Vista desde la superficie</p>
+        <h2>Gale crater (Curiosity)</h2>
+        <p class="meta">-4.59°, 137.44° · Mount Sharp Panorama in White-Balanced Colors (PIA16768)<br>
+          MSL Curiosity / Mastcam (100 mm) · Released 2013-03-15<br>
+          Crédito: NASA/JPL-Caltech/MSSS · 14576×2018 px, 2.08 MB ·
+          <a href="https://photojournal.jpl.nasa.gov/catalog/PIA16768" target="_blank" rel="noopener">fuente</a></p>
+        <p class="note">Surface mosaic. White-balanced: the sky looks too blue, terrain as under Earth light. TIFF is 84 MB (&gt; 60 MB) so the full-size JPEG was used.</p>
+        <h3>Análogos terrestres</h3>
+        <ul>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #1</span>
+            <b>egypt western desert</b>
+            <span class="score">score 0.245</span></div>
+          <div class="sub">25.375, 29.575 · <a href="https://www.google.com/maps/@25.375,29.575,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: precipitación · peor: temperatura media</div>
+          <a href="../../maps/07_mars_jezero_crater_A1_earth_egypt_western_desert_photo.png"><img class="earth" loading="lazy" src="../../maps/07_mars_jezero_crater_A1_earth_egypt_western_desert_photo.png" alt="Foto de egypt_western_desert"></a><small> (foto hecha para otro objetivo, misma celda)</small>
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #2</span>
+            <b>fezzan libya</b>
+            <span class="score">score 0.238</span></div>
+          <div class="sub">24.375, 14.925 · <a href="https://www.google.com/maps/@24.375,14.925,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: albedo · peor: temperatura media</div>
+          <a href="../../maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png"><img class="earth" loading="lazy" src="../../maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png" alt="Foto de fezzan_libya"></a><small> (foto hecha para otro objetivo, misma celda)</small>
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #3</span>
+            <b>taklamakan</b>
+            <span class="score">score 0.198</span></div>
+          <div class="sub">38.675, 84.625 · <a href="https://www.google.com/maps/@38.675,84.625,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: rugosidad · peor: precipitación</div>
+          <a href="../../maps/07_mars_jezero_crater_A3_earth_taklamakan_photo.png"><img class="earth" loading="lazy" src="../../maps/07_mars_jezero_crater_A3_earth_taklamakan_photo.png" alt="Foto de taklamakan"></a><small> (foto hecha para otro objetivo, misma celda)</small>
+        </li>
+        <li class="known">
+          <div class="row"><span class="tag">Análogo conocido #1</span>
+            <b>transantarctic mts</b>
+            <span class="score">score 0.247</span></div>
+          <div class="sub">-85.125, 166.925 · <a href="https://www.google.com/maps/@-85.125,166.925,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: vegetación (NDVI) · peor: precipitación</div>
+          
+        </li>
+        </ul>
+      </div>
+    </article>
+    <article class="card">
+      <a href="images/03_mars_vastitas_phoenix.tif"><img class="site lowres" loading="lazy" src="images/previews/03_mars_vastitas_phoenix.jpg" alt="Looking out Across the Martian Polar Plains"></a>
+      <div class="body">
+        <p class="kicker">Marte · Vista desde la superficie</p>
+        <h2>Vastitas Borealis (Phoenix)</h2>
+        <p class="meta">68.22°, -125.75° · Looking out Across the Martian Polar Plains (PIA10693)<br>
+          Phoenix Mars Lander / SSI (Surface Stereo Imager) · Sol 0 (landing 2008-05-25)<br>
+          Crédito: NASA/JPL-Caltech/University of Arizona/Texas A&amp;M · 640×360 px, 0.69 MB ·
+          <a href="https://photojournal.jpl.nasa.gov/catalog/PIA10693" target="_blank" rel="noopener">fuente</a></p>
+        <p class="note">Surface view, approximate colour, but LOW RESOLUTION: only 640x360 (still of an animation; JPEG is 21 KB, TIFF 0.7 MB). Preview is not upscaled. A larger Phoenix panorama would be better.</p>
+        <h3>Análogos terrestres</h3>
+        <ul>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #1</span>
+            <b>fezzan libya</b>
+            <span class="score">score 0.131</span></div>
+          <div class="sub">24.425, 14.975 · <a href="https://www.google.com/maps/@24.425,14.975,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: precipitación · peor: temperatura media</div>
+          <a href="../../maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png"><img class="earth" loading="lazy" src="../../maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png" alt="Foto de fezzan_libya"></a><small> (foto hecha para otro objetivo, misma celda)</small>
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #2</span>
+            <b>egypt western desert</b>
+            <span class="score">score 0.130</span></div>
+          <div class="sub">25.175, 28.725 · <a href="https://www.google.com/maps/@25.175,28.725,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: pendiente · peor: temperatura media</div>
+          
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #3</span>
+            <b>kumtag lop nur</b>
+            <span class="score">score 0.121</span></div>
+          <div class="sub">42.025, 90.925 · <a href="https://www.google.com/maps/@42.025,90.925,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: albedo · peor: temperatura media</div>
+          
+        </li>
+        <li class="known">
+          <div class="row"><span class="tag">Análogo conocido #1</span>
+            <b>transantarctic mts</b>
+            <span class="score">score 0.157</span></div>
+          <div class="sub">-85.125, 166.875 · <a href="https://www.google.com/maps/@-85.125,166.875,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: vegetación (NDVI) · peor: precipitación</div>
+          
+        </li>
+        </ul>
+      </div>
+    </article>
+    <article class="card">
+      <a href="images/04_moon_shackleton_rim.png"><img class="site" loading="lazy" src="images/previews/04_moon_shackleton_rim.jpg" alt="On the Rim! (oblique view of the rim of Shackleton crater)"></a>
+      <div class="body">
+        <p class="kicker">Luna · Vista orbital oblicua (LRO), no de superficie</p>
+        <h2>Shackleton rim</h2>
+        <p class="meta">-89.67°, 129.78° · On the Rim! (oblique view of the rim of Shackleton crater) (NAC M1224655261LR (NASA page labels it M1195011983LR))<br>
+          LRO / LROC NAC<br>
+          Crédito: NASA/GSFC/Arizona State University · 3750×3750 px, 0.47 MB ·
+          <a href="https://www.lroc.asu.edu/posts/993" target="_blank" rel="noopener">fuente</a></p>
+        <p class="note">Orbital oblique view, not surface. Full 3750x3750 rebuilt from LROC Zoomify tiles (NASA image-detail copy is only 952x952). Most of the frame is black: crater interior in permanent shadow.</p>
+        <h3>Análogos terrestres</h3>
+        <ul>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #1</span>
+            <b>ellesmere north</b>
+            <span class="score">score 0.052</span></div>
+          <div class="sub">81.275, -71.275 · <a href="https://www.google.com/maps/@81.275,-71.275,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: albedo · peor: precipitación</div>
+          <a href="../../maps/01_moon_shackleton_rim_A1_earth_ellesmere_north_photo.png"><img class="earth" loading="lazy" src="../../maps/01_moon_shackleton_rim_A1_earth_ellesmere_north_photo.png" alt="Foto de ellesmere_north"></a><small></small>
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #2</span>
+            <b>north greenland</b>
+            <span class="score">score 0.051</span></div>
+          <div class="sub">81.875, -34.825 · <a href="https://www.google.com/maps/@81.875,-34.825,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: pendiente · peor: precipitación</div>
+          <a href="../../maps/01_moon_shackleton_rim_A2_earth_north_greenland_photo.png"><img class="earth" loading="lazy" src="../../maps/01_moon_shackleton_rim_A2_earth_north_greenland_photo.png" alt="Foto de north_greenland"></a><small></small>
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #3</span>
+            <b>pamir</b>
+            <span class="score">score 0.050</span></div>
+          <div class="sub">39.225, 73.475 · <a href="https://www.google.com/maps/@39.225,73.475,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: albedo · peor: temperatura media</div>
+          <a href="../../maps/01_moon_shackleton_rim_A3_earth_pamir_photo.png"><img class="earth" loading="lazy" src="../../maps/01_moon_shackleton_rim_A3_earth_pamir_photo.png" alt="Foto de pamir"></a><small></small>
+        </li>
+        <li class="known">
+          <div class="row"><span class="tag">Análogo conocido #1</span>
+            <b>transantarctic mts</b>
+            <span class="score">score 0.087</span></div>
+          <div class="sub">-85.125, 166.725 · <a href="https://www.google.com/maps/@-85.125,166.725,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: vegetación (NDVI) · peor: rango térmico</div>
+          
+        </li>
+        </ul>
+      </div>
+    </article>
+    <article class="card">
+      <a href="images/05_moon_de_gerlache_ridge.png"><img class="site" loading="lazy" src="images/previews/05_moon_de_gerlache_ridge.jpg" alt="Traversing the Shackleton de Gerlache Ridge"></a>
+      <div class="body">
+        <p class="kicker">Luna · Vista orbital oblicua (LRO), no de superficie</p>
+        <h2>de Gerlache rim</h2>
+        <p class="meta">-88.48°, -88.34° · Traversing the Shackleton de Gerlache Ridge (NAC M1348682369LR)<br>
+          LRO / LROC NAC<br>
+          Crédito: NASA/GSFC/Arizona State University · 1100×1100 px, 0.6 MB ·
+          <a href="https://www.lroc.asu.edu/images/1247" target="_blank" rel="noopener">fuente</a></p>
+        <p class="note">Orbital oblique view, not surface. Ridge ~14 km long; Shackleton rim on the left. 1100x1100 is the largest version published (LROC original = NASA copy; no zoomable full-res).</p>
+        <h3>Análogos terrestres</h3>
+        <ul>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #1</span>
+            <b>ellesmere north</b>
+            <span class="score">score 0.054</span></div>
+          <div class="sub">81.325, -71.525 · <a href="https://www.google.com/maps/@81.325,-71.525,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: pendiente · peor: precipitación</div>
+          <a href="../../maps/01_moon_shackleton_rim_A1_earth_ellesmere_north_photo.png"><img class="earth" loading="lazy" src="../../maps/01_moon_shackleton_rim_A1_earth_ellesmere_north_photo.png" alt="Foto de ellesmere_north"></a><small> (foto hecha para otro objetivo, misma celda)</small>
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #2</span>
+            <b>north greenland</b>
+            <span class="score">score 0.053</span></div>
+          <div class="sub">81.625, -34.275 · <a href="https://www.google.com/maps/@81.625,-34.275,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: vegetación (NDVI) · peor: precipitación</div>
+          
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #3</span>
+            <b>changtang tibet</b>
+            <span class="score">score 0.052</span></div>
+          <div class="sub">34.575, 82.775 · <a href="https://www.google.com/maps/@34.575,82.775,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: pendiente · peor: temperatura media</div>
+          
+        </li>
+        <li class="known">
+          <div class="row"><span class="tag">Análogo conocido #1</span>
+            <b>transantarctic mts</b>
+            <span class="score">score 0.091</span></div>
+          <div class="sub">-85.225, 167.125 · <a href="https://www.google.com/maps/@-85.225,167.125,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: vegetación (NDVI) · peor: rango térmico</div>
+          
+        </li>
+        </ul>
+      </div>
+    </article>
+    <article class="card">
+      <a href="images/06_moon_mons_mouton_im2.jpg"><img class="site" loading="lazy" src="images/previews/06_moon_mons_mouton_im2.jpg" alt="IM-2 Athena Seen Obliquely"></a>
+      <div class="body">
+        <p class="kicker">Luna · Vista orbital oblicua (LRO), no de superficie</p>
+        <h2>Mons Mouton summit</h2>
+        <p class="meta">-84.60°, 31.00° · IM-2 Athena Seen Obliquely (NAC M1495922531LR)<br>
+          LRO / LROC NAC · 2025-03-07 16:54:21 UTC<br>
+          Crédito: NASA/GSFC/Arizona State University · 15500×5000 px, 12.28 MB ·
+          <a href="https://www.lroc.asu.edu/images/1408" target="_blank" rel="noopener">fuente</a></p>
+        <p class="note">Orbital oblique view, not surface: Intuitive Machines IM-2 Athena landing site near the centre of Mons Mouton (84.79°S, 29.20°E), ~23.5 h after touchdown. LROC (NASA) image, not an IM photo. Full NAC mosaic is 31000x10000; rebuilt at half resolution from Zoomify tiles to stay &lt; 60 MB.</p>
+        <h3>Análogos terrestres</h3>
+        <ul>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #1</span>
+            <b>ellesmere north</b>
+            <span class="score">score 0.052</span></div>
+          <div class="sub">81.425, -70.775 · <a href="https://www.google.com/maps/@81.425,-70.775,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: vegetación (NDVI) · peor: precipitación</div>
+          
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #2</span>
+            <b>north greenland</b>
+            <span class="score">score 0.052</span></div>
+          <div class="sub">81.825, -34.925 · <a href="https://www.google.com/maps/@81.825,-34.925,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: pendiente · peor: precipitación</div>
+          <a href="../../maps/01_moon_shackleton_rim_A2_earth_north_greenland_photo.png"><img class="earth" loading="lazy" src="../../maps/01_moon_shackleton_rim_A2_earth_north_greenland_photo.png" alt="Foto de north_greenland"></a><small> (foto hecha para otro objetivo, misma celda)</small>
+        </li>
+        <li class="new">
+          <div class="row"><span class="tag">Nuevo #3</span>
+            <b>changtang tibet</b>
+            <span class="score">score 0.051</span></div>
+          <div class="sub">34.875, 83.225 · <a href="https://www.google.com/maps/@34.875,83.225,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: pendiente · peor: temperatura media</div>
+          
+        </li>
+        <li class="known">
+          <div class="row"><span class="tag">Análogo conocido #1</span>
+            <b>transantarctic mts</b>
+            <span class="score">score 0.089</span></div>
+          <div class="sub">-85.125, 166.925 · <a href="https://www.google.com/maps/@-85.125,166.925,10z" target="_blank" rel="noopener">Google Maps</a>
+            · mejor: vegetación (NDVI) · peor: temperatura media</div>
+          
+        </li>
+        </ul>
+      </div>
+    </article>
+</main>
+</body>
+</html>

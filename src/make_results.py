@@ -27,7 +27,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 import compare  # noqa: E402
 
-WEIGHTS = {"elev_m": 0}                       # elevation is not comparable between bodies
+WEIGHTS = {"elev_m": 0, "em_contrast": 0.5}   # elevation not comparable between bodies; rock type = calibrated estimate (docs/COMPOSICION.md)
 LEAVE_OUT_OF_OVERALL = {"Moon": ["Shackleton floor (shadow)"]}   # a contrast site, not a base site
 
 
@@ -38,7 +38,7 @@ def main():
     results = compare.compare_all(earth, targets, weights=WEIGHTS)
 
     pairs = results[results["rank"] <= 20].drop(
-        columns=["water_frac", "known", "target_em_contrast", "sim_em_contrast", "sim_elev_m",
+        columns=["water_frac", "known", "sim_elev_m",
                  "target_elev_m"], errors="ignore")
     pairs.round(4).to_csv("data/results_pairs_top20.csv", index=False)
 

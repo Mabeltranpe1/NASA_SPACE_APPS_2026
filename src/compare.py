@@ -64,7 +64,7 @@ DEFAULT_WEIGHTS = {
     "albedo": 1.0,
     "precip_mm": 1.0,
     "ndvi": 1.0,
-    "em_contrast": 1.0,   # only used when the target has a value (see build_*_targets.py)
+    "em_contrast": 1.0,   # Moon/Mars values are calibrated estimates (src/composition.py)
 }
 
 # Optional different weights for one body only. They replace DEFAULT_WEIGHTS
@@ -89,7 +89,7 @@ TOLERANCE = {
     "albedo": 0.10,        # 0.10 of reflectance
     "precip_mm": 1.0,      # in log scale: about 2.7 times more or less rain
     "ndvi": 0.10,          # 0.10 of vegetation index (bare rock ~0, shrubs ~0.2)
-    "em_contrast": 0.03,   # 0.03 of emissivity contrast (basalt ~0.02, quartz sand ~0.15)
+    "em_contrast": 0.03,   # 0.03 of emissivity contrast (basalt ~0.00, andesite ~0.05, quartz sand ~0.15-0.2)
 }
 
 # Values outside these limits are probably a unit mistake (e.g. Celsius
