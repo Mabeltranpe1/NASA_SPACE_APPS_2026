@@ -16,22 +16,22 @@ const TEXT = {
     {
       title: { es: '1 · Datos abiertos', en: '1 · Open data' },
       text: {
-        es: 'La Tierra se divide en celdas de ~5 km con relieve a 200 m (NASADEM, Copernicus), temperatura y albedo (MODIS), lluvia (GPM IMERG), vegetación y tipo de roca (ASTER). La Luna y Marte usan LRO LOLA y Diviner, HRSC + MOLA, TES y el Mars Climate Database.',
-        en: 'Earth is split into ~5 km cells with terrain at 200 m (NASADEM, Copernicus), temperature and albedo (MODIS), rain (GPM IMERG), vegetation and rock type (ASTER). The Moon and Mars use LRO LOLA and Diviner, HRSC + MOLA, TES and the Mars Climate Database.',
+        es: 'Las zonas áridas y frías de todo el mundo se dividen en celdas de ~5 km con relieve a 200 m (NASADEM, Copernicus), temperatura y albedo (MODIS), lluvia (GPM IMERG), vegetación y tipo de roca (ASTER). La Luna y Marte usan LRO LOLA y Diviner, HRSC + MOLA, TES y el Mars Climate Database.',
+        en: 'The world\'s dry and cold lands are split into ~5 km cells with terrain at 200 m (NASADEM, Copernicus), temperature and albedo (MODIS), rain (GPM IMERG), vegetation and rock type (ASTER). The Moon and Mars use LRO LOLA and Diviner, HRSC + MOLA, TES and the Mars Climate Database.',
       },
     },
     {
       title: { es: '2 · Comparación', en: '2 · Comparison' },
       text: {
-        es: 'Cada diferencia se divide por una tolerancia física (por ejemplo, 5° de pendiente) y se convierte en una similitud de 0 a 1. El puntaje combina todas las variables con pesos que puedes cambiar en la app.',
-        en: 'Each difference is divided by a physical tolerance (for example, 5° of slope) and turned into a similarity from 0 to 1. The score combines every variable with weights you can change in the app.',
+        es: 'Cada diferencia se divide por una tolerancia física (por ejemplo, 5° de pendiente) y se convierte en una similitud de 0 a 1. El puntaje general combina todas las variables; además, cada dimensión (relieve, temperatura, superficie y roca, aridez) tiene su propio puntaje con la misma fórmula.',
+        en: 'Each difference is divided by a physical tolerance (for example, 5° of slope) and turned into a similarity from 0 to 1. The overall score combines every variable; each dimension (relief, temperature, surface and rock, aridity) also gets its own score with the same formula.',
       },
     },
     {
       title: { es: '3 · Validación', en: '3 · Validation' },
       text: {
-        es: 'Los análogos conocidos (Antártida, Atacama, Islandia…) se usan como control: el método debe ponerlos arriba, y lo hace. Además, cada lugar se prueba con 100 variaciones aleatorias de los pesos.',
-        en: 'Known analogs (Antarctica, Atacama, Iceland…) are used as controls: the method must rank them high, and it does. Each place is also tested with 100 random weight variations.',
+        es: 'Los análogos conocidos (Antártida, Atacama, Islandia…) se usan como control. Cada lugar se prueba con 100 variaciones aleatorias de los pesos (±50 %): si sigue entre los 500 mejores del planeta en al menos el 80 %, lo marcamos como «resultado robusto».',
+        en: 'Known analogs (Antarctica, Atacama, Iceland…) are used as controls. Each place is tested with 100 random weight variations (±50%): if it stays among the planet\'s 500 best in at least 80% of them, we mark it as a “robust result”.',
       },
     },
   ],
@@ -51,8 +51,16 @@ const TEXT = {
       en: 'If no place on Earth reaches a value (the Moon sits at 50–125 K), that variable is shown as a limit and is not scored.',
     },
     {
-      es: 'Los descubrimientos se eligen por región, para que una sola zona no llene la lista.',
-      en: 'Discoveries are picked per region, so a single area cannot fill the list.',
+      es: 'Los lugares se eligen uno por región y separados al menos 300 km, para que una sola zona no llene la lista.',
+      en: 'Places are picked one per region and at least 300 km apart, so a single area cannot fill the list.',
+    },
+    {
+      es: 'Todos los lugares se puntúan igual: los análogos conocidos, el caso de estudio de Colombia y los descubrimientos.',
+      en: 'Every place is scored the same way: known analogs, the Colombian case study and the discoveries.',
+    },
+    {
+      es: 'El tipo de roca de la Luna y Marte es una estimación calibrada (±0,03), por eso pesa la mitad.',
+      en: 'The rock type of the Moon and Mars is a calibrated estimate (±0.03), so it weighs half.',
     },
     {
       es: 'La lluvia es exigente a propósito: en la Luna y en Marte no llueve.',
@@ -78,8 +86,12 @@ const TEXT = {
       en: 'Mars temperature comes from a model (Mars Climate Database), not a direct measurement.',
     },
     {
-      es: 'La mineralogía (EMIT) aún no está procesada: hay escenas disponibles, falta el análisis.',
-      en: 'Mineralogy (EMIT) is not processed yet: scenes are available, the analysis is pending.',
+      es: 'La búsqueda mundial no cubre China, Rusia, Medio Oriente ni Afganistán; solo siguen algunas regiones nombradas de antes (Tíbet, Taklamakán, Lut…).',
+      en: 'The worldwide search does not cover China, Russia, the Middle East or Afghanistan; only a few earlier named regions remain (Tibet, Taklamakan, Lut…).',
+    },
+    {
+      es: 'Los puntajes absolutos son bajos porque ningún lugar de la Tierra es la Luna o Marte: sirven para comparar lugares entre sí, no como un porcentaje de parecido.',
+      en: 'Absolute scores are low because no place on Earth is the Moon or Mars: they are for comparing places with each other, not a percentage of likeness.',
     },
   ],
   teamTitle: { es: 'Equipo', en: 'Team' },
@@ -89,8 +101,8 @@ const TEXT = {
       en: 'Marco · global search and comparator (compare.py)',
     },
     {
-      es: 'Santiago · caracterización de Colombia: relieve a 200 m, índice PAI, Sentinel-2 y EMIT',
-      en: 'Santiago · Colombian characterization: 200 m terrain, PAI index, Sentinel-2 and EMIT',
+      es: 'Santiago · caracterización detallada de Colombia: relieve a 200 m, clima, Sentinel-2 y EMIT',
+      en: 'Santiago · detailed Colombian characterization: 200 m terrain, climate, Sentinel-2 and EMIT',
     },
     { es: 'Plataforma web · globos 3D, visualización y despliegue', en: 'Web platform · 3D globes, visualization and deployment' },
   ],

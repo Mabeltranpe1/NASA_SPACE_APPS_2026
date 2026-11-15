@@ -39,8 +39,8 @@ export const TOUR_STEPS: TourStep[] = [
       en: 'The global search finds new places',
     },
     text: {
-      es: 'Comparamos unas 164 000 celdas de la Tierra con 15 sitios de la Luna y Marte. De cada región poco estudiada destacamos su mejor lugar, y el mapa muestra en qué partes del planeta está el mayor parecido.',
-      en: 'We compare about 164,000 Earth cells with 15 Moon and Mars sites. For each little-studied region we highlight its best place, and the map shows where on the planet the match is strongest.',
+      es: 'Comparamos unas 690 000 celdas de las zonas áridas y frías del mundo con 15 sitios de la Luna y Marte. Listamos los 100 lugares poco estudiados más parecidos para cada cuerpo, separados al menos 300 km, y los mejores por relieve, temperatura, roca y aridez.',
+      en: 'We compare about 690,000 cells of the world\'s dry and cold lands with 15 Moon and Mars sites. We list the 100 most similar little-studied places for each body, at least 300 km apart, and the best ones by relief, temperature, rock and aridity.',
     },
   },
   {
@@ -78,8 +78,8 @@ export const TOUR_STEPS: TourStep[] = [
       en: 'A lesser-studied candidate: Tatacoa',
     },
     text: {
-      es: 'El reto pide mirar más allá de los análogos conocidos. Las cárcavas de sedimentos rojizos de la Tatacoa, en Colombia, recuerdan terrenos marcianos tallados por agua y viento. La analogía falla en el clima: aquí hay vegetación y lluvia.',
-      en: 'The challenge asks us to look beyond well-known analogs. The reddish sediment gullies of Tatacoa, in Colombia, resemble Martian terrains carved by water and wind. The analogy breaks down in the climate: there is vegetation and rain.',
+      es: 'El reto pide mirar más allá de los análogos conocidos. Las cárcavas de sedimentos rojizos de la Tatacoa, en Colombia, recuerdan terrenos marcianos tallados por agua y viento. Las dimensiones lo muestran: se parece en el relieve, pero falla en la aridez, porque aquí hay vegetación y lluvia.',
+      en: 'The challenge asks us to look beyond well-known analogs. The reddish sediment gullies of Tatacoa, in Colombia, resemble Martian terrains carved by water and wind. The dimensions show it: it matches in relief but fails in aridity, because there is vegetation and rain.',
     },
   },
   {
@@ -106,8 +106,8 @@ export const TOUR_STEPS: TourStep[] = [
       en: 'Measuring how similar they are',
     },
     text: {
-      es: 'Cada par tiene un puntaje calculado con datos reales: pendiente, rugosidad, temperatura, albedo, lluvia y vegetación, frente a unas 164 000 celdas de la Tierra. La vista muestra en qué se parecen, dónde se rompe la analogía y qué no puede reproducir la Tierra: la gravedad, el vacío y la radiación.',
-      en: 'Each pair gets a score computed from real data: slope, roughness, temperature, albedo, rain and vegetation, against about 164,000 Earth cells. The view shows what is similar, where the analogy breaks down, and what Earth cannot reproduce: gravity, vacuum and radiation.',
+      es: 'Cada par tiene un puntaje calculado con datos reales: pendiente, rugosidad, temperatura, albedo, tipo de roca, lluvia y vegetación, frente a unas 690 000 celdas de la Tierra, y un puntaje por dimensión. La vista muestra en qué se parecen, dónde se rompe la analogía y qué no puede reproducir la Tierra: la gravedad, el vacío y la radiación.',
+      en: 'Each pair gets a score computed from real data: slope, roughness, temperature, albedo, rock type, rain and vegetation, against about 690,000 Earth cells, plus one score per dimension. The view shows what is similar, where the analogy breaks down, and what Earth cannot reproduce: gravity, vacuum and radiation.',
     },
   },
 ]

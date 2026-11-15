@@ -115,3 +115,48 @@ def test_build_writes_valid_contract(tmp_path):
     assert set(heatmaps) == {"shackleton", "jezero"}
     cells = heatmaps["jezero"]
     assert cells == sorted(cells, key=lambda c: -c[2])
+
+
+def test_dimension_scores_use_the_same_formula():
+    # One dimension with a single feature: its score is that feature's similarity.
+    sims = np.full((2, len(compare.FEATURES)), np.nan)
+    i = compare.FEATURES.index
+    sims[0, i("slope_deg")], sims[0, i("roughness")] = 0.5, 0.5
+    sims[1, i("slope_deg")] = 0.8
+    dims = export_web.dimension_scores(sims, {**compare.DEFAULT_WEIGHTS, **export_web.WEB_WEIGHTS})
+    assert dims["relieve"][0] == pytest.approx(0.5, abs=1e-6)
+    assert dims["relieve"][1] == pytest.approx(0.8, abs=1e-6)
+    # No usable feature in a dimension -> not comparable (NaN), never 0 or 1.
+    assert np.isnan(dims["temperatura"]).all()
+
+
+def test_rankings_are_spread_out_and_consistent(tmp_path):
+    earth_path, targets_path = tmp_path / "earth.csv", tmp_path / "targets.csv"
+    make_earth(n_regions=6).to_csv(earth_path, index=False)
+    make_targets().to_csv(targets_path, index=False)
+    sites_ts = tmp_path / "sites.ts"
+    sites_ts.write_text("export const SITES = [\n]\n", encoding="utf-8")
+    old_runs = export_web.STABILITY_RUNS
+    export_web.STABILITY_RUNS = 3
+    try:
+        data, _, _ = export_web.build(earth_path, targets_path, tmp_path / "none.csv", sites_ts,
+                                      tmp_path / "features")
+    finally:
+        export_web.STABILITY_RUNS = old_runs
+    json.dumps(data, allow_nan=False)
+    sites = {s["id"]: s for s in data["sites"]}
+    assert set(data["rankings"]) == {"luna", "marte"}
+    # The Moon temperature is switched off, so there is no "best thermal analog" list.
+    assert "temperatura" not in data["rankings"]["luna"]
+    assert "temperatura" in data["rankings"]["marte"]
+    for body, lists in data["rankings"].items():
+        general = lists["general"]
+        scores = [p["score"] for p in general]
+        assert scores == sorted(scores, reverse=True)
+        regions = [sites[p["site"]]["region"] for p in general]
+        assert len(regions) == len(set(regions))           # one place per region
+        assert not any(sites[p["site"]]["known"] for p in general)
+        for p in general:                                   # the listed score is the site's result
+            r = next(r for r in sites[p["site"]]["results"] if r["target"] == p["target"])
+            assert r["score"] == p["score"]
+            assert set(r["dims"]) == set(export_web.DIMENSIONS)

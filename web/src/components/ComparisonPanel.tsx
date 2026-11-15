@@ -12,6 +12,7 @@ import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
 import { useLang } from '../i18n/useLang'
 import { BODY_NAMES, SOURCE_PHRASES_EN, type Lang } from '../i18n/strings'
 import { dumbbellScale, featureLabel, makeFmt } from '../data/format'
+import { placeName } from '../data/focus'
 
 /** Physical conditions Earth cannot reproduce. Always shown: the analogy breaks here for every site. */
 type Limit = { label: string; earth: string; body: string }
@@ -56,14 +57,6 @@ function sourceText(text: string | undefined, lang: Lang) {
   if (!text) return '—'
   return lang === 'en' ? (SOURCE_PHRASES_EN[text] ?? text) : text
 }
-
-/** Weight presets: each one keeps only the features of one kind (default weights), the rest go to 0. */
-const PRESETS: { id: 'all' | 'terrain' | 'surface' | 'climate'; features: string[] | null }[] = [
-  { id: 'all', features: null },
-  { id: 'terrain', features: ['elev_m', 'slope_deg', 'roughness'] },
-  { id: 'surface', features: ['albedo', 'ndvi', 'em_contrast'] },
-  { id: 'climate', features: ['temp_mean_K', 'temp_range_K', 'precip_mm'] },
-]
 
 export interface Place {
   lat: number
@@ -119,9 +112,13 @@ function ComparisonContent({
   // Targets with computed results for this site on this body. The homologue goes first.
   const available = useMemo(() => {
     if (!entry) return []
-    const ids = new Set(entry.results.map((r) => r.target))
-    const list = data.targets.filter((t) => t.body === body && ids.has(t.id))
-    return list.sort((a, b) => Number(b.id === homologue?.id) - Number(a.id === homologue?.id))
+    // The counterpart first, then the most similar targets.
+    const score = new Map(entry.results.map((r) => [r.target, r.score ?? -1]))
+    const list = data.targets.filter((t) => t.body === body && score.has(t.id))
+    return list.sort(
+      (a, b) =>
+        Number(b.id === homologue?.id) - Number(a.id === homologue?.id) || (score.get(b.id) ?? -1) - (score.get(a.id) ?? -1),
+    )
   }, [data, entry, body, homologue])
 
   const defaults = useMemo(() => Object.fromEntries(data.features.map((f) => [f.id, f.default_weight])), [data])
@@ -152,6 +149,11 @@ function ComparisonContent({
   const excluded = new Set(target.excluded ?? [])
   const presetWeights = (features: string[] | null) =>
     Object.fromEntries(data.features.map((f) => [f.id, !features || features.includes(f.id) ? f.default_weight : 0]))
+  // Presets: everything, or one dimension only (same groups as the dimension scores).
+  const PRESETS: { id: string; label: string; features: string[] | null }[] = [
+    { id: 'all', label: t('cmp.preset.all'), features: null },
+    ...(data.dimensions ?? []).map((d) => ({ id: d.id, label: d.label[lang], features: d.features })),
+  ]
   const activePreset = PRESETS.find((p) => {
     const w = presetWeights(p.features)
     return data.features.every((f) => weights[f.id] === w[f.id])
@@ -242,7 +244,7 @@ function ComparisonContent({
                 aria-pressed={activePreset === p.id}
                 onClick={() => setWeights(presetWeights(p.features))}
               >
-                {t(`cmp.preset.${p.id}`)}
+                {p.label}
               </button>
             ))}
           </div>
@@ -351,7 +353,7 @@ function ComparisonContent({
                   key={r.site.id}
                   className={current ? 'current' : ''}
                   onMouseMove={(e) =>
-                    showTip(e, `${r.site.name}: ${Math.round((r.score ?? 0) * 100)} / 100${r.site.note ? ` · ${r.site.note}` : ''}`)
+                    showTip(e, `${placeName(r.site, lang)}: ${Math.round((r.score ?? 0) * 100)} / 100${r.site.note ? ` · ${r.site.note}` : ''}`)
                   }
                   onMouseLeave={hideTip}
                 >
@@ -361,12 +363,12 @@ function ComparisonContent({
                       <button
                         className="link"
                         title={t('cmp.goTo')}
-                        onClick={() => onGoTo({ lat: r.site.lat, lng: r.site.lng, name: r.site.name })}
+                        onClick={() => onGoTo({ lat: r.site.lat, lng: r.site.lng, name: placeName(r.site, lang) })}
                       >
-                        {r.site.name}
+                        {placeName(r.site, lang)}
                       </button>
                     ) : (
-                      r.site.name
+                      placeName(r.site, lang)
                     )}
                     {tag && <small> · {tag}</small>}
                   </span>
