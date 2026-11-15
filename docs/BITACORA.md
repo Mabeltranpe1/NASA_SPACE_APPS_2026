@@ -14,6 +14,11 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v1.0.0 (MVP) a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #21 (nombre GeoAnalog y cierre de pendientes) y se publicó **`v1.0.0`** en `main`: la versión final del MVP para NASA Space Apps 2026. `develop` y `main` quedan iguales.
+
 ## 2026-11-15 · GeoAnalog: nombre de la app y cierre del MVP
 **Autor:** @Ssalazarp420
 
