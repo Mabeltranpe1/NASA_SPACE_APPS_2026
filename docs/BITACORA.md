@@ -14,6 +14,11 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v1.1.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #22 (modo video de 30 s) y se publicó `v1.1.0` en `main`.
+
 ## 2026-11-15 · Modo video del recorrido guiado (30 s)
 **Autor:** @Ssalazarp420
 
