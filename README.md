@@ -2,8 +2,6 @@
 
 **Análogos terrestres de bases en la Luna y Marte** · NASA Space Apps 2026. App: https://icy-flower-03890400f.5.azurestaticapps.net
 
-El nombre lo propuso Santiago.
-
 Proyecto para el reto **Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars** del NASA Space Apps Challenge 2026.
 
 ## El reto
