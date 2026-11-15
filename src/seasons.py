@@ -21,7 +21,7 @@ coldest months are dark all day and very hard to work in; the table shows
 daylight hours so you can see that trade-off.
 
 Example:
-    python src/seasons.py --overall data/results_mars_overall.csv --targets data/targets_mars.csv
+    python src/seasons.py --overall outputs/results/results_mars_overall.csv --targets data/targets_mars.csv
 """
 
 import argparse

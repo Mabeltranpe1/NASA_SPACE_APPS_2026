@@ -1,0 +1,13 @@
+region,product_type,expected_count,actual_count,status,error
+Jezero,MTRDR,7,7,ok,
+Jezero,MRDR4,4,4,ok,
+Gale,MTRDR,9,9,ok,
+Gale,MRDR4,4,4,ok,
+Phoenix,MTRDR,14,14,ok,
+Phoenix,MRDR4,0,0,no_matches,
+Pathfinder,MTRDR,3,3,ok,
+Pathfinder,MRDR4,4,4,ok,
+Viking_1,MTRDR,3,3,ok,
+Viking_1,MRDR4,4,4,ok,
+Viking_2,MTRDR,3,3,ok,
+Viking_2,MRDR4,67,67,ok,

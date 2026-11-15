@@ -39,8 +39,8 @@ export const TOUR_STEPS: TourStep[] = [
       en: 'The global search finds new places',
     },
     text: {
-      es: 'Comparamos unas 690 000 celdas de las zonas áridas y frías del mundo con 15 sitios de la Luna y Marte. Listamos los 100 lugares poco estudiados más parecidos para cada cuerpo, separados al menos 300 km, y los mejores por relieve, temperatura, roca y aridez.',
-      en: 'We compare about 690,000 cells of the world\'s dry and cold lands with 15 Moon and Mars sites. We list the 100 most similar little-studied places for each body, at least 300 km apart, and the best ones by relief, temperature, rock and aridity.',
+      es: 'Comparamos unas 690 000 celdas de las zonas áridas y frías del mundo con 31 sitios de la Luna y Marte (22 son las regiones candidatas de Artemis III). Listamos los 100 lugares poco estudiados más parecidos para cada cuerpo, separados al menos 300 km, y los mejores por relieve, temperatura, roca y aridez.',
+      en: 'We compare about 690,000 cells of the world\'s dry and cold lands with 31 Moon and Mars sites (22 are the Artemis III candidate regions). We list the 100 most similar little-studied places for each body, at least 300 km apart, and the best ones by relief, temperature, rock and aridity.',
     },
   },
   {

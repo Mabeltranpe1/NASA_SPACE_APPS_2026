@@ -14,6 +14,38 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.6.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #20 (22 sitios lunares de Marco, ciencia regional de Santiago y API de análogos, con un solo puntaje) y se publicó `v0.6.0` en `main`.
+
+## 2026-11-15 · Integración del equipo: 22 sitios lunares, ciencia regional y API de análogos
+**Autor:** @Ssalazarp420
+
+- **Pedido:** adaptar lo que propusieron Marco y Santiago para que no haya conflictos y quede optimizado para la v0.5.0.
+- **Decisiones aplicadas** (las recomendadas, para tener una sola versión coherente):
+  1. **Una sola regla de puntaje en toda la app y en la API**: la de `export_web.py`. Las variables que la Tierra no alcanza (la temperatura de la Luna) se apagan y se muestran como límite.
+  2. **El PAI de Santiago** solo aparece dentro de su panel científico, como «modelo experimental de relieve». No es un ranking ni un puntaje en otra parte.
+  3. **El catálogo de regiones es el de Marco** (dueño de los datos globales). La rama de Santiago traía una versión distinta, sin algunos cuadros de Patagonia y Tierra del Fuego; queda para revisar con él.
+- **Marco · `feature/compare_analysis` (22 sitios de la Luna):**
+  - Se une su rama: las 9 regiones candidatas de Artemis III (NASA 2024) y las 7 de la lista de 2022 (Wueller et al. 2026), con carpetas reorganizadas (`outputs/results/`).
+  - Su README en inglés pasa a `docs/DATOS_Y_METODO.md`; sus rutas nuevas se aplican en `src/export_analogos.py`.
+  - `export_web.py`: ids legibles para los 16 sitios nuevos (`connecting-ridge`, `malapert`…). Si varios sitios empatan en una dimensión (la aridez es igual en todos los de la Luna), gana el de mejor puntaje general: antes todas las filas decían «≈ Shackleton rim». La prueba de robustez usa `np.partition` en vez de ordenar las 691 000 celdas (idea de Santiago).
+  - Galería: los sitios nuevos usan, como alias, las fotos de su región del polo sur (visualizaciones del LRO).
+  - Resultado: Mons Mouton summit sigue siendo el par más común (85 de 100 lugares), porque es el más llano, pero ahora aparecen Nobile Rim 2, Slater Plain, Peak near Cabeus B y Faustini. Panel derecho: nueva línea «También se parece a…» con los otros sitios del mismo cuerpo.
+- **Santiago · `feature/colombia-scientific-integration`:**
+  - Su rama salió de v0.4.2, en paralelo a v0.5.0 (11 archivos en conflicto). En lugar de unirla, se trajeron **solo sus archivos**: los scripts de extracción, `src/export_science.py`, los datos (`data/features/`, `figures/`, `processed/`, `raw/climate/`), `ScientificPanel`, sus textos, sus documentos y sus pruebas.
+  - `export_science.py` se volvió a correr con los 22 sitios de Marco: sus ventanas quedan enlazadas **por geometría** con Connecting Ridge, Malapert, Mons Mouton Plateau, de Gerlache Rim 1 y 2, Peak near Shackleton, Jezero, Gale, Viking 1 y 2 y Phoenix.
+  - La app lee el enlace desde `science/index.json`: el panel aparece en la ficha de los sitios de Colombia y en el análisis detallado de los sitios de la Luna y Marte.
+  - **No se trajeron:** su `comparisons.json`, sus mapas de calor y la tabla «Ranking global» (mostraban otros puntajes), ni su versión de `export_web.py`.
+  - Pruebas: 16 de las suyas, ajustadas (sin el CSV viejo que Marco borró, enlace por `index.json`, 31 sitios). Se quitó el `import similarity`, porque ese script reescribe una figura al importarse.
+- **Marco · `feature/analog-finder` (API y «Buscar»):**
+  - Salía de v0.2.0; se trajeron sus archivos y se integró como apartado **«Buscar»** en la barra lateral, con carga diferida (la base de 7 MB solo se descarga al abrirlo).
+  - `analog_api.py` usa `export_web.body_weights()` y `target_id()`: **mismo puntaje y mismos ids** que la app (Mons Mouton → Desierto Occidental de Egipto, 0,645, igual que en Descubrir). Las variables apagadas van en `switched_off` y en `out_of_earth_range`.
+  - Nombres legibles de las regiones en el buscador.
+  - API estática en `/data/api/v1/` (31 sitios en JSON, GeoJSON, KML y waypoints). `tests/test_web_port.py`: Python y navegador coinciden en 38 búsquedas (1e-16).
+- **Pendientes:** confirmar con Santiago el catálogo de regiones; pintar los resultados del buscador en el globo 3D; mover sus textos a `strings.ts`.
+
 ## 2026-11-15 · Release v0.5.0 a producción
 **Autor:** @Ssalazarp420
 

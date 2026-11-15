@@ -3135,3 +3135,34 @@
     height: auto;
   }
 }
+
+/* Santiago's regional science: folds inside the site card and the detailed analysis */
+.science-panel { margin: 14px 0; border: 1px solid var(--border-strong); border-radius: 12px; padding: 10px 12px; background: var(--surface-2); }
+.science-panel > summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.86rem; }
+.science-body { margin-top: 12px; min-width: 0; }
+.science-study h3, .science-study h4 { margin: 14px 0 8px; font-size: 0.92rem; }
+.science-coordinates { font-variant-numeric: tabular-nums; font-size: 0.8rem; color: var(--muted); }
+.science-warning, .science-note { padding: 8px 10px; border-left: 3px solid var(--warn); background: rgba(224, 162, 58, 0.08); font-size: 0.82rem; line-height: 1.5; border-radius: 0 8px 8px 0; }
+.science-note { border-color: var(--accent); background: var(--accent-soft); }
+.science-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.science-tabs .chip { font-size: 0.74rem; text-align: left; }
+.science-table-scroll { max-width: 100%; overflow-x: auto; margin: 10px 0; }
+.science-table-scroll table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.science-table-scroll th, .science-table-scroll td { text-align: left; vertical-align: top; padding: 7px 8px; border-bottom: 1px solid var(--border); }
+.science-table-scroll th { color: var(--accent); }
+.science-table-scroll td { font-variant-numeric: tabular-nums; }
+.science-table-scroll small, .science-sources small, .science-assets small { display: block; color: var(--muted); font-size: 0.7rem; margin: 3px 0; }
+.science-values { grid-template-columns: minmax(0, 1fr); }
+.science-values > div { gap: 16px; }
+.science-provenance code, .science-pai code { white-space: normal; overflow-wrap: anywhere; font-size: 0.74rem; }
+.science-figure { margin: 14px 0; }
+.science-figure img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.science-figure figcaption, .science-spectrum figcaption { font-size: 0.74rem; color: var(--muted); line-height: 1.5; }
+.science-spectrum { margin: 14px 0; }
+.science-spectrum svg { width: 100%; max-height: 200px; }
+.science-sources a, .science-assets a { color: var(--accent); overflow-wrap: anywhere; }
+.science-related { margin-top: 20px; }
+@media (max-width: 700px) { .science-panel { padding: 8px; } .science-tabs .chip { font-size: 0.7rem; } .science-table-scroll th, .science-table-scroll td { padding: 6px; } }
+
+.also-like { margin: 2px 0 10px; line-height: 1.6; }
+.also-like b { color: var(--similarity); font-variant-numeric: tabular-nums; }
