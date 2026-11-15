@@ -1,0 +1,13 @@
+region,planet,spectral_group,scenes_seen,scenes_with_valid_observations,valid_observations,accepted_observations,raw_matched_observations,no_match_observations,accepted_pct_of_valid_observations,mean_valid_bins_touched_pct_200m,source,status
+Tatacoa,earth,1,3,3,66061,2306,4093,61968,3.490713,91.906667,NASA EMITL2BMIN.001,provisional
+Tatacoa,earth,2,3,3,66061,23260,23298,42763,35.209882,91.906667,NASA EMITL2BMIN.001,provisional
+La_Guajira,earth,1,3,3,37535,25353,27338,10197,67.544958,52.906667,NASA EMITL2BMIN.001,provisional
+La_Guajira,earth,2,3,3,37535,25286,25287,12248,67.366458,52.906667,NASA EMITL2BMIN.001,provisional
+Nevado_del_Ruiz,earth,1,3,3,32330,12612,16907,15423,39.010207,44.626667,NASA EMITL2BMIN.001,provisional
+Nevado_del_Ruiz,earth,2,3,3,32330,2838,3501,28829,8.778225,44.626667,NASA EMITL2BMIN.001,provisional
+Volcan_Purace,earth,1,3,2,28589,12864,14512,14077,44.996327,59.740000,NASA EMITL2BMIN.001,partial_provisional
+Volcan_Purace,earth,2,3,2,28589,9736,10375,18214,34.055056,59.740000,NASA EMITL2BMIN.001,partial_provisional
+La_Candelaria,earth,1,3,3,59468,804,943,58525,1.351988,83.106667,NASA EMITL2BMIN.001,provisional
+La_Candelaria,earth,2,3,3,59468,1660,1847,57621,2.791417,83.106667,NASA EMITL2BMIN.001,provisional
+Nevado_Santa_Isabel,earth,1,3,3,40092,3984,6704,33388,9.937145,55.253333,NASA EMITL2BMIN.001,provisional
+Nevado_Santa_Isabel,earth,2,3,3,40092,1988,2231,37861,4.958595,55.253333,NASA EMITL2BMIN.001,provisional
