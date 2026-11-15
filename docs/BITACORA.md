@@ -14,6 +14,12 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.3.2 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #14 (imágenes de Sentinel-2 y corrección del panel duplicado) y se publicó `v0.3.2` en `main`.
+- **Producción:** https://icy-flower-03890400f.5.azurestaticapps.net
+
 ## 2026-11-15 · Imágenes de Sentinel-2 (Microsoft Planetary Computer)
 **Autor:** @Ssalazarp420
 
