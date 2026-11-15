@@ -32,7 +32,7 @@ import {
   LogoMark,
 } from './components/Icons'
 import { loadHeatmap, useComparisons, type ComparisonData, type Heatmap } from './data/comparisons'
-import { bodiesOf, discoveriesFor, discoveryAsSite, type Discovery } from './data/focus'
+import { bestScore, bodiesOf, discoveriesFor, discoveryAsSite, type Discovery } from './data/focus'
 import type { TourStep } from './data/tour'
 import { BODY_COLORS, SIMILARITY_COLOR } from './theme'
 import { BASE_LAYERS, OVERLAY_LAYERS, type BaseLayerId, type OverlayLayerId } from './map/gibs'
@@ -361,8 +361,21 @@ export default function App() {
     return items
   })()
 
-  const mainSites = filtered.filter((s) => !s.caseStudy)
-  const caseStudies = filtered.filter((s) => s.caseStudy)
+  // Most similar first, so the most compatible place is on top (no score yet: last).
+  const scores = useMemo(
+    () => new Map(data ? sites.map((s) => [s.id, bestScore(data, s)] as const) : []),
+    [data, sites],
+  )
+  const byScore = (list: AnalogSite[]) =>
+    [...list].sort((a, b) => (scores.get(b.id)?.score ?? -1) - (scores.get(a.id)?.score ?? -1))
+  // Open a site from the lists already compared with the body of its score.
+  const pickSite = (site: AnalogSite, stay = false) => {
+    const best = scores.get(site.id)
+    if (best) setLastTarget(best.body)
+    selectSite(site, stay)
+  }
+  const mainSites = byScore(filtered.filter((s) => !s.caseStudy))
+  const caseStudies = byScore(filtered.filter((s) => s.caseStudy))
   const onGlobe = view === 'discover' || view === 'sites'
 
   return (
@@ -551,13 +564,14 @@ export default function App() {
                       )}
                     </div>
                   )}
-                  <SiteList items={mainSites} onPick={selectSite} />
+                  {data && <p className="hint">{t('side.sortedHint')}</p>}
+                  <SiteList items={mainSites} scores={scores} onPick={pickSite} />
                   {filtered.length === 0 && <p className="hint">{t('results.empty')}</p>}
                   {caseStudies.length > 0 && (
                     <>
                       <h2 className="panel-heading sm">{t('side.caseStudy')}</h2>
                       <p className="hint">{t('side.caseStudyHint')}</p>
-                      <SiteList items={caseStudies} onPick={selectSite} />
+                      <SiteList items={caseStudies} scores={scores} onPick={pickSite} />
                     </>
                   )}
                   <p className="muted small">{t('footer.note')}</p>
@@ -705,8 +719,8 @@ export default function App() {
                 )}
                 <h2 className="section-title">{t('side.catalog')}</h2>
                 <div className="pick-grid">
-                  {sites.map((s) => (
-                    <button key={s.id} className="pick glass" onClick={() => selectSite(s, true)}>
+                  {byScore(sites).map((s) => (
+                    <button key={s.id} className="pick glass" onClick={() => pickSite(s, true)}>
                       <span className="pick-dots">
                         {s.homologues.map((h) => (
                           <span key={h.body} className="dot" style={{ background: BODY_COLORS[h.body] }} />
@@ -733,30 +747,51 @@ export default function App() {
   )
 }
 
-function SiteList({ items, onPick }: { items: AnalogSite[]; onPick: (s: AnalogSite) => void }) {
-  const { t } = useLang()
+function SiteList({
+  items,
+  scores,
+  onPick,
+}: {
+  items: AnalogSite[]
+  scores: Map<string, { score: number; body: Target } | null>
+  onPick: (s: AnalogSite) => void
+}) {
+  const { lang, t } = useLang()
   return (
     <ul className="site-list">
-      {items.map((s) => (
-        <li key={s.id}>
-          <button onClick={() => onPick(s)}>
-            <span className="site-dots">
-              {s.homologues.map((h) => (
-                <span key={h.body} className="dot" style={{ background: BODY_COLORS[h.body] }} />
-              ))}
-            </span>
-            <span>
-              <strong>
-                {s.name}
-                {!s.wellKnown && !s.caseStudy && <span className="pill">{t('badge.lesserKnown')}</span>}
-              </strong>
-              <small>
-                {s.country} → {s.homologues.map((h) => h.name).join(' · ')}
-              </small>
-            </span>
-          </button>
-        </li>
-      ))}
+      {items.map((s) => {
+        const best = scores.get(s.id)
+        return (
+          <li key={s.id}>
+            <button onClick={() => onPick(s)}>
+              <span className="site-dots">
+                {s.homologues.map((h) => (
+                  <span key={h.body} className="dot" style={{ background: BODY_COLORS[h.body] }} />
+                ))}
+              </span>
+              <span>
+                <strong>
+                  {s.name}
+                  {!s.wellKnown && !s.caseStudy && <span className="pill">{t('badge.lesserKnown')}</span>}
+                </strong>
+                <small>
+                  {s.country} → {s.homologues.map((h) => h.name).join(' · ')}
+                </small>
+              </span>
+              {best && (
+                <span
+                  className="site-score"
+                  style={{ ['--body' as string]: BODY_COLORS[best.body] }}
+                  title={t('side.scoreTitle', { body: BODY_NAMES[lang][best.body] })}
+                >
+                  <b>{Math.round(best.score * 100)}</b>
+                  <small>/100</small>
+                </span>
+              )}
+            </button>
+          </li>
+        )
+      })}
     </ul>
   )
 }

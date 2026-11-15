@@ -21,6 +21,8 @@ export const STRINGS = {
     'side.catalog': 'Análogos de referencia',
     'side.caseStudy': 'Caso de estudio: Colombia',
     'side.caseStudyHint': 'Sitios elegidos por Santiago y comparados solo por su relieve (índice PAI).',
+    'side.sortedHint': 'Ordenados de más a menos similar. El número es el índice de similitud (0–100) con su par más parecido.',
+    'side.scoreTitle': 'Índice de similitud con {body} (0–100)',
     'cmp.caseStudy': 'Caso de estudio de Colombia: este sitio se eligió por su relieve. El puntaje usa todas las variables, que es el criterio de la búsqueda global; pulsa «Relieve» para ver solo el parecido topográfico.',
     'footer.note':
       'Los puntajes de la comparación detallada se calculan con datos abiertos de NASA y ESA sobre unas 164 000 celdas de la Tierra. La similitud por dimensión de la ficha es cualitativa (bibliografía). Imágenes: NASA GIBS, NASA Moon Trek y Mars Trek.',
@@ -217,6 +219,8 @@ export const STRINGS = {
     'side.catalog': 'Reference analogs',
     'side.caseStudy': 'Case study: Colombia',
     'side.caseStudyHint': 'Sites chosen by Santiago and compared by terrain only (PAI index).',
+    'side.sortedHint': 'Sorted from most to least similar. The number is the similarity index (0–100) with its closest counterpart.',
+    'side.scoreTitle': 'Similarity index with {body} (0–100)',
     'cmp.caseStudy': 'Colombian case study: this site was chosen for its terrain. The score uses every variable, which is the global search criterion; press “Terrain” to see the terrain match only.',
     'footer.note':
       'The scores of the detailed comparison are computed from open NASA and ESA data over about 164,000 Earth cells. The similarity by dimension in the site card is qualitative (literature). Imagery: NASA GIBS, NASA Moon Trek and Mars Trek.',
