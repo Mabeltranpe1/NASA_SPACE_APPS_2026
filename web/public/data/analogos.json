@@ -1,0 +1,5948 @@
+{
+ "generated": "2026-11-15",
+ "about": "Lugares poco conocidos de la Tierra análogos a sitios de bases en la Luna y Marte. score: similitud total 0..1; similarity: similitud por variable 0..1.",
+ "features": {
+  "elev_m": {
+   "label": "Elevación",
+   "unit": "m"
+  },
+  "slope_deg": {
+   "label": "Pendiente",
+   "unit": "°"
+  },
+  "roughness": {
+   "label": "Rugosidad",
+   "unit": "m"
+  },
+  "temp_mean_K": {
+   "label": "Temperatura media",
+   "unit": "K"
+  },
+  "temp_range_K": {
+   "label": "Variación de temperatura",
+   "unit": "K"
+  },
+  "albedo": {
+   "label": "Albedo",
+   "unit": ""
+  },
+  "precip_mm": {
+   "label": "Precipitación anual",
+   "unit": "mm"
+  },
+  "ndvi": {
+   "label": "Vegetación (NDVI)",
+   "unit": ""
+  },
+  "em_contrast": {
+   "label": "Composición de la roca (contraste de emisividad)",
+   "unit": ""
+  }
+ },
+ "composition_method": "em_contrast = emisividad ASTER (10.6-11.3 um) - (8.3-9.1 um). En la Luna y Marte es un valor EQUIVALENTE calculado con el Christiansen feature (Diviner / TES): indicador aproximado del tipo de roca, ±0.03. Ver docs/COMPOSICION.md.",
+ "oxides_order": [
+  "SiO2",
+  "TiO2",
+  "Al2O3",
+  "FeO",
+  "MgO",
+  "CaO",
+  "Na2O",
+  "K2O"
+ ],
+ "oxides_note": "Composición TÍPICA del tipo de roca (% en peso, valores de literatura), no medida en el lugar exacto. FeO = hierro total.",
+ "rock_types": {
+  "luna_feldespatica": {
+   "label": "Tierras altas feldespáticas (anortosita)",
+   "oxides": {
+    "SiO2": 45.0,
+    "TiO2": 0.6,
+    "Al2O3": 27.0,
+    "FeO": 5.5,
+    "MgO": 6.0,
+    "CaO": 15.5,
+    "Na2O": 0.45,
+    "K2O": 0.11
+   },
+   "source": "Promedio del regolito de Apolo 16 (Lunar Sourcebook; Korotev 1981)"
+  },
+  "luna_feldespatica_noritica": {
+   "label": "Tierras altas feldespáticas con norita (borde de la cuenca SPA)",
+   "oxides": {
+    "SiO2": 45.5,
+    "TiO2": 0.7,
+    "Al2O3": 22.0,
+    "FeO": 8.0,
+    "MgO": 9.0,
+    "CaO": 13.0,
+    "Na2O": 0.5,
+    "K2O": 0.15
+   },
+   "source": "Valor aproximado intermedio entre Apolo 16 y norita de SPA (Lunar Prospector)"
+  },
+  "marte_basalto_olivinico": {
+   "label": "Basalto rico en olivino",
+   "oxides": {
+    "SiO2": 45.7,
+    "TiO2": 0.5,
+    "Al2O3": 10.9,
+    "FeO": 18.8,
+    "MgO": 10.8,
+    "CaO": 7.8,
+    "Na2O": 2.4,
+    "K2O": 0.07
+   },
+   "source": "Basalto Adirondack, cráter Gusev (Spirit APXS; McSween et al. 2006)"
+  },
+  "marte_suelo_basaltico": {
+   "label": "Suelo y arena basáltica marciana",
+   "oxides": {
+    "SiO2": 45.4,
+    "TiO2": 0.9,
+    "Al2O3": 9.6,
+    "FeO": 17.6,
+    "MgO": 8.3,
+    "CaO": 7.0,
+    "Na2O": 2.6,
+    "K2O": 0.45
+   },
+   "source": "Suelo marciano promedio (Spirit, Opportunity, Curiosity APXS; Yen et al. 2005, O'Connell-Cooper et al. 2017). Además ~6 % SO3 y ~0.7 % Cl"
+  },
+  "marte_tipo2": {
+   "label": "Tipo de superficie 2 de TES (andesita basáltica o basalto alterado)",
+   "oxides": {
+    "SiO2": 55.0,
+    "TiO2": 1.0,
+    "Al2O3": 16.0,
+    "FeO": 9.0,
+    "MgO": 4.5,
+    "CaO": 7.5,
+    "Na2O": 3.3,
+    "K2O": 1.2
+   },
+   "source": "Andesita basáltica típica de la Tierra. Si es basalto alterado, se parece más a 'marte_suelo_basaltico' (Bandfield et al. 2000; Wyatt & McSween 2002)"
+  },
+  "tierra_basalto": {
+   "label": "Basalto",
+   "oxides": {
+    "SiO2": 49.2,
+    "TiO2": 1.8,
+    "Al2O3": 15.7,
+    "FeO": 10.4,
+    "MgO": 6.7,
+    "CaO": 9.5,
+    "Na2O": 2.9,
+    "K2O": 1.1
+   },
+   "source": "Basalto promedio (Le Maitre 1976)"
+  },
+  "tierra_andesita": {
+   "label": "Andesita / roca intermedia",
+   "oxides": {
+    "SiO2": 57.9,
+    "TiO2": 0.9,
+    "Al2O3": 17.0,
+    "FeO": 6.9,
+    "MgO": 3.3,
+    "CaO": 6.8,
+    "Na2O": 3.5,
+    "K2O": 1.6
+   },
+   "source": "Andesita promedio (Le Maitre 1976)"
+  },
+  "tierra_granito": {
+   "label": "Granito / roca félsica",
+   "oxides": {
+    "SiO2": 71.3,
+    "TiO2": 0.3,
+    "Al2O3": 14.3,
+    "FeO": 2.6,
+    "MgO": 0.7,
+    "CaO": 1.8,
+    "Na2O": 3.7,
+    "K2O": 4.1
+   },
+   "source": "Granito promedio (Le Maitre 1976)"
+  },
+  "tierra_arena_cuarzo": {
+   "label": "Arena o arenisca de cuarzo",
+   "oxides": {
+    "SiO2": 92.0,
+    "TiO2": 0.2,
+    "Al2O3": 3.5,
+    "FeO": 0.8,
+    "MgO": 0.3,
+    "CaO": 1.0,
+    "Na2O": 0.4,
+    "K2O": 1.2
+   },
+   "source": "Arena de duna cuarzosa típica (valor aproximado; sin contar carbonatos)"
+  }
+ },
+ "sites": [
+  {
+   "id": "shackleton-rim",
+   "number": 1,
+   "name": "Shackleton rim",
+   "body": "Moon",
+   "lat": -89.67,
+   "lon": 129.78,
+   "area": "rim 20.92 km",
+   "values": {
+    "elev_m": 916.3,
+    "slope_deg": 14.87,
+    "roughness": 44.36,
+    "temp_mean_K": 124.89,
+    "temp_range_K": 134.94,
+    "albedo": 0.3758,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   },
+   "composition": {
+    "lithology": "feldspathic highland (anorthositic)",
+    "cf_um": 8.15,
+    "cf_sigma_um": 0.1,
+    "em_contrast": 0.0245,
+    "em_contrast_sigma": 0.0263,
+    "evidence": "Diviner highland CF ~8.1-8.2 um (Greenhagen 2010); Shackleton on SPA rim, plagioclase-rich (Kaguya)",
+    "rock_type": "luna_feldespatica"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/01_moon_shackleton_rim_B_moon.png",
+     "url": "/data/img/maps/01_moon_shackleton_rim_B_moon.png",
+     "title": "Relieve de Shackleton rim",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": -89.67,
+     "lon": 129.78
+    },
+    {
+     "kind": "foto_orbital",
+     "src": "maps/01_moon_shackleton_rim_B_moon_photo.png",
+     "url": "/data/img/maps/01_moon_shackleton_rim_B_moon_photo.png",
+     "title": "Vista orbital de Shackleton rim",
+     "credit": "LROC WAC south pole mosaic 100 m (NASA/LRO/ASU)",
+     "source": null,
+     "lat": -89.67,
+     "lon": 129.78
+    },
+    {
+     "kind": "foto_orbital",
+     "src": "experiments/fotos_analogos/images/previews/04_moon_shackleton_rim.jpg",
+     "url": "/data/img/experiments/fotos_analogos/images/previews/04_moon_shackleton_rim.jpg",
+     "title": "On the Rim! (oblique view of the rim of Shackleton crater)",
+     "credit": "NASA/GSFC/Arizona State University",
+     "source": "https://www.lroc.asu.edu/posts/993",
+     "lat": -89.67,
+     "lon": 129.78,
+     "mission": "LRO / LROC NAC",
+     "date": null,
+     "product_id": "NAC M1224655261LR (NASA page labels it M1195011983LR)",
+     "licence": "NASA mission image, free to use with credit NASA/GSFC/Arizona State University",
+     "note": "Orbital oblique view, not surface. Full 3750x3750 rebuilt from LROC Zoomify tiles (NASA image-detail copy is only 952x952). Most of the frame is black: crater interior in permanent shadow."
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "ellesmere_north",
+     "region_label": "Ellesmere North",
+     "region_description": "Found by the global screening: northern Ellesmere Island, Canada",
+     "lat": 81.275,
+     "lon": -71.275,
+     "score": 0.0569,
+     "earth_values": {
+      "slope_deg": 13.66,
+      "roughness": 42.21,
+      "temp_mean_K": 254.73,
+      "temp_range_K": 32.09,
+      "albedo": 0.3757,
+      "precip_mm": 155.1,
+      "ndvi": -0.012,
+      "em_contrast": 0.0105,
+      "elev_m": 354.9
+     },
+     "similarity": {
+      "slope_deg": 0.7851,
+      "roughness": 0.6505,
+      "temp_mean_K": 0.0132,
+      "temp_range_K": 0.0324,
+      "albedo": 0.999,
+      "precip_mm": 0.0064,
+      "ndvi": 0.8869,
+      "em_contrast": 0.6271
+     },
+     "best_match": "albedo",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0105,
+      "cf_equivalent_um": 8.2,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/01_moon_shackleton_rim_A1_earth_ellesmere_north.png",
+       "url": "/data/img/maps/01_moon_shackleton_rim_A1_earth_ellesmere_north.png",
+       "title": "Relieve en ellesmere_north",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.275,
+       "lon": -71.275,
+       "same_place": true,
+       "distance_km": 0.0
+      },
+      {
+       "kind": "foto_satelite",
+       "src": "maps/01_moon_shackleton_rim_A1_earth_ellesmere_north_photo.png",
+       "url": "/data/img/maps/01_moon_shackleton_rim_A1_earth_ellesmere_north_photo.png",
+       "title": "Foto satelital en ellesmere_north",
+       "credit": "Sentinel-2 L2A true colour 10 m (ESA Copernicus, via AWS earth-search)",
+       "source": null,
+       "lat": 81.275,
+       "lon": -71.275,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "north_greenland",
+     "region_label": "North Greenland",
+     "region_description": "Peary Land: ice-free polar desert, little known",
+     "lat": 81.875,
+     "lon": -34.825,
+     "score": 0.0555,
+     "earth_values": {
+      "slope_deg": 15.99,
+      "roughness": 48.17,
+      "temp_mean_K": 256.57,
+      "temp_range_K": 30.45,
+      "albedo": 0.3015,
+      "precip_mm": 140.0,
+      "ndvi": 0.03,
+      "em_contrast": 0.01,
+      "elev_m": 452.3
+     },
+     "similarity": {
+      "slope_deg": 0.7993,
+      "roughness": 0.4667,
+      "temp_mean_K": 0.0124,
+      "temp_range_K": 0.0307,
+      "albedo": 0.4757,
+      "precip_mm": 0.0071,
+      "ndvi": 0.7408,
+      "em_contrast": 0.6167
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.01,
+      "cf_equivalent_um": 8.21,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/01_moon_shackleton_rim_A2_earth_north_greenland.png",
+       "url": "/data/img/maps/01_moon_shackleton_rim_A2_earth_north_greenland.png",
+       "title": "Relieve en north_greenland",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.875,
+       "lon": -34.825,
+       "same_place": true,
+       "distance_km": 0.0
+      },
+      {
+       "kind": "foto_satelite",
+       "src": "maps/01_moon_shackleton_rim_A2_earth_north_greenland_photo.png",
+       "url": "/data/img/maps/01_moon_shackleton_rim_A2_earth_north_greenland_photo.png",
+       "title": "Foto satelital en north_greenland",
+       "credit": "Sentinel-2 L2A true colour 10 m (ESA Copernicus, via AWS earth-search)",
+       "source": null,
+       "lat": 81.875,
+       "lon": -34.825,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "pamir",
+     "region_label": "Pamir",
+     "region_description": "High cold desert of Tajikistan, little known",
+     "lat": 39.225,
+     "lon": 73.475,
+     "score": 0.0549,
+     "earth_values": {
+      "slope_deg": 14.56,
+      "roughness": 43.74,
+      "temp_mean_K": 267.51,
+      "temp_range_K": 27.03,
+      "albedo": 0.3745,
+      "precip_mm": 90.7,
+      "ndvi": 0.037,
+      "em_contrast": 0.0257,
+      "elev_m": 4615.2
+     },
+     "similarity": {
+      "slope_deg": 0.9399,
+      "roughness": 0.8834,
+      "temp_mean_K": 0.0086,
+      "temp_range_K": 0.0274,
+      "albedo": 0.9871,
+      "precip_mm": 0.0109,
+      "ndvi": 0.6907,
+      "em_contrast": 0.9608
+     },
+     "best_match": "albedo",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0257,
+      "cf_equivalent_um": 8.15,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/01_moon_shackleton_rim_A3_earth_pamir.png",
+       "url": "/data/img/maps/01_moon_shackleton_rim_A3_earth_pamir.png",
+       "title": "Relieve en pamir",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 39.225,
+       "lon": 73.475,
+       "same_place": true,
+       "distance_km": 0.0
+      },
+      {
+       "kind": "foto_satelite",
+       "src": "maps/01_moon_shackleton_rim_A3_earth_pamir_photo.png",
+       "url": "/data/img/maps/01_moon_shackleton_rim_A3_earth_pamir_photo.png",
+       "title": "Foto satelital en pamir",
+       "credit": "Sentinel-2 L2A true colour 10 m (ESA Copernicus, via AWS earth-search)",
+       "source": null,
+       "lat": 39.225,
+       "lon": 73.475,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 4,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.675,
+     "lon": 82.825,
+     "score": 0.0529,
+     "earth_values": {
+      "slope_deg": 13.2,
+      "roughness": 41.06,
+      "temp_mean_K": 266.17,
+      "temp_range_K": 22.55,
+      "albedo": 0.3292,
+      "precip_mm": 94.0,
+      "ndvi": 0.056,
+      "em_contrast": 0.0233,
+      "elev_m": 5413.4
+     },
+     "similarity": {
+      "slope_deg": 0.7161,
+      "roughness": 0.5169,
+      "temp_mean_K": 0.009,
+      "temp_range_K": 0.0236,
+      "albedo": 0.6275,
+      "precip_mm": 0.0105,
+      "ndvi": 0.5712,
+      "em_contrast": 0.9608
+     },
+     "best_match": "em_contrast",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0233,
+      "cf_equivalent_um": 8.15,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 43.525,
+     "lon": 90.125,
+     "score": 0.0439,
+     "earth_values": {
+      "slope_deg": 15.82,
+      "roughness": 48.92,
+      "temp_mean_K": 269.34,
+      "temp_range_K": 25.86,
+      "albedo": 0.3643,
+      "precip_mm": 198.9,
+      "ndvi": 0.099,
+      "em_contrast": 0.0013,
+      "elev_m": 3235.4
+     },
+     "similarity": {
+      "slope_deg": 0.827,
+      "roughness": 0.4017,
+      "temp_mean_K": 0.0081,
+      "temp_range_K": 0.0264,
+      "albedo": 0.8914,
+      "precip_mm": 0.005,
+      "ndvi": 0.3716,
+      "em_contrast": 0.4615
+     },
+     "best_match": "albedo",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0013,
+      "cf_equivalent_um": 8.24,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "de-gerlache-rim",
+   "number": 2,
+   "name": "de Gerlache rim",
+   "body": "Moon",
+   "lat": -88.48,
+   "lon": -88.34,
+   "area": "rim 32.71 km",
+   "values": {
+    "elev_m": 248.1,
+    "slope_deg": 11.97,
+    "roughness": 35.1,
+    "temp_mean_K": 125.3,
+    "temp_range_K": 127.29,
+    "albedo": 0.3422,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   },
+   "composition": {
+    "lithology": "feldspathic highland (anorthositic)",
+    "cf_um": 8.15,
+    "cf_sigma_um": 0.1,
+    "em_contrast": 0.0245,
+    "em_contrast_sigma": 0.0263,
+    "evidence": "Diviner highland CF ~8.1-8.2 um; same terrain as Shackleton",
+    "rock_type": "luna_feldespatica"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/02_moon_de_gerlache_rim_B_moon.png",
+     "url": "/data/img/maps/02_moon_de_gerlache_rim_B_moon.png",
+     "title": "Relieve de de Gerlache rim",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": -88.48,
+     "lon": -88.34
+    },
+    {
+     "kind": "foto_orbital",
+     "src": "experiments/fotos_analogos/images/previews/05_moon_de_gerlache_ridge.jpg",
+     "url": "/data/img/experiments/fotos_analogos/images/previews/05_moon_de_gerlache_ridge.jpg",
+     "title": "Traversing the Shackleton de Gerlache Ridge",
+     "credit": "NASA/GSFC/Arizona State University",
+     "source": "https://www.lroc.asu.edu/images/1247",
+     "lat": -88.48,
+     "lon": -88.34,
+     "mission": "LRO / LROC NAC",
+     "date": null,
+     "product_id": "NAC M1348682369LR",
+     "licence": "NASA mission image, free to use with credit NASA/GSFC/Arizona State University",
+     "note": "Orbital oblique view, not surface. Ridge ~14 km long; Shackleton rim on the left. 1100x1100 is the largest version published (LROC original = NASA copy; no zoomable full-res)."
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "ellesmere_north",
+     "region_label": "Ellesmere North",
+     "region_description": "Found by the global screening: northern Ellesmere Island, Canada",
+     "lat": 81.325,
+     "lon": -71.525,
+     "score": 0.0595,
+     "earth_values": {
+      "slope_deg": 11.98,
+      "roughness": 35.49,
+      "temp_mean_K": 254.13,
+      "temp_range_K": 31.39,
+      "albedo": 0.3787,
+      "precip_mm": 155.1,
+      "ndvi": -0.011,
+      "em_contrast": 0.007,
+      "elev_m": 485.8
+     },
+     "similarity": {
+      "slope_deg": 0.998,
+      "roughness": 0.925,
+      "temp_mean_K": 0.0136,
+      "temp_range_K": 0.0409,
+      "albedo": 0.6942,
+      "precip_mm": 0.0064,
+      "ndvi": 0.8958,
+      "em_contrast": 0.558
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.007,
+      "cf_equivalent_um": 8.22,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/02_moon_de_gerlache_rim_A1_earth_ellesmere_north.png",
+       "url": "/data/img/maps/02_moon_de_gerlache_rim_A1_earth_ellesmere_north.png",
+       "title": "Relieve en ellesmere_north",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.325,
+       "lon": -71.525,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "north_greenland",
+     "region_label": "North Greenland",
+     "region_description": "Peary Land: ice-free polar desert, little known",
+     "lat": 81.625,
+     "lon": -34.275,
+     "score": 0.0586,
+     "earth_values": {
+      "slope_deg": 11.32,
+      "roughness": 34.37,
+      "temp_mean_K": 255.7,
+      "temp_range_K": 30.52,
+      "albedo": 0.3767,
+      "precip_mm": 154.6,
+      "ndvi": 0.0,
+      "em_contrast": 0.0222,
+      "elev_m": 750.3
+     },
+     "similarity": {
+      "slope_deg": 0.8781,
+      "roughness": 0.8642,
+      "temp_mean_K": 0.0129,
+      "temp_range_K": 0.0397,
+      "albedo": 0.7082,
+      "precip_mm": 0.0064,
+      "ndvi": 1.0,
+      "em_contrast": 0.9262
+     },
+     "best_match": "ndvi",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0222,
+      "cf_equivalent_um": 8.16,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/02_moon_de_gerlache_rim_A2_earth_north_greenland.png",
+       "url": "/data/img/maps/02_moon_de_gerlache_rim_A2_earth_north_greenland.png",
+       "title": "Relieve en north_greenland",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.625,
+       "lon": -34.275,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.575,
+     "lon": 82.775,
+     "score": 0.0566,
+     "earth_values": {
+      "slope_deg": 11.09,
+      "roughness": 33.37,
+      "temp_mean_K": 266.96,
+      "temp_range_K": 24.08,
+      "albedo": 0.2812,
+      "precip_mm": 87.2,
+      "ndvi": 0.026,
+      "em_contrast": 0.0148,
+      "elev_m": 5612.6
+     },
+     "similarity": {
+      "slope_deg": 0.8386,
+      "roughness": 0.7075,
+      "temp_mean_K": 0.0089,
+      "temp_range_K": 0.0321,
+      "albedo": 0.5434,
+      "precip_mm": 0.0113,
+      "ndvi": 0.7711,
+      "em_contrast": 0.7237
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0148,
+      "cf_equivalent_um": 8.19,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "pamir",
+     "region_label": "Pamir",
+     "region_description": "High cold desert of Tajikistan, little known",
+     "lat": 38.575,
+     "lon": 73.525,
+     "score": 0.055,
+     "earth_values": {
+      "slope_deg": 12.7,
+      "roughness": 39.37,
+      "temp_mean_K": 269.08,
+      "temp_range_K": 28.02,
+      "albedo": 0.3211,
+      "precip_mm": 95.6,
+      "ndvi": 0.035,
+      "em_contrast": 0.0105,
+      "elev_m": 4444.0
+     },
+     "similarity": {
+      "slope_deg": 0.8642,
+      "roughness": 0.4257,
+      "temp_mean_K": 0.0083,
+      "temp_range_K": 0.0366,
+      "albedo": 0.8098,
+      "precip_mm": 0.0104,
+      "ndvi": 0.7047,
+      "em_contrast": 0.6271
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0105,
+      "cf_equivalent_um": 8.2,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 43.825,
+     "lon": 91.775,
+     "score": 0.0482,
+     "earth_values": {
+      "slope_deg": 10.82,
+      "roughness": 32.53,
+      "temp_mean_K": 278.16,
+      "temp_range_K": 31.26,
+      "albedo": 0.2386,
+      "precip_mm": 107.3,
+      "ndvi": 0.102,
+      "em_contrast": 0.0192,
+      "elev_m": 2133.4
+     },
+     "similarity": {
+      "slope_deg": 0.7945,
+      "roughness": 0.5981,
+      "temp_mean_K": 0.0061,
+      "temp_range_K": 0.0407,
+      "albedo": 0.3549,
+      "precip_mm": 0.0092,
+      "ndvi": 0.3606,
+      "em_contrast": 0.8381
+     },
+     "best_match": "em_contrast",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0192,
+      "cf_equivalent_um": 8.17,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "haworth-rim",
+   "number": 3,
+   "name": "Haworth rim",
+   "body": "Moon",
+   "lat": -87.45,
+   "lon": -5.17,
+   "area": "rim 51.42 km",
+   "values": {
+    "elev_m": -60.0,
+    "slope_deg": 10.54,
+    "roughness": 30.91,
+    "temp_mean_K": 78.11,
+    "temp_range_K": 151.47,
+    "albedo": 0.333,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0167
+   },
+   "composition": {
+    "lithology": "feldspathic highland, some noritic SPA ejecta",
+    "cf_um": 8.18,
+    "cf_sigma_um": 0.1,
+    "em_contrast": 0.0167,
+    "em_contrast_sigma": 0.0263,
+    "evidence": "Diviner highland CF; closer to SPA basin (more pyroxene)",
+    "rock_type": "luna_feldespatica_noritica"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/03_moon_haworth_rim_B_moon.png",
+     "url": "/data/img/maps/03_moon_haworth_rim_B_moon.png",
+     "title": "Relieve de Haworth rim",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": -87.45,
+     "lon": -5.17
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "ellesmere_north",
+     "region_label": "Ellesmere North",
+     "region_description": "Found by the global screening: northern Ellesmere Island, Canada",
+     "lat": 81.575,
+     "lon": -70.375,
+     "score": 0.0328,
+     "earth_values": {
+      "slope_deg": 9.81,
+      "roughness": 30.12,
+      "temp_mean_K": 254.19,
+      "temp_range_K": 32.75,
+      "albedo": 0.3907,
+      "precip_mm": 158.0,
+      "ndvi": -0.002,
+      "em_contrast": 0.0103,
+      "elev_m": 500.1
+     },
+     "similarity": {
+      "slope_deg": 0.8642,
+      "roughness": 0.8538,
+      "temp_mean_K": 0.0028,
+      "temp_range_K": 0.0191,
+      "albedo": 0.5616,
+      "precip_mm": 0.0063,
+      "ndvi": 0.9802,
+      "em_contrast": 0.8079
+     },
+     "best_match": "ndvi",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0103,
+      "cf_equivalent_um": 8.2,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/03_moon_haworth_rim_A1_earth_ellesmere_north.png",
+       "url": "/data/img/maps/03_moon_haworth_rim_A1_earth_ellesmere_north.png",
+       "title": "Relieve en ellesmere_north",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.325,
+       "lon": -70.975,
+       "same_place": false,
+       "distance_km": 29.5,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "north_greenland",
+     "region_label": "North Greenland",
+     "region_description": "Peary Land: ice-free polar desert, little known",
+     "lat": 81.875,
+     "lon": -34.875,
+     "score": 0.0323,
+     "earth_values": {
+      "slope_deg": 9.67,
+      "roughness": 30.31,
+      "temp_mean_K": 256.57,
+      "temp_range_K": 30.45,
+      "albedo": 0.2818,
+      "precip_mm": 140.0,
+      "ndvi": 0.024,
+      "em_contrast": 0.0065,
+      "elev_m": 320.6
+     },
+     "similarity": {
+      "slope_deg": 0.8403,
+      "roughness": 0.8869,
+      "temp_mean_K": 0.0026,
+      "temp_range_K": 0.0177,
+      "albedo": 0.5993,
+      "precip_mm": 0.0071,
+      "ndvi": 0.7866,
+      "em_contrast": 0.7118
+     },
+     "best_match": "roughness",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0065,
+      "cf_equivalent_um": 8.22,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": []
+    },
+    {
+     "rank": 3,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.575,
+     "lon": 82.775,
+     "score": 0.0301,
+     "earth_values": {
+      "slope_deg": 11.09,
+      "roughness": 33.37,
+      "temp_mean_K": 266.96,
+      "temp_range_K": 24.08,
+      "albedo": 0.2812,
+      "precip_mm": 87.2,
+      "ndvi": 0.026,
+      "em_contrast": 0.0148,
+      "elev_m": 5612.6
+     },
+     "similarity": {
+      "slope_deg": 0.8958,
+      "roughness": 0.6114,
+      "temp_mean_K": 0.0018,
+      "temp_range_K": 0.0143,
+      "albedo": 0.5957,
+      "precip_mm": 0.0113,
+      "ndvi": 0.7711,
+      "em_contrast": 0.9386
+     },
+     "best_match": "em_contrast",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0148,
+      "cf_equivalent_um": 8.19,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "pamir",
+     "region_label": "Pamir",
+     "region_description": "High cold desert of Tajikistan, little known",
+     "lat": 37.625,
+     "lon": 73.825,
+     "score": 0.0292,
+     "earth_values": {
+      "slope_deg": 9.51,
+      "roughness": 28.68,
+      "temp_mean_K": 270.32,
+      "temp_range_K": 34.36,
+      "albedo": 0.3949,
+      "precip_mm": 111.0,
+      "ndvi": 0.036,
+      "em_contrast": 0.0157,
+      "elev_m": 4272.1
+     },
+     "similarity": {
+      "slope_deg": 0.8138,
+      "roughness": 0.6402,
+      "temp_mean_K": 0.0016,
+      "temp_range_K": 0.0202,
+      "albedo": 0.5385,
+      "precip_mm": 0.0089,
+      "ndvi": 0.6977,
+      "em_contrast": 0.9672
+     },
+     "best_match": "em_contrast",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0157,
+      "cf_equivalent_um": 8.18,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "victoria_island",
+     "region_label": "Victoria Island",
+     "region_description": "Found by the global screening: polar desert of Victoria/Melville islands, Canada",
+     "lat": 75.875,
+     "lon": -107.675,
+     "score": 0.0276,
+     "earth_values": {
+      "slope_deg": 9.06,
+      "roughness": 28.02,
+      "temp_mean_K": 257.07,
+      "temp_range_K": 30.99,
+      "albedo": 0.4426,
+      "precip_mm": 279.8,
+      "ndvi": 0.018,
+      "em_contrast": 0.0008,
+      "elev_m": 126.6
+     },
+     "similarity": {
+      "slope_deg": 0.7438,
+      "roughness": 0.561,
+      "temp_mean_K": 0.0026,
+      "temp_range_K": 0.018,
+      "albedo": 0.3342,
+      "precip_mm": 0.0036,
+      "ndvi": 0.8353,
+      "em_contrast": 0.5886
+     },
+     "best_match": "ndvi",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0008,
+      "cf_equivalent_um": 8.24,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "faustini-rim",
+   "number": 4,
+   "name": "Faustini rim",
+   "body": "Moon",
+   "lat": -87.18,
+   "lon": 84.31,
+   "area": "rim 42.48 km",
+   "values": {
+    "elev_m": 72.1,
+    "slope_deg": 8.3,
+    "roughness": 24.26,
+    "temp_mean_K": 98.8,
+    "temp_range_K": 127.94,
+    "albedo": 0.3579,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0167
+   },
+   "composition": {
+    "lithology": "feldspathic highland, some noritic SPA ejecta",
+    "cf_um": 8.18,
+    "cf_sigma_um": 0.1,
+    "em_contrast": 0.0167,
+    "em_contrast_sigma": 0.0263,
+    "evidence": "Diviner highland CF; closer to SPA basin (more pyroxene)",
+    "rock_type": "luna_feldespatica_noritica"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/04_moon_faustini_rim_B_moon.png",
+     "url": "/data/img/maps/04_moon_faustini_rim_B_moon.png",
+     "title": "Relieve de Faustini rim",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": -87.18,
+     "lon": 84.31
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "ellesmere_north",
+     "region_label": "Ellesmere North",
+     "region_description": "Found by the global screening: northern Ellesmere Island, Canada",
+     "lat": 81.575,
+     "lon": -70.675,
+     "score": 0.0458,
+     "earth_values": {
+      "slope_deg": 7.69,
+      "roughness": 23.37,
+      "temp_mean_K": 253.85,
+      "temp_range_K": 32.93,
+      "albedo": 0.4007,
+      "precip_mm": 158.0,
+      "ndvi": 0.003,
+      "em_contrast": 0.0073,
+      "elev_m": 501.9
+     },
+     "similarity": {
+      "slope_deg": 0.8851,
+      "roughness": 0.8369,
+      "temp_mean_K": 0.0057,
+      "temp_range_K": 0.0421,
+      "albedo": 0.6518,
+      "precip_mm": 0.0063,
+      "ndvi": 0.9704,
+      "em_contrast": 0.731
+     },
+     "best_match": "ndvi",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0073,
+      "cf_equivalent_um": 8.22,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/04_moon_faustini_rim_A1_earth_ellesmere_north.png",
+       "url": "/data/img/maps/04_moon_faustini_rim_A1_earth_ellesmere_north.png",
+       "title": "Relieve en ellesmere_north",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.575,
+       "lon": -70.675,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "north_greenland",
+     "region_label": "North Greenland",
+     "region_description": "Peary Land: ice-free polar desert, little known",
+     "lat": 82.125,
+     "lon": -34.725,
+     "score": 0.0454,
+     "earth_values": {
+      "slope_deg": 8.08,
+      "roughness": 24.45,
+      "temp_mean_K": 255.63,
+      "temp_range_K": 29.13,
+      "albedo": 0.402,
+      "precip_mm": 140.0,
+      "ndvi": 0.003,
+      "em_contrast": 0.0165,
+      "elev_m": 748.8
+     },
+     "similarity": {
+      "slope_deg": 0.957,
+      "roughness": 0.9627,
+      "temp_mean_K": 0.0054,
+      "temp_range_K": 0.0371,
+      "albedo": 0.6434,
+      "precip_mm": 0.0071,
+      "ndvi": 0.9704,
+      "em_contrast": 0.9934
+     },
+     "best_match": "em_contrast",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0165,
+      "cf_equivalent_um": 8.18,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/04_moon_faustini_rim_A2_earth_north_greenland.png",
+       "url": "/data/img/maps/04_moon_faustini_rim_A2_earth_north_greenland.png",
+       "title": "Relieve en north_greenland",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.825,
+       "lon": -34.725,
+       "same_place": false,
+       "distance_km": 33.4,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.875,
+     "lon": 83.275,
+     "score": 0.0426,
+     "earth_values": {
+      "slope_deg": 8.52,
+      "roughness": 26.16,
+      "temp_mean_K": 268.11,
+      "temp_range_K": 22.07,
+      "albedo": 0.2675,
+      "precip_mm": 60.2,
+      "ndvi": 0.089,
+      "em_contrast": -0.0192,
+      "elev_m": 5379.8
+     },
+     "similarity": {
+      "slope_deg": 0.957,
+      "roughness": 0.6839,
+      "temp_mean_K": 0.0035,
+      "temp_range_K": 0.0293,
+      "albedo": 0.4049,
+      "precip_mm": 0.0163,
+      "ndvi": 0.4107,
+      "em_contrast": 0.3022
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": -0.0192,
+      "cf_equivalent_um": 8.32,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "pamir",
+     "region_label": "Pamir",
+     "region_description": "High cold desert of Tajikistan, little known",
+     "lat": 37.625,
+     "lon": 73.925,
+     "score": 0.0409,
+     "earth_values": {
+      "slope_deg": 8.32,
+      "roughness": 25.04,
+      "temp_mean_K": 270.16,
+      "temp_range_K": 34.32,
+      "albedo": 0.4161,
+      "precip_mm": 115.4,
+      "ndvi": 0.034,
+      "em_contrast": 0.0152,
+      "elev_m": 4326.7
+     },
+     "similarity": {
+      "slope_deg": 0.996,
+      "roughness": 0.8556,
+      "temp_mean_K": 0.0033,
+      "temp_range_K": 0.0441,
+      "albedo": 0.5588,
+      "precip_mm": 0.0086,
+      "ndvi": 0.7118,
+      "em_contrast": 0.9512
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0152,
+      "cf_equivalent_um": 8.19,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.625,
+     "lon": 29.425,
+     "score": 0.0389,
+     "earth_values": {
+      "slope_deg": 6.04,
+      "roughness": 18.23,
+      "temp_mean_K": 300.23,
+      "temp_range_K": 19.39,
+      "albedo": 0.3772,
+      "precip_mm": 1.4,
+      "ndvi": 0.092,
+      "em_contrast": 0.0417,
+      "elev_m": 405.1
+     },
+     "similarity": {
+      "slope_deg": 0.6364,
+      "roughness": 0.2994,
+      "temp_mean_K": 0.0012,
+      "temp_range_K": 0.0268,
+      "albedo": 0.8245,
+      "precip_mm": 0.4167,
+      "ndvi": 0.3985,
+      "em_contrast": 0.4346
+     },
+     "best_match": "albedo",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0417,
+      "cf_equivalent_um": 8.08,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "mons-mouton-summit",
+   "number": 5,
+   "name": "Mons Mouton summit",
+   "body": "Moon",
+   "lat": -84.6,
+   "lon": 31.0,
+   "area": "disk 5.0 km",
+   "values": {
+    "elev_m": 5139.2,
+    "slope_deg": 5.6,
+    "roughness": 16.35,
+    "temp_mean_K": 113.26,
+    "temp_range_K": 107.82,
+    "albedo": 0.3204,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   },
+   "composition": {
+    "lithology": "feldspathic massif (SPA rim)",
+    "cf_um": 8.15,
+    "cf_sigma_um": 0.1,
+    "em_contrast": 0.0245,
+    "em_contrast_sigma": 0.0263,
+    "evidence": "Diviner highland CF; SPA rim massif",
+    "rock_type": "luna_feldespatica"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/05_moon_mons_mouton_summit_B_moon.png",
+     "url": "/data/img/maps/05_moon_mons_mouton_summit_B_moon.png",
+     "title": "Relieve de Mons Mouton summit",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": -84.6,
+     "lon": 31.0
+    },
+    {
+     "kind": "foto_orbital",
+     "src": "experiments/fotos_analogos/imagenes/luna/luna_01_polo_sur_mons_mouton_LROC_M1495922531.jpg",
+     "url": "/data/img/experiments/fotos_analogos/imagenes/luna/luna_01_polo_sur_mons_mouton_LROC_M1495922531.jpg",
+     "title": "Polo sur, Mons Mouton (zona del aterrizaje IM-2 Athena), meseta",
+     "credit": "NASA/GSFC/Arizona State University",
+     "source": "https://lroc.im-ldi.com/images/1408",
+     "lat": -84.7906,
+     "lon": 29.1957,
+     "mission": "LRO",
+     "instrument": "LROC NAC (oblicua)",
+     "date": "2025-03-07",
+     "product_id": "M1495922531LR",
+     "licence": "Uso libre con credito NASA/GSFC/ASU (politica de imagenes NASA)",
+     "coord_precision": "centro de la escena (sitio IM-2, coordenadas LROC); no la nave",
+     "width": 8000,
+     "height": 2581,
+     "distance_to_site_km": 7.7
+    },
+    {
+     "kind": "foto_orbital",
+     "src": "experiments/fotos_analogos/images/previews/06_moon_mons_mouton_im2.jpg",
+     "url": "/data/img/experiments/fotos_analogos/images/previews/06_moon_mons_mouton_im2.jpg",
+     "title": "IM-2 Athena Seen Obliquely",
+     "credit": "NASA/GSFC/Arizona State University",
+     "source": "https://www.lroc.asu.edu/images/1408",
+     "lat": -84.6,
+     "lon": 31.0,
+     "mission": "LRO / LROC NAC",
+     "date": "2025-03-07 16:54:21 UTC",
+     "product_id": "NAC M1495922531LR",
+     "licence": "NASA mission image, free to use with credit NASA/GSFC/Arizona State University",
+     "note": "Orbital oblique view, not surface: Intuitive Machines IM-2 Athena landing site near the centre of Mons Mouton (84.79°S, 29.20°E), ~23.5 h after touchdown. LROC (NASA) image, not an IM photo. Full NAC mosaic is 31000x10000; rebuilt at half resolution from Zoomify tiles to stay < 60 MB."
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "north_greenland",
+     "region_label": "North Greenland",
+     "region_description": "Peary Land: ice-free polar desert, little known",
+     "lat": 81.875,
+     "lon": -34.975,
+     "score": 0.0571,
+     "earth_values": {
+      "slope_deg": 6.53,
+      "roughness": 18.22,
+      "temp_mean_K": 256.31,
+      "temp_range_K": 30.01,
+      "albedo": 0.2995,
+      "precip_mm": 140.0,
+      "ndvi": 0.001,
+      "em_contrast": 0.0158,
+      "elev_m": 407.6
+     },
+     "similarity": {
+      "slope_deg": 0.8303,
+      "roughness": 0.688,
+      "temp_mean_K": 0.0085,
+      "temp_range_K": 0.0747,
+      "albedo": 0.8114,
+      "precip_mm": 0.0071,
+      "ndvi": 0.99,
+      "em_contrast": 0.7483
+     },
+     "best_match": "ndvi",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0158,
+      "cf_equivalent_um": 8.18,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/05_moon_mons_mouton_summit_A2_earth_north_greenland.png",
+       "url": "/data/img/maps/05_moon_mons_mouton_summit_A2_earth_north_greenland.png",
+       "title": "Relieve en north_greenland",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.825,
+       "lon": -34.925,
+       "same_place": true,
+       "distance_km": 5.6
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "ellesmere_north",
+     "region_label": "Ellesmere North",
+     "region_description": "Found by the global screening: northern Ellesmere Island, Canada",
+     "lat": 81.425,
+     "lon": -70.775,
+     "score": 0.0571,
+     "earth_values": {
+      "slope_deg": 5.77,
+      "roughness": 16.61,
+      "temp_mean_K": 253.62,
+      "temp_range_K": 31.66,
+      "albedo": 0.3846,
+      "precip_mm": 158.0,
+      "ndvi": 0.001,
+      "em_contrast": 0.005,
+      "elev_m": 760.3
+     },
+     "similarity": {
+      "slope_deg": 0.9666,
+      "roughness": 0.9493,
+      "temp_mean_K": 0.0093,
+      "temp_range_K": 0.079,
+      "albedo": 0.5262,
+      "precip_mm": 0.0063,
+      "ndvi": 0.99,
+      "em_contrast": 0.522
+     },
+     "best_match": "ndvi",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.005,
+      "cf_equivalent_um": 8.22,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/05_moon_mons_mouton_summit_A1_earth_ellesmere_north.png",
+       "url": "/data/img/maps/05_moon_mons_mouton_summit_A1_earth_ellesmere_north.png",
+       "title": "Relieve en ellesmere_north",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.425,
+       "lon": -70.775,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.875,
+     "lon": 83.225,
+     "score": 0.0564,
+     "earth_values": {
+      "slope_deg": 5.16,
+      "roughness": 15.67,
+      "temp_mean_K": 267.83,
+      "temp_range_K": 22.07,
+      "albedo": 0.2818,
+      "precip_mm": 60.2,
+      "ndvi": 0.101,
+      "em_contrast": 0.0273,
+      "elev_m": 5294.8
+     },
+     "similarity": {
+      "slope_deg": 0.9158,
+      "roughness": 0.8728,
+      "temp_mean_K": 0.0058,
+      "temp_range_K": 0.0574,
+      "albedo": 0.6798,
+      "precip_mm": 0.0163,
+      "ndvi": 0.3642,
+      "em_contrast": 0.9109
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0273,
+      "cf_equivalent_um": 8.14,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/05_moon_mons_mouton_summit_A3_earth_changtang_tibet.png",
+       "url": "/data/img/maps/05_moon_mons_mouton_summit_A3_earth_changtang_tibet.png",
+       "title": "Relieve en changtang_tibet",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 34.875,
+       "lon": 83.225,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 4,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.475,
+     "lon": 29.525,
+     "score": 0.0532,
+     "earth_values": {
+      "slope_deg": 4.66,
+      "roughness": 14.03,
+      "temp_mean_K": 300.76,
+      "temp_range_K": 18.54,
+      "albedo": 0.3628,
+      "precip_mm": 0.7,
+      "ndvi": 0.085,
+      "em_contrast": 0.024,
+      "elev_m": 335.2
+     },
+     "similarity": {
+      "slope_deg": 0.8286,
+      "roughness": 0.6288,
+      "temp_mean_K": 0.0019,
+      "temp_range_K": 0.051,
+      "albedo": 0.6544,
+      "precip_mm": 0.5882,
+      "ndvi": 0.4274,
+      "em_contrast": 0.9835
+     },
+     "best_match": "em_contrast",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.024,
+      "cf_equivalent_um": 8.15,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "pamir",
+     "region_label": "Pamir",
+     "region_description": "High cold desert of Tajikistan, little known",
+     "lat": 37.625,
+     "lon": 73.675,
+     "score": 0.0514,
+     "earth_values": {
+      "slope_deg": 5.78,
+      "roughness": 17.27,
+      "temp_mean_K": 269.94,
+      "temp_range_K": 34.44,
+      "albedo": 0.4379,
+      "precip_mm": 108.1,
+      "ndvi": 0.037,
+      "em_contrast": 0.0243,
+      "elev_m": 4226.8
+     },
+     "similarity": {
+      "slope_deg": 0.9646,
+      "roughness": 0.8319,
+      "temp_mean_K": 0.0054,
+      "temp_range_K": 0.0866,
+      "albedo": 0.3088,
+      "precip_mm": 0.0092,
+      "ndvi": 0.6907,
+      "em_contrast": 0.9934
+     },
+     "best_match": "em_contrast",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0243,
+      "cf_equivalent_um": 8.15,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "shackleton-floor",
+   "number": 6,
+   "name": "Shackleton floor (shadow)",
+   "body": "Moon",
+   "lat": -89.67,
+   "lon": 129.78,
+   "area": "disk 3.0 km",
+   "values": {
+    "elev_m": -2705.4,
+    "slope_deg": 7.93,
+    "roughness": 23.53,
+    "temp_mean_K": 51.26,
+    "temp_range_K": 32.21,
+    "albedo": 0.4176,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   },
+   "composition": {
+    "lithology": "feldspathic highland (cold trap)",
+    "cf_um": 8.15,
+    "cf_sigma_um": 0.15,
+    "em_contrast": 0.0245,
+    "em_contrast_sigma": 0.0394,
+    "evidence": "No CF in permanent shadow (no sunlight); same rock as the rim, larger uncertainty (possible frost)",
+    "rock_type": "luna_feldespatica"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/06_moon_shackleton_floor_B_moon.png",
+     "url": "/data/img/maps/06_moon_shackleton_floor_B_moon.png",
+     "title": "Relieve de Shackleton floor (shadow)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": -89.67,
+     "lon": 129.78
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "north_greenland",
+     "region_label": "North Greenland",
+     "region_description": "Peary Land: ice-free polar desert, little known",
+     "lat": 82.025,
+     "lon": -34.725,
+     "score": 0.0325,
+     "earth_values": {
+      "slope_deg": 7.53,
+      "roughness": 21.92,
+      "temp_mean_K": 254.35,
+      "temp_range_K": 22.91,
+      "albedo": 0.4267,
+      "precip_mm": 140.0,
+      "ndvi": -0.051,
+      "em_contrast": 0.0048,
+      "elev_m": 873.4
+     },
+     "similarity": {
+      "slope_deg": 0.9231,
+      "roughness": 0.7247,
+      "temp_mean_K": 0.0011,
+      "temp_range_K": 0.7334,
+      "albedo": 0.913,
+      "precip_mm": 0.0071,
+      "ndvi": 0.6005,
+      "em_contrast": 0.5186
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0048,
+      "cf_equivalent_um": 8.23,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/06_moon_shackleton_floor_A1_earth_north_greenland.png",
+       "url": "/data/img/maps/06_moon_shackleton_floor_A1_earth_north_greenland.png",
+       "title": "Relieve en north_greenland",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 82.025,
+       "lon": -34.725,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "ellesmere_north",
+     "region_label": "Ellesmere North",
+     "region_description": "Found by the global screening: northern Ellesmere Island, Canada",
+     "lat": 81.425,
+     "lon": -71.225,
+     "score": 0.0324,
+     "earth_values": {
+      "slope_deg": 7.56,
+      "roughness": 22.49,
+      "temp_mean_K": 253.49,
+      "temp_range_K": 32.63,
+      "albedo": 0.4538,
+      "precip_mm": 155.1,
+      "ndvi": 0.011,
+      "em_contrast": 0.0035,
+      "elev_m": 517.3
+     },
+     "similarity": {
+      "slope_deg": 0.9287,
+      "roughness": 0.8122,
+      "temp_mean_K": 0.0012,
+      "temp_range_K": 0.9861,
+      "albedo": 0.6963,
+      "precip_mm": 0.0064,
+      "ndvi": 0.8958,
+      "em_contrast": 0.4966
+     },
+     "best_match": "temp_range_K",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0035,
+      "cf_equivalent_um": 8.23,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/06_moon_shackleton_floor_A2_earth_ellesmere_north.png",
+       "url": "/data/img/maps/06_moon_shackleton_floor_A2_earth_ellesmere_north.png",
+       "title": "Relieve en ellesmere_north",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 81.425,
+       "lon": -71.225,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.775,
+     "lon": 82.275,
+     "score": 0.0303,
+     "earth_values": {
+      "slope_deg": 6.57,
+      "roughness": 19.36,
+      "temp_mean_K": 258.97,
+      "temp_range_K": 19.29,
+      "albedo": 0.3471,
+      "precip_mm": 138.9,
+      "ndvi": 0.035,
+      "em_contrast": 0.0262,
+      "elev_m": 5513.4
+     },
+     "similarity": {
+      "slope_deg": 0.7619,
+      "roughness": 0.4343,
+      "temp_mean_K": 0.001,
+      "temp_range_K": 0.6501,
+      "albedo": 0.4941,
+      "precip_mm": 0.0071,
+      "ndvi": 0.7047,
+      "em_contrast": 0.9449
+     },
+     "best_match": "em_contrast",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0262,
+      "cf_equivalent_um": 8.14,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "pamir",
+     "region_label": "Pamir",
+     "region_description": "High cold desert of Tajikistan, little known",
+     "lat": 37.525,
+     "lon": 74.175,
+     "score": 0.0279,
+     "earth_values": {
+      "slope_deg": 7.98,
+      "roughness": 23.95,
+      "temp_mean_K": 269.54,
+      "temp_range_K": 31.7,
+      "albedo": 0.3796,
+      "precip_mm": 116.4,
+      "ndvi": 0.047,
+      "em_contrast": 0.0267,
+      "elev_m": 4295.6
+     },
+     "similarity": {
+      "slope_deg": 0.99,
+      "roughness": 0.9194,
+      "temp_mean_K": 0.0007,
+      "temp_range_K": 0.9831,
+      "albedo": 0.6839,
+      "precip_mm": 0.0085,
+      "ndvi": 0.625,
+      "em_contrast": 0.9293
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0267,
+      "cf_equivalent_um": 8.14,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "victoria_island",
+     "region_label": "Victoria Island",
+     "region_description": "Found by the global screening: polar desert of Victoria/Melville islands, Canada",
+     "lat": 75.925,
+     "lon": -107.775,
+     "score": 0.0278,
+     "earth_values": {
+      "slope_deg": 8.09,
+      "roughness": 23.9,
+      "temp_mean_K": 256.9,
+      "temp_range_K": 29.3,
+      "albedo": 0.4299,
+      "precip_mm": 279.8,
+      "ndvi": 0.009,
+      "em_contrast": 0.001,
+      "elev_m": 82.9
+     },
+     "similarity": {
+      "slope_deg": 0.9685,
+      "roughness": 0.9287,
+      "temp_mean_K": 0.0011,
+      "temp_range_K": 0.9076,
+      "albedo": 0.8843,
+      "precip_mm": 0.0036,
+      "ndvi": 0.9139,
+      "em_contrast": 0.4569
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.001,
+      "cf_equivalent_um": 8.24,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "jezero-crater",
+   "number": 7,
+   "name": "Jezero crater (Perseverance)",
+   "body": "Mars",
+   "lat": 18.44,
+   "lon": 77.45,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -2490.1,
+    "slope_deg": 3.37,
+    "roughness": 9.86,
+    "temp_mean_K": 223.74,
+    "temp_range_K": 63.14,
+    "albedo": 0.1744,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0411
+   },
+   "composition": {
+    "lithology": "olivine-rich basalt + carbonates",
+    "cf_um": 8.4,
+    "cf_sigma_um": 0.1,
+    "em_contrast": -0.0411,
+    "em_contrast_sigma": 0.0263,
+    "evidence": "TES/THEMIS olivine-rich Nili Fossae region; Perseverance: Seitah olivine cumulate, Maaz basalt",
+    "rock_type": "marte_basalto_olivinico"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/07_mars_jezero_crater_B_mars.png",
+     "url": "/data/img/maps/07_mars_jezero_crater_B_mars.png",
+     "title": "Relieve de Jezero crater (Perseverance)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": 18.44,
+     "lon": 77.45
+    },
+    {
+     "kind": "foto_orbital",
+     "src": "maps/07_mars_jezero_crater_B_mars_photo.png",
+     "url": "/data/img/maps/07_mars_jezero_crater_B_mars_photo.png",
+     "title": "Vista orbital de Jezero crater (Perseverance)",
+     "credit": "CTX mosaic 5 m (NASA/JPL/MSSS, Caltech Murray Lab, Esri OnMars)",
+     "source": null,
+     "lat": 18.44,
+     "lon": 77.45
+    },
+    {
+     "kind": "foto_superficie",
+     "src": "experiments/fotos_analogos/imagenes/marte/marte_01_jezero_aterrizaje_PIA24264.jpg",
+     "url": "/data/img/experiments/fotos_analogos/imagenes/marte/marte_01_jezero_aterrizaje_PIA24264.jpg",
+     "title": "Crater Jezero, sitio de aterrizaje Octavia E. Butler (suelo del crater)",
+     "credit": "NASA/JPL-Caltech/ASU/MSSS",
+     "source": "https://science.nasa.gov/photojournal/?search=PIA24264",
+     "lat": 18.444627,
+     "lon": 77.450886,
+     "mission": "Mars 2020 Perseverance",
+     "instrument": "Mastcam-Z",
+     "date": "sol 3 (2021-02-21)",
+     "product_id": "PIA24264",
+     "licence": "Dominio publico (NASA)",
+     "coord_precision": "parada exacta (waypoint M20 site 3, sol 3-13; MMGIS)",
+     "width": 8000,
+     "height": 2123,
+     "distance_to_site_km": 0.3
+    },
+    {
+     "kind": "foto_superficie",
+     "src": "experiments/fotos_analogos/imagenes/marte/marte_02_jezero_delta_PIA24921.jpg",
+     "url": "/data/img/experiments/fotos_analogos/imagenes/marte/marte_02_jezero_delta_PIA24921.jpg",
+     "title": "Crater Jezero, frente del delta (Hawksbill Gap), color realzado",
+     "credit": "NASA/JPL-Caltech/ASU/MSSS",
+     "source": "https://science.nasa.gov/photojournal/detailed-panorama-of-mars-jezero-crater-delta/",
+     "lat": 18.458794,
+     "lon": 77.406013,
+     "mission": "Mars 2020 Perseverance",
+     "instrument": "Mastcam-Z",
+     "date": "soles 466-474 (2022-06-12/20)",
+     "product_id": "PIA24921",
+     "licence": "Dominio publico (NASA)",
+     "coord_precision": "parada exacta (waypoint M20 site 26 drive 756, sol 464-474; MMGIS)",
+     "width": 8000,
+     "height": 2244,
+     "distance_to_site_km": 2.7
+    },
+    {
+     "kind": "foto_superficie",
+     "src": "experiments/fotos_analogos/imagenes/marte/marte_03_jezero_borde_crater_PIA26373.jpg",
+     "url": "/data/img/experiments/fotos_analogos/imagenes/marte/marte_03_jezero_borde_crater_PIA26373.jpg",
+     "title": "Crater Jezero, vista al borde sur del crater (subida al borde)",
+     "credit": "NASA/JPL-Caltech/ASU/MSSS",
+     "source": "https://science.nasa.gov/photojournal/?search=PIA26373",
+     "lat": 18.493046,
+     "lon": 77.301003,
+     "mission": "Mars 2020 Perseverance",
+     "instrument": "Mastcam-Z",
+     "date": "sol 1229 (2024-08-04)",
+     "product_id": "PIA26373",
+     "licence": "Dominio publico (NASA)",
+     "coord_precision": "parada exacta (waypoint M20 site 56 drive 2932, sol 1227-1229; MMGIS)",
+     "width": 8000,
+     "height": 2098,
+     "distance_to_site_km": 8.9
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.425,
+     "lon": 30.075,
+     "score": 0.2247,
+     "earth_values": {
+      "slope_deg": 4.02,
+      "roughness": 12.01,
+      "temp_mean_K": 302.89,
+      "temp_range_K": 17.69,
+      "albedo": 0.3288,
+      "precip_mm": 0.7,
+      "ndvi": 0.098,
+      "em_contrast": 0.0067,
+      "elev_m": 461.7
+     },
+     "similarity": {
+      "slope_deg": 0.8781,
+      "roughness": 0.6505,
+      "temp_mean_K": 0.0715,
+      "temp_range_K": 0.2198,
+      "albedo": 0.2135,
+      "precip_mm": 0.5882,
+      "ndvi": 0.3753,
+      "em_contrast": 0.2032
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0067,
+      "cf_equivalent_um": 8.22,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/07_mars_jezero_crater_A1_earth_egypt_western_desert.png",
+       "url": "/data/img/maps/07_mars_jezero_crater_A1_earth_egypt_western_desert.png",
+       "title": "Relieve en egypt_western_desert",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 25.375,
+       "lon": 29.575,
+       "same_place": false,
+       "distance_km": 50.5,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      },
+      {
+       "kind": "foto_satelite",
+       "src": "maps/07_mars_jezero_crater_A1_earth_egypt_western_desert_photo.png",
+       "url": "/data/img/maps/07_mars_jezero_crater_A1_earth_egypt_western_desert_photo.png",
+       "title": "Foto satelital en egypt_western_desert",
+       "credit": "Sentinel-2 L2A true colour 10 m (ESA Copernicus, via AWS earth-search)",
+       "source": null,
+       "lat": 25.375,
+       "lon": 29.575,
+       "same_place": false,
+       "distance_km": 50.5,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "fezzan_libya",
+     "region_label": "Fezzan Libya",
+     "region_description": "Found by the global screening: hyper-arid central Sahara",
+     "lat": 26.525,
+     "lon": 13.025,
+     "score": 0.1924,
+     "earth_values": {
+      "slope_deg": 2.11,
+      "roughness": 6.65,
+      "temp_mean_K": 302.06,
+      "temp_range_K": 22.16,
+      "albedo": 0.2772,
+      "precip_mm": 1.5,
+      "ndvi": 0.166,
+      "em_contrast": 0.049,
+      "elev_m": 481.7
+     },
+     "similarity": {
+      "slope_deg": 0.7772,
+      "roughness": 0.5262,
+      "temp_mean_K": 0.0735,
+      "temp_range_K": 0.2551,
+      "albedo": 0.3577,
+      "precip_mm": 0.4,
+      "ndvi": 0.1901,
+      "em_contrast": 0.0496
+     },
+     "best_match": "slope_deg",
+     "worst_match": "em_contrast",
+     "composition": {
+      "em_contrast": 0.049,
+      "cf_equivalent_um": 8.06,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/07_mars_jezero_crater_A2_earth_fezzan_libya.png",
+       "url": "/data/img/maps/07_mars_jezero_crater_A2_earth_fezzan_libya.png",
+       "title": "Relieve en fezzan_libya",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 24.375,
+       "lon": 14.925,
+       "same_place": false,
+       "distance_km": 305.8,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      },
+      {
+       "kind": "foto_satelite",
+       "src": "maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png",
+       "url": "/data/img/maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png",
+       "title": "Foto satelital en fezzan_libya",
+       "credit": "Sentinel-2 L2A true colour 10 m (ESA Copernicus, via AWS earth-search)",
+       "source": null,
+       "lat": 24.375,
+       "lon": 14.925,
+       "same_place": false,
+       "distance_km": 305.8,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.875,
+     "lon": 83.525,
+     "score": 0.1806,
+     "earth_values": {
+      "slope_deg": 3.36,
+      "roughness": 9.88,
+      "temp_mean_K": 269.82,
+      "temp_range_K": 24.3,
+      "albedo": 0.2633,
+      "precip_mm": 58.7,
+      "ndvi": 0.082,
+      "em_contrast": -0.033,
+      "elev_m": 5229.2
+     },
+     "similarity": {
+      "slope_deg": 0.998,
+      "roughness": 0.996,
+      "temp_mean_K": 0.2152,
+      "temp_range_K": 0.274,
+      "albedo": 0.4111,
+      "precip_mm": 0.0168,
+      "ndvi": 0.4404,
+      "em_contrast": 0.7634
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": -0.033,
+      "cf_equivalent_um": 8.37,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "tibesti",
+     "region_label": "Tibesti",
+     "region_description": "Volcanic massif in the Sahara, Chad",
+     "lat": 19.675,
+     "lon": 18.825,
+     "score": 0.1711,
+     "earth_values": {
+      "slope_deg": 2.16,
+      "roughness": 6.57,
+      "temp_mean_K": 305.97,
+      "temp_range_K": 16.71,
+      "albedo": 0.1727,
+      "precip_mm": 14.0,
+      "ndvi": 0.076,
+      "em_contrast": 0.0307,
+      "elev_m": 835.4
+     },
+     "similarity": {
+      "slope_deg": 0.7851,
+      "roughness": 0.5179,
+      "temp_mean_K": 0.0645,
+      "temp_range_K": 0.2127,
+      "albedo": 0.9831,
+      "precip_mm": 0.0667,
+      "ndvi": 0.4677,
+      "em_contrast": 0.0913
+     },
+     "best_match": "albedo",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0307,
+      "cf_equivalent_um": 8.13,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 42.225,
+     "lon": 90.525,
+     "score": 0.1656,
+     "earth_values": {
+      "slope_deg": 2.68,
+      "roughness": 8.25,
+      "temp_mean_K": 290.85,
+      "temp_range_K": 36.75,
+      "albedo": 0.1503,
+      "precip_mm": 28.0,
+      "ndvi": 0.056,
+      "em_contrast": 0.0607,
+      "elev_m": 1045.0
+     },
+     "similarity": {
+      "slope_deg": 0.8711,
+      "roughness": 0.7247,
+      "temp_mean_K": 0.1068,
+      "temp_range_K": 0.4149,
+      "albedo": 0.7858,
+      "precip_mm": 0.0345,
+      "ndvi": 0.5712,
+      "em_contrast": 0.0336
+     },
+     "best_match": "slope_deg",
+     "worst_match": "em_contrast",
+     "composition": {
+      "em_contrast": 0.0607,
+      "cf_equivalent_um": 8.01,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "gale-crater",
+   "number": 8,
+   "name": "Gale crater (Curiosity)",
+   "body": "Mars",
+   "lat": -4.59,
+   "lon": 137.44,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -4367.5,
+    "slope_deg": 3.52,
+    "roughness": 10.24,
+    "temp_mean_K": 222.48,
+    "temp_range_K": 69.95,
+    "albedo": 0.2365,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0148
+   },
+   "composition": {
+    "lithology": "basalt (olivine-bearing sand, mudstones)",
+    "cf_um": 8.3,
+    "cf_sigma_um": 0.1,
+    "em_contrast": -0.0148,
+    "em_contrast_sigma": 0.0263,
+    "evidence": "TES Surface Type 1 nearby; Bagnold dunes olivine basalt (Curiosity)",
+    "rock_type": "marte_suelo_basaltico"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/08_mars_gale_crater_B_mars.png",
+     "url": "/data/img/maps/08_mars_gale_crater_B_mars.png",
+     "title": "Relieve de Gale crater (Curiosity)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": -4.59,
+     "lon": 137.44
+    },
+    {
+     "kind": "foto_superficie",
+     "src": "experiments/fotos_analogos/imagenes/marte/marte_04_gale_monte_sharp_PIA16768.jpg",
+     "url": "/data/img/experiments/fotos_analogos/imagenes/marte/marte_04_gale_monte_sharp_PIA16768.jpg",
+     "title": "Crater Gale, llanura Aeolis Palus mirando al Monte Sharp (balance de blancos)",
+     "credit": "NASA/JPL-Caltech/MSSS",
+     "source": "https://science.nasa.gov/photojournal/mount-sharp-panorama-in-white-balanced-colors/",
+     "lat": -4.590435,
+     "lon": 137.445348,
+     "mission": "MSL Curiosity",
+     "instrument": "Mastcam (M-100)",
+     "date": "sol 45 (2012-09-20)",
+     "product_id": "PIA16768",
+     "licence": "Dominio publico (NASA)",
+     "coord_precision": "parada exacta (waypoint MSL site 4 drive 2100, sol 45; MMGIS)",
+     "width": 8000,
+     "height": 1108,
+     "distance_to_site_km": 0.3
+    },
+    {
+     "kind": "foto_superficie",
+     "src": "experiments/fotos_analogos/imagenes/marte/marte_05_gale_meseta_naukluft_PIA20332.jpg",
+     "url": "/data/img/experiments/fotos_analogos/imagenes/marte/marte_05_gale_meseta_naukluft_PIA20332.jpg",
+     "title": "Crater Gale, meseta Naukluft (areniscas eolicas, Monte Sharp inferior)",
+     "credit": "NASA/JPL-Caltech/MSSS",
+     "source": "https://science.nasa.gov/photojournal/full-circle-vista-from-naukluft-plateau-on-mars/",
+     "lat": -4.678375,
+     "lon": 137.359359,
+     "mission": "MSL Curiosity",
+     "instrument": "Mastcam (M-34)",
+     "date": "sol 1302 (2016-04-04)",
+     "product_id": "PIA20332",
+     "licence": "Dominio publico (NASA)",
+     "coord_precision": "parada exacta (waypoint MSL site 54 drive 0, sol 1301; MMGIS)",
+     "width": 8000,
+     "height": 1838,
+     "distance_to_site_km": 7.1
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.425,
+     "lon": 30.075,
+     "score": 0.24,
+     "earth_values": {
+      "slope_deg": 4.02,
+      "roughness": 12.01,
+      "temp_mean_K": 302.89,
+      "temp_range_K": 17.69,
+      "albedo": 0.3288,
+      "precip_mm": 0.7,
+      "ndvi": 0.098,
+      "em_contrast": 0.0067,
+      "elev_m": 461.7
+     },
+     "similarity": {
+      "slope_deg": 0.9048,
+      "roughness": 0.7019,
+      "temp_mean_K": 0.0685,
+      "temp_range_K": 0.1752,
+      "albedo": 0.3973,
+      "precip_mm": 0.5882,
+      "ndvi": 0.3753,
+      "em_contrast": 0.4884
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0067,
+      "cf_equivalent_um": 8.22,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/08_mars_gale_crater_A1_earth_egypt_western_desert.png",
+       "url": "/data/img/maps/08_mars_gale_crater_A1_earth_egypt_western_desert.png",
+       "title": "Relieve en egypt_western_desert",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 25.375,
+       "lon": 29.575,
+       "same_place": false,
+       "distance_km": 50.5,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "fezzan_libya",
+     "region_label": "Fezzan Libya",
+     "region_description": "Found by the global screening: hyper-arid central Sahara",
+     "lat": 26.525,
+     "lon": 13.025,
+     "score": 0.2081,
+     "earth_values": {
+      "slope_deg": 2.11,
+      "roughness": 6.65,
+      "temp_mean_K": 302.06,
+      "temp_range_K": 22.16,
+      "albedo": 0.2772,
+      "precip_mm": 1.5,
+      "ndvi": 0.166,
+      "em_contrast": 0.049,
+      "elev_m": 481.7
+     },
+     "similarity": {
+      "slope_deg": 0.7543,
+      "roughness": 0.4877,
+      "temp_mean_K": 0.0705,
+      "temp_range_K": 0.2033,
+      "albedo": 0.6656,
+      "precip_mm": 0.4,
+      "ndvi": 0.1901,
+      "em_contrast": 0.1192
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.049,
+      "cf_equivalent_um": 8.06,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/08_mars_gale_crater_A2_earth_fezzan_libya.png",
+       "url": "/data/img/maps/08_mars_gale_crater_A2_earth_fezzan_libya.png",
+       "title": "Relieve en fezzan_libya",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 24.375,
+       "lon": 14.925,
+       "same_place": false,
+       "distance_km": 305.8,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.875,
+     "lon": 83.525,
+     "score": 0.1788,
+     "earth_values": {
+      "slope_deg": 3.36,
+      "roughness": 9.88,
+      "temp_mean_K": 269.82,
+      "temp_range_K": 24.3,
+      "albedo": 0.2633,
+      "precip_mm": 58.7,
+      "ndvi": 0.082,
+      "em_contrast": -0.033,
+      "elev_m": 5229.2
+     },
+     "similarity": {
+      "slope_deg": 0.9685,
+      "roughness": 0.9305,
+      "temp_mean_K": 0.2064,
+      "temp_range_K": 0.2183,
+      "albedo": 0.7649,
+      "precip_mm": 0.0168,
+      "ndvi": 0.4404,
+      "em_contrast": 0.5452
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": -0.033,
+      "cf_equivalent_um": 8.37,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 42.225,
+     "lon": 90.525,
+     "score": 0.1721,
+     "earth_values": {
+      "slope_deg": 2.68,
+      "roughness": 8.25,
+      "temp_mean_K": 290.85,
+      "temp_range_K": 36.75,
+      "albedo": 0.1503,
+      "precip_mm": 28.0,
+      "ndvi": 0.056,
+      "em_contrast": 0.0607,
+      "elev_m": 1045.0
+     },
+     "similarity": {
+      "slope_deg": 0.8454,
+      "roughness": 0.6717,
+      "temp_mean_K": 0.1024,
+      "temp_range_K": 0.3307,
+      "albedo": 0.4223,
+      "precip_mm": 0.0345,
+      "ndvi": 0.5712,
+      "em_contrast": 0.0807
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0607,
+      "cf_equivalent_um": 8.01,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "tibesti",
+     "region_label": "Tibesti",
+     "region_description": "Volcanic massif in the Sahara, Chad",
+     "lat": 19.675,
+     "lon": 18.825,
+     "score": 0.1716,
+     "earth_values": {
+      "slope_deg": 2.16,
+      "roughness": 6.57,
+      "temp_mean_K": 305.97,
+      "temp_range_K": 16.71,
+      "albedo": 0.1727,
+      "precip_mm": 14.0,
+      "ndvi": 0.076,
+      "em_contrast": 0.0307,
+      "elev_m": 835.4
+     },
+     "similarity": {
+      "slope_deg": 0.7619,
+      "roughness": 0.48,
+      "temp_mean_K": 0.0619,
+      "temp_range_K": 0.1695,
+      "albedo": 0.5283,
+      "precip_mm": 0.0667,
+      "ndvi": 0.4677,
+      "em_contrast": 0.2194
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0307,
+      "cf_equivalent_um": 8.13,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "elysium-planitia",
+   "number": 9,
+   "name": "Elysium Planitia (InSight)",
+   "body": "Mars",
+   "lat": 4.5,
+   "lon": 135.62,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -2620.7,
+    "slope_deg": 0.29,
+    "roughness": 0.87,
+    "temp_mean_K": 222.78,
+    "temp_range_K": 67.02,
+    "albedo": 0.2409,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0017
+   },
+   "composition": {
+    "lithology": "basaltic lava under dust",
+    "cf_um": 8.25,
+    "cf_sigma_um": 0.15,
+    "em_contrast": -0.0017,
+    "em_contrast_sigma": 0.0394,
+    "evidence": "Dust-covered in TES (high dust cover index); basaltic plains",
+    "rock_type": "marte_suelo_basaltico"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/09_mars_elysium_planitia_B_mars.png",
+     "url": "/data/img/maps/09_mars_elysium_planitia_B_mars.png",
+     "title": "Relieve de Elysium Planitia (InSight)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": 4.5,
+     "lon": 135.62
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.425,
+     "lon": 30.025,
+     "score": 0.2486,
+     "earth_values": {
+      "slope_deg": 0.73,
+      "roughness": 2.24,
+      "temp_mean_K": 300.25,
+      "temp_range_K": 18.67,
+      "albedo": 0.3643,
+      "precip_mm": 0.7,
+      "ndvi": 0.098,
+      "em_contrast": 0.0077,
+      "elev_m": 554.4
+     },
+     "similarity": {
+      "slope_deg": 0.9158,
+      "roughness": 0.7603,
+      "temp_mean_K": 0.0756,
+      "temp_range_K": 0.1996,
+      "albedo": 0.2911,
+      "precip_mm": 0.5882,
+      "ndvi": 0.3753,
+      "em_contrast": 0.731
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0077,
+      "cf_equivalent_um": 8.21,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/09_mars_elysium_planitia_A2_earth_egypt_western_desert.png",
+       "url": "/data/img/maps/09_mars_elysium_planitia_A2_earth_egypt_western_desert.png",
+       "title": "Relieve en egypt_western_desert",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 25.375,
+       "lon": 29.375,
+       "same_place": false,
+       "distance_km": 65.5,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "fezzan_libya",
+     "region_label": "Fezzan Libya",
+     "region_description": "Found by the global screening: hyper-arid central Sahara",
+     "lat": 25.875,
+     "lon": 14.325,
+     "score": 0.2231,
+     "earth_values": {
+      "slope_deg": 0.18,
+      "roughness": 0.56,
+      "temp_mean_K": 301.37,
+      "temp_range_K": 19.55,
+      "albedo": 0.3453,
+      "precip_mm": 1.5,
+      "ndvi": 0.097,
+      "em_contrast": 0.063,
+      "elev_m": 417.5
+     },
+     "similarity": {
+      "slope_deg": 0.9782,
+      "roughness": 0.9399,
+      "temp_mean_K": 0.0728,
+      "temp_range_K": 0.2055,
+      "albedo": 0.352,
+      "precip_mm": 0.4,
+      "ndvi": 0.3791,
+      "em_contrast": 0.1157
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.063,
+      "cf_equivalent_um": 8.0,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/09_mars_elysium_planitia_A1_earth_fezzan_libya.png",
+       "url": "/data/img/maps/09_mars_elysium_planitia_A1_earth_fezzan_libya.png",
+       "title": "Relieve en fezzan_libya",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 26.075,
+       "lon": 14.525,
+       "same_place": false,
+       "distance_km": 29.9,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "taklamakan",
+     "region_label": "Taklamakan",
+     "region_description": "Sand sea, China",
+     "lat": 38.025,
+     "lon": 84.675,
+     "score": 0.1973,
+     "earth_values": {
+      "slope_deg": 0.17,
+      "roughness": 0.5,
+      "temp_mean_K": 289.53,
+      "temp_range_K": 30.99,
+      "albedo": 0.2494,
+      "precip_mm": 24.4,
+      "ndvi": 0.084,
+      "em_contrast": 0.0413,
+      "elev_m": 1255.8
+     },
+     "similarity": {
+      "slope_deg": 0.9763,
+      "roughness": 0.9287,
+      "temp_mean_K": 0.1081,
+      "temp_range_K": 0.3009,
+      "albedo": 0.9185,
+      "precip_mm": 0.0394,
+      "ndvi": 0.4317,
+      "em_contrast": 0.2385
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0413,
+      "cf_equivalent_um": 8.09,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 42.025,
+     "lon": 90.825,
+     "score": 0.1846,
+     "earth_values": {
+      "slope_deg": 1.0,
+      "roughness": 2.99,
+      "temp_mean_K": 289.22,
+      "temp_range_K": 35.4,
+      "albedo": 0.1815,
+      "precip_mm": 24.3,
+      "ndvi": 0.05,
+      "em_contrast": 0.0733,
+      "elev_m": 1185.5
+     },
+     "similarity": {
+      "slope_deg": 0.8676,
+      "roughness": 0.6544,
+      "temp_mean_K": 0.1092,
+      "temp_range_K": 0.3485,
+      "albedo": 0.5521,
+      "precip_mm": 0.0395,
+      "ndvi": 0.6065,
+      "em_contrast": 0.0821
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0733,
+      "cf_equivalent_um": 7.96,
+      "rock_type": "tierra_granito",
+      "ambiguous": false,
+      "note": "Contraste alto: roca félsica o arena con bastante cuarzo."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "nubian_desert_sudan",
+     "region_label": "Nubian Desert Sudan",
+     "region_description": "Found by the global screening: Nubian Desert, Sudan",
+     "lat": 19.925,
+     "lon": 30.325,
+     "score": 0.1816,
+     "earth_values": {
+      "slope_deg": 1.19,
+      "roughness": 3.66,
+      "temp_mean_K": 306.96,
+      "temp_range_K": 17.15,
+      "albedo": 0.2272,
+      "precip_mm": 10.4,
+      "ndvi": 0.096,
+      "em_contrast": 0.0503,
+      "elev_m": 226.3
+     },
+     "similarity": {
+      "slope_deg": 0.8353,
+      "roughness": 0.5724,
+      "temp_mean_K": 0.0604,
+      "temp_range_K": 0.1897,
+      "albedo": 0.872,
+      "precip_mm": 0.0877,
+      "ndvi": 0.3829,
+      "em_contrast": 0.1767
+     },
+     "best_match": "albedo",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0503,
+      "cf_equivalent_um": 8.05,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "meridiani-planum",
+   "number": 10,
+   "name": "Meridiani Planum (Opportunity)",
+   "body": "Mars",
+   "lat": -1.95,
+   "lon": -5.53,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -1380.6,
+    "slope_deg": 1.33,
+    "roughness": 3.87,
+    "temp_mean_K": 227.1,
+    "temp_range_K": 71.16,
+    "albedo": 0.1308,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0017
+   },
+   "composition": {
+    "lithology": "basaltic sand + hematite",
+    "cf_um": 8.25,
+    "cf_sigma_um": 0.1,
+    "em_contrast": -0.0017,
+    "em_contrast_sigma": 0.0263,
+    "evidence": "TES Surface Type 1 + hematite (Christensen 2000); Opportunity",
+    "rock_type": "marte_suelo_basaltico"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/10_mars_meridiani_planum_B_mars.png",
+     "url": "/data/img/maps/10_mars_meridiani_planum_B_mars.png",
+     "title": "Relieve de Meridiani Planum (Opportunity)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": -1.95,
+     "lon": -5.53
+    },
+    {
+     "kind": "foto_superficie",
+     "src": "experiments/fotos_analogos/imagenes/marte/marte_06_meridiani_endeavour_marathon_PIA20750.jpg",
+     "url": "/data/img/experiments/fotos_analogos/imagenes/marte/marte_06_meridiani_endeavour_marathon_PIA20750.jpg",
+     "title": "Meridiani Planum, crater Endeavour, Marathon Valley (borde oeste), color realzado",
+     "credit": "NASA/JPL-Caltech/Cornell/Arizona State Univ.",
+     "source": "https://science.nasa.gov/photojournal/?search=PIA20750",
+     "lat": -2.31613,
+     "lon": -5.35382,
+     "mission": "MER-B Opportunity",
+     "instrument": "Pancam",
+     "date": "soles 4347-4375 (2016-04-16/05-15)",
+     "product_id": "PIA20750",
+     "licence": "Dominio publico (NASA)",
+     "coord_precision": "parada exacta (traverse PDS MERB site 198 drive 245, soles 4347-4375; ±decenas m)",
+     "width": 8000,
+     "height": 2734,
+     "distance_to_site_km": 24.0
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.325,
+     "lon": 30.025,
+     "score": 0.2345,
+     "earth_values": {
+      "slope_deg": 2.07,
+      "roughness": 6.18,
+      "temp_mean_K": 304.52,
+      "temp_range_K": 19.6,
+      "albedo": 0.2768,
+      "precip_mm": 0.0,
+      "ndvi": 0.082,
+      "em_contrast": 0.0373,
+      "elev_m": 284.0
+     },
+     "similarity": {
+      "slope_deg": 0.8624,
+      "roughness": 0.63,
+      "temp_mean_K": 0.0757,
+      "temp_range_K": 0.1793,
+      "albedo": 0.2322,
+      "precip_mm": 1.0,
+      "ndvi": 0.4404,
+      "em_contrast": 0.2725
+     },
+     "best_match": "precip_mm",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0373,
+      "cf_equivalent_um": 8.1,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/10_mars_meridiani_planum_A2_earth_egypt_western_desert.png",
+       "url": "/data/img/maps/10_mars_meridiani_planum_A2_earth_egypt_western_desert.png",
+       "title": "Relieve en egypt_western_desert",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 25.175,
+       "lon": 28.725,
+       "same_place": false,
+       "distance_km": 131.8,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "fezzan_libya",
+     "region_label": "Fezzan Libya",
+     "region_description": "Found by the global screening: hyper-arid central Sahara",
+     "lat": 26.525,
+     "lon": 13.025,
+     "score": 0.2096,
+     "earth_values": {
+      "slope_deg": 2.11,
+      "roughness": 6.65,
+      "temp_mean_K": 302.06,
+      "temp_range_K": 22.16,
+      "albedo": 0.2772,
+      "precip_mm": 1.5,
+      "ndvi": 0.166,
+      "em_contrast": 0.049,
+      "elev_m": 481.7
+     },
+     "similarity": {
+      "slope_deg": 0.8556,
+      "roughness": 0.5735,
+      "temp_mean_K": 0.0822,
+      "temp_range_K": 0.1953,
+      "albedo": 0.2313,
+      "precip_mm": 0.4,
+      "ndvi": 0.1901,
+      "em_contrast": 0.1845
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.049,
+      "cf_equivalent_um": 8.06,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/10_mars_meridiani_planum_A1_earth_fezzan_libya.png",
+       "url": "/data/img/maps/10_mars_meridiani_planum_A1_earth_fezzan_libya.png",
+       "title": "Relieve en fezzan_libya",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 24.425,
+       "lon": 14.975,
+       "same_place": false,
+       "distance_km": 304.7,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 42.025,
+     "lon": 90.825,
+     "score": 0.1908,
+     "earth_values": {
+      "slope_deg": 1.0,
+      "roughness": 2.99,
+      "temp_mean_K": 289.22,
+      "temp_range_K": 35.4,
+      "albedo": 0.1815,
+      "precip_mm": 24.3,
+      "ndvi": 0.05,
+      "em_contrast": 0.0733,
+      "elev_m": 1185.5
+     },
+     "similarity": {
+      "slope_deg": 0.9361,
+      "roughness": 0.8386,
+      "temp_mean_K": 0.1261,
+      "temp_range_K": 0.3036,
+      "albedo": 0.6023,
+      "precip_mm": 0.0395,
+      "ndvi": 0.6065,
+      "em_contrast": 0.0821
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0733,
+      "cf_equivalent_um": 7.96,
+      "rock_type": "tierra_granito",
+      "ambiguous": false,
+      "note": "Contraste alto: roca félsica o arena con bastante cuarzo."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "taklamakan",
+     "region_label": "Taklamakan",
+     "region_description": "Sand sea, China",
+     "lat": 38.025,
+     "lon": 84.675,
+     "score": 0.1876,
+     "earth_values": {
+      "slope_deg": 0.17,
+      "roughness": 0.5,
+      "temp_mean_K": 289.53,
+      "temp_range_K": 30.99,
+      "albedo": 0.2494,
+      "precip_mm": 24.4,
+      "ndvi": 0.084,
+      "em_contrast": 0.0413,
+      "elev_m": 1255.8
+     },
+     "similarity": {
+      "slope_deg": 0.7929,
+      "roughness": 0.5097,
+      "temp_mean_K": 0.1248,
+      "temp_range_K": 0.2621,
+      "albedo": 0.3054,
+      "precip_mm": 0.0394,
+      "ndvi": 0.4317,
+      "em_contrast": 0.2385
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0413,
+      "cf_equivalent_um": 8.09,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "tibesti",
+     "region_label": "Tibesti",
+     "region_description": "Volcanic massif in the Sahara, Chad",
+     "lat": 19.675,
+     "lon": 18.825,
+     "score": 0.1859,
+     "earth_values": {
+      "slope_deg": 2.16,
+      "roughness": 6.57,
+      "temp_mean_K": 305.97,
+      "temp_range_K": 16.71,
+      "albedo": 0.1727,
+      "precip_mm": 14.0,
+      "ndvi": 0.076,
+      "em_contrast": 0.0307,
+      "elev_m": 835.4
+     },
+     "similarity": {
+      "slope_deg": 0.847,
+      "roughness": 0.5827,
+      "temp_mean_K": 0.0722,
+      "temp_range_K": 0.1628,
+      "albedo": 0.6577,
+      "precip_mm": 0.0667,
+      "ndvi": 0.4677,
+      "em_contrast": 0.3396
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0307,
+      "cf_equivalent_um": 8.13,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "gusev-crater",
+   "number": 11,
+   "name": "Gusev crater (Spirit)",
+   "body": "Mars",
+   "lat": -14.57,
+   "lon": 175.47,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -1958.7,
+    "slope_deg": 2.9,
+    "roughness": 8.41,
+    "temp_mean_K": 216.65,
+    "temp_range_K": 81.1,
+    "albedo": 0.2225,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.028
+   },
+   "composition": {
+    "lithology": "olivine basalt",
+    "cf_um": 8.35,
+    "cf_sigma_um": 0.12,
+    "em_contrast": -0.028,
+    "em_contrast_sigma": 0.0315,
+    "evidence": "Spirit: Adirondack-class olivine basalt; moderately dusty",
+    "rock_type": "marte_basalto_olivinico"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/11_mars_gusev_crater_B_mars.png",
+     "url": "/data/img/maps/11_mars_gusev_crater_B_mars.png",
+     "title": "Relieve de Gusev crater (Spirit)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": -14.57,
+     "lon": 175.47
+    },
+    {
+     "kind": "foto_superficie",
+     "src": "experiments/fotos_analogos/imagenes/marte/marte_07_gusev_husband_hill_PIA17760.jpg",
+     "url": "/data/img/experiments/fotos_analogos/imagenes/marte/marte_07_gusev_husband_hill_PIA17760.jpg",
+     "title": "Crater Gusev, Columbia Hills, cima de Husband Hill (vista al sur)",
+     "credit": "NASA/JPL-Caltech/Cornell Univ.",
+     "source": "https://science.nasa.gov/photojournal/?search=PIA17760",
+     "lat": -14.59304,
+     "lon": 175.52806,
+     "mission": "MER-A Spirit",
+     "instrument": "Pancam",
+     "date": "octubre 2005 (soles ~618-635)",
+     "product_id": "PIA17760",
+     "licence": "Dominio publico (NASA)",
+     "coord_precision": "parada exacta (traverse PDS MERA site 114, soles 618-635; ±decenas m)",
+     "width": 2421,
+     "height": 1362,
+     "distance_to_site_km": 3.6
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.425,
+     "lon": 30.075,
+     "score": 0.202,
+     "earth_values": {
+      "slope_deg": 4.02,
+      "roughness": 12.01,
+      "temp_mean_K": 302.89,
+      "temp_range_K": 17.69,
+      "albedo": 0.3288,
+      "precip_mm": 0.7,
+      "ndvi": 0.098,
+      "em_contrast": 0.0067,
+      "elev_m": 461.7
+     },
+     "similarity": {
+      "slope_deg": 0.7993,
+      "roughness": 0.4868,
+      "temp_mean_K": 0.0564,
+      "temp_range_K": 0.1208,
+      "albedo": 0.3454,
+      "precip_mm": 0.5882,
+      "ndvi": 0.3753,
+      "em_contrast": 0.3145
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0067,
+      "cf_equivalent_um": 8.22,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/11_mars_gusev_crater_A1_earth_egypt_western_desert.png",
+       "url": "/data/img/maps/11_mars_gusev_crater_A1_earth_egypt_western_desert.png",
+       "title": "Relieve en egypt_western_desert",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 25.375,
+       "lon": 29.575,
+       "same_place": false,
+       "distance_km": 50.5,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "fezzan_libya",
+     "region_label": "Fezzan Libya",
+     "region_description": "Found by the global screening: hyper-arid central Sahara",
+     "lat": 26.525,
+     "lon": 13.025,
+     "score": 0.1811,
+     "earth_values": {
+      "slope_deg": 2.11,
+      "roughness": 6.65,
+      "temp_mean_K": 302.06,
+      "temp_range_K": 22.16,
+      "albedo": 0.2772,
+      "precip_mm": 1.5,
+      "ndvi": 0.166,
+      "em_contrast": 0.049,
+      "elev_m": 481.7
+     },
+     "similarity": {
+      "slope_deg": 0.8538,
+      "roughness": 0.7033,
+      "temp_mean_K": 0.058,
+      "temp_range_K": 0.1402,
+      "albedo": 0.5787,
+      "precip_mm": 0.4,
+      "ndvi": 0.1901,
+      "em_contrast": 0.0768
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.049,
+      "cf_equivalent_um": 8.06,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/11_mars_gusev_crater_A2_earth_fezzan_libya.png",
+       "url": "/data/img/maps/11_mars_gusev_crater_A2_earth_fezzan_libya.png",
+       "title": "Relieve en fezzan_libya",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 24.375,
+       "lon": 14.925,
+       "same_place": false,
+       "distance_km": 305.8,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.875,
+     "lon": 83.525,
+     "score": 0.165,
+     "earth_values": {
+      "slope_deg": 3.36,
+      "roughness": 9.88,
+      "temp_mean_K": 269.82,
+      "temp_range_K": 24.3,
+      "albedo": 0.2633,
+      "precip_mm": 58.7,
+      "ndvi": 0.082,
+      "em_contrast": -0.033,
+      "elev_m": 5229.2
+     },
+     "similarity": {
+      "slope_deg": 0.9121,
+      "roughness": 0.7453,
+      "temp_mean_K": 0.1699,
+      "temp_range_K": 0.1506,
+      "albedo": 0.665,
+      "precip_mm": 0.0168,
+      "ndvi": 0.4404,
+      "em_contrast": 0.8465
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": -0.033,
+      "cf_equivalent_um": 8.37,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 42.225,
+     "lon": 90.525,
+     "score": 0.1545,
+     "earth_values": {
+      "slope_deg": 2.68,
+      "roughness": 8.25,
+      "temp_mean_K": 290.85,
+      "temp_range_K": 36.75,
+      "albedo": 0.1503,
+      "precip_mm": 28.0,
+      "ndvi": 0.056,
+      "em_contrast": 0.0607,
+      "elev_m": 1045.0
+     },
+     "similarity": {
+      "slope_deg": 0.957,
+      "roughness": 0.9685,
+      "temp_mean_K": 0.0843,
+      "temp_range_K": 0.228,
+      "albedo": 0.4858,
+      "precip_mm": 0.0345,
+      "ndvi": 0.5712,
+      "em_contrast": 0.052
+     },
+     "best_match": "roughness",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0607,
+      "cf_equivalent_um": 8.01,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "tibesti",
+     "region_label": "Tibesti",
+     "region_description": "Volcanic massif in the Sahara, Chad",
+     "lat": 19.675,
+     "lon": 18.825,
+     "score": 0.1533,
+     "earth_values": {
+      "slope_deg": 2.16,
+      "roughness": 6.57,
+      "temp_mean_K": 305.97,
+      "temp_range_K": 16.71,
+      "albedo": 0.1727,
+      "precip_mm": 14.0,
+      "ndvi": 0.076,
+      "em_contrast": 0.0307,
+      "elev_m": 835.4
+     },
+     "similarity": {
+      "slope_deg": 0.8624,
+      "roughness": 0.6921,
+      "temp_mean_K": 0.0509,
+      "temp_range_K": 0.1169,
+      "albedo": 0.6077,
+      "precip_mm": 0.0667,
+      "ndvi": 0.4677,
+      "em_contrast": 0.1413
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0307,
+      "cf_equivalent_um": 8.13,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "chryse-planitia",
+   "number": 12,
+   "name": "Chryse Planitia (Viking 1)",
+   "body": "Mars",
+   "lat": 22.27,
+   "lon": -47.95,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -3630.0,
+    "slope_deg": 0.42,
+    "roughness": 1.22,
+    "temp_mean_K": 220.47,
+    "temp_range_K": 59.89,
+    "albedo": 0.2176,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0017
+   },
+   "composition": {
+    "lithology": "basaltic plains under dust",
+    "cf_um": 8.25,
+    "cf_sigma_um": 0.15,
+    "em_contrast": -0.0017,
+    "em_contrast_sigma": 0.0394,
+    "evidence": "Moderately dusty in TES; basaltic soils (Viking)",
+    "rock_type": "marte_suelo_basaltico"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/12_mars_chryse_planitia_B_mars.png",
+     "url": "/data/img/maps/12_mars_chryse_planitia_B_mars.png",
+     "title": "Relieve de Chryse Planitia (Viking 1)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": 22.27,
+     "lon": -47.95
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.425,
+     "lon": 30.025,
+     "score": 0.2433,
+     "earth_values": {
+      "slope_deg": 0.73,
+      "roughness": 2.24,
+      "temp_mean_K": 300.25,
+      "temp_range_K": 18.67,
+      "albedo": 0.3643,
+      "precip_mm": 0.7,
+      "ndvi": 0.098,
+      "em_contrast": 0.0077,
+      "elev_m": 554.4
+     },
+     "similarity": {
+      "slope_deg": 0.9399,
+      "roughness": 0.8155,
+      "temp_mean_K": 0.07,
+      "temp_range_K": 0.2531,
+      "albedo": 0.2306,
+      "precip_mm": 0.5882,
+      "ndvi": 0.3753,
+      "em_contrast": 0.731
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0077,
+      "cf_equivalent_um": 8.21,
+      "rock_type": "tierra_basalto",
+      "ambiguous": true,
+      "note": "Contraste bajo: basalto u otra roca máfica, pero también carbonatos, arcillas, evaporitas o hielo dan valores así. Confirmar con mapa geológico."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/12_mars_chryse_planitia_A2_earth_egypt_western_desert.png",
+       "url": "/data/img/maps/12_mars_chryse_planitia_A2_earth_egypt_western_desert.png",
+       "title": "Relieve en egypt_western_desert",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 25.175,
+       "lon": 28.725,
+       "same_place": false,
+       "distance_km": 133.6,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "fezzan_libya",
+     "region_label": "Fezzan Libya",
+     "region_description": "Found by the global screening: hyper-arid central Sahara",
+     "lat": 25.875,
+     "lon": 14.325,
+     "score": 0.2188,
+     "earth_values": {
+      "slope_deg": 0.18,
+      "roughness": 0.56,
+      "temp_mean_K": 301.37,
+      "temp_range_K": 19.55,
+      "albedo": 0.3453,
+      "precip_mm": 1.5,
+      "ndvi": 0.097,
+      "em_contrast": 0.063,
+      "elev_m": 417.5
+     },
+     "similarity": {
+      "slope_deg": 0.9531,
+      "roughness": 0.8763,
+      "temp_mean_K": 0.0674,
+      "temp_range_K": 0.2606,
+      "albedo": 0.2789,
+      "precip_mm": 0.4,
+      "ndvi": 0.3791,
+      "em_contrast": 0.1157
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.063,
+      "cf_equivalent_um": 8.0,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/12_mars_chryse_planitia_A1_earth_fezzan_libya.png",
+       "url": "/data/img/maps/12_mars_chryse_planitia_A1_earth_fezzan_libya.png",
+       "title": "Relieve en fezzan_libya",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 24.425,
+       "lon": 14.975,
+       "same_place": false,
+       "distance_km": 174.0,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "taklamakan",
+     "region_label": "Taklamakan",
+     "region_description": "Sand sea, China",
+     "lat": 38.025,
+     "lon": 84.675,
+     "score": 0.1964,
+     "earth_values": {
+      "slope_deg": 0.17,
+      "roughness": 0.5,
+      "temp_mean_K": 289.53,
+      "temp_range_K": 30.99,
+      "albedo": 0.2494,
+      "precip_mm": 24.4,
+      "ndvi": 0.084,
+      "em_contrast": 0.0413,
+      "elev_m": 1255.8
+     },
+     "similarity": {
+      "slope_deg": 0.9512,
+      "roughness": 0.8659,
+      "temp_mean_K": 0.1001,
+      "temp_range_K": 0.3816,
+      "albedo": 0.7276,
+      "precip_mm": 0.0394,
+      "ndvi": 0.4317,
+      "em_contrast": 0.2385
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0413,
+      "cf_equivalent_um": 8.09,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 42.025,
+     "lon": 90.825,
+     "score": 0.186,
+     "earth_values": {
+      "slope_deg": 1.0,
+      "roughness": 2.99,
+      "temp_mean_K": 289.22,
+      "temp_range_K": 35.4,
+      "albedo": 0.1815,
+      "precip_mm": 24.3,
+      "ndvi": 0.05,
+      "em_contrast": 0.0733,
+      "elev_m": 1185.5
+     },
+     "similarity": {
+      "slope_deg": 0.8905,
+      "roughness": 0.7019,
+      "temp_mean_K": 0.1011,
+      "temp_range_K": 0.442,
+      "albedo": 0.697,
+      "precip_mm": 0.0395,
+      "ndvi": 0.6065,
+      "em_contrast": 0.0821
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0733,
+      "cf_equivalent_um": 7.96,
+      "rock_type": "tierra_granito",
+      "ambiguous": false,
+      "note": "Contraste alto: roca félsica o arena con bastante cuarzo."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "nubian_desert_sudan",
+     "region_label": "Nubian Desert Sudan",
+     "region_description": "Found by the global screening: Nubian Desert, Sudan",
+     "lat": 19.925,
+     "lon": 30.325,
+     "score": 0.1827,
+     "earth_values": {
+      "slope_deg": 1.19,
+      "roughness": 3.66,
+      "temp_mean_K": 306.96,
+      "temp_range_K": 17.15,
+      "albedo": 0.2272,
+      "precip_mm": 10.4,
+      "ndvi": 0.096,
+      "em_contrast": 0.0503,
+      "elev_m": 226.3
+     },
+     "similarity": {
+      "slope_deg": 0.8573,
+      "roughness": 0.6139,
+      "temp_mean_K": 0.056,
+      "temp_range_K": 0.2406,
+      "albedo": 0.9085,
+      "precip_mm": 0.0877,
+      "ndvi": 0.3829,
+      "em_contrast": 0.1767
+     },
+     "best_match": "albedo",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0503,
+      "cf_equivalent_um": 8.05,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "utopia-planitia",
+   "number": 13,
+   "name": "Utopia Planitia (Viking 2)",
+   "body": "Mars",
+   "lat": 47.64,
+   "lon": 134.29,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -4510.6,
+    "slope_deg": 2.14,
+    "roughness": 6.25,
+    "temp_mean_K": 195.55,
+    "temp_range_K": 75.96,
+    "albedo": 0.2388,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0377
+   },
+   "composition": {
+    "lithology": "Surface Type 2 (andesite-like / weathered basalt)",
+    "cf_um": 8.1,
+    "cf_sigma_um": 0.12,
+    "em_contrast": 0.0377,
+    "em_contrast_sigma": 0.0315,
+    "evidence": "TES Surface Type 2 dominates the northern lowlands (Bandfield 2000; Wyatt & McSween 2002)",
+    "rock_type": "marte_tipo2"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/13_mars_utopia_planitia_B_mars.png",
+     "url": "/data/img/maps/13_mars_utopia_planitia_B_mars.png",
+     "title": "Relieve de Utopia Planitia (Viking 2)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": 47.64,
+     "lon": 134.29
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.375,
+     "lon": 30.075,
+     "score": 0.1763,
+     "earth_values": {
+      "slope_deg": 2.07,
+      "roughness": 6.38,
+      "temp_mean_K": 304.31,
+      "temp_range_K": 19.29,
+      "albedo": 0.2804,
+      "precip_mm": 0.0,
+      "ndvi": 0.08,
+      "em_contrast": 0.0403,
+      "elev_m": 268.8
+     },
+     "similarity": {
+      "slope_deg": 0.9861,
+      "roughness": 0.9743,
+      "temp_mean_K": 0.0266,
+      "temp_range_K": 0.1512,
+      "albedo": 0.6597,
+      "precip_mm": 1.0,
+      "ndvi": 0.4493,
+      "em_contrast": 0.917
+     },
+     "best_match": "precip_mm",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0403,
+      "cf_equivalent_um": 8.09,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/13_mars_utopia_planitia_A2_earth_egypt_western_desert.png",
+       "url": "/data/img/maps/13_mars_utopia_planitia_A2_earth_egypt_western_desert.png",
+       "title": "Relieve en egypt_western_desert",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 25.325,
+       "lon": 29.475,
+       "same_place": false,
+       "distance_km": 60.5,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "fezzan_libya",
+     "region_label": "Fezzan Libya",
+     "region_description": "Found by the global screening: hyper-arid central Sahara",
+     "lat": 24.375,
+     "lon": 14.875,
+     "score": 0.1664,
+     "earth_values": {
+      "slope_deg": 1.62,
+      "roughness": 5.09,
+      "temp_mean_K": 303.41,
+      "temp_range_K": 19.07,
+      "albedo": 0.2476,
+      "precip_mm": 0.7,
+      "ndvi": 0.078,
+      "em_contrast": 0.0943,
+      "elev_m": 539.8
+     },
+     "similarity": {
+      "slope_deg": 0.9012,
+      "roughness": 0.7929,
+      "temp_mean_K": 0.0275,
+      "temp_range_K": 0.1501,
+      "albedo": 0.9158,
+      "precip_mm": 0.5882,
+      "ndvi": 0.4584,
+      "em_contrast": 0.1516
+     },
+     "best_match": "albedo",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0943,
+      "cf_equivalent_um": 7.88,
+      "rock_type": "tierra_granito",
+      "ambiguous": false,
+      "note": "Contraste alto: roca félsica o arena con bastante cuarzo."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/13_mars_utopia_planitia_A1_earth_fezzan_libya.png",
+       "url": "/data/img/maps/13_mars_utopia_planitia_A1_earth_fezzan_libya.png",
+       "title": "Relieve en fezzan_libya",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 24.375,
+       "lon": 14.975,
+       "same_place": false,
+       "distance_km": 10.1,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 42.025,
+     "lon": 90.825,
+     "score": 0.1507,
+     "earth_values": {
+      "slope_deg": 1.0,
+      "roughness": 2.99,
+      "temp_mean_K": 289.22,
+      "temp_range_K": 35.4,
+      "albedo": 0.1815,
+      "precip_mm": 24.3,
+      "ndvi": 0.05,
+      "em_contrast": 0.0733,
+      "elev_m": 1185.5
+     },
+     "similarity": {
+      "slope_deg": 0.7961,
+      "roughness": 0.521,
+      "temp_mean_K": 0.0441,
+      "temp_range_K": 0.2587,
+      "albedo": 0.5638,
+      "precip_mm": 0.0395,
+      "ndvi": 0.6065,
+      "em_contrast": 0.3052
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0733,
+      "cf_equivalent_um": 7.96,
+      "rock_type": "tierra_granito",
+      "ambiguous": false,
+      "note": "Contraste alto: roca félsica o arena con bastante cuarzo."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "taklamakan",
+     "region_label": "Taklamakan",
+     "region_description": "Sand sea, China",
+     "lat": 38.675,
+     "lon": 84.875,
+     "score": 0.1477,
+     "earth_values": {
+      "slope_deg": 2.44,
+      "roughness": 7.32,
+      "temp_mean_K": 291.4,
+      "temp_range_K": 32.1,
+      "albedo": 0.2843,
+      "precip_mm": 23.6,
+      "ndvi": 0.059,
+      "em_contrast": 0.0793,
+      "elev_m": 1144.7
+     },
+     "similarity": {
+      "slope_deg": 0.9418,
+      "roughness": 0.8073,
+      "temp_mean_K": 0.041,
+      "temp_range_K": 0.2318,
+      "albedo": 0.6344,
+      "precip_mm": 0.0407,
+      "ndvi": 0.5543,
+      "em_contrast": 0.2499
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0793,
+      "cf_equivalent_um": 7.94,
+      "rock_type": "tierra_granito",
+      "ambiguous": false,
+      "note": "Contraste alto: roca félsica o arena con bastante cuarzo."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.825,
+     "lon": 83.625,
+     "score": 0.1461,
+     "earth_values": {
+      "slope_deg": 1.52,
+      "roughness": 4.5,
+      "temp_mean_K": 271.22,
+      "temp_range_K": 25.18,
+      "albedo": 0.2708,
+      "precip_mm": 55.1,
+      "ndvi": 0.066,
+      "em_contrast": 0.0143,
+      "elev_m": 5013.3
+     },
+     "similarity": {
+      "slope_deg": 0.8834,
+      "roughness": 0.7047,
+      "temp_mean_K": 0.0803,
+      "temp_range_K": 0.184,
+      "albedo": 0.7261,
+      "precip_mm": 0.0178,
+      "ndvi": 0.5169,
+      "em_contrast": 0.4584
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0143,
+      "cf_equivalent_um": 8.19,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "vastitas-borealis",
+   "number": 14,
+   "name": "Vastitas Borealis (Phoenix)",
+   "body": "Mars",
+   "lat": 68.22,
+   "lon": -125.75,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -4120.0,
+    "slope_deg": 0.7,
+    "roughness": 2.02,
+    "temp_mean_K": 178.26,
+    "temp_range_K": 79.97,
+    "albedo": 0.2024,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0377
+   },
+   "composition": {
+    "lithology": "Surface Type 2 (andesite-like / weathered basalt)",
+    "cf_um": 8.1,
+    "cf_sigma_um": 0.12,
+    "em_contrast": 0.0377,
+    "em_contrast_sigma": 0.0315,
+    "evidence": "TES Surface Type 2 northern plains",
+    "rock_type": "marte_tipo2"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/14_mars_vastitas_borealis_B_mars.png",
+     "url": "/data/img/maps/14_mars_vastitas_borealis_B_mars.png",
+     "title": "Relieve de Vastitas Borealis (Phoenix)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": 68.22,
+     "lon": -125.75
+    },
+    {
+     "kind": "foto_superficie",
+     "src": "experiments/fotos_analogos/images/previews/03_mars_vastitas_phoenix.jpg",
+     "url": "/data/img/experiments/fotos_analogos/images/previews/03_mars_vastitas_phoenix.jpg",
+     "title": "Looking out Across the Martian Polar Plains",
+     "credit": "NASA/JPL-Caltech/University of Arizona/Texas A&M",
+     "source": "https://photojournal.jpl.nasa.gov/catalog/PIA10693",
+     "lat": 68.22,
+     "lon": -125.75,
+     "mission": "Phoenix Mars Lander / SSI (Surface Stereo Imager)",
+     "date": "Sol 0 (landing 2008-05-25)",
+     "product_id": "PIA10693",
+     "licence": "Public domain (NASA/JPL image use policy; credit requested)",
+     "note": "Surface view, approximate colour, but LOW RESOLUTION: only 640x360 (still of an animation; JPEG is 21 KB, TIFF 0.7 MB). Preview is not upscaled. A larger Phoenix panorama would be better."
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.425,
+     "lon": 29.425,
+     "score": 0.1345,
+     "earth_values": {
+      "slope_deg": 0.57,
+      "roughness": 1.74,
+      "temp_mean_K": 303.08,
+      "temp_range_K": 20.28,
+      "albedo": 0.3277,
+      "precip_mm": 0.0,
+      "ndvi": 0.074,
+      "em_contrast": 0.0543,
+      "elev_m": 155.2
+     },
+     "similarity": {
+      "slope_deg": 0.9743,
+      "roughness": 0.9455,
+      "temp_mean_K": 0.0156,
+      "temp_range_K": 0.1367,
+      "albedo": 0.2856,
+      "precip_mm": 1.0,
+      "ndvi": 0.4771,
+      "em_contrast": 0.575
+     },
+     "best_match": "precip_mm",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0543,
+      "cf_equivalent_um": 8.04,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/14_mars_vastitas_borealis_A2_earth_egypt_western_desert.png",
+       "url": "/data/img/maps/14_mars_vastitas_borealis_A2_earth_egypt_western_desert.png",
+       "title": "Relieve en egypt_western_desert",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 25.175,
+       "lon": 28.725,
+       "same_place": false,
+       "distance_km": 75.7,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "fezzan_libya",
+     "region_label": "Fezzan Libya",
+     "region_description": "Found by the global screening: hyper-arid central Sahara",
+     "lat": 24.425,
+     "lon": 14.975,
+     "score": 0.1314,
+     "earth_values": {
+      "slope_deg": 0.91,
+      "roughness": 2.77,
+      "temp_mean_K": 303.74,
+      "temp_range_K": 19.18,
+      "albedo": 0.224,
+      "precip_mm": 0.0,
+      "ndvi": 0.072,
+      "em_contrast": 0.098,
+      "elev_m": 563.0
+     },
+     "similarity": {
+      "slope_deg": 0.9589,
+      "roughness": 0.8607,
+      "temp_mean_K": 0.0153,
+      "temp_range_K": 0.1318,
+      "albedo": 0.8057,
+      "precip_mm": 1.0,
+      "ndvi": 0.4868,
+      "em_contrast": 0.134
+     },
+     "best_match": "precip_mm",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.098,
+      "cf_equivalent_um": 7.87,
+      "rock_type": "tierra_granito",
+      "ambiguous": false,
+      "note": "Contraste alto: roca félsica o arena con bastante cuarzo."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/14_mars_vastitas_borealis_A1_earth_fezzan_libya.png",
+       "url": "/data/img/maps/14_mars_vastitas_borealis_A1_earth_fezzan_libya.png",
+       "title": "Relieve en fezzan_libya",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 24.425,
+       "lon": 14.975,
+       "same_place": true,
+       "distance_km": 0.0
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 42.025,
+     "lon": 90.825,
+     "score": 0.1265,
+     "earth_values": {
+      "slope_deg": 1.0,
+      "roughness": 2.99,
+      "temp_mean_K": 289.22,
+      "temp_range_K": 35.4,
+      "albedo": 0.1815,
+      "precip_mm": 24.3,
+      "ndvi": 0.05,
+      "em_contrast": 0.0733,
+      "elev_m": 1185.5
+     },
+     "similarity": {
+      "slope_deg": 0.9418,
+      "roughness": 0.8237,
+      "temp_mean_K": 0.0248,
+      "temp_range_K": 0.2264,
+      "albedo": 0.8114,
+      "precip_mm": 0.0395,
+      "ndvi": 0.6065,
+      "em_contrast": 0.3052
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0733,
+      "cf_equivalent_um": 7.96,
+      "rock_type": "tierra_granito",
+      "ambiguous": false,
+      "note": "Contraste alto: roca félsica o arena con bastante cuarzo."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "taklamakan",
+     "region_label": "Taklamakan",
+     "region_description": "Sand sea, China",
+     "lat": 38.025,
+     "lon": 84.675,
+     "score": 0.1242,
+     "earth_values": {
+      "slope_deg": 0.17,
+      "roughness": 0.5,
+      "temp_mean_K": 289.53,
+      "temp_range_K": 30.99,
+      "albedo": 0.2494,
+      "precip_mm": 24.4,
+      "ndvi": 0.084,
+      "em_contrast": 0.0413,
+      "elev_m": 1255.8
+     },
+     "similarity": {
+      "slope_deg": 0.8994,
+      "roughness": 0.7379,
+      "temp_mean_K": 0.0245,
+      "temp_range_K": 0.1954,
+      "albedo": 0.625,
+      "precip_mm": 0.0394,
+      "ndvi": 0.4317,
+      "em_contrast": 0.8869
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0413,
+      "cf_equivalent_um": 8.09,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.975,
+     "lon": 83.075,
+     "score": 0.1227,
+     "earth_values": {
+      "slope_deg": 1.45,
+      "roughness": 4.24,
+      "temp_mean_K": 268.59,
+      "temp_range_K": 20.19,
+      "albedo": 0.2515,
+      "precip_mm": 58.6,
+      "ndvi": 0.049,
+      "em_contrast": 0.0178,
+      "elev_m": 4991.8
+     },
+     "similarity": {
+      "slope_deg": 0.8607,
+      "roughness": 0.6415,
+      "temp_mean_K": 0.0492,
+      "temp_range_K": 0.1363,
+      "albedo": 0.612,
+      "precip_mm": 0.0168,
+      "ndvi": 0.6126,
+      "em_contrast": 0.5151
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0178,
+      "cf_equivalent_um": 8.18,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  },
+  {
+   "id": "arcadia-planitia",
+   "number": 15,
+   "name": "Arcadia Planitia (human candidate)",
+   "body": "Mars",
+   "lat": 40.0,
+   "lon": -160.0,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -3918.4,
+    "slope_deg": 0.33,
+    "roughness": 0.97,
+    "temp_mean_K": 203.24,
+    "temp_range_K": 74.8,
+    "albedo": 0.244,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   },
+   "composition": {
+    "lithology": "Surface Type 2 under some dust",
+    "cf_um": 8.15,
+    "cf_sigma_um": 0.15,
+    "em_contrast": 0.0245,
+    "em_contrast_sigma": 0.0394,
+    "evidence": "Northern lowlands (Type 2) with moderate dust",
+    "rock_type": "marte_tipo2"
+   },
+   "images": [
+    {
+     "kind": "mapa_relieve",
+     "src": "maps/15_mars_arcadia_planitia_B_mars.png",
+     "url": "/data/img/maps/15_mars_arcadia_planitia_B_mars.png",
+     "title": "Relieve de Arcadia Planitia (human candidate)",
+     "credit": "LOLA (Luna) / HRSC-MOLA (Marte), NASA",
+     "source": null,
+     "lat": 40.0,
+     "lon": -160.0
+    }
+   ],
+   "analogs": [
+    {
+     "rank": 1,
+     "region": "egypt_western_desert",
+     "region_label": "Egypt Western Desert",
+     "region_description": "Found by the global screening: hyper-arid, bright desert",
+     "lat": 25.425,
+     "lon": 29.425,
+     "score": 0.1928,
+     "earth_values": {
+      "slope_deg": 0.57,
+      "roughness": 1.74,
+      "temp_mean_K": 303.08,
+      "temp_range_K": 20.28,
+      "albedo": 0.3277,
+      "precip_mm": 0.0,
+      "ndvi": 0.074,
+      "em_contrast": 0.0543,
+      "elev_m": 155.2
+     },
+     "similarity": {
+      "slope_deg": 0.9531,
+      "roughness": 0.8573,
+      "temp_mean_K": 0.0359,
+      "temp_range_K": 0.1625,
+      "albedo": 0.433,
+      "precip_mm": 1.0,
+      "ndvi": 0.4771,
+      "em_contrast": 0.3703
+     },
+     "best_match": "precip_mm",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.0543,
+      "cf_equivalent_um": 8.04,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/15_mars_arcadia_planitia_A2_earth_egypt_western_desert.png",
+       "url": "/data/img/maps/15_mars_arcadia_planitia_A2_earth_egypt_western_desert.png",
+       "title": "Relieve en egypt_western_desert",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 25.375,
+       "lon": 29.375,
+       "same_place": true,
+       "distance_km": 7.5
+      }
+     ]
+    },
+    {
+     "rank": 2,
+     "region": "fezzan_libya",
+     "region_label": "Fezzan Libya",
+     "region_description": "Found by the global screening: hyper-arid central Sahara",
+     "lat": 25.875,
+     "lon": 14.325,
+     "score": 0.183,
+     "earth_values": {
+      "slope_deg": 0.18,
+      "roughness": 0.56,
+      "temp_mean_K": 301.37,
+      "temp_range_K": 19.55,
+      "albedo": 0.3453,
+      "precip_mm": 1.5,
+      "ndvi": 0.097,
+      "em_contrast": 0.063,
+      "elev_m": 417.5
+     },
+     "similarity": {
+      "slope_deg": 0.9704,
+      "roughness": 0.9213,
+      "temp_mean_K": 0.038,
+      "temp_range_K": 0.1586,
+      "albedo": 0.3631,
+      "precip_mm": 0.4,
+      "ndvi": 0.3791,
+      "em_contrast": 0.2771
+     },
+     "best_match": "slope_deg",
+     "worst_match": "temp_mean_K",
+     "composition": {
+      "em_contrast": 0.063,
+      "cf_equivalent_um": 8.0,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": [
+      {
+       "kind": "mapa_relieve",
+       "src": "maps/15_mars_arcadia_planitia_A1_earth_fezzan_libya.png",
+       "url": "/data/img/maps/15_mars_arcadia_planitia_A1_earth_fezzan_libya.png",
+       "title": "Relieve en fezzan_libya",
+       "credit": "Copernicus DEM 90 m / NASADEM",
+       "source": null,
+       "lat": 26.075,
+       "lon": 14.525,
+       "same_place": false,
+       "distance_km": 29.9,
+       "note": "Imagen de otro punto de la misma región (el mejor lugar antes de añadir la composición). Regenerar con src/make_maps.py."
+      }
+     ]
+    },
+    {
+     "rank": 3,
+     "region": "taklamakan",
+     "region_label": "Taklamakan",
+     "region_description": "Sand sea, China",
+     "lat": 38.025,
+     "lon": 84.675,
+     "score": 0.1655,
+     "earth_values": {
+      "slope_deg": 0.17,
+      "roughness": 0.5,
+      "temp_mean_K": 289.53,
+      "temp_range_K": 30.99,
+      "albedo": 0.2494,
+      "precip_mm": 24.4,
+      "ndvi": 0.084,
+      "em_contrast": 0.0413,
+      "elev_m": 1255.8
+     },
+     "similarity": {
+      "slope_deg": 0.9685,
+      "roughness": 0.9103,
+      "temp_mean_K": 0.0563,
+      "temp_range_K": 0.2322,
+      "albedo": 0.9474,
+      "precip_mm": 0.0394,
+      "ndvi": 0.4317,
+      "em_contrast": 0.5712
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0413,
+      "cf_equivalent_um": 8.09,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    },
+    {
+     "rank": 4,
+     "region": "kumtag_lop_nur",
+     "region_label": "Kumtag Lop Nur",
+     "region_description": "Found by the global screening: Kumtag desert and Lop Nur, China",
+     "lat": 42.025,
+     "lon": 90.825,
+     "score": 0.1613,
+     "earth_values": {
+      "slope_deg": 1.0,
+      "roughness": 2.99,
+      "temp_mean_K": 289.22,
+      "temp_range_K": 35.4,
+      "albedo": 0.1815,
+      "precip_mm": 24.3,
+      "ndvi": 0.05,
+      "em_contrast": 0.0733,
+      "elev_m": 1185.5
+     },
+     "similarity": {
+      "slope_deg": 0.8746,
+      "roughness": 0.6676,
+      "temp_mean_K": 0.0569,
+      "temp_range_K": 0.2689,
+      "albedo": 0.5353,
+      "precip_mm": 0.0395,
+      "ndvi": 0.6065,
+      "em_contrast": 0.1966
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0733,
+      "cf_equivalent_um": 7.96,
+      "rock_type": "tierra_granito",
+      "ambiguous": false,
+      "note": "Contraste alto: roca félsica o arena con bastante cuarzo."
+     },
+     "images": []
+    },
+    {
+     "rank": 5,
+     "region": "changtang_tibet",
+     "region_label": "Changtang Tibet",
+     "region_description": "Found by the global screening: very high cold desert plateau",
+     "lat": 34.975,
+     "lon": 83.025,
+     "score": 0.1552,
+     "earth_values": {
+      "slope_deg": 0.35,
+      "roughness": 1.04,
+      "temp_mean_K": 268.65,
+      "temp_range_K": 17.17,
+      "albedo": 0.2719,
+      "precip_mm": 58.6,
+      "ndvi": 0.033,
+      "em_contrast": 0.0348,
+      "elev_m": 4967.4
+     },
+     "similarity": {
+      "slope_deg": 0.996,
+      "roughness": 0.9861,
+      "temp_mean_K": 0.113,
+      "temp_range_K": 0.1465,
+      "albedo": 0.7565,
+      "precip_mm": 0.0168,
+      "ndvi": 0.7189,
+      "em_contrast": 0.7094
+     },
+     "best_match": "slope_deg",
+     "worst_match": "precip_mm",
+     "composition": {
+      "em_contrast": 0.0348,
+      "cf_equivalent_um": 8.11,
+      "rock_type": "tierra_andesita",
+      "ambiguous": false,
+      "note": "Contraste intermedio: roca intermedia o mezcla de materiales."
+     },
+     "images": []
+    }
+   ]
+  }
+ ],
+ "overall": {
+  "Moon": [
+   {
+    "rank": 1,
+    "region": "ellesmere_north",
+    "lat": 81.575,
+    "lon": -70.375,
+    "mean_score": 0.0461,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.6094,
+     "roughness": 0.3309,
+     "temp_mean_K": 0.0089,
+     "temp_range_K": 0.0438,
+     "albedo": 0.6509,
+     "precip_mm": 0.0063,
+     "ndvi": 0.9802,
+     "em_contrast": 0.6969
+    }
+   },
+   {
+    "rank": 16,
+    "region": "north_greenland",
+    "lat": 82.075,
+    "lon": -34.875,
+    "mean_score": 0.0456,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.5946,
+     "roughness": 0.2783,
+     "temp_mean_K": 0.0084,
+     "temp_range_K": 0.0402,
+     "albedo": 0.7187,
+     "precip_mm": 0.0071,
+     "ndvi": 0.8521,
+     "em_contrast": 0.8498
+    }
+   },
+   {
+    "rank": 228,
+    "region": "changtang_tibet",
+    "lat": 34.575,
+    "lon": 82.775,
+    "mean_score": 0.0433,
+    "conditions_met": "4 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.622,
+     "roughness": 0.325,
+     "temp_mean_K": 0.0058,
+     "temp_range_K": 0.0328,
+     "albedo": 0.5335,
+     "precip_mm": 0.0113,
+     "ndvi": 0.7711,
+     "em_contrast": 0.8097
+    }
+   },
+   {
+    "rank": 454,
+    "region": "pamir",
+    "lat": 37.625,
+    "lon": 73.825,
+    "mean_score": 0.042,
+    "conditions_met": "4 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.602,
+     "roughness": 0.2917,
+     "temp_mean_K": 0.0052,
+     "temp_range_K": 0.0462,
+     "albedo": 0.6241,
+     "precip_mm": 0.0089,
+     "ndvi": 0.6977,
+     "em_contrast": 0.8344
+    }
+   },
+   {
+    "rank": 956,
+    "region": "kamchatka",
+    "lat": 55.925,
+    "lon": 160.625,
+    "mean_score": 0.0278,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.6114,
+     "roughness": 0.3115,
+     "temp_mean_K": 0.0062,
+     "temp_range_K": 0.0374,
+     "albedo": 0.8467,
+     "precip_mm": 0.0011,
+     "ndvi": 0.5769,
+     "em_contrast": 0.5338
+    }
+   },
+   {
+    "rank": 1904,
+    "region": "victoria_island",
+    "lat": 75.875,
+    "lon": -107.675,
+    "mean_score": 0.0385,
+    "conditions_met": "3 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.595,
+     "roughness": 0.282,
+     "temp_mean_K": 0.0081,
+     "temp_range_K": 0.0413,
+     "albedo": 0.3873,
+     "precip_mm": 0.0036,
+     "ndvi": 0.8353,
+     "em_contrast": 0.5077
+    }
+   },
+   {
+    "rank": 2041,
+    "region": "egypt_western_desert",
+    "lat": 25.525,
+    "lon": 30.125,
+    "mean_score": 0.0373,
+    "conditions_met": "3 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.5073,
+     "roughness": 0.2168,
+     "temp_mean_K": 0.0017,
+     "temp_range_K": 0.0273,
+     "albedo": 0.7201,
+     "precip_mm": 0.4167,
+     "ndvi": 0.3867,
+     "em_contrast": 0.6843
+    }
+   },
+   {
+    "rank": 2202,
+    "region": "kumtag_lop_nur",
+    "lat": 43.875,
+    "lon": 91.675,
+    "mean_score": 0.0358,
+    "conditions_met": "3 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.5958,
+     "roughness": 0.2782,
+     "temp_mean_K": 0.0039,
+     "temp_range_K": 0.0418,
+     "albedo": 0.509,
+     "precip_mm": 0.0092,
+     "ndvi": 0.194,
+     "em_contrast": 0.6498
+    }
+   },
+   {
+    "rank": 2304,
+    "region": "puna",
+    "lat": -26.475,
+    "lon": -67.975,
+    "mean_score": 0.0346,
+    "conditions_met": "3 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.5947,
+     "roughness": 0.2774,
+     "temp_mean_K": 0.0038,
+     "temp_range_K": 0.0374,
+     "albedo": 0.1362,
+     "precip_mm": 0.0108,
+     "ndvi": 0.5543,
+     "em_contrast": 0.5019
+    }
+   },
+   {
+    "rank": 2472,
+    "region": "tibesti",
+    "lat": 20.875,
+    "lon": 18.575,
+    "mean_score": 0.032,
+    "conditions_met": "3 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.6158,
+     "roughness": 0.3214,
+     "temp_mean_K": 0.0019,
+     "temp_range_K": 0.0274,
+     "albedo": 0.1723,
+     "precip_mm": 0.0327,
+     "ndvi": 0.5326,
+     "em_contrast": 0.6455
+    }
+   },
+   {
+    "rank": 2522,
+    "region": "dasht_margo",
+    "lat": 29.075,
+    "lon": 62.775,
+    "mean_score": 0.0312,
+    "conditions_met": "3 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.6173,
+     "roughness": 0.3145,
+     "temp_mean_K": 0.0019,
+     "temp_range_K": 0.0311,
+     "albedo": 0.1396,
+     "precip_mm": 0.027,
+     "ndvi": 0.5769,
+     "em_contrast": 0.5294
+    }
+   },
+   {
+    "rank": 2672,
+    "region": "lut_iran",
+    "lat": 29.825,
+    "lon": 57.725,
+    "mean_score": 0.0285,
+    "conditions_met": "3 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.6362,
+     "roughness": 0.3431,
+     "temp_mean_K": 0.0021,
+     "temp_range_K": 0.032,
+     "albedo": 0.1912,
+     "precip_mm": 0.0089,
+     "ndvi": 0.5066,
+     "em_contrast": 0.7063
+    }
+   },
+   {
+    "rank": 5415,
+    "region": "tenere_niger",
+    "lat": 18.875,
+    "lon": 9.575,
+    "mean_score": 0.0322,
+    "conditions_met": "2 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.6287,
+     "roughness": 0.3375,
+     "temp_mean_K": 0.0016,
+     "temp_range_K": 0.0248,
+     "albedo": 0.2468,
+     "precip_mm": 0.0581,
+     "ndvi": 0.2671,
+     "em_contrast": 0.6466
+    }
+   },
+   {
+    "rank": 5447,
+    "region": "tanezrouft_sahara",
+    "lat": 23.575,
+    "lon": 2.625,
+    "mean_score": 0.0319,
+    "conditions_met": "2 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.6299,
+     "roughness": 0.3277,
+     "temp_mean_K": 0.0016,
+     "temp_range_K": 0.0257,
+     "albedo": 0.2224,
+     "precip_mm": 0.0498,
+     "ndvi": 0.3535,
+     "em_contrast": 0.5241
+    }
+   },
+   {
+    "rank": 5763,
+    "region": "taklamakan",
+    "lat": 38.575,
+    "lon": 84.875,
+    "mean_score": 0.0304,
+    "conditions_met": "2 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.3219,
+     "roughness": 0.0843,
+     "temp_mean_K": 0.0026,
+     "temp_range_K": 0.0413,
+     "albedo": 0.5126,
+     "precip_mm": 0.0418,
+     "ndvi": 0.5543,
+     "em_contrast": 0.1181
+    }
+   },
+   {
+    "rank": 6423,
+    "region": "djourab_chad",
+    "lat": 19.425,
+    "lon": 18.625,
+    "mean_score": 0.0275,
+    "conditions_met": "2 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.5062,
+     "roughness": 0.2253,
+     "temp_mean_K": 0.0016,
+     "temp_range_K": 0.0245,
+     "albedo": 0.553,
+     "precip_mm": 0.0559,
+     "ndvi": 0.3985,
+     "em_contrast": 0.0202
+    }
+   },
+   {
+    "rank": 6589,
+    "region": "fezzan_libya",
+    "lat": 24.925,
+    "lon": 12.075,
+    "mean_score": 0.0271,
+    "conditions_met": "2 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.508,
+     "roughness": 0.2167,
+     "temp_mean_K": 0.0019,
+     "temp_range_K": 0.0298,
+     "albedo": 0.3398,
+     "precip_mm": 0.5882,
+     "ndvi": 0.343,
+     "em_contrast": 0.002
+    }
+   },
+   {
+    "rank": 7751,
+    "region": "badain_jaran",
+    "lat": 41.175,
+    "lon": 103.975,
+    "mean_score": 0.0246,
+    "conditions_met": "2 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.2913,
+     "roughness": 0.0634,
+     "temp_mean_K": 0.0027,
+     "temp_range_K": 0.0434,
+     "albedo": 0.1372,
+     "precip_mm": 0.0122,
+     "ndvi": 0.5379,
+     "em_contrast": 0.6254
+    }
+   },
+   {
+    "rank": 8868,
+    "region": "gobi",
+    "lat": 42.025,
+    "lon": 102.975,
+    "mean_score": 0.022,
+    "conditions_met": "2 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.2052,
+     "roughness": 0.0222,
+     "temp_mean_K": 0.0029,
+     "temp_range_K": 0.0438,
+     "albedo": 0.6039,
+     "precip_mm": 0.0141,
+     "ndvi": 0.5769,
+     "em_contrast": 0.0543
+    }
+   },
+   {
+    "rank": 10271,
+    "region": "nubian_desert_sudan",
+    "lat": 19.675,
+    "lon": 30.725,
+    "mean_score": 0.0193,
+    "conditions_met": "2 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.2,
+     "roughness": 0.0211,
+     "temp_mean_K": 0.0016,
+     "temp_range_K": 0.0271,
+     "albedo": 0.6451,
+     "precip_mm": 0.0775,
+     "ndvi": 0.522,
+     "em_contrast": 0.0169
+    }
+   },
+   {
+    "rank": 10350,
+    "region": "northern_andes",
+    "lat": -1.475,
+    "lon": -78.875,
+    "mean_score": 0.019,
+    "conditions_met": "2 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.593,
+     "roughness": 0.3,
+     "temp_mean_K": 0.0038,
+     "temp_range_K": 0.0254,
+     "albedo": 0.0952,
+     "precip_mm": 0.0009,
+     "ndvi": 0.2299,
+     "em_contrast": 0.5338
+    }
+   },
+   {
+    "rank": 10668,
+    "region": "adrar_mauritania",
+    "lat": 22.375,
+    "lon": -15.375,
+    "mean_score": 0.0175,
+    "conditions_met": "2 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.1718,
+     "roughness": 0.013,
+     "temp_mean_K": 0.0017,
+     "temp_range_K": 0.0241,
+     "albedo": 0.6186,
+     "precip_mm": 0.0255,
+     "ndvi": 0.5016,
+     "em_contrast": 0.0716
+    }
+   },
+   {
+    "rank": 25013,
+    "region": "rub_al_khali",
+    "lat": 19.625,
+    "lon": 52.975,
+    "mean_score": 0.0193,
+    "conditions_met": "1 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.489,
+     "roughness": 0.2183,
+     "temp_mean_K": 0.0014,
+     "temp_range_K": 0.0274,
+     "albedo": 0.5773,
+     "precip_mm": 0.0292,
+     "ndvi": 0.2592,
+     "em_contrast": 0.0019
+    }
+   }
+  ],
+  "Mars": [
+   {
+    "rank": 1,
+    "region": "egypt_western_desert",
+    "lat": 25.325,
+    "lon": 29.625,
+    "mean_score": 0.1959,
+    "conditions_met": "5 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.7889,
+     "roughness": 0.5061,
+     "temp_mean_K": 0.051,
+     "temp_range_K": 0.1797,
+     "albedo": 0.5664,
+     "precip_mm": 0.5882,
+     "ndvi": 0.5016,
+     "em_contrast": 0.2323
+    }
+   },
+   {
+    "rank": 2,
+    "region": "north_greenland",
+    "lat": 81.925,
+    "lon": -34.875,
+    "mean_score": 0.1335,
+    "conditions_met": "5 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7885,
+     "roughness": 0.513,
+     "temp_mean_K": 0.2587,
+     "temp_range_K": 0.2102,
+     "albedo": 0.5099,
+     "precip_mm": 0.0071,
+     "ndvi": 0.6188,
+     "em_contrast": 0.5538
+    }
+   },
+   {
+    "rank": 3,
+    "region": "puna",
+    "lat": -25.025,
+    "lon": -67.725,
+    "mean_score": 0.133,
+    "conditions_met": "5 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.8025,
+     "roughness": 0.5754,
+     "temp_mean_K": 0.0876,
+     "temp_range_K": 0.1924,
+     "albedo": 0.7433,
+     "precip_mm": 0.0139,
+     "ndvi": 0.5827,
+     "em_contrast": 0.5166
+    }
+   },
+   {
+    "rank": 5,
+    "region": "changtang_tibet",
+    "lat": 34.075,
+    "lon": 82.325,
+    "mean_score": 0.1197,
+    "conditions_met": "5 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.8022,
+     "roughness": 0.5563,
+     "temp_mean_K": 0.1534,
+     "temp_range_K": 0.1921,
+     "albedo": 0.5276,
+     "precip_mm": 0.0065,
+     "ndvi": 0.625,
+     "em_contrast": 0.5072
+    }
+   },
+   {
+    "rank": 16,
+    "region": "fezzan_libya",
+    "lat": 24.375,
+    "lon": 14.875,
+    "mean_score": 0.1778,
+    "conditions_met": "4 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.7961,
+     "roughness": 0.5227,
+     "temp_mean_K": 0.0534,
+     "temp_range_K": 0.1792,
+     "albedo": 0.7397,
+     "precip_mm": 0.5882,
+     "ndvi": 0.4584,
+     "em_contrast": 0.0641
+    }
+   },
+   {
+    "rank": 24,
+    "region": "kumtag_lop_nur",
+    "lat": 42.025,
+    "lon": 90.825,
+    "mean_score": 0.1628,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.8019,
+     "roughness": 0.5592,
+     "temp_mean_K": 0.0858,
+     "temp_range_K": 0.3088,
+     "albedo": 0.6593,
+     "precip_mm": 0.0395,
+     "ndvi": 0.6065,
+     "em_contrast": 0.1292
+    }
+   },
+   {
+    "rank": 57,
+    "region": "taklamakan",
+    "lat": 38.125,
+    "lon": 84.675,
+    "mean_score": 0.1546,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7918,
+     "roughness": 0.5852,
+     "temp_mean_K": 0.0812,
+     "temp_range_K": 0.2819,
+     "albedo": 0.6222,
+     "precip_mm": 0.0418,
+     "ndvi": 0.5769,
+     "em_contrast": 0.1023
+    }
+   },
+   {
+    "rank": 66,
+    "region": "tibesti",
+    "lat": 20.975,
+    "lon": 18.625,
+    "mean_score": 0.153,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.79,
+     "roughness": 0.5185,
+     "temp_mean_K": 0.0592,
+     "temp_range_K": 0.1851,
+     "albedo": 0.6191,
+     "precip_mm": 0.0373,
+     "ndvi": 0.5827,
+     "em_contrast": 0.4681
+    }
+   },
+   {
+    "rank": 83,
+    "region": "tanezrouft_sahara",
+    "lat": 24.725,
+    "lon": 2.525,
+    "mean_score": 0.1523,
+    "conditions_met": "4 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.7899,
+     "roughness": 0.5193,
+     "temp_mean_K": 0.0472,
+     "temp_range_K": 0.1916,
+     "albedo": 0.6877,
+     "precip_mm": 0.0704,
+     "ndvi": 0.5169,
+     "em_contrast": 0.2224
+    }
+   },
+   {
+    "rank": 964,
+    "region": "pamir",
+    "lat": 39.075,
+    "lon": 73.525,
+    "mean_score": 0.1396,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7405,
+     "roughness": 0.4835,
+     "temp_mean_K": 0.1402,
+     "temp_range_K": 0.2319,
+     "albedo": 0.7922,
+     "precip_mm": 0.0115,
+     "ndvi": 0.644,
+     "em_contrast": 0.508
+    }
+   },
+   {
+    "rank": 1098,
+    "region": "dasht_margo",
+    "lat": 28.975,
+    "lon": 62.875,
+    "mean_score": 0.1386,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7971,
+     "roughness": 0.5354,
+     "temp_mean_K": 0.0506,
+     "temp_range_K": 0.2087,
+     "albedo": 0.5903,
+     "precip_mm": 0.0329,
+     "ndvi": 0.5326,
+     "em_contrast": 0.3465
+    }
+   },
+   {
+    "rank": 1244,
+    "region": "djourab_chad",
+    "lat": 19.575,
+    "lon": 19.175,
+    "mean_score": 0.1376,
+    "conditions_met": "4 of 8",
+    "weakest": "temp_mean_K",
+    "similarity": {
+     "slope_deg": 0.8001,
+     "roughness": 0.5833,
+     "temp_mean_K": 0.0497,
+     "temp_range_K": 0.1796,
+     "albedo": 0.7576,
+     "precip_mm": 0.0606,
+     "ndvi": 0.5488,
+     "em_contrast": 0.0791
+    }
+   },
+   {
+    "rank": 1577,
+    "region": "gobi",
+    "lat": 42.975,
+    "lon": 101.725,
+    "mean_score": 0.1346,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.8024,
+     "roughness": 0.5548,
+     "temp_mean_K": 0.0959,
+     "temp_range_K": 0.3215,
+     "albedo": 0.722,
+     "precip_mm": 0.014,
+     "ndvi": 0.522,
+     "em_contrast": 0.2151
+    }
+   },
+   {
+    "rank": 2012,
+    "region": "lut_iran",
+    "lat": 30.925,
+    "lon": 59.325,
+    "mean_score": 0.13,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.8035,
+     "roughness": 0.5544,
+     "temp_mean_K": 0.0493,
+     "temp_range_K": 0.2298,
+     "albedo": 0.5592,
+     "precip_mm": 0.0266,
+     "ndvi": 0.5488,
+     "em_contrast": 0.2541
+    }
+   },
+   {
+    "rank": 2091,
+    "region": "badain_jaran",
+    "lat": 41.175,
+    "lon": 103.875,
+    "mean_score": 0.1293,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7894,
+     "roughness": 0.5194,
+     "temp_mean_K": 0.0835,
+     "temp_range_K": 0.287,
+     "albedo": 0.6053,
+     "precip_mm": 0.013,
+     "ndvi": 0.5599,
+     "em_contrast": 0.3209
+    }
+   },
+   {
+    "rank": 2348,
+    "region": "nubian_desert_sudan",
+    "lat": 19.625,
+    "lon": 30.575,
+    "mean_score": 0.1274,
+    "conditions_met": "4 of 8",
+    "weakest": "em_contrast",
+    "similarity": {
+     "slope_deg": 0.7951,
+     "roughness": 0.5839,
+     "temp_mean_K": 0.0475,
+     "temp_range_K": 0.18,
+     "albedo": 0.621,
+     "precip_mm": 0.0694,
+     "ndvi": 0.5488,
+     "em_contrast": 0.038
+    }
+   },
+   {
+    "rank": 2901,
+    "region": "ellesmere_north",
+    "lat": 81.675,
+    "lon": -71.975,
+    "mean_score": 0.124,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7887,
+     "roughness": 0.5197,
+     "temp_mean_K": 0.29,
+     "temp_range_K": 0.2419,
+     "albedo": 0.1954,
+     "precip_mm": 0.0063,
+     "ndvi": 0.9048,
+     "em_contrast": 0.5582
+    }
+   },
+   {
+    "rank": 4404,
+    "region": "adrar_mauritania",
+    "lat": 22.025,
+    "lon": -15.525,
+    "mean_score": 0.116,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.8011,
+     "roughness": 0.5835,
+     "temp_mean_K": 0.0513,
+     "temp_range_K": 0.1627,
+     "albedo": 0.7927,
+     "precip_mm": 0.0202,
+     "ndvi": 0.5169,
+     "em_contrast": 0.1687
+    }
+   },
+   {
+    "rank": 5432,
+    "region": "victoria_island",
+    "lat": 75.775,
+    "lon": -107.875,
+    "mean_score": 0.1046,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7948,
+     "roughness": 0.5242,
+     "temp_mean_K": 0.2501,
+     "temp_range_K": 0.2667,
+     "albedo": 0.2385,
+     "precip_mm": 0.0036,
+     "ndvi": 0.6126,
+     "em_contrast": 0.5812
+    }
+   },
+   {
+    "rank": 6609,
+    "region": "kamchatka",
+    "lat": 56.275,
+    "lon": 161.175,
+    "mean_score": 0.0649,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7738,
+     "roughness": 0.5584,
+     "temp_mean_K": 0.1685,
+     "temp_range_K": 0.1977,
+     "albedo": 0.5234,
+     "precip_mm": 0.0012,
+     "ndvi": 0.1287,
+     "em_contrast": 0.5729
+    }
+   },
+   {
+    "rank": 6618,
+    "region": "northern_andes",
+    "lat": 11.725,
+    "lon": -70.175,
+    "mean_score": 0.0619,
+    "conditions_met": "4 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7966,
+     "roughness": 0.5829,
+     "temp_mean_K": 0.0532,
+     "temp_range_K": 0.126,
+     "albedo": 0.6089,
+     "precip_mm": 0.0028,
+     "ndvi": 0.0679,
+     "em_contrast": 0.5684
+    }
+   },
+   {
+    "rank": 22074,
+    "region": "tenere_niger",
+    "lat": 18.775,
+    "lon": 9.475,
+    "mean_score": 0.1331,
+    "conditions_met": "3 of 8",
+    "weakest": "precip_mm",
+    "similarity": {
+     "slope_deg": 0.7884,
+     "roughness": 0.5116,
+     "temp_mean_K": 0.0524,
+     "temp_range_K": 0.1709,
+     "albedo": 0.6858,
+     "precip_mm": 0.033,
+     "ndvi": 0.2645,
+     "em_contrast": 0.4227
+    }
+   },
+   {
+    "rank": 80763,
+    "region": "rub_al_khali",
+    "lat": 20.275,
+    "lon": 50.375,
+    "mean_score": 0.0649,
+    "conditions_met": "2 of 8",
+    "weakest": "em_contrast",
+    "similarity": {
+     "slope_deg": 0.8021,
+     "roughness": 0.5568,
+     "temp_mean_K": 0.0473,
+     "temp_range_K": 0.1813,
+     "albedo": 0.146,
+     "precip_mm": 0.0244,
+     "ndvi": 0.4148,
+     "em_contrast": 0.0019
+    }
+   }
+  ]
+ },
+ "regions": [
+  {
+   "name": "northern_andes",
+   "west": -80.0,
+   "south": -5.0,
+   "east": -66.0,
+   "north": 13.0,
+   "known": false,
+   "description": "Colombia, Ecuador and Venezuela: first test region"
+  },
+  {
+   "name": "dry_valleys",
+   "west": 160.0,
+   "south": -78.5,
+   "east": 164.0,
+   "north": -76.5,
+   "known": true,
+   "description": "McMurdo Dry Valleys, Antarctica: classic cold desert analog"
+  },
+  {
+   "name": "antarctic_plateau",
+   "west": 122.0,
+   "south": -76.0,
+   "east": 125.0,
+   "north": -74.5,
+   "known": true,
+   "description": "Dome C area: coldest kind of place on Earth"
+  },
+  {
+   "name": "devon_island",
+   "west": -91.0,
+   "south": 75.0,
+   "east": -88.0,
+   "north": 76.0,
+   "known": true,
+   "description": "Haughton impact crater, Canada: classic polar analog"
+  },
+  {
+   "name": "axel_heiberg",
+   "west": -93.0,
+   "south": 79.0,
+   "east": -88.0,
+   "north": 80.5,
+   "known": true,
+   "description": "Canadian high Arctic: cold springs, permafrost"
+  },
+  {
+   "name": "north_greenland",
+   "west": -35.0,
+   "south": 81.5,
+   "east": -29.0,
+   "north": 83.0,
+   "known": false,
+   "description": "Peary Land: ice-free polar desert, little known"
+  },
+  {
+   "name": "svalbard",
+   "west": 13.0,
+   "south": 78.0,
+   "east": 17.0,
+   "north": 80.0,
+   "known": true,
+   "description": "Arctic volcanic and permafrost terrain"
+  },
+  {
+   "name": "iceland_highlands",
+   "west": -19.0,
+   "south": 64.3,
+   "east": -16.0,
+   "north": 65.3,
+   "known": true,
+   "description": "Basalt lava deserts"
+  },
+  {
+   "name": "kamchatka",
+   "west": 159.0,
+   "south": 55.0,
+   "east": 161.5,
+   "north": 57.0,
+   "known": false,
+   "description": "Cold volcanic terrain, Russia"
+  },
+  {
+   "name": "atacama",
+   "west": -70.0,
+   "south": -25.0,
+   "east": -67.0,
+   "north": -22.0,
+   "known": true,
+   "description": "Driest desert on Earth, high altitude"
+  },
+  {
+   "name": "puna",
+   "west": -68.0,
+   "south": -27.5,
+   "east": -66.0,
+   "north": -25.0,
+   "known": false,
+   "description": "High cold desert of Argentina, little known"
+  },
+  {
+   "name": "uyuni_altiplano",
+   "west": -69.0,
+   "south": -21.5,
+   "east": -66.5,
+   "north": -19.5,
+   "known": true,
+   "description": "Bolivian altiplano and salt flats"
+  },
+  {
+   "name": "qaidam_tibet",
+   "west": 90.0,
+   "south": 36.0,
+   "east": 93.0,
+   "north": 38.5,
+   "known": true,
+   "description": "Qaidam basin: high, cold, hyper-arid"
+  },
+  {
+   "name": "ladakh",
+   "west": 77.0,
+   "south": 33.0,
+   "east": 79.5,
+   "north": 35.0,
+   "known": true,
+   "description": "Cold high desert of the Himalaya"
+  },
+  {
+   "name": "pamir",
+   "west": 72.5,
+   "south": 37.5,
+   "east": 75.0,
+   "north": 39.5,
+   "known": false,
+   "description": "High cold desert of Tajikistan, little known"
+  },
+  {
+   "name": "taklamakan",
+   "west": 82.0,
+   "south": 38.0,
+   "east": 85.0,
+   "north": 40.0,
+   "known": false,
+   "description": "Sand sea, China"
+  },
+  {
+   "name": "gobi",
+   "west": 100.0,
+   "south": 41.0,
+   "east": 103.0,
+   "north": 43.0,
+   "known": false,
+   "description": "Cold desert, Mongolia and China"
+  },
+  {
+   "name": "lut_iran",
+   "west": 57.0,
+   "south": 29.5,
+   "east": 59.5,
+   "north": 31.5,
+   "known": false,
+   "description": "Dasht-e Lut: hottest surface on Earth, yardangs"
+  },
+  {
+   "name": "rub_al_khali",
+   "west": 50.0,
+   "south": 19.0,
+   "east": 53.0,
+   "north": 21.0,
+   "known": false,
+   "description": "Empty Quarter: largest sand desert"
+  },
+  {
+   "name": "danakil",
+   "west": 39.5,
+   "south": 13.0,
+   "east": 41.5,
+   "north": 15.0,
+   "known": true,
+   "description": "Dallol, Ethiopia: volcanic, salt, extreme chemistry"
+  },
+  {
+   "name": "tibesti",
+   "west": 16.5,
+   "south": 19.5,
+   "east": 19.0,
+   "north": 21.5,
+   "known": false,
+   "description": "Volcanic massif in the Sahara, Chad"
+  },
+  {
+   "name": "namib",
+   "west": 14.0,
+   "south": -25.0,
+   "east": 16.0,
+   "north": -23.0,
+   "known": true,
+   "description": "Coastal hyper-arid desert"
+  },
+  {
+   "name": "pilbara",
+   "west": 117.0,
+   "south": -23.0,
+   "east": 120.0,
+   "north": -21.0,
+   "known": true,
+   "description": "Very old iron-rich rocks, Australia"
+  },
+  {
+   "name": "mojave_death_valley",
+   "west": -118.0,
+   "south": 35.0,
+   "east": -115.5,
+   "north": 37.5,
+   "known": true,
+   "description": "Classic NASA test area"
+  },
+  {
+   "name": "utah_mdrs",
+   "west": -111.5,
+   "south": 37.5,
+   "east": -109.5,
+   "north": 39.5,
+   "known": true,
+   "description": "Mars Desert Research Station area"
+  },
+  {
+   "name": "mauna_kea_hawaii",
+   "west": -156.2,
+   "south": 19.0,
+   "east": -154.8,
+   "north": 20.3,
+   "known": true,
+   "description": "HI-SEAS basalt volcano"
+  },
+  {
+   "name": "teide_tenerife",
+   "west": -17.0,
+   "south": 28.0,
+   "east": -16.0,
+   "north": 28.7,
+   "known": true,
+   "description": "Volcanic high desert, ESA test site"
+  },
+  {
+   "name": "rio_tinto",
+   "west": -7.0,
+   "south": 37.4,
+   "east": -6.2,
+   "north": 38.0,
+   "known": true,
+   "description": "Acid iron-rich river, Spain: Mars chemistry analog"
+  },
+  {
+   "name": "fezzan_libya",
+   "west": 12.0,
+   "south": 24.0,
+   "east": 15.0,
+   "north": 27.0,
+   "known": false,
+   "description": "Found by the global screening: hyper-arid central Sahara"
+  },
+  {
+   "name": "egypt_western_desert",
+   "west": 28.0,
+   "south": 24.0,
+   "east": 31.0,
+   "north": 26.0,
+   "known": false,
+   "description": "Found by the global screening: hyper-arid, bright desert"
+  },
+  {
+   "name": "tanezrouft_sahara",
+   "west": 0.0,
+   "south": 23.0,
+   "east": 3.0,
+   "north": 25.0,
+   "known": false,
+   "description": "Found by the global screening: one of the emptiest parts of the Sahara"
+  },
+  {
+   "name": "changtang_tibet",
+   "west": 82.0,
+   "south": 33.0,
+   "east": 85.0,
+   "north": 35.0,
+   "known": false,
+   "description": "Found by the global screening: very high cold desert plateau"
+  },
+  {
+   "name": "transantarctic_mts",
+   "west": 164.0,
+   "south": -86.0,
+   "east": 170.0,
+   "north": -84.0,
+   "known": true,
+   "description": "Found by the global screening: rock and ice near 85 S, colder than the Dry Valleys"
+  },
+  {
+   "name": "prince_charles_mts",
+   "west": 62.0,
+   "south": -74.0,
+   "east": 66.0,
+   "north": -72.0,
+   "known": true,
+   "description": "Found by the global screening: East Antarctic mountains with ice-free rock"
+  },
+  {
+   "name": "tenere_niger",
+   "west": 8.0,
+   "south": 18.0,
+   "east": 10.0,
+   "north": 20.0,
+   "known": false,
+   "description": "Found by the global screening: Tenere sand and rock desert, Niger"
+  },
+  {
+   "name": "nubian_desert_sudan",
+   "west": 30.0,
+   "south": 18.0,
+   "east": 32.0,
+   "north": 20.0,
+   "known": false,
+   "description": "Found by the global screening: Nubian Desert, Sudan"
+  },
+  {
+   "name": "djourab_chad",
+   "west": 18.0,
+   "south": 18.0,
+   "east": 20.0,
+   "north": 20.0,
+   "known": false,
+   "description": "Found by the global screening: Djourab / Borkou, Chad"
+  },
+  {
+   "name": "adrar_mauritania",
+   "west": -16.0,
+   "south": 22.0,
+   "east": -14.0,
+   "north": 24.0,
+   "known": false,
+   "description": "Found by the global screening: Adrar plateau, Mauritania"
+  },
+  {
+   "name": "kumtag_lop_nur",
+   "west": 90.0,
+   "south": 42.0,
+   "east": 92.0,
+   "north": 44.0,
+   "known": false,
+   "description": "Found by the global screening: Kumtag desert and Lop Nur, China"
+  },
+  {
+   "name": "badain_jaran",
+   "west": 102.0,
+   "south": 40.0,
+   "east": 104.0,
+   "north": 42.0,
+   "known": false,
+   "description": "Found by the global screening: Badain Jaran desert, China"
+  },
+  {
+   "name": "dasht_margo",
+   "west": 62.0,
+   "south": 28.0,
+   "east": 64.0,
+   "north": 30.0,
+   "known": false,
+   "description": "Found by the global screening: Dasht-e Margo / Chagai, Afghanistan-Pakistan"
+  },
+  {
+   "name": "victoria_island",
+   "west": -108.0,
+   "south": 74.0,
+   "east": -106.0,
+   "north": 76.0,
+   "known": false,
+   "description": "Found by the global screening: polar desert of Victoria/Melville islands, Canada"
+  },
+  {
+   "name": "ellesmere_north",
+   "west": -72.0,
+   "south": 80.0,
+   "east": -70.0,
+   "north": 82.0,
+   "known": false,
+   "description": "Found by the global screening: northern Ellesmere Island, Canada"
+  }
+ ],
+ "reference_photos": [
+  {
+   "kind": "foto_superficie",
+   "src": "experiments/fotos_analogos/imagenes/marte/marte_08_ares_vallis_pathfinder_PIA01466.jpg",
+   "url": "/data/img/experiments/fotos_analogos/imagenes/marte/marte_08_ares_vallis_pathfinder_PIA01466.jpg",
+   "title": "Ares Vallis, llanura de inundacion rocosa (Twin Peaks al fondo)",
+   "credit": "NASA/JPL",
+   "source": "https://science.nasa.gov/photojournal/?search=PIA01466",
+   "lat": 19.13,
+   "lon": -33.22,
+   "mission": "Mars Pathfinder",
+   "instrument": "IMP",
+   "date": "soles 8-10 (1997-07-12/14)",
+   "product_id": "PIA01466",
+   "licence": "Dominio publico (NASA)",
+   "coord_precision": "sitio de aterrizaje (lander fijo = punto de toma; ±~100 m)",
+   "width": 6222,
+   "height": 1086,
+   "body": "Mars"
+  },
+  {
+   "kind": "foto_superficie",
+   "src": "experiments/fotos_analogos/imagenes/luna/luna_02_apollo17_taurus_littrow_LM_AS17-147-22526.jpg",
+   "url": "/data/img/experiments/fotos_analogos/imagenes/luna/luna_02_apollo17_taurus_littrow_LM_AS17-147-22526.jpg",
+   "title": "Valle Taurus-Littrow, zona del LM (suelo del valle, Macizo Sur al fondo)",
+   "credit": "NASA/JSC",
+   "source": "https://images.nasa.gov/details/as17-147-22526",
+   "lat": 20.19091,
+   "lon": 30.77168,
+   "mission": "Apollo 17",
+   "instrument": "Hasselblad 70 mm",
+   "date": "1972-12-11 (EVA 1)",
+   "product_id": "AS17-147-22526",
+   "licence": "Dominio publico (NASA)",
+   "coord_precision": "LM (Haase et al. 2019; foto a <~50 m del LM)",
+   "width": 3000,
+   "height": 3000,
+   "body": "Moon"
+  },
+  {
+   "kind": "foto_superficie",
+   "src": "experiments/fotos_analogos/imagenes/luna/luna_03_apollo17_estacion6_roca_partida_AS17-140-21496.jpg",
+   "url": "/data/img/experiments/fotos_analogos/imagenes/luna/luna_03_apollo17_estacion6_roca_partida_AS17-140-21496.jpg",
+   "title": "Taurus-Littrow, Estacion 6, roca partida al pie del Macizo Norte (ladera)",
+   "credit": "NASA/JSC",
+   "source": "https://images.nasa.gov/details/as17-140-21496",
+   "lat": 20.2908,
+   "lon": 30.80051,
+   "mission": "Apollo 17",
+   "instrument": "Hasselblad 70 mm",
+   "date": "1972-12-13 (EVA 3)",
+   "product_id": "AS17-140-21496",
+   "licence": "Dominio publico (NASA)",
+   "coord_precision": "estacion exacta (sitio de panoramica color Est. 6, Haase et al. 2019)",
+   "width": 3953,
+   "height": 4095,
+   "body": "Moon"
+  },
+  {
+   "kind": "foto_superficie",
+   "src": "experiments/fotos_analogos/imagenes/luna/luna_04_apollo15_monte_hadley_AS15-87-11849.jpg",
+   "url": "/data/img/experiments/fotos_analogos/imagenes/luna/luna_04_apollo15_monte_hadley_AS15-87-11849.jpg",
+   "title": "Hadley-Apennine, Mons Hadley visto desde el sitio ALSEP (llanura de mare + montana)",
+   "credit": "NASA/JSC",
+   "source": "https://images.nasa.gov/details/as15-87-11849",
+   "lat": 26.13406,
+   "lon": 3.62991,
+   "mission": "Apollo 15",
+   "instrument": "Hasselblad 70 mm",
+   "date": "1971-07-31/08-02",
+   "product_id": "AS15-87-11849",
+   "licence": "Dominio publico (NASA)",
+   "coord_precision": "estacion exacta (ALSEP, LROC 2016 Coordinates of Human Features)",
+   "width": 4056,
+   "height": 3976,
+   "body": "Moon"
+  },
+  {
+   "kind": "foto_superficie",
+   "src": "experiments/fotos_analogos/imagenes/luna/luna_05_apollo15_rima_hadley_AS15-89-12100.jpg",
+   "url": "/data/img/experiments/fotos_analogos/imagenes/luna/luna_05_apollo15_rima_hadley_AS15-89-12100.jpg",
+   "title": "Hadley-Apennine, Rima Hadley (pared oeste, teleobjetivo desde Estacion 9A)",
+   "credit": "NASA/JSC",
+   "source": "https://images.nasa.gov/details/as15-89-12100",
+   "lat": 26.1324,
+   "lon": 3.5672,
+   "mission": "Apollo 15",
+   "instrument": "Hasselblad 70 mm (500 mm)",
+   "date": "1971-08-02 (EVA 3)",
+   "product_id": "AS15-89-12100",
+   "licence": "Dominio publico (NASA)",
+   "coord_precision": "estacion aproximada (Est. 9A ~1.8 km al O del LM segun Apollo 15 PSR; ±~300 m)",
+   "width": 3864,
+   "height": 3809,
+   "body": "Moon"
+  },
+  {
+   "kind": "foto_superficie",
+   "src": "experiments/fotos_analogos/imagenes/luna/luna_06_apollo16_descartes_LM_AS16-113-18339.jpg",
+   "url": "/data/img/experiments/fotos_analogos/imagenes/luna/luna_06_apollo16_descartes_LM_AS16-113-18339.jpg",
+   "title": "Descartes, llanura Cayley (tierras altas), zona del LM con Stone Mountain al fondo",
+   "credit": "NASA/JSC",
+   "source": "https://images.nasa.gov/details/as16-113-18339",
+   "lat": -8.9734,
+   "lon": 15.5011,
+   "mission": "Apollo 16",
+   "instrument": "Hasselblad 70 mm",
+   "date": "1972-04-21 (EVA 1)",
+   "product_id": "AS16-113-18339",
+   "licence": "Dominio publico (NASA)",
+   "coord_precision": "LM (LROC 2016; foto a <~30 m del LM)",
+   "width": 3928,
+   "height": 3928,
+   "body": "Moon"
+  },
+  {
+   "kind": "foto_superficie",
+   "src": "experiments/fotos_analogos/imagenes/luna/luna_07_apollo12_crater_surveyor_AS12-48-7133.jpg",
+   "url": "/data/img/experiments/fotos_analogos/imagenes/luna/luna_07_apollo12_crater_surveyor_AS12-48-7133.jpg",
+   "title": "Oceanus Procellarum, crater Surveyor (mare) con Surveyor 3 y el LM al fondo",
+   "credit": "NASA/JSC",
+   "source": "https://images.nasa.gov/details/AS12-48-7133",
+   "lat": -3.0162,
+   "lon": -23.418,
+   "mission": "Apollo 12",
+   "instrument": "Hasselblad 70 mm",
+   "date": "1969-11-20 (EVA 2)",
+   "product_id": "AS12-48-7133",
+   "licence": "Dominio publico (NASA)",
+   "coord_precision": "estacion exacta (Surveyor 3, LROC 2016; foto en el borde del crater, ±~20 m)",
+   "width": 5409,
+   "height": 5409,
+   "body": "Moon"
+  }
+ ]
+}

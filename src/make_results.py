@@ -8,6 +8,8 @@ challenge asks for little-known places.
 It writes, in data/:
     results_pairs_top20.csv         20 best Earth places for each Moon/Mars site,
                                     with the values of both places side by side
+    results_per_target_top_regions.csv  best place of the 5 best REGIONS for each
+                                    Moon/Mars site (used by maps and the web app)
     results_mars_overall.csv        top 1000 places for all Mars sites together
     results_moon_overall.csv        top 1000 places for all Moon sites together
     results_mars_new_per_region.csv best place of each region (Mars)
@@ -41,6 +43,16 @@ def main():
         columns=["water_frac", "known", "sim_elev_m",
                  "target_elev_m"], errors="ignore")
     pairs.round(4).to_csv("data/results_pairs_top20.csv", index=False)
+
+    # Best place of each Earth REGION for every Moon/Mars site (top 5 regions).
+    # The top 20 cells are often all in one region; this table gives variety
+    # and is what the maps and the web app use.
+    by_region = (results.sort_values(["target", "rank"])
+                 .drop_duplicates(["target", "region"])
+                 .assign(region_rank=lambda t: t.groupby("target").cumcount() + 1))
+    by_region = by_region[by_region["region_rank"] <= 5].drop(
+        columns=["water_frac", "known", "sim_elev_m", "target_elev_m"], errors="ignore")
+    by_region.round(4).to_csv("data/results_per_target_top_regions.csv", index=False)
 
     for body in ("Mars", "Moon"):
         overall = compare.overall_ranking(results[results["body"] == body],

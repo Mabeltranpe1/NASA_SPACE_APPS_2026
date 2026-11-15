@@ -165,9 +165,10 @@ def best_places(pairs_file, per_target, earth_file, targets_file):
     not 15 neighbours of the same place).
     """
     import compare   # noqa: E402  (same comparison as make_results.py)
+    from make_results import WEIGHTS   # noqa: E402  (same weights, incl. rock composition)
     earth, targets = compare.load_inputs(earth_file, targets_file)
     earth = earth[earth["known"] != "yes"].reset_index(drop=True)
-    results = compare.compare_all(earth, targets, weights={"elev_m": 0})
+    results = compare.compare_all(earth, targets, weights=WEIGHTS)
     best = (results.sort_values("score", ascending=False)
             .groupby(["target", "region"], sort=False).first().reset_index())
     best = best.sort_values(["target", "score"], ascending=[True, False])

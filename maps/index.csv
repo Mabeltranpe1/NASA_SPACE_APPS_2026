@@ -13,11 +13,20 @@ number,earth_option,body,target,target_lat,target_lon,earth_region,earth_lat,ear
 6,A1,Moon,Shackleton floor (shadow),-89.67,129.78,north_greenland,82.025,-34.725,0.0292,temp_mean_K,06_moon_shackleton_floor_A1_earth_north_greenland.png,06_moon_shackleton_floor_B_moon.png
 6,A2,Moon,Shackleton floor (shadow),-89.67,129.78,ellesmere_north,81.425,-71.225,0.0291,temp_mean_K,06_moon_shackleton_floor_A2_earth_ellesmere_north.png,06_moon_shackleton_floor_B_moon.png
 7,A1,Mars,Jezero crater (Perseverance),18.44,77.45,egypt_western_desert,25.375,29.575,0.2488,temp_mean_K,07_mars_jezero_crater_A1_earth_egypt_western_desert.png,07_mars_jezero_crater_B_mars.png
+7,A2,Mars,Jezero crater (Perseverance),18.44,77.45,fezzan_libya,24.375,14.925,0.247,temp_mean_K,07_mars_jezero_crater_A2_earth_fezzan_libya.png,07_mars_jezero_crater_B_mars.png
 8,A1,Mars,Gale crater (Curiosity),-4.59,137.44,egypt_western_desert,25.375,29.575,0.2455,temp_mean_K,08_mars_gale_crater_A1_earth_egypt_western_desert.png,08_mars_gale_crater_B_mars.png
+8,A2,Mars,Gale crater (Curiosity),-4.59,137.44,fezzan_libya,24.375,14.925,0.2382,temp_mean_K,08_mars_gale_crater_A2_earth_fezzan_libya.png,08_mars_gale_crater_B_mars.png
+9,A1,Mars,Elysium Planitia (InSight),4.5,135.62,fezzan_libya,26.075,14.525,0.253,temp_mean_K,09_mars_elysium_planitia_A1_earth_fezzan_libya.png,09_mars_elysium_planitia_B_mars.png
 9,A2,Mars,Elysium Planitia (InSight),4.5,135.62,egypt_western_desert,25.375,29.375,0.2506,temp_mean_K,09_mars_elysium_planitia_A2_earth_egypt_western_desert.png,09_mars_elysium_planitia_B_mars.png
+10,A1,Mars,Meridiani Planum (Opportunity),-1.95,-5.53,fezzan_libya,24.425,14.975,0.2522,temp_mean_K,10_mars_meridiani_planum_A1_earth_fezzan_libya.png,10_mars_meridiani_planum_B_mars.png
 10,A2,Mars,Meridiani Planum (Opportunity),-1.95,-5.53,egypt_western_desert,25.175,28.725,0.2366,temp_mean_K,10_mars_meridiani_planum_A2_earth_egypt_western_desert.png,10_mars_meridiani_planum_B_mars.png
 11,A1,Mars,Gusev crater (Spirit),-14.57,175.47,egypt_western_desert,25.375,29.575,0.2135,temp_mean_K,11_mars_gusev_crater_A1_earth_egypt_western_desert.png,11_mars_gusev_crater_B_mars.png
+11,A2,Mars,Gusev crater (Spirit),-14.57,175.47,fezzan_libya,24.375,14.925,0.2131,temp_mean_K,11_mars_gusev_crater_A2_earth_fezzan_libya.png,11_mars_gusev_crater_B_mars.png
+12,A1,Mars,Chryse Planitia (Viking 1),22.27,-47.95,fezzan_libya,24.425,14.975,0.2547,temp_mean_K,12_mars_chryse_planitia_A1_earth_fezzan_libya.png,12_mars_chryse_planitia_B_mars.png
 12,A2,Mars,Chryse Planitia (Viking 1),22.27,-47.95,egypt_western_desert,25.175,28.725,0.248,temp_mean_K,12_mars_chryse_planitia_A2_earth_egypt_western_desert.png,12_mars_chryse_planitia_B_mars.png
+13,A1,Mars,Utopia Planitia (Viking 2),47.64,134.29,fezzan_libya,24.375,14.975,0.1689,temp_mean_K,13_mars_utopia_planitia_A1_earth_fezzan_libya.png,13_mars_utopia_planitia_B_mars.png
 13,A2,Mars,Utopia Planitia (Viking 2),47.64,134.29,egypt_western_desert,25.325,29.475,0.1666,temp_mean_K,13_mars_utopia_planitia_A2_earth_egypt_western_desert.png,13_mars_utopia_planitia_B_mars.png
+14,A1,Mars,Vastitas Borealis (Phoenix),68.22,-125.75,fezzan_libya,24.425,14.975,0.1312,temp_mean_K,14_mars_vastitas_borealis_A1_earth_fezzan_libya.png,14_mars_vastitas_borealis_B_mars.png
 14,A2,Mars,Vastitas Borealis (Phoenix),68.22,-125.75,egypt_western_desert,25.175,28.725,0.1295,temp_mean_K,14_mars_vastitas_borealis_A2_earth_egypt_western_desert.png,14_mars_vastitas_borealis_B_mars.png
+15,A1,Mars,Arcadia Planitia (human candidate),40.0,-160.0,fezzan_libya,26.075,14.525,0.1894,temp_mean_K,15_mars_arcadia_planitia_A1_earth_fezzan_libya.png,15_mars_arcadia_planitia_B_mars.png
 15,A2,Mars,Arcadia Planitia (human candidate),40.0,-160.0,egypt_western_desert,25.375,29.375,0.1874,temp_mean_K,15_mars_arcadia_planitia_A2_earth_egypt_western_desert.png,15_mars_arcadia_planitia_B_mars.png

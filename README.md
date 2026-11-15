@@ -125,6 +125,10 @@ npm run dev                  # http://localhost:5173
 
 Deployment to Azure is explained in [infra/README.md](infra/README.md).
 
+The analysis results for the app (sites, Earth analogs, rock composition, images) are in
+`web/public/data/analogos.json`, made with `python src/export_web.py` after `python src/make_results.py`.
+Format and usage: [web/DATOS.md](web/DATOS.md). Rock composition method: [docs/COMPOSICION.md](docs/COMPOSICION.md).
+
 ---
 
 ## 5. Install the environment
