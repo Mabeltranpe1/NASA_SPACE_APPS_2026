@@ -12,7 +12,7 @@ import {
   type Target,
 } from './data/types'
 import PlanetGlobe, { type GlobeMarker } from './components/PlanetGlobe'
-import DetailImage from './components/DetailImage'
+import { EarthCarousel, TargetCarousel } from './components/PlaceCarousels'
 import ComparisonPanel, { type Place } from './components/ComparisonPanel'
 import InsightPanel from './components/InsightPanel'
 import SiteCard from './components/SiteCard'
@@ -648,13 +648,9 @@ export default function App() {
                 </header>
                 <h2 className="section-title">{t('analysis.images')}</h2>
                 <section className="details" style={{ ['--cols' as string]: 1 + focus.homologues.length }}>
-                  {(['tierra', ...siteTargets(focus)] as Body[]).map((body) => (
-                    <DetailImage
-                      key={`${focus.id}-${body}`}
-                      body={body}
-                      site={focus}
-                      homologue={body === 'tierra' ? undefined : homologueFor(focus, body)}
-                    />
+                  <EarthCarousel site={focus} />
+                  {siteTargets(focus).map((body) => (
+                    <TargetCarousel key={`${focus.id}-${body}`} site={focus} body={body} />
                   ))}
                 </section>
                 {siteTargets(focus).map((body) => (

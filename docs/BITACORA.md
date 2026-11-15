@@ -14,6 +14,36 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.4.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #15 (galería de fotos reales con carruseles) y se publicó `v0.4.0` en `main`.
+- **Producción:** https://icy-flower-03890400f.5.azurestaticapps.net
+
+## 2026-11-15 · Galería de fotos reales (carruseles)
+**Autor:** @Ssalazarp420
+
+- **Pedido:** ver un pequeño catálogo de fotos de cada sitio en lugar del simple acercamiento al globo 3D, con imágenes de buena resolución como las de Perseverance.
+- **Qué se hizo:**
+  - En la ventana para comparar y en la sección Análisis hay dos **carruseles**: la Tierra a la izquierda y la Luna o Marte a la derecha. Tienen flechas, puntos, teclado (← →) y deslizamiento en móvil.
+  - En la Tierra, primero va el recorte de Sentinel-2 del punto exacto y después las fotos.
+  - En la Luna y Marte van las fotos, y al final la vista 3D interactiva.
+  - El panel derecho tiene un botón **Ver galería · N imágenes**.
+- **96 fotos de la NASA para 40 lugares**, elegidas a mano de la NASA Image and Video Library y del Scientific Visualization Studio:
+  - **Marte:** fotos de Perseverance, Curiosity, Spirit, Opportunity, Phoenix, Viking 1 y 2 e InSight; HiRISE y MOC para los sitios sin aterrizaje.
+  - **Luna:** fotos del Apolo 11, el pozo de Marius Hills del LRO y visualizaciones del LRO de las regiones de Artemis III.
+  - **Tierra:** rovers K10 de la NASA en Haughton, prueba de un dron para Marte en Death Valley, el radar RIMFAX en Svalbard, estromatolitos en Pilbara, fotos de astronautas de Uyuni, el Nevado del Ruiz, La Guajira, el Tibesti, el Ténéré, el Gran Mar de Arena y el Taklamakán, e imágenes del satélite Terra.
+- **Honestidad:**
+  - Cada foto dice si es "Desde el rover", "Desde órbita", una "Visualización con datos del LRO", una "Foto de campo", etc.
+  - Las fotos de las regiones de los descubrimientos llevan el aviso "Foto de la región, no del punto exacto".
+  - Se leyó la descripción de cada foto antes de incluirla. Así se descartaron una foto del salar de Coipasa titulada como Uyuni, una de la parte peruana de Atacama y las ilustraciones artísticas.
+- **Problemas resueltos:**
+  - El crédito de cada misión no estaba en la descripción sino en el campo `secondary_creator`. Lo detectó un test. Ahora se cita completo, por ejemplo "NASA/JPL-Caltech/MSSS".
+  - Una panorámica original de 195 megapíxeles detuvo el script. Ahora los JPEG enormes se decodifican a escala reducida.
+  - El recorte de bordes negros confundía las sombras lunares con borde vacío. Ahora solo quita filas o columnas casi totalmente negras.
+- **Tamaño:** ~25 MB de imágenes. Con las de Sentinel-2, la app sirve ~41 MB de imágenes estáticas, dentro del plan Free de Azure Static Web Apps.
+- **Tests:** `tests/test_export_gallery.py` comprueba la lista curada, que todo objetivo de la Luna y Marte tenga fotos, el recorte de bordes y la lectura del crédito.
+
 ## 2026-11-15 · Release v0.3.2 a producción
 **Autor:** @Ssalazarp420
 

@@ -46,6 +46,7 @@ export function discoveryAsSite(d: Discovery): AnalogSite {
     limitations: '',
     missionUse: '',
     wellKnown: Boolean(d.site.known),
+    region: d.site.region,
   }
 }
 

@@ -67,6 +67,8 @@ export interface AnalogSite {
    */
   caseStudy?: boolean
   earthImage?: EarthImageOverride
+  /** Region of the global search (discoveries only), used for its photo gallery. */
+  region?: string
 }
 
 export const BODY_LABELS: Record<Body, string> = {
