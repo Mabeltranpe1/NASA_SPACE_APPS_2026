@@ -28,6 +28,9 @@ interface Props {
   onToggleMap: (target: { id: string; name: string; body: Target } | null) => void
   /** Fly the Earth globe to one of the similar places. */
   onGoTo: (place: Place) => void
+  /** Open the photo gallery from outside (video mode of the guided tour). */
+  galleryOpen?: boolean
+  onGalleryClose?: () => void
 }
 
 export default function InsightPanel(props: Props) {
@@ -41,9 +44,20 @@ export default function InsightPanel(props: Props) {
 }
 
 /** Opens the image comparison pop-up with the photo carousels. */
-function GalleryButton({ site, body }: { site: AnalogSite; body: Target | null }) {
+function GalleryButton({
+  site,
+  body,
+  forceOpen = false,
+  onForceClose,
+}: {
+  site: AnalogSite
+  body: Target | null
+  forceOpen?: boolean
+  onForceClose?: () => void
+}) {
   const { t } = useLang()
-  const [open, setOpen] = useState(false)
+  const [opened, setOpen] = useState(false)
+  const open = opened || forceOpen
   const count = useGalleryCount(site)
   if (!site.homologues.length) return null
   return (
@@ -51,12 +65,21 @@ function GalleryButton({ site, body }: { site: AnalogSite; body: Target | null }
       <button className="btn ghost wide gallery-button" onClick={() => setOpen(true)}>
         <IconImages size={16} /> {count > 0 ? t('carousel.open', { n: count + 1 }) : t('image.compare')}
       </button>
-      {open && <ImageCompareModal site={site} initialBody={body} onClose={() => setOpen(false)} />}
+      {open && (
+        <ImageCompareModal
+          site={site}
+          initialBody={body}
+          onClose={() => {
+            setOpen(false)
+            onForceClose?.()
+          }}
+        />
+      )}
     </>
   )
 }
 
-function TerrainThumbs({ site, activeBody, compareBody, onBody }: Props) {
+function TerrainThumbs({ site, activeBody, compareBody, onBody, galleryOpen, onGalleryClose }: Props) {
   const { lang, t } = useLang()
   const allowed = bodiesOf(site)
   return (
@@ -97,7 +120,7 @@ function TerrainThumbs({ site, activeBody, compareBody, onBody }: Props) {
         })}
       </div>
       <p className="credit">Copernicus Sentinel-2 / NASA GIBS · NASA Moon Trek (LRO WAC) · Mars Trek (Viking)</p>
-      <GalleryButton site={site} body={compareBody} />
+      <GalleryButton site={site} body={compareBody} forceOpen={galleryOpen} onForceClose={onGalleryClose} />
     </section>
   )
 }

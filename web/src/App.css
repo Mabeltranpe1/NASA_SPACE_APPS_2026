@@ -3138,3 +3138,20 @@
 
 .also-like { margin: 2px 0 10px; line-height: 1.6; }
 .also-like b { color: var(--similarity); font-variant-numeric: tabular-nums; }
+
+/* Video mode of the guided tour (?demo=1): a compact caption above everything, even the photo pop-up */
+.tour.demo {
+  z-index: 130;
+  bottom: 18px;
+  width: min(620px, calc(100vw - 32px));
+  padding: 12px 18px 12px;
+}
+
+.tour.demo h2 {
+  font-size: 1.25rem;
+  margin: 8px 0 2px;
+}
+
+.tour.demo .tour-text {
+  margin: 0;
+}
