@@ -19,6 +19,7 @@ Formato sugerido:
 
 - **Integración:** la rama `feature/web-real-data` junta el trabajo de los dos.
   - **Marco** (`feature/compare_analysis`): base global de ~164 000 celdas en 43 regiones, 15 objetivos de la Luna y Marte, y el nuevo `compare.py` con tolerancias físicas. Su README técnico pasó a `docs/PIPELINE_COMPARADOR.md`.
+  - **Relieve a 200 m:** Marco subió durante la integración la versión con pendiente y rugosidad medidas a 200 m en los tres cuerpos (`terrain_common.py`), como se había acordado. Los datos de la app se regeneraron con esa versión.
   - **Santiago** (`feature/planetary-analysis`): CSV de `data/features/`, ranking PAI, scripts y su documento técnico (`docs/CONTEXTO_TECNICO_SANTIAGO.md`). No se trajeron los GeoTIFF, las series crudas ni las figuras.
 - **Decisión de alcance:** búsqueda en **todo el mundo** (base de Marco), con Colombia destacada. Se agregaron al catálogo los 5 sitios colombianos de Santiago: La Guajira, Nevado del Ruiz, Nevado Santa Isabel, Volcán Puracé y La Candelaria.
 - **`src/export_web.py` reescrito.** Usa `compare.py` sin cambiar la fórmula y aplica tres reglas (ver [DATOS_WEB.md](DATOS_WEB.md)):
@@ -38,7 +39,6 @@ Formato sugerido:
 - **Entorno:** se agregaron a `requirements.txt` y `environment.yml` las librerías que usan los scripts (`scipy`, `pyproj`, `requests`, `h5py`, `pyhdf`, `earthaccess`). Earth Engine (API de Python) quedó configurado en la máquina de @Ssalazarp420.
 - **Pendientes** (detalle en [DATOS_WEB.md](DATOS_WEB.md#pendientes-conocidos)):
   - Regiones para Timanfaya y Lava Beds.
-  - Relieve a 200 m en todos los cuerpos.
   - Revisar la tolerancia de la precipitación y la lluvia de IMERG en latitudes altas.
   - Máscara de mar en La Guajira.
   - Temperatura de Diviner para los sitios de Artemis de Santiago.

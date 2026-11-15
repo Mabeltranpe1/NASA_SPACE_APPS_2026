@@ -100,17 +100,17 @@ SANTIAGO_SITES = {
 
 # Metadata shown in the app. Keys must match compare.FEATURES.
 # "range" is the fixed axis used to draw the real values.
-EARTH_DEM = "NASADEM 30 m / Copernicus 90 m"
+EARTH_DEM = "NASADEM / Copernicus, a 200 m"
 FEATURE_META = {
     "elev_m": {"label": "Elevación", "unit": "m", "dimension": "terreno", "range": [-6000, 6000],
                "source_earth": EARTH_DEM,
-               "source_target": {"luna": "LRO LOLA", "marte": "HRSC + MOLA (200 m)"}},
+               "source_target": {"luna": "LRO LOLA", "marte": "HRSC + MOLA, 200 m"}},
     "slope_deg": {"label": "Pendiente", "unit": "°", "dimension": "terreno", "range": [0, 30],
                   "source_earth": EARTH_DEM,
-                  "source_target": {"luna": "LRO LOLA (80 m)", "marte": "HRSC + MOLA (200 m)"}},
+                  "source_target": {"luna": "LRO LOLA, a 200 m", "marte": "HRSC + MOLA, 200 m"}},
     "roughness": {"label": "Rugosidad", "unit": "m", "dimension": "terreno", "range": [0, 40],
                   "source_earth": EARTH_DEM,
-                  "source_target": {"luna": "LRO LOLA (80 m)", "marte": "HRSC + MOLA (200 m)"}},
+                  "source_target": {"luna": "LRO LOLA, a 200 m", "marte": "HRSC + MOLA, 200 m"}},
     "temp_mean_K": {"label": "Temperatura media", "unit": "K", "dimension": "temperatura", "range": [0, 350],
                     "source_earth": "MODIS MOD11C3 (LST)",
                     "source_target": {"luna": "LRO Diviner", "marte": "Mars Climate Database v6.2 (modelo)"}},

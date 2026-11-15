@@ -7,7 +7,7 @@ Este documento explica cómo los datos de Marco y de Santiago llegan a la app, q
 ```mermaid
 flowchart LR
     subgraph Marco["Marco: búsqueda global"]
-        E["data/earth_all.csv<br/>~164 000 celdas de 0,05° en 43 regiones"]
+        E["data/earth_all.csv<br/>~164 000 celdas de 0,05° en 43 regiones<br/>relieve a 200 m"]
         T["data/targets.csv<br/>6 sitios de la Luna + 9 de Marte"]
         R["data/regions_catalog.csv<br/>qué es cada región y si es conocida"]
     end
@@ -72,7 +72,6 @@ El puntaje es el de `compare.py` (Marco), sin cambios en la fórmula. El exporta
 | Pendiente | Quién | Detalle |
 |---|---|---|
 | Timanfaya y Lava Beds no tienen datos | Marco | Están fuera de las regiones de `regions_catalog.csv`. Basta con agregar una región que las contenga |
-| Resolución del relieve | Marco + Santiago | La Tierra usa ~90 m y Marte 200 m. Conviene llevar todo a 200 m (ver la discusión en la BITÁCORA) |
 | Peso de la precipitación | Marco | Con la tolerancia actual (escala logarítmica, 1), 20 mm al año ya dan una similitud de 0,05 en esa variable. Esto favorece mucho los desiertos hiperáridos. Revisar si es la intención |
 | Lluvia en latitudes altas | Marco | IMERG es menos confiable por encima de 60°. El norte de Groenlandia sale como gran análogo de Marte en parte por eso |
 | La Guajira | Santiago | Su ventana puede incluir mar: está marcada como provisional en la ficha |

@@ -328,6 +328,8 @@ export const SOURCE_PHRASES_EN: Record<string, string> = {
   '0 (no llueve)': '0 (no rain)',
   '0 (sin plantas)': '0 (no plants)',
   'Aún no comparable': 'Not comparable yet',
+  'NASADEM / Copernicus, a 200 m': 'NASADEM / Copernicus, at 200 m',
+  'LRO LOLA, a 200 m': 'LRO LOLA, at 200 m',
 }
 
 export const COUNTRY_NAMES_EN: Record<string, string> = {
