@@ -118,7 +118,7 @@ web/src/
 │   ├── sites.ts             # Catálogo de 12 sitios con sus homólogos (español)
 │   ├── sites.en.ts          # Textos del catálogo en inglés
 │   ├── comparisons.ts       # Tipos del JSON, carga y recálculo del puntaje con pesos
-│   ├── focus.ts             # Descubrimientos por cuerpo y conversión de un descubrimiento en «sitio»
+│   ├── focus.ts             # Descubrimientos por cuerpo y conversión de un descubrimiento en «sitio»; `comparedTarget`/`bestScore` (índice con el que se ordenan los análogos)
 │   ├── gallery.ts           # Carga de gallery.json e imágenes de cada lugar
 │   └── tour.ts              # Pasos del recorrido guiado (ES/EN)
 ├── App.css                  # Estilos de la app (paneles de vidrio, barra de navegación, versión móvil)

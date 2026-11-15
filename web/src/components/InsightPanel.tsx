@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { homologueFor, type AnalogSite, type Body, type Target } from '../data/types'
 import { useComparisons, type ComparisonData } from '../data/comparisons'
-import { bodiesOf } from '../data/focus'
+import { bodiesOf, comparedTarget } from '../data/focus'
 import { BODIES } from '../planet/bodies'
 import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
 import { shownImage, useEarthImage } from '../map/earthImages'
@@ -143,15 +143,7 @@ function SimilarityContent({
 }: Props & { data: ComparisonData }) {
   const { lang, t } = useLang()
   const [showAll, setShowAll] = useState(false)
-  const homologue = compareBody ? homologueFor(site, compareBody) : undefined
-  const entry = data.sites.find((s) => s.id === site.id)
-  // Same rule as the detailed comparison: the counterpart when it is in the
-  // database, otherwise the first target of that body with a result.
-  const withResult = new Set(entry?.results.map((r) => r.target) ?? [])
-  const target =
-    data.targets.find((tg) => tg.id === homologue?.id && withResult.has(tg.id)) ??
-    data.targets.find((tg) => tg.body === compareBody && withResult.has(tg.id))
-  const result = target ? entry?.results.find((r) => r.target === target.id) : undefined
+  const { target, result } = compareBody ? comparedTarget(data, site, compareBody) : {}
   const label = (id: string) =>
     lang === 'en' ? (FEATURE_NAMES_EN[id] ?? id) : (data.features.find((f) => f.id === id)?.label ?? id)
 
