@@ -4,6 +4,7 @@
   "version": "0.4.2",
   "type": "module",
   "scripts": {
+    "copy-images": "node scripts/copy-data-images.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",

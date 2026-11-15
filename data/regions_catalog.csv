@@ -51,3 +51,691 @@ badain_jaran,102,40,104,42,cop90,no,"Found by the global screening: Badain Jaran
 dasht_margo,62,28,64,30,cop90,no,"Found by the global screening: Dasht-e Margo / Chagai, Afghanistan-Pakistan"
 victoria_island,-108,74,-106,76,cop90,no,"Found by the global screening: polar desert of Victoria/Melville islands, Canada"
 ellesmere_north,-72,80,-70,82,cop90,no,"Found by the global screening: northern Ellesmere Island, Canada"
+# --- Systematic grid search (2026-11-15): every 2x2 degree area of the world's drylands.
+#     Inside each area only the selected 1x1 degree tiles are built: checkerboard over arid land
+#     (rain < 300 mm, NDVI < 0.25), all of the best tiles of the climate screening, and named zones.
+#     China, Russia, the Middle East, Afghanistan and the zones the challenge avoids are skipped.
+chile_56s_070w,-70,-56,-68,-54,cop90,no,Grid search Chile: 2 of 4 tiles (named_tierra_del_fuego)
+argentina_56s_068w,-68,-56,-66,-54,cop90,no,Grid search Argentina: 2 of 4 tiles (named_tierra_del_fuego)
+argentina_56s_066w,-66,-56,-64,-54,cop90,no,Grid search Argentina: 1 of 4 tiles (named_tierra_del_fuego)
+chile_54s_070w,-70,-54,-68,-52,cop90,no,Grid search Chile: 4 of 4 tiles (named_tierra_del_fuego)
+argentina_54s_068w,-68,-54,-66,-52,cop90,no,Grid search Argentina: 1 of 4 tiles (named_tierra_del_fuego)
+argentina_52s_074w,-74,-52,-72,-50,cop90,no,Grid search Argentina: 1 of 4 tiles (grid)
+argentina_52s_072w,-72,-52,-70,-50,cop90,no,"Grid search Argentina: 2 of 4 tiles (grid, named_patagonia)"
+argentina_52s_070w,-70,-52,-68,-50,cop90,no,Grid search Argentina: 2 of 4 tiles (named_patagonia)
+argentina_50s_072w,-72,-50,-70,-48,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_50s_070w,-70,-50,-68,-48,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_50s_068w,-68,-50,-66,-48,cop90,no,Grid search Argentina: 3 of 4 tiles (named_patagonia)
+argentina_48s_072w,-72,-48,-70,-46,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_48s_070w,-70,-48,-68,-46,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_48s_068w,-68,-48,-66,-46,cop90,no,"Grid search Argentina: 3 of 4 tiles (grid, named_patagonia)"
+argentina_48s_066w,-66,-48,-64,-46,cop90,no,Grid search Argentina: 1 of 4 tiles (named_patagonia)
+argentina_46s_072w,-72,-46,-70,-44,cop90,no,Grid search Argentina: 4 of 4 tiles (named_patagonia)
+argentina_46s_070w,-70,-46,-68,-44,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_46s_068w,-68,-46,-66,-44,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_46s_066w,-66,-46,-64,-44,cop90,no,Grid search Argentina: 1 of 4 tiles (named_patagonia)
+argentina_44s_072w,-72,-44,-70,-42,cop90,no,Grid search Argentina: 4 of 4 tiles (named_patagonia)
+argentina_44s_070w,-70,-44,-68,-42,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_44s_068w,-68,-44,-66,-42,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_44s_066w,-66,-44,-64,-42,cop90,no,"Grid search Argentina: 3 of 4 tiles (grid, named_patagonia)"
+argentina_42s_072w,-72,-42,-70,-40,cop90,no,Grid search Argentina: 4 of 4 tiles (named_patagonia)
+argentina_42s_070w,-70,-42,-68,-40,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_42s_068w,-68,-42,-66,-40,cop90,no,"Grid search Argentina: 4 of 4 tiles (grid, named_patagonia)"
+argentina_42s_066w,-66,-42,-64,-40,cop90,no,"Grid search Argentina: 2 of 4 tiles (grid, named_patagonia)"
+argentina_40s_070w,-70,-40,-68,-38,cop90,no,Grid search Argentina: 1 of 4 tiles (grid)
+argentina_40s_068w,-68,-40,-66,-38,cop90,no,Grid search Argentina: 1 of 4 tiles (grid)
+argentina_40s_066w,-66,-40,-64,-38,cop90,no,Grid search Argentina: 1 of 4 tiles (grid)
+argentina_38s_070w,-70,-38,-68,-36,cop90,no,Grid search Argentina: 2 of 4 tiles (grid)
+argentina_36s_070w,-70,-36,-68,-34,cop90,no,Grid search Argentina: 2 of 4 tiles (grid)
+chile_34s_072w,-72,-34,-70,-32,cop90,no,Grid search Chile: 1 of 4 tiles (grid)
+argentina_34s_070w,-70,-34,-68,-32,cop90,no,Grid search Argentina: 1 of 4 tiles (grid)
+south_africa_34s_020e,20,-34,22,-32,cop90,no,Grid search South Africa: 1 of 4 tiles (grid)
+australia_34s_136e,136,-34,138,-32,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_34s_138e,138,-34,140,-32,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+chile_32s_072w,-72,-32,-70,-30,cop90,no,"Grid search Chile: 2 of 4 tiles (grid, top)"
+argentina_32s_070w,-70,-32,-68,-30,cop90,no,"Grid search Argentina: 3 of 4 tiles (grid, top)"
+argentina_32s_068w,-68,-32,-66,-30,cop90,no,Grid search Argentina: 1 of 4 tiles (grid)
+south_africa_32s_018e,18,-32,20,-30,cop90,no,Grid search South Africa: 1 of 4 tiles (grid)
+south_africa_32s_020e,20,-32,22,-30,cop90,no,Grid search South Africa: 2 of 4 tiles (grid)
+south_africa_32s_022e,22,-32,24,-30,cop90,no,Grid search South Africa: 1 of 4 tiles (grid)
+australia_32s_116e,116,-32,118,-30,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_32s_122e,122,-32,124,-30,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_32s_124e,124,-32,126,-30,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_32s_126e,126,-32,128,-30,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_32s_128e,128,-32,130,-30,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_32s_130e,130,-32,132,-30,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_32s_132e,132,-32,134,-30,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_32s_134e,134,-32,136,-30,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_32s_136e,136,-32,138,-30,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_32s_138e,138,-32,140,-30,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_32s_140e,140,-32,142,-30,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_32s_142e,142,-32,144,-30,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+south_africa_30s_016e,16,-30,18,-28,cop90,no,Grid search South Africa: 2 of 4 tiles (grid)
+south_africa_30s_018e,18,-30,20,-28,cop90,no,Grid search South Africa: 2 of 4 tiles (grid)
+south_africa_30s_020e,20,-30,22,-28,cop90,no,Grid search South Africa: 2 of 4 tiles (grid)
+south_africa_30s_022e,22,-30,24,-28,cop90,no,Grid search South Africa: 1 of 4 tiles (grid)
+australia_30s_116e,116,-30,118,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_118e,118,-30,120,-28,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_30s_120e,120,-30,122,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_122e,122,-30,124,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_124e,124,-30,126,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_126e,126,-30,128,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_128e,128,-30,130,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_130e,130,-30,132,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_132e,132,-30,134,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_134e,134,-30,136,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_136e,136,-30,138,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_138e,138,-30,140,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_140e,140,-30,142,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_30s_142e,142,-30,144,-28,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+namibia_28s_014e,14,-28,16,-26,cop90,yes,"Grid search Namibia: 1 of 4 tiles (grid, top); near Namib"
+namibia_28s_016e,16,-28,18,-26,cop90,yes,"Grid search Namibia: 3 of 4 tiles (grid, top); near Namib"
+namibia_28s_018e,18,-28,20,-26,cop90,yes,Grid search Namibia: 2 of 4 tiles (grid); near Namib
+south_africa_28s_020e,20,-28,22,-26,cop90,no,Grid search South Africa: 2 of 4 tiles (grid)
+australia_28s_112e,112,-28,114,-26,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_28s_114e,114,-28,116,-26,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_28s_116e,116,-28,118,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_118e,118,-28,120,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_120e,120,-28,122,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_122e,122,-28,124,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_124e,124,-28,126,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_126e,126,-28,128,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_128e,128,-28,130,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_130e,130,-28,132,-26,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Central Australia
+australia_28s_132e,132,-28,134,-26,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Central Australia
+australia_28s_134e,134,-28,136,-26,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Central Australia
+australia_28s_136e,136,-28,138,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_138e,138,-28,140,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_140e,140,-28,142,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_142e,142,-28,144,-26,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_28s_144e,144,-28,146,-26,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+namibia_26s_014e,14,-26,16,-24,cop90,yes,"Grid search Namibia: 1 of 4 tiles (grid, top); near Namib"
+namibia_26s_016e,16,-26,18,-24,cop90,yes,Grid search Namibia: 2 of 4 tiles (grid); near Namib
+namibia_26s_018e,18,-26,20,-24,cop90,yes,Grid search Namibia: 2 of 4 tiles (grid); near Namib
+south_africa_26s_020e,20,-26,22,-24,cop90,no,Grid search South Africa: 2 of 4 tiles (grid)
+australia_26s_112e,112,-26,114,-24,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_26s_114e,114,-26,116,-24,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Pilbara
+australia_26s_116e,116,-26,118,-24,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Pilbara
+australia_26s_118e,118,-26,120,-24,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Pilbara
+australia_26s_120e,120,-26,122,-24,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Pilbara
+australia_26s_122e,122,-26,124,-24,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_26s_124e,124,-26,126,-24,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_26s_126e,126,-26,128,-24,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_26s_128e,128,-26,130,-24,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_26s_130e,130,-26,132,-24,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Central Australia
+australia_26s_132e,132,-26,134,-24,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Central Australia
+australia_26s_134e,134,-26,136,-24,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Central Australia
+australia_26s_136e,136,-26,138,-24,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_26s_138e,138,-26,140,-24,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_26s_140e,140,-26,142,-24,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_26s_142e,142,-26,144,-24,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+namibia_24s_014e,14,-24,16,-22,cop90,yes,"Grid search Namibia: 2 of 4 tiles (grid, top); near Namib"
+namibia_24s_016e,16,-24,18,-22,cop90,yes,Grid search Namibia: 1 of 4 tiles (grid); near Namib
+namibia_24s_018e,18,-24,20,-22,cop90,no,Grid search Namibia: 1 of 4 tiles (grid)
+australia_24s_112e,112,-24,114,-22,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_24s_114e,114,-24,116,-22,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Pilbara
+australia_24s_116e,116,-24,118,-22,cop90,yes,Grid search Australia: 1 of 4 tiles (grid); near Pilbara
+australia_24s_118e,118,-24,120,-22,cop90,yes,Grid search Australia: 1 of 4 tiles (grid); near Pilbara
+australia_24s_120e,120,-24,122,-22,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Pilbara
+australia_24s_122e,122,-24,124,-22,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_24s_124e,124,-24,126,-22,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_24s_126e,126,-24,128,-22,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_24s_128e,128,-24,130,-22,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+australia_24s_136e,136,-24,138,-22,cop90,no,Grid search Australia: 2 of 4 tiles (grid)
+australia_24s_138e,138,-24,140,-22,cop90,no,Grid search Australia: 1 of 4 tiles (grid)
+namibia_22s_012e,12,-22,14,-20,cop90,yes,"Grid search Namibia: 2 of 4 tiles (grid, top); near Namib"
+namibia_22s_014e,14,-22,16,-20,cop90,yes,Grid search Namibia: 1 of 4 tiles (grid); near Namib
+australia_22s_114e,114,-22,116,-20,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Pilbara
+australia_22s_116e,116,-22,118,-20,cop90,yes,Grid search Australia: 2 of 4 tiles (grid); near Pilbara
+australia_22s_118e,118,-22,120,-20,cop90,yes,Grid search Australia: 1 of 4 tiles (grid); near Pilbara
+namibia_20s_012e,12,-20,14,-18,cop90,no,Grid search Namibia: 2 of 4 tiles (grid)
+namibia_20s_014e,14,-20,16,-18,cop90,no,Grid search Namibia: 1 of 4 tiles (grid)
+peru_18s_074w,-74,-18,-72,-16,cop90,no,"Grid search Peru: 1 of 4 tiles (grid, named_andes_peru_bolivia, top)"
+peru_18s_072w,-72,-18,-70,-16,cop90,no,Grid search Peru: 2 of 4 tiles (named_andes_peru_bolivia)
+peru_18s_070w,-70,-18,-68,-16,cop90,no,Grid search Peru: 2 of 4 tiles (named_andes_peru_bolivia)
+bolivia_18s_068w,-68,-18,-66,-16,cop90,no,Grid search Bolivia: 1 of 4 tiles (named_andes_peru_bolivia)
+angola_18s_010e,10,-18,12,-16,cop90,no,Grid search Angola: 1 of 4 tiles (grid)
+namibia_18s_012e,12,-18,14,-16,cop90,no,Grid search Namibia: 1 of 4 tiles (grid)
+peru_16s_078w,-78,-16,-76,-14,cop90,no,"Grid search Peru: 1 of 4 tiles (grid, top)"
+peru_16s_076w,-76,-16,-74,-14,cop90,no,"Grid search Peru: 1 of 4 tiles (grid, top)"
+peru_16s_074w,-74,-16,-72,-14,cop90,no,"Grid search Peru: 3 of 4 tiles (grid, named_andes_peru_bolivia)"
+peru_16s_072w,-72,-16,-70,-14,cop90,no,Grid search Peru: 4 of 4 tiles (named_andes_peru_bolivia)
+peru_16s_070w,-70,-16,-68,-14,cop90,no,Grid search Peru: 4 of 4 tiles (named_andes_peru_bolivia)
+bolivia_16s_068w,-68,-16,-66,-14,cop90,no,Grid search Bolivia: 2 of 4 tiles (named_andes_peru_bolivia)
+angola_16s_012e,12,-16,14,-14,cop90,no,Grid search Angola: 1 of 4 tiles (grid)
+peru_14s_078w,-78,-14,-76,-12,cop90,no,Grid search Peru: 1 of 4 tiles (grid)
+peru_14s_074w,-74,-14,-72,-12,cop90,no,Grid search Peru: 1 of 4 tiles (named_andes_peru_bolivia)
+peru_14s_072w,-72,-14,-70,-12,cop90,no,Grid search Peru: 2 of 4 tiles (named_andes_peru_bolivia)
+peru_14s_070w,-70,-14,-68,-12,cop90,no,Grid search Peru: 2 of 4 tiles (named_andes_peru_bolivia)
+bolivia_14s_068w,-68,-14,-66,-12,cop90,no,Grid search Bolivia: 1 of 4 tiles (named_andes_peru_bolivia)
+peru_12s_078w,-78,-12,-76,-10,cop90,no,Grid search Peru: 1 of 4 tiles (grid)
+peru_08s_082w,-82,-8,-80,-6,cop90,no,Grid search Peru: 1 of 4 tiles (grid)
+somalia_02n_046e,46,2,48,4,cop90,no,Grid search Somalia: 2 of 4 tiles (grid)
+somalia_04n_046e,46,4,48,6,cop90,no,Grid search Somalia: 2 of 4 tiles (grid)
+somalia_06n_046e,46,6,48,8,cop90,no,Grid search Somalia: 2 of 4 tiles (grid)
+somalia_06n_048e,48,6,50,8,cop90,no,Grid search Somalia: 2 of 4 tiles (grid)
+somaliland_08n_046e,46,8,48,10,cop90,no,Grid search Somaliland: 2 of 4 tiles (grid)
+somalia_08n_048e,48,8,50,10,cop90,no,Grid search Somalia: 2 of 4 tiles (grid)
+somalia_08n_050e,50,8,52,10,cop90,no,Grid search Somalia: 1 of 4 tiles (grid)
+somaliland_10n_042e,42,10,44,12,cop90,yes,Grid search Somaliland: 1 of 4 tiles (grid); near Afar
+somaliland_10n_046e,46,10,48,12,cop90,no,Grid search Somaliland: 2 of 4 tiles (grid)
+somaliland_10n_048e,48,10,50,12,cop90,no,Grid search Somaliland: 2 of 4 tiles (grid)
+somalia_10n_050e,50,10,52,12,cop90,no,Grid search Somalia: 2 of 4 tiles (grid)
+eritrea_12n_040e,40,12,42,14,cop90,yes,Grid search Eritrea: 1 of 4 tiles (grid); near Danakil / Dallol
+eritrea_12n_042e,42,12,44,14,cop90,yes,Grid search Eritrea: 1 of 4 tiles (grid); near Danakil / Dallol
+mali_14n_000e,0,14,2,16,cop90,no,Grid search Mali: 1 of 4 tiles (grid)
+mali_14n_002e,2,14,4,16,cop90,no,Grid search Mali: 1 of 4 tiles (grid)
+niger_14n_008e,8,14,10,16,cop90,no,Grid search Niger: 1 of 4 tiles (grid)
+niger_14n_010e,10,14,12,16,cop90,no,Grid search Niger: 2 of 4 tiles (grid)
+niger_14n_012e,12,14,14,16,cop90,no,Grid search Niger: 2 of 4 tiles (grid)
+chad_14n_014e,14,14,16,16,cop90,no,Grid search Chad: 2 of 4 tiles (grid)
+chad_14n_016e,16,14,18,16,cop90,no,Grid search Chad: 2 of 4 tiles (grid)
+chad_14n_018e,18,14,20,16,cop90,no,Grid search Chad: 2 of 4 tiles (grid)
+chad_14n_020e,20,14,22,16,cop90,no,Grid search Chad: 1 of 4 tiles (grid)
+sudan_14n_022e,22,14,24,16,cop90,no,Grid search Sudan: 1 of 4 tiles (grid)
+sudan_14n_024e,24,14,26,16,cop90,no,Grid search Sudan: 1 of 4 tiles (grid)
+sudan_14n_026e,26,14,28,16,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_14n_028e,28,14,30,16,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_14n_030e,30,14,32,16,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_14n_032e,32,14,34,16,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_14n_034e,34,14,36,16,cop90,no,Grid search Sudan: 1 of 4 tiles (grid)
+mauritania_16n_018w,-18,16,-16,18,cop90,no,Grid search Mauritania: 1 of 4 tiles (grid)
+mauritania_16n_016w,-16,16,-14,18,cop90,no,Grid search Mauritania: 1 of 4 tiles (grid)
+mauritania_16n_014w,-14,16,-12,18,cop90,no,Grid search Mauritania: 1 of 4 tiles (grid)
+mauritania_16n_012w,-12,16,-10,18,cop90,no,Grid search Mauritania: 1 of 4 tiles (grid)
+mauritania_16n_010w,-10,16,-8,18,cop90,no,Grid search Mauritania: 1 of 4 tiles (grid)
+mauritania_16n_008w,-8,16,-6,18,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mali_16n_006w,-6,16,-4,18,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_16n_004w,-4,16,-2,18,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_16n_002w,-2,16,0,18,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_16n_000e,0,16,2,18,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_16n_002e,2,16,4,18,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+niger_16n_004e,4,16,6,18,cop90,no,Grid search Niger: 2 of 4 tiles (grid)
+niger_16n_006e,6,16,8,18,cop90,no,Grid search Niger: 2 of 4 tiles (grid)
+niger_16n_008e,8,16,10,18,cop90,no,"Grid search Niger: 2 of 4 tiles (grid, top)"
+niger_16n_010e,10,16,12,18,cop90,no,Grid search Niger: 2 of 4 tiles (grid)
+niger_16n_012e,12,16,14,18,cop90,no,Grid search Niger: 2 of 4 tiles (grid)
+niger_16n_014e,14,16,16,18,cop90,no,Grid search Niger: 2 of 4 tiles (grid)
+chad_16n_016e,16,16,18,18,cop90,no,Grid search Chad: 2 of 4 tiles (grid)
+chad_16n_018e,18,16,20,18,cop90,no,Grid search Chad: 2 of 4 tiles (grid)
+chad_16n_020e,20,16,22,18,cop90,no,Grid search Chad: 2 of 4 tiles (grid)
+chad_16n_022e,22,16,24,18,cop90,no,Grid search Chad: 2 of 4 tiles (grid)
+sudan_16n_024e,24,16,26,18,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_16n_026e,26,16,28,18,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_16n_028e,28,16,30,18,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_16n_030e,30,16,32,18,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_16n_032e,32,16,34,18,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_16n_034e,34,16,36,18,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_16n_036e,36,16,38,18,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+eritrea_16n_038e,38,16,40,18,cop90,yes,Grid search Eritrea: 1 of 4 tiles (grid); near Danakil / Dallol
+mauritania_18n_018w,-18,18,-16,20,cop90,no,Grid search Mauritania: 1 of 4 tiles (grid)
+mauritania_18n_016w,-16,18,-14,20,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mauritania_18n_014w,-14,18,-12,20,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mauritania_18n_012w,-12,18,-10,20,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mauritania_18n_010w,-10,18,-8,20,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mauritania_18n_008w,-8,18,-6,20,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mali_18n_006w,-6,18,-4,20,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_18n_004w,-4,18,-2,20,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_18n_002w,-2,18,0,20,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_18n_000e,0,18,2,20,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_18n_002e,2,18,4,20,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+algeria_18n_004e,4,18,6,20,cop90,no,"Grid search Algeria: 3 of 4 tiles (grid, top)"
+niger_18n_006e,6,18,8,20,cop90,no,Grid search Niger: 2 of 4 tiles (grid)
+niger_18n_010e,10,18,12,20,cop90,no,"Grid search Niger: 3 of 4 tiles (grid, top)"
+niger_18n_012e,12,18,14,20,cop90,no,"Grid search Niger: 3 of 4 tiles (grid, top)"
+niger_18n_014e,14,18,16,20,cop90,no,Grid search Niger: 2 of 4 tiles (grid)
+chad_18n_016e,16,18,18,20,cop90,no,"Grid search Chad: 3 of 4 tiles (grid, top)"
+chad_18n_020e,20,18,22,20,cop90,no,"Grid search Chad: 3 of 4 tiles (grid, top)"
+chad_18n_022e,22,18,24,20,cop90,no,"Grid search Chad: 2 of 4 tiles (grid, top)"
+sudan_18n_024e,24,18,26,20,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_18n_026e,26,18,28,20,cop90,no,"Grid search Sudan: 3 of 4 tiles (grid, top)"
+sudan_18n_028e,28,18,30,20,cop90,no,"Grid search Sudan: 2 of 4 tiles (grid, top)"
+sudan_18n_032e,32,18,34,20,cop90,no,"Grid search Sudan: 3 of 4 tiles (grid, top)"
+sudan_18n_034e,34,18,36,20,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_18n_036e,36,18,38,20,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+sudan_18n_038e,38,18,40,20,cop90,no,Grid search Sudan: 1 of 4 tiles (grid)
+morocco_20n_018w,-18,20,-16,22,cop90,no,Grid search Morocco: 1 of 4 tiles (grid)
+mauritania_20n_016w,-16,20,-14,22,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mauritania_20n_014w,-14,20,-12,22,cop90,no,"Grid search Mauritania: 3 of 4 tiles (grid, named_richat)"
+mauritania_20n_012w,-12,20,-10,22,cop90,no,"Grid search Mauritania: 4 of 4 tiles (grid, named_richat)"
+mauritania_20n_010w,-10,20,-8,22,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mauritania_20n_008w,-8,20,-6,22,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mali_20n_006w,-6,20,-4,22,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_20n_004w,-4,20,-2,22,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_20n_002w,-2,20,0,22,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+mali_20n_000e,0,20,2,22,cop90,no,Grid search Mali: 2 of 4 tiles (grid)
+algeria_20n_002e,2,20,4,22,cop90,no,"Grid search Algeria: 2 of 4 tiles (grid, top)"
+algeria_20n_004e,4,20,6,22,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_20n_006e,6,20,8,22,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+niger_20n_008e,8,20,10,22,cop90,no,"Grid search Niger: 4 of 4 tiles (grid, top)"
+niger_20n_010e,10,20,12,22,cop90,no,"Grid search Niger: 4 of 4 tiles (grid, top)"
+niger_20n_012e,12,20,14,22,cop90,no,"Grid search Niger: 4 of 4 tiles (grid, top)"
+niger_20n_014e,14,20,16,22,cop90,no,"Grid search Niger: 3 of 4 tiles (grid, top)"
+chad_20n_016e,16,20,18,22,cop90,no,"Grid search Chad: 3 of 4 tiles (grid, top)"
+chad_20n_018e,18,20,20,22,cop90,no,"Grid search Chad: 3 of 4 tiles (grid, top)"
+chad_20n_020e,20,20,22,22,cop90,no,"Grid search Chad: 4 of 4 tiles (grid, top)"
+libya_20n_022e,22,20,24,22,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_20n_024e,24,20,26,22,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+sudan_20n_026e,26,20,28,22,cop90,no,"Grid search Sudan: 4 of 4 tiles (grid, top)"
+sudan_20n_028e,28,20,30,22,cop90,no,"Grid search Sudan: 4 of 4 tiles (grid, top)"
+sudan_20n_030e,30,20,32,22,cop90,no,"Grid search Sudan: 4 of 4 tiles (grid, top)"
+sudan_20n_032e,32,20,34,22,cop90,no,"Grid search Sudan: 4 of 4 tiles (grid, top)"
+sudan_20n_034e,34,20,36,22,cop90,no,"Grid search Sudan: 3 of 4 tiles (grid, top)"
+sudan_20n_036e,36,20,38,22,cop90,no,Grid search Sudan: 2 of 4 tiles (grid)
+mexico_22n_104w,-104,22,-102,24,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+mexico_22n_102w,-102,22,-100,24,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+morocco_22n_018w,-18,22,-16,24,cop90,no,Grid search Morocco: 1 of 4 tiles (top)
+western_sahara_22n_014w,-14,22,-12,24,cop90,no,"Grid search Western Sahara: 3 of 4 tiles (grid, named_richat)"
+mauritania_22n_012w,-12,22,-10,24,cop90,no,"Grid search Mauritania: 4 of 4 tiles (grid, named_richat, top)"
+mauritania_22n_010w,-10,22,-8,24,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+mauritania_22n_008w,-8,22,-6,24,cop90,no,"Grid search Mauritania: 3 of 4 tiles (grid, top)"
+mali_22n_006w,-6,22,-4,24,cop90,no,"Grid search Mali: 3 of 4 tiles (grid, top)"
+mali_22n_004w,-4,22,-2,24,cop90,no,"Grid search Mali: 4 of 4 tiles (grid, top)"
+algeria_22n_002w,-2,22,0,24,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_22n_000e,0,22,2,24,cop90,no,"Grid search Algeria: 2 of 4 tiles (grid, top)"
+algeria_22n_002e,2,22,4,24,cop90,no,"Grid search Algeria: 3 of 4 tiles (grid, top)"
+algeria_22n_004e,4,22,6,24,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_22n_006e,6,22,8,24,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_22n_008e,8,22,10,24,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+niger_22n_010e,10,22,12,24,cop90,no,"Grid search Niger: 4 of 4 tiles (grid, top)"
+niger_22n_012e,12,22,14,24,cop90,no,"Grid search Niger: 4 of 4 tiles (grid, top)"
+libya_22n_014e,14,22,16,24,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+chad_22n_016e,16,22,18,24,cop90,no,"Grid search Chad: 4 of 4 tiles (grid, top)"
+libya_22n_018e,18,22,20,24,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_22n_020e,20,22,22,24,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_22n_022e,22,22,24,24,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_22n_024e,24,22,26,24,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+egypt_22n_026e,26,22,28,24,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_22n_028e,28,22,30,24,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_22n_030e,30,22,32,24,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_22n_032e,32,22,34,24,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_22n_034e,34,22,36,24,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_22n_036e,36,22,38,24,cop90,no,Grid search Egypt: 1 of 4 tiles (grid)
+mexico_24n_114w,-114,24,-112,26,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+mexico_24n_112w,-112,24,-110,26,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+morocco_24n_016w,-16,24,-14,26,cop90,yes,"Grid search Morocco: 3 of 4 tiles (grid, top); near Teide"
+morocco_24n_014w,-14,24,-12,26,cop90,no,"Grid search Morocco: 2 of 4 tiles (grid, top)"
+mauritania_24n_012w,-12,24,-10,26,cop90,no,"Grid search Mauritania: 3 of 4 tiles (grid, top)"
+mauritania_24n_010w,-10,24,-8,26,cop90,no,"Grid search Mauritania: 3 of 4 tiles (grid, top)"
+mauritania_24n_008w,-8,24,-6,26,cop90,no,"Grid search Mauritania: 3 of 4 tiles (grid, top)"
+mali_24n_006w,-6,24,-4,26,cop90,no,"Grid search Mali: 4 of 4 tiles (grid, top)"
+algeria_24n_004w,-4,24,-2,26,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_24n_002w,-2,24,0,26,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_24n_000e,0,24,2,26,cop90,no,"Grid search Algeria: 2 of 4 tiles (grid, top)"
+algeria_24n_002e,2,24,4,26,cop90,no,"Grid search Algeria: 3 of 4 tiles (grid, top)"
+algeria_24n_004e,4,24,6,26,cop90,no,"Grid search Algeria: 3 of 4 tiles (grid, top)"
+algeria_24n_006e,6,24,8,26,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_24n_008e,8,24,10,26,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+libya_24n_010e,10,24,12,26,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_24n_014e,14,24,16,26,cop90,no,"Grid search Libya: 2 of 4 tiles (grid, top)"
+libya_24n_016e,16,24,18,26,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_24n_018e,18,24,20,26,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_24n_020e,20,24,22,26,cop90,no,"Grid search Libya: 2 of 4 tiles (grid, top)"
+libya_24n_022e,22,24,24,26,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_24n_024e,24,24,26,26,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+egypt_24n_026e,26,24,28,26,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_24n_030e,30,24,32,26,cop90,no,"Grid search Egypt: 2 of 4 tiles (grid, top)"
+egypt_24n_032e,32,24,34,26,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_24n_034e,34,24,36,26,cop90,no,"Grid search Egypt: 3 of 4 tiles (grid, top)"
+pakistan_24n_062e,62,24,64,26,cop90,no,Grid search Pakistan: 1 of 4 tiles (grid)
+pakistan_24n_064e,64,24,66,26,cop90,no,Grid search Pakistan: 1 of 4 tiles (grid)
+pakistan_24n_066e,66,24,68,26,cop90,no,Grid search Pakistan: 1 of 4 tiles (grid)
+mexico_26n_116w,-116,26,-114,28,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+mexico_26n_114w,-114,26,-112,28,cop90,no,Grid search Mexico: 2 of 4 tiles (grid)
+mexico_26n_112w,-112,26,-110,28,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+mexico_26n_106w,-106,26,-104,28,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+morocco_26n_014w,-14,26,-12,28,cop90,yes,"Grid search Morocco: 4 of 4 tiles (grid, top); near Teide"
+morocco_26n_012w,-12,26,-10,28,cop90,yes,"Grid search Morocco: 2 of 4 tiles (grid, top); near Lanzarote"
+western_sahara_26n_010w,-10,26,-8,28,cop90,no,Grid search Western Sahara: 2 of 4 tiles (grid)
+mauritania_26n_008w,-8,26,-6,28,cop90,no,Grid search Mauritania: 2 of 4 tiles (grid)
+algeria_26n_006w,-6,26,-4,28,cop90,no,"Grid search Algeria: 3 of 4 tiles (grid, top)"
+algeria_26n_004w,-4,26,-2,28,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_26n_002w,-2,26,0,28,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_26n_000e,0,26,2,28,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_26n_002e,2,26,4,28,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_26n_004e,4,26,6,28,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_26n_006e,6,26,8,28,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_26n_008e,8,26,10,28,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+libya_26n_010e,10,26,12,28,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_26n_012e,12,26,14,28,cop90,no,"Grid search Libya: 2 of 4 tiles (grid, top)"
+libya_26n_014e,14,26,16,28,cop90,no,"Grid search Libya: 3 of 4 tiles (grid, top)"
+libya_26n_016e,16,26,18,28,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_26n_018e,18,26,20,28,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_26n_020e,20,26,22,28,cop90,no,"Grid search Libya: 2 of 4 tiles (grid, top)"
+libya_26n_022e,22,26,24,28,cop90,no,"Grid search Libya: 3 of 4 tiles (grid, top)"
+libya_26n_024e,24,26,26,28,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+egypt_26n_026e,26,26,28,28,cop90,no,"Grid search Egypt: 3 of 4 tiles (grid, top)"
+egypt_26n_028e,28,26,30,28,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_26n_030e,30,26,32,28,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_26n_032e,32,26,34,28,cop90,no,"Grid search Egypt: 4 of 4 tiles (grid, top)"
+egypt_26n_034e,34,26,36,28,cop90,no,"Grid search Egypt: 2 of 4 tiles (grid, top)"
+pakistan_26n_062e,62,26,64,28,cop90,no,Grid search Pakistan: 2 of 4 tiles (grid)
+pakistan_26n_064e,64,26,66,28,cop90,no,Grid search Pakistan: 2 of 4 tiles (grid)
+pakistan_26n_068e,68,26,70,28,cop90,no,Grid search Pakistan: 1 of 4 tiles (grid)
+mexico_28n_116w,-116,28,-114,30,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+mexico_28n_114w,-114,28,-112,30,cop90,no,Grid search Mexico: 2 of 4 tiles (grid)
+mexico_28n_112w,-112,28,-110,30,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+mexico_28n_108w,-108,28,-106,30,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+mexico_28n_106w,-106,28,-104,30,cop90,no,Grid search Mexico: 2 of 4 tiles (grid)
+mexico_28n_104w,-104,28,-102,30,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+spain_28n_014w,-14,28,-12,30,cop90,yes,Grid search Spain: 1 of 4 tiles (grid); near Teide
+morocco_28n_012w,-12,28,-10,30,cop90,yes,Grid search Morocco: 2 of 4 tiles (grid); near Lanzarote
+morocco_28n_010w,-10,28,-8,30,cop90,no,Grid search Morocco: 2 of 4 tiles (grid)
+algeria_28n_008w,-8,28,-6,30,cop90,yes,"Grid search Algeria: 4 of 4 tiles (grid, top); near Morocco Erfoud / Ibn Battuta"
+algeria_28n_006w,-6,28,-4,30,cop90,yes,"Grid search Algeria: 4 of 4 tiles (grid, top); near Morocco Erfoud / Ibn Battuta"
+algeria_28n_004w,-4,28,-2,30,cop90,yes,"Grid search Algeria: 4 of 4 tiles (grid, top); near Morocco Erfoud / Ibn Battuta"
+algeria_28n_002w,-2,28,0,30,cop90,yes,"Grid search Algeria: 4 of 4 tiles (grid, top); near Morocco Erfoud / Ibn Battuta"
+algeria_28n_000e,0,28,2,30,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_28n_002e,2,28,4,30,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_28n_004e,4,28,6,30,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_28n_006e,6,28,8,30,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_28n_008e,8,28,10,30,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+libya_28n_010e,10,28,12,30,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_28n_012e,12,28,14,30,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_28n_014e,14,28,16,30,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_28n_016e,16,28,18,30,cop90,no,"Grid search Libya: 4 of 4 tiles (grid, top)"
+libya_28n_018e,18,28,20,30,cop90,no,"Grid search Libya: 2 of 4 tiles (grid, top)"
+libya_28n_020e,20,28,22,30,cop90,no,Grid search Libya: 2 of 4 tiles (grid)
+libya_28n_022e,22,28,24,30,cop90,no,Grid search Libya: 2 of 4 tiles (grid)
+libya_28n_024e,24,28,26,30,cop90,no,Grid search Libya: 2 of 4 tiles (grid)
+egypt_28n_026e,26,28,28,30,cop90,no,"Grid search Egypt: 3 of 4 tiles (grid, top)"
+egypt_28n_028e,28,28,30,30,cop90,no,"Grid search Egypt: 3 of 4 tiles (grid, top)"
+egypt_28n_030e,30,28,32,30,cop90,yes,"Grid search Egypt: 3 of 4 tiles (grid, top); near Negev / Ramon crater"
+egypt_28n_032e,32,28,34,30,cop90,yes,"Grid search Egypt: 4 of 4 tiles (grid, top); near Negev / Ramon crater"
+egypt_28n_034e,34,28,36,30,cop90,yes,"Grid search Egypt: 2 of 4 tiles (grid, top); near Negev / Ramon crater"
+pakistan_28n_060e,60,28,62,30,cop90,no,Grid search Pakistan: 1 of 4 tiles (grid)
+pakistan_28n_064e,64,28,66,30,cop90,no,Grid search Pakistan: 2 of 4 tiles (grid)
+pakistan_28n_066e,66,28,68,30,cop90,no,Grid search Pakistan: 1 of 4 tiles (grid)
+mexico_30n_116w,-116,30,-114,32,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+mexico_30n_114w,-114,30,-112,32,cop90,no,Grid search Mexico: 1 of 4 tiles (grid)
+mexico_30n_112w,-112,30,-110,32,cop90,no,Grid search Mexico: 2 of 4 tiles (grid)
+united_states_of_america_30n_110w,-110,30,-108,32,cop90,no,Grid search United States of America: 1 of 4 tiles (grid)
+mexico_30n_108w,-108,30,-106,32,cop90,no,Grid search Mexico: 2 of 4 tiles (grid)
+mexico_30n_106w,-106,30,-104,32,cop90,no,Grid search Mexico: 2 of 4 tiles (grid)
+united_states_of_america_30n_104w,-104,30,-102,32,cop90,no,Grid search United States of America: 2 of 4 tiles (grid)
+morocco_30n_010w,-10,30,-8,32,cop90,no,Grid search Morocco: 2 of 4 tiles (grid)
+morocco_30n_008w,-8,30,-6,32,cop90,yes,Grid search Morocco: 2 of 4 tiles (grid); near Morocco Erfoud / Ibn Battuta
+morocco_30n_006w,-6,30,-4,32,cop90,yes,"Grid search Morocco: 3 of 4 tiles (grid, top); near Morocco Erfoud / Ibn Battuta"
+algeria_30n_004w,-4,30,-2,32,cop90,yes,"Grid search Algeria: 3 of 4 tiles (grid, top); near Morocco Erfoud / Ibn Battuta"
+algeria_30n_002w,-2,30,0,32,cop90,yes,Grid search Algeria: 2 of 4 tiles (grid); near Morocco Erfoud / Ibn Battuta
+algeria_30n_000e,0,30,2,32,cop90,no,"Grid search Algeria: 3 of 4 tiles (grid, top)"
+algeria_30n_002e,2,30,4,32,cop90,no,"Grid search Algeria: 4 of 4 tiles (grid, top)"
+algeria_30n_004e,4,30,6,32,cop90,no,"Grid search Algeria: 3 of 4 tiles (grid, top)"
+algeria_30n_006e,6,30,8,32,cop90,no,"Grid search Algeria: 3 of 4 tiles (grid, top)"
+algeria_30n_008e,8,30,10,32,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+libya_30n_010e,10,30,12,32,cop90,no,Grid search Libya: 2 of 4 tiles (grid)
+libya_30n_012e,12,30,14,32,cop90,no,Grid search Libya: 2 of 4 tiles (grid)
+libya_30n_014e,14,30,16,32,cop90,no,"Grid search Libya: 3 of 4 tiles (grid, top)"
+libya_30n_016e,16,30,18,32,cop90,no,Grid search Libya: 1 of 4 tiles (grid)
+libya_30n_018e,18,30,20,32,cop90,no,Grid search Libya: 1 of 4 tiles (grid)
+libya_30n_020e,20,30,22,32,cop90,no,Grid search Libya: 1 of 4 tiles (grid)
+libya_30n_022e,22,30,24,32,cop90,no,Grid search Libya: 2 of 4 tiles (grid)
+libya_30n_024e,24,30,26,32,cop90,no,Grid search Libya: 2 of 4 tiles (grid)
+egypt_30n_026e,26,30,28,32,cop90,no,Grid search Egypt: 2 of 4 tiles (grid)
+egypt_30n_028e,28,30,30,32,cop90,no,Grid search Egypt: 1 of 4 tiles (grid)
+egypt_30n_032e,32,30,34,32,cop90,yes,"Grid search Egypt: 3 of 4 tiles (grid, top); near Negev / Ramon crater"
+egypt_30n_034e,34,30,36,32,cop90,yes,Grid search Egypt: 1 of 4 tiles (grid); near Negev / Ramon crater
+pakistan_30n_066e,66,30,68,32,cop90,no,Grid search Pakistan: 1 of 4 tiles (grid)
+mexico_32n_116w,-116,32,-114,34,cop90,yes,Grid search Mexico: 2 of 4 tiles (grid); near Death Valley / Mojave
+united_states_of_america_32n_114w,-114,32,-112,34,cop90,yes,Grid search United States of America: 2 of 4 tiles (grid); near Arizona craters / Flagstaff
+united_states_of_america_32n_112w,-112,32,-110,34,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Arizona craters / Flagstaff
+united_states_of_america_32n_110w,-110,32,-108,34,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Arizona craters / Flagstaff
+united_states_of_america_32n_108w,-108,32,-106,34,cop90,no,Grid search United States of America: 2 of 4 tiles (grid)
+united_states_of_america_32n_106w,-106,32,-104,34,cop90,no,Grid search United States of America: 2 of 4 tiles (grid)
+united_states_of_america_32n_104w,-104,32,-102,34,cop90,no,Grid search United States of America: 1 of 4 tiles (grid)
+morocco_32n_008w,-8,32,-6,34,cop90,yes,Grid search Morocco: 1 of 4 tiles (grid); near Morocco Erfoud / Ibn Battuta
+morocco_32n_006w,-6,32,-4,34,cop90,yes,Grid search Morocco: 2 of 4 tiles (grid); near Morocco Erfoud / Ibn Battuta
+morocco_32n_004w,-4,32,-2,34,cop90,yes,Grid search Morocco: 2 of 4 tiles (grid); near Morocco Erfoud / Ibn Battuta
+morocco_32n_002w,-2,32,0,34,cop90,yes,Grid search Morocco: 2 of 4 tiles (grid); near Morocco Erfoud / Ibn Battuta
+algeria_32n_000e,0,32,2,34,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_32n_002e,2,32,4,34,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_32n_004e,4,32,6,34,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_32n_006e,6,32,8,34,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+tunisia_32n_008e,8,32,10,34,cop90,no,Grid search Tunisia: 2 of 4 tiles (grid)
+tunisia_32n_010e,10,32,12,34,cop90,no,Grid search Tunisia: 2 of 4 tiles (grid)
+libya_32n_012e,12,32,14,34,cop90,no,Grid search Libya: 1 of 4 tiles (grid)
+libya_32n_014e,14,32,16,34,cop90,no,Grid search Libya: 1 of 4 tiles (grid)
+united_states_of_america_34n_116w,-116,34,-114,36,cop90,yes,Grid search United States of America: 2 of 4 tiles (grid); near Death Valley / Mojave
+united_states_of_america_34n_114w,-114,34,-112,36,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Death Valley / Mojave
+united_states_of_america_34n_112w,-112,34,-110,36,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Utah MDRS
+united_states_of_america_34n_108w,-108,34,-106,36,cop90,no,Grid search United States of America: 1 of 4 tiles (grid)
+united_states_of_america_34n_106w,-106,34,-104,36,cop90,no,Grid search United States of America: 1 of 4 tiles (grid)
+morocco_34n_004w,-4,34,-2,36,cop90,no,Grid search Morocco: 1 of 4 tiles (grid)
+algeria_34n_002w,-2,34,0,36,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_34n_000e,0,34,2,36,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_34n_002e,2,34,4,36,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_34n_004e,4,34,6,36,cop90,no,Grid search Algeria: 2 of 4 tiles (grid)
+algeria_34n_006e,6,34,8,36,cop90,no,Grid search Algeria: 1 of 4 tiles (grid)
+tunisia_34n_008e,8,34,10,36,cop90,no,Grid search Tunisia: 2 of 4 tiles (grid)
+tunisia_34n_010e,10,34,12,36,cop90,no,Grid search Tunisia: 1 of 4 tiles (grid)
+turkmenistan_34n_060e,60,34,62,36,cop90,no,Grid search Turkmenistan: 1 of 4 tiles (grid)
+pakistan_34n_076e,76,34,78,36,cop90,yes,Grid search Pakistan: 1 of 4 tiles (top); near Ladakh
+united_states_of_america_36n_118w,-118,36,-116,38,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Death Valley / Mojave
+united_states_of_america_36n_116w,-116,36,-114,38,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Death Valley / Mojave
+united_states_of_america_36n_112w,-112,36,-110,38,cop90,yes,Grid search United States of America: 2 of 4 tiles (grid); near Utah MDRS
+united_states_of_america_36n_110w,-110,36,-108,38,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Utah MDRS
+united_states_of_america_36n_108w,-108,36,-106,38,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Utah MDRS
+turkmenistan_36n_052e,52,36,54,38,cop90,no,Grid search Turkmenistan: 1 of 4 tiles (grid)
+turkmenistan_36n_058e,58,36,60,38,cop90,no,Grid search Turkmenistan: 1 of 4 tiles (grid)
+turkmenistan_36n_060e,60,36,62,38,cop90,no,Grid search Turkmenistan: 1 of 4 tiles (grid)
+turkmenistan_36n_062e,62,36,64,38,cop90,no,Grid search Turkmenistan: 2 of 4 tiles (grid)
+turkmenistan_36n_064e,64,36,66,38,cop90,no,Grid search Turkmenistan: 2 of 4 tiles (grid)
+uzbekistan_36n_066e,66,36,68,38,cop90,no,Grid search Uzbekistan: 1 of 4 tiles (grid)
+tajikistan_36n_070e,70,36,72,38,cop90,no,Grid search Tajikistan: 1 of 4 tiles (grid)
+pakistan_36n_072e,72,36,74,38,cop90,no,"Grid search Pakistan: 4 of 4 tiles (grid, top)"
+pakistan_36n_074e,74,36,76,38,cop90,yes,"Grid search Pakistan: 3 of 4 tiles (grid, top); near Ladakh"
+united_states_of_america_38n_120w,-120,38,-118,40,cop90,no,Grid search United States of America: 1 of 4 tiles (grid)
+united_states_of_america_38n_118w,-118,38,-116,40,cop90,yes,Grid search United States of America: 2 of 4 tiles (grid); near Death Valley / Mojave
+united_states_of_america_38n_116w,-116,38,-114,40,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Death Valley / Mojave
+united_states_of_america_38n_114w,-114,38,-112,40,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Utah MDRS
+united_states_of_america_38n_112w,-112,38,-110,40,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Utah MDRS
+azerbaijan_38n_050e,50,38,52,40,cop90,no,Grid search Azerbaijan: 1 of 4 tiles (grid)
+turkmenistan_38n_052e,52,38,54,40,cop90,no,Grid search Turkmenistan: 2 of 4 tiles (grid)
+turkmenistan_38n_054e,54,38,56,40,cop90,no,Grid search Turkmenistan: 2 of 4 tiles (grid)
+turkmenistan_38n_056e,56,38,58,40,cop90,no,"Grid search Turkmenistan: 3 of 4 tiles (grid, named_karakum_darvaza)"
+turkmenistan_38n_058e,58,38,60,40,cop90,no,"Grid search Turkmenistan: 4 of 4 tiles (grid, named_karakum_darvaza)"
+turkmenistan_38n_060e,60,38,62,40,cop90,no,"Grid search Turkmenistan: 4 of 4 tiles (grid, named_karakum_darvaza, top)"
+turkmenistan_38n_062e,62,38,64,40,cop90,no,"Grid search Turkmenistan: 3 of 4 tiles (grid, top)"
+turkmenistan_38n_064e,64,38,66,40,cop90,no,Grid search Turkmenistan: 2 of 4 tiles (grid)
+uzbekistan_38n_066e,66,38,68,40,cop90,no,Grid search Uzbekistan: 1 of 4 tiles (grid)
+tajikistan_38n_070e,70,38,72,40,cop90,no,Grid search Tajikistan: 1 of 4 tiles (grid)
+tajikistan_38n_072e,72,38,74,40,cop90,no,"Grid search Tajikistan: 2 of 4 tiles (grid, top)"
+united_states_of_america_40n_120w,-120,40,-118,42,cop90,no,Grid search United States of America: 2 of 4 tiles (grid)
+united_states_of_america_40n_114w,-114,40,-112,42,cop90,yes,Grid search United States of America: 1 of 4 tiles (grid); near Utah MDRS
+azerbaijan_40n_050e,50,40,52,42,cop90,no,Grid search Azerbaijan: 2 of 4 tiles (grid)
+turkmenistan_40n_052e,52,40,54,42,cop90,no,Grid search Turkmenistan: 2 of 4 tiles (grid)
+turkmenistan_40n_054e,54,40,56,42,cop90,no,Grid search Turkmenistan: 2 of 4 tiles (grid)
+turkmenistan_40n_056e,56,40,58,42,cop90,no,"Grid search Turkmenistan: 3 of 4 tiles (grid, named_karakum_darvaza)"
+turkmenistan_40n_058e,58,40,60,42,cop90,no,"Grid search Turkmenistan: 4 of 4 tiles (grid, named_karakum_darvaza)"
+turkmenistan_40n_060e,60,40,62,42,cop90,no,"Grid search Turkmenistan: 4 of 4 tiles (grid, named_karakum_darvaza, named_kyzylkum, top)"
+uzbekistan_40n_062e,62,40,64,42,cop90,no,"Grid search Uzbekistan: 4 of 4 tiles (grid, named_kyzylkum, top)"
+uzbekistan_40n_064e,64,40,66,42,cop90,no,"Grid search Uzbekistan: 4 of 4 tiles (grid, named_kyzylkum)"
+uzbekistan_40n_066e,66,40,68,42,cop90,no,Grid search Uzbekistan: 2 of 4 tiles (grid)
+uzbekistan_40n_070e,70,40,72,42,cop90,no,Grid search Uzbekistan: 1 of 4 tiles (grid)
+kyrgyzstan_40n_074e,74,40,76,42,cop90,no,Grid search Kyrgyzstan: 2 of 4 tiles (grid)
+kyrgyzstan_40n_076e,76,40,78,42,cop90,no,Grid search Kyrgyzstan: 2 of 4 tiles (grid)
+united_states_of_america_42n_120w,-120,42,-118,44,cop90,no,Grid search United States of America: 1 of 4 tiles (grid)
+kazakhstan_42n_050e,50,42,52,44,cop90,no,Grid search Kazakhstan: 1 of 4 tiles (grid)
+kazakhstan_42n_052e,52,42,54,44,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+kazakhstan_42n_054e,54,42,56,44,cop90,no,"Grid search Kazakhstan: 4 of 4 tiles (grid, named_ustyurt)"
+uzbekistan_42n_056e,56,42,58,44,cop90,no,"Grid search Uzbekistan: 4 of 4 tiles (grid, named_ustyurt)"
+uzbekistan_42n_058e,58,42,60,44,cop90,no,"Grid search Uzbekistan: 3 of 4 tiles (grid, named_ustyurt)"
+uzbekistan_42n_060e,60,42,62,44,cop90,no,"Grid search Uzbekistan: 3 of 4 tiles (grid, named_kyzylkum)"
+uzbekistan_42n_062e,62,42,64,44,cop90,no,"Grid search Uzbekistan: 4 of 4 tiles (grid, named_kyzylkum)"
+uzbekistan_42n_064e,64,42,66,44,cop90,no,"Grid search Uzbekistan: 4 of 4 tiles (grid, named_kyzylkum)"
+kazakhstan_42n_066e,66,42,68,44,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+kazakhstan_42n_074e,74,42,76,44,cop90,no,Grid search Kazakhstan: 1 of 4 tiles (grid)
+mongolia_42n_096e,96,42,98,44,cop90,no,"Grid search Mongolia: 2 of 4 tiles (grid, top)"
+mongolia_42n_098e,98,42,100,44,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+mongolia_42n_100e,100,42,102,44,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+mongolia_42n_102e,102,42,104,44,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+mongolia_42n_104e,104,42,106,44,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_42n_106e,106,42,108,44,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_42n_108e,108,42,110,44,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_42n_110e,110,42,112,44,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+kazakhstan_44n_052e,52,44,54,46,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+kazakhstan_44n_054e,54,44,56,46,cop90,no,"Grid search Kazakhstan: 4 of 4 tiles (grid, named_ustyurt)"
+uzbekistan_44n_056e,56,44,58,46,cop90,no,"Grid search Uzbekistan: 4 of 4 tiles (grid, named_ustyurt)"
+uzbekistan_44n_058e,58,44,60,46,cop90,no,Grid search Uzbekistan: 2 of 4 tiles (named_ustyurt)
+uzbekistan_44n_060e,60,44,62,46,cop90,no,Grid search Uzbekistan: 2 of 4 tiles (grid)
+kazakhstan_44n_062e,62,44,64,46,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+kazakhstan_44n_064e,64,44,66,46,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+kazakhstan_44n_066e,66,44,68,46,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+kazakhstan_44n_068e,68,44,70,46,cop90,no,"Grid search Kazakhstan: 4 of 4 tiles (grid, named_betpak_dala)"
+kazakhstan_44n_070e,70,44,72,46,cop90,no,"Grid search Kazakhstan: 4 of 4 tiles (grid, named_betpak_dala)"
+kazakhstan_44n_072e,72,44,74,46,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+kazakhstan_44n_074e,74,44,76,46,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+kazakhstan_44n_076e,76,44,78,46,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+mongolia_44n_090e,90,44,92,46,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+mongolia_44n_092e,92,44,94,46,cop90,no,"Grid search Mongolia: 1 of 4 tiles (grid, top)"
+mongolia_44n_094e,94,44,96,46,cop90,no,"Grid search Mongolia: 4 of 4 tiles (grid, top)"
+mongolia_44n_096e,96,44,98,46,cop90,no,"Grid search Mongolia: 4 of 4 tiles (grid, top)"
+mongolia_44n_098e,98,44,100,46,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_44n_100e,100,44,102,46,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_44n_102e,102,44,104,46,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_44n_104e,104,44,106,46,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_44n_106e,106,44,108,46,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_44n_108e,108,44,110,46,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_44n_110e,110,44,112,46,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_44n_112e,112,44,114,46,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+kazakhstan_46n_060e,60,46,62,48,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (grid)
+kazakhstan_46n_062e,62,46,64,48,cop90,no,Grid search Kazakhstan: 1 of 4 tiles (grid)
+kazakhstan_46n_064e,64,46,66,48,cop90,no,Grid search Kazakhstan: 1 of 4 tiles (grid)
+kazakhstan_46n_068e,68,46,70,48,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (named_betpak_dala)
+kazakhstan_46n_070e,70,46,72,48,cop90,no,Grid search Kazakhstan: 2 of 4 tiles (named_betpak_dala)
+kazakhstan_46n_072e,72,46,74,48,cop90,no,Grid search Kazakhstan: 1 of 4 tiles (grid)
+kazakhstan_46n_074e,74,46,76,48,cop90,no,Grid search Kazakhstan: 1 of 4 tiles (grid)
+kazakhstan_46n_076e,76,46,78,48,cop90,no,Grid search Kazakhstan: 1 of 4 tiles (grid)
+mongolia_46n_090e,90,46,92,48,cop90,no,"Grid search Mongolia: 2 of 4 tiles (grid, top)"
+mongolia_46n_092e,92,46,94,48,cop90,no,"Grid search Mongolia: 2 of 4 tiles (grid, top)"
+mongolia_46n_094e,94,46,96,48,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_46n_096e,96,46,98,48,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_46n_098e,98,46,100,48,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_46n_100e,100,46,102,48,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+mongolia_46n_106e,106,46,108,48,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+mongolia_46n_108e,108,46,110,48,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_46n_110e,110,46,112,48,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_46n_112e,112,46,114,48,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_46n_114e,114,46,116,48,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+united_states_of_america_48n_112w,-112,48,-110,50,cop90,no,Grid search United States of America: 2 of 4 tiles (grid)
+canada_48n_110w,-110,48,-108,50,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_48n_108w,-108,48,-106,50,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+mongolia_48n_088e,88,48,90,50,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_48n_090e,90,48,92,50,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_48n_092e,92,48,94,50,cop90,no,Grid search Mongolia: 2 of 4 tiles (grid)
+mongolia_48n_094e,94,48,96,50,cop90,no,"Grid search Mongolia: 2 of 4 tiles (grid, top)"
+mongolia_48n_096e,96,48,98,50,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+mongolia_48n_098e,98,48,100,50,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+mongolia_48n_114e,114,48,116,50,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+canada_50n_112w,-112,50,-110,52,cop90,no,Grid search Canada: 2 of 4 tiles (grid)
+canada_50n_110w,-110,50,-108,52,cop90,no,Grid search Canada: 2 of 4 tiles (grid)
+canada_50n_108w,-108,50,-106,52,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+mongolia_50n_092e,92,50,94,52,cop90,no,Grid search Mongolia: 1 of 4 tiles (grid)
+canada_74n_106w,-106,74,-104,76,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_74n_104w,-104,74,-102,76,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_74n_102w,-102,74,-100,76,cop90,yes,Grid search Canada: 1 of 4 tiles (grid); near Devon Island / Haughton
+canada_74n_098w,-98,74,-96,76,cop90,yes,Grid search Canada: 2 of 4 tiles (grid); near Devon Island / Haughton
+canada_74n_094w,-94,74,-92,76,cop90,yes,Grid search Canada: 1 of 4 tiles (grid); near Devon Island / Haughton
+canada_76n_116w,-116,76,-114,78,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_76n_114w,-114,76,-112,78,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_76n_112w,-112,76,-110,78,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_76n_110w,-110,76,-108,78,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_76n_108w,-108,76,-106,78,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_76n_106w,-106,76,-104,78,cop90,yes,"Grid search Canada: 1 of 4 tiles (grid, top); near Axel Heiberg"
+canada_76n_104w,-104,76,-102,78,cop90,yes,Grid search Canada: 2 of 4 tiles (grid); near Axel Heiberg
+canada_76n_102w,-102,76,-100,78,cop90,yes,Grid search Canada: 2 of 4 tiles (grid); near Devon Island / Haughton
+canada_76n_100w,-100,76,-98,78,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Devon Island / Haughton"
+canada_76n_098w,-98,76,-96,78,cop90,yes,Grid search Canada: 2 of 4 tiles (grid); near Devon Island / Haughton
+canada_76n_096w,-96,76,-94,78,cop90,yes,"Grid search Canada: 3 of 4 tiles (grid, top); near Devon Island / Haughton"
+canada_76n_094w,-94,76,-92,78,cop90,yes,Grid search Canada: 1 of 4 tiles (top); near Devon Island / Haughton
+canada_76n_092w,-92,76,-90,78,cop90,yes,"Grid search Canada: 1 of 4 tiles (grid, top); near Devon Island / Haughton"
+canada_76n_090w,-90,76,-88,78,cop90,yes,"Grid search Canada: 3 of 4 tiles (grid, top); near Devon Island / Haughton"
+canada_76n_088w,-88,76,-86,78,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Devon Island / Haughton"
+canada_76n_086w,-86,76,-84,78,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Devon Island / Haughton"
+canada_76n_084w,-84,76,-82,78,cop90,yes,"Grid search Canada: 3 of 4 tiles (grid, top); near Devon Island / Haughton"
+canada_76n_082w,-82,76,-80,78,cop90,yes,Grid search Canada: 2 of 4 tiles (top); near Devon Island / Haughton
+canada_78n_114w,-114,78,-112,80,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_78n_112w,-112,78,-110,80,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_78n_110w,-110,78,-108,80,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_78n_104w,-104,78,-102,80,cop90,yes,Grid search Canada: 1 of 4 tiles (grid); near Axel Heiberg
+canada_78n_102w,-102,78,-100,80,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_100w,-100,78,-98,80,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_098w,-98,78,-96,80,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_096w,-96,78,-94,80,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_094w,-94,78,-92,80,cop90,yes,"Grid search Canada: 3 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_090w,-90,78,-88,80,cop90,yes,Grid search Canada: 1 of 4 tiles (top); near Axel Heiberg
+canada_78n_088w,-88,78,-86,80,cop90,yes,"Grid search Canada: 4 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_086w,-86,78,-84,80,cop90,yes,"Grid search Canada: 4 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_084w,-84,78,-82,80,cop90,yes,"Grid search Canada: 4 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_082w,-82,78,-80,80,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_078w,-78,78,-76,80,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_076w,-76,78,-74,80,cop90,yes,"Grid search Canada: 1 of 4 tiles (grid, top); near Axel Heiberg"
+canada_78n_074w,-74,78,-72,80,cop90,no,"Grid search Canada: 2 of 4 tiles (grid, top)"
+greenland_78n_072w,-72,78,-70,80,cop90,no,Grid search Greenland: 2 of 4 tiles (top)
+greenland_78n_070w,-70,78,-68,80,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_78n_068w,-68,78,-66,80,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+canada_80n_096w,-96,80,-94,82,cop90,yes,Grid search Canada: 1 of 4 tiles (grid); near Axel Heiberg
+canada_80n_094w,-94,80,-92,82,cop90,yes,Grid search Canada: 2 of 4 tiles (grid); near Axel Heiberg
+canada_80n_092w,-92,80,-90,82,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_090w,-90,80,-88,82,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_088w,-88,80,-86,82,cop90,yes,"Grid search Canada: 3 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_086w,-86,80,-84,82,cop90,yes,"Grid search Canada: 4 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_084w,-84,80,-82,82,cop90,yes,"Grid search Canada: 4 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_082w,-82,80,-80,82,cop90,yes,"Grid search Canada: 3 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_080w,-80,80,-78,82,cop90,yes,"Grid search Canada: 4 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_078w,-78,80,-76,82,cop90,yes,"Grid search Canada: 3 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_076w,-76,80,-74,82,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_074w,-74,80,-72,82,cop90,yes,"Grid search Canada: 2 of 4 tiles (grid, top); near Axel Heiberg"
+canada_80n_070w,-70,80,-68,82,cop90,no,"Grid search Canada: 4 of 4 tiles (grid, top)"
+canada_80n_068w,-68,80,-66,82,cop90,no,"Grid search Canada: 3 of 4 tiles (grid, top)"
+canada_80n_066w,-66,80,-64,82,cop90,no,"Grid search Canada: 3 of 4 tiles (grid, top)"
+canada_80n_064w,-64,80,-62,82,cop90,no,"Grid search Canada: 2 of 4 tiles (grid, top)"
+greenland_80n_062w,-62,80,-60,82,cop90,no,"Grid search Greenland: 4 of 4 tiles (grid, top)"
+greenland_80n_060w,-60,80,-58,82,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_80n_058w,-58,80,-56,82,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_80n_056w,-56,80,-54,82,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_80n_054w,-54,80,-52,82,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_80n_052w,-52,80,-50,82,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_80n_050w,-50,80,-48,82,cop90,no,Grid search Greenland: 1 of 4 tiles (grid)
+greenland_80n_034w,-34,80,-32,82,cop90,no,Grid search Greenland: 1 of 4 tiles (top)
+greenland_80n_032w,-32,80,-30,82,cop90,no,"Grid search Greenland: 1 of 4 tiles (grid, top)"
+greenland_80n_030w,-30,80,-28,82,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_80n_028w,-28,80,-26,82,cop90,no,"Grid search Greenland: 3 of 4 tiles (grid, top)"
+greenland_80n_026w,-26,80,-24,82,cop90,no,"Grid search Greenland: 4 of 4 tiles (grid, top)"
+greenland_80n_024w,-24,80,-22,82,cop90,no,"Grid search Greenland: 3 of 4 tiles (grid, top)"
+greenland_80n_022w,-22,80,-20,82,cop90,no,Grid search Greenland: 1 of 4 tiles (grid)
+greenland_80n_020w,-20,80,-18,82,cop90,no,Grid search Greenland: 1 of 4 tiles (grid)
+canada_82n_086w,-86,82,-84,84,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_82n_084w,-84,82,-82,84,cop90,no,"Grid search Canada: 2 of 4 tiles (grid, top)"
+canada_82n_082w,-82,82,-80,84,cop90,no,"Grid search Canada: 2 of 4 tiles (grid, top)"
+canada_82n_080w,-80,82,-78,84,cop90,no,"Grid search Canada: 1 of 4 tiles (grid, top)"
+canada_82n_078w,-78,82,-76,84,cop90,no,Grid search Canada: 1 of 4 tiles (top)
+canada_82n_076w,-76,82,-74,84,cop90,no,"Grid search Canada: 1 of 4 tiles (grid, top)"
+canada_82n_074w,-74,82,-72,84,cop90,no,Grid search Canada: 1 of 4 tiles (grid)
+canada_82n_072w,-72,82,-70,84,cop90,no,Grid search Canada: 1 of 4 tiles (top)
+canada_82n_070w,-70,82,-68,84,cop90,no,"Grid search Canada: 2 of 4 tiles (grid, top)"
+canada_82n_068w,-68,82,-66,84,cop90,no,"Grid search Canada: 2 of 4 tiles (grid, top)"
+canada_82n_066w,-66,82,-64,84,cop90,no,"Grid search Canada: 2 of 4 tiles (grid, top)"
+canada_82n_064w,-64,82,-62,84,cop90,no,"Grid search Canada: 2 of 4 tiles (grid, top)"
+canada_82n_062w,-62,82,-60,84,cop90,no,"Grid search Canada: 1 of 4 tiles (grid, top)"
+greenland_82n_060w,-60,82,-58,84,cop90,no,Grid search Greenland: 1 of 4 tiles (grid)
+greenland_82n_058w,-58,82,-56,84,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_82n_056w,-56,82,-54,84,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_82n_054w,-54,82,-52,84,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_82n_052w,-52,82,-50,84,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_82n_050w,-50,82,-48,84,cop90,no,Grid search Greenland: 1 of 4 tiles (grid)
+greenland_82n_048w,-48,82,-46,84,cop90,no,Grid search Greenland: 2 of 4 tiles (grid)
+greenland_82n_046w,-46,82,-44,84,cop90,no,Grid search Greenland: 2 of 4 tiles (grid)
+greenland_82n_044w,-44,82,-42,84,cop90,no,"Grid search Greenland: 1 of 4 tiles (grid, top)"
+greenland_82n_042w,-42,82,-40,84,cop90,no,"Grid search Greenland: 3 of 4 tiles (grid, top)"
+greenland_82n_040w,-40,82,-38,84,cop90,no,"Grid search Greenland: 1 of 4 tiles (grid, top)"
+greenland_82n_038w,-38,82,-36,84,cop90,no,Grid search Greenland: 3 of 4 tiles (top)
+greenland_82n_036w,-36,82,-34,84,cop90,no,"Grid search Greenland: 3 of 4 tiles (grid, top)"
+greenland_82n_034w,-34,82,-32,84,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_82n_032w,-32,82,-30,84,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_82n_030w,-30,82,-28,84,cop90,no,"Grid search Greenland: 3 of 4 tiles (grid, top)"
+greenland_82n_028w,-28,82,-26,84,cop90,no,"Grid search Greenland: 4 of 4 tiles (grid, top)"
+greenland_82n_026w,-26,82,-24,84,cop90,no,"Grid search Greenland: 4 of 4 tiles (grid, top)"
+greenland_82n_024w,-24,82,-22,84,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_82n_022w,-22,82,-20,84,cop90,no,"Grid search Greenland: 2 of 4 tiles (grid, top)"
+greenland_82n_020w,-20,82,-18,84,cop90,no,Grid search Greenland: 1 of 4 tiles (grid)

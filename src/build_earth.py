@@ -15,7 +15,8 @@ Columns (the same features that src/compare.py uses):
     temp_range_K  warmest monthly daytime temperature minus the yearly mean
                   (MOD11C3). Same definition as the Moon (Diviner max - mean).
     albedo        mean white-sky shortwave albedo, 15th of each month (MCD43C3)
-    precip_mm     total precipitation in the year (GPM IMERG monthly)
+    precip_mm     total precipitation in the year: GPM IMERG between 60 S and
+                  60 N, MERRA-2 reanalysis above 60 degrees (IMERG gives 0 on ice)
     ndvi          vegetation index, mean of 4 months, one per season (MOD13C2).
                   About 0 or below = no plants (rock, sand, ice); 0.2 = sparse
                   shrubs; above 0.5 = dense vegetation. MODIS does not cover
@@ -237,24 +238,61 @@ def albedo(grid):
     return {"albedo": quiet_nan(np.nanmean, stack)}
 
 
-def precipitation(lat, lon):
-    """Yearly total in mm. IMERG gives a mean rate in mm/hour for each month."""
-    files = sorted((RAW / "GPM_3IMERGM").glob("*.HDF5"))
-    if len(files) != 12:
-        print(f"  WARNING: found {len(files)} GPM files instead of 12; precip_mm will be wrong.")
+POLAR_LAT = 60.0   # above this latitude (north or south) IMERG is not reliable
+
+
+def monthly_precipitation(lat, lon):
+    """
+    Precipitation of each month in mm, as an array (12, *lat.shape).
+
+    Between 60 S and 60 N: GPM IMERG (0.1 degrees, satellites + rain gauges).
+    Above 60 degrees: MERRA-2 (NASA reanalysis, 0.5 x 0.625 degrees). IMERG
+    cannot measure snow over ice and frozen ground: it stores 0 mm there
+    (we checked: 0 mm in every month for all of Antarctica), which made the
+    polar places look perfectly dry. MERRA-2 fills that gap.
+    Months without data stay EMPTY (NaN), never 0.
+    """
+    lat, lon = np.asarray(lat, float), np.asarray(lon, float)
+    imerg = sorted((RAW / "GPM_3IMERGM").glob("*.HDF5"))
+    merra = sorted((RAW / "MERRA2_FLX").glob("*.nc4"))
+    if len(imerg) != 12:
+        print(f"  WARNING: found {len(imerg)} GPM files instead of 12; precip_mm will be wrong.")
+    polar = np.abs(lat) >= POLAR_LAT
+    if polar.any() and len(merra) != 12:
+        print(f"  WARNING: found {len(merra)} MERRA-2 files instead of 12; "
+              "precipitation above 60 degrees is left empty.")
+
     # IMERG grid is 0.1 degrees, arranged [lon, lat] from -180 and -90.
     i_lon = np.clip(((lon + 180) / 0.1).astype(int), 0, 3599)
     i_lat = np.clip(((lat + 90) / 0.1).astype(int), 0, 1799)
-    total = np.zeros(lat.shape)
-    for f in files:
+    # MERRA-2 grid: lat from -90 every 0.5, lon from -180 every 0.625 (nearest point).
+    m_lat = np.clip(np.round((lat + 90) / 0.5).astype(int), 0, 360)
+    m_lon = np.round((lon + 180) / 0.625).astype(int) % 576
+    merra_by_month = {re.search(r"\.(\d{6})\.nc4", f.name)[1]: f for f in merra}
+
+    months = np.full((12,) + lat.shape, np.nan)
+    for k, f in enumerate(imerg):
+        stamp = re.search(r"\.(\d{4})(\d{2})01-", f.name)
+        year, month = int(stamp[1]), int(stamp[2])
+        hours = 24 * calendar.monthrange(year, month)[1]
         with h5py.File(f) as h:
-            rate = h["Grid/precipitation"][0]                 # mm/hour
-            month = re.search(r"\.(\d{4})(\d{2})01-", f.name)
-            hours = 24 * calendar.monthrange(int(month[1]), int(month[2]))[1]
-            values = rate[i_lon, i_lat].astype(float)
-            values[values < 0] = np.nan                       # negative = no data
-            total += values * hours
-    return {"precip_mm": total}
+            values = h["Grid/precipitation"][0][i_lon, i_lat].astype(float)   # mm/hour
+        values[values < 0] = np.nan                                          # negative = no data
+        values = values * hours
+        values[polar] = np.nan
+        m_file = merra_by_month.get(f"{year}{month:02d}")
+        if m_file is not None and polar.any():
+            with h5py.File(m_file) as h:
+                rate = h["PRECTOTCORR"][0][m_lat[polar], m_lon[polar]].astype(float)  # kg/m2/s = mm/s
+            rate[(rate < 0) | (rate > 1)] = np.nan                           # fill values
+            values[polar] = rate * hours * 3600
+        months[k] = values
+    return months
+
+
+def precipitation(lat, lon):
+    """Yearly total in mm (sum of the 12 months; empty if a month is missing)."""
+    return {"precip_mm": monthly_precipitation(lat, lon).sum(axis=0)}
 
 
 def vegetation(grid):

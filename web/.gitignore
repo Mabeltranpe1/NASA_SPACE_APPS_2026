@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Imagenes copiadas por scripts/copy-data-images.mjs (el original esta en maps/ y experiments/)
+public/data/img/
