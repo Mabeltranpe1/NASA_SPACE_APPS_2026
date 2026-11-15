@@ -20,10 +20,13 @@ Files that already exist are skipped, so you can stop and run it again.
 
 import argparse
 import shutil
+import urllib.error
+import urllib.request
 from datetime import date
 from pathlib import Path
 
 import earthaccess
+import numpy as np
 
 RAW_DIR = Path("data/raw")
 
@@ -110,7 +113,54 @@ def download(datasets):
 
 
 # ---------------------------------------------------------------------------
-# 3. Command line
+# 3. Copernicus DEM (for places NASADEM does not cover: north of 60N and
+#    south of 56S, like Antarctica, Devon Island or Svalbard)
+# ---------------------------------------------------------------------------
+
+COP90_URL = ("https://copernicus-dem-90m.s3.amazonaws.com/"
+             "Copernicus_DSM_COG_30_{tile}_DEM/Copernicus_DSM_COG_30_{tile}_DEM.tif")
+
+
+def cop90_tiles(region):
+    """Names of the 1 x 1 degree Copernicus tiles (named by their south-west corner)."""
+    west, south, east, north = region
+    names = []
+    for lat in range(int(np.floor(south)), int(np.ceil(north))):
+        for lon in range(int(np.floor(west)), int(np.ceil(east))):
+            ns = f"{'N' if lat >= 0 else 'S'}{abs(lat):02d}_00"
+            ew = f"{'E' if lon >= 0 else 'W'}{abs(lon):03d}_00"
+            names.append(f"{ns}_{ew}")
+    return names
+
+
+def download_cop90(region, really):
+    """Download Copernicus GLO-90 tiles. Free, no login. Missing tiles = only sea."""
+    target = RAW_DIR / "COP90"
+    target.mkdir(parents=True, exist_ok=True)
+    tiles = cop90_tiles(region)
+    print(f"Copernicus DEM 90 m: {len(tiles)} possible tiles (sea-only tiles do not exist)")
+    if not really:
+        print("\nNothing downloaded. Add --download to download these files.")
+        return
+    got = 0
+    for tile in tiles:
+        path = target / f"{tile}.tif"
+        if path.exists():
+            got += 1
+            continue
+        try:
+            tmp = path.with_suffix(".part")
+            urllib.request.urlretrieve(COP90_URL.format(tile=tile), tmp)
+            tmp.rename(path)
+            got += 1
+        except urllib.error.HTTPError as err:
+            if err.code not in (403, 404):   # 403/404 = no tile here (sea)
+                print(f"  FAILED {tile}: {err}")
+    print(f"  {got} tiles in {target}")
+
+
+# ---------------------------------------------------------------------------
+# 4. Command line
 # ---------------------------------------------------------------------------
 
 def main():
@@ -119,6 +169,9 @@ def main():
                         metavar=("WEST", "SOUTH", "EAST", "NORTH"),
                         help="Area for the elevation tiles, in degrees, e.g. -80 -5 -66 13")
     parser.add_argument("--year", type=int, default=2023, help="Year for the monthly data (default 2023)")
+    parser.add_argument("--dem", choices=["nasadem", "cop90"], default="nasadem",
+                        help="nasadem (default): all 4 NASA datasets. cop90: only Copernicus "
+                             "elevation tiles, for regions outside NASADEM (north of 60N, south of 56S)")
     parser.add_argument("--download", action="store_true",
                         help="Really download. Without this flag we only show the plan.")
     args = parser.parse_args()
@@ -128,6 +181,10 @@ def main():
         parser.error("region must be WEST SOUTH EAST NORTH, with west < east and south < north")
     if not 2001 <= args.year < date.today().year:
         parser.error(f"year must be between 2001 and {date.today().year - 1}")
+
+    if args.dem == "cop90":
+        download_cop90(args.region, args.download)
+        return
 
     print(f"Searching NASA Earthdata (year {args.year}, region {args.region}) ...")
     datasets = plan(args.region, args.year)

@@ -1,0 +1,16 @@
+name,body,site_lat,site_lon,area,elev_m,slope_deg,roughness,temp_mean_K,temp_range_K,albedo,precip_mm,ndvi,em_contrast,n_dem_pixels,n_temp_points
+Shackleton rim,Moon,-89.67,129.78,rim 20.92 km,923.3,15.33,20.58,124.89,134.94,0.3758,0.0,0.0,,47260.0,2351.0
+de Gerlache rim,Moon,-88.48,-88.34,rim 32.71 km,252.1,12.21,16.12,125.3,127.29,0.3422,0.0,0.0,,115557.0,5743.0
+Haworth rim,Moon,-87.45,-5.17,rim 51.42 km,-65.1,10.82,14.28,78.11,151.47,0.333,0.0,0.0,,285565.0,14243.0
+Faustini rim,Moon,-87.18,84.31,rim 42.48 km,72.0,8.65,11.36,98.8,127.94,0.3579,0.0,0.0,,194861.0,9723.0
+Mons Mouton summit,Moon,-84.6,31.0,disk 5.0 km,5138.5,5.92,7.72,113.26,107.82,0.3204,0.0,0.0,,12269.0,612.0
+Shackleton floor (shadow),Moon,-89.67,129.78,disk 3.0 km,-2711.8,7.96,10.47,51.26,32.21,0.4176,0.0,0.0,,4413.0,221.0
+Jezero crater (Perseverance),Mars,18.44,77.45,disk 10 km,-2490.6,3.4,4.34,223.74,63.14,0.1744,0.0,0.0,,,
+Gale crater (Curiosity),Mars,-4.59,137.44,disk 10 km,-4367.4,3.52,4.61,222.48,69.95,0.2365,0.0,0.0,,,
+Elysium Planitia (InSight),Mars,4.5,135.62,disk 10 km,-2620.7,0.3,0.39,222.78,67.02,0.2409,0.0,0.0,,,
+Meridiani Planum (Opportunity),Mars,-1.95,-5.53,disk 10 km,-1380.6,1.33,1.74,227.1,71.16,0.1308,0.0,0.0,,,
+Gusev crater (Spirit),Mars,-14.57,175.47,disk 10 km,-1958.8,2.93,3.77,216.65,81.1,0.2225,0.0,0.0,,,
+Chryse Planitia (Viking 1),Mars,22.27,-47.95,disk 10 km,-3630.0,0.42,0.53,220.47,59.89,0.2176,0.0,0.0,,,
+Utopia Planitia (Viking 2),Mars,47.64,134.29,disk 10 km,-4510.5,2.2,2.44,195.55,75.96,0.2388,0.0,0.0,,,
+Vastitas Borealis (Phoenix),Mars,68.22,-125.75,disk 10 km,-4120.0,0.72,0.6,178.26,79.97,0.2024,0.0,0.0,,,
+Arcadia Planitia (human candidate),Mars,40.0,-160.0,disk 10 km,-3918.4,0.34,0.4,203.24,74.8,0.244,0.0,0.0,,,

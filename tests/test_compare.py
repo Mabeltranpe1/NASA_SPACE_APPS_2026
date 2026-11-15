@@ -30,6 +30,8 @@ def make_tables():
         "temp_range_K": [80.0, 40.0, 10.0],
         "albedo": [0.2, 0.3, 0.1],
         "precip_mm": [5.0, 200.0, 2000.0],
+        "ndvi": [0.0, 0.2, 0.8],
+        "em_contrast": [0.15, 0.05, 0.0],
     })
     target = earth.iloc[[0]].drop(columns=["lat", "lon"]).copy()
     target.insert(0, "name", "Twin of cell 0")
@@ -132,6 +134,13 @@ def test_sensitivity_is_repeatable_and_twin_is_always_top():
     second = compare.weight_sensitivity(earth, targets, top=1, runs=50)
     assert first.equals(second)
     assert first.iloc[0]["lat"] == 0.0 and first.iloc[0]["top_share"] == 1.0
+
+
+def test_overall_table_puts_the_twin_first():
+    earth, targets = make_tables()
+    overall = compare.overall_ranking(compare.compare_all(earth, targets))
+    assert overall.iloc[0]["lat"] == 0.0 and overall.iloc[0]["conditions_met"] == "9 of 9"
+    assert len(overall) == len(earth)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
-name,body,site_lat,site_lon,area,elev_m,slope_deg,roughness,temp_mean_K,temp_range_K,albedo,precip_mm,n_dem_pixels,n_temp_points
-Shackleton rim,Moon,-89.67,129.78,rim 20.92 km,923.3,15.33,18.29,124.89,134.94,0.3758,0.0,47260,2351
-de Gerlache rim,Moon,-88.48,-88.34,rim 32.71 km,252.1,12.21,14.32,125.3,127.29,0.3422,0.0,115557,5743
-Haworth rim,Moon,-87.45,-5.17,rim 51.42 km,-65.1,10.82,12.69,78.11,151.47,0.333,0.0,285565,14243
-Faustini rim,Moon,-87.18,84.31,rim 42.48 km,72.0,8.65,10.1,98.8,127.94,0.3579,0.0,194861,9723
-Mons Mouton summit,Moon,-84.6,31.0,disk 5.0 km,5138.5,5.92,6.87,113.26,107.82,0.3204,0.0,12269,612
-Shackleton floor (shadow),Moon,-89.67,129.78,disk 3.0 km,-2711.8,7.96,9.31,51.26,32.21,0.4176,0.0,4413,221
+name,body,site_lat,site_lon,area,elev_m,slope_deg,roughness,temp_mean_K,temp_range_K,albedo,precip_mm,ndvi,em_contrast,n_dem_pixels,n_temp_points
+Shackleton rim,Moon,-89.67,129.78,rim 20.92 km,923.3,15.33,20.58,124.89,134.94,0.3758,0.0,0.0,,47260,2351
+de Gerlache rim,Moon,-88.48,-88.34,rim 32.71 km,252.1,12.21,16.12,125.3,127.29,0.3422,0.0,0.0,,115557,5743
+Haworth rim,Moon,-87.45,-5.17,rim 51.42 km,-65.1,10.82,14.28,78.11,151.47,0.333,0.0,0.0,,285565,14243
+Faustini rim,Moon,-87.18,84.31,rim 42.48 km,72.0,8.65,11.36,98.8,127.94,0.3579,0.0,0.0,,194861,9723
+Mons Mouton summit,Moon,-84.6,31.0,disk 5.0 km,5138.5,5.92,7.72,113.26,107.82,0.3204,0.0,0.0,,12269,612
+Shackleton floor (shadow),Moon,-89.67,129.78,disk 3.0 km,-2711.8,7.96,10.47,51.26,32.21,0.4176,0.0,0.0,,4413,221

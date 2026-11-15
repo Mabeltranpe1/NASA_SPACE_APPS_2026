@@ -13,11 +13,15 @@ The columns are the same as in data/earth.csv, so src/compare.py can use it.
 How each feature is measured (kept the same as on Earth on purpose):
     elev_m        mean height above the Moon reference sphere (1737.4 km)
     slope_deg     mean slope between 80 m pixels
-    roughness     mean standard deviation of height in a 3 x 3 pixel window (m)
+    roughness     mean standard deviation of height in a 3 x 3 pixel window (m),
+                  rescaled to the 90 m pixel size used on Earth
     temp_mean_K   Diviner yearly mean temperature
     temp_range_K  Diviner yearly max temperature minus the yearly mean
     albedo        LOLA normal albedo (laser, 1064 nm)
     precip_mm     0 (it never rains on the Moon)
+    ndvi          0 (no plants)
+    em_contrast   empty for now: the Moon's rock type is measured differently
+                  (Diviner Christiansen feature), so it is not compared yet
 
 Example:
     python src/build_moon_targets.py
@@ -34,6 +38,7 @@ import rasterio
 from pyproj import CRS, Transformer
 from rasterio.windows import Window
 
+EARTH_PIXEL_M = 90.0   # pixel size used for the Earth terrain (see build_earth.py)
 RAW = Path("data/raw/moon")
 LOLA = "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/float_img/"
 DIVINER = "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/"
@@ -132,7 +137,9 @@ def terrain_features(dem, site):
     # Standard deviation of height in each 3 x 3 window (same as on Earth).
     pad = np.pad(z, 1, mode="edge")
     windows = np.lib.stride_tricks.sliding_window_view(pad, (3, 3))
-    rough = windows.std(axis=(2, 3))
+    # Roughness grows with pixel size. Earth is measured at ~90 m pixels, so we
+    # rescale to 90 m to compare like with like.
+    rough = windows.std(axis=(2, 3)) * (EARTH_PIXEL_M / px)
 
     inside = site_mask(xs, ys, cx, cy, shape, size)
     return {"elev_m": np.nanmean(z[inside]), "slope_deg": np.nanmean(slope[inside]),
@@ -196,6 +203,8 @@ def main():
             row.update(temperature_features(div, div_x, div_y, site))
             row.update(albedo_feature(alb, site))
             row["precip_mm"] = 0.0
+            row["ndvi"] = 0.0            # no plants
+            row["em_contrast"] = np.nan  # rock type: not yet measured in the same way (left empty = not used)
             rows.append(row)
             print(f"  {site[0]}: done")
 
@@ -203,7 +212,7 @@ def main():
     if table[["temp_mean_K", "slope_deg", "albedo"]].isna().any().any():
         print("WARNING: some sites have no data for a feature; check the coordinates.", file=sys.stderr)
     order = ["name", "body", "site_lat", "site_lon", "area", "elev_m", "slope_deg", "roughness",
-             "temp_mean_K", "temp_range_K", "albedo", "precip_mm", "n_dem_pixels", "n_temp_points"]
+             "temp_mean_K", "temp_range_K", "albedo", "precip_mm", "ndvi", "em_contrast", "n_dem_pixels", "n_temp_points"]
     table = table[order].round({"elev_m": 1, "slope_deg": 2, "roughness": 2, "temp_mean_K": 2,
                                 "temp_range_K": 2, "albedo": 4})
     table.to_csv(args.out, index=False)

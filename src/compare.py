@@ -49,6 +49,8 @@ FEATURES = [
     "temp_range_K",  # day-night / seasonal temperature range (Kelvin)
     "albedo",        # how much sunlight the surface reflects (0..1)
     "precip_mm",     # yearly precipitation (mm)
+    "ndvi",          # vegetation index (about 0 = no plants)
+    "em_contrast",   # rock type from thermal emissivity (big = silica-rich, small = basalt)
 ]
 
 # How important each feature is. Bigger number = matters more.
@@ -61,6 +63,8 @@ DEFAULT_WEIGHTS = {
     "temp_range_K": 1.0,
     "albedo": 1.0,
     "precip_mm": 1.0,
+    "ndvi": 1.0,
+    "em_contrast": 1.0,   # only used when the target has a value (see build_*_targets.py)
 }
 
 # Optional different weights for one body only. They replace DEFAULT_WEIGHTS
@@ -84,6 +88,8 @@ TOLERANCE = {
     "temp_range_K": 30.0,  # 30 K of temperature swing
     "albedo": 0.10,        # 0.10 of reflectance
     "precip_mm": 1.0,      # in log scale: about 2.7 times more or less rain
+    "ndvi": 0.10,          # 0.10 of vegetation index (bare rock ~0, shrubs ~0.2)
+    "em_contrast": 0.03,   # 0.03 of emissivity contrast (basalt ~0.02, quartz sand ~0.15)
 }
 
 # Values outside these limits are probably a unit mistake (e.g. Celsius
@@ -97,6 +103,8 @@ VALID_RANGES = {
     "temp_range_K": (0, 400),
     "albedo": (0, 1),
     "precip_mm": (0, None),
+    "ndvi": (-1, 1),
+    "em_contrast": (-0.2, 0.5),
 }
 
 
@@ -124,9 +132,15 @@ def load_table(path, id_columns):
     df = pd.read_csv(path, comment="#", skipinitialspace=True)
     df.columns = df.columns.str.strip()
 
-    missing = [c for c in id_columns + FEATURES if c not in df.columns]
+    missing = [c for c in id_columns if c not in df.columns]
     if missing:
         raise ValueError(f"{path} is missing columns: {missing}")
+    for col in FEATURES:
+        if col not in df.columns:
+            # Older files do not have the newer variables. That is fine: an
+            # empty column is simply not used (weight 0) for targets.
+            warn(f"{path} has no '{col}' column; it is treated as empty.")
+            df[col] = np.nan
     if df.empty:
         raise ValueError(f"{path} has no data rows.")
 
@@ -215,7 +229,7 @@ def parse_weights(items):
 
 def to_matrix(df):
     """Take the FEATURES of a table as a number array (rows x features)."""
-    matrix = np.array(df[FEATURES], dtype=float)  # np.array makes our own copy
+    matrix = np.array(df.reindex(columns=FEATURES), dtype=float)  # missing column -> NaN
     for name in LOG_FEATURES:
         j = FEATURES.index(name)
         if np.nanmin(matrix[:, j], initial=0.0) < 0:
@@ -345,6 +359,15 @@ def compare_all(earth, targets, weights=None, body_weights=None, top=None,
         table.insert(0, "target", target["name"])
         table.insert(1, "body", target["body"])
         table.insert(2, "rank", np.arange(1, len(order) + 1))
+        # Where the target is on the Moon or Mars (if the targets file says so),
+        # so a map can show both places side by side.
+        if "site_lat" in targets.columns and "site_lon" in targets.columns:
+            table.insert(2, "target_lat", target["site_lat"])
+            table.insert(3, "target_lon", target["site_lon"])
+        # The target's own values, next to the Earth values, so one row tells
+        # the whole story: Earth place + its twin on the Moon/Mars + scores.
+        for feature in FEATURES:
+            table[f"target_{feature}"] = target[feature]
         table["score"] = score[order]
         for j, feature in enumerate(FEATURES):
             table[f"sim_{feature}"] = sims[order, j]
@@ -411,7 +434,38 @@ def weight_sensitivity(earth, targets, weights=None, body_weights=None,
 
 
 # ---------------------------------------------------------------------------
-# 7. Command line
+# 7. One final table: the best places for ALL targets together
+# ---------------------------------------------------------------------------
+
+def overall_ranking(results, good=0.5, exclude=()):
+    """
+    Join the tables of all targets into ONE ranking of Earth places.
+
+    For every Earth place we average over the targets:
+        mean_score      -> mean of 'score' (how good it is for all sites)
+        sim_<feature>   -> mean similarity of each feature
+        conditions_met  -> how many features have a mean similarity of at
+                           least 'good' (0.5 by default), e.g. "4 of 6"
+    Places that meet more conditions come first; ties are ordered by mean_score.
+    'exclude' is a list of target names to leave out of the average.
+    """
+    results = results[~results["target"].isin(list(exclude))]
+    sim_cols = [f"sim_{f}" for f in FEATURES if results[f"sim_{f}"].notna().any()]
+    keys = [c for c in ("region", "place_hint", "lat", "lon") if c in results.columns]
+
+    table = results.groupby(keys, sort=False)[["score"] + sim_cols].mean().reset_index()
+    table = table.rename(columns={"score": "mean_score"}).dropna(subset=["mean_score"])
+    met = (table[sim_cols] >= good).sum(axis=1)
+    table["n_met"] = met
+    table["conditions_met"] = met.astype(str) + f" of {len(sim_cols)}"
+    table["weakest"] = table[sim_cols].idxmin(axis=1).str.replace("sim_", "")
+    table = table.sort_values(["n_met", "mean_score"], ascending=False).reset_index(drop=True)
+    table.insert(0, "rank", table.index + 1)
+    return table
+
+
+# ---------------------------------------------------------------------------
+# 8. Command line
 # ---------------------------------------------------------------------------
 
 def print_by_target(table, columns, title, limit=None):
@@ -419,7 +473,10 @@ def print_by_target(table, columns, title, limit=None):
     with pd.option_context("display.width", 250, "display.max_columns", None,
                            "display.float_format", "{:.3f}".format):
         for name, group in table.groupby("target", sort=False):
-            print(f"\n=== {name} ({group['body'].iloc[0]}) - {title} ===")
+            where = ""
+            if "target_lat" in group.columns:
+                where = f" at lat {group['target_lat'].iloc[0]:g}, lon {group['target_lon'].iloc[0]:g}"
+            print(f"\n=== {name} ({group['body'].iloc[0]}{where}) - {title} ===")
             print(group[columns].head(limit).to_string(index=False, na_rep="-"))
 
 
@@ -433,7 +490,7 @@ def positive_int(text):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Rank Earth cells as analogs of Moon/Mars sites.")
-    parser.add_argument("--earth", default="data/earth.csv", help="Earth cells CSV")
+    parser.add_argument("--earth", default="data/earth_all.csv", help="Earth cells CSV")
     parser.add_argument("--targets", default="data/targets.csv", help="Moon/Mars sites CSV")
     parser.add_argument("--top", type=positive_int, default=5,
                         help="How many analogs to print per target (default 5)")
@@ -446,6 +503,12 @@ def main(argv=None):
                         help="How much the weights change in the sensitivity check (default 0.5 = +-50%%)")
     parser.add_argument("--scaling", choices=["tolerance", "robust"], default="tolerance",
                         help="How features are put on one scale (default: tolerance, see TOLERANCE)")
+    parser.add_argument("--include-known", action="store_true",
+                        help="Also rank famous analog regions (known = yes). By default they are "
+                             "left out, because the challenge asks for little-known places")
+    parser.add_argument("--exclude", action="append", default=[], metavar="TARGET",
+                        help="Leave this target out of the final overall table (can repeat)")
+    parser.add_argument("--out-overall", help="Save the final overall table to this CSV file")
     parser.add_argument("--min-coverage", type=float, default=1.0,
                         help="Share of the weight an Earth cell must have data for (default 1.0 = all)")
     args = parser.parse_args(argv)
@@ -453,11 +516,15 @@ def main(argv=None):
     try:
         weights = parse_weights(args.weight)
         earth, targets = load_inputs(args.earth, args.targets)
+        if "known" in earth.columns and not args.include_known:
+            n_known = int((earth["known"] == "yes").sum())
+            earth = earth[earth["known"] != "yes"].reset_index(drop=True)
+            print(f"Left out {n_known:,} places in famous analog regions (use --include-known to see them).")
         results = compare_all(earth, targets, weights, scaling=args.scaling,
                               min_coverage=args.min_coverage)
 
         # Show the place name too, if the Earth file has one.
-        place = ["place_hint"] if "place_hint" in results.columns else []
+        place = [c for c in ("region", "place_hint") if c in results.columns]
         columns = ["rank", "lat", "lon"] + place + ["score"]
         columns += [f"sim_{f}" for f in FEATURES] + ["worst_match"]
         print_by_target(results, columns, f"top {args.top} Earth analogs", args.top)
@@ -465,6 +532,19 @@ def main(argv=None):
         if args.out:
             results.to_csv(args.out, index=False)
             print(f"\nFull results saved to {args.out}")
+
+        # Final table: best Earth places for all targets together.
+        overall = overall_ranking(results, exclude=args.exclude)
+        used = [t for t in results["target"].unique() if t not in args.exclude]
+        print(f"\n=== OVERALL - best Earth places for all {len(used)} targets together ===")
+        print("(conditions_met = features with a mean similarity of 0.5 or more)")
+        shown = [c for c in overall.columns if c not in ("n_met", "target")]
+        with pd.option_context("display.width", 250, "display.max_columns", None,
+                               "display.float_format", "{:.3f}".format):
+            print(overall[shown].head(args.top).to_string(index=False, na_rep="-"))
+        if args.out_overall:
+            overall.drop(columns="n_met").to_csv(args.out_overall, index=False)
+            print(f"\nOverall table saved to {args.out_overall}")
 
         if args.sensitivity:
             stability = weight_sensitivity(earth, targets, weights, top=args.top,

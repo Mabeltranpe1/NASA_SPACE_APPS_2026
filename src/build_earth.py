@@ -15,6 +15,14 @@ Columns (the same features that src/compare.py uses):
                   (MOD11C3). Same definition as the Moon (Diviner max - mean).
     albedo        mean white-sky shortwave albedo, 15th of each month (MCD43C3)
     precip_mm     total precipitation in the year (GPM IMERG monthly)
+    ndvi          vegetation index, mean of 4 months, one per season (MOD13C2).
+                  About 0 or below = no plants (rock, sand, ice); 0.2 = sparse
+                  shrubs; above 0.5 = dense vegetation. MODIS does not cover
+                  Antarctica, so there it is set to 0 (almost no plants).
+    em_contrast   rock type from thermal emissivity (ASTER GED): emissivity at
+                  10.6-11.3 um minus emissivity at 8.3-9.1 um. Silica-rich rock
+                  (quartz sand, granite) gives a big contrast (~0.1 or more);
+                  basalt and other dark volcanic rock give a small one (~0.02).
     water_frac    share of the cell covered by water (NASADEM water mask)
 
 Cells that are mostly water (sea, big lakes) are left out.
@@ -34,6 +42,7 @@ from pathlib import Path
 import h5py
 import numpy as np
 import pandas as pd
+import rasterio
 from pyhdf.SD import SD, SDC
 from scipy.ndimage import uniform_filter
 
@@ -85,22 +94,46 @@ def block_mean(a, size):
     return quiet_nan(np.nanmean, blocks, axis=(1, 3))
 
 
-def terrain_for_tile(path):
-    """
-    Terrain features of one 1 x 1 degree tile, already averaged to the
-    0.05 degree grid: returns (lat_south, lon_west, dict of 20 x 20 arrays).
-    """
-    match = re.search(r"([ns])(\d{2})([ew])(\d{3})", path.name.lower())
-    lat_s = int(match[2]) * (1 if match[1] == "n" else -1)
-    lon_w = int(match[4]) * (1 if match[3] == "e" else -1)
+def tile_corner(path):
+    """South-west corner of a tile from its file name (n00w080 or N75_00_W090_00)."""
+    m = re.search(r"([ns])(\d{2})(?:_00)?_?([ew])(\d{3})", path.name.lower())
+    lat_s = int(m[2]) * (1 if m[1] == "n" else -1)
+    lon_w = int(m[4]) * (1 if m[3] == "e" else -1)
+    return lat_s, lon_w
 
+
+def read_nasadem_90m(path):
+    """NASADEM tile averaged to ~90 m (1200 x 1200) + water share per pixel."""
     height, water = read_tile(path)
     height, water = height[:3600, :3600], water[:3600, :3600]  # drop the shared edge
+    return block_mean(height, DEM_STEP), block_mean(water.astype(float), DEM_STEP)
 
-    # ~90 m pixels: smoother and closer to the 80 m Moon map (LOLA).
-    z = block_mean(height, DEM_STEP)
-    px_y = DEM_STEP * M_PER_ARCSEC
-    px_x = px_y * np.cos(np.radians(lat_s + 0.5))   # pixels get narrower away from the equator
+
+def read_cop90(path):
+    """
+    Copernicus GLO-90 tile: 1200 rows of 3 arc-seconds. Far from the equator
+    it has fewer columns (e.g. 400 at 70-80 degrees), so each pixel stays ~90 m
+    wide. The sea is stored as exactly 0 m, which we use as the water mask.
+    """
+    with rasterio.open(path) as src:
+        z = src.read(1).astype(float)
+    if src.nodata is not None:
+        z[z == src.nodata] = np.nan
+    return z, (z == 0).astype(float)
+
+
+def terrain_for_tile(path, source):
+    """
+    Terrain features of one 1 x 1 degree tile, averaged to the 0.05 degree
+    grid: returns (lat_south, lon_west, dict of 20 x 20 arrays).
+    """
+    lat_s, lon_w = tile_corner(path)
+    z, water = read_nasadem_90m(path) if source == "nasadem" else read_cop90(path)
+    rows, cols = z.shape
+
+    # Pixel size in metres (pixels get narrower away from the equator).
+    px_y = (3600 / rows) * M_PER_ARCSEC
+    px_x = (3600 / cols) * M_PER_ARCSEC * np.cos(np.radians(lat_s + 0.5))
 
     dz_dy, dz_dx = np.gradient(z, px_y, px_x)
     slope = np.degrees(np.arctan(np.hypot(dz_dx, dz_dy)))
@@ -111,30 +144,40 @@ def terrain_for_tile(path):
     rough = np.sqrt(np.clip(uniform_filter(zf**2, 3) - mean**2, 0, None))
     rough[np.isnan(z)] = np.nan
 
-    per_cell = int(round(CELL * 3600 / DEM_STEP))   # 60 pixels of ~90 m per 0.05 degrees
-    land = ~water
-    # Use land pixels only for the terrain averages.
-    out = {
-        "elev_m": block_mean(np.where(land, height, np.nan), int(CELL * 3600)),
-        "slope_deg": block_mean(np.where(block_mean(land.astype(float), DEM_STEP) > 0.5, slope, np.nan), per_cell),
-        "roughness": block_mean(np.where(block_mean(land.astype(float), DEM_STEP) > 0.5, rough, np.nan), per_cell),
-        "water_frac": block_mean(water.astype(float), int(CELL * 3600)),
-    }
+    # Terrain averages use land pixels only.
+    land = water <= 0.5
+    layers = {"elev_m": np.where(land, z, np.nan), "slope_deg": np.where(land, slope, np.nan),
+              "roughness": np.where(land, rough, np.nan), "water_frac": water}
+
+    # If the tile has fewer columns (Copernicus, high latitude), repeat them so
+    # every tile is 1200 x 1200 before averaging into 60 x 60 blocks = 0.05 deg.
+    per_cell = rows // 20
+    out = {}
+    for key, values in layers.items():
+        if cols != rows:
+            values = values[:, np.arange(rows) * cols // rows]
+        out[key] = block_mean(values, per_cell)
     return lat_s, lon_w, out
 
 
-def terrain(grid):
-    """Put the terrain of every downloaded tile into the region grid."""
+def terrain(grid, source="nasadem"):
+    """Put the terrain of every downloaded tile that touches the region into the grid."""
     r0, r1, c0, c1 = grid
     shape = (r1 - r0, c1 - c0)
     result = {k: np.full(shape, np.nan) for k in ("elev_m", "slope_deg", "roughness", "water_frac")}
-    tiles = sorted((RAW / "NASADEM_HGT").glob("*.zip"))
+    folder, pattern = ("NASADEM_HGT", "*.zip") if source == "nasadem" else ("COP90", "*.tif")
+    north, west = 90 - r0 * CELL, -180 + c0 * CELL
+    south, east = 90 - r1 * CELL, -180 + c1 * CELL
+    tiles = [t for t in sorted((RAW / folder).glob(pattern))
+             if south < tile_corner(t)[0] + 1 and tile_corner(t)[0] < north
+             and west < tile_corner(t)[1] + 1 and tile_corner(t)[1] < east]
     if not tiles:
-        sys.exit("No NASADEM tiles in data/raw/NASADEM_HGT. Run src/download_earth.py first.")
+        sys.exit(f"No {folder} tiles for this region in data/raw/{folder}. "
+                 "Run src/download_earth.py first.")
 
     per_deg = int(round(1 / CELL))  # 20 cells per degree
     for i, path in enumerate(tiles, 1):
-        lat_s, lon_w, out = terrain_for_tile(path)
+        lat_s, lon_w, out = terrain_for_tile(path, source)
         row = int(round((90 - (lat_s + 1)) / CELL)) - r0   # tile's north edge
         col = int(round((lon_w + 180) / CELL)) - c0
         # Part of the tile that falls inside the region.
@@ -143,7 +186,7 @@ def terrain(grid):
         if rs < re_ and cs < ce:
             for key, values in out.items():
                 result[key][rs:re_, cs:ce] = values[rs - row:re_ - row, cs - col:ce - col]
-        print(f"\r  NASADEM tiles: {i}/{len(tiles)}", end="", flush=True)
+        print(f"\r  {folder} tiles: {i}/{len(tiles)}", end="", flush=True)
     print()
     return result
 
@@ -209,6 +252,86 @@ def precipitation(lat, lon):
     return {"precip_mm": total}
 
 
+def vegetation(grid):
+    """
+    Mean NDVI of the downloaded months (MOD13C2). Note: this product stores
+    NDVI as raw / 10000 (it DIVIDES by its scale factor), unlike the
+    temperature and albedo files, so we do not use read_hdf4 here.
+    """
+    r0, r1, c0, c1 = grid
+    files = sorted((RAW / "MOD13C2").glob("*.hdf"))
+    if not files:
+        sys.exit("No MOD13C2 files in data/raw/MOD13C2.")
+    stack = []
+    for f in files:
+        layer = SD(str(f), SDC.READ).select("CMG 0.05 Deg Monthly NDVI")
+        raw = layer[r0:r1, c0:c1].astype(float)
+        raw[(raw < -2000) | (raw > 10000)] = np.nan   # -3000 = no data
+        stack.append(raw / 10000)
+    ndvi = quiet_nan(np.nanmean, np.stack(stack))
+    # MOD13C2 has no data south of about 60 S. Antarctica has almost no
+    # plants (a few mosses and lichens), so there we use 0 instead of empty.
+    lats = 90 - CELL * (np.arange(r0, r1) + 0.5)
+    ndvi[(lats < -60)[:, None] & np.isnan(ndvi)] = 0.0
+    return {"ndvi": ndvi}
+
+
+def rock(grid):
+    """
+    Emissivity contrast from ASTER GED (5 thermal bands: 10, 11, 12, 13, 14).
+    Mean of the downloaded files (January and July 2015).
+    """
+    r0, r1, c0, c1 = grid
+    files = sorted((RAW / "AG5KMMOH").glob("*.h5"))
+    if not files:
+        sys.exit("No ASTER GED files in data/raw/AG5KMMOH.")
+    values = []
+    for f in files:
+        with h5py.File(f) as h:
+            raw = h["SDS/Emissivity"][:, r0:r1, c0:c1].astype(float)
+        raw[raw == 0] = np.nan                         # 0 = no data
+        em = raw * 0.002 + 0.49
+        values.append(np.nanmean(em[3:5], axis=0) - np.nanmean(em[0:3], axis=0))
+    return {"em_contrast": quiet_nan(np.nanmean, np.stack(values))}
+
+
+def surface_layers(grid, lat, lon):
+    """Every layer that is NOT terrain: all of them come from global files."""
+    layers = {}
+    print("  temperature (MOD11C3) ..."); layers.update(temperature(grid))
+    print("  albedo (MCD43C3) ...");      layers.update(albedo(grid))
+    print("  precipitation (GPM) ...");   layers.update(precipitation(lat, lon))
+    print("  vegetation (MOD13C2) ...");  layers.update(vegetation(grid))
+    print("  rock type (ASTER GED) ..."); layers.update(rock(grid))
+    return layers
+
+
+SURFACE = ["temp_mean_K", "temp_range_K", "albedo", "precip_mm", "ndvi", "em_contrast"]
+ROUNDING = {"elev_m": 1, "slope_deg": 2, "roughness": 2, "temp_mean_K": 2, "temp_range_K": 2,
+            "albedo": 4, "precip_mm": 1, "water_frac": 3, "ndvi": 3, "em_contrast": 4}
+
+
+def refresh_surface(path):
+    """
+    Recompute the non-terrain columns of an existing region file, without
+    redoing the (slow) terrain. Used when a new global variable is added.
+    """
+    table = pd.read_csv(path)
+    lat_min, lat_max = table["lat"].min(), table["lat"].max()
+    lon_min, lon_max = table["lon"].min(), table["lon"].max()
+    grid = make_grid(lon_min - CELL / 2, lat_min - CELL / 2, lon_max + CELL / 2, lat_max + CELL / 2)
+    lat, lon = cell_centres(*grid)
+    layers = surface_layers(grid, lat, lon)
+    r0, _, c0, _ = grid
+    rows = np.round((90 - table["lat"]) / CELL - 0.5).astype(int) - r0
+    cols = np.round((table["lon"] + 180) / CELL - 0.5).astype(int) - c0
+    for key in SURFACE:
+        table[key] = layers[key][rows, cols]
+    order = [c for c in table.columns if c != "water_frac"] + ["water_frac"]
+    table[order].round(ROUNDING).to_csv(path, index=False)
+    return table
+
+
 # ---------------------------------------------------------------------------
 # 4. Putting it together
 # ---------------------------------------------------------------------------
@@ -218,6 +341,9 @@ def main():
     parser.add_argument("--region", nargs=4, type=float, required=True,
                         metavar=("WEST", "SOUTH", "EAST", "NORTH"))
     parser.add_argument("--out", default="data/earth.csv")
+    parser.add_argument("--dem", choices=["nasadem", "cop90"], default="nasadem",
+                        help="Elevation source: nasadem (60N-56S) or cop90 (Copernicus, whole Earth)")
+    parser.add_argument("--name", help="Region name to write in a 'region' column, e.g. atacama")
     parser.add_argument("--max-water", type=float, default=0.5,
                         help="Leave out cells with more water than this share (default 0.5)")
     args = parser.parse_args()
@@ -227,20 +353,18 @@ def main():
     print(f"Grid: {lat.size:,} cells of {CELL} degrees")
 
     layers = {}
-    layers.update(terrain(grid))
-    print("  temperature (MOD11C3) ..."); layers.update(temperature(grid))
-    print("  albedo (MCD43C3) ...");      layers.update(albedo(grid))
-    print("  precipitation (GPM) ...");   layers.update(precipitation(lat, lon))
+    layers.update(terrain(grid, args.dem))
+    layers.update(surface_layers(grid, lat, lon))
 
     table = pd.DataFrame({"lat": lat.ravel().round(3), "lon": lon.ravel().round(3)})
-    for key in ("elev_m", "slope_deg", "roughness", "temp_mean_K", "temp_range_K",
-                "albedo", "precip_mm", "water_frac"):
+    if args.name:
+        table.insert(0, "region", args.name)
+    for key in ["elev_m", "slope_deg", "roughness"] + SURFACE + ["water_frac"]:
         table[key] = layers[key].ravel()
 
     # Keep land cells that have terrain data.
     keep = table["elev_m"].notna() & (table["water_frac"].fillna(1) <= args.max_water)
-    table = table[keep].round({"elev_m": 1, "slope_deg": 2, "roughness": 2, "temp_mean_K": 2,
-                               "temp_range_K": 2, "albedo": 4, "precip_mm": 1, "water_frac": 3})
+    table = table[keep].round(ROUNDING)
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     table.to_csv(args.out, index=False)
 
