@@ -3,7 +3,7 @@ import type { AnalogSite, Body, Homologue } from '../data/types'
 import { BODIES } from '../planet/bodies'
 import PlanetGlobe from './PlanetGlobe'
 import { useLang } from '../i18n/useLang'
-import { earthSnapshotUrl } from '../map/snapshot'
+import { useEarthImage } from '../map/earthImages'
 import { BODY_NAMES } from '../i18n/strings'
 
 interface Props {
@@ -19,6 +19,7 @@ export default function DetailImage({ body, site, homologue, polarZoomOut = 6 }:
   const [loadedUrl, setLoadedUrl] = useState<string | null>(null)
   const [failedUrl, setFailedUrl] = useState<string | null>(null)
   const [relief, setRelief] = useState(false)
+  const earthImage = useEarthImage(site)
   const point = useMemo(
     () => (body === 'tierra' ? { lat: site.lat, lng: site.lng } : homologue ? { lat: homologue.lat, lng: homologue.lng } : null),
     [body, site, homologue],
@@ -29,27 +30,32 @@ export default function DetailImage({ body, site, homologue, polarZoomOut = 6 }:
   )
 
   if (body === 'tierra') {
-    const snap = earthSnapshotUrl(site)
+    // Pre-rendered Sentinel-2 crop when there is one; NASA GIBS if it fails to load.
+    const snap = earthImage && failedUrl === earthImage.url && earthImage.fallback ? earthImage.fallback : earthImage
     return (
       <figure className="detail-image">
-        {loadedUrl !== snap.url && failedUrl !== snap.url && <div className="image-loading">{t('image.loading')}</div>}
-        {failedUrl === snap.url ? (
+        {(!snap || (loadedUrl !== snap.url && failedUrl !== snap.url)) && <div className="image-loading">{t('image.loading')}</div>}
+        {snap && failedUrl === snap.url ? (
           <div className="image-loading">{t('image.failed')}</div>
         ) : (
-          <img
-            key={snap.url}
-            src={snap.url}
-            alt={t('image.alt', { name: site.name })}
-            onLoad={() => setLoadedUrl(snap.url)}
-            onError={() => setFailedUrl(snap.url)}
-          />
+          snap && (
+            <img
+              key={snap.url}
+              src={snap.url}
+              alt={t('image.alt', { name: site.name })}
+              onLoad={() => setLoadedUrl(snap.url)}
+              onError={() => setFailedUrl(snap.url)}
+            />
+          )
         )}
-        <figcaption>
-          <strong>{site.name}</strong>
-          <span>
-            {snap.label} · {t('image.side', { km: snap.widthKm })} · NASA GIBS
-          </span>
-        </figcaption>
+        {snap && (
+          <figcaption>
+            <strong>{site.name}</strong>
+            <span>
+              {snap.label} · {t('image.side', { km: snap.widthKm })} · {snap.credit}
+            </span>
+          </figcaption>
+        )}
       </figure>
     )
   }

@@ -175,7 +175,7 @@ export const STRINGS = {
     'intro.close': 'Cerrar',
     'image.compare': 'Comparar imágenes',
     'image.compareAria': 'Comparar las imágenes de {name} y de su homólogo',
-    'image.scaleNote': 'Imágenes reales de NASA. Cada una tiene su propia escala: arrastra o usa la rueda en la de la Luna o Marte para acercarte.',
+    'image.scaleNote': 'Imágenes satelitales reales: Tierra, Copernicus Sentinel-2 (ESA); Luna y Marte, NASA Trek. Cada una tiene su propia escala: arrastra o usa la rueda en la de la Luna o Marte para acercarte.',
   },
   en: {
     'app.title': 'Earth Analogs · Moon and Mars',
@@ -349,7 +349,7 @@ export const STRINGS = {
     'intro.close': 'Close',
     'image.compare': 'Compare images',
     'image.compareAria': 'Compare the images of {name} and its counterpart',
-    'image.scaleNote': 'Real NASA imagery. Each image has its own scale: drag or scroll on the Moon or Mars view to zoom in.',
+    'image.scaleNote': 'Real satellite imagery: Earth, Copernicus Sentinel-2 (ESA); Moon and Mars, NASA Trek. Each image has its own scale: drag or scroll on the Moon or Mars view to zoom in.',
   },
 } as const
 

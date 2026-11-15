@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { DIMENSION_LABELS, type AnalogSite, type Body, type Dimension, type Target } from '../data/types'
 import { useComparisons, type Characterization } from '../data/comparisons'
 import { googleEarthUrl } from '../data/focus'
-import { earthSnapshotUrl } from '../map/snapshot'
+import { shownImage, useEarthImage } from '../map/earthImages'
 import { BODY_COLORS } from '../theme'
 import { useLang } from '../i18n/useLang'
 import { BODY_NAMES, DIMENSION_NAMES, ENVIRONMENT_NAMES } from '../i18n/strings'
@@ -21,8 +21,9 @@ interface Props {
 
 export default function SiteCard({ site, discovery = false, onBack, onBody, compareBody = null }: Props) {
   const { lang, t } = useLang()
-  const snap = earthSnapshotUrl(site)
+  const [mainFailed, setMainFailed] = useState(false)
   const [imgOk, setImgOk] = useState(true)
+  const snap = shownImage(useEarthImage(site), mainFailed)
   const [comparing, setComparing] = useState(false)
   const canCompare = site.homologues.length > 0
   const target = site.homologues[0]
@@ -41,18 +42,27 @@ export default function SiteCard({ site, discovery = false, onBack, onBody, comp
           aria-label={t('image.compareAria', { name: site.name })}
           title={canCompare ? t('image.compare') : undefined}
         >
-          {imgOk && <img src={snap.url} alt={t('image.alt', { name: site.name })} onError={() => setImgOk(false)} />}
+          {imgOk && snap && (
+            <img
+              key={snap.url}
+              src={snap.url}
+              alt={t('image.alt', { name: site.name })}
+              onError={() => (snap.fallback ? setMainFailed(true) : setImgOk(false))}
+            />
+          )}
           {canCompare && (
             <span className="hero-cta">
               <IconExpand size={15} /> {t('image.compare')}
             </span>
           )}
         </button>
-        <figcaption>
-          <span>
-            {snap.label} · {t('image.side', { km: snap.widthKm })}
-          </span>
-        </figcaption>
+        {snap && (
+          <figcaption>
+            <span>
+              {snap.label} · {t('image.side', { km: snap.widthKm })}
+            </span>
+          </figcaption>
+        )}
       </figure>
       {comparing && <ImageCompareModal site={site} initialBody={compareBody} onClose={() => setComparing(false)} />}
 

@@ -19,3 +19,5 @@ requests
 h5py
 pyhdf          # MODIS en HDF4 (build_earth.py); si falla con pip, instalar con conda
 earthaccess    # descargas de NASA Earthdata (EMIT, NASADEM)
+pillow         # imágenes de cerca de la app (export_images.py)
+shapely        # cobertura de escenas (export_images.py)
