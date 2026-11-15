@@ -1,141 +1,70 @@
-# Datos de la app: de dónde salen y cómo se actualizan
+# Datos de la aplicación unificada GeoAnalog
 
-Este documento explica cómo los datos de Marco y de Santiago llegan a la app, qué reglas se aplican en el camino y cómo regenerar todo.
+Versión de integración: 2026-11-15. El contrato canónico es `comparisons.json` v3. La base de la interfaz es `origin/main@58313dc`; el comparador y datos ampliados provienen de Marco `e75ecdb`, y la ciencia regional de Santiago de `aaf4ebb`.
 
-## Flujo
+## Flujo efectivo
 
 ```mermaid
 flowchart LR
-    subgraph Marco["Marco: búsqueda global"]
-        E["data/earth_all.csv<br/>~164 000 celdas de 0,05° en 43 regiones<br/>relieve a 200 m"]
-        T["data/targets.csv<br/>6 sitios de la Luna + 9 de Marte"]
-        R["data/regions_catalog.csv<br/>qué es cada región y si es conocida"]
-    end
-    subgraph Santiago["Santiago: caracterización de Colombia"]
-        F["data/features/*.csv<br/>relieve a 200 m, ambiente, Sentinel-2, EMIT"]
-        P["data/results/analog_ranking.csv<br/>índice topográfico (PAI)"]
-    end
-    C["web/src/data/sites.ts<br/>catálogo de la app"]
-    X["src/export_web.py<br/>(usa src/compare.py de Marco)"]
-    J1["web/public/data/comparisons.json"]
-    J2["web/public/data/heatmap/&lt;objetivo&gt;.json"]
-    E --> X
-    T --> X
-    R --> X
-    F --> X
-    P --> X
-    C --> X
-    X --> J1
-    X --> J2
+  G[earth_all.csv.gz: 691035 celdas / 727 regiones] --> E[export_web.py]
+  T[targets.csv y catálogo] --> E
+  P[top200_analogos.csv original] --> E
+  S[CSV / GeoJSON / DEM / figuras regionales] --> A[scientific_catalog.py]
+  A --> E
+  E --> C[comparisons.json v3]
+  E --> H[heatmap: 15 objetivos]
+  E --> R[global-rankings.json]
+  A --> J[science/index.json y 18 documentos regionales]
+  C --> UI[React / Cesium existentes]
+  H --> UI
+  R --> UI
+  J --> UI
 ```
 
-**Regenerar los datos de la app** (tarda unos 2 minutos):
+## Qué consume la interfaz
 
-```bash
-source .venv/bin/activate
-python src/export_web.py
+| Archivo | Consumidor y alcance |
+|---|---|
+| `web/public/data/comparisons.json` | `web/src/data/comparisons.ts`; 274 sitios exportados (16 de catálogo y 258 de descubrimiento), 15 objetivos y puntuaciones web calculadas sobre la base ampliada. Fuente real: `synthetic=false`. |
+| `web/public/data/heatmap/*.json` | Mapa de similitud existente: hasta 2.500 celdas por objetivo, sin enviar toda la base al navegador. |
+| `web/public/data/global-rankings.json` | `GlobalRankings.tsx`; top 200 original de Marco con claves de navegación hacia los sitios del contrato canónico. |
+| `web/public/data/science/index.json` | Índice y procedencia de las 18 ventanas, equipo confirmado y asociaciones geométricas. |
+| `web/public/data/science/{earth,moon,mars}/*.json` | `ScientificPanel.tsx`; carga al abrir el panel de cada ventana. Incluye todas las secciones disponibles, calidad, fuentes y PAI. |
+| `web/public/data/science/variables.json` | Correspondencia completa y versionada de campos originales, unidades, soporte, fechas, método y compatibilidad. |
+| `web/public/data/science/files/data/...` | Copias byte a byte de 85 artefactos originales: tablas, GeoJSON, DEM pequeños, series de clima y figuras. Se descargan bajo demanda. |
+| `web/public/data/analogos.json` | Fotografía del contrato histórico de Marco, conservada para referencia; no se entrega a componentes que esperan el contrato v3. |
+
+Las cifras anteriores corresponden al corte de esta integración. El exportador imprime los conteos efectivos cuando cambian los insumos.
+
+## Modelos que coexisten
+
+- **Índice global completo de Marco, 0–1:** conserva el top 100 por cuerpo, sus medias, mejores objetivos, condiciones, separación de 300 km y orden originales. Elevación desactivada y emisividad equivalente con peso 0,5. No se aplican las exclusiones térmicas de la web a esos resultados originales.
+- **Puntaje web de dimensiones comparables, 0–1:** fórmula exponencial del comparador y reglas de la interfaz, con exclusiones por cuerpo fuera del rango terrestre. La base ampliada excluye ambas variables térmicas para la Luna; no produce la exclusión marciana de amplitud que tenía la base antigua. La lista de exclusiones real está en cada objetivo.
+- **PAI regional, 0–100:** seis variables topográficas, estandarización con seis candidatos colombianos y `100/(1+d)`. Los 72 valores originales se conservan con su precisión. El modo web «Relieve» usa el comparador global restringido, no el PAI.
+
+Reponderar en el navegador solo reordena los sitios exportados. No reconstruye el ranking mundial ni recalcula sensibilidad. La sensibilidad de 100 ejecuciones describe cambios de pesos, no errores instrumentales ni probabilidad de equivalencia física.
+
+## Prioridad regional y asociación planetaria
+
+Las seis fichas colombianas priorizan la investigación de Santiago en el panel científico. Sus celdas globales mantienen los valores de Marco. No se reemplaza una celda de 0,05° por un promedio regional de 10 km.
+
+Las ventanas planetarias se enlazan a objetivos globales solamente si una intersección geométrica del mismo cuerpo es positiva. Dos anillos lunares se superponen parcialmente con las ventanas de Santiago; cinco discos marcianos las contienen. Los restantes estudios se abren desde las doce comparaciones PAI de cada región colombiana. No hay asignación solo por nombre.
+
+La Guajira conserva la advertencia de agua; EMIT, sus coincidencias provisionales; THEMIS, el piloto con banda sin verificar; Phoenix CRISM, sus observaciones no calificadas; y Diviner, la estabilidad modelada de hielo sin afirmación de presencia.
+
+## Imágenes y diseño
+
+Se conservan el globo de Sebastián, capas GIBS/Trek, catálogo, carruseles, recorrido, controles y soporte ES/EN. Las figuras científicas originales se añaden a las fichas. La gráfica Sentinel-2 muestra medias de bandas discretas; no implica espectro continuo ni identificación inequívoca de minerales. Las imágenes satelitales y fotografías ilustran las regiones; no modifican índices.
+
+## Regeneración
+
+```powershell
+.\.venv\Scripts\python.exe -B src/export_web.py
+.\.venv\Scripts\python.exe -B src/export_science.py
+cd web
+npm run dev -- --host 127.0.0.1
 ```
 
-Cuando Marco agregue regiones o sitios, basta con volver a correr este comando y subir los JSON con un PR.
+El primer comando publica toda la integración; el segundo es opcional cuando solo cambia ciencia regional. Se utilizan los productos disponibles y no se inician descargas. `src/export_analogos.py` restaura únicamente la fotografía histórica de su contrato desde `data/reference/marco_analogos.json`.
 
-## Qué se publica
-
-| Archivo | Contenido | Tamaño aprox. |
-|---|---|---|
-| `comparisons.json` | Los sitios del catálogo (celda más cercana, a menos de ~11 km) y los **descubrimientos**, con su resultado frente a cada objetivo: puntaje, similitud por variable, posición entre todas las celdas de la Tierra y estabilidad. Los sitios colombianos traen además la caracterización de Santiago | 300 KB |
-| `heatmap/<objetivo>.json` | Las 2500 mejores celdas de la Tierra para ese objetivo: `[lat, lng, puntaje]` | 55 KB c/u |
-
-## Reglas que aplica `export_web.py`
-
-El puntaje es el de `compare.py` (Marco), sin cambios en la fórmula. El exportador solo decide qué variables cuentan y qué lugares se muestran:
-
-1. **La elevación no se compara.** Cada cuerpo mide la altura desde un cero distinto (nivel del mar, areoide, esfera de referencia). Se muestra el valor, pero no entra en el puntaje.
-2. **Una variable que la Tierra no alcanza se muestra como límite, no como puntaje.** Si el valor típico de un cuerpo (la mediana de sus sitios) queda fuera del rango de todas las celdas de la Tierra por más de una tolerancia, esa variable se apaga para ese cuerpo. Con los datos actuales:
-   - **Luna:** temperatura media (50–125 K) y amplitud térmica (108–151 K). En la Tierra van de 214 a 315 K y de 1 a 41 K.
-   - **Marte:** amplitud térmica (mediana ~71 K).
-
-   Sin esta regla, para la Luna ganaba siempre el lugar más frío del planeta (el norte de Groenlandia), sin importar el relieve. En la app estas variables aparecen con la etiqueta **"fuera del rango de la Tierra"**.
-3. **Descubrimientos por región.** Para cada objetivo se toma la mejor celda de cada región **poco conocida** (`known = no`) y se guardan las 6 mejores regiones. Así una sola región no llena toda la lista. Las regiones conocidas (Antártida, Atacama, Islandia, Hawái…) quedan como **control**: el método debe ponerlas arriba, y lo hace.
-4. **La precipitación es exigente a propósito.** En la Luna y en Marte no llueve, así que Marco definió una tolerancia estricta (escala logarítmica, tolerancia 1): solo los lugares casi sin lluvia se parecen en esta variable (con 20 mm al año, la similitud ya es de 0,05). Por eso los sitios lluviosos, como la Tatacoa, tienen un puntaje completo bajo aunque su relieve se parezca. El botón "Relieve" de la app muestra esa otra mirada.
-5. **Estabilidad:** en cuántas de 100 variaciones aleatorias de los pesos (±50 %) el lugar sigue entre los 500 mejores de la Tierra.
-
-## Qué muestra la app
-
-La **respuesta principal es la búsqueda global de Marco**. Los sitios de Santiago son un **caso de estudio de Colombia** comparado por relieve.
-
-- **Barra de navegación:**
-  - **Descubrir** (vista inicial): el mejor lugar de cada región poco conocida para la Luna o para Marte. Al hacer clic, el globo vuela al lugar y se enciende el mapa de similitud.
-  - **Análogos:** el catálogo curado y, debajo, el **caso de estudio de Colombia** (los 6 sitios de Santiago).
-- **Un solo globo** con los botones Tierra · Luna · Marte. Con un lugar elegido, el globo vuela a su homólogo en el cuerpo que se pulse. Los cuerpos sin homólogo quedan bloqueados.
-- **Panel derecho, índice de similitud:**
-  - el puntaje del lugar frente a su homólogo, o frente al primer objetivo con datos de ese cuerpo si el homólogo no está en la base;
-  - su posición entre todas las celdas de la Tierra y su estabilidad;
-  - las barras por variable, ordenadas de mayor a menor;
-  - las variables "fuera del rango de la Tierra".
-- **Sitios del caso de estudio:** su homólogo es el objetivo con mejor índice topográfico (PAI) de Santiago **entre los que ya están en la base de datos**. Si su mejor parecido absoluto todavía no está en la base (por ejemplo, Connecting Ridge), el texto lo dice. La ficha y el panel aclaran que la similitud es solo de relieve y que con el puntaje completo quedan lejos.
-- **Comparación detallada** (sección Análisis):
-  - Botones **"Comparar por: Todo · Relieve · Superficie · Clima y agua"**, que recalculan el puntaje en el navegador con la misma fórmula. Sirven para mostrar las dos miradas del equipo: el puntaje completo y el solo topográfico, como el PAI de Santiago.
-  - La posición del sitio entre todas las celdas de la Tierra (por ejemplo, "#709 de 163 999").
-- **Ranking:** un lugar por región poco estudiada, más los análogos conocidos como control. Al hacer clic en un nombre, el globo de la Tierra vuela a ese lugar.
-- **Mapa de similitud:** el botón "Ver en el globo dónde más se parece la Tierra" pinta en el globo las 2500 mejores celdas para el objetivo elegido. Usa un solo tono, y la opacidad y el tamaño crecen con el puntaje.
-- **Ficha de los sitios colombianos:** la caracterización de Santiago (relieve a 200 m, temperatura superficial, lluvia, vegetación, índices de Sentinel-2 y su índice topográfico). **Es descriptiva: no entra en el puntaje.**
-
-## Imágenes de cerca de la Tierra
-
-Las imágenes de la ficha, de las miniaturas y de la ventana para comparar son recortes de unos 22 km de lado alrededor de cada lugar. **Son ilustrativas: no entran en el puntaje.**
-
-| Prioridad | Fuente | Resolución | Cuándo se usa |
-|---|---|---|---|
-| 1 | **Sentinel-2 L2A** (Microsoft Planetary Computer) | 10 m | Siempre que haya una escena útil. Hoy la tienen los **73 lugares** (catálogo y descubrimientos) |
-| 2 | NASA GIBS en vivo: Landsat WELD, o MODIS por encima de 78° o en sitios con `earthImage` | 30 m / 250 m | Si el lugar no tiene imagen generada o la imagen no carga |
-
-**Cómo elige la escena `export_images.py`:**
-1. Busca escenas de 2021–2025 con menos de 20 % de nubes. Por encima de 60° de latitud solo acepta las de **verano** (julio–agosto en el norte, diciembre–febrero en el sur), para que el suelo no salga cubierto de nieve.
-2. Agrupa las teselas por **pasada del satélite**. Si el recorte cae en el borde entre dos teselas, las une (tienen la misma fecha y empatan sin costura).
-3. Renderiza el producto de color verdadero (`visual`). Si más del 25 % de los píxeles salen **saturados** (arena, sal o hielo muy claros), vuelve a renderizar desde las bandas B04, B03 y B02 con una escala de 1000 a 9000. Los valores L2A llevan un desplazamiento de +1000. Hoy eso pasa en 43 de las 73 imágenes. El campo `stretch` del índice indica cuál se usó.
-4. Descarta los recortes con más de un 2 % de píxeles vacíos y prueba la siguiente pasada.
-
-Se probó Landsat Collection 2 como segunda fuente, pero el Planetary Computer devolvió error 500 al renderizar sus recortes (2026-11-15), así que no se usa.
-
-**Generarlas** (solo faltantes; la primera vez tarda unos 15–25 minutos):
-
-```bash
-source .venv/bin/activate
-python src/export_images.py                 # todas las que falten
-python src/export_images.py --only tatacoa  # un lugar
-python src/export_images.py --force         # rehacer todo
-python src/export_images.py --redo-saturated  # rehacer las que salieron quemadas
-python src/export_gallery.py                # galería de fotos (solo faltantes)
-```
-
-- **Qué genera:** `web/public/images/earth/<id>.jpg` (1024 × 1024, ~200–400 KB) y `index.json`, con la escena, la fecha, la nubosidad, la resolución y el crédito de cada imagen. La app muestra esos datos en el pie de cada imagen.
-- **Descubrimientos nuevos:** después de correr `export_web.py`, vuelve a correr `export_images.py` para generar sus imágenes.
-- **Control de calidad:** el script descarta las escenas cuyo recorte tiene más de un 2 % de píxeles vacíos (bordes de la escena) y prueba la siguiente.
-- **Limitación:** la nubosidad que se filtra es la de toda la escena (unos 110 km). Puede quedar alguna nube local en el recorte. Si una imagen no convence, se rehace con `--only <id> --force --max-cloud 5`.
-
-## Galería de fotos (carruseles)
-
-La ventana para comparar y la sección Análisis muestran **carruseles de fotos reales**: a la izquierda la Tierra y a la derecha la Luna o Marte. **Son ilustrativas: no entran en el puntaje.**
-
-- **Tierra:** primero el recorte de Sentinel-2 del punto exacto y después fotos de campo de la NASA (por ejemplo, rovers de prueba en Haughton o un dron en Death Valley), fotos de astronautas desde la Estación Espacial e imágenes del satélite Terra.
-- **Luna y Marte:** fotos de los rovers y módulos de aterrizaje (Perseverance, Curiosity, Spirit, Opportunity, Phoenix, Viking, InSight, Apolo 11), imágenes orbitales (HiRISE, LRO) y visualizaciones del LRO para el polo sur. La última imagen siempre es la vista 3D interactiva.
-- **Cada foto lleva una etiqueta** con su tipo ("Desde el rover", "Desde órbita", "Visualización con datos del LRO", "Foto de campo", "Desde la Estación Espacial"…), su crédito, su fecha y un enlace a la fuente.
-- **Límite que se muestra con honestidad:** solo hay fotos desde el suelo donde aterrizó una misión. El polo sur lunar, Medusae Fossae, Eberswalde, Terra Sirenum y Arsia Mons solo tienen imágenes orbitales.
-- **Descubrimientos:** sus fotos son de la **región** (por ejemplo, el macizo del Tibesti), no del punto exacto, y la app lo dice sobre la imagen. Las regiones sin fotos verificadas muestran solo Sentinel-2.
-
-**Cómo está hecha:**
-1. `data/gallery_sources.json` es la **lista curada a mano**: 96 imágenes para 40 lugares, cada una con un pie de foto en español e inglés. Antes de incluir una foto se leyó su descripción en la NASA para confirmar qué lugar muestra. Así se descartaron, por ejemplo, una foto del salar de Coipasa titulada como Uyuni y una de la parte peruana de Atacama.
-2. `python src/export_gallery.py` descarga las imágenes de la [NASA Image and Video Library](https://images.nasa.gov) y del [Scientific Visualization Studio](https://svs.gsfc.nasa.gov). Luego recorta los bordes negros y las panorámicas extremas, las reduce a 1600 px como máximo y escribe `web/public/data/gallery.json` con el crédito de cada misión (campo `secondary_creator` de la NASA). Las imágenes quedan en `web/public/images/gallery/` (~25 MB).
-3. **Para agregar una foto:** búscala en images.nasa.gov, revisa su descripción, agrega su `nasa_id` con `kind`, `es` y `en` al JSON y corre `python src/export_gallery.py`. Solo descarga lo que falta.
-
-Las claves de `gallery_sources.json` son los id de los objetivos (`jezero`, `shackleton`…), los id de los sitios del catálogo (`haughton-crater`…) y `region:<región>` para los descubrimientos. Un test (`tests/test_export_gallery.py`) comprueba que todo objetivo de la Luna y Marte tenga fotos.
-
-## Pendientes conocidos
-
-| Pendiente | Quién | Detalle |
-|---|---|---|
-| Timanfaya y Lava Beds no tienen datos | Marco | Están fuera de las regiones de `regions_catalog.csv`. Basta con agregar una región que las contenga |
-| Lluvia en latitudes altas | Marco | Comparación con ERA5-Land en 2023 (Earth Engine, 6 celdas por región): IMERG da **0 mm en las 4 regiones de la Antártida** (ERA5-Land: 23–94 mm), probablemente porque falta el dato y se guarda como 0, y **20 mm en el norte de Groenlandia frente a 137 mm** (×7). Entre 60° S y 60° N los dos coinciden en orden de magnitud. Propuesta: usar ERA5-Land por encima de 60° y no guardar como 0 lo que falta |
-| La Guajira | Santiago | Su ventana puede incluir mar: está marcada como provisional en la ficha |
-| Sitios lunares de Artemis de Santiago | Marco + Santiago | Connecting Ridge, Peak near Shackleton, Leibnitz Beta y Malapert solo tienen relieve. Falta la temperatura de Diviner para sumarlos a `targets.csv` |
-| Mineralogía EMIT | Santiago | Hay escenas, pero falta la descarga y el procesamiento. La ficha lo muestra como "pendiente" |
+[Contrato y correspondencias](SCIENTIFIC_DATA_CONTRACT.md) · [Mapa completo de variables](SCIENTIFIC_VARIABLE_MAPPING.md) · [Informe de integración](../GEOANALOG_INTEGRATION_REPORT.md).

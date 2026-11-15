@@ -18,7 +18,6 @@ INPUT_FILE = (
 )
 
 OUTPUT_DIR = BASE_DIR / "data" / "results"
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # ==================================================
@@ -48,70 +47,8 @@ WEIGHTS = np.array([
 # 2. CARGAR DATASET
 # ==================================================
 
-df = pd.read_csv(INPUT_FILE)
 
-df = df.dropna(subset=FEATURES).copy()
-
-df["region_id"] = (
-    df["planet"] + "_" + df["region"]
-)
-
-df = df.set_index("region_id")
-
-earth = df[df["planet"] == "earth"].copy()
-
-if len(earth) < 2:
-    raise ValueError(
-        "Se necesitan al menos dos regiones terrestres."
-    )
-
-print("Regiones disponibles:", len(df))
-print("Regiones terrestres:", len(earth))
-
-
-# ==================================================
-# 3. NORMALIZACION Z-SCORE
-# ==================================================
-
-mean = earth[FEATURES].mean()
-std = earth[FEATURES].std(ddof=0)
-
-# Excluir variables sin variabilidad
-active = std > 1e-10
-
-if not active.any():
-    raise ValueError("No existen variables con variabilidad.")
-
-features = [
-    f for f in FEATURES if active[f]
-]
-
-weights = WEIGHTS[active.to_numpy()]
-weights = weights / weights.sum()
-
-normalized = (
-    df[features] - mean[features]
-) / std[features]
-
-normalized.to_csv(
-    OUTPUT_DIR / "normalized_features.csv"
-)
-
-# Guardar parametros de normalizacion
-pd.DataFrame({
-    "mean": mean,
-    "std": std,
-    "active": active
-}).to_csv(
-    OUTPUT_DIR / "normalization_parameters.csv"
-)
-
-
-# ==================================================
-# 4. FUNCION DE SIMILITUD
-# ==================================================
-
-def calculate_similarity(a, b):
+def calculate_similarity(a, b, weights=WEIGHTS):
 
     distance = np.sqrt(
         np.sum(weights * (a - b) ** 2)
@@ -122,174 +59,246 @@ def calculate_similarity(a, b):
     return distance, pai
 
 
-# ==================================================
-# 5. MATRIZ DE SIMILITUD
-# ==================================================
+def main(input_file=INPUT_FILE, output_dir=OUTPUT_DIR):
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    df = pd.read_csv(input_file)
 
-names = normalized.index.tolist()
+    df = df.dropna(subset=FEATURES).copy()
 
-matrix = np.zeros(
-    (len(names), len(names))
-)
+    df["region_id"] = (
+        df["planet"] + "_" + df["region"]
+    )
 
-for i, name_a in enumerate(names):
+    df = df.set_index("region_id")
 
-    for j, name_b in enumerate(names):
+    earth = df[df["planet"] == "earth"].copy()
 
-        a = normalized.loc[name_a].to_numpy()
-        b = normalized.loc[name_b].to_numpy()
+    if len(earth) < 2:
+        raise ValueError(
+            "Se necesitan al menos dos regiones terrestres."
+        )
 
-        distance, pai = calculate_similarity(a, b)
-
-        matrix[i, j] = pai
-
-
-similarity_df = pd.DataFrame(
-    matrix,
-    index=names,
-    columns=names
-)
-
-similarity_df.to_csv(
-    OUTPUT_DIR / "similarity_matrix.csv"
-)
+    print("Regiones disponibles:", len(df))
+    print("Regiones terrestres:", len(earth))
 
 
-# ==================================================
-# 6. VISUALIZAR MATRIZ
-# ==================================================
+    # ==================================================
+    # 3. NORMALIZACION Z-SCORE
+    # ==================================================
 
-fig, ax = plt.subplots(figsize=(10, 8))
+    mean = earth[FEATURES].mean()
+    std = earth[FEATURES].std(ddof=0)
 
-im = ax.imshow(
-    matrix,
-    cmap="viridis",
-    vmin=0,
-    vmax=100
-)
+    # Excluir variables sin variabilidad
+    active = std > 1e-10
 
-ax.set_xticks(range(len(names)))
-ax.set_yticks(range(len(names)))
+    if not active.any():
+        raise ValueError("No existen variables con variabilidad.")
 
-ax.set_xticklabels(
-    names,
-    rotation=45,
-    ha="right"
-)
+    features = [
+        f for f in FEATURES if active[f]
+    ]
 
-ax.set_yticklabels(names)
+    weights = WEIGHTS[active.to_numpy()]
+    weights = weights / weights.sum()
 
-if len(names) <= 20:
+    normalized = (
+        df[features] - mean[features]
+    ) / std[features]
 
-    for i in range(len(names)):
+    normalized.to_csv(
+        output_dir / "normalized_features.csv"
+    )
 
-        for j in range(len(names)):
+    # Guardar parametros de normalizacion
+    pd.DataFrame({
+        "mean": mean,
+        "std": std,
+        "active": active
+    }).to_csv(
+        output_dir / "normalization_parameters.csv"
+    )
 
-            ax.text(
-                j, i,
-                f"{matrix[i, j]:.1f}",
-                ha="center",
-                va="center",
-                color=(
-                    "black"
-                    if matrix[i, j] > 65
-                    else "white"
+
+    # ==================================================
+    # 4. FUNCION DE SIMILITUD
+    # ==================================================
+
+
+
+    # ==================================================
+    # 5. MATRIZ DE SIMILITUD
+    # ==================================================
+
+    names = normalized.index.tolist()
+
+    matrix = np.zeros(
+        (len(names), len(names))
+    )
+
+    for i, name_a in enumerate(names):
+
+        for j, name_b in enumerate(names):
+
+            a = normalized.loc[name_a].to_numpy()
+            b = normalized.loc[name_b].to_numpy()
+
+            distance, pai = calculate_similarity(a, b, weights)
+
+            matrix[i, j] = pai
+
+
+    similarity_df = pd.DataFrame(
+        matrix,
+        index=names,
+        columns=names
+    )
+
+    similarity_df.to_csv(
+        output_dir / "similarity_matrix.csv"
+    )
+
+
+    # ==================================================
+    # 6. VISUALIZAR MATRIZ
+    # ==================================================
+
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    im = ax.imshow(
+        matrix,
+        cmap="viridis",
+        vmin=0,
+        vmax=100
+    )
+
+    ax.set_xticks(range(len(names)))
+    ax.set_yticks(range(len(names)))
+
+    ax.set_xticklabels(
+        names,
+        rotation=45,
+        ha="right"
+    )
+
+    ax.set_yticklabels(names)
+
+    if len(names) <= 20:
+
+        for i in range(len(names)):
+
+            for j in range(len(names)):
+
+                ax.text(
+                    j, i,
+                    f"{matrix[i, j]:.1f}",
+                    ha="center",
+                    va="center",
+                    color=(
+                        "black"
+                        if matrix[i, j] > 65
+                        else "white"
+                    )
                 )
-            )
 
-fig.colorbar(im, label="Planetary Analog Index")
+    fig.colorbar(im, label="Planetary Analog Index")
 
-ax.set_title("GeoAnalog - Similarity Matrix")
+    ax.set_title("GeoAnalog - Similarity Matrix")
 
-plt.tight_layout()
+    plt.tight_layout()
 
-plt.savefig(
-    OUTPUT_DIR / "similarity_matrix.png",
-    dpi=200
-)
-
-plt.close(fig)
-
-
-# ==================================================
-# 7. BUSCAR ANALOGOS TERRESTRES
-# ==================================================
-
-planetary = df[
-    df["planet"].isin(["mars", "moon"])
-]
-
-if planetary.empty:
-
-    # Prueba entre regiones terrestres
-    targets = earth
-
-    print(
-        "\nModo de prueba: comparacion terrestre."
+    plt.savefig(
+        output_dir / "similarity_matrix.png",
+        dpi=200
     )
 
-else:
+    plt.close(fig)
 
-    targets = planetary
 
-    print(
-        "\nModo de busqueda planetaria."
+    # ==================================================
+    # 7. BUSCAR ANALOGOS TERRESTRES
+    # ==================================================
+
+    planetary = df[
+        df["planet"].isin(["mars", "moon"])
+    ]
+
+    if planetary.empty:
+
+        # Prueba entre regiones terrestres
+        targets = earth
+
+        print(
+            "\nModo de prueba: comparacion terrestre."
+        )
+
+    else:
+
+        targets = planetary
+
+        print(
+            "\nModo de busqueda planetaria."
+        )
+
+
+    results = []
+
+    for target_id in targets.index:
+
+        for candidate_id in earth.index:
+
+            if target_id == candidate_id:
+                continue
+
+            a = normalized.loc[target_id].to_numpy()
+            b = normalized.loc[candidate_id].to_numpy()
+
+            distance, pai = calculate_similarity(a, b, weights)
+
+            results.append({
+
+                "target": target_id,
+                "candidate": candidate_id,
+                "distance": distance,
+                "PAI": pai
+
+            })
+
+
+    ranking = pd.DataFrame(results)
+
+    ranking = ranking.sort_values(
+        ["target", "PAI"],
+        ascending=[True, False]
+    )
+
+    ranking.to_csv(
+        output_dir / "analog_ranking.csv",
+        index=False,
+        float_format="%.5f"
     )
 
 
-results = []
+    # ==================================================
+    # 8. MOSTRAR RESULTADOS
+    # ==================================================
 
-for target_id in targets.index:
+    for target, group in ranking.groupby("target"):
 
-    for candidate_id in earth.index:
+        print("\n================================")
+        print("Region objetivo:", target)
+        print("================================")
 
-        if target_id == candidate_id:
-            continue
+        print(
+            group[["candidate", "PAI"]]
+            .head(5)
+            .to_string(index=False)
+        )
 
-        a = normalized.loc[target_id].to_numpy()
-        b = normalized.loc[candidate_id].to_numpy()
-
-        distance, pai = calculate_similarity(a, b)
-
-        results.append({
-
-            "target": target_id,
-            "candidate": candidate_id,
-            "distance": distance,
-            "PAI": pai
-
-        })
+    print("\nProcesamiento finalizado.")
+    print("Resultados guardados en:", output_dir)
 
 
-ranking = pd.DataFrame(results)
-
-ranking = ranking.sort_values(
-    ["target", "PAI"],
-    ascending=[True, False]
-)
-
-ranking.to_csv(
-    OUTPUT_DIR / "analog_ranking.csv",
-    index=False,
-    float_format="%.5f"
-)
-
-
-# ==================================================
-# 8. MOSTRAR RESULTADOS
-# ==================================================
-
-for target, group in ranking.groupby("target"):
-
-    print("\n================================")
-    print("Region objetivo:", target)
-    print("================================")
-
-    print(
-        group[["candidate", "PAI"]]
-        .head(5)
-        .to_string(index=False)
-    )
-
-print("\nProcesamiento finalizado.")
-print("Resultados guardados en:", OUTPUT_DIR)
+if __name__ == "__main__":
+    main()

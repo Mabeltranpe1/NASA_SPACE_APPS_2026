@@ -20,6 +20,8 @@ import EarthThumb from './components/EarthThumb'
 import MethodView from './components/MethodView'
 import IntroOverlay from './components/IntroOverlay'
 import GuidedTour from './components/GuidedTour'
+import ScientificPanel from './components/ScientificPanel'
+import GlobalRankings from './components/GlobalRankings'
 import {
   IconBook,
   IconChart,
@@ -666,6 +668,7 @@ export default function App() {
                   </h1>
                 </header>
                 <h2 className="section-title">{t('analysis.images')}</h2>
+                <ScientificPanel key={`science-${focus.id}`} reference={data?.sites.find((s) => s.id === focus.id)?.science_ref} initialOpen />
                 <section className="details" style={{ ['--cols' as string]: 1 + focus.homologues.length }}>
                   <EarthCarousel site={focus} />
                   {siteTargets(focus).map((body) => (
@@ -703,6 +706,7 @@ export default function App() {
                 {data && (
                   <>
                     <h2 className="section-title">{t('side.discoveries')}</h2>
+                    <GlobalRankings data={data} onSelect={(d) => selectDiscovery(d, true)} />
                     <div className="pick-grid">
                       {(['marte', 'luna'] as Target[]).flatMap((b) =>
                         discoveriesFor(data, b, 4).map((d) => (

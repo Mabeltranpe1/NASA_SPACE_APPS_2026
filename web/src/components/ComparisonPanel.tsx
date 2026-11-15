@@ -12,6 +12,8 @@ import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
 import { useLang } from '../i18n/useLang'
 import { BODY_NAMES, SOURCE_PHRASES_EN, type Lang } from '../i18n/strings'
 import { dumbbellScale, featureLabel, makeFmt } from '../data/format'
+import ScientificPanel from './ScientificPanel'
+import { SCIENCE_STRINGS } from '../i18n/science'
 
 /** Physical conditions Earth cannot reproduce. Always shown: the analogy breaks here for every site. */
 type Limit = { label: string; earth: string; body: string }
@@ -454,6 +456,14 @@ function ComparisonContent({
           {t('cmp.generated', { date: new Date(data.generated_at).toLocaleString(lang), n: data.n_cells })}
         </p>
       </details>
+
+      {target.science_refs && target.science_refs.length > 0 && (
+        <section className="science-related">
+          <h3>{SCIENCE_STRINGS[lang].related}</h3>
+          <p className="hint">{SCIENCE_STRINGS[lang].reference}</p>
+          {target.science_refs.map((reference) => <ScientificPanel key={reference.url} reference={reference} />)}
+        </section>
+      )}
 
       {tooltip && (
         <div className="chart-tooltip" style={{ left: tooltip.x, top: tooltip.y }} role="status">

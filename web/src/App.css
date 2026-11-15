@@ -12,6 +12,37 @@
     var(--bg);
 }
 
+/* Regional science extends the existing folds/cards without replacing navigation. */
+.science-panel { margin: 18px 0; border: 1px solid rgba(122, 216, 208, .25); border-radius: 12px; padding: 12px; background: rgba(11, 24, 35, .65); }
+.science-panel > summary { cursor: pointer; color: #b5f5ed; font-weight: 600; }
+.science-body { margin-top: 14px; min-width: 0; }
+.science-study h3, .science-study h4 { margin: 16px 0 10px; }
+.science-coordinates { font-variant-numeric: tabular-nums; font-size: .82rem; opacity: .8; }
+.science-warning, .science-note { padding: 10px 12px; border-left: 3px solid #d3ad74; background: rgba(211, 173, 116, .07); font-size: .86rem; line-height: 1.5; }
+.science-note { border-color: #7ad8d0; }
+.science-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0; }
+.science-tabs .chip { font-size: .78rem; text-align: left; }
+.science-table-scroll { max-width: 100%; overflow-x: auto; margin: 12px 0; }
+.science-table-scroll table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+.science-table-scroll th, .science-table-scroll td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.science-table-scroll th { color: #b5f5ed; }
+.science-table-scroll td { font-variant-numeric: tabular-nums; }
+.science-table-scroll small, .science-sources small, .science-assets small { display: block; opacity: .65; font-size: .72rem; margin: 4px 0; }
+.science-values { grid-template-columns: minmax(0, 1fr); }
+.science-values > div { gap: 16px; }
+.science-provenance code, .science-pai code { white-space: normal; overflow-wrap: anywhere; font-size: .75rem; }
+.science-figure { margin: 16px 0; }
+.science-figure img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.science-figure figcaption, .science-spectrum figcaption { font-size: .76rem; opacity: .75; line-height: 1.5; }
+.science-spectrum { margin: 16px 0; }
+.science-spectrum svg { width: 100%; max-height: 200px; }
+.science-global { margin: 18px 0 30px; }
+.science-global .chips { margin: 14px 0; }
+.science-sources a, .science-assets a { color: #9be2dc; overflow-wrap: anywhere; }
+.science-related { margin-top: 24px; }
+.page.analysis { scroll-padding-top: 110px; }
+@media (max-width: 700px) { .science-panel { padding: 10px; } .science-tabs .chip { font-size: .7rem; } .science-table-scroll th, .science-table-scroll td { padding: 7px; } }
+
 .glass {
   background: var(--surface);
   backdrop-filter: blur(18px) saturate(140%);

@@ -41,3 +41,26 @@ Thumbs.db
 # Archivos temporales de Windows y LibreOffice
 *:Zone.Identifier
 .~lock.*#
+
+# Reproducible small derived science products; native multi-GB inputs stay ignored.
+!data/processed/earth/
+!data/processed/mars/
+!data/processed/moon/
+!data/processed/earth/*_DEM_200m.tif
+!data/processed/mars/*_DEM_200m.tif
+!data/processed/moon/*_DEM_200m.tif
+!data/raw/climate/
+!data/raw/climate/*_NASA_POWER.csv
+!data/raw/moon/
+data/raw/moon/*
+!data/raw/moon/README
+!web/public/data/science/files/data/processed/
+!web/public/data/science/files/data/processed/*/
+!web/public/data/science/files/data/processed/*/*_DEM_200m.tif
+
+# Local caches, test reports and the preserved independent clone.
+.npm-cache/
+.pytest_cache/
+test-results/
+playwright-report/
+NASA_SPACE_APPS_2026/

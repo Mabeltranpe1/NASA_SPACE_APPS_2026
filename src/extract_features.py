@@ -19,8 +19,6 @@ INPUT_DIR = BASE_DIR / "data" / "processed"
 OUTPUT_DIR = BASE_DIR / "data" / "features"
 FIGURES_DIR = BASE_DIR / "data" / "figures"
 
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 TARGET_RESOLUTION = 200
 
@@ -56,7 +54,7 @@ def calculate_tpi(window):
 # 2. EXTRACCION DE CARACTERISTICAS
 # ==================================================
 
-def extract_features(path, planet):
+def extract_features(path, planet, save_figure=True):
 
     with rasterio.open(path) as src:
 
@@ -193,16 +191,17 @@ def extract_features(path, planet):
     }
 
     # Guardar visualizaciones
-    create_figure(
-        region,
-        planet,
-        dem,
-        relative_dem,
-        slope,
-        tri,
-        tpi,
-        aspect
-    )
+    if save_figure:
+        create_figure(
+            region,
+            planet,
+            dem,
+            relative_dem,
+            slope,
+            tri,
+            tpi,
+            aspect
+        )
 
     return features
 
@@ -216,6 +215,7 @@ def create_figure(
     slope, tri, tpi, aspect
 ):
 
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
     fig, axes = plt.subplots(
         2, 3,
         figsize=(16, 10),
@@ -274,73 +274,79 @@ def create_figure(
 # 4. PROCESAMIENTO AUTOMATICO
 # ==================================================
 
-results = []
+def main():
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    results = []
 
-for planet in ["earth", "mars", "moon"]:
+    for planet in ["earth", "mars", "moon"]:
 
-    planet_dir = INPUT_DIR / planet
+        planet_dir = INPUT_DIR / planet
 
-    files = sorted(
-        planet_dir.glob("*.tif")
-    )
+        files = sorted(
+            planet_dir.glob("*.tif")
+        )
 
-    for file in files:
+        for file in files:
 
-        print(f"\nProcesando: {file.name}")
+            print(f"\nProcesando: {file.name}")
 
-        try:
+            try:
 
-            features = extract_features(
-                file, planet
-            )
+                features = extract_features(
+                    file, planet
+                )
 
-            results.append(features)
+                results.append(features)
 
-            print(
-                f"Pendiente promedio: "
-                f"{features['slope_mean_deg']:.2f} grados"
-            )
+                print(
+                    f"Pendiente promedio: "
+                    f"{features['slope_mean_deg']:.2f} grados"
+                )
 
-            print(
-                f"Rugosidad promedio: "
-                f"{features['tri_mean_m']:.2f} m"
-            )
+                print(
+                    f"Rugosidad promedio: "
+                    f"{features['tri_mean_m']:.2f} m"
+                )
 
-            print(
-                f"Relieve local: "
-                f"{features['local_relief_m']:.2f} m"
-            )
+                print(
+                    f"Relieve local: "
+                    f"{features['local_relief_m']:.2f} m"
+                )
 
-            print("Estado: OK")
+                print("Estado: OK")
 
-        except Exception as error:
+            except Exception as error:
 
-            print(f"ERROR: {error}")
+                print(f"ERROR: {error}")
 
 
-# ==================================================
-# 5. CREACION DEL DATASET
-# ==================================================
+    # ==================================================
+    # 5. CREACION DEL DATASET
+    # ==================================================
 
-if results:
+    if results:
 
-    df = pd.DataFrame(results)
+        df = pd.DataFrame(results)
 
-    output_csv = (
-        OUTPUT_DIR / "planetary_features.csv"
-    )
+        output_csv = (
+            OUTPUT_DIR / "planetary_features.csv"
+        )
 
-    df.to_csv(
-        output_csv,
-        index=False,
-        float_format="%.5f"
-    )
+        df.to_csv(
+            output_csv,
+            index=False,
+            float_format="%.5f"
+        )
 
-    print("\nDATASET GENERADO CORRECTAMENTE")
-    print(f"Regiones procesadas: {len(df)}")
-    print(f"Columnas: {len(df.columns)}")
-    print(f"Archivo: {output_csv}")
+        print("\nDATASET GENERADO CORRECTAMENTE")
+        print(f"Regiones procesadas: {len(df)}")
+        print(f"Columnas: {len(df.columns)}")
+        print(f"Archivo: {output_csv}")
 
-else:
+    else:
 
-    print("No se encontraron regiones validas.")
+        print("No se encontraron regiones validas.")
+
+
+if __name__ == "__main__":
+    main()

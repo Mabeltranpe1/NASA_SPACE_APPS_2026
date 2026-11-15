@@ -488,6 +488,8 @@ export const SOURCE_PHRASES_EN: Record<string, string> = {
   '0 (no llueve)': '0 (no rain)',
   '0 (sin plantas)': '0 (no plants)',
   'Aún no comparable': 'Not comparable yet',
+  'GPM IMERG / MERRA-2 (|lat| ≥ 60°)': 'GPM IMERG / MERRA-2 (|lat| ≥ 60°)',
+  'CF: equivalente bibliográfico calibrado (±0.026–0.039)': 'CF: calibrated literature equivalent (±0.026–0.039)',
   'NASADEM / Copernicus, a 200 m': 'NASADEM / Copernicus, at 200 m',
   'LRO LOLA, a 200 m': 'LRO LOLA, at 200 m',
 }

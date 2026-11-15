@@ -12,8 +12,8 @@ const TEXT = {
     en: 'Where on Earth can we rehearse living on the Moon and Mars?',
   },
   lead: {
-    es: 'Comparamos cada rincón de la Tierra con los sitios candidatos para bases lunares y para explorar Marte, usando datos abiertos de la NASA. Mostramos en qué se parecen, cuánto, y dónde deja de valer la analogía.',
-    en: 'We compare every corner of Earth with the candidate sites for lunar bases and Mars exploration, using open NASA data. We show what is similar, how much, and where the analogy breaks down.',
+    es: 'Exploramos una base internacional de celdas terrestres y seis regiones colombianas con datos abiertos de NASA y otras instituciones. Mostramos qué condiciones se parecen a objetivos lunares y marcianos y los límites de cada analogía.',
+    en: 'We explore an international Earth-cell database and six Colombian regions using open NASA and partner data. We show which conditions resemble lunar and Martian targets and the limits of each analogy.',
   },
   cells: { es: 'celdas de la Tierra analizadas', en: 'Earth cells analyzed' },
   regions: { es: 'regiones de todo el mundo', en: 'regions worldwide' },

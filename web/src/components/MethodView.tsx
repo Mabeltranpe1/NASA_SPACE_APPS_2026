@@ -9,15 +9,15 @@ const TEXT = {
   eyebrow: { es: 'Método', en: 'Method' },
   title: { es: 'Cómo medimos el parecido', en: 'How we measure similarity' },
   lead: {
-    es: 'No basta con que un lugar se vea parecido. Describimos cada lugar de la Tierra, la Luna y Marte con las mismas variables físicas, medidas por satélites, y calculamos cuánto se parecen, en qué y dónde deja de valer la analogía.',
-    en: 'Looking alike is not enough. We describe every place on Earth, the Moon and Mars with the same physical variables, measured from orbit, and compute how similar they are, in what, and where the analogy breaks down.',
+    es: 'Comparamos celdas terrestres seleccionadas con objetivos lunares y marcianos mediante observaciones, modelos y estimaciones identificadas. La investigación regional conserva su propia geometría, calidad y metodología para explicar qué se parece y dónde termina la analogía.',
+    en: 'We compare selected Earth cells with lunar and Martian targets using identified observations, models and estimates. Regional research retains its own geometry, quality and methods to explain what is similar and where the analogy ends.',
   },
   steps: [
     {
       title: { es: '1 · Datos abiertos', en: '1 · Open data' },
       text: {
-        es: 'La Tierra se divide en celdas de ~5 km con relieve a 200 m (NASADEM, Copernicus), temperatura y albedo (MODIS), lluvia (GPM IMERG), vegetación y tipo de roca (ASTER). La Luna y Marte usan LRO LOLA y Diviner, HRSC + MOLA, TES y el Mars Climate Database.',
-        en: 'Earth is split into ~5 km cells with terrain at 200 m (NASADEM, Copernicus), temperature and albedo (MODIS), rain (GPM IMERG), vegetation and rock type (ASTER). The Moon and Mars use LRO LOLA and Diviner, HRSC + MOLA, TES and the Mars Climate Database.',
+        es: 'La base global usa celdas de 0,05° (el ancho varía con la latitud), relieve a 200 m, MODIS, IMERG/MERRA-2 y ASTER. La investigación de Colombia añade ventanas propias de 10×10 km, POWER, CHIRPS, WorldCover, Sentinel-2, SGC y EMIT. Los objetivos planetarios conservan sus fuentes LOLA, Diviner, HRSC/MOLA, TES y MCD.',
+        en: 'The global database uses 0.05° cells (width varies with latitude), 200 m terrain, MODIS, IMERG/MERRA-2 and ASTER. Colombian research adds independent 10×10 km windows, POWER, CHIRPS, WorldCover, Sentinel-2, SGC and EMIT. Planetary targets retain their LOLA, Diviner, HRSC/MOLA, TES and MCD sources.',
       },
     },
     {
@@ -28,17 +28,17 @@ const TEXT = {
       },
     },
     {
-      title: { es: '3 · Validación', en: '3 · Validation' },
+      title: { es: '3 · Sensibilidad y controles', en: '3 · Sensitivity and controls' },
       text: {
-        es: 'Los análogos conocidos (Antártida, Atacama, Islandia…) se usan como control: el método debe ponerlos arriba, y lo hace. Además, cada lugar se prueba con 100 variaciones aleatorias de los pesos.',
-        en: 'Known analogs (Antarctica, Atacama, Iceland…) are used as controls: the method must rank them high, and it does. Each place is also tested with 100 random weight variations.',
+        es: 'Se conservan análogos conocidos como referencias y se ejecutan 100 variaciones de pesos para el puntaje web. Esa sensibilidad no es incertidumbre instrumental ni validación de campo. Las coincidencias minerales y los resultados piloto mantienen sus indicadores de calidad.',
+        en: 'Known analogs remain as references, and the web score uses 100 weight variations. This sensitivity is neither instrument uncertainty nor field validation. Mineral matches and pilot results retain their quality indicators.',
       },
     },
   ],
   formulaTitle: { es: 'La fórmula', en: 'The formula' },
   formulaNote: {
-    es: 'x_T: valor en la Tierra · x_P: valor en la Luna o Marte · τ: tolerancia física · w: peso. 1 = idénticos.',
-    en: 'x_T: Earth value · x_P: Moon or Mars value · τ: physical tolerance · w: weight. 1 = identical.',
+    es: 'x_T: Tierra · x_P: objetivo · τ: tolerancia · w: peso. La precipitación se transforma con ln(1+x). 1 significa igualdad de las variables activas, no equivalencia física completa.',
+    en: 'x_T: Earth · x_P: target · τ: tolerance · w: weight. Precipitation uses ln(1+x). 1 means equality of active variables, not complete physical equivalence.',
   },
   rulesTitle: { es: 'Reglas para comparar con honestidad', en: 'Rules for an honest comparison' },
   rules: [
@@ -70,29 +70,29 @@ const TEXT = {
   caveatsTitle: { es: 'Limitaciones conocidas', en: 'Known limitations' },
   caveats: [
     {
-      es: 'La lluvia de IMERG es menos confiable por encima de 60° de latitud (Antártida, Groenlandia).',
-      en: 'IMERG rain is less reliable above 60° latitude (Antarctica, Greenland).',
+      es: 'En la base ampliada se usa MERRA-2 para precipitación a |latitud|≥60°; se conserva como reanálisis, no como una medición local. Los calendarios heredados requieren revisar esa corrección.',
+      en: 'The expanded grid uses MERRA-2 precipitation at |latitude|≥60°; it remains a reanalysis, not a local measurement. Legacy seasonal calendars require review of this correction.',
     },
     {
       es: 'La temperatura de Marte viene de un modelo (Mars Climate Database), no de una medición directa.',
       en: 'Mars temperature comes from a model (Mars Climate Database), not a direct measurement.',
     },
     {
-      es: 'La mineralogía (EMIT) aún no está procesada: hay escenas disponibles, falta el análisis.',
-      en: 'Mineralogy (EMIT) is not processed yet: scenes are available, the analysis is pending.',
+      es: 'EMIT está procesado como coincidencias provisionales de biblioteca. THEMIS es piloto; CRISM Phoenix no tiene datos calificados. La Guajira contiene agua dentro de su ventana, y la estabilidad de hielo Diviner es modelada.',
+      en: 'EMIT is processed as provisional library matches. THEMIS is a pilot; Phoenix CRISM has no qualified data. La Guajira includes water in its window, and Diviner ice stability is modeled.',
     },
   ],
   teamTitle: { es: 'Equipo', en: 'Team' },
   team: [
     {
-      es: 'Marco · búsqueda global y comparador (compare.py)',
-      en: 'Marco · global search and comparator (compare.py)',
+      es: 'Marco (Mabeltranpe1) · investigación global, adquisición y comparador',
+      en: 'Marco (Mabeltranpe1) · global research, acquisition and comparator',
     },
     {
-      es: 'Santiago · caracterización de Colombia: relieve a 200 m, índice PAI, Sentinel-2 y EMIT',
-      en: 'Santiago · Colombian characterization: 200 m terrain, PAI index, Sentinel-2 and EMIT',
+      es: 'Santiago (santiago-851) · caracterización regional, PAI y productos científicos complementarios',
+      en: 'Santiago (santiago-851) · regional characterization, PAI and complementary scientific products',
     },
-    { es: 'Plataforma web · globos 3D, visualización y despliegue', en: 'Web platform · 3D globes, visualization and deployment' },
+    { es: 'Sebastián (Ssalazarp420) · interfaz, mapas, visualización e integración funcional', en: 'Sebastián (Ssalazarp420) · interface, maps, visualization and functional integration' },
   ],
 } satisfies Record<string, unknown>
 
@@ -145,6 +145,12 @@ export default function MethodView() {
           </code>
         </div>
         <p className="muted small">{tx(TEXT.formulaNote, lang)}</p>
+      </section>
+
+      <section className="glass tile">
+        <h2>{lang === 'es' ? 'Tres resultados con alcances diferentes' : 'Three results with different scopes'}</h2>
+        <p>{lang === 'es' ? 'El ranking internacional conserva el índice global completo de Marco (0–1). El puntaje web compara las dimensiones activas y muestra las exclusiones por cuerpo. El PAI regional (0–100) usa solo seis descriptores topográficos y normalización sobre seis candidatos colombianos. No se sustituyen ni se promedian.' : "The international ranking preserves Marco's full global index (0–1). The web score compares active dimensions and shows exclusions by body. The regional PAI (0–100) uses only six terrain descriptors and normalization fitted to six Colombian candidates. These scores neither replace nor average each other."}</p>
+        <code>PAI = 100 / (1 + √Σ w · (zA − zB)²)</code>
       </section>
 
       <section className="two-col">

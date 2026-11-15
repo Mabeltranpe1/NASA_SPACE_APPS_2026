@@ -6,7 +6,7 @@ comparator) and only decides WHAT goes to the web and in which format.
 Data contract: docs/VISUALIZACION_COMPARACION.md.
 
 Inputs (defaults):
-    data/earth_all.csv        Earth grid, one row per 0.05 deg cell (Marco)
+    data/earth_all.csv.gz     Expanded Earth grid, one row per 0.05 deg cell (Marco)
     data/targets.csv          Moon and Mars sites (Marco)
     data/regions_catalog.csv  description of each Earth region (Marco)
     web/src/data/sites.ts     catalog sites shown in the app (their lat/lng)
@@ -17,6 +17,8 @@ Outputs (web/public/data/):
     comparisons.json          catalog sites + best little-known places
                               ("discoveries"), with every target's result
     heatmap/<target>.json     the best Earth cells for one target (map layer)
+    global-rankings.json      original Marco top 200 with navigation references
+    science/                 regional observations, original PAI and source assets
 
 Rules applied here (explained in docs/DATOS_WEB.md):
     1. Elevation is never compared: each body measures height from a
@@ -34,6 +36,8 @@ Example:
 """
 
 import argparse
+import gzip
+import hashlib
 import json
 import math
 import re
@@ -46,6 +50,8 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import compare  # noqa: E402
+from scientific_catalog import build_science, validate_comparison_contract  # noqa: E402
+from science_metadata import GLOBAL_COMMIT, SCIENCE_COMMIT, WEB_COMMIT  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -54,7 +60,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # ---------------------------------------------------------------------------
 
 # Weights used for the web, on top of compare.DEFAULT_WEIGHTS.
-WEB_WEIGHTS = {"elev_m": 0.0}
+WEB_WEIGHTS = {"elev_m": 0.0, "em_contrast": 0.5}
 
 # A target value further than this many tolerances outside Earth's range
 # switches that feature off for that body (rule 2).
@@ -121,14 +127,14 @@ FEATURE_META = {
                "source_earth": "MODIS MCD43C3",
                "source_target": {"luna": "LRO LOLA (albedo normal)", "marte": "MGS TES"}},
     "precip_mm": {"label": "Precipitación anual", "unit": "mm", "dimension": "agua_hielo", "range": [0, 3000],
-                  "source_earth": "GPM IMERG",
+                  "source_earth": "GPM IMERG / MERRA-2 (|lat| ≥ 60°)",
                   "source_target": {"luna": "0 (no llueve)", "marte": "0 (no llueve)"}},
     "ndvi": {"label": "Vegetación (NDVI)", "unit": "", "dimension": "habitabilidad", "range": [-0.2, 1],
              "source_earth": "MODIS MOD13C2",
              "source_target": {"luna": "0 (sin plantas)", "marte": "0 (sin plantas)"}},
     "em_contrast": {"label": "Tipo de roca (emisividad)", "unit": "", "dimension": "geologia", "range": [-0.1, 0.3],
                     "source_earth": "ASTER GED",
-                    "source_target": {"luna": "Aún no comparable", "marte": "Aún no comparable"}},
+                    "source_target": {"luna": "CF: equivalente bibliográfico calibrado (±0.026–0.039)", "marte": "CF: equivalente bibliográfico calibrado (±0.026–0.039)"}},
 }
 
 
@@ -136,7 +142,7 @@ FEATURE_META = {
 # 2. Small helpers
 # ---------------------------------------------------------------------------
 
-def num(value, digits=4):
+def num(value, digits=8):
     """JSON-safe number: NaN/inf/None become null."""
     if value is None:
         return None
@@ -251,12 +257,26 @@ def stability(earth_scaled, target_scaled, weights, cells, rng):
     compare.weight_sensitivity, measured only for the cells we export.
     """
     base = compare.build_weights(weights)
+    active = (base > 0) & np.isfinite(target_scaled)
+    if not active.any():
+        raise ValueError("No active feature for weight sensitivity")
+    base = base[active]
+    valid = np.isfinite(earth_scaled[:, active]).all(axis=1)
+    squares = np.nan_to_num(earth_scaled[:, active] - target_scaled[active]) ** 2
     inside = np.zeros(len(cells))
     for _ in range(STABILITY_RUNS):
-        factors = rng.uniform(1 - STABILITY_SPREAD, 1 + STABILITY_SPREAD, size=len(base))
-        score, _ = compare.score_cells(earth_scaled, target_scaled, base * factors)
-        rank = global_rank(score)
-        inside += rank[cells] <= STABILITY_TOP
+        # Draw all feature factors, as in the original algorithm, including inactive ones.
+        factors = rng.uniform(1 - STABILITY_SPREAD, 1 + STABILITY_SPREAD, size=len(compare.FEATURES))[active]
+        w = base * factors
+        score = np.exp(-np.sqrt(np.einsum("ij,j->i", squares, w) / w.sum()))
+        score[~valid] = -np.inf
+        n = min(STABILITY_TOP, len(score))
+        cutoff = np.partition(score, len(score) - n)[len(score) - n]
+        n_above = int(np.count_nonzero(score > cutoff))
+        tied = np.flatnonzero(score == cutoff)[:n - n_above]
+        # Preserve stable row-order ties without sorting all 691k cells on every run.
+        last_tied = tied[-1] if len(tied) else -1
+        inside += np.isfinite(score[cells]) & ((score[cells] > cutoff) | ((score[cells] == cutoff) & (cells <= last_tied)))
     return inside / STABILITY_RUNS
 
 
@@ -328,7 +348,7 @@ def santiago_characterization(features_dir):
             }
         m = row(emit, region)
         if m is not None:
-            info["mineralogy"] = {"status": "pendiente", "emit_granules": int(m["emit_granules"])}
+            info["mineralogy"] = {"status": "provisional", "emit_granules": int(m["emit_granules"])}
         if pai is not None:
             best = (pai[pai["candidate"] == f"earth_{region}"]
                     .sort_values("PAI", ascending=False)
@@ -349,7 +369,8 @@ def santiago_characterization(features_dir):
 # ---------------------------------------------------------------------------
 
 def is_synthetic(path):
-    with open(path, encoding="utf-8") as f:
+    opener = gzip.open if str(path).endswith(".gz") else open
+    with opener(path, "rt", encoding="utf-8") as f:
         return "SYNTHETIC" in f.readline().upper()
 
 
@@ -376,10 +397,26 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
         site_cells[s["id"]] = i
         site_info[s["id"]] = {"kind": "catalog", "name": s["name"]}
 
+    # Retain all 200 places from Marco's published full-environment ranking in the
+    # canonical site catalog, so opening that ranking keeps map/comparison controls.
+    top_path = Path(earth_path).parent / "top200_analogos.csv"
+    if top_path.exists():
+        top = pd.read_csv(top_path)
+        grid_indices = {(round(a, 6), round(o, 6)): i for i, (a, o) in enumerate(zip(earth["lat"], earth["lon"]))}
+        for row in top.to_dict("records"):
+            key = (round(row["earth_lat"], 6), round(row["earth_lon"], 6))
+            if key not in grid_indices:
+                raise ValueError(f"Published global ranking cell {key} is missing from {earth_path}; use the expanded gzip database")
+            i = grid_indices[key]
+            sid = cell_id(row["earth_lat"], row["earth_lon"])
+            site_cells.setdefault(sid, i)
+            site_info.setdefault(sid, {"kind": "discovery", "name": region_label(row["earth_region"]), "note": row.get("region_description")})
+
     per_body = body_weights(targets, earth)
     per_target = []
     heatmaps = {}
     for pos, (_, t) in enumerate(targets.iterrows()):
+        print(f"Scoring {t['name']} on {len(earth):,} original global cells", flush=True)
         weights, excluded = per_body[t["body"]]
         score, sims = score_target(earth_scaled, targets_scaled[pos], weights)
         rank = global_rank(score)
@@ -402,18 +439,20 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
         heatmaps[tid] = [[num(earth["lat"].iat[i], 3), num(earth["lon"].iat[i], 3), num(score[i], 3)]
                          for i in top]
         per_target.append({"pos": pos, "id": tid, "row": t, "weights": weights, "excluded": excluded,
-                           "score": score, "sims": sims, "rank": rank})
+                           "score": score, "rank": rank})
 
     # Results of every exported site for every target.
     cells = np.array(list(site_cells.values()))
     ids = list(site_cells.keys())
     results = {sid: [] for sid in ids}
     for tg in per_target:
+        print(f"Sensitivity {tg['row']['name']}: {STABILITY_RUNS} runs", flush=True)
         stab = stability(earth_scaled, targets_scaled[tg["pos"]], tg["weights"], cells, rng)
+        _, exported_sims = score_target(earth_scaled[cells], targets_scaled[tg["pos"]], tg["weights"])
         for k, (sid, i) in enumerate(zip(ids, cells)):
             if not np.isfinite(tg["score"][i]):
                 continue
-            sim = {f: num(tg["sims"][i, j]) for j, f in enumerate(compare.FEATURES)}
+            sim = {f: num(exported_sims[k, j]) for j, f in enumerate(compare.FEATURES)}
             used = {f: v for f, v in sim.items() if v is not None}
             results[sid].append({
                 "target": tg["id"],
@@ -458,7 +497,7 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
 
     weights = {**compare.DEFAULT_WEIGHTS, **WEB_WEIGHTS}
     data = {
-        "version": "2",
+        "version": "3",
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "synthetic": is_synthetic(earth_path) or is_synthetic(targets_path),
         "n_cells": int(len(earth)),
@@ -472,6 +511,8 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
         ],
         "targets": target_list,
         "sites": sites,
+        "method": {"id": "web-comparable-dimensions-v3", "equation": "exp(-sqrt(sum(w*d²)/sum(w)))", "scaling": "physical tolerances; log1p precipitation", "excluded_policy": "per-body outside terrestrial range; see each target.excluded", "global_cell_source": str(Path(earth_path).name), "regional_science_replaces_global_cells": False},
+        "provenance": {"global_commit": GLOBAL_COMMIT, "science_commit": SCIENCE_COMMIT, "web_base_commit": WEB_COMMIT},
     }
     return data, heatmaps, unmatched
 
@@ -485,16 +526,43 @@ def write_json(path, payload):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--earth", default=str(ROOT / "data/earth_all.csv"))
+    parser.add_argument("--earth", default=str(ROOT / "data/earth_all.csv.gz"))
     parser.add_argument("--targets", default=str(ROOT / "data/targets.csv"))
     parser.add_argument("--regions", default=str(ROOT / "data/regions_catalog.csv"))
     parser.add_argument("--sites-ts", default=str(ROOT / "web/src/data/sites.ts"))
     parser.add_argument("--features", default=str(ROOT / "data/features"))
     parser.add_argument("--out-dir", default=str(ROOT / "web/public/data"))
+    parser.add_argument("--stability-runs", type=int, default=100)
     args = parser.parse_args(argv)
 
+    if args.stability_runs < 1:
+        parser.error("--stability-runs must be positive")
+    global STABILITY_RUNS
+    STABILITY_RUNS = args.stability_runs
     data, heatmaps, unmatched = build(args.earth, args.targets, args.regions, args.sites_ts, args.features)
     out = Path(args.out_dir)
+    science = build_science(args.features, Path(args.features).parent / "results", Path(args.features).parent / "processed", out / "science", pd.read_csv(args.targets))
+    studies = {s["site_id"]: s for s in science["studies"] if s.get("site_id")}
+    for site in data["sites"]:
+        if site["id"] in studies:
+            study = studies[site["id"]]
+            site["science_ref"] = {"id": study["id"], "url": study["url"], "name": study["name"]}
+    for target in data["targets"]:
+        target["science_refs"] = science["target_associations"].get(target["name"], [])
+    data["science_index_url"] = "/data/science/index.json"
+    data["global_rankings_url"] = "/data/global-rankings.json"
+    top_path = Path(args.earth).parent / "top200_analogos.csv"
+    if top_path.exists():
+        top = pd.read_csv(top_path)
+        top["site_id"] = [cell_id(a, o) for a, o in zip(top["earth_lat"], top["earth_lon"])]
+        top["target_id"] = top["best_site"].map(target_id)
+        write_json(out / "global-rankings.json", {
+            "version": "1.0.0", "n_cells": data["n_cells"], "n_regions": data["n_regions"],
+            "source_commit": GLOBAL_COMMIT, "source_sha256": hashlib.sha256(top_path.read_bytes()).hexdigest(),
+            "model": {"id": "marco-global-full-environment", "weights": {**compare.DEFAULT_WEIGHTS, "elev_m": 0, "em_contrast": .5}, "excluded_moon_average": ["Shackleton floor (shadow)"], "separation_km": 300, "note": "Original global full-environment scores; different from the web comparable-dimensions score and from PAI"},
+            "rows": json.loads(top.to_json(orient="records", double_precision=15)),
+        })
+    validate_comparison_contract(data)
     size = write_json(out / "comparisons.json", data)
     heat_dir = out / "heatmap"
     for old in heat_dir.glob("*.json") if heat_dir.exists() else []:

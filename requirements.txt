@@ -21,3 +21,4 @@ pyhdf          # MODIS en HDF4 (build_earth.py); si falla con pip, instalar con 
 earthaccess    # descargas de NASA Earthdata (EMIT, NASADEM)
 pillow         # imágenes de cerca de la app (export_images.py)
 shapely        # cobertura de escenas (export_images.py)
+netCDF4        # motor explícito de los productos EMIT NetCDF

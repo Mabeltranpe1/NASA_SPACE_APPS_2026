@@ -1,0 +1,8 @@
+# Keep published scientific tables and manifests byte-stable across Windows/Linux.
+*.csv text eol=lf
+*.geojson text eol=lf
+*.json text eol=lf
+*.tif binary
+*.tiff binary
+*.png binary
+*.gz binary

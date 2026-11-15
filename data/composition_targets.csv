@@ -1,0 +1,16 @@
+name,lithology,cf_um,cf_sigma_um,em_contrast,em_contrast_sigma,evidence
+Shackleton rim,feldspathic highland (anorthositic),8.15,0.1,0.0245,0.0263,"Diviner highland CF ~8.1-8.2 um (Greenhagen 2010); Shackleton on SPA rim, plagioclase-rich (Kaguya)"
+de Gerlache rim,feldspathic highland (anorthositic),8.15,0.1,0.0245,0.0263,Diviner highland CF ~8.1-8.2 um; same terrain as Shackleton
+Haworth rim,"feldspathic highland, some noritic SPA ejecta",8.18,0.1,0.0167,0.0263,Diviner highland CF; closer to SPA basin (more pyroxene)
+Faustini rim,"feldspathic highland, some noritic SPA ejecta",8.18,0.1,0.0167,0.0263,Diviner highland CF; closer to SPA basin (more pyroxene)
+Mons Mouton summit,feldspathic massif (SPA rim),8.15,0.1,0.0245,0.0263,Diviner highland CF; SPA rim massif
+Shackleton floor (shadow),feldspathic highland (cold trap),8.15,0.15,0.0245,0.0394,"No CF in permanent shadow (no sunlight); same rock as the rim, larger uncertainty (possible frost)"
+Jezero crater (Perseverance),olivine-rich basalt + carbonates,8.4,0.1,-0.0411,0.0263,"TES/THEMIS olivine-rich Nili Fossae region; Perseverance: Seitah olivine cumulate, Maaz basalt"
+Gale crater (Curiosity),"basalt (olivine-bearing sand, mudstones)",8.3,0.1,-0.0148,0.0263,TES Surface Type 1 nearby; Bagnold dunes olivine basalt (Curiosity)
+Elysium Planitia (InSight),basaltic lava under dust,8.25,0.15,-0.0017,0.0394,Dust-covered in TES (high dust cover index); basaltic plains
+Meridiani Planum (Opportunity),basaltic sand + hematite,8.25,0.1,-0.0017,0.0263,TES Surface Type 1 + hematite (Christensen 2000); Opportunity
+Gusev crater (Spirit),olivine basalt,8.35,0.12,-0.028,0.0315,Spirit: Adirondack-class olivine basalt; moderately dusty
+Chryse Planitia (Viking 1),basaltic plains under dust,8.25,0.15,-0.0017,0.0394,Moderately dusty in TES; basaltic soils (Viking)
+Utopia Planitia (Viking 2),Surface Type 2 (andesite-like / weathered basalt),8.1,0.12,0.0377,0.0315,TES Surface Type 2 dominates the northern lowlands (Bandfield 2000; Wyatt & McSween 2002)
+Vastitas Borealis (Phoenix),Surface Type 2 (andesite-like / weathered basalt),8.1,0.12,0.0377,0.0315,TES Surface Type 2 northern plains
+Arcadia Planitia (human candidate),Surface Type 2 under some dust,8.15,0.15,0.0245,0.0394,Northern lowlands (Type 2) with moderate dust

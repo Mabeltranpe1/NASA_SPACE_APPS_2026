@@ -1,5 +1,36 @@
 # NASA Space Apps 2026: Análogos terrestres de bases en la Luna y Marte
 
+## Versión unificada: investigación global + ciencia regional de Colombia
+
+La rama `feature/colombia-scientific-integration` conserva la interfaz de Sebastián (`Ssalazarp420`), la base de Marco (`Mabeltranpe1`) de **691.035 celdas / 727 regiones** y la investigación de Santiago (`santiago-851`): **seis regiones colombianas, doce ventanas planetarias y 72 comparaciones PAI**.
+
+Los JSON científicos y las figuras ya están incluidos. Para abrir la app sin descargar datasets:
+
+```powershell
+cd web
+npm ci
+npm run dev -- --host 127.0.0.1
+```
+
+Abre `http://127.0.0.1:5173/?site=tatacoa&view=analysis&lang=es`. En la ficha científica puedes elegir topografía, clima, ambiente, geología, espectros, EMIT y PAI; los enlaces PAI abren las ventanas lunares/marcianas con sus productos complementarios. `?view=analysis&lang=en` sin un sitio seleccionado muestra también el top 100 lunar y top 100 marciano de Marco.
+
+La caracterización regional y las celdas globales conservan soportes diferentes. El PAI, el índice global completo y el puntaje web se muestran como métodos distintos. Guajira, EMIT, THEMIS, CRISM Phoenix y el hielo modelado mantienen sus indicadores de calidad.
+
+Para reexportar desde los productos existentes y verificar:
+
+```powershell
+.\.venv\Scripts\python.exe -B src/export_web.py
+.\.venv\Scripts\python.exe -B -m pytest -q -p no:cacheprovider tests
+cd web
+npm run lint
+npm run build
+npm run test:e2e
+```
+
+Las pruebas de navegador usan Edge instalado por defecto. Para Chromium: instala su navegador de Playwright y configura `PLAYWRIGHT_CHANNEL=chromium`. Las pruebas aíslan las capas externas; validan la interfaz, contratos y datos locales.
+
+Consulta [el informe de integración](GEOANALOG_INTEGRATION_REPORT.md), [el contrato científico](docs/SCIENTIFIC_DATA_CONTRACT.md) y [la correspondencia completa de variables](docs/SCIENTIFIC_VARIABLE_MAPPING.md). La exportación usa el gzip ampliado; `data/earth_all.csv` se conserva solo como referencia de la versión anterior. No hace falta ejecutar descargadores ni reconstruir la base global para usar la app.
+
 Proyecto para el reto **Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars** del NASA Space Apps Challenge 2026.
 
 ## El reto
