@@ -1,3 +1,31 @@
+# Entornos virtuales de Python
+.venv/
+venv/
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Credenciales y variables de entorno
+.env
+.env.*
+!.env.example
+credentials.json
+.netrc
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Configuración local de VS Code
+.vscode/
+
+# Datos satelitales originales
+data/raw/emit/
+data/raw/mars/
+data/raw/moon/*.tif
+data/raw/earth/*.tif
 # Datos (pesados, se descargan con scripts)
 data/raw/*
 data/processed/*
