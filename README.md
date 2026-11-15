@@ -106,6 +106,7 @@ El despliegue en Azure se explica en [infra/README.md](infra/README.md).
 - [docs/BITACORA.md](docs/BITACORA.md): registro de decisiones y avances
 - [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): guía para crear y probar una API key de Google Maps
 - [docs/VISUALIZACION_COMPARACION.md](docs/VISUALIZACION_COMPARACION.md): plan de la vista de comparación detallada, contrato de datos y mejoras para el jurado
+- [docs/PIPELINE_COMPARADOR.md](docs/PIPELINE_COMPARADOR.md): cómo funciona el comparador (`compare.py`), fuentes de datos de la Tierra, la Luna y Marte, y cómo correrlo (Marco)
 
 ## Cómo colaborar
 

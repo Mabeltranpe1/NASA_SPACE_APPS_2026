@@ -30,6 +30,8 @@ def make_tables():
         "temp_range_K": [80.0, 40.0, 10.0],
         "albedo": [0.2, 0.3, 0.1],
         "precip_mm": [5.0, 200.0, 2000.0],
+        "ndvi": [0.0, 0.2, 0.8],
+        "em_contrast": [0.15, 0.05, 0.0],
     })
     target = earth.iloc[[0]].drop(columns=["lat", "lon"]).copy()
     target.insert(0, "name", "Twin of cell 0")
@@ -70,11 +72,28 @@ def test_empty_target_feature_is_skipped():
     assert np.isclose(result.iloc[0]["score"], 1.0)
 
 
-def test_missing_earth_value_does_not_break_the_cell():
+def test_missing_earth_value_cannot_win():
     earth, targets = make_tables()
     earth.loc[1, "albedo"] = np.nan
-    result = compare.compare_all(earth, targets)
-    assert result["score"].notna().all()
+    strict = compare.compare_all(earth, targets)
+    assert strict[strict["lat"] == 10.0]["score"].isna().all()   # excluded by default
+    assert strict.iloc[-1]["lat"] == 10.0                        # and ranked last
+    relaxed = compare.compare_all(earth, targets, min_coverage=0.8)
+    assert relaxed["score"].notna().all()
+
+
+def test_both_scalings_find_the_twin():
+    earth, targets = make_tables()
+    for scaling in ("tolerance", "robust"):
+        best = compare.compare_all(earth, targets, scaling=scaling).iloc[0]
+        assert best["lat"] == 0.0 and np.isclose(best["score"], 1.0)
+
+
+def test_tolerance_scale_is_physical():
+    earth, targets = make_tables()
+    targets.loc[0, "temp_mean_K"] = 220.0 + compare.TOLERANCE["temp_mean_K"]
+    cell0 = compare.compare_all(earth, targets).query("lat == 0.0").iloc[0]
+    assert np.isclose(cell0["sim_temp_mean_K"], np.exp(-1))
 
 
 def test_worst_match_names_the_broken_feature():
@@ -115,6 +134,13 @@ def test_sensitivity_is_repeatable_and_twin_is_always_top():
     second = compare.weight_sensitivity(earth, targets, top=1, runs=50)
     assert first.equals(second)
     assert first.iloc[0]["lat"] == 0.0 and first.iloc[0]["top_share"] == 1.0
+
+
+def test_overall_table_puts_the_twin_first():
+    earth, targets = make_tables()
+    overall = compare.overall_ranking(compare.compare_all(earth, targets))
+    assert overall.iloc[0]["lat"] == 0.0 and overall.iloc[0]["conditions_met"] == "9 of 9"
+    assert len(overall) == len(earth)
 
 
 if __name__ == "__main__":
