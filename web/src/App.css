@@ -758,6 +758,35 @@
   line-height: 1.35;
 }
 
+.site-list button > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Similarity index of a list row, tinted with the body it is compared with */
+.site-list .site-score {
+  flex: none;
+  align-self: center;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--body) 55%, transparent);
+  background: color-mix(in srgb, var(--body) 14%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+
+.site-list .site-score b {
+  font-size: 0.86rem;
+}
+
+.site-list .site-score small {
+  display: inline;
+  margin: 0;
+  font-size: 0.66rem;
+}
+
 .site-dots {
   display: flex;
   flex-direction: column;

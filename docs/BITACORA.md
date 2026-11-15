@@ -14,6 +14,17 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Análogos ordenados de más a menos similar
+**Autor:** @Ssalazarp420
+
+- **Pedido:** en la pestaña «Análogos» del panel izquierdo, ordenar los sitios de más a menos similar para ver de un vistazo cuál es más compatible.
+- **Qué se hizo:**
+  - Las dos listas (análogos de referencia y caso de estudio Colombia) y la cuadrícula de la sección Análisis se ordenan por el **índice de similitud** (0–100). Es el mismo número del panel derecho.
+  - Cada fila muestra el índice en una pastilla del color del cuerpo con el que se compara (Luna o Marte). Si un sitio tiene par en ambos, cuenta el más parecido.
+  - Al abrir un sitio desde la lista, el panel derecho ya lo compara con ese cuerpo, para que el número de la lista y el del panel coincidan. Ejemplo: Haughton da 12/100 con Gale (Marte) y solo 2/100 con Shackleton (Luna).
+  - Los sitios sin resultado en la base de datos (Timanfaya y Lava Beds, cuyas regiones aún faltan) van al final, sin número.
+- **Decisión:** la regla para elegir el objetivo comparado (el par si está en la base, si no el primer objetivo del cuerpo con resultado) quedó en una sola función, `comparedTarget()` en `web/src/data/focus.ts`, que usan la lista y el panel derecho.
+
 ## 2026-11-15 · Release v0.4.0 a producción
 **Autor:** @Ssalazarp420
 
