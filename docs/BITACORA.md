@@ -14,6 +14,11 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.5.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #18 (búsqueda mundial de 727 regiones con un solo sistema de puntajes, que incluye la rama de Marco) y se publicó `v0.5.0` en `main`.
+
 ## 2026-11-15 · Búsqueda mundial (727 regiones) y un solo sistema de puntajes
 **Autor:** @Ssalazarp420
 
