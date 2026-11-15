@@ -73,7 +73,8 @@ flowchart LR
 |---|---|
 | Framework | React 19 + TypeScript |
 | Build | Vite |
-| Globos 3D | **CesiumJS** (Apache 2.0, sin Cesium ion ni token): un visor por cuerpo con su elipsoide real (`Ellipsoid.WGS84`, `MOON`, `MARS`). Maneja los polos, necesario para el polo sur lunar |
+| Globos 3D | **CesiumJS** (Apache 2.0, sin Cesium ion ni token): **un solo globo principal** que se recrea con el elipsoide real del cuerpo elegido (`Ellipsoid.WGS84`, `MOON`, `MARS`). Maneja los polos, necesario para el polo sur lunar. Las miniaturas del panel derecho son visores de detalle sin interacción |
+| Tipografía | Inter (texto) y Space Grotesk (títulos), de Google Fonts (gratis) |
 | Luna y Marte | **NASA Moon Trek** (LRO WAC, ~100 m/px) y **Mars Trek** (Viking MDIM 2.1 color, ~232 m/px; relieve MOLA, ~463 m/px), teselas geográficas `default028mm` |
 | Imagen de detalle (Tierra) | **NASA GIBS Snapshot API**: Landsat WELD (30 m/px); MODIS Terra en sitios polares sin cobertura Landsat |
 | Imágenes | **NASA GIBS** (WMTS): Blue Marble, VIIRS NOAA-20 color verdadero, relieve ASTER GDEM, temperatura superficial MODIS, etiquetas de referencia. Sin key ni costo. |
@@ -84,18 +85,24 @@ flowchart LR
 Estructura:
 ```
 web/src/
-├── App.tsx                  # Modos de comparación, filtros, globos lado a lado, ficha y recorrido
+├── App.tsx                  # Barra de navegación, un solo globo con selector Tierra · Luna · Marte, paneles, búsqueda y vistas
 ├── main.tsx                 # Punto de entrada (envuelve la app en LanguageProvider)
 ├── theme.ts                 # Colores de identidad validados (Tierra, Luna, Marte) y de similitud
 ├── components/
-│   ├── PlanetGlobe.tsx      # Visor Cesium genérico (globo completo o vista de detalle)
+│   ├── PlanetGlobe.tsx      # Visor Cesium genérico (globo, vista de detalle o miniatura; giro lento en reposo)
+│   ├── SiteCard.tsx         # Ficha del lugar (panel izquierdo) y caracterización de Santiago
+│   ├── InsightPanel.tsx     # Panel derecho: miniaturas de terreno con candados e índice de similitud
 │   ├── DetailImage.tsx      # Imagen de detalle: snapshot Landsat/MODIS o vista cercana Luna/Marte
 │   ├── ComparisonPanel.tsx  # Comparación detallada: puntaje, pesos, valores, ranking, límites
-│   └── GuidedTour.tsx       # Recorrido guiado de 6 pasos
+│   ├── MethodView.tsx       # Vista «Método»: fórmula, reglas, fuentes, límites y equipo
+│   ├── IntroOverlay.tsx     # Pantalla de bienvenida con las cifras del proyecto
+│   ├── GuidedTour.tsx       # Recorrido guiado de 7 pasos
+│   └── Icons.tsx            # Iconos SVG en línea (sin librerías)
 ├── planet/
 │   └── bodies.ts            # Configuración por cuerpo: elipsoide, imágenes, alturas de cámara
 ├── map/
-│   └── gibs.ts              # Capas NASA GIBS de la Tierra y URLs de teselas
+│   ├── gibs.ts              # Capas NASA GIBS de la Tierra y URLs de teselas
+│   └── snapshot.ts          # Imagen de cerca de la Tierra (Landsat; MODIS por encima de 78°)
 ├── i18n/
 │   ├── strings.ts           # Textos de la interfaz en español e inglés
 │   ├── LanguageContext.tsx  # Proveedor de idioma (navegador, localStorage, ?lang=)
@@ -105,9 +112,10 @@ web/src/
 │   ├── sites.ts             # Catálogo de 12 sitios con sus homólogos (español)
 │   ├── sites.en.ts          # Textos del catálogo en inglés
 │   ├── comparisons.ts       # Tipos del JSON, carga y recálculo del puntaje con pesos
+│   ├── focus.ts             # Descubrimientos por cuerpo y conversión de un descubrimiento en «sitio»
 │   └── tour.ts              # Pasos del recorrido guiado (ES/EN)
-├── App.css                  # Estilos de la app
-└── index.css                # Variables de color (tema oscuro)
+├── App.css                  # Estilos de la app (paneles de vidrio, barra de navegación, versión móvil)
+└── index.css                # Variables de color y tipografía (tema oscuro; Inter y Space Grotesk)
 
 web/public/data/comparisons.json   # Generado por src/export_web.py
 web/public/data/heatmap/*.json     # Mapa de similitud por objetivo (mismo script)

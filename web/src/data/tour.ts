@@ -1,33 +1,52 @@
 import type { Lang } from '../i18n/strings'
+import type { Body, Target } from './types'
 
-export type TourMode = 'tierra-luna' | 'tierra-marte' | 'luna-marte'
+export type TourView = 'discover' | 'sites' | 'analysis'
 
 export interface TourStep {
-  mode: TourMode
-  /** Site to select; null shows the whole globes. */
+  view: TourView
+  /** Catalog site to select; null shows the whole globe. */
   siteId: string | null
+  /** Select the best discovery of the global search for this body. */
+  discovery?: Target
+  /** Body the globe switches to after a few seconds on Earth. */
+  body: Body
   title: Record<Lang, string>
   text: Record<Lang, string>
-  /** Scroll down to the detailed comparison at this step. */
-  showComparison?: boolean
 }
 
 export const TOUR_STEPS: TourStep[] = [
   {
-    mode: 'tierra-luna',
+    view: 'discover',
     siteId: null,
+    body: 'tierra',
     title: {
       es: 'Ensayar en la Tierra antes de volar',
       en: 'Rehearse on Earth before flying',
     },
     text: {
-      es: 'Antes de construir una base en la Luna o aterrizar en Marte, los equipos prueban equipos y procedimientos en lugares de la Tierra con condiciones parecidas. Aquí los comparamos lado a lado con datos abiertos de la NASA.',
-      en: 'Before building a base on the Moon or landing on Mars, teams test equipment and procedures in places on Earth with similar conditions. Here we compare them side by side using open NASA data.',
+      es: 'Antes de construir una base en la Luna o aterrizar en Marte, los equipos prueban equipos y procedimientos en lugares de la Tierra con condiciones parecidas. Aquí los encontramos y los comparamos con datos abiertos de la NASA.',
+      en: 'Before building a base on the Moon or landing on Mars, teams test equipment and procedures in places on Earth with similar conditions. Here we find and compare them using open NASA data.',
     },
   },
   {
-    mode: 'tierra-luna',
+    view: 'discover',
+    siteId: null,
+    discovery: 'marte',
+    body: 'marte',
+    title: {
+      es: 'La búsqueda global encuentra lugares nuevos',
+      en: 'The global search finds new places',
+    },
+    text: {
+      es: 'Comparamos unas 164 000 celdas de la Tierra con 15 sitios de la Luna y Marte. De cada región poco estudiada destacamos su mejor lugar, y el mapa muestra en qué partes del planeta está el mayor parecido.',
+      en: 'We compare about 164,000 Earth cells with 15 Moon and Mars sites. For each little-studied region we highlight its best place, and the map shows where on the planet the match is strongest.',
+    },
+  },
+  {
+    view: 'sites',
     siteId: 'haughton-crater',
+    body: 'luna',
     title: {
       es: 'Un cráter polar para practicar Artemis',
       en: 'A polar crater to practice for Artemis',
@@ -38,8 +57,9 @@ export const TOUR_STEPS: TourStep[] = [
     },
   },
   {
-    mode: 'tierra-marte',
+    view: 'sites',
     siteId: 'atacama-yungay',
+    body: 'marte',
     title: {
       es: 'El suelo más seco de la Tierra',
       en: 'The driest soil on Earth',
@@ -50,8 +70,9 @@ export const TOUR_STEPS: TourStep[] = [
     },
   },
   {
-    mode: 'tierra-marte',
+    view: 'sites',
     siteId: 'tatacoa',
+    body: 'marte',
     title: {
       es: 'Un candidato poco estudiado: la Tatacoa',
       en: 'A lesser-studied candidate: Tatacoa',
@@ -62,8 +83,9 @@ export const TOUR_STEPS: TourStep[] = [
     },
   },
   {
-    mode: 'luna-marte',
+    view: 'sites',
     siteId: 'lava-beds',
+    body: 'luna',
     title: {
       es: 'Refugios bajo tierra',
       en: 'Shelters underground',
@@ -74,8 +96,11 @@ export const TOUR_STEPS: TourStep[] = [
     },
   },
   {
-    mode: 'tierra-luna',
-    siteId: 'haughton-crater',
+    view: 'analysis',
+    siteId: null,
+    // The best place of the global search: the clearest example of a high, stable score.
+    discovery: 'marte',
+    body: 'tierra',
     title: {
       es: 'Medir cuánto se parecen',
       en: 'Measuring how similar they are',
@@ -84,6 +109,5 @@ export const TOUR_STEPS: TourStep[] = [
       es: 'Cada par tiene un puntaje calculado con datos reales: pendiente, rugosidad, temperatura, albedo, lluvia y vegetación, frente a unas 164 000 celdas de la Tierra. La vista muestra en qué se parecen, dónde se rompe la analogía y qué no puede reproducir la Tierra: la gravedad, el vacío y la radiación.',
       en: 'Each pair gets a score computed from real data: slope, roughness, temperature, albedo, rain and vegetation, against about 164,000 Earth cells. The view shows what is similar, where the analogy breaks down, and what Earth cannot reproduce: gravity, vacuum and radiation.',
     },
-    showComparison: true,
   },
 ]

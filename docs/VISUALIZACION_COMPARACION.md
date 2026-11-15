@@ -160,9 +160,9 @@ Ordenadas por impacto/esfuerzo:
 | 1 | **Puntajes con datos reales + mapa de calor de "descubrimientos"** (lugares con alta similitud que no están entre los análogos conocidos) | ⭐⭐⭐ Es lo que el reto pide explícitamente | Alto (depende del pipeline) |
 | 2 | **Recorrido guiado** de 60–90 s: la app vuela sola por 4–5 pares con un texto corto en cada uno. Sirve como demo en vivo y para grabar el video | ⭐⭐⭐ | Medio |
 | 3 | **Versión en inglés** (selector ES/EN): el jurado es internacional | ⭐⭐⭐ | Bajo–medio |
-| 4 | **Panel "Cómo lo calculamos"**: método, fórmulas, fuentes por variable y límites (gravedad, vacío, radiación) | ⭐⭐ Credibilidad científica | Bajo |
-| 5 | **Enlaces compartibles**: la URL guarda el modo y el par (`?modo=tierra-marte&sitio=tatacoa`) | ⭐⭐ Útil para la presentación | Bajo |
-| 6 | **Cámaras sincronizadas**: girar un globo gira el otro; o vista "lado a lado a la misma escala" | ⭐⭐ Efecto visual | Medio |
-| 7 | **Pantalla de inicio** con la pregunta del proyecto y un botón "Explorar" | ⭐⭐ Primera impresión | Bajo |
+| 4 | ✅ **Vista "Método"**: fórmula, reglas, fuentes por variable, límites y equipo | ⭐⭐ Credibilidad científica | Bajo |
+| 5 | ✅ **Enlaces compartibles**: la URL guarda la sección y el sitio (`?view=sites&site=tatacoa`) | ⭐⭐ Útil para la presentación | Bajo |
+| 6 | ~~Cámaras sincronizadas~~: reemplazado por **un solo globo** con selector Tierra · Luna · Marte y miniaturas de los tres cuerpos | ⭐⭐ Efecto visual | Medio |
+| 7 | ✅ **Pantalla de inicio** con la pregunta del proyecto, cifras clave, recorrido guiado y "Explorar" | ⭐⭐ Primera impresión | Bajo |
 | 8 | **Rendimiento**: cargar Cesium bajo demanda y mostrar una pantalla de carga | ⭐ Evita la "pantalla negra" | Bajo |
 | 9 | **Móvil y accesibilidad**: navegación con teclado, contraste, tabla alternativa | ⭐ | Medio |

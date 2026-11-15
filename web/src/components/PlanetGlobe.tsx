@@ -44,6 +44,10 @@ interface Props {
   /** Similarity map: [lat, lng, score] cells drawn as points (one hue, opacity by score). */
   heat?: [number, number, number][] | null
   heatColor?: string
+  /** Slow rotation while nothing is selected; stops as soon as the user touches the globe. */
+  spin?: boolean
+  /** false = no mouse/touch navigation (thumbnails). */
+  interactive?: boolean
 }
 
 /** Height (m) of markers and map points above the smooth globe, so the ground does not cover them. */
@@ -73,6 +77,8 @@ export default function PlanetGlobe({
   closeupHeight,
   heat = null,
   heatColor = '#2fa58f',
+  spin = false,
+  interactive = true,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
   const viewerRef = useRef<Viewer | null>(null)
@@ -112,6 +118,7 @@ export default function PlanetGlobe({
     scene.fog.enabled = cfg.atmosphere
     if (scene.moon) scene.moon.show = false
     if (variant === 'closeup' && scene.skyBox) scene.skyBox.show = false
+    if (variant === 'closeup' && scene.sun) scene.sun.show = false
 
     if (cfg.createReliefLayer) {
       const reliefLayer = cfg.createReliefLayer()
@@ -129,6 +136,11 @@ export default function PlanetGlobe({
     viewer.camera.setView({
       destination: Cartesian3.fromDegrees(-20, 15, cfg.globeHeight, cfg.ellipsoid),
     })
+
+    if (!interactive) {
+      const c = scene.screenSpaceCameraController
+      c.enableRotate = c.enableTranslate = c.enableZoom = c.enableTilt = c.enableLook = false
+    }
 
     const handler = new ScreenSpaceEventHandler(scene.canvas)
     handler.setInputAction((event: ScreenSpaceEventHandler.PositionedEvent) => {
@@ -149,7 +161,38 @@ export default function PlanetGlobe({
       earthLayersRef.current = null
       reliefLayerRef.current = null
     }
-  }, [body, variant])
+  }, [body, variant, interactive])
+
+  // Idle rotation. Starts after the camera settles and stops on the first touch.
+  useEffect(() => {
+    const viewer = viewerRef.current
+    if (!viewer || !spin) return
+    const canvas = viewer.scene.canvas
+    let raf = 0
+    let last = performance.now()
+    const startAt = last + 2200
+    let stopped = false
+    const stop = () => {
+      stopped = true
+    }
+    canvas.addEventListener('pointerdown', stop)
+    canvas.addEventListener('wheel', stop, { passive: true })
+    const tick = (now: number) => {
+      const dt = Math.min((now - last) / 1000, 0.1)
+      last = now
+      if (!stopped && now > startAt && !viewer.isDestroyed()) {
+        viewer.camera.rotate(Cartesian3.UNIT_Z, -0.045 * dt)
+        viewer.scene.requestRender()
+      }
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => {
+      cancelAnimationFrame(raf)
+      canvas.removeEventListener('pointerdown', stop)
+      canvas.removeEventListener('wheel', stop)
+    }
+  }, [spin, body, variant])
 
   // Earth layer visibility.
   useEffect(() => {
@@ -227,7 +270,7 @@ export default function PlanetGlobe({
                 horizontalOrigin: HorizontalOrigin.LEFT,
                 verticalOrigin: VerticalOrigin.CENTER,
                 pixelOffset: new Cartesian2(12, 0),
-                show: isSelected || markers.length <= 6,
+                show: isSelected || markers.length <= 10,
                 translucencyByDistance: new NearFarScalar(1.5e6, 1, 4e7, 0.6),
               }
             : undefined,
