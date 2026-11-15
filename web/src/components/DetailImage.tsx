@@ -10,9 +10,11 @@ interface Props {
   body: Body
   site: AnalogSite
   homologue?: Homologue
+  /** How much higher the camera goes near the poles (bigger views need more). */
+  polarZoomOut?: number
 }
 
-export default function DetailImage({ body, site, homologue }: Props) {
+export default function DetailImage({ body, site, homologue, polarZoomOut = 6 }: Props) {
   const { lang, t } = useLang()
   const [loadedUrl, setLoadedUrl] = useState<string | null>(null)
   const [failedUrl, setFailedUrl] = useState<string | null>(null)
@@ -63,7 +65,7 @@ export default function DetailImage({ body, site, homologue }: Props) {
   const cfg = BODIES[body]
   // Near the poles the camera goes higher to show the polar region instead of the stretched pole.
   const polar = Math.abs(point.lat) > 80
-  const height = polar ? cfg.closeupHeight * 6 : undefined
+  const height = polar ? cfg.closeupHeight * polarZoomOut : undefined
 
   return (
     <figure className="detail-image">

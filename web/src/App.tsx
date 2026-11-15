@@ -456,7 +456,13 @@ export default function App() {
 
             <aside className="panel panel-left glass" key={focus?.id ?? `list-${focusKind}`}>
               {focus ? (
-                <SiteCard site={focus} discovery={focusKind === 'discover'} onBack={clearFocus} onBody={chooseBody} />
+                <SiteCard
+                  site={focus}
+                  discovery={focusKind === 'discover'}
+                  onBack={clearFocus}
+                  onBody={chooseBody}
+                  compareBody={compareBody}
+                />
               ) : focusKind === 'discover' ? (
                 <>
                   <p className="eyebrow">{t('nav.discover')}</p>

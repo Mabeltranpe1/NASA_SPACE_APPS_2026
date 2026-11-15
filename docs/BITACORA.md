@@ -14,6 +14,24 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.3.1 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #13 (ventana para comparar imágenes) y se publicó `v0.3.1` en `main`.
+- **Producción:** https://icy-flower-03890400f.5.azurestaticapps.net
+
+## 2026-11-15 · Ventana para comparar imágenes
+**Autor:** @Ssalazarp420
+
+- Al hacer clic en la imagen de la ficha (panel izquierdo) se abre una **ventana emergente**:
+  - a la izquierda, la imagen de la Tierra: Landsat, o MODIS por encima de 78°;
+  - a la derecha, la vista de cerca del homólogo en la Luna o Marte, con el botón Imagen/Relieve en Marte.
+  - Si el lugar tiene homólogo en los dos cuerpos, se cambia con los botones Luna · Marte. Empieza en el cuerpo que se esté comparando en el panel derecho.
+- Se cierra con Esc, con el botón ✕ o haciendo clic fuera. En móvil las imágenes quedan una encima de la otra.
+- La ventana avisa que cada imagen tiene su propia escala. La de la Luna o Marte se puede acercar o arrastrar.
+- **Polo sur lunar:** en la ventana grande se notaba la deformación del mosaico global cerca del polo. Ahí la cámara se aleja más (14 veces la altura normal, frente a 6 en las imágenes pequeñas).
+- **Detalle técnico:** la ventana usa `createPortal` hacia `body`, porque el panel tiene `backdrop-filter` y eso encerraría un `position: fixed`.
+
 ## 2026-11-14 · Release v0.3.0 a producción
 **Autor:** @Ssalazarp420
 

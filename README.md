@@ -93,7 +93,7 @@ En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analo
    - **Análisis:** la comparación detallada.
    - **Método:** cómo se calcula el puntaje.
 3. Elige un lugar en la lista, en el globo o con el buscador. El globo vuela al lugar y aparecen dos paneles:
-   - a la izquierda, la ficha;
+   - a la izquierda, la ficha; al hacer clic en su imagen se abre una ventana con la Tierra a la izquierda y la Luna o Marte a la derecha;
    - a la derecha, las miniaturas de la Tierra, la Luna y Marte, y el **índice de similitud**.
 4. Con los botones **Tierra · Luna · Marte** el globo cambia de cuerpo y vuela al homólogo. Si el lugar no tiene homólogo en un cuerpo, ese botón queda bloqueado (🔒).
 5. **Ver análisis completo** abre el puntaje, los pesos ajustables, los valores reales, el ranking y los límites.

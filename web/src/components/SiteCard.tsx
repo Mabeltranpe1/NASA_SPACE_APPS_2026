@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { DIMENSION_LABELS, type AnalogSite, type Body, type Dimension } from '../data/types'
+import { DIMENSION_LABELS, type AnalogSite, type Body, type Dimension, type Target } from '../data/types'
 import { useComparisons, type Characterization } from '../data/comparisons'
 import { googleEarthUrl } from '../data/focus'
 import { earthSnapshotUrl } from '../map/snapshot'
 import { BODY_COLORS } from '../theme'
 import { useLang } from '../i18n/useLang'
 import { BODY_NAMES, DIMENSION_NAMES, ENVIRONMENT_NAMES } from '../i18n/strings'
-import { IconExternal } from './Icons'
+import { IconExpand, IconExternal } from './Icons'
+import ImageCompareModal from './ImageCompareModal'
 
 interface Props {
   site: AnalogSite
@@ -14,12 +15,16 @@ interface Props {
   discovery?: boolean
   onBack: () => void
   onBody: (body: Body) => void
+  /** Moon/Mars body shown first in the image comparison pop-up. */
+  compareBody?: Target | null
 }
 
-export default function SiteCard({ site, discovery = false, onBack, onBody }: Props) {
+export default function SiteCard({ site, discovery = false, onBack, onBody, compareBody = null }: Props) {
   const { lang, t } = useLang()
   const snap = earthSnapshotUrl(site)
   const [imgOk, setImgOk] = useState(true)
+  const [comparing, setComparing] = useState(false)
+  const canCompare = site.homologues.length > 0
   const target = site.homologues[0]
 
   return (
@@ -29,13 +34,27 @@ export default function SiteCard({ site, discovery = false, onBack, onBody }: Pr
       </button>
 
       <figure className="site-hero">
-        {imgOk && <img src={snap.url} alt={t('image.alt', { name: site.name })} onError={() => setImgOk(false)} />}
+        <button
+          className="site-hero-button"
+          onClick={() => setComparing(true)}
+          disabled={!canCompare}
+          aria-label={t('image.compareAria', { name: site.name })}
+          title={canCompare ? t('image.compare') : undefined}
+        >
+          {imgOk && <img src={snap.url} alt={t('image.alt', { name: site.name })} onError={() => setImgOk(false)} />}
+          {canCompare && (
+            <span className="hero-cta">
+              <IconExpand size={15} /> {t('image.compare')}
+            </span>
+          )}
+        </button>
         <figcaption>
           <span>
             {snap.label} · {t('image.side', { km: snap.widthKm })}
           </span>
         </figcaption>
       </figure>
+      {comparing && <ImageCompareModal site={site} initialBody={compareBody} onClose={() => setComparing(false)} />}
 
       <h2 className="site-name">{site.name}</h2>
       <p className="site-meta">

@@ -2244,6 +2244,117 @@
 }
 
 /* =====================================================================
+   Image comparison pop-up (Earth ↔ Moon/Mars)
+   ===================================================================== */
+
+.site-hero-button {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+}
+
+.site-hero-button:disabled {
+  cursor: default;
+}
+
+.site-hero-button img {
+  transition: transform 0.4s ease;
+}
+
+.site-hero-button:hover:not(:disabled) img {
+  transform: scale(1.04);
+}
+
+.hero-cta {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(6, 10, 18, 0.72);
+  border: 1px solid var(--border-strong);
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s;
+}
+
+.site-hero-button:hover .hero-cta,
+.site-hero-button:focus-visible .hero-cta {
+  background: rgba(165, 216, 255, 0.22);
+}
+
+.site-hero figcaption {
+  pointer-events: none;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(2, 4, 9, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fade-in 0.25s ease-out;
+}
+
+.modal {
+  width: min(1320px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 20px 22px 16px;
+  border-color: var(--border-strong);
+  background: rgba(12, 17, 29, 0.88);
+  animation: rise-in 0.3s ease-out;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.modal-head h2 {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.modal-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-tools .seg {
+  margin: 0;
+}
+
+.modal-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  height: min(68vh, 660px);
+}
+
+.modal-note {
+  margin: 10px 2px 0;
+}
+
+/* =====================================================================
    Medium screens: narrower panels
    ===================================================================== */
 
@@ -2436,5 +2547,32 @@
 
   .ranking li {
     grid-template-columns: 1.4em minmax(0, 1fr) 4em 2.2em;
+  }
+
+  .modal-backdrop {
+    padding: 10px;
+  }
+
+  .modal {
+    padding: 14px;
+  }
+
+  .modal-head h2 {
+    font-size: 1.05rem;
+  }
+
+  .modal-tools {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+
+  .modal-images {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 72vh;
+  }
+
+  .modal-images .detail-image {
+    height: auto;
   }
 }
