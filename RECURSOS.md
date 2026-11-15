@@ -73,6 +73,16 @@ Estado de acceso verificado el 2026-11-14: ✅ carga bien · ⚠️ requiere rev
 - Datos de radar SAR terrestre, comparables con Mini-RF lunar y SHARAD de Marte.
 - ⚠️ Desde WSL falla la verificación del certificado SSL. En el navegador debería abrir sin problema.
 
+### NASA Image and Video Library ✅
+- URL: https://images.nasa.gov · API: https://images-api.nasa.gov (sin clave, con CORS)
+- Fotos curadas de las misiones: rovers y módulos (Perseverance, Curiosity, Spirit, Opportunity, Phoenix, Viking, InSight), Apolo, HiRISE, LRO, fotos de astronautas desde la Estación Espacial y trabajo de campo de la NASA (Ames).
+- Son material público de la NASA. Se cita el crédito de cada misión (campo `secondary_creator`, por ejemplo "NASA/JPL-Caltech/MSSS").
+- La app la usa para la **galería de fotos** (`src/export_gallery.py`, lista curada en `data/gallery_sources.json`).
+
+### NASA Scientific Visualization Studio (SVS) ✅
+- URL: https://svs.gsfc.nasa.gov · API: https://svs.gsfc.nasa.gov/api/<id>
+- Visualizaciones hechas con datos del LRO; por ejemplo, las regiones candidatas de Artemis III (SVS 5013). Se usan para los sitios del polo sur lunar, que no tienen fotos desde el suelo.
+
 ### Microsoft Planetary Computer ✅
 - Catálogo: https://planetarycomputer.microsoft.com/catalog · API STAC: https://planetarycomputer.microsoft.com/api/stac/v1
 - Unas 140 colecciones de la Tierra: Sentinel-2 L2A, Landsat Collection 2, Copernicus DEM, NASADEM, MODIS, ALOS, ESA WorldCover…
@@ -119,6 +129,7 @@ Las descargas se hacen con los scripts de `src/`. Detalle de versiones, resoluci
 | Tierra | NASA POWER | Clima del aire y radiación solar | Santiago |
 | Tierra | EMIT L2B (EMITL2BMIN) | Mineralogía (pendiente de procesar) | Santiago |
 | Tierra | Sentinel-2 L2A (Microsoft Planetary Computer) | Imágenes de cerca en la app (no entran en el puntaje) | Web |
+| Tierra, Luna y Marte | NASA Image and Video Library y NASA SVS | Galería de fotos de la app (no entra en el puntaje) | Web |
 | Luna | LRO LOLA (LDEM 80 m polar, 5 m en sitios de Artemis) | Elevación, pendiente, rugosidad, albedo | Marco, Santiago |
 | Luna | LRO Diviner PRP | Temperatura media y máxima | Marco |
 | Marte | HRSC + MOLA blend (200 m, USGS) | Elevación, pendiente, rugosidad | Marco, Santiago |

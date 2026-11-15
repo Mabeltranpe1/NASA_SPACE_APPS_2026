@@ -105,12 +105,30 @@ python src/export_images.py                 # todas las que falten
 python src/export_images.py --only tatacoa  # un lugar
 python src/export_images.py --force         # rehacer todo
 python src/export_images.py --redo-saturated  # rehacer las que salieron quemadas
+python src/export_gallery.py                # galería de fotos (solo faltantes)
 ```
 
 - **Qué genera:** `web/public/images/earth/<id>.jpg` (1024 × 1024, ~200–400 KB) y `index.json`, con la escena, la fecha, la nubosidad, la resolución y el crédito de cada imagen. La app muestra esos datos en el pie de cada imagen.
 - **Descubrimientos nuevos:** después de correr `export_web.py`, vuelve a correr `export_images.py` para generar sus imágenes.
 - **Control de calidad:** el script descarta las escenas cuyo recorte tiene más de un 2 % de píxeles vacíos (bordes de la escena) y prueba la siguiente.
 - **Limitación:** la nubosidad que se filtra es la de toda la escena (unos 110 km). Puede quedar alguna nube local en el recorte. Si una imagen no convence, se rehace con `--only <id> --force --max-cloud 5`.
+
+## Galería de fotos (carruseles)
+
+La ventana para comparar y la sección Análisis muestran **carruseles de fotos reales**: a la izquierda la Tierra y a la derecha la Luna o Marte. **Son ilustrativas: no entran en el puntaje.**
+
+- **Tierra:** primero el recorte de Sentinel-2 del punto exacto y después fotos de campo de la NASA (por ejemplo, rovers de prueba en Haughton o un dron en Death Valley), fotos de astronautas desde la Estación Espacial e imágenes del satélite Terra.
+- **Luna y Marte:** fotos de los rovers y módulos de aterrizaje (Perseverance, Curiosity, Spirit, Opportunity, Phoenix, Viking, InSight, Apolo 11), imágenes orbitales (HiRISE, LRO) y visualizaciones del LRO para el polo sur. La última imagen siempre es la vista 3D interactiva.
+- **Cada foto lleva una etiqueta** con su tipo ("Desde el rover", "Desde órbita", "Visualización con datos del LRO", "Foto de campo", "Desde la Estación Espacial"…), su crédito, su fecha y un enlace a la fuente.
+- **Límite que se muestra con honestidad:** solo hay fotos desde el suelo donde aterrizó una misión. El polo sur lunar, Medusae Fossae, Eberswalde, Terra Sirenum y Arsia Mons solo tienen imágenes orbitales.
+- **Descubrimientos:** sus fotos son de la **región** (por ejemplo, el macizo del Tibesti), no del punto exacto, y la app lo dice sobre la imagen. Las regiones sin fotos verificadas muestran solo Sentinel-2.
+
+**Cómo está hecha:**
+1. `data/gallery_sources.json` es la **lista curada a mano**: 96 imágenes para 40 lugares, cada una con un pie de foto en español e inglés. Antes de incluir una foto se leyó su descripción en la NASA para confirmar qué lugar muestra. Así se descartaron, por ejemplo, una foto del salar de Coipasa titulada como Uyuni y una de la parte peruana de Atacama.
+2. `python src/export_gallery.py` descarga las imágenes de la [NASA Image and Video Library](https://images.nasa.gov) y del [Scientific Visualization Studio](https://svs.gsfc.nasa.gov). Luego recorta los bordes negros y las panorámicas extremas, las reduce a 1600 px como máximo y escribe `web/public/data/gallery.json` con el crédito de cada misión (campo `secondary_creator` de la NASA). Las imágenes quedan en `web/public/images/gallery/` (~25 MB).
+3. **Para agregar una foto:** búscala en images.nasa.gov, revisa su descripción, agrega su `nasa_id` con `kind`, `es` y `en` al JSON y corre `python src/export_gallery.py`. Solo descarga lo que falta.
+
+Las claves de `gallery_sources.json` son los id de los objetivos (`jezero`, `shackleton`…), los id de los sitios del catálogo (`haughton-crater`…) y `region:<región>` para los descubrimientos. Un test (`tests/test_export_gallery.py`) comprueba que todo objetivo de la Luna y Marte tenga fotos.
 
 ## Pendientes conocidos
 

@@ -4,7 +4,7 @@ import { homologueFor, siteTargets, type AnalogSite, type Target } from '../data
 import { BODY_COLORS } from '../theme'
 import { useLang } from '../i18n/useLang'
 import { BODY_NAMES } from '../i18n/strings'
-import DetailImage from './DetailImage'
+import { EarthCarousel, TargetCarousel } from './PlaceCarousels'
 import { IconClose } from './Icons'
 
 interface Props {
@@ -86,9 +86,9 @@ export default function ImageCompareModal({ site, initialBody, onClose }: Props)
         </header>
 
         <div className="modal-images">
-          <DetailImage body="tierra" site={site} />
+          <EarthCarousel site={site} />
           {body && homologue ? (
-            <DetailImage key={body} body={body} site={site} homologue={homologue} polarZoomOut={14} />
+            <TargetCarousel key={body} site={site} body={body} />
           ) : (
             <figure className="detail-image empty">
               <div className="image-loading">{t('insight.noData')}</div>

@@ -8,7 +8,9 @@ import { shownImage, useEarthImage } from '../map/earthImages'
 import { useLang } from '../i18n/useLang'
 import { BODY_NAMES, FEATURE_NAMES_EN } from '../i18n/strings'
 import PlanetGlobe from './PlanetGlobe'
-import { IconLock } from './Icons'
+import { IconImages, IconLock } from './Icons'
+import ImageCompareModal from './ImageCompareModal'
+import { useGalleryCount } from '../data/gallery'
 
 const BODY_ORDER: Body[] = ['tierra', 'luna', 'marte']
 
@@ -34,7 +36,23 @@ export default function InsightPanel(props: Props) {
   )
 }
 
-function TerrainThumbs({ site, activeBody, onBody }: Props) {
+/** Opens the image comparison pop-up with the photo carousels. */
+function GalleryButton({ site, body }: { site: AnalogSite; body: Target | null }) {
+  const { t } = useLang()
+  const [open, setOpen] = useState(false)
+  const count = useGalleryCount(site)
+  if (!site.homologues.length) return null
+  return (
+    <>
+      <button className="btn ghost wide gallery-button" onClick={() => setOpen(true)}>
+        <IconImages size={16} /> {count > 0 ? t('carousel.open', { n: count + 1 }) : t('image.compare')}
+      </button>
+      {open && <ImageCompareModal site={site} initialBody={body} onClose={() => setOpen(false)} />}
+    </>
+  )
+}
+
+function TerrainThumbs({ site, activeBody, compareBody, onBody }: Props) {
   const { lang, t } = useLang()
   const allowed = bodiesOf(site)
   return (
@@ -75,6 +93,7 @@ function TerrainThumbs({ site, activeBody, onBody }: Props) {
         })}
       </div>
       <p className="credit">Copernicus Sentinel-2 / NASA GIBS · NASA Moon Trek (LRO WAC) · Mars Trek (Viking)</p>
+      <GalleryButton site={site} body={compareBody} />
     </section>
   )
 }

@@ -80,6 +80,9 @@ python src/export_web.py
 
 # Imágenes de cerca de la Tierra (Sentinel-2, solo las que falten)
 python src/export_images.py
+
+# Galería de fotos de la NASA (lista curada en data/gallery_sources.json)
+python src/export_gallery.py
 ```
 
 En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analogos`.
@@ -96,7 +99,7 @@ En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analo
    - **Análisis:** la comparación detallada.
    - **Método:** cómo se calcula el puntaje.
 3. Elige un lugar en la lista, en el globo o con el buscador. El globo vuela al lugar y aparecen dos paneles:
-   - a la izquierda, la ficha; al hacer clic en su imagen se abre una ventana con la Tierra a la izquierda y la Luna o Marte a la derecha;
+   - a la izquierda, la ficha; al hacer clic en su imagen (o en **Ver galería** del panel derecho) se abre una ventana con **carruseles de fotos reales**: la Tierra a la izquierda y la Luna o Marte a la derecha (fotos de rovers, orbitales y la vista 3D);
    - a la derecha, las miniaturas de la Tierra, la Luna y Marte, y el **índice de similitud**.
 4. Con los botones **Tierra · Luna · Marte** el globo cambia de cuerpo y vuela al homólogo. Si el lugar no tiene homólogo en un cuerpo, ese botón queda bloqueado (🔒).
 5. **Ver análisis completo** abre el puntaje, los pesos ajustables, los valores reales, el ranking y los límites.

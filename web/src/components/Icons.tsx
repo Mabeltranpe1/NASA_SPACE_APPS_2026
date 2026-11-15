@@ -88,6 +88,27 @@ export const IconExpand = (p: IconProps) => (
   </Svg>
 )
 
+export const IconCamera = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M4 8h3l2-3h6l2 3h3v11H4z" />
+    <circle cx="12" cy="13" r="3.5" />
+  </Svg>
+)
+
+export const IconSatellite = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="m13 7 4 4-6 6-4-4z" />
+    <path d="m8 12-4-4 3-3 4 4M16 12l4 4-3 3-4-4M19 3a2 2 0 0 1 2 2" />
+  </Svg>
+)
+
+export const IconImages = (p: IconProps) => (
+  <Svg {...p}>
+    <rect x="3" y="6" width="14" height="13" rx="2" />
+    <path d="M7 3h12a2 2 0 0 1 2 2v11M3 15l4-4 4 4 2-2 4 4" />
+  </Svg>
+)
+
 export const IconClose = (p: IconProps) => (
   <Svg {...p}>
     <path d="M6 6l12 12M18 6 6 18" />
