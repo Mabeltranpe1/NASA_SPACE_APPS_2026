@@ -1,23 +1,19 @@
 # What each file in data/ is
 
-## The database (inputs)
-- `earth_all.csv.gz` – ALL Earth places (compressed CSV; pandas reads it directly) (one row = one 0.05° cell, ~5.5 km), with the 9 variables. Column `known` = yes for famous analogs (controls). **Main Earth file.**
-- `regions/<name>.csv` – the same, one file per region. `earth_all.csv.gz` is made from these.
-- `regions_catalog.csv` – list of regions (box, elevation source, known yes/no, why). Add a row and run `python src/build_database.py`.
-- `targets.csv` – all Moon and Mars sites together. **Main target file.**
-- `targets_moon.csv`, `targets_mars.csv` – the same, split by body (built by `build_moon_targets.py` / `build_mars_targets.py`).
-- `raw/` – downloaded NASA files (not in git).
+`data/` holds the **inputs** of the comparison. Everything the code produces from them is in `outputs/` (see [outputs/README.md](../outputs/README.md)). How the files are used: main [README](../README.md), sections 4 and 5.
 
-## Results (outputs, can be made again at any time)
-- `discovery_mars_new.csv`, `discovery_moon_new.csv` – NEW candidate areas from the global screening (famous zones left out). `discovery_mars.csv` / `discovery_moon.csv` = full list including famous zones.
-- `results_mars_new_per_region.csv`, `results_moon_new_per_region.csv` – best little-known place in each region.
-- `results_mars_overall.csv`, `results_moon_overall.csv` – top 1000 little-known places for all sites of that body together.
-- `results_pairs_top20.csv` – **most complete result**: for every Moon/Mars site, its 20 best little-known Earth places. Each row has the Earth place (lat, lon and all its values), the Moon/Mars site (target_lat, target_lon and all its values as target_*), the score and the similarity of each variable.
-- `seasons_mars.csv`, `seasons_moon.csv` – month by month score for the best place of each region.
+## The Earth database
+- `earth_all.csv.gz` – **main Earth file.** All Earth places in one gzip CSV (pandas and `compare.py` read it directly): 691,035 cells of 0.05° (~5.5 km) from 727 regions. Columns: `region, lat, lon`, the 9 features (`elev_m, slope_deg, roughness, temp_mean_K, temp_range_K, albedo, precip_mm, ndvi, em_contrast`), `water_frac` and `known` (`yes` = famous analog, kept only as a control). Made by `python src/build_database.py`. Never commit an uncompressed `earth_all.csv` (it is in `.gitignore`).
+- `regions/<name>.csv` – the same columns, one file per region. `earth_all.csv.gz` is made from these. Only the 43 hand-picked regions are in git; the 684 grid search regions (`<country>_<lat>n_<lon>e.csv`, 2 × 2° areas) are ignored by git and can be rebuilt with `src/build_database.py`.
+- `regions_catalog.csv` – one row per region: `name, west, south, east, north, dem (nasadem | cop90), known (yes | no), why`. Add a row and run `python src/build_database.py` to add a region.
+
+## The Moon and Mars sites
+- `targets.csv` – **main target file.** All 22 Moon and 9 Mars sites: `name, body, site_lat, site_lon, area`, the 9 features, `n_dem_pixels, n_temp_points`.
+- `targets_moon.csv`, `targets_mars.csv` – the same rows split by body, written by `src/build_moon_targets.py` / `src/build_mars_targets.py`.
+- `moon_sites_sources.csv` – one row per Moon site: kind (crater rim, landing region…), program (NASA Artemis III 2024 list, 2022 list only, or crater-scale site), centre, area, **why it matters** and **source**.
+- `composition_targets.csv` – rock type of every site: lithology, Christiansen feature (CF) and its uncertainty, `em_contrast` and its uncertainty, and the evidence (papers, missions). Written by `python src/composition.py --write`; method in [docs/COMPOSICION.md](../docs/COMPOSICION.md).
 
 ## Other
-- `sample_earth.csv`, `sample_targets.csv` – FAKE example data, only to try the code.
-- `archive/` – old files from earlier tests, no longer used. Safe to delete.
-
-## Maps (folder maps/ at the project root)
-- One image per place. Same number = same Moon/Mars site. `B` = the Moon/Mars site, `A1`, `A2`, `A3` = its 3 best little-known Earth analogs (each from a different region). All images of one number show a square of the same size, at 200 m pixels. `maps/index.csv` lists every pair. Made by `python src/make_maps.py`.
+- `sample_earth.csv`, `sample_targets.csv` – **FAKE** example data with only 7 features, used by `tests/test_compare.py` and to try the code. Never use their results.
+- `raw/` – downloaded files, not in git (~9 GB): `NASADEM_HGT/`, `COP90/`, `MOD11C3/`, `MCD43C3/`, `MOD13C2/`, `GPM_3IMERGM/`, `MERRA2_FLX/`, `AG5KMMOH/`, `moon/` (LOLA, Diviner; `moon/artemis_sites/` = Wueller et al. 2026 landing sites from Zenodo), `mars/` (TES albedo, Mars Climate Database). Sources and versions: main README, section 6.
+- `processed/` – free space for processed data (not in git).

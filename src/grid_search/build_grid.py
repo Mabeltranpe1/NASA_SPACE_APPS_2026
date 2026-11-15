@@ -1,8 +1,11 @@
 """Build region files for the systematic grid search (2x2 degree areas, selected 1x1 tiles only)."""
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[2]      # project root
+WORK = ROOT / "outputs" / "grid_search"          # intermediate files of the grid search
 import sys, os, re, time, numpy as np, pandas as pd
-os.chdir("/root/work"); sys.path.insert(0, "src")
+os.chdir(ROOT); sys.path.insert(0, str(ROOT / "src"))
 import build_earth as be
-S = pd.read_csv("/root/selected_tiles.csv")
+S = pd.read_csv(WORK / "selected_tiles.csv")
 have = {p[:-4] for p in os.listdir("data/raw/COP90") if p.endswith(".tif")}
 def tname(a, o): return f"{'N' if a>=0 else 'S'}{abs(a):02d}_00_{'E' if o>=0 else 'W'}{abs(o):03d}_00"
 S["tile"] = [tname(a, o) for a, o in zip(S.tlat, S.tlon)]
@@ -38,5 +41,5 @@ for i, ((alat, alon), g) in enumerate(S[S.downloaded].groupby(["alat", "alon"]))
     keep = table["elev_m"].notna() & (table["water_frac"].fillna(1) <= 0.5)
     table[keep].round(be.ROUNDING).to_csv(out, index=False)
     print(f"{name}: {keep.sum()} cells, {time.time()-t0:.1f}s", flush=True)
-pd.DataFrame(rows).to_csv("/root/grid_catalog_rows.csv", index=False)
+pd.DataFrame(rows).to_csv(WORK / "grid_catalog_rows.csv", index=False)
 print("areas", len(rows))
