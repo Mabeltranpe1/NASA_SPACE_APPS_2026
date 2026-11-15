@@ -69,22 +69,58 @@ function sourceText(text: string | undefined, lang: Lang) {
   return lang === 'en' ? (SOURCE_PHRASES_EN[text] ?? text) : text
 }
 
+/** Weight presets: each one keeps only the features of one kind (default weights), the rest go to 0. */
+const PRESETS: { id: 'all' | 'terrain' | 'surface' | 'climate'; features: string[] | null }[] = [
+  { id: 'all', features: null },
+  { id: 'terrain', features: ['elev_m', 'slope_deg', 'roughness'] },
+  { id: 'surface', features: ['albedo', 'ndvi', 'em_contrast'] },
+  { id: 'climate', features: ['temp_mean_K', 'temp_range_K', 'precip_mm'] },
+]
+
+export interface Place {
+  lat: number
+  lng: number
+  name: string
+}
+
 interface Props {
   site: AnalogSite
   body: Target
+  /** Target whose similarity map is shown on the Earth globe (null = none). */
+  mapTargetId?: string | null
+  onShowMap?: (target: { id: string; name: string } | null) => void
+  /** Fly the Earth globe to a place of the ranking. */
+  onGoTo?: (place: Place) => void
 }
 
-export default function ComparisonPanel({ site, body }: Props) {
+export default function ComparisonPanel({ site, body, mapTargetId = null, onShowMap, onGoTo }: Props) {
   const state = useComparisons()
   const { t } = useLang()
 
   if (state.status === 'loading') return <section className="comparison muted-box">{t('cmp.loading')}</section>
   if (state.status === 'error') return <section className="comparison muted-box">{t('cmp.error')}</section>
 
-  return <ComparisonContent key={`${site.id}-${body}`} data={state.data} site={site} body={body} />
+  return (
+    <ComparisonContent
+      key={`${site.id}-${body}`}
+      data={state.data}
+      site={site}
+      body={body}
+      mapTargetId={mapTargetId}
+      onShowMap={onShowMap}
+      onGoTo={onGoTo}
+    />
+  )
 }
 
-function ComparisonContent({ data, site, body }: { data: ComparisonData; site: AnalogSite; body: Target }) {
+function ComparisonContent({
+  data,
+  site,
+  body,
+  mapTargetId,
+  onShowMap,
+  onGoTo,
+}: { data: ComparisonData } & Required<Pick<Props, 'site' | 'body'>> & Omit<Props, 'site' | 'body'>) {
   const { lang, t } = useLang()
   const fmt = makeFmt(lang)
   const bodyName = BODY_NAMES[lang][body]
@@ -125,6 +161,14 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
   const usingDefaults = data.features.every((f) => weights[f.id] === f.default_weight)
   const score = scoreWithWeights(result.sim, weights)
   const position = ranking.findIndex((r) => r.site.id === site.id) + 1
+  const excluded = new Set(target.excluded ?? [])
+  const presetWeights = (features: string[] | null) =>
+    Object.fromEntries(data.features.map((f) => [f.id, !features || features.includes(f.id) ? f.default_weight : 0]))
+  const activePreset = PRESETS.find((p) => {
+    const w = presetWeights(p.features)
+    return data.features.every((f) => weights[f.id] === w[f.id])
+  })?.id
+  const mapShown = mapTargetId === target.id
   const features = data.features
   const usable = features.filter((f) => result.sim[f.id] != null && (weights[f.id] ?? 0) > 0)
   const best = usable.length ? usable.reduce((a, b) => ((result.sim[a.id] ?? 0) >= (result.sim[b.id] ?? 0) ? a : b)) : null
@@ -176,7 +220,16 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
             </div>
             <div className="hero-meta">
               <p>
-                <strong>{t('cmp.rank', { pos: position, n: ranking.length })}</strong> {t('cmp.rankFor', { target: target.name })}
+                {usingDefaults ? (
+                  <>
+                    <strong>{t('cmp.rank', { pos: result.rank.toLocaleString(lang), n: data.n_cells.toLocaleString(lang) })}</strong>{' '}
+                    {t('cmp.rankEarth', { target: target.name })}
+                  </>
+                ) : (
+                  <>
+                    <strong>{t('cmp.rank', { pos: position, n: ranking.length })}</strong> {t('cmp.rankShown', { target: target.name })}
+                  </>
+                )}
               </p>
               <p className="muted">
                 {usingDefaults && result.stability != null
@@ -188,6 +241,20 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
                   : t('cmp.reweighted')}
               </p>
             </div>
+          </div>
+
+          <div className="chips presets" role="group" aria-label={t('cmp.presets')}>
+            <span className="muted">{t('cmp.presets')}</span>
+            {PRESETS.map((p) => (
+              <button
+                key={p.id}
+                className={`chip ${activePreset === p.id ? 'active' : ''}`}
+                aria-pressed={activePreset === p.id}
+                onClick={() => setWeights(presetWeights(p.features))}
+              >
+                {t(`cmp.preset.${p.id}`)}
+              </button>
+            ))}
           </div>
 
           <h3>{t('cmp.similarity')}</h3>
@@ -203,9 +270,11 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
                     onMouseMove={(e) =>
                       showTip(
                         e,
-                        off
-                          ? t('cmp.notUsedTip', { feature: featureLabel(f, lang) })
-                          : t('cmp.simTip', { feature: featureLabel(f, lang), value: fmt(s) }),
+                        excluded.has(f.id)
+                          ? t('cmp.excludedTip', { feature: featureLabel(f, lang), body: bodyName })
+                          : off
+                            ? t('cmp.notUsedTip', { feature: featureLabel(f, lang) })
+                            : t('cmp.simTip', { feature: featureLabel(f, lang), value: fmt(s) }),
                       )
                     }
                     onMouseLeave={hideTip}
@@ -214,7 +283,11 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
                   </span>
                   <span className="meter-value">{s == null ? '—' : fmt(s)}</span>
                   <span className="meter-tag">
-                    {s == null && <span className="tag muted">{t('cmp.notApplicable', { body: bodyName })}</span>}
+                    {s == null && excluded.has(f.id) && <span className="tag bad">{t('cmp.excluded')}</span>}
+                    {s == null && f.id === 'elev_m' && <span className="tag muted">{t('cmp.datum')}</span>}
+                    {s == null && !excluded.has(f.id) && f.id !== 'elev_m' && (
+                      <span className="tag muted">{t('cmp.notApplicable', { body: bodyName })}</span>
+                    )}
                     {s != null && off && <span className="tag muted">{t('cmp.noWeight')}</span>}
                     {!off && f.id === best?.id && <span className="tag good">{t('cmp.best')}</span>}
                     {!off && f.id === worst?.id && <span className="tag bad">{t('cmp.worst')}</span>}
@@ -278,20 +351,34 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
         {/* ---------- Ranking ---------- */}
         <div className="card">
           <h3>{t('cmp.ranking', { target: target.name })}</h3>
+          <p className="hint">{t('cmp.rankingNote')}</p>
           <ol className="ranking">
-            {ranking.slice(0, 8).map((r, i) => {
+            {ranking.slice(0, 10).map((r, i) => {
               const current = r.site.id === site.id
+              const tag = r.site.kind === 'discovery' ? t('cmp.discovery') : r.site.known ? t('cmp.known') : null
               return (
                 <li
                   key={r.site.id}
                   className={current ? 'current' : ''}
-                  onMouseMove={(e) => showTip(e, `${r.site.name}: ${Math.round((r.score ?? 0) * 100)} / 100`)}
+                  onMouseMove={(e) =>
+                    showTip(e, `${r.site.name}: ${Math.round((r.score ?? 0) * 100)} / 100${r.site.note ? ` · ${r.site.note}` : ''}`)
+                  }
                   onMouseLeave={hideTip}
                 >
                   <span className="rank-pos">{i + 1}</span>
                   <span className="rank-name">
-                    {r.site.name}
-                    {r.site.id.startsWith('cell_') && <small>{t('cmp.outside')}</small>}
+                    {onGoTo ? (
+                      <button
+                        className="link"
+                        title={t('cmp.goTo')}
+                        onClick={() => onGoTo({ lat: r.site.lat, lng: r.site.lng, name: r.site.name })}
+                      >
+                        {r.site.name}
+                      </button>
+                    ) : (
+                      r.site.name
+                    )}
+                    {tag && <small> · {tag}</small>}
                   </span>
                   <span className="rank-track">
                     <span
@@ -304,6 +391,15 @@ function ComparisonContent({ data, site, body }: { data: ComparisonData; site: A
               )
             })}
           </ol>
+          {onShowMap && (
+            <button
+              className={`map-toggle ${mapShown ? 'active' : ''}`}
+              aria-pressed={mapShown}
+              onClick={() => onShowMap(mapShown ? null : { id: target.id, name: target.name })}
+            >
+              {mapShown ? t('cmp.hideMap') : t('cmp.showMap')}
+            </button>
+          )}
         </div>
 
         {/* ---------- Limits + sources ---------- */}

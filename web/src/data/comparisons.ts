@@ -18,7 +18,15 @@ export interface ComparisonTarget {
   id: string
   body: Target
   name: string
+  lat?: number | null
+  lng?: number | null
+  /** Size of the area averaged around the site, e.g. "disk 10 km". */
+  area?: string | null
   values: Record<string, number | null>
+  /** Features switched off for this body: its value is outside anything found on Earth. */
+  excluded?: string[]
+  /** Best score of any Earth cell for this target. */
+  best_score?: number | null
 }
 
 export interface ComparisonResult {
@@ -32,13 +40,41 @@ export interface ComparisonResult {
   stability: number | null
 }
 
+/** Detailed 10 x 10 km characterization (Santiago). Descriptive: not part of the score. */
+export interface Characterization {
+  source: string
+  window_km: number
+  status: string
+  topography?: Record<string, number | string | null>
+  environment?: Record<string, number | string | null>
+  spectral?: Record<string, number | string | null>
+  mineralogy?: { status: string; emit_granules: number }
+  topographic_index?: { target: string; body: Target; pai: number | null }[]
+  quality_flags?: string[]
+}
+
 export interface ComparisonSite {
   id: string
+  /** catalog = site of web/src/data/sites.ts; discovery = best cell of a little-known region. */
+  kind?: 'catalog' | 'discovery'
   name: string
   lat: number
   lng: number
+  /** Earth region of the database (data/regions_catalog.csv). */
+  region?: string
+  /** True when the region is a famous analog (kept as a control). */
+  known?: boolean
+  /** Why the region is in the database. */
+  note?: string
   values: Record<string, number | null>
   results: ComparisonResult[]
+  characterization?: Characterization
+}
+
+/** One map layer: the best Earth cells for one target, as [lat, lng, score]. */
+export interface Heatmap {
+  target: string
+  cells: [number, number, number][]
 }
 
 export interface ComparisonData {
@@ -46,6 +82,7 @@ export interface ComparisonData {
   generated_at: string
   synthetic: boolean
   n_cells: number
+  n_regions?: number
   stability_runs: number
   stability_top: number
   features: FeatureMeta[]
@@ -99,13 +136,40 @@ export function scoreWithWeights(sim: Record<string, number | null>, weights: Re
   return Math.exp(-Math.sqrt(num / den))
 }
 
-/** All Earth sites ranked for one target with the given weights. */
+/**
+ * Exported Earth sites ranked for one target with the given weights.
+ * Discoveries keep only the best place of each region, so one region
+ * cannot fill the whole list; catalog sites are always kept.
+ */
 export function rankForTarget(data: ComparisonData, targetId: string, weights: Record<string, number>) {
-  return data.sites
+  const ranked = data.sites
     .map((site) => {
       const result = site.results.find((r) => r.target === targetId)
       return result ? { site, result, score: scoreWithWeights(result.sim, weights) } : null
     })
     .filter((x): x is NonNullable<typeof x> => x !== null && x.score !== null)
     .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
+  const seen = new Set<string>()
+  return ranked.filter(({ site }) => {
+    if (site.kind !== 'discovery' || !site.region) return true
+    if (seen.has(site.region)) return false
+    seen.add(site.region)
+    return true
+  })
+}
+
+const heatmapCache = new Map<string, Promise<Heatmap>>()
+
+/** Map layer for one target (web/public/data/heatmap/<id>.json). */
+export function loadHeatmap(targetId: string): Promise<Heatmap> {
+  let p = heatmapCache.get(targetId)
+  if (!p) {
+    p = fetch(`/data/heatmap/${encodeURIComponent(targetId)}.json`).then((r) => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      return r.json() as Promise<Heatmap>
+    })
+    p.catch(() => heatmapCache.delete(targetId))
+    heatmapCache.set(targetId, p)
+  }
+  return p
 }

@@ -91,6 +91,41 @@ const SITES_EN: Record<string, SiteText> = {
     limitations: 'There is vegetation and abundant liquid water.',
     missionUse: 'Testing rover instruments (AMASE expeditions).',
   },
+  'la-guajira': {
+    name: 'La Guajira (Taroa dunes)',
+    analogOf: 'Martian plains and dune fields',
+    similarities: 'Dunes and almost flat plains: 99.7% of the ground has slopes under 5° (at 200 m). Steady wind (about 8 m/s on average) and little rain (about 300 mm a year).',
+    limitations: 'It is on the coast: the analyzed window may include sea, so its result is provisional. Warm (about 300 K) and humid climate.',
+    missionUse: 'Rover mobility tests on sand and the study of wind processes (dunes and dust).',
+  },
+  'nevado-del-ruiz': {
+    name: 'Nevado del Ruiz',
+    analogOf: 'Steep terrain of crater rims and volcanoes',
+    similarities: 'An active volcano with steep slopes (16.8° on average at 200 m), more than 1,700 m of relief within 10 km, and a glacier on the summit.',
+    limitations: 'Rainy (about 2,100 mm a year), with páramo vegetation on its slopes; volcanic activity limits access.',
+    missionUse: 'Navigation and anchoring on steep slopes, and the study of ice and volcanic deposits at altitude.',
+  },
+  'nevado-santa-isabel': {
+    name: 'Nevado Santa Isabel',
+    analogOf: 'Cold high-mountain terrain with ice',
+    similarities: 'A volcano with a retreating glacier, more than 4,300 m high on average, with slopes of 13.7° on average (at 200 m) and ground exposed as the ice retreats.',
+    limitations: 'Very rainy (about 2,100 mm a year) with páramo vegetation; the glacier is disappearing.',
+    missionUse: 'Testing ice-detection instruments and operations on cold slopes.',
+  },
+  'volcan-purace': {
+    name: 'Puracé Volcano',
+    analogOf: 'Volcanoes and acidic sulfur chemistry',
+    similarities: 'An active volcano with slopes of 13° on average (at 200 m), about 1,470 m of relief within 10 km, and acidic, sulfur-rich water (Vinagre river).',
+    limitations: 'Humid climate (about 1,860 mm a year) and lots of vegetation: in Sentinel-2, only 2% of the window has ground with little vegetation.',
+    missionUse: 'Studying acidic, sulfur-rich chemistry like that of ancient volcanic settings on Mars, and navigation on volcanic slopes.',
+  },
+  'la-candelaria': {
+    name: 'La Candelaria Desert (Boyacá)',
+    analogOf: 'Eroded mountain slopes',
+    similarities: 'A dry area at about 2,400 m with eroded slopes: mean slope of 9.6° and relief similar to the ridge that joins Shackleton and de Gerlache on the Moon (Santiago’s topographic index: 56/100).',
+    limitations: 'It rains more than its name suggests (about 1,130 mm a year in the 10 km window), and there are pastures and crops around it.',
+    missionUse: 'Mobility tests on moderate slopes and the study of erosion.',
+  },
 }
 
 const HOMOLOGUES_EN: Record<string, HomologueText> = {
@@ -110,6 +145,7 @@ const HOMOLOGUES_EN: Record<string, HomologueText> = {
   sirenum: { name: 'Terra Sirenum (chloride deposits)', note: 'Chloride salt deposits in basins.' },
   gusev: { name: 'Home Plate, Gusev Crater (Spirit)', note: 'Silica deposits of hydrothermal origin.' },
   jezero: { name: 'Jezero Crater (Perseverance)', note: 'Delta and carbonates in an ancient lake.' },
+  'de-gerlache': { name: 'de Gerlache crater rim (south pole)', note: 'Crater rim near the south pole, in the Artemis candidate region.' },
 }
 
 export function localizeSite(site: AnalogSite, lang: Lang): AnalogSite {
