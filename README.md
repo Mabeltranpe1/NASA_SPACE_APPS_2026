@@ -86,13 +86,19 @@ En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analo
 👉 **Ver la app:** https://icy-flower-03890400f.5.azurestaticapps.net (versión en inglés: agrega `?lang=en`)
 
 **Cómo usarla:**
-1. Elige una comparación arriba: **Tierra ↔ Luna**, **Tierra ↔ Marte** o **Luna ↔ Marte**.
-2. Filtra por tipo de ambiente o por la dimensión en la que debe parecerse.
-3. Haz clic en un sitio (lista o globo): los dos globos vuelan al lugar y debajo aparecen las imágenes de cerca.
-4. Baja para ver la **comparación detallada** (puntaje, pesos ajustables, valores reales y límites).
-5. O pulsa **▶ Recorrido guiado** para una demo automática.
+1. Al entrar, la pantalla de bienvenida ofrece el **▶ Recorrido guiado** (demo automática de 7 pasos) o **Explorar**.
+2. La barra de la izquierda tiene cuatro secciones:
+   - **Descubrir:** los lugares poco estudiados que encontró la búsqueda global.
+   - **Análogos:** el catálogo de referencia y el caso de estudio de Colombia.
+   - **Análisis:** la comparación detallada.
+   - **Método:** cómo se calcula el puntaje.
+3. Elige un lugar en la lista, en el globo o con el buscador. El globo vuela al lugar y aparecen dos paneles:
+   - a la izquierda, la ficha;
+   - a la derecha, las miniaturas de la Tierra, la Luna y Marte, y el **índice de similitud**.
+4. Con los botones **Tierra · Luna · Marte** el globo cambia de cuerpo y vuela al homólogo. Si el lugar no tiene homólogo en un cuerpo, ese botón queda bloqueado (🔒).
+5. **Ver análisis completo** abre el puntaje, los pesos ajustables, los valores reales, el ranking y los límites.
 
-Comparación lado a lado en **globos 3D de la Tierra, la Luna y Marte** (modos Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte), con filtros por tipo de ambiente y dimensión de similitud. Al elegir un sitio, ambos globos vuelan al lugar y debajo aparecen sus imágenes de detalle: Landsat de la Tierra y los mosaicos de NASA Moon Trek y Mars Trek. Todo con datos abiertos de la NASA, sin API keys. Disponible en **español e inglés** (`?lang=es` / `?lang=en`). Incluye un **recorrido guiado** y una **comparación detallada** con puntajes, pesos ajustables y límites de la analogía. Cada sitio se puede abrir en Google Earth.
+Un solo **globo 3D** que cambia entre la Tierra, la Luna y Marte, con imágenes de NASA GIBS, Moon Trek y Mars Trek, sin API keys. Disponible en **español e inglés** (`?lang=es` / `?lang=en`). Los enlaces se pueden compartir: la URL guarda la sección y el sitio, por ejemplo `?view=sites&site=tatacoa`. Cada lugar se puede abrir en Google Earth.
 
 ```bash
 cd web

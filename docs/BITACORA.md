@@ -14,6 +14,40 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Rediseño visual: un solo globo y paneles flotantes
+**Autor:** @Ssalazarp420
+
+- **Objetivo:** mejorar la primera impresión ante el público y el jurado. Se tomaron como referencia dos conceptos de interfaz espacial: un globo central con paneles de vidrio.
+- **Un solo globo** en lugar de dos lado a lado. Los botones **Tierra · Luna · Marte** cambian el cuerpo y el globo vuela al homólogo del lugar elegido.
+  - Si el lugar no tiene homólogo en un cuerpo, ese botón queda **bloqueado** con un candado. Por ejemplo, Atacama solo se compara con Marte.
+  - Desaparecen los modos Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte: el par lo define el lugar.
+  - Ganancia: un visor de Cesium menos en la vista principal.
+- **Barra de navegación** con cuatro secciones:
+  - **Descubrir** (vista inicial): la búsqueda global es la respuesta principal.
+  - **Análogos:** el catálogo y Colombia.
+  - **Análisis:** la comparación detallada.
+  - **Método:** la fórmula, las reglas, las fuentes, los límites y el equipo.
+- **Paneles flotantes:**
+  - a la izquierda, la ficha del lugar con su imagen;
+  - a la derecha, las miniaturas de la Tierra, la Luna y Marte, y el **índice de similitud** en anillo, con la posición global, la estabilidad y las barras por variable.
+- **Pantalla de bienvenida** con la pregunta del proyecto y las cifras reales del JSON (163 998 celdas, 43 regiones, 15 sitios).
+- **Otras mejoras:**
+  - buscador de lugares;
+  - enlaces que se pueden compartir (`?view=sites&site=tatacoa`);
+  - giro lento del globo en reposo;
+  - tipografía Inter + Space Grotesk;
+  - versión móvil con la navegación abajo.
+- **Recorrido guiado de 7 pasos:** se agregó uno sobre la búsqueda global, y en cada parada el globo pasa de la Tierra al homólogo.
+- **Decisiones para no exagerar los datos:**
+  - Las barras de la referencia del tipo "Tierra 92 % · Luna 78 %" no se copiaron: la Tierra no se compara consigo misma. Se muestran barras por variable frente al objetivo.
+  - No se usan etiquetas como "similitud alta", que no están validadas (ver el documento de Santiago). Se muestra el número, la posición y la estabilidad.
+  - Las imágenes son las de NASA (GIBS, Moon Trek y Mars Trek), no fotos de stock.
+- **Hallazgo:** con el puntaje completo, los sitios del catálogo dan 1–12/100 frente a su homólogo, mientras que el mejor descubrimiento (North Greenland ≈ Gale) da 35/100, queda #62 de 163 998 y es estable en el 100 % de las variaciones. Por eso el último paso del recorrido usa ese ejemplo.
+- **Correcciones:**
+  - Landsat WELD no tiene datos por encima de ~78° (la imagen salía negra en North Greenland y Ellesmere); ahí se usa MODIS Terra de verano.
+  - Si el homólogo del catálogo no está en la base (Medusae Fossae, Eberswalde, Tranquillitatis…), el índice usa el primer objetivo con datos de ese cuerpo, igual que la comparación detallada.
+- **Verificación:** `tsc`, `oxlint` y `vite build` sin errores. Capturas con Chromium (Playwright) de todas las vistas, del recorrido completo y del móvil (390 px), sin errores en consola.
+
 ## 2026-11-14 · Datos reales en la app (Marco + Santiago)
 **Autor:** @Ssalazarp420
 

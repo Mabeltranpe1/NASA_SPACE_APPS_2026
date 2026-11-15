@@ -24,7 +24,7 @@ La plataforma reúne los sitios en un **mapa interactivo filtrable** y muestra *
 
 | Funcionalidad | Descripción |
 |---|---|
-| Modos de comparación | **Tierra ↔ Luna**, **Tierra ↔ Marte** y **Luna ↔ Marte**, con dos globos 3D lado a lado |
+| Globo único | Un globo 3D con botones **Tierra · Luna · Marte**: vuela al homólogo del lugar elegido; los cuerpos sin homólogo quedan bloqueados |
 | Filtro por tipo de ambiente | Desértico, polar/ártico, volcánico, cráter de impacto, cuevas/tubos de lava, salar |
 | Filtro por dimensión | Muestra solo los sitios con similitud **alta o media** en todas las dimensiones elegidas (geología, terreno, temperatura, agua/hielo, polvo/viento, habitabilidad, subsuelo, operaciones) |
 | Solo poco estudiados | Oculta los análogos ya muy conocidos, como pide el reto |

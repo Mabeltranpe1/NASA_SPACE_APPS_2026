@@ -63,12 +63,17 @@ El puntaje es el de `compare.py` (Marco), sin cambios en la fórmula. El exporta
 
 La **respuesta principal es la búsqueda global de Marco**. Los sitios de Santiago son un **caso de estudio de Colombia** comparado por relieve.
 
-- **Barra lateral, en este orden:**
-  1. **Lugares poco estudiados encontrados:** el mejor lugar de cada región poco conocida para el cuerpo del modo elegido (Luna o Marte). Al hacer clic, el globo de la Tierra vuela al lugar, el otro globo vuela al sitio objetivo y se enciende el mapa de similitud.
-  2. **Análogos de referencia:** el catálogo curado.
-  3. **Caso de estudio: Colombia:** los 6 sitios de Santiago, con la etiqueta "Caso de estudio".
+- **Barra de navegación:**
+  - **Descubrir** (vista inicial): el mejor lugar de cada región poco conocida para la Luna o para Marte. Al hacer clic, el globo vuela al lugar y se enciende el mapa de similitud.
+  - **Análogos:** el catálogo curado y, debajo, el **caso de estudio de Colombia** (los 6 sitios de Santiago).
+- **Un solo globo** con los botones Tierra · Luna · Marte. Con un lugar elegido, el globo vuela a su homólogo en el cuerpo que se pulse. Los cuerpos sin homólogo quedan bloqueados.
+- **Panel derecho, índice de similitud:**
+  - el puntaje del lugar frente a su homólogo, o frente al primer objetivo con datos de ese cuerpo si el homólogo no está en la base;
+  - su posición entre todas las celdas de la Tierra y su estabilidad;
+  - las barras por variable, ordenadas de mayor a menor;
+  - las variables "fuera del rango de la Tierra".
 - **Sitios del caso de estudio:** su homólogo es el objetivo con mejor índice topográfico (PAI) de Santiago **entre los que ya están en la base de datos**. Si su mejor parecido absoluto todavía no está en la base (por ejemplo, Connecting Ridge), el texto lo dice. La ficha y el panel aclaran que la similitud es solo de relieve y que con el puntaje completo quedan lejos.
-- **Comparación detallada:**
+- **Comparación detallada** (sección Análisis):
   - Botones **"Comparar por: Todo · Relieve · Superficie · Clima y agua"**, que recalculan el puntaje en el navegador con la misma fórmula. Sirven para mostrar las dos miradas del equipo: el puntaje completo y el solo topográfico, como el PAI de Santiago.
   - La posición del sitio entre todas las celdas de la Tierra (por ejemplo, "#709 de 163 999").
 - **Ranking:** un lugar por región poco estudiada, más los análogos conocidos como control. Al hacer clic en un nombre, el globo de la Tierra vuela a ese lugar.
