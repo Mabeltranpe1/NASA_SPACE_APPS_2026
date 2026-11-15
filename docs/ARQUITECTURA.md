@@ -61,6 +61,7 @@ flowchart LR
     HEAT --> GLOBE["Globo de la Tierra<br/>(mapa de similitud)"]
 ```
 
+- **`src/export_images.py`**: genera las imágenes de cerca de la Tierra (Sentinel-2 de Microsoft Planetary Computer, uniendo teselas de la misma pasada y con escala ampliada en superficies muy claras) en `web/public/images/earth/`, con un `index.json` que cita la escena y la fecha. Ver [DATOS_WEB.md](DATOS_WEB.md#imágenes-de-cerca-de-la-tierra).
 - **Salida actual:** **datos reales** (15 objetivos, 17 sitios del catálogo, 50 descubrimientos). Los CSV de muestra (`data/sample_*.csv`) quedan solo para los tests.
 - **Reglas:**
   - Los datos crudos van en `data/raw/` y los procesados en `data/processed/`. **No se suben a git.**
@@ -76,7 +77,7 @@ flowchart LR
 | Globos 3D | **CesiumJS** (Apache 2.0, sin Cesium ion ni token): **un solo globo principal** que se recrea con el elipsoide real del cuerpo elegido (`Ellipsoid.WGS84`, `MOON`, `MARS`). Maneja los polos, necesario para el polo sur lunar. Las miniaturas del panel derecho son visores de detalle sin interacción |
 | Tipografía | Inter (texto) y Space Grotesk (títulos), de Google Fonts (gratis) |
 | Luna y Marte | **NASA Moon Trek** (LRO WAC, ~100 m/px) y **Mars Trek** (Viking MDIM 2.1 color, ~232 m/px; relieve MOLA, ~463 m/px), teselas geográficas `default028mm` |
-| Imagen de detalle (Tierra) | **NASA GIBS Snapshot API**: Landsat WELD (30 m/px); MODIS Terra en sitios polares sin cobertura Landsat |
+| Imagen de detalle (Tierra) | **Sentinel-2 L2A** (10 m/px), recortes pregenerados con Microsoft Planetary Computer (`src/export_images.py`). Respaldo: **NASA GIBS Snapshot API**, con Landsat WELD (30 m/px) o MODIS Terra en sitios polares |
 | Imágenes | **NASA GIBS** (WMTS): Blue Marble, VIIRS NOAA-20 color verdadero, relieve ASTER GDEM, temperatura superficial MODIS, etiquetas de referencia. Sin key ni costo. |
 | Lint | oxlint |
 | Estado | `useState` y `useMemo` locales (sin librería de estado global) |
@@ -103,7 +104,8 @@ web/src/
 │   └── bodies.ts            # Configuración por cuerpo: elipsoide, imágenes, alturas de cámara
 ├── map/
 │   ├── gibs.ts              # Capas NASA GIBS de la Tierra y URLs de teselas
-│   └── snapshot.ts          # Imagen de cerca de la Tierra (Landsat; MODIS por encima de 78°)
+│   ├── snapshot.ts          # Imagen de NASA GIBS (Landsat; MODIS por encima de 78°): respaldo
+│   └── earthImages.ts       # Imagen de cerca de la Tierra: Sentinel-2 pregenerada o, si falta, la de GIBS
 ├── i18n/
 │   ├── strings.ts           # Textos de la interfaz en español e inglés
 │   ├── LanguageContext.tsx  # Proveedor de idioma (navegador, localStorage, ?lang=)
@@ -120,6 +122,7 @@ web/src/
 
 web/public/data/comparisons.json   # Generado por src/export_web.py
 web/public/data/heatmap/*.json     # Mapa de similitud por objetivo (mismo script)
+web/public/images/earth/*.jpg      # Imágenes de cerca de la Tierra (src/export_images.py) + index.json
 ```
 
 **Modelo de datos (`AnalogSite`):**
@@ -197,7 +200,7 @@ Ver [CONTRIBUTING.md](../CONTRIBUTING.md). Resumen: `feature/*` → PR → `deve
 
 ## Seguridad
 
-- **El frontend no contiene secretos:** NASA GIBS y NASA Trek son públicos y no usan key. Cesium se usa sin Cesium ion.
+- **El frontend no contiene secretos:** NASA GIBS y NASA Trek son públicos y no usan key. Las imágenes de Sentinel-2 se sirven desde la propia app. Cesium se usa sin Cesium ion.
 - El token de despliegue de Azure solo existe en el estado de Terraform y en el secret de GitHub. Si se filtra, se regenera en el portal (*Administrar token de implementación → Restablecer*) y se actualiza el secret.
 - `terraform.tfvars` y `*.tfstate` están en `.gitignore`.
 
@@ -209,6 +212,7 @@ Ver [CONTRIBUTING.md](../CONTRIBUTING.md). Resumen: `feature/*` → PR → `deve
 |---|---|---|---|
 | Azure Static Web Apps | Free | 100 GB/mes de ancho de banda, 3 vistas previas | — |
 | NASA GIBS (Tierra) | Público | Sin límite de uso publicado | — |
+| Microsoft Planetary Computer | Público, sin cuenta | Solo se usa al generar las imágenes, no en la app | — |
 | NASA Moon Trek / Mars Trek | Público | Sin límite de uso publicado | — |
 | CesiumJS | Código abierto (Apache 2.0) | Sin Cesium ion: costo cero | — |
 | Google Earth (enlace) | Gratis | — | — |

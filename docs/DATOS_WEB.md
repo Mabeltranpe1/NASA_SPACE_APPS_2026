@@ -80,6 +80,38 @@ La **respuesta principal es la búsqueda global de Marco**. Los sitios de Santia
 - **Mapa de similitud:** el botón "Ver en el globo dónde más se parece la Tierra" pinta en el globo las 2500 mejores celdas para el objetivo elegido. Usa un solo tono, y la opacidad y el tamaño crecen con el puntaje.
 - **Ficha de los sitios colombianos:** la caracterización de Santiago (relieve a 200 m, temperatura superficial, lluvia, vegetación, índices de Sentinel-2 y su índice topográfico). **Es descriptiva: no entra en el puntaje.**
 
+## Imágenes de cerca de la Tierra
+
+Las imágenes de la ficha, de las miniaturas y de la ventana para comparar son recortes de unos 22 km de lado alrededor de cada lugar. **Son ilustrativas: no entran en el puntaje.**
+
+| Prioridad | Fuente | Resolución | Cuándo se usa |
+|---|---|---|---|
+| 1 | **Sentinel-2 L2A** (Microsoft Planetary Computer) | 10 m | Siempre que haya una escena útil. Hoy la tienen los **73 lugares** (catálogo y descubrimientos) |
+| 2 | NASA GIBS en vivo: Landsat WELD, o MODIS por encima de 78° o en sitios con `earthImage` | 30 m / 250 m | Si el lugar no tiene imagen generada o la imagen no carga |
+
+**Cómo elige la escena `export_images.py`:**
+1. Busca escenas de 2021–2025 con menos de 20 % de nubes. Por encima de 60° de latitud solo acepta las de **verano** (julio–agosto en el norte, diciembre–febrero en el sur), para que el suelo no salga cubierto de nieve.
+2. Agrupa las teselas por **pasada del satélite**. Si el recorte cae en el borde entre dos teselas, las une (tienen la misma fecha y empatan sin costura).
+3. Renderiza el producto de color verdadero (`visual`). Si más del 25 % de los píxeles salen **saturados** (arena, sal o hielo muy claros), vuelve a renderizar desde las bandas B04, B03 y B02 con una escala de 1000 a 9000. Los valores L2A llevan un desplazamiento de +1000. Hoy eso pasa en 43 de las 73 imágenes. El campo `stretch` del índice indica cuál se usó.
+4. Descarta los recortes con más de un 2 % de píxeles vacíos y prueba la siguiente pasada.
+
+Se probó Landsat Collection 2 como segunda fuente, pero el Planetary Computer devolvió error 500 al renderizar sus recortes (2026-11-15), así que no se usa.
+
+**Generarlas** (solo faltantes; la primera vez tarda unos 15–25 minutos):
+
+```bash
+source .venv/bin/activate
+python src/export_images.py                 # todas las que falten
+python src/export_images.py --only tatacoa  # un lugar
+python src/export_images.py --force         # rehacer todo
+python src/export_images.py --redo-saturated  # rehacer las que salieron quemadas
+```
+
+- **Qué genera:** `web/public/images/earth/<id>.jpg` (1024 × 1024, ~200–400 KB) y `index.json`, con la escena, la fecha, la nubosidad, la resolución y el crédito de cada imagen. La app muestra esos datos en el pie de cada imagen.
+- **Descubrimientos nuevos:** después de correr `export_web.py`, vuelve a correr `export_images.py` para generar sus imágenes.
+- **Control de calidad:** el script descarta las escenas cuyo recorte tiene más de un 2 % de píxeles vacíos (bordes de la escena) y prueba la siguiente.
+- **Limitación:** la nubosidad que se filtra es la de toda la escena (unos 110 km). Puede quedar alguna nube local en el recorte. Si una imagen no convence, se rehace con `--only <id> --force --max-cloud 5`.
+
 ## Pendientes conocidos
 
 | Pendiente | Quién | Detalle |

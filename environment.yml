@@ -21,3 +21,5 @@ dependencies:
   - h5py
   - pyhdf
   - earthaccess
+  - pillow
+  - shapely

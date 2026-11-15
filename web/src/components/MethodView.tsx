@@ -207,7 +207,7 @@ export default function MethodView() {
           ))}
         </ul>
         <p className="muted small">
-          NASA GIBS · NASA Moon Trek · NASA Mars Trek · NASA Earthdata · ESA Copernicus · USGS Astrogeology · LMD Mars Climate Database
+          NASA GIBS · NASA Moon Trek · NASA Mars Trek · NASA Earthdata · ESA Copernicus (Sentinel-2) · Microsoft Planetary Computer · USGS Astrogeology · LMD Mars Climate Database
         </p>
       </section>
     </div>

@@ -4,7 +4,7 @@ import { useComparisons, type ComparisonData } from '../data/comparisons'
 import { bodiesOf } from '../data/focus'
 import { BODIES } from '../planet/bodies'
 import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
-import { earthSnapshotUrl } from '../map/snapshot'
+import { shownImage, useEarthImage } from '../map/earthImages'
 import { useLang } from '../i18n/useLang'
 import { BODY_NAMES, FEATURE_NAMES_EN } from '../i18n/strings'
 import PlanetGlobe from './PlanetGlobe'
@@ -61,7 +61,7 @@ function TerrainThumbs({ site, activeBody, onBody }: Props) {
                     <IconLock size={18} />
                   </span>
                 ) : body === 'tierra' ? (
-                  <img src={earthSnapshotUrl(site).url} alt="" loading="lazy" />
+                  <EarthThumb site={site} />
                 ) : (
                   <ThumbGlobe site={site} body={body} />
                 )}
@@ -74,9 +74,17 @@ function TerrainThumbs({ site, activeBody, onBody }: Props) {
           )
         })}
       </div>
-      <p className="credit">NASA GIBS (Landsat) · Moon Trek (LRO WAC) · Mars Trek (Viking)</p>
+      <p className="credit">Copernicus Sentinel-2 / NASA GIBS · NASA Moon Trek (LRO WAC) · Mars Trek (Viking)</p>
     </section>
   )
+}
+
+/** Earth thumbnail: the Sentinel-2 crop, or NASA GIBS if it fails. */
+function EarthThumb({ site }: { site: AnalogSite }) {
+  const [failed, setFailed] = useState(false)
+  const image = shownImage(useEarthImage(site), failed)
+  if (!image) return null
+  return <img key={image.url} src={image.url} alt="" onError={() => image.fallback && setFailed(true)} />
 }
 
 /** Static close-up of the counterpart (Cesium reprojects the polar regions correctly). */

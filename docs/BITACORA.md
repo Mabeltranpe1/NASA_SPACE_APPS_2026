@@ -14,6 +14,22 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Imágenes de Sentinel-2 (Microsoft Planetary Computer)
+**Autor:** @Ssalazarp420
+
+- Las imágenes de cerca de la Tierra (ficha, miniaturas, ventana para comparar y análisis) pasan de **Landsat WELD (30 m, año 2000)** a **Sentinel-2 L2A (10 m, 2021–2025)**.
+  - Las genera el script nuevo `src/export_images.py` con el catálogo gratuito de Microsoft Planetary Computer, sin cuenta ni clave.
+  - Se guardan como JPEG en `web/public/images/earth/` (73 imágenes, 16 MB) con un `index.json` que cita la escena, la fecha y la nubosidad.
+- **Por qué pregeneradas y no en vivo:** cada recorte en vivo pesa ~1,7 MB y tarda varios segundos. Con los archivos estáticos, la demo no depende de un servidor externo. Si alguna imagen falta o no carga, la app usa la de NASA GIBS como antes.
+- **Problemas encontrados y resueltos:**
+  - **Bordes de tesela:** si el recorte caía entre dos teselas de Sentinel-2, ninguna lo cubría entero (North Greenland, Fezzan, Mauna Kea). Se unen las teselas de la misma pasada.
+  - **Imágenes quemadas:** el producto de color verdadero (`visual`) satura la arena, la sal y el hielo; Tenere Niger salía casi blanco. Esas imágenes (43 de 73) se renderizan desde las bandas B04, B03 y B02 con una escala de 1000 a 9000, porque los valores L2A llevan un desplazamiento de +1000.
+  - **Nieve en latitudes altas:** Haughton salía nevado (escena de septiembre). Por encima de 60° solo se aceptan escenas de verano. Ahora se ve el anillo completo del cráter.
+  - **Landsat C2 como respaldo:** el Planetary Computer devuelve error 500 al renderizar sus recortes, así que se descartó.
+- **Corrección de la interfaz:** al cambiar de lugar se veían dos fichas encimadas en el panel izquierdo. La causa era que los paneles izquierdo y derecho compartían la misma `key` de React. Ahora cada uno tiene la suya.
+- **Créditos:** la ficha y la ventana muestran "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer". La vista Método y RECURSOS.md agregan la fuente.
+- **Tests:** `tests/test_export_images.py` cubre, sin red, el recorte cuadrado, la detección de bordes vacíos y la lista de lugares.
+
 ## 2026-11-15 · Release v0.3.1 a producción
 **Autor:** @Ssalazarp420
 
