@@ -14,6 +14,18 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Release v0.3.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionaron en `develop` los PR #11 (datos reales de Marco y Santiago) y #12 (rediseño visual), y se publicó el release `v0.3.0` en `main`.
+- **Producción:** https://icy-flower-03890400f.5.azurestaticapps.net (inglés: `?lang=en`).
+- **Contenido de la versión:**
+  - Datos reales: búsqueda global en 163 998 celdas, 15 objetivos de la Luna y Marte, y el caso de estudio de Colombia.
+  - Un solo globo con selector Tierra · Luna · Marte y paneles flotantes.
+  - Secciones Descubrir, Análogos, Análisis y Método.
+  - Pantalla de bienvenida, buscador, enlaces que se pueden compartir y recorrido guiado de 7 pasos.
+- **Pendientes:** los de [DATOS_WEB.md](DATOS_WEB.md#pendientes-conocidos), y cargar Cesium bajo demanda (la app pesa ~1,2 MB comprimida).
+
 ## 2026-11-14 · Rediseño visual: un solo globo y paneles flotantes
 **Autor:** @Ssalazarp420
 
