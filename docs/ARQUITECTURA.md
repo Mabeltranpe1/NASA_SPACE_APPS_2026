@@ -93,6 +93,7 @@ web/src/
 │   ├── SiteCard.tsx         # Ficha del lugar (panel izquierdo) y caracterización de Santiago
 │   ├── InsightPanel.tsx     # Panel derecho: miniaturas de terreno con candados e índice de similitud
 │   ├── DetailImage.tsx      # Imagen de detalle: snapshot Landsat/MODIS o vista cercana Luna/Marte
+│   ├── ImageCompareModal.tsx # Ventana emergente: imagen de la Tierra a la izquierda y del homólogo a la derecha
 │   ├── ComparisonPanel.tsx  # Comparación detallada: puntaje, pesos, valores, ranking, límites
 │   ├── MethodView.tsx       # Vista «Método»: fórmula, reglas, fuentes, límites y equipo
 │   ├── IntroOverlay.tsx     # Pantalla de bienvenida con las cifras del proyecto
