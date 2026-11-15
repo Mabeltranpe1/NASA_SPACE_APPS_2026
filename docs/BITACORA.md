@@ -14,6 +14,12 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.4.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #15 (galería de fotos reales con carruseles) y se publicó `v0.4.0` en `main`.
+- **Producción:** https://icy-flower-03890400f.5.azurestaticapps.net
+
 ## 2026-11-15 · Galería de fotos reales (carruseles)
 **Autor:** @Ssalazarp420
 
