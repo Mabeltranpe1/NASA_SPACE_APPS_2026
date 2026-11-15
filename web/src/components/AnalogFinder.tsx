@@ -12,7 +12,18 @@ import {
   type PointResponse,
   type Values,
 } from '../comparator/compare'
+import {
+  MISSION_IDS,
+  missionFits,
+  missionReference,
+  missionWeights,
+  topMissions,
+  type MissionFit,
+  type MissionId,
+} from '../comparator/missions'
 import { useLang } from '../i18n/useLang'
+import { MISSION_TEXT, MISSION_UI } from '../i18n/missions'
+import { MissionIcon } from './MissionIcons'
 import { BODY_NAMES, type Lang } from '../i18n/strings'
 import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
 import './AnalogFinder.css'
@@ -23,6 +34,8 @@ import './AnalogFinder.css'
  * an Earth point -> which Moon/Mars sites it resembles. Results download as GeoJSON/KML/waypoints.
  * Self-contained: it loads its own data (public/data/comparator, ~7 MB) only when opened.
  * Visual language = ComparisonPanel (.comparison, .card, .hero, .meter-list, .ranking, .chips).
+ * Mission types (comparator/missions.ts) are weight presets: picking one re-ranks the places for that
+ * kind of test, and every result shows the 2-3 missions it suits best ("suitable for").
  */
 
 /** Readable region name ("Egipto · 24,1° N, 32,1° E"), like the rest of the app. */
@@ -195,6 +208,13 @@ type Form = {
   includeKnown: boolean
   minKm: number
   weights: Record<string, number>
+  /** Mission type whose weights are in use, or '' for the model weights / custom weights. */
+  mission: MissionId | ''
+}
+
+/** Weights to start from: the mission's, or the model's for this body. */
+function startWeights(db: ComparatorDB, body: Body, mission: MissionId | '') {
+  return mission ? missionWeights(db.meta, body, mission) : { ...db.meta.weights[body] }
 }
 
 function siteStrings(db: ComparatorDB, id: string): Record<string, string> {
@@ -220,7 +240,9 @@ function formFromHash(db: ComparatorDB): Partial<Form> | null {
   })
   const s = db.meta.sites.find((x) => x.id === p.get('site'))
   const body: Body = (p.get('body') ?? s?.body) === 'Moon' ? 'Moon' : 'Mars'
+  const mission = (MISSION_IDS as string[]).includes(p.get('mission') ?? '') ? (p.get('mission') as MissionId) : ''
   return {
+    mission,
     site: s && !Object.keys(values).length ? s.id : '',
     body,
     values: { ...(s ? siteStrings(db, s.id) : {}), ...values },
@@ -228,7 +250,7 @@ function formFromHash(db: ComparatorDB): Partial<Form> | null {
     perRegion: p.get('per_region') !== '0',
     includeKnown: p.get('include_known') === '1',
     minKm: p.has('min_km') ? Math.max(0, Number(p.get('min_km')) || 0) : DEFAULT_MIN_KM,
-    weights: { ...db.meta.weights[body], ...weights },
+    weights: { ...startWeights(db, body, mission), ...weights },
   }
 }
 
@@ -287,7 +309,7 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
         const first = d.meta.sites.find((s) => s.body === 'Mars') ?? d.meta.sites[0]
         const initial: Form = {
           site: first.id, body: first.body, values: siteStrings(d, first.id), top: 10,
-          perRegion: true, includeKnown: false, minKm: DEFAULT_MIN_KM, weights: { ...d.meta.weights[first.body] },
+          perRegion: true, includeKnown: false, minKm: DEFAULT_MIN_KM, weights: { ...d.meta.weights[first.body] }, mission: '',
         }
         const f = { ...initial, ...formFromHash(d) }
         setForm(f)
@@ -305,14 +327,30 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
     const p = new URLSearchParams()
     if (form.site) p.set('site', form.site)
     p.set('body', form.body)
+    if (form.mission) p.set('mission', form.mission)
     if (!form.site) for (const f of db.features) if (form.values[f]) p.set(`v.${f}`, form.values[f])
-    for (const f of db.features) if (form.weights[f] !== db.meta.weights[form.body][f]) p.set(`w.${f}`, String(form.weights[f]))
+    const start = startWeights(db, form.body, form.mission)
+    for (const f of db.features) if (form.weights[f] !== start[f]) p.set(`w.${f}`, String(form.weights[f]))
     if (form.top !== 10) p.set('top', String(form.top))
     if (!form.perRegion) p.set('per_region', '0')
     if (form.includeKnown) p.set('include_known', '1')
     if (form.minKm !== DEFAULT_MIN_KM) p.set('min_km', String(form.minKm))
     return `${window.location.origin}${window.location.pathname}#buscar?${p.toString()}`
   }, [db, form])
+
+  // Yardstick for "suitable for": best score Earth has for each mission, for the searched target.
+  // Depends only on the target (values + body), not on the weights, so a mission change reuses it.
+  const refKey = result ? `${result.query.body}|${JSON.stringify(result.query.values)}` : ''
+  const missionRef = useMemo(
+    () => (db && result ? missionReference(db, result.query.values, result.query.body) : null),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [db, refKey],
+  )
+  const pointSite = pointResult?.results[0] ? db?.meta.sites.find((s) => s.id === pointResult.results[0].site) : undefined
+  const pointRef = useMemo(
+    () => (db && pointSite ? missionReference(db, pointSite.values, pointSite.body) : null),
+    [db, pointSite],
+  )
 
   if (error && !db) return <section className="comparison muted-box">{t('loadError')} ({error})</section>
   if (!db || !form) return <section className="comparison muted-box">{t('loading')}</section>
@@ -321,11 +359,49 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
   const pickSite = (id: string) => {
     if (!id) return set({ site: '' })
     const s = db.meta.sites.find((x) => x.id === id)!
-    const f = { ...form, site: id, body: s.body, values: siteStrings(db, id), weights: { ...db.meta.weights[s.body] } }
+    const f = { ...form, site: id, body: s.body, values: siteStrings(db, id), weights: startWeights(db, s.body, form.mission) }
     setForm(f)
     run(db, f)
   }
-  const usingDefaults = db.features.every((f) => form.weights[f] === db.meta.weights[form.body][f])
+  const pickMission = (mission: MissionId | '') => {
+    const f = { ...form, mission, weights: startWeights(db, form.body, mission) }
+    setForm(f)
+    run(db, f)
+  }
+  const usingDefaults = !form.mission && db.features.every((f) => form.weights[f] === db.meta.weights[form.body][f])
+  const mt = (m: MissionId) => MISSION_TEXT[lang][m]
+  const mu = (k: keyof (typeof MISSION_UI)['es'], vars?: Record<string, string | number>) => fill(MISSION_UI[lang][k], vars)
+  /** Variables a mission weighs most for this body (switched-off ones excluded). */
+  const priorities = (m: MissionId) => {
+    const w = missionWeights(db.meta, form.body, m)
+    return db.features.filter((f) => w[f] > 0).sort((a, b) => w[b] - w[a]).slice(0, 3).map((f) => FEATURE_NAMES[lang][f]).join(', ')
+  }
+  const fitsOf = (body: Body, similarity: Record<string, number>, ref: Record<MissionId, number> | null) =>
+    topMissions(missionFits(db.meta, body, similarity, ref ?? undefined))
+  /** "Suitable for" badge: the 2-3 missions a place suits best; a click filters by that mission. */
+  const suitable = (fits: MissionFit[], compact = false, onPick: (m: MissionId) => void = pickMission) => (
+    <span className={`mission-fits ${compact ? 'compact' : ''}`}>
+      {!compact && <span className="mission-fits-label">{mu('suitable')}</span>}
+      {fits.map((x) => {
+        const tip = mu('fitTip', {
+          mission: mt(x.mission).name, score: Math.round(x.score * 100), rel: Math.min(100, Math.round(x.relative * 100)),
+        })
+        return compact ? (
+          <span key={x.mission} className="mission-dot" title={tip} aria-label={tip}>
+            <MissionIcon id={x.mission} size={14} />
+          </span>
+        ) : (
+          <button key={x.mission} className={`pill mission ${form.mission === x.mission ? 'active' : ''}`} title={tip}
+            onClick={(e) => {
+              e.stopPropagation()
+              onPick(x.mission)
+            }}>
+            <MissionIcon id={x.mission} size={14} /> {mt(x.mission).short}
+          </button>
+        )
+      })}
+    </span>
+  )
   const range = db.meta.earth_range
   const unit = (f: string) => UNITS[lang][f] ?? ''
   const bodyName = (b: Body) => BODY_NAMES[lang][BODY_KEY[b]]
@@ -398,11 +474,43 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
               <span className="finder-body">{t('custom')}</span>
               {(['Moon', 'Mars'] as Body[]).map((b) => (
                 <button key={b} className={`chip ${!form.site && form.body === b ? 'active' : ''}`}
-                  onClick={() => set({ site: '', body: b, weights: { ...db.meta.weights[b] } })}>
+                  onClick={() => set({ site: '', body: b, weights: startWeights(db, b, form.mission) })}>
                   {bodyName(b)}
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* ---------- Mission type (weight presets) ---------- */}
+          <h3>{mu('title')}</h3>
+          <div className="chips mission-chips" role="group" aria-label={mu('title')}>
+            <button className={`chip ${!form.mission && usingDefaults ? 'active' : ''}`} onClick={() => pickMission('')}>
+              {mu('all')}
+            </button>
+            {MISSION_IDS.map((m) => (
+              <button key={m} className={`chip mission-chip ${form.mission === m ? 'active' : ''}`} onClick={() => pickMission(m)}
+                aria-pressed={form.mission === m}>
+                <MissionIcon id={m} /> {mt(m).name}
+              </button>
+            ))}
+            {!form.mission && !usingDefaults && <span className="chip mission-custom" aria-disabled="true">{mu('custom')}</span>}
+          </div>
+          <div className="mission-info">
+            {form.mission ? (
+              <>
+                <span className="mission-info-icon"><MissionIcon id={form.mission} size={30} /></span>
+                <div>
+                  <p><strong>{mt(form.mission).name}.</strong> {mt(form.mission).why}</p>
+                  <p className="muted small">
+                    {mu('priorities', { list: priorities(form.mission) })}
+                    {form.body === 'Moon' && (form.mission === 'thermal' || form.mission === 'habitat') && <> · {mu('moonTemp')}</>}
+                  </p>
+                  {mt(form.mission).note && <p className="mission-note small">⚠ {mt(form.mission).note}</p>}
+                </div>
+              </>
+            ) : (
+              <p className="muted small">{mu('hint')}</p>
+            )}
           </div>
 
           <div className="comparison-grid">
@@ -452,11 +560,11 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
                   <label key={f}>
                     <span>{FEATURE_NAMES[lang][f]}</span>
                     <input type="range" min={0} max={3} step={0.25} value={form.weights[f] ?? 0}
-                      onChange={(e) => set({ weights: { ...form.weights, [f]: Number(e.target.value) } })} />
+                      onChange={(e) => set({ mission: '', weights: { ...form.weights, [f]: Number(e.target.value) } })} />
                     <span className="weight-value">{(form.weights[f] ?? 0).toFixed(2)}</span>
                   </label>
                 ))}
-                <button className="link" disabled={usingDefaults} onClick={() => set({ weights: { ...db.meta.weights[form.body] } })}>
+                <button className="link" disabled={usingDefaults} onClick={() => pickMission('')}>
                   {t('resetWeights')}
                 </button>
               </details>
@@ -486,6 +594,7 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
                         {t('forWhat', { what: result.query.site_name ?? t('customWhat', { body: bodyName(result.query.body) }) })}
                       </p>
                       <p className="muted">{t('candidates', { n: result.n_candidates.toLocaleString(lang), ms: elapsed })}</p>
+                      {suitable(fitsOf(result.query.body, sel.similarity, missionRef))}
                     </div>
                   </div>
                   <ol className="ranking">
@@ -496,6 +605,7 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
                         <span className="rank-name">
                           {regionLabel(db, r.region, lang, r.lat, r.lon)}
                           {r.known && <small> · {t('known')}</small>}
+                          {suitable(fitsOf(result.query.body, r.similarity, missionRef), true)}
                         </span>
                         <span className="rank-track">
                           <span className="rank-fill" style={{ width: `${r.score * 100}%`, background: i === selected ? SIMILARITY_COLOR : '#3a4560' }} />
@@ -630,6 +740,15 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
                       {t('nearest', { region: regionLabel(db, pointResult.cell.region, lang, pointResult.cell.lat, pointResult.cell.lon), km: fmt(pointResult.cell.distance_km, lang, 1) })}
                       {pointResult.cell.known && <span className="badge">{t('known')}</span>}
                     </p>
+                    {pointResult.results[0].score != null &&
+                      suitable(fitsOf(pointResult.results[0].body, pointResult.results[0].similarity, pointRef), false, (m) => {
+                        // Search analogs of that site for this mission.
+                        const s = pointResult.results[0]
+                        const f = { ...form, site: s.site, body: s.body, values: siteStrings(db, s.site), mission: m, weights: missionWeights(db.meta, s.body, m) }
+                        setForm(f)
+                        setTab('site')
+                        run(db, f)
+                      })}
                   </div>
                 </div>
                 <ol className="ranking">
