@@ -1,12 +1,14 @@
 import { useMemo, useState } from 'react'
 import { homologueFor, type AnalogSite, type Body, type Target } from '../data/types'
-import { useComparisons, type ComparisonData } from '../data/comparisons'
-import { bodiesOf, comparedTarget } from '../data/focus'
+import { rankForTarget, useComparisons, type ComparisonData, type ComparisonTarget } from '../data/comparisons'
+import { bodiesOf, comparedTarget, discoveryAsSite } from '../data/focus'
+import { dumbbellScale, featureLabel, formatCoords, makeFmt } from '../data/format'
+import type { Place } from './ComparisonPanel'
+import EarthThumb from './EarthThumb'
 import { BODIES } from '../planet/bodies'
 import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
-import { shownImage, useEarthImage } from '../map/earthImages'
 import { useLang } from '../i18n/useLang'
-import { BODY_NAMES, FEATURE_NAMES_EN } from '../i18n/strings'
+import { BODY_NAMES } from '../i18n/strings'
 import PlanetGlobe from './PlanetGlobe'
 import { IconImages, IconLock } from './Icons'
 import ImageCompareModal from './ImageCompareModal'
@@ -24,6 +26,8 @@ interface Props {
   /** Id of the target whose similarity map is on the globe (null = none). */
   mapTargetId: string | null
   onToggleMap: (target: { id: string; name: string; body: Target } | null) => void
+  /** Fly the Earth globe to one of the similar places. */
+  onGoTo: (place: Place) => void
 }
 
 export default function InsightPanel(props: Props) {
@@ -98,14 +102,6 @@ function TerrainThumbs({ site, activeBody, compareBody, onBody }: Props) {
   )
 }
 
-/** Earth thumbnail: the Sentinel-2 crop, or NASA GIBS if it fails. */
-function EarthThumb({ site }: { site: AnalogSite }) {
-  const [failed, setFailed] = useState(false)
-  const image = shownImage(useEarthImage(site), failed)
-  if (!image) return null
-  return <img key={image.url} src={image.url} alt="" onError={() => image.fallback && setFailed(true)} />
-}
-
 /** Static close-up of the counterpart (Cesium reprojects the polar regions correctly). */
 function ThumbGlobe({ site, body }: { site: AnalogSite; body: Target }) {
   const h = homologueFor(site, body)
@@ -140,12 +136,16 @@ function SimilarityContent({
   onOpenAnalysis,
   mapTargetId,
   onToggleMap,
+  onGoTo,
 }: Props & { data: ComparisonData }) {
   const { lang, t } = useLang()
   const [showAll, setShowAll] = useState(false)
   const { target, result } = compareBody ? comparedTarget(data, site, compareBody) : {}
-  const label = (id: string) =>
-    lang === 'en' ? (FEATURE_NAMES_EN[id] ?? id) : (data.features.find((f) => f.id === id)?.label ?? id)
+  const entry = data.sites.find((s) => s.id === site.id)
+  const label = (id: string) => {
+    const f = data.features.find((x) => x.id === id)
+    return f ? featureLabel(f, lang) : id
+  }
 
   if (!compareBody || !target || !result || result.score == null) {
     return (
@@ -160,10 +160,10 @@ function SimilarityContent({
   }
 
   const score = Math.round(result.score * 100)
+  // Most similar variable first; the ones Earth cannot reach are listed apart.
   const bars = data.features
     .filter((f) => result.sim[f.id] != null)
-    .map((f) => ({ id: f.id, sim: result.sim[f.id] as number }))
-    .sort((a, b) => b.sim - a.sim)
+    .sort((a, b) => (result.sim[b.id] ?? 0) - (result.sim[a.id] ?? 0))
   const shown = showAll ? bars : bars.slice(0, 5)
   const excluded = (target.excluded ?? []).map(label)
   const mapShown = mapTargetId === target.id
@@ -195,31 +195,40 @@ function SimilarityContent({
 
       {site.caseStudy && <p className="note-line">{t('insight.caseStudy')}</p>}
 
-      <h4 className="panel-sub">{t('insight.byFeature')}</h4>
-      <ul className="mini-bars">
-        {shown.map((b) => (
-          <li key={b.id}>
-            <span className="mini-name">
-              {label(b.id)}
-              {b.id === result.best_match && <span className="tag good"> ✓</span>}
-              {b.id === result.worst_match && <span className="tag bad"> ⚠</span>}
-            </span>
-            <span className="mini-track">
-              <span className="mini-fill" style={{ width: `${b.sim * 100}%`, background: SIMILARITY_COLOR }} />
-            </span>
-            <span className="mini-value">{b.sim.toFixed(2)}</span>
-          </li>
+      <h4 className="panel-sub">{t('cmp.values')}</h4>
+      <p className="legend-line small">
+        <span>
+          <span className="dot" style={{ background: BODY_COLORS.tierra }} /> {BODY_NAMES[lang].tierra}
+        </span>
+        <span>
+          <span className="dot" style={{ background: BODY_COLORS[compareBody] }} /> {target.name}
+        </span>
+      </p>
+      <ul className="value-rows">
+        {shown.map((f) => (
+          <ValueRow
+            key={f.id}
+            label={label(f.id)}
+            unit={f.unit}
+            earth={entry?.values[f.id] ?? null}
+            other={target.values[f.id] ?? null}
+            scale={f}
+            color={BODY_COLORS[compareBody]}
+            mark={f.id === result.best_match ? 'good' : f.id === result.worst_match ? 'bad' : null}
+            otherName={target.name}
+          />
         ))}
       </ul>
       {bars.length > 5 && (
         <button className="link small" onClick={() => setShowAll((v) => !v)}>
-          {showAll ? '−' : `+${bars.length - 5}`}
+          {showAll ? t('insight.fewer') : bars.length - 5 === 1 ? t('insight.moreOne') : t('insight.more', { n: bars.length - 5 })}
         </button>
       )}
       <p className="legend-line small">
         <span className="tag good">✓ {t('cmp.best').replace('✓ ', '')}</span>
         <span className="tag bad">⚠ {t('cmp.worst').replace('⚠ ', '')}</span>
       </p>
+      <p className="muted small">{t('insight.valuesHint')}</p>
       {excluded.length > 0 && <p className="muted small">{t('insight.notComparable', { list: excluded.join(', ') })}</p>}
 
       <div className="panel-actions">
@@ -234,6 +243,123 @@ function SimilarityContent({
           {mapShown ? t('cmp.hideMap') : t('cmp.showMap')}
         </button>
       </div>
+
+      <SimilarPlaces data={data} site={site} target={target} onGoTo={onGoTo} />
+    </section>
+  )
+}
+
+/** One variable: Earth and Moon/Mars values on the same fixed axis (dumbbell). */
+function ValueRow({
+  label,
+  unit,
+  earth,
+  other,
+  scale,
+  color,
+  mark,
+  otherName,
+}: {
+  label: string
+  unit: string
+  earth: number | null
+  other: number | null
+  scale: Parameters<typeof dumbbellScale>[0]
+  color: string
+  mark: 'good' | 'bad' | null
+  otherName: string
+}) {
+  const { lang, t } = useLang()
+  const fmt = makeFmt(lang)
+  const tip = `${label}: ${BODY_NAMES[lang].tierra} ${fmt(earth, unit)} · ${otherName} ${fmt(other, unit)}`
+  const pos = earth != null && other != null ? dumbbellScale(scale, earth, other) : null
+  return (
+    <li className="value-row" title={tip} aria-label={tip}>
+      <span className="value-name">
+        {label}
+        {unit && <small> ({unit})</small>}
+        {mark === 'good' && <span className="tag good"> ✓</span>}
+        {mark === 'bad' && <span className="tag bad"> ⚠</span>}
+      </span>
+      <span className="value-nums">
+        <span style={{ color: BODY_COLORS.tierra }}>{fmt(earth)}</span>
+        {' · '}
+        <span style={{ color }}>{fmt(other)}</span>
+      </span>
+      {pos ? (
+        <span className="value-plot" aria-hidden="true">
+          <span className="dumbbell-axis" />
+          <span className="dumbbell-link" style={{ left: `${Math.min(pos.earth, pos.other)}%`, width: `${Math.abs(pos.earth - pos.other)}%` }} />
+          <span className="dumbbell-dot" style={{ left: `${pos.earth}%`, background: BODY_COLORS.tierra }} />
+          <span className="dumbbell-dot" style={{ left: `${pos.other}%`, background: color }} />
+          <span className="value-tick start">{fmt(pos.lo)}</span>
+          <span className="value-tick end">{fmt(pos.hi)}</span>
+        </span>
+      ) : (
+        <span className="value-plot muted small">{t('insight.noValue')}</span>
+      )}
+    </li>
+  )
+}
+
+/** The best places on Earth for the compared Moon/Mars site (one per region), with coordinates. */
+function SimilarPlaces({
+  data,
+  site,
+  target,
+  onGoTo,
+}: {
+  data: ComparisonData
+  site: AnalogSite
+  target: ComparisonTarget
+  onGoTo: (place: Place) => void
+}) {
+  const { lang, t } = useLang()
+  const defaults = useMemo(() => Object.fromEntries(data.features.map((f) => [f.id, f.default_weight])), [data])
+  const top = useMemo(() => rankForTarget(data, target.id, defaults).slice(0, 5), [data, target, defaults])
+  if (!top.length) return null
+  const best = top[0]
+  const bestSite = discoveryAsSite({ site: best.site, target, score: best.score ?? 0 })
+  const go = (r: (typeof top)[number]) => onGoTo({ lat: r.site.lat, lng: r.site.lng, name: r.site.name })
+  const tag = (r: (typeof top)[number]) =>
+    r.site.kind === 'discovery' ? t('cmp.discovery') : r.site.known ? t('cmp.known') : null
+
+  return (
+    <section className="similar-places">
+      <h4 className="panel-sub">{t('cmp.ranking', { target: target.name })}</h4>
+      <button className="best-place" onClick={() => go(best)} title={t('cmp.goTo')}>
+        <span className="best-thumb">
+          <EarthThumb site={bestSite} alt={best.site.name} />
+          <span className="best-badge">#1</span>
+        </span>
+        <span className="best-text">
+          <strong>{best.site.name}</strong>
+          <small>{formatCoords(best.site.lat, best.site.lng, lang)}</small>
+          {tag(best) && <small>{tag(best)}</small>}
+        </span>
+        <span className="best-score">
+          <b>{Math.round((best.score ?? 0) * 100)}</b>
+          <small>/100</small>
+        </span>
+      </button>
+      <ol className="place-rows" start={2}>
+        {top.slice(1).map((r, i) => (
+          <li key={r.site.id} className={r.site.id === site.id ? 'current' : ''}>
+            <button onClick={() => go(r)} title={t('cmp.goTo')}>
+              <span className="place-pos">{i + 2}</span>
+              <span className="place-text">
+                <strong>{r.site.name}</strong>
+                <small>
+                  {formatCoords(r.site.lat, r.site.lng, lang)}
+                  {tag(r) && ` · ${tag(r)}`}
+                </small>
+              </span>
+              <span className="place-score">{Math.round((r.score ?? 0) * 100)}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+      <p className="muted small">{t('insight.placesHint')}</p>
     </section>
   )
 }

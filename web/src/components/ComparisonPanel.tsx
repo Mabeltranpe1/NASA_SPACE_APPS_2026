@@ -10,7 +10,8 @@ import {
 import { homologueFor, type AnalogSite, type Target } from '../data/types'
 import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
 import { useLang } from '../i18n/useLang'
-import { BODY_NAMES, FEATURE_NAMES_EN, SOURCE_PHRASES_EN, type Lang } from '../i18n/strings'
+import { BODY_NAMES, SOURCE_PHRASES_EN, type Lang } from '../i18n/strings'
+import { dumbbellScale, featureLabel, makeFmt } from '../data/format'
 
 /** Physical conditions Earth cannot reproduce. Always shown: the analogy breaks here for every site. */
 type Limit = { label: string; earth: string; body: string }
@@ -49,19 +50,6 @@ interface Tooltip {
   x: number
   y: number
   text: string
-}
-
-function makeFmt(locale: string) {
-  return (value: number | null | undefined, unit = '') => {
-    if (value == null) return '—'
-    const abs = Math.abs(value)
-    const digits = abs >= 100 ? 0 : abs >= 10 ? 1 : 2
-    return `${value.toLocaleString(locale, { maximumFractionDigits: digits })}${unit ? ` ${unit}` : ''}`
-  }
-}
-
-function featureLabel(f: FeatureMeta, lang: Lang) {
-  return lang === 'en' ? (FEATURE_NAMES_EN[f.id] ?? f.label) : f.label
 }
 
 function sourceText(text: string | undefined, lang: Lang) {
@@ -515,12 +503,7 @@ function Dumbbell({
     )
   }
   // Fixed physical axis so the distance between the two dots means something.
-  const [min, max] = feature.range ?? [Math.min(earth, other), Math.max(earth, other)]
-  const lo = Math.min(min, earth, other)
-  const hi = Math.max(max, earth, other)
-  const pct = (v: number) => (hi === lo ? 50 : ((v - lo) / (hi - lo)) * 100)
-  const pe = pct(earth)
-  const po = pct(other)
+  const { lo, hi, earth: pe, other: po } = dumbbellScale(feature, earth, other)
   const tip = `${label}: ${earthName} ${fmt(earth, feature.unit)} · ${otherLabel} ${fmt(other, feature.unit)}`
 
   return (

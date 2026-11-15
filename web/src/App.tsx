@@ -16,6 +16,7 @@ import { EarthCarousel, TargetCarousel } from './components/PlaceCarousels'
 import ComparisonPanel, { type Place } from './components/ComparisonPanel'
 import InsightPanel from './components/InsightPanel'
 import SiteCard from './components/SiteCard'
+import EarthThumb from './components/EarthThumb'
 import MethodView from './components/MethodView'
 import IntroOverlay from './components/IntroOverlay'
 import GuidedTour from './components/GuidedTour'
@@ -592,6 +593,10 @@ export default function App() {
                   setMapTarget(target)
                   if (target) setActiveBody('tierra')
                 }}
+                onGoTo={(p) => {
+                  setPlace(p)
+                  setActiveBody('tierra')
+                }}
               />
             )}
 
@@ -764,18 +769,21 @@ function SiteList({
         return (
           <li key={s.id}>
             <button onClick={() => onPick(s)}>
-              <span className="site-dots">
-                {s.homologues.map((h) => (
-                  <span key={h.body} className="dot" style={{ background: BODY_COLORS[h.body] }} />
-                ))}
+              <span className="site-thumb">
+                <EarthThumb site={s} />
+                <span className="site-dots">
+                  {s.homologues.map((h) => (
+                    <span key={h.body} className="dot" style={{ background: BODY_COLORS[h.body] }} />
+                  ))}
+                </span>
               </span>
               <span>
-                <strong>
-                  {s.name}
-                  {!s.wellKnown && !s.caseStudy && <span className="pill">{t('badge.lesserKnown')}</span>}
-                </strong>
+                <strong>{s.name}</strong>
                 <small>
                   {s.country} → {s.homologues.map((h) => h.name).join(' · ')}
+                </small>
+                <small className={`studied ${s.wellKnown ? 'well' : 'little'}`}>
+                  {s.wellKnown ? t('badge.wellKnown') : t('badge.lesserKnown')}
                 </small>
               </span>
               {best && (
