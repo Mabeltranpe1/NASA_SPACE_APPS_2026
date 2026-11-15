@@ -7,9 +7,10 @@ That is the same grid that the MODIS temperature and albedo files use.
 
 Columns (the same features that src/compare.py uses):
     elev_m        mean elevation of the cell (NASADEM, metres above sea level)
-    slope_deg     mean terrain slope, measured at ~90 m pixels (NASADEM)
+    slope_deg     mean terrain slope, measured between 200 m pixels
     roughness     mean local roughness: standard deviation of elevation in
-                  a 3 x 3 window of ~90 m pixels, in metres (NASADEM)
+                  a 3 x 3 window of 200 m pixels, in metres
+                  (all bodies use 200 m pixels, see src/terrain_common.py)
     temp_mean_K   yearly mean land surface temperature, day and night (MOD11C3)
     temp_range_K  warmest monthly daytime temperature minus the yearly mean
                   (MOD11C3). Same definition as the Moon (Diviner max - mean).
@@ -44,7 +45,9 @@ import numpy as np
 import pandas as pd
 import rasterio
 from pyhdf.SD import SD, SDC
-from scipy.ndimage import uniform_filter
+
+sys.path.insert(0, str(Path(__file__).parent))
+import terrain_common  # noqa: E402  (same 200 m terrain for every body)
 
 RAW = Path("data/raw")
 CELL = 0.05             # grid cell size in degrees (MODIS CMG grid)
@@ -126,37 +129,39 @@ def terrain_for_tile(path, source):
     """
     Terrain features of one 1 x 1 degree tile, averaged to the 0.05 degree
     grid: returns (lat_south, lon_west, dict of 20 x 20 arrays).
+    The tile is first brought to 200 m pixels (src/terrain_common.py), the
+    same pixel size used for the Moon and Mars.
     """
     lat_s, lon_w = tile_corner(path)
     z, water = read_nasadem_90m(path) if source == "nasadem" else read_cop90(path)
     rows, cols = z.shape
 
-    # Pixel size in metres (pixels get narrower away from the equator).
+    # Native pixel size in metres (pixels get narrower away from the equator).
     px_y = (3600 / rows) * M_PER_ARCSEC
     px_x = (3600 / cols) * M_PER_ARCSEC * np.cos(np.radians(lat_s + 0.5))
 
-    dz_dy, dz_dx = np.gradient(z, px_y, px_x)
-    slope = np.degrees(np.arctan(np.hypot(dz_dx, dz_dy)))
-
-    # Roughness = standard deviation of elevation in a 3 x 3 window.
-    zf = np.nan_to_num(z, nan=np.nanmean(z) if np.isfinite(z).any() else 0.0)
-    mean = uniform_filter(zf, 3)
-    rough = np.sqrt(np.clip(uniform_filter(zf**2, 3) - mean**2, 0, None))
-    rough[np.isnan(z)] = np.nan
+    z200, _ = terrain_common.resample_to_200m(z, px_x, px_y)
+    water200, _ = terrain_common.resample_to_200m(water, px_x, px_y)
+    slope, rough = terrain_common.slope_and_roughness(z200)
 
     # Terrain averages use land pixels only.
-    land = water <= 0.5
-    layers = {"elev_m": np.where(land, z, np.nan), "slope_deg": np.where(land, slope, np.nan),
-              "roughness": np.where(land, rough, np.nan), "water_frac": water}
+    land = water200 <= 0.5
+    layers = {"elev_m": np.where(land, z200, np.nan), "slope_deg": np.where(land, slope, np.nan),
+              "roughness": np.where(land, rough, np.nan), "water_frac": water200}
 
-    # If the tile has fewer columns (Copernicus, high latitude), repeat them so
-    # every tile is 1200 x 1200 before averaging into 60 x 60 blocks = 0.05 deg.
-    per_cell = rows // 20
+    # Every 200 m pixel belongs to one of the 20 x 20 cells of 0.05 degrees.
+    r200, c200 = z200.shape
+    cell_r = np.minimum((np.arange(r200) * 20) // r200, 19)
+    cell_c = np.minimum((np.arange(c200) * 20) // c200, 19)
+    cell_id = (cell_r[:, None] * 20 + cell_c[None, :]).ravel()
     out = {}
     for key, values in layers.items():
-        if cols != rows:
-            values = values[:, np.arange(rows) * cols // rows]
-        out[key] = block_mean(values, per_cell)
+        v = values.ravel()
+        ok = np.isfinite(v)
+        total = np.bincount(cell_id[ok], weights=v[ok], minlength=400)
+        count = np.bincount(cell_id[ok], minlength=400)
+        with np.errstate(invalid="ignore", divide="ignore"):
+            out[key] = (total / count).reshape(20, 20)
     return lat_s, lon_w, out
 
 

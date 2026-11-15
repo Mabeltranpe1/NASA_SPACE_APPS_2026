@@ -18,3 +18,6 @@
 ## Other
 - `sample_earth.csv`, `sample_targets.csv` – FAKE example data, only to try the code.
 - `archive/` – old files from earlier tests, no longer used. Safe to delete.
+
+## Maps (folder maps/ at the project root)
+- One image per place. Same number = same Moon/Mars site. `B` = the Moon/Mars site, `A1`, `A2`, `A3` = its 3 best little-known Earth analogs (each from a different region). All images of one number show a square of the same size, at 200 m pixels. `maps/index.csv` lists every pair. Made by `python src/make_maps.py`.

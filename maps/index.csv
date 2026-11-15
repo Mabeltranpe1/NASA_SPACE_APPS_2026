@@ -1,0 +1,46 @@
+number,earth_option,body,target,target_lat,target_lon,earth_region,earth_lat,earth_lon,score,worst_match,image_earth,image_twin
+01,A1,Moon,Shackleton rim,-89.67,129.78,north_greenland,82.575,-33.775,0.0865,temp_mean_K,01_moon_shackleton_rim_A1_earth_north_greenland.png,01_moon_shackleton_rim_B_moon.png
+01,A2,Moon,Shackleton rim,-89.67,129.78,ellesmere_north,81.275,-71.675,0.0615,temp_mean_K,01_moon_shackleton_rim_A2_earth_ellesmere_north.png,01_moon_shackleton_rim_B_moon.png
+01,A3,Moon,Shackleton rim,-89.67,129.78,pamir,39.225,73.475,0.0499,temp_mean_K,01_moon_shackleton_rim_A3_earth_pamir.png,01_moon_shackleton_rim_B_moon.png
+02,A1,Moon,de Gerlache rim,-88.48,-88.34,north_greenland,82.525,-32.275,0.092,temp_mean_K,02_moon_de_gerlache_rim_A1_earth_north_greenland.png,02_moon_de_gerlache_rim_B_moon.png
+02,A2,Moon,de Gerlache rim,-88.48,-88.34,ellesmere_north,81.275,-71.825,0.0648,temp_mean_K,02_moon_de_gerlache_rim_A2_earth_ellesmere_north.png,02_moon_de_gerlache_rim_B_moon.png
+02,A3,Moon,de Gerlache rim,-88.48,-88.34,victoria_island,75.675,-106.925,0.054,temp_mean_K,02_moon_de_gerlache_rim_A3_earth_victoria_island.png,02_moon_de_gerlache_rim_B_moon.png
+03,A1,Moon,Haworth rim,-87.45,-5.17,north_greenland,82.475,-34.025,0.0445,temp_mean_K,03_moon_haworth_rim_A1_earth_north_greenland.png,03_moon_haworth_rim_B_moon.png
+03,A2,Moon,Haworth rim,-87.45,-5.17,ellesmere_north,81.225,-71.825,0.0341,temp_mean_K,03_moon_haworth_rim_A2_earth_ellesmere_north.png,03_moon_haworth_rim_B_moon.png
+03,A3,Moon,Haworth rim,-87.45,-5.17,victoria_island,75.675,-106.925,0.0305,temp_mean_K,03_moon_haworth_rim_A3_earth_victoria_island.png,03_moon_haworth_rim_B_moon.png
+04,A1,Moon,Faustini rim,-87.18,84.31,north_greenland,82.525,-32.225,0.0664,temp_mean_K,04_moon_faustini_rim_A1_earth_north_greenland.png,04_moon_faustini_rim_B_moon.png
+04,A2,Moon,Faustini rim,-87.18,84.31,ellesmere_north,81.225,-71.925,0.0487,temp_mean_K,04_moon_faustini_rim_A2_earth_ellesmere_north.png,04_moon_faustini_rim_B_moon.png
+04,A3,Moon,Faustini rim,-87.18,84.31,victoria_island,75.625,-107.675,0.0471,temp_mean_K,04_moon_faustini_rim_A3_earth_victoria_island.png,04_moon_faustini_rim_B_moon.png
+05,A1,Moon,Mons Mouton summit,-84.6,31.0,north_greenland,82.375,-34.175,0.0856,temp_mean_K,05_moon_mons_mouton_summit_A1_earth_north_greenland.png,05_moon_mons_mouton_summit_B_moon.png
+05,A2,Moon,Mons Mouton summit,-84.6,31.0,ellesmere_north,81.225,-71.675,0.0618,temp_mean_K,05_moon_mons_mouton_summit_A2_earth_ellesmere_north.png,05_moon_mons_mouton_summit_B_moon.png
+05,A3,Moon,Mons Mouton summit,-84.6,31.0,victoria_island,75.675,-107.675,0.0606,temp_mean_K,05_moon_mons_mouton_summit_A3_earth_victoria_island.png,05_moon_mons_mouton_summit_B_moon.png
+06,A1,Moon,Shackleton floor (shadow),-89.67,129.78,north_greenland,82.525,-32.625,0.0441,temp_mean_K,06_moon_shackleton_floor_A1_earth_north_greenland.png,06_moon_shackleton_floor_B_moon.png
+06,A2,Moon,Shackleton floor (shadow),-89.67,129.78,ellesmere_north,81.375,-71.925,0.0336,temp_mean_K,06_moon_shackleton_floor_A2_earth_ellesmere_north.png,06_moon_shackleton_floor_B_moon.png
+06,A3,Moon,Shackleton floor (shadow),-89.67,129.78,victoria_island,75.625,-107.675,0.0331,temp_mean_K,06_moon_shackleton_floor_A3_earth_victoria_island.png,06_moon_shackleton_floor_B_moon.png
+07,A1,Mars,Jezero crater (Perseverance),18.44,77.45,north_greenland,82.225,-34.075,0.3275,precip_mm,07_mars_jezero_crater_A1_earth_north_greenland.png,07_mars_jezero_crater_B_mars.png
+07,A2,Mars,Jezero crater (Perseverance),18.44,77.45,egypt_western_desert,25.375,29.575,0.2488,temp_mean_K,07_mars_jezero_crater_A2_earth_egypt_western_desert.png,07_mars_jezero_crater_B_mars.png
+07,A3,Mars,Jezero crater (Perseverance),18.44,77.45,fezzan_libya,24.375,14.925,0.247,temp_mean_K,07_mars_jezero_crater_A3_earth_fezzan_libya.png,07_mars_jezero_crater_B_mars.png
+08,A1,Mars,Gale crater (Curiosity),-4.59,137.44,north_greenland,82.225,-34.075,0.3272,precip_mm,08_mars_gale_crater_A1_earth_north_greenland.png,08_mars_gale_crater_B_mars.png
+08,A2,Mars,Gale crater (Curiosity),-4.59,137.44,egypt_western_desert,25.375,29.575,0.2455,temp_mean_K,08_mars_gale_crater_A2_earth_egypt_western_desert.png,08_mars_gale_crater_B_mars.png
+08,A3,Mars,Gale crater (Curiosity),-4.59,137.44,fezzan_libya,24.375,14.925,0.2382,temp_mean_K,08_mars_gale_crater_A3_earth_fezzan_libya.png,08_mars_gale_crater_B_mars.png
+09,A1,Mars,Elysium Planitia (InSight),4.5,135.62,north_greenland,82.225,-34.125,0.3006,precip_mm,09_mars_elysium_planitia_A1_earth_north_greenland.png,09_mars_elysium_planitia_B_mars.png
+09,A2,Mars,Elysium Planitia (InSight),4.5,135.62,fezzan_libya,26.075,14.525,0.253,temp_mean_K,09_mars_elysium_planitia_A2_earth_fezzan_libya.png,09_mars_elysium_planitia_B_mars.png
+09,A3,Mars,Elysium Planitia (InSight),4.5,135.62,egypt_western_desert,25.375,29.375,0.2506,temp_mean_K,09_mars_elysium_planitia_A3_earth_egypt_western_desert.png,09_mars_elysium_planitia_B_mars.png
+10,A1,Mars,Meridiani Planum (Opportunity),-1.95,-5.53,north_greenland,82.225,-34.175,0.2972,precip_mm,10_mars_meridiani_planum_A1_earth_north_greenland.png,10_mars_meridiani_planum_B_mars.png
+10,A2,Mars,Meridiani Planum (Opportunity),-1.95,-5.53,fezzan_libya,24.425,14.975,0.2522,temp_mean_K,10_mars_meridiani_planum_A2_earth_fezzan_libya.png,10_mars_meridiani_planum_B_mars.png
+10,A3,Mars,Meridiani Planum (Opportunity),-1.95,-5.53,egypt_western_desert,25.175,28.725,0.2366,temp_mean_K,10_mars_meridiani_planum_A3_earth_egypt_western_desert.png,10_mars_meridiani_planum_B_mars.png
+11,A1,Mars,Gusev crater (Spirit),-14.57,175.47,north_greenland,82.225,-34.075,0.2884,precip_mm,11_mars_gusev_crater_A1_earth_north_greenland.png,11_mars_gusev_crater_B_mars.png
+11,A2,Mars,Gusev crater (Spirit),-14.57,175.47,egypt_western_desert,25.375,29.575,0.2135,temp_mean_K,11_mars_gusev_crater_A2_earth_egypt_western_desert.png,11_mars_gusev_crater_B_mars.png
+11,A3,Mars,Gusev crater (Spirit),-14.57,175.47,fezzan_libya,24.375,14.925,0.2131,temp_mean_K,11_mars_gusev_crater_A3_earth_fezzan_libya.png,11_mars_gusev_crater_B_mars.png
+12,A1,Mars,Chryse Planitia (Viking 1),22.27,-47.95,north_greenland,82.225,-34.175,0.3072,precip_mm,12_mars_chryse_planitia_A1_earth_north_greenland.png,12_mars_chryse_planitia_B_mars.png
+12,A2,Mars,Chryse Planitia (Viking 1),22.27,-47.95,fezzan_libya,24.425,14.975,0.2547,temp_mean_K,12_mars_chryse_planitia_A2_earth_fezzan_libya.png,12_mars_chryse_planitia_B_mars.png
+12,A3,Mars,Chryse Planitia (Viking 1),22.27,-47.95,egypt_western_desert,25.175,28.725,0.248,temp_mean_K,12_mars_chryse_planitia_A3_earth_egypt_western_desert.png,12_mars_chryse_planitia_B_mars.png
+13,A1,Mars,Utopia Planitia (Viking 2),47.64,134.29,north_greenland,82.225,-34.175,0.2477,precip_mm,13_mars_utopia_planitia_A1_earth_north_greenland.png,13_mars_utopia_planitia_B_mars.png
+13,A2,Mars,Utopia Planitia (Viking 2),47.64,134.29,fezzan_libya,24.375,14.975,0.1689,temp_mean_K,13_mars_utopia_planitia_A2_earth_fezzan_libya.png,13_mars_utopia_planitia_B_mars.png
+13,A3,Mars,Utopia Planitia (Viking 2),47.64,134.29,egypt_western_desert,25.325,29.475,0.1666,temp_mean_K,13_mars_utopia_planitia_A3_earth_egypt_western_desert.png,13_mars_utopia_planitia_B_mars.png
+14,A1,Mars,Vastitas Borealis (Phoenix),68.22,-125.75,north_greenland,82.225,-34.175,0.1926,temp_mean_K,14_mars_vastitas_borealis_A1_earth_north_greenland.png,14_mars_vastitas_borealis_B_mars.png
+14,A2,Mars,Vastitas Borealis (Phoenix),68.22,-125.75,fezzan_libya,24.425,14.975,0.1312,temp_mean_K,14_mars_vastitas_borealis_A2_earth_fezzan_libya.png,14_mars_vastitas_borealis_B_mars.png
+14,A3,Mars,Vastitas Borealis (Phoenix),68.22,-125.75,egypt_western_desert,25.175,28.725,0.1295,temp_mean_K,14_mars_vastitas_borealis_A3_earth_egypt_western_desert.png,14_mars_vastitas_borealis_B_mars.png
+15,A1,Mars,Arcadia Planitia (human candidate),40.0,-160.0,north_greenland,82.225,-34.125,0.2497,precip_mm,15_mars_arcadia_planitia_A1_earth_north_greenland.png,15_mars_arcadia_planitia_B_mars.png
+15,A2,Mars,Arcadia Planitia (human candidate),40.0,-160.0,fezzan_libya,26.075,14.525,0.1894,temp_mean_K,15_mars_arcadia_planitia_A2_earth_fezzan_libya.png,15_mars_arcadia_planitia_B_mars.png
+15,A3,Mars,Arcadia Planitia (human candidate),40.0,-160.0,egypt_western_desert,25.375,29.375,0.1874,temp_mean_K,15_mars_arcadia_planitia_A3_earth_egypt_western_desert.png,15_mars_arcadia_planitia_B_mars.png
