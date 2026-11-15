@@ -14,6 +14,11 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.6.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #20 (22 sitios lunares de Marco, ciencia regional de Santiago y API de análogos, con un solo puntaje) y se publicó `v0.6.0` en `main`.
+
 ## 2026-11-15 · Integración del equipo: 22 sitios lunares, ciencia regional y API de análogos
 **Autor:** @Ssalazarp420
 
