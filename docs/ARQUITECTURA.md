@@ -43,21 +43,25 @@ flowchart LR
 
 ## Componentes
 
-### 1. Pipeline de datos (`src/`, `notebooks/`) · *en construcción*
+### 1. Pipeline de datos (`src/`, `notebooks/`) · *con datos reales*
 - **Lenguaje:** Python 3.12 (GDAL/rasterio, numpy, pandas, geopandas, scikit-learn). Entorno: `environment.yml` (conda) o `requirements.txt` (uv/pip).
-- **Entrada:** datos planetarios (PDS) y terrestres (Earthdata, Copernicus, CSA, JAXA), resumidos en CSV por celda/sitio (Santiago: descarga; Marco: vectorización).
-- **`src/compare.py`** (Marco): índice de similitud entre celdas de la Tierra y sitios de la Luna/Marte. Escala robusta común, similitud por característica `s = exp(−|d|)`, puntaje `S = exp(−√(Σ w·d² / Σ w))`, mejor y peor característica, y análisis de sensibilidad a los pesos. Tests en `tests/test_compare.py`.
-- **`src/export_web.py`**: convierte la salida de `compare.py` en `web/public/data/comparisons.json` (contrato en [VISUALIZACION_COMPARACION.md](VISUALIZACION_COMPARACION.md)). Enlaza celdas con el catálogo por palabras clave en `place_hint`.
+- **Entrada (Marco):** base de datos global de la Tierra (`data/earth_all.csv`, ~164 000 celdas de 0,05° en 43 regiones, de NASADEM/Copernicus, MODIS, IMERG y ASTER) y sitios de la Luna y Marte (`data/targets.csv`, de LOLA, Diviner, HRSC+MOLA, TES y el Mars Climate Database). Scripts: `download_earth.py`, `build_earth.py`, `build_database.py`, `build_moon_targets.py`, `build_mars_targets.py`, `screen_global.py`. Detalle en [PIPELINE_COMPARADOR.md](PIPELINE_COMPARADOR.md).
+- **Entrada (Santiago):** caracterización de 6 sitios de Colombia en ventanas de 10 × 10 km a 200 m (relieve, ambiente con GEE, Sentinel-2, NASA POWER, disponibilidad de EMIT) en `data/features/`, e índice topográfico PAI en `data/results/`. Scripts: `resample.py`, `process_planetary.py`, `extract_features.py`, `similarity.py`, `extract_climate.py`, `search_emit.py`, `download_emit.py`. Detalle en [CONTEXTO_TECNICO_SANTIAGO.md](CONTEXTO_TECNICO_SANTIAGO.md).
+- **`src/compare.py`** (Marco): índice de similitud entre celdas de la Tierra y sitios de la Luna/Marte. Escala por tolerancias físicas (`TOLERANCE`), similitud por característica `s = exp(−|d|)`, puntaje `S = exp(−√(Σ w·d² / Σ w))`, mejor y peor característica, y análisis de sensibilidad a los pesos. Tests en `tests/test_compare.py`.
+- **`src/export_web.py`**: usa `compare.py` sobre toda la base y genera `web/public/data/comparisons.json` y `web/public/data/heatmap/<objetivo>.json` (contrato en [VISUALIZACION_COMPARACION.md](VISUALIZACION_COMPARACION.md)). Toma las coordenadas del catálogo de `web/src/data/sites.ts`, elige descubrimientos por región y agrega la caracterización de Santiago. Reglas y cómo regenerar: [DATOS_WEB.md](DATOS_WEB.md). Tests en `tests/test_export_web.py`.
 
 ```mermaid
 flowchart LR
-    CSV["CSV Tierra + CSV objetivos<br/>(data/)"] --> CMP["src/compare.py"]
+    CSV["earth_all.csv + targets.csv<br/>(Marco)"] --> CMP["src/compare.py"]
+    SAN["data/features/<br/>(Santiago)"] --> EXP
     CMP --> EXP["src/export_web.py"]
-    EXP --> JSON["web/public/data/<br/>comparisons.json"]
-    JSON --> PANEL["ComparisonPanel<br/>(web)"]
+    EXP --> JSON["comparisons.json"]
+    EXP --> HEAT["heatmap/&lt;objetivo&gt;.json"]
+    JSON --> PANEL["ComparisonPanel + ficha"]
+    HEAT --> GLOBE["Globo de la Tierra<br/>(mapa de similitud)"]
 ```
 
-- **Salida actual:** datos **sintéticos** de muestra (`data/sample_*.csv`), marcados en la interfaz.
+- **Salida actual:** **datos reales** (15 objetivos, 17 sitios del catálogo, 50 descubrimientos). Los CSV de muestra (`data/sample_*.csv`) quedan solo para los tests.
 - **Reglas:**
   - Los datos crudos van en `data/raw/` y los procesados en `data/processed/`. **No se suben a git.**
   - Cada dataset debe tener un script de descarga reproducible.
@@ -69,29 +73,36 @@ flowchart LR
 |---|---|
 | Framework | React 19 + TypeScript |
 | Build | Vite |
-| Globos 3D | **CesiumJS** (Apache 2.0, sin Cesium ion ni token): un visor por cuerpo con su elipsoide real (`Ellipsoid.WGS84`, `MOON`, `MARS`). Maneja los polos, necesario para el polo sur lunar |
+| Globos 3D | **CesiumJS** (Apache 2.0, sin Cesium ion ni token): **un solo globo principal** que se recrea con el elipsoide real del cuerpo elegido (`Ellipsoid.WGS84`, `MOON`, `MARS`). Maneja los polos, necesario para el polo sur lunar. Las miniaturas del panel derecho son visores de detalle sin interacción |
+| Tipografía | Inter (texto) y Space Grotesk (títulos), de Google Fonts (gratis) |
 | Luna y Marte | **NASA Moon Trek** (LRO WAC, ~100 m/px) y **Mars Trek** (Viking MDIM 2.1 color, ~232 m/px; relieve MOLA, ~463 m/px), teselas geográficas `default028mm` |
 | Imagen de detalle (Tierra) | **NASA GIBS Snapshot API**: Landsat WELD (30 m/px); MODIS Terra en sitios polares sin cobertura Landsat |
 | Imágenes | **NASA GIBS** (WMTS): Blue Marble, VIIRS NOAA-20 color verdadero, relieve ASTER GDEM, temperatura superficial MODIS, etiquetas de referencia. Sin key ni costo. |
 | Lint | oxlint |
 | Estado | `useState` y `useMemo` locales (sin librería de estado global) |
-| Datos | Por ahora en `web/src/data/sites.ts`; se reemplazará por el archivo generado por el pipeline |
+| Datos | Catálogo curado en `web/src/data/sites.ts` (17 sitios); puntajes, descubrimientos y mapas de similitud en `web/public/data/`, generados por `src/export_web.py` |
 
 Estructura:
 ```
 web/src/
-├── App.tsx                  # Modos de comparación, filtros, globos lado a lado, ficha y recorrido
+├── App.tsx                  # Barra de navegación, un solo globo con selector Tierra · Luna · Marte, paneles, búsqueda y vistas
 ├── main.tsx                 # Punto de entrada (envuelve la app en LanguageProvider)
 ├── theme.ts                 # Colores de identidad validados (Tierra, Luna, Marte) y de similitud
 ├── components/
-│   ├── PlanetGlobe.tsx      # Visor Cesium genérico (globo completo o vista de detalle)
+│   ├── PlanetGlobe.tsx      # Visor Cesium genérico (globo, vista de detalle o miniatura; giro lento en reposo)
+│   ├── SiteCard.tsx         # Ficha del lugar (panel izquierdo) y caracterización de Santiago
+│   ├── InsightPanel.tsx     # Panel derecho: miniaturas de terreno con candados e índice de similitud
 │   ├── DetailImage.tsx      # Imagen de detalle: snapshot Landsat/MODIS o vista cercana Luna/Marte
 │   ├── ComparisonPanel.tsx  # Comparación detallada: puntaje, pesos, valores, ranking, límites
-│   └── GuidedTour.tsx       # Recorrido guiado de 6 pasos
+│   ├── MethodView.tsx       # Vista «Método»: fórmula, reglas, fuentes, límites y equipo
+│   ├── IntroOverlay.tsx     # Pantalla de bienvenida con las cifras del proyecto
+│   ├── GuidedTour.tsx       # Recorrido guiado de 7 pasos
+│   └── Icons.tsx            # Iconos SVG en línea (sin librerías)
 ├── planet/
 │   └── bodies.ts            # Configuración por cuerpo: elipsoide, imágenes, alturas de cámara
 ├── map/
-│   └── gibs.ts              # Capas NASA GIBS de la Tierra y URLs de teselas
+│   ├── gibs.ts              # Capas NASA GIBS de la Tierra y URLs de teselas
+│   └── snapshot.ts          # Imagen de cerca de la Tierra (Landsat; MODIS por encima de 78°)
 ├── i18n/
 │   ├── strings.ts           # Textos de la interfaz en español e inglés
 │   ├── LanguageContext.tsx  # Proveedor de idioma (navegador, localStorage, ?lang=)
@@ -101,11 +112,13 @@ web/src/
 │   ├── sites.ts             # Catálogo de 12 sitios con sus homólogos (español)
 │   ├── sites.en.ts          # Textos del catálogo en inglés
 │   ├── comparisons.ts       # Tipos del JSON, carga y recálculo del puntaje con pesos
+│   ├── focus.ts             # Descubrimientos por cuerpo y conversión de un descubrimiento en «sitio»
 │   └── tour.ts              # Pasos del recorrido guiado (ES/EN)
-├── App.css                  # Estilos de la app
-└── index.css                # Variables de color (tema oscuro)
+├── App.css                  # Estilos de la app (paneles de vidrio, barra de navegación, versión móvil)
+└── index.css                # Variables de color y tipografía (tema oscuro; Inter y Space Grotesk)
 
 web/public/data/comparisons.json   # Generado por src/export_web.py
+web/public/data/heatmap/*.json     # Mapa de similitud por objetivo (mismo script)
 ```
 
 **Modelo de datos (`AnalogSite`):**

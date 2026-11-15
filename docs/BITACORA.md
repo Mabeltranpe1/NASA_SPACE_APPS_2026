@@ -14,6 +14,89 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Release v0.3.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionaron en `develop` los PR #11 (datos reales de Marco y Santiago) y #12 (rediseño visual), y se publicó el release `v0.3.0` en `main`.
+- **Producción:** https://icy-flower-03890400f.5.azurestaticapps.net (inglés: `?lang=en`).
+- **Contenido de la versión:**
+  - Datos reales: búsqueda global en 163 998 celdas, 15 objetivos de la Luna y Marte, y el caso de estudio de Colombia.
+  - Un solo globo con selector Tierra · Luna · Marte y paneles flotantes.
+  - Secciones Descubrir, Análogos, Análisis y Método.
+  - Pantalla de bienvenida, buscador, enlaces que se pueden compartir y recorrido guiado de 7 pasos.
+- **Pendientes:** los de [DATOS_WEB.md](DATOS_WEB.md#pendientes-conocidos), y cargar Cesium bajo demanda (la app pesa ~1,2 MB comprimida).
+
+## 2026-11-14 · Rediseño visual: un solo globo y paneles flotantes
+**Autor:** @Ssalazarp420
+
+- **Objetivo:** mejorar la primera impresión ante el público y el jurado. Se tomaron como referencia dos conceptos de interfaz espacial: un globo central con paneles de vidrio.
+- **Un solo globo** en lugar de dos lado a lado. Los botones **Tierra · Luna · Marte** cambian el cuerpo y el globo vuela al homólogo del lugar elegido.
+  - Si el lugar no tiene homólogo en un cuerpo, ese botón queda **bloqueado** con un candado. Por ejemplo, Atacama solo se compara con Marte.
+  - Desaparecen los modos Tierra ↔ Luna, Tierra ↔ Marte y Luna ↔ Marte: el par lo define el lugar.
+  - Ganancia: un visor de Cesium menos en la vista principal.
+- **Barra de navegación** con cuatro secciones:
+  - **Descubrir** (vista inicial): la búsqueda global es la respuesta principal.
+  - **Análogos:** el catálogo y Colombia.
+  - **Análisis:** la comparación detallada.
+  - **Método:** la fórmula, las reglas, las fuentes, los límites y el equipo.
+- **Paneles flotantes:**
+  - a la izquierda, la ficha del lugar con su imagen;
+  - a la derecha, las miniaturas de la Tierra, la Luna y Marte, y el **índice de similitud** en anillo, con la posición global, la estabilidad y las barras por variable.
+- **Pantalla de bienvenida** con la pregunta del proyecto y las cifras reales del JSON (163 998 celdas, 43 regiones, 15 sitios).
+- **Otras mejoras:**
+  - buscador de lugares;
+  - enlaces que se pueden compartir (`?view=sites&site=tatacoa`);
+  - giro lento del globo en reposo;
+  - tipografía Inter + Space Grotesk;
+  - versión móvil con la navegación abajo.
+- **Recorrido guiado de 7 pasos:** se agregó uno sobre la búsqueda global, y en cada parada el globo pasa de la Tierra al homólogo.
+- **Decisiones para no exagerar los datos:**
+  - Las barras de la referencia del tipo "Tierra 92 % · Luna 78 %" no se copiaron: la Tierra no se compara consigo misma. Se muestran barras por variable frente al objetivo.
+  - No se usan etiquetas como "similitud alta", que no están validadas (ver el documento de Santiago). Se muestra el número, la posición y la estabilidad.
+  - Las imágenes son las de NASA (GIBS, Moon Trek y Mars Trek), no fotos de stock.
+- **Hallazgo:** con el puntaje completo, los sitios del catálogo dan 1–12/100 frente a su homólogo, mientras que el mejor descubrimiento (North Greenland ≈ Gale) da 35/100, queda #62 de 163 998 y es estable en el 100 % de las variaciones. Por eso el último paso del recorrido usa ese ejemplo.
+- **Correcciones:**
+  - Landsat WELD no tiene datos por encima de ~78° (la imagen salía negra en North Greenland y Ellesmere); ahí se usa MODIS Terra de verano.
+  - Si el homólogo del catálogo no está en la base (Medusae Fossae, Eberswalde, Tranquillitatis…), el índice usa el primer objetivo con datos de ese cuerpo, igual que la comparación detallada.
+- **Verificación:** `tsc`, `oxlint` y `vite build` sin errores. Capturas con Chromium (Playwright) de todas las vistas, del recorrido completo y del móvil (390 px), sin errores en consola.
+
+## 2026-11-14 · Datos reales en la app (Marco + Santiago)
+**Autor:** @Ssalazarp420
+
+- **Integración:** la rama `feature/web-real-data` junta el trabajo de los dos.
+  - **Marco** (`feature/compare_analysis`): base global de ~164 000 celdas en 43 regiones, 15 objetivos de la Luna y Marte, y el nuevo `compare.py` con tolerancias físicas. Su README técnico pasó a `docs/PIPELINE_COMPARADOR.md`.
+  - **Relieve a 200 m:** Marco subió durante la integración la versión con pendiente y rugosidad medidas a 200 m en los tres cuerpos (`terrain_common.py`), como se había acordado. Los datos de la app se regeneraron con esa versión.
+  - **Santiago** (`feature/planetary-analysis`): CSV de `data/features/`, ranking PAI, scripts y su documento técnico (`docs/CONTEXTO_TECNICO_SANTIAGO.md`). No se trajeron los GeoTIFF, las series crudas ni las figuras.
+- **Decisión de alcance:** búsqueda en **todo el mundo** (base de Marco), con Colombia destacada. Se agregaron al catálogo los 5 sitios colombianos de Santiago: La Guajira, Nevado del Ruiz, Nevado Santa Isabel, Volcán Puracé y La Candelaria.
+- **`src/export_web.py` reescrito.** Usa `compare.py` sin cambiar la fórmula y aplica tres reglas (ver [DATOS_WEB.md](DATOS_WEB.md)):
+  - La elevación no se compara: cada cuerpo mide la altura desde un cero distinto.
+  - Una variable que ningún lugar de la Tierra alcanza se apaga para ese cuerpo y se muestra como límite. En la Luna se apagan la temperatura media y la amplitud térmica; en Marte, la amplitud térmica.
+  - Los descubrimientos se eligen por región.
+- **Problema encontrado y corregido:** con la configuración por defecto, los 20 mejores lugares de los 15 objetivos salían **todos** del norte de Groenlandia. Mandaban la temperatura (la Luna está a 50–125 K) y la elevación (con ceros distintos). Con las reglas anteriores aparecen el Desierto Occidental de Egipto y Fezzan (Libia) para la Luna, y Groenlandia, el Sahara central y el Tíbet para Marte.
+- **Validación:** los análogos conocidos (controles) quedan arriba. Las mejores celdas del planeta para la Luna y Marte están en la Antártida, y McMurdo queda #171 de 164 000 para Jezero.
+- **Web:**
+  - Mapa de similitud en el globo de la Tierra.
+  - Ranking con un lugar por región; al hacer clic, el globo vuela al lugar.
+  - Botones "Comparar por: Todo · Relieve · Superficie · Clima y agua".
+  - Etiqueta "fuera del rango de la Tierra" en las variables apagadas.
+  - Posición del sitio entre todas las celdas de la Tierra.
+  - Caracterización de Santiago en la ficha de los sitios colombianos.
+- **Corrección:** los marcadores del otro lado del planeta se veían a través del globo; ahora quedan ocultos.
+- **Decisión: la búsqueda global de Marco es la respuesta principal (opción A).**
+  - La barra lateral muestra primero los lugares poco estudiados encontrados.
+  - Los 6 sitios de Santiago pasan a una sección "Caso de estudio: Colombia", comparados solo por relieve.
+  - Sus homólogos se eligieron con el mismo criterio: mejor índice PAI entre los objetivos con datos. Se corrigió el del Nevado del Ruiz, que pasa de Shackleton (24) a de Gerlache (47).
+  - El motivo es que antes la ficha decía "se parece a Shackleton" mientras el puntaje completo daba 2/100.
+- **Precipitación:** la tolerancia estricta es intencional. Marco busca lugares casi sin lluvia, como la Luna y Marte.
+- **Calidad de IMERG en latitudes altas** (comparación con ERA5-Land en 2023 hecha con Earth Engine): IMERG da 0 mm en toda la Antártida (ERA5-Land: 23–94 mm) y 20 mm en el norte de Groenlandia frente a 137 mm. Esto infla la posición de Groenlandia como análogo de Marte. Propuesta para Marco: ERA5-Land por encima de 60°.
+- **Entorno:** se agregaron a `requirements.txt` y `environment.yml` las librerías que usan los scripts (`scipy`, `pyproj`, `requests`, `h5py`, `pyhdf`, `earthaccess`). Earth Engine (API de Python) quedó configurado en la máquina de @Ssalazarp420.
+- **Pendientes** (detalle en [DATOS_WEB.md](DATOS_WEB.md#pendientes-conocidos)):
+  - Regiones para Timanfaya y Lava Beds.
+  - Revisar la lluvia de IMERG en latitudes altas (menos confiable por encima de 60°). La tolerancia estricta de la precipitación es intencional: Marco buscó lugares casi sin lluvia, como la Luna y Marte.
+  - Máscara de mar en La Guajira.
+  - Temperatura de Diviner para los sitios de Artemis de Santiago.
+  - Procesar EMIT.
+
 ## 2026-11-14 · Release v0.2.0 a producción
 **Autor:** @Ssalazarp420
 

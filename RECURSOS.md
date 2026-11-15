@@ -91,3 +91,27 @@ Estado de acceso verificado el 2026-11-14: ✅ carga bien · ⚠️ requiere rev
 | Rugosidad / radar | Mini-RF, SHARAD | Sentinel-1, RADARSAT, ALOS-PALSAR |
 | Hielo / agua | LEND, Mini-RF | Permafrost, glaciares (Earthdata) |
 | Iluminación | LOLA (sombras permanentes) | Latitudes polares |
+
+---
+
+## 4. Fuentes que ya usa el proyecto (actualizado el 2026-11-14)
+
+Las descargas se hacen con los scripts de `src/`. Detalle de versiones, resoluciones y periodos en [docs/PIPELINE_COMPARADOR.md](docs/PIPELINE_COMPARADOR.md) (Marco) y [docs/CONTEXTO_TECNICO_SANTIAGO.md](docs/CONTEXTO_TECNICO_SANTIAGO.md) (Santiago).
+
+| Cuerpo | Fuente | Variable | Usada por |
+|---|---|---|---|
+| Tierra | NASADEM (30 m) y Copernicus GLO-90 | Elevación, pendiente, rugosidad | Marco, Santiago |
+| Tierra | MODIS MOD11C3 / MOD11A1 | Temperatura superficial | Marco, Santiago |
+| Tierra | MODIS MCD43C3 | Albedo | Marco |
+| Tierra | GPM IMERG / CHIRPS | Precipitación | Marco / Santiago |
+| Tierra | MODIS MOD13C2 / MOD13Q1 | Vegetación (NDVI) | Marco / Santiago |
+| Tierra | ASTER GED | Emisividad (tipo de roca) | Marco |
+| Tierra | ESA WorldCover 2021 | Cobertura del suelo | Santiago |
+| Tierra | Sentinel-2 L2A | Reflectancia, índices de óxidos de hierro e hidroxilos | Santiago |
+| Tierra | NASA POWER | Clima del aire y radiación solar | Santiago |
+| Tierra | EMIT L2B (EMITL2BMIN) | Mineralogía (pendiente de procesar) | Santiago |
+| Luna | LRO LOLA (LDEM 80 m polar, 5 m en sitios de Artemis) | Elevación, pendiente, rugosidad, albedo | Marco, Santiago |
+| Luna | LRO Diviner PRP | Temperatura media y máxima | Marco |
+| Marte | HRSC + MOLA blend (200 m, USGS) | Elevación, pendiente, rugosidad | Marco, Santiago |
+| Marte | MGS TES | Albedo | Marco |
+| Marte | Mars Climate Database v6.2 (LMD) | Temperatura superficial (modelo) | Marco |

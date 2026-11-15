@@ -1,6 +1,6 @@
 # Plan: visualizar en detalle por qué dos lugares son homólogos
 
-Estado: **prototipo funcionando con datos sintéticos** (`src/export_web.py` → `web/public/data/comparisons.json` → `ComparisonPanel`). Depende de los datos que generen el comparador (`src/compare.py`, Marco) y la descarga de datasets (Santiago).
+Estado: **funcionando con datos reales** (`src/export_web.py` → `web/public/data/` → `ComparisonPanel` y mapa de similitud). Usa la base global y el comparador de Marco y la caracterización de Santiago. Reglas y regeneración: [DATOS_WEB.md](DATOS_WEB.md).
 
 Objetivo: que cualquier persona, y en especial el jurado, entienda **con datos** por qué un lugar de la Tierra es análogo a uno de la Luna o de Marte, **cuánto** se parece y **dónde deja de valer** la analogía.
 
@@ -113,15 +113,26 @@ La web leerá archivos JSON estáticos de `web/public/data/`. Los nombres de las
 }
 ```
 
-### `web/public/data/heatmap_<target>.json` (mapa de calor)
+### Campos agregados en la versión 2 (datos reales)
 
-Rejilla gruesa (por ejemplo, 0,5°) solo con las celdas con `score ≥ 0,3`, para que el archivo sea liviano:
+| Dónde | Campo | Significado |
+|---|---|---|
+| `targets[]` | `lat`, `lng`, `area` | Ubicación del sitio y tamaño del área promediada (por ejemplo, `disk 10 km`) |
+| `targets[]` | `excluded` | Variables apagadas para ese cuerpo porque ningún lugar de la Tierra las alcanza |
+| `targets[]` | `best_score` | Mejor puntaje de toda la Tierra para ese objetivo |
+| `sites[]` | `kind` | `catalog` (sitio de `sites.ts`) o `discovery` (mejor celda de una región poco conocida) |
+| `sites[]` | `region`, `known`, `note` | Región de la base de Marco, si es un análogo conocido (control) y por qué está en la base |
+| `sites[]` | `characterization` | Solo sitios colombianos: relieve a 200 m, ambiente, Sentinel-2, EMIT e índice PAI (Santiago). Descriptivo |
+| `results[]` | `rank` | Posición entre **todas** las celdas de la Tierra |
+| `results[]` | `stability` | Fracción de 100 variaciones de pesos en que sigue entre las 500 mejores celdas |
+
+### `web/public/data/heatmap/<target>.json` (mapa de calor)
+
+Las 2500 mejores celdas de 0,05° para ese objetivo, de mayor a menor puntaje (~55 KB por archivo):
 
 ```jsonc
-{ "target": "shackleton", "cell_deg": 0.5, "cells": [[lat, lng, score], ...] }
+{ "target": "shackleton", "cells": [[lat, lng, score], ...] }
 ```
-
-Si el archivo resulta muy pesado (más de 5 MB), se cambia a teselas PNG, que Cesium puede mostrar como capa.
 
 ### Qué necesita cada persona del equipo
 
@@ -134,9 +145,9 @@ Si el archivo resulta muy pesado (más de 5 MB), se cambia a teselas PNG, que Ce
 ## 4. Fases
 
 1. ✅ **Prototipo con datos sintéticos:** `src/export_web.py` y `ComparisonPanel` con la etiqueta "datos de muestra".
-2. **Datos reales para 2 objetivos** (Shackleton y Jezero) y los 12 sitios del catálogo.
-3. **Mapa de calor global** y descubrimiento de análogos nuevos.
-4. **Pesos ajustables** y análisis de estabilidad.
+2. ✅ **Datos reales:** 15 objetivos (6 de la Luna, 9 de Marte) y 15 de los 17 sitios del catálogo.
+3. ✅ **Mapa de calor** en el globo y descubrimiento de análogos nuevos por región.
+4. ✅ **Pesos ajustables** (con opciones predefinidas por tipo de variable) y análisis de estabilidad.
 
 ---
 
@@ -149,9 +160,9 @@ Ordenadas por impacto/esfuerzo:
 | 1 | **Puntajes con datos reales + mapa de calor de "descubrimientos"** (lugares con alta similitud que no están entre los análogos conocidos) | ⭐⭐⭐ Es lo que el reto pide explícitamente | Alto (depende del pipeline) |
 | 2 | **Recorrido guiado** de 60–90 s: la app vuela sola por 4–5 pares con un texto corto en cada uno. Sirve como demo en vivo y para grabar el video | ⭐⭐⭐ | Medio |
 | 3 | **Versión en inglés** (selector ES/EN): el jurado es internacional | ⭐⭐⭐ | Bajo–medio |
-| 4 | **Panel "Cómo lo calculamos"**: método, fórmulas, fuentes por variable y límites (gravedad, vacío, radiación) | ⭐⭐ Credibilidad científica | Bajo |
-| 5 | **Enlaces compartibles**: la URL guarda el modo y el par (`?modo=tierra-marte&sitio=tatacoa`) | ⭐⭐ Útil para la presentación | Bajo |
-| 6 | **Cámaras sincronizadas**: girar un globo gira el otro; o vista "lado a lado a la misma escala" | ⭐⭐ Efecto visual | Medio |
-| 7 | **Pantalla de inicio** con la pregunta del proyecto y un botón "Explorar" | ⭐⭐ Primera impresión | Bajo |
+| 4 | ✅ **Vista "Método"**: fórmula, reglas, fuentes por variable, límites y equipo | ⭐⭐ Credibilidad científica | Bajo |
+| 5 | ✅ **Enlaces compartibles**: la URL guarda la sección y el sitio (`?view=sites&site=tatacoa`) | ⭐⭐ Útil para la presentación | Bajo |
+| 6 | ~~Cámaras sincronizadas~~: reemplazado por **un solo globo** con selector Tierra · Luna · Marte y miniaturas de los tres cuerpos | ⭐⭐ Efecto visual | Medio |
+| 7 | ✅ **Pantalla de inicio** con la pregunta del proyecto, cifras clave, recorrido guiado y "Explorar" | ⭐⭐ Primera impresión | Bajo |
 | 8 | **Rendimiento**: cargar Cesium bajo demanda y mostrar una pantalla de carga | ⭐ Evita la "pantalla negra" | Bajo |
 | 9 | **Móvil y accesibilidad**: navegación con teclado, contraste, tabla alternativa | ⭐ | Medio |
