@@ -14,6 +14,21 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v1.1.0 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #22 (modo video de 30 s) y se publicó `v1.1.0` en `main`.
+
+## 2026-11-15 · Modo video del recorrido guiado (30 s)
+**Autor:** @Ssalazarp420
+
+- **Pedido:** usar el recorrido guiado para un video de 30 segundos que muestre la mayor cantidad de funciones.
+- **Qué se hizo:** un **modo video** con 8 pasos cortos (`DEMO_STEPS` en `web/src/data/tour.ts`): Descubrir, pestañas por dimensión, un lugar con su par en Marte, Haughton ≈ Shackleton en la Luna, la ventana de fotos, el análisis, el apartado Buscar y el Método.
+  - Se inicia con la tecla **D** (y se reinicia con D, se cierra con Esc) o con `?demo=1`. La tecla evita que el primer paso salga sin las imágenes del globo.
+  - Subtítulo compacto, sin botones, que queda encima incluso de la ventana de fotos.
+  - Los pasos aceptan nuevas acciones: duración propia, demora para volar a la Luna o Marte, lista y cuerpo de Descubrir, abrir la galería y buscar un sitio en «Buscar».
+- **Guía de grabación** con el guion por segundo y un texto para la voz en español e inglés: [VIDEO.md](VIDEO.md).
+
 ## 2026-11-15 · Release v1.0.0 (MVP) a producción
 **Autor:** @Ssalazarp420
 
