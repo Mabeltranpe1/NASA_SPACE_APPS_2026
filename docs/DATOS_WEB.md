@@ -8,11 +8,12 @@ Este documento explica cómo los datos de Marco y de Santiago llegan a la app, q
 flowchart LR
     subgraph Marco["Marco: búsqueda global"]
         E["data/earth_all.csv.gz<br/>~691 000 celdas de 0,05° en 727 regiones<br/>zonas áridas y frías de todo el mundo"]
-        T["data/targets.csv<br/>6 sitios de la Luna + 9 de Marte<br/>con tipo de roca calibrado"]
+        T["data/targets.csv<br/>22 sitios de la Luna (regiones de Artemis III) + 9 de Marte<br/>con tipo de roca calibrado"]
         R["data/regions_catalog.csv<br/>qué es cada región y si es conocida"]
     end
     subgraph Santiago["Santiago: caracterización de Colombia"]
-        F["data/features/*.csv<br/>relieve a 200 m, ambiente, Sentinel-2, EMIT<br/>(descriptivo)"]
+        F["data/features/*.csv<br/>18 ventanas: relieve, clima, geología, EMIT,<br/>CRISM, Diviner, TES, THEMIS (descriptivo)"]
+        S["src/export_science.py"]
     end
     C["web/src/data/sites.ts<br/>catálogo de la app"]
     X["src/export_web.py<br/>(usa compare.py y los pesos de make_results.py)"]
@@ -25,6 +26,10 @@ flowchart LR
     C --> X
     X --> J1
     X --> J2
+    F --> S --> J3["web/public/data/science/<br/>(18 estudios, índice y archivos)"]
+    E --> A["src/analog_api.py<br/>(misma regla que export_web.py)"]
+    T --> A
+    A --> J4["data/comparator/ (buscador)<br/>data/api/v1/ (API estática)"]
 ```
 
 **Regenerar los datos de la app** (tarda unos 12 minutos y usa ~1 GB de memoria; casi todo es la prueba de robustez):
@@ -33,6 +38,10 @@ flowchart LR
 source .venv/bin/activate
 python src/export_web.py
 python src/export_images.py --prune --size 768   # imágenes de los lugares nuevos; borra las que sobran
+python src/export_science.py                     # estudios regionales de Santiago (y su relación con los sitios)
+python src/analog_api.py export-web              # base del apartado «Buscar» (7 MB)
+python src/analog_api.py export-static           # API estática para investigadores
+python tests/test_web_port.py                    # Python y navegador dan el mismo puntaje (node >= 22)
 ```
 
 Cuando Marco agregue regiones o sitios, basta con volver a correr estos comandos y subir los JSON con un PR.
@@ -95,6 +104,18 @@ La **respuesta principal es la búsqueda global de Marco**. Los sitios de Santia
 - **Ranking:** un lugar por región poco estudiada, más los análogos conocidos como control. Al hacer clic en un nombre, el globo de la Tierra vuela a ese lugar.
 - **Mapa de similitud:** el botón "Ver en el globo dónde más se parece la Tierra" pinta en el globo las 2500 mejores celdas para el objetivo elegido. Usa un solo tono, y la opacidad y el tamaño crecen con el puntaje.
 - **Ficha de los sitios colombianos:** la caracterización de Santiago (relieve a 200 m, temperatura superficial, lluvia, vegetación e índices de Sentinel-2). **Es descriptiva: no entra en el puntaje.** Su índice PAI ya no se muestra, para que haya un solo sistema de puntajes.
+
+## Estudios científicos regionales (Santiago)
+
+`src/export_science.py` publica en `web/public/data/science/` un documento por ventana de estudio: 6 en Colombia, 6 en la Luna y 6 en Marte. Cada uno trae secciones (relieve, clima, geología del SGC, minerales EMIT, CRISM, Diviner, TES, THEMIS), etiquetas de calidad, fuentes, los archivos originales con su SHA-256 y el **PAI**. Contrato: [SCIENTIFIC_DATA_CONTRACT.md](SCIENTIFIC_DATA_CONTRACT.md).
+
+- **Son descriptivos: no cambian el puntaje.** El PAI se muestra solo dentro del panel, como «modelo experimental de relieve».
+- **Relación con los sitios de Marco:** por geometría (intersección de la ventana con el disco del sitio), nunca por nombre. Con los 22 sitios lunares, por ejemplo, Connecting Ridge, Malapert y Mons Mouton Plateau tienen datos de Santiago.
+- **Dónde se ven:** en la ficha de los sitios de Colombia y en el análisis detallado de los sitios de la Luna y Marte que se superponen con una ventana.
+
+## API y apartado «Buscar» (Marco)
+
+Ver [API.md](API.md). Usa la misma regla y los mismos `id` que el resto de la app.
 
 ## Imágenes de cerca de la Tierra
 

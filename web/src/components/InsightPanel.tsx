@@ -195,6 +195,26 @@ function SimilarityContent({
 
       {site.caseStudy && <p className="note-line">{t('insight.caseStudy')}</p>}
 
+      {(() => {
+        // The same place against the other sites of this body: the match is rarely with one site only.
+        const others = (entry?.results ?? [])
+          .filter((r) => r.target !== target.id && r.score != null && data.targets.find((tg) => tg.id === r.target)?.body === compareBody)
+          .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
+        if (!others.length) return null
+        return (
+          <p className="also-like small">
+            <span className="muted">{t('insight.alsoLike')}</span>{' '}
+            {others.slice(0, 3).map((r, i) => (
+              <span key={r.target}>
+                {i > 0 && ' · '}
+                {data.targets.find((tg) => tg.id === r.target)?.name} <b>{Math.round((r.score ?? 0) * 100)}</b>
+              </span>
+            ))}
+            {others.length > 3 && <span className="muted"> {t('insight.alsoMore', { n: others.length - 3 })}</span>}
+          </p>
+        )
+      })()}
+
       {result.dims && data.dimensions && (
         <>
           <h4 className="panel-sub">{t('insight.dims')}</h4>

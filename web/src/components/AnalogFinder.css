@@ -1,0 +1,186 @@
+/*
+ * "Find analogs" section (AnalogFinder.tsx).
+ * It reuses the classes of the comparison panel in App.css (.comparison, .card, .hero, .meter-list,
+ * .ranking, .chips, .weights, .limits, .tour-button, .mode-switch); this file only adds the few
+ * pieces that panel does not have (inputs, site groups, the flat world map).
+ */
+
+/* In finder view the main column is not split into globe/detail rows. */
+.main.finder-view {
+  grid-template-rows: auto auto;
+}
+
+.finder .comparison-header .mode-switch {
+  flex-shrink: 0;
+}
+
+.finder .comparison-header .pair {
+  max-width: 70ch;
+  line-height: 1.45;
+}
+
+.finder > h3 {
+  margin-top: 16px;
+}
+
+.finder .small {
+  font-size: 0.78rem;
+}
+
+.finder-sites {
+  display: grid;
+  gap: 6px;
+}
+
+.finder-sites .target-chips {
+  margin-top: 0;
+  align-items: center;
+}
+
+.finder-body {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 7.5em;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.finder-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 12px;
+}
+
+.finder-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  min-width: 0;
+}
+
+.finder-field small {
+  font-size: 0.72rem;
+}
+
+.finder input:not([type='checkbox']):not([type='range']),
+.finder select {
+  width: 100%;
+  min-width: 0;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.finder input:focus-visible,
+.finder select:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.finder .weights .checkbox {
+  display: flex;
+  grid-template-columns: none;
+  gap: 8px;
+}
+
+.finder-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.finder-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+}
+
+.finder-downloads a.link {
+  text-decoration: none;
+}
+
+.finder-rank {
+  cursor: pointer;
+}
+
+.finder-rank:hover {
+  background: var(--hover);
+}
+
+.finder .meter-list .tag.muted {
+  color: var(--muted);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.finder-world {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  /* 30-degree graticule, visible if the NASA GIBS image cannot load */
+  background-color: #000;
+  background-image:
+    linear-gradient(to right, #1b2338 1px, transparent 1px),
+    linear-gradient(to bottom, #1b2338 1px, transparent 1px);
+  background-size: calc(100% / 12) calc(100% / 6);
+}
+
+.finder-world.clickable {
+  cursor: crosshair;
+}
+
+.finder-world img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0.8;
+}
+
+.finder-dot {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--surface-2);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.finder-dot.active {
+  width: 15px;
+  height: 15px;
+  border-color: #fff;
+  z-index: 1;
+}
+
+.finder-map-gap {
+  margin-top: 14px;
+}
+
+.finder-error {
+  color: var(--bad);
+  font-size: 0.85rem;
+}
+
+.finder-api {
+  margin: 14px 0 0;
+}
+
+@media (max-width: 900px) {
+  .finder-values {
+    grid-template-columns: 1fr;
+  }
+}

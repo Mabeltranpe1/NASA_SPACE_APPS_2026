@@ -13,6 +13,9 @@ import { useLang } from '../i18n/useLang'
 import { BODY_NAMES, SOURCE_PHRASES_EN, type Lang } from '../i18n/strings'
 import { dumbbellScale, featureLabel, makeFmt } from '../data/format'
 import { placeName } from '../data/focus'
+import ScientificPanel from './ScientificPanel'
+import { studiesForTarget, useScienceIndex } from '../data/science'
+import { SCIENCE_STRINGS } from '../i18n/science'
 
 /** Physical conditions Earth cannot reproduce. Always shown: the analogy breaks here for every site. */
 type Limit = { label: string; earth: string; body: string }
@@ -428,6 +431,8 @@ function ComparisonContent({
         </div>
       </div>
 
+      <RelatedScience targetName={target.name} />
+
       <details className="data-table">
         <summary>{t('cmp.table')}</summary>
         <table>
@@ -526,5 +531,21 @@ function Dumbbell({
         {fmt(earth)} · {fmt(other)}
       </span>
     </li>
+  )
+}
+
+/** Santiago's regional windows that overlap this Moon/Mars target (descriptive, not part of the score). */
+function RelatedScience({ targetName }: { targetName: string }) {
+  const { lang } = useLang()
+  const refs = studiesForTarget(useScienceIndex(), targetName)
+  if (!refs.length) return null
+  return (
+    <section className="science-related">
+      <h3>{SCIENCE_STRINGS[lang].related}</h3>
+      <p className="hint">{SCIENCE_STRINGS[lang].reference}</p>
+      {refs.map((r) => (
+        <ScientificPanel key={r.url} reference={r} />
+      ))}
+    </section>
   )
 }

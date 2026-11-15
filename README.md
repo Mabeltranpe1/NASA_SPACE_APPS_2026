@@ -122,6 +122,8 @@ El despliegue en Azure se explica en [infra/README.md](infra/README.md).
 - [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): guía para crear y probar una API key de Google Maps
 - [docs/VISUALIZACION_COMPARACION.md](docs/VISUALIZACION_COMPARACION.md): plan de la vista de comparación detallada, contrato de datos y mejoras para el jurado
 - [docs/PIPELINE_COMPARADOR.md](docs/PIPELINE_COMPARADOR.md): cómo funciona el comparador (`compare.py`), fuentes de datos de la Tierra, la Luna y Marte, y cómo correrlo (Marco)
+- [docs/API.md](docs/API.md): API de análogos y apartado «Buscar» (Marco)
+- [docs/SCIENTIFIC_DATA_CONTRACT.md](docs/SCIENTIFIC_DATA_CONTRACT.md): estudios científicos regionales (Santiago)
 - [docs/DATOS_Y_METODO.md](docs/DATOS_Y_METODO.md): la base de datos mundial, los 22 sitios de la Luna (regiones de Artemis III), los 9 de Marte, las variables y cómo regenerar los resultados (Marco, en inglés)
 - [docs/CONTEXTO_TECNICO_SANTIAGO.md](docs/CONTEXTO_TECNICO_SANTIAGO.md): caracterización de los sitios de Colombia, índice topográfico PAI, Sentinel-2, EMIT y plan científico (Santiago)
 - [docs/DATOS_WEB.md](docs/DATOS_WEB.md): cómo llegan los datos a la app, reglas aplicadas y cómo regenerarlos

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { SITES } from './data/sites'
 import {
   ENVIRONMENT_LABELS,
@@ -42,7 +42,10 @@ import { useLang } from './i18n/useLang'
 import { BODY_NAMES, ENVIRONMENT_NAMES } from './i18n/strings'
 import './App.css'
 
-type View = 'discover' | 'sites' | 'analysis' | 'method'
+type View = 'discover' | 'sites' | 'analysis' | 'finder' | 'method'
+
+// Marco's "Find analogs": loaded only when opened (it brings its own ~7 MB Earth database).
+const AnalogFinder = lazy(() => import('./components/AnalogFinder'))
 type GlobeView = 'discover' | 'sites'
 
 const BODY_ORDER: Body[] = ['tierra', 'luna', 'marte']
@@ -115,7 +118,8 @@ export default function App() {
   const startsOnSite = !!initialSite && SITES.some((s) => s.id === initialSite)
   const [view, setView] = useState<View>(() => {
     const v = initial.get('view')
-    if (v === 'analysis' || v === 'method' || v === 'sites' || v === 'discover') return v
+    if (window.location.hash.startsWith('#buscar')) return 'finder'
+    if (v === 'analysis' || v === 'finder' || v === 'method' || v === 'sites' || v === 'discover') return v
     return startsOnSite ? 'sites' : 'discover'
   })
   const [globeView, setGlobeView] = useState<GlobeView>(startsOnSite ? 'sites' : 'discover')
@@ -414,6 +418,7 @@ export default function App() {
             ['discover', IconCompass],
             ['sites', IconPin],
             ['analysis', IconChart],
+            ['finder', IconSearch],
             ['method', IconBook],
           ] as const
         ).map(([v, Icon]) => (
@@ -769,6 +774,14 @@ export default function App() {
                 </div>
               </>
             )}
+          </div>
+        )}
+
+        {view === 'finder' && (
+          <div className="page finder-page">
+            <Suspense fallback={<p className="hint">{t('cmp.loading')}</p>}>
+              <AnalogFinder />
+            </Suspense>
           </div>
         )}
 

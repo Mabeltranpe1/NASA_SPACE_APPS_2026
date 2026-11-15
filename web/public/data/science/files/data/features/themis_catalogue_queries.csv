@@ -1,0 +1,13 @@
+region,product_type,catalogue_rows,status,error
+Jezero,IRPBT4,110,ok,
+Jezero,IRPBT2,48,ok,
+Gale,IRPBT4,86,ok,
+Gale,IRPBT2,121,ok,
+Phoenix,IRPBT4,124,ok,
+Phoenix,IRPBT2,162,ok,
+Pathfinder,IRPBT4,67,ok,
+Pathfinder,IRPBT2,79,ok,
+Viking_1,IRPBT4,74,ok,
+Viking_1,IRPBT2,78,ok,
+Viking_2,IRPBT4,98,ok,
+Viking_2,IRPBT2,93,ok,
