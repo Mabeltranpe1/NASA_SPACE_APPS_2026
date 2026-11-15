@@ -35,7 +35,6 @@ import warnings
 
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import RobustScaler
 
 # ---------------------------------------------------------------------------
 # 1. Settings (the part you will edit most often)
@@ -268,6 +267,7 @@ def scale_together(earth, targets, method="tolerance"):
         return earth_matrix / tol, targets_matrix / tol
     if method != "robust":
         raise ValueError(f"Unknown scaling '{method}'. Use 'tolerance' or 'robust'.")
+    from sklearn.preprocessing import RobustScaler  # only here: the API and the web export run without scikit-learn
     with warnings.catch_warnings():
         # A column that is empty in BOTH files makes numpy complain. That is
         # fine: the column stays empty and is simply not used.

@@ -72,11 +72,18 @@ source .venv/bin/activate
 
 Verificar:
 ```bash
-pytest -q tests
+pytest -q tests                # incluye tests/test_web_port.py, que necesita Node.js 22 o más
 python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --top 5
+
+# Rehacer las tablas de resultados (outputs/results/) si cambió la base o los sitios
+python src/make_results.py
 
 # Regenerar los datos reales que muestra la app (~12 min, ~1 GB de memoria)
 python src/export_web.py
+
+# Base del apartado «Buscar» y API estática para investigadores (ver docs/API.md)
+python src/analog_api.py export-web
+python src/analog_api.py export-static
 
 # Imágenes de cerca de la Tierra (Sentinel-2: las que falten; borra las que sobran)
 python src/export_images.py --prune --size 768
@@ -93,10 +100,11 @@ En VS Code: `Ctrl+Shift+P` → *Python: Select Interpreter* → `.venv` o `analo
 
 **Cómo usarla:**
 1. Al entrar, la pantalla de bienvenida ofrece el **▶ Recorrido guiado** (demo automática de 7 pasos) o **Explorar**.
-2. La barra de la izquierda tiene cuatro secciones:
+2. La barra de la izquierda tiene cinco secciones:
    - **Descubrir:** los lugares poco estudiados que encontró la búsqueda global.
    - **Análogos:** el catálogo de referencia y el caso de estudio de Colombia.
    - **Análisis:** la comparación detallada.
+   - **Buscar:** eliges uno de los 31 sitios de la Luna y Marte, o escribes los datos de un lugar de otro planeta, y la página sugiere los lugares de la Tierra más parecidos entre los 691 mil de la base. También responde a qué se parece un punto de la Tierra (lat/lon o clic en el mapa). Los resultados se descargan en GeoJSON, KML o waypoints, y **Copiar enlace** guarda la consulta.
    - **Método:** cómo se calcula el puntaje.
 3. Elige un lugar en la lista, en el globo o con el buscador. El globo vuela al lugar y aparecen dos paneles:
    - a la izquierda, la ficha; al hacer clic en su imagen (o en **Ver galería** del panel derecho) se abre una ventana con **carruseles de fotos reales**: la Tierra a la izquierda y la Luna o Marte a la derecha (fotos de rovers, orbitales y la vista 3D);
@@ -113,6 +121,20 @@ npm run dev                  # http://localhost:5173
 ```
 
 El despliegue en Azure se explica en [infra/README.md](infra/README.md).
+
+## API para investigadores
+
+Los mismos resultados de la app se pueden usar desde otras herramientas, con el mismo puntaje (detalle en [docs/API.md](docs/API.md)):
+
+- **API estática en la web publicada**, sin servidor: `https://icy-flower-03890400f.5.azurestaticapps.net/data/api/v1/sites.json` y `.../data/api/v1/analogs/<sitio>.json`, `.geojson`, `.kml` o `.waypoints` (por ejemplo `jezero.geojson`). QGIS abre el GeoJSON por URL (*Capa → Añadir capa vectorial → Protocolo HTTP*) y Google Earth abre el KML.
+- **Consultas libres en Python** (valores propios o un punto de la Tierra), como librería, en la línea de comandos o como servidor local de solo lectura:
+
+```bash
+python src/analog_api.py find --site jezero --top 10 --format geojson > jezero.geojson
+python src/analog_api.py find --body Mars --value temp_mean_K=215 --value albedo=0.15
+python src/analog_api.py point --lat 25.4 --lon 29.4
+python src/analog_api.py serve --port 8000     # http://127.0.0.1:8000/api/v1/sites
+```
 
 ## Documentación
 

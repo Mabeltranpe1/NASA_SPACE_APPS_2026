@@ -25,7 +25,7 @@ The goal is to find places on Earth that look like the places where we want to b
 | Subsurface | Caves, lava tubes |
 | Operations | Landing, mobility, navigation, construction |
 
-Other data sources (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, etc.) are listed in [RECURSOS.md](RECURSOS.md).
+Other data sources (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, etc.) are listed in [RECURSOS.md](../RECURSOS.md).
 
 ---
 
@@ -34,7 +34,7 @@ Other data sources (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, etc
 - **Earth database:** 691,035 places (cells of 0.05° ≈ 5.5 km) in **727 regions** of the world's drylands, polar deserts and high plateaus (`data/earth_all.csv.gz`). 133 regions are famous analogs (Atacama, Devon Island, Dry Valleys, Iceland…); they are kept as **controls** and left out of the rankings.
 - **Targets:** 22 Moon south pole sites and 9 Mars sites in `data/targets.csv`. Moon: the **9 regions NASA kept in October 2024 as Artemis III candidate landing regions** (Peak near Cabeus B, Haworth, Malapert Massif, Mons Mouton Plateau, Mons Mouton, Nobile Rim 1, Nobile Rim 2, de Gerlache Rim 2, Slater Plain), the **7 regions of the first 2022 list that were dropped** (Peak near Shackleton, Connecting Ridge, Connecting Ridge Extension, de Gerlache Rim 1, de Gerlache-Kocher Massif, Faustini Rim A, Amundsen Rim), and 6 crater-scale sites (Shackleton, de Gerlache, Haworth and Faustini rims, Mons Mouton summit, and the shadowed Shackleton floor as a contrast site). Why each site matters and where it comes from: `data/moon_sites_sources.csv` and section 1.1. Mars: 9 sites (the landing sites of Perseverance, Curiosity, InSight, Opportunity, Spirit, Viking 1 and 2, Phoenix, plus Arcadia Planitia, a candidate for human missions).
 - **Every place is described by the same 9 numbers** (section 2), measured the same way on the three bodies.
-- **Outputs:** for every Moon/Mars site its best Earth analogs in 5 different parts of the world, a top 100 for the Moon and a top 100 for Mars (`outputs/results/top200_analogos.csv/.json`), the best months for a field campaign, side by side relief maps and photos (`maps/`), and one JSON file for the web app (`web/public/data/analogos.json`).
+- **Outputs:** for every Moon/Mars site its best Earth analogs in 5 different parts of the world, a top 100 for the Moon and a top 100 for Mars (`outputs/results/top200_analogos.csv/.json`), the best months for a field campaign, side by side relief maps and photos (`maps/`), the data of the web app (`web/public/data/comparisons.json` and heatmaps, by `src/export_web.py`), and an **API** for researchers with the same score (`src/analog_api.py`; static files in `web/public/data/api/v1/`, see [docs/API.md](API.md)).
 
 
 ### 1.1 Why the Moon sites are all near the south pole
@@ -68,7 +68,7 @@ Important details that make the comparison fair:
 - **Same terrain ruler on every body.** Slope and roughness depend on pixel size, so every elevation map (Earth 30–90 m, Moon 80 m, Mars 200 m) is first brought to **200 m pixels** (`src/terrain_common.py`), the coarsest of the three.
 - **Same temperature definition.** `temp_range_K` = warmest monthly daytime value minus the yearly mean on Earth, Diviner yearly max minus mean on the Moon, and hottest moment minus yearly mean on Mars.
 - **Precipitation at the poles.** GPM IMERG gives 0 mm over ice above 60°, which would make Greenland look as dry as the Moon. Above 60° we use MERRA-2 instead.
-- **Rock type on the Moon and Mars.** There is no ASTER outside Earth. `src/composition.py` converts each site's lithology into the value an Earth rock of the same composition would give to ASTER, using the Christiansen feature (CF) as a bridge: `em_contrast = 2.1639 − 0.2625 · CF`, fitted with two anchors from our own ASTER data (Iceland basalt and Rub' al Khali quartz sand) and checked on the Puna. Moon CF comes from Diviner highland values in the literature, Mars CF from TES surface types plus rover ground truth. Uncertainty is ±0.026–0.039, about the size of the tolerance, so this variable gets a **half weight**. Full method: [docs/COMPOSICION.md](docs/COMPOSICION.md).
+- **Rock type on the Moon and Mars.** There is no ASTER outside Earth. `src/composition.py` converts each site's lithology into the value an Earth rock of the same composition would give to ASTER, using the Christiansen feature (CF) as a bridge: `em_contrast = 2.1639 − 0.2625 · CF`, fitted with two anchors from our own ASTER data (Iceland basalt and Rub' al Khali quartz sand) and checked on the Puna. Moon CF comes from Diviner highland values in the literature, Mars CF from TES surface types plus rover ground truth. Uncertainty is ±0.026–0.039, about the size of the tolerance, so this variable gets a **half weight**. Full method: [docs/COMPOSICION.md](COMPOSICION.md).
 - `water_frac` (share of water in the cell) is also in the Earth table; cells that are mostly water are removed. It is not compared.
 
 ---
@@ -145,14 +145,17 @@ Always run from the project folder, with the environment active.
 | 7 | `python src/make_results.py` | `data/earth_all.csv.gz`, `data/targets.csv` | `outputs/results/results_*.csv`, `seasons_*.csv` (calls `src/seasons.py`) |
 | 8 | `python src/make_top_analogos.py` | results of step 7 | `outputs/results/top200_analogos.csv` and `.json` |
 | 9 | `python src/make_maps.py` then `python src/make_photos.py` | DEMs, Sentinel-2, CTX, LROC | `maps/*.png`, `maps/index.csv`, `maps/photo_sources.csv` |
-| 10 | `python src/export_web.py` | targets, composition, results, maps, photos | `web/public/data/analogos.json` (format: [web/DATOS.md](web/DATOS.md)) |
+| 10 | `python src/export_web.py` | Earth database, targets, composition, Santiago's regional science | `web/public/data/comparisons.json` and `heatmap/` (rules: [DATOS_WEB.md](DATOS_WEB.md)) |
+| 11 | `python src/analog_api.py export-web` then `export-static` | Earth database, targets, the rules of `export_web.py` | `web/public/data/comparator/` (the «Buscar» section, 7 MB) and `web/public/data/api/v1/` (static API); see [API.md](API.md) |
 
 Helpers and one-off tools:
-- `src/compare.py`: the similarity index itself (section 3); also usable alone (section 7).
+- `src/compare.py`: the similarity index itself (section 3); also usable alone (section 11).
+- `src/analog_api.py`: read-only API on top of `compare.py`: best Earth analogs of a site or of your own values, what an Earth point resembles, GeoJSON/KML/waypoints export, a local HTTP server, and the exports of step 11 ([API.md](API.md)).
+- `src/export_analogos.py`: remakes the old `analogos.json` contract (15 sites), kept for reference; the app no longer reads it ([web/DATOS.md](../web/DATOS.md)).
 - `src/terrain_common.py`: 200 m resampling, slope and roughness, shared by all builders.
 - `src/seasons.py`: month by month score (MOD11C3 day/night temperature + monthly rain) for the best place of each region, with daylight hours, to choose the best month for a field campaign.
 - `src/screen_global.py`: fast worldwide screening on the 0.05° climate grids (temperature, albedo, rain, vegetation; no terrain) to find candidate areas → `outputs/discovery/`.
-- `src/grid_search/`: the worldwide drylands grid search that grew the database from 43 to 727 regions (see its [README](src/grid_search/README.md)).
+- `src/grid_search/`: the worldwide drylands grid search that grew the database from 43 to 727 regions (see its [README](../src/grid_search/README.md)).
 - `src/checks/compare_before_after.py`: rankings before and after adding rock composition → `outputs/composition/`.
 
 ### Outputs (`outputs/results/`)
@@ -193,7 +196,7 @@ The download script covers NASADEM, MOD11C3, MCD43C3, GPM IMERG and Copernicus. 
 | LRO LOLA GDR polar `ldem_80s_80m` | elevation, slope, roughness (80 m) | https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/float_img/ |
 | LRO LOLA `ldam_50s_1000m` | normal albedo at 1064 nm | same folder |
 | LRO Diviner polar resource product (PRP) south | yearly mean and max temperature (~500 m) | https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/ |
-| Diviner Christiansen feature (literature: Greenhagen et al. 2010) | rock type (`em_contrast`) | [docs/COMPOSICION.md](docs/COMPOSICION.md) |
+| Diviner Christiansen feature (literature: Greenhagen et al. 2010) | rock type (`em_contrast`) | [docs/COMPOSICION.md](COMPOSICION.md) |
 | LROC WAC south pole mosaic (100 m) | grey image of each site (`maps/*_B_moon_photo.png`) | https://pds.lroc.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/ |
 | USGS Gazetteer of Planetary Nomenclature | crater-scale site centres and diameters | https://planetarynames.wr.usgs.gov/ |
 | NASA Artemis III candidate landing regions (2022 list of 13, 2024 list of 9) | which Moon sites to use | https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/ |
@@ -206,7 +209,7 @@ The download script covers NASADEM, MOD11C3, MCD43C3, GPM IMERG and Copernicus. 
 | HRSC + MOLA blended DEM, 200 m, v2 (USGS) | elevation, slope, roughness, relief maps (read over the internet, the file is 11 GB) | https://planetarymaps.usgs.gov/mosaic/Mars/HRSC_MOLA_Blend/ |
 | MGS TES albedo mosaic, 7.4 km (USGS) | albedo | https://planetarymaps.usgs.gov/mosaic/Mars_MGS_TES_Albedo_mosaic_global_7410m.tif |
 | Mars Climate Database v6.2 (LMD) | surface temperature for every season and hour | https://www-mars.lmd.jussieu.fr/ |
-| TES surface types (Bandfield et al. 2000) + rover results; THEMIS/TES olivine at Nili Fossae (literature only) | rock type (`em_contrast`) | [docs/COMPOSICION.md](docs/COMPOSICION.md) |
+| TES surface types (Bandfield et al. 2000) + rover results; THEMIS/TES olivine at Nili Fossae (literature only) | rock type (`em_contrast`) | [docs/COMPOSICION.md](COMPOSICION.md) |
 | CTX global mosaic, 5 m (NASA/JPL/MSSS, Caltech Murray Lab), via Esri OnMars tiles | grey image of each site (`maps/*_B_mars_photo.png`) | https://murray-lab.caltech.edu/CTX/ |
 | Rover photos from NASA Photojournal: Perseverance Mastcam-Z, Curiosity Mastcam, Opportunity and Spirit Pancam, Pathfinder IMP | surface photos in the web app (`experiments/fotos_analogos/`) | https://science.nasa.gov/photojournal/ |
 | Mars 2020 / MSL waypoints (MMGIS) | exact coordinates of the rover photos | https://mars.nasa.gov/maps/ |
@@ -231,7 +234,7 @@ Credits and licences of every photo are in `experiments/fotos_analogos/imagenes/
 
 ```
 NASA_SPACE_APPS_2026/
-├── README.md              <- this file
+├── README.md              <- main README (Spanish): how to use the app, the API and the setup
 ├── RECURSOS.md            <- catalog of possible data sources
 ├── CONTRIBUTING.md        <- git flow workflow (read before working)
 ├── environment.yml        <- conda environment "analogos"
@@ -261,7 +264,8 @@ NASA_SPACE_APPS_2026/
 │   └── grid_search/       <- tiles selected by the grid search
 ├── maps/                  <- relief maps and photos, Earth analog next to its Moon/Mars site
 ├── experiments/fotos_analogos/  <- surface photos of the Moon/Mars sites with credits
-├── tests/test_compare.py  <- automatic checks for compare.py
+├── tests/                 <- test_compare.py (maths of compare.py), test_web_port.py (browser = Python),
+│                             test_export_web.py and the other export/science checks
 ├── notebooks/             <- Jupyter notebooks
 ├── web/                   <- web platform (React + Vite + MapLibre + NASA GIBS)
 └── infra/                 <- Azure infrastructure with Terraform (Free plans only)
@@ -271,7 +275,7 @@ NASA_SPACE_APPS_2026/
 
 ## 9. Web platform (`web/`)
 
-An interactive map to filter Earth analogs by target (Moon or Mars), type of environment (desert, polar, volcanic, crater, caves, salt flat) and similarity dimension. The map is a 3D globe with NASA imagery (GIBS): Blue Marble, recent satellite images, relief and land surface temperature. Each site can be opened in Google Earth.
+A single 3D globe (CesiumJS) that switches between Earth, the Moon and Mars, with NASA GIBS, Moon Trek and Mars Trek imagery, in Spanish and English. Sections: **Discover** (little-known places found by the worldwide search), **Analogs** (reference catalog and the Colombia case study), **Analysis** (detailed comparison), **Find** (the user picks a Moon/Mars site or types the values of a place on another world and gets the most similar Earth places; also "what does this Earth point resemble"; GeoJSON/KML/waypoints downloads) and **Method**. How to use it: main [README](../README.md).
 
 You need Node.js and npm:
 
@@ -281,12 +285,9 @@ npm install
 npm run dev                  # http://localhost:5173
 ```
 
-Deployment to Azure is explained in [infra/README.md](infra/README.md).
+Deployment to Azure is explained in [infra/README.md](../infra/README.md).
 
-The analysis results for the app (sites, Earth analogs, rock composition, images) are in
-`web/public/data/analogos.json`, made with `python src/export_web.py` after `python src/make_results.py`.
-`npm run dev` / `npm run build` first copy the images listed in the JSON into `web/public/data/img/` (`web/scripts/copy-data-images.mjs`).
-Format and usage: [web/DATOS.md](web/DATOS.md). Rock composition method: [docs/COMPOSICION.md](docs/COMPOSICION.md).
+The data of the app are made by `python src/export_web.py` (`comparisons.json`, heatmaps; rules in [DATOS_WEB.md](DATOS_WEB.md)) and by `python src/analog_api.py export-web` / `export-static` (the «Find» section and the static API; [API.md](API.md)). The old `analogos.json` contract is described in [web/DATOS.md](../web/DATOS.md). Rock composition method: [COMPOSICION.md](COMPOSICION.md).
 
 ---
 
@@ -387,10 +388,12 @@ Settings at the top of `src/compare.py`: `FEATURES`, `DEFAULT_WEIGHTS`, `BODY_WE
 ## 12. Run the tests
 
 ```fish
-python tests/test_compare.py
+python tests/test_compare.py      # maths of compare.py
+python tests/test_web_port.py     # the browser comparator gives the same scores as Python (needs Node.js >= 22)
+pytest -q tests                   # everything
 ```
 
-You should see `ok` for each test and then `All 13 tests passed.` The tests use invented numbers and check the maths (a cell identical to the target gets score 1, weight 0 switches a feature off, empty values do not break anything, the worst match names the broken feature…). They also work with `pytest tests/`.
+`test_compare.py` prints `ok` for each test and then `All 13 tests passed.` The tests use invented numbers and check the maths (a cell identical to the target gets score 1, weight 0 switches a feature off, empty values do not break anything, the worst match names the broken feature…). They also work with `pytest tests/`.
 
 ---
 
@@ -429,17 +432,19 @@ Files go to `data/raw/<dataset>/` (ignored by git). Files that already exist are
 
 ## 14. Documentation
 
-- [docs/COMPOSICION.md](docs/COMPOSICION.md): rock type (`em_contrast`) for the Moon and Mars
-- [data/README.md](data/README.md): every input file
-- [outputs/README.md](outputs/README.md): every result file
-- [src/grid_search/README.md](src/grid_search/README.md): the worldwide grid search
-- [web/DATOS.md](web/DATOS.md): the JSON for the web app
-- [docs/OBJETIVO.md](docs/OBJETIVO.md): detailed goal of the platform and challenge criteria
-- [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): components, CI/CD, security and costs
-- [docs/BITACORA.md](docs/BITACORA.md): log of decisions and progress
-- [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): how to create and test a Google Maps API key
-- [RECURSOS.md](RECURSOS.md): data sources
+- [docs/COMPOSICION.md](COMPOSICION.md): rock type (`em_contrast`) for the Moon and Mars
+- [data/README.md](../data/README.md): every input file
+- [outputs/README.md](../outputs/README.md): every result file
+- [src/grid_search/README.md](../src/grid_search/README.md): the worldwide grid search
+- [docs/API.md](API.md): the API for researchers and the «Find» section
+- [docs/DATOS_WEB.md](DATOS_WEB.md): how the data reach the web app and how to remake them
+- [web/DATOS.md](../web/DATOS.md): the old `analogos.json` contract (no longer used by the app)
+- [docs/OBJETIVO.md](OBJETIVO.md): detailed goal of the platform and challenge criteria
+- [docs/ARQUITECTURA.md](ARQUITECTURA.md): components, CI/CD, security and costs
+- [docs/BITACORA.md](BITACORA.md): log of decisions and progress
+- [docs/GOOGLE_MAPS_API_KEY.md](GOOGLE_MAPS_API_KEY.md): how to create and test a Google Maps API key
+- [RECURSOS.md](../RECURSOS.md): data sources
 
 ## 15. How to collaborate
 
-We use **git flow**. Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start working.
+We use **git flow**. Read [CONTRIBUTING.md](../CONTRIBUTING.md) before you start working.
