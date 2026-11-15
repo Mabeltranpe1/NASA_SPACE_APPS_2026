@@ -14,6 +14,36 @@ Formato sugerido:
 
 ---
 
+## 2026-11-14 · Datos reales en la app (Marco + Santiago)
+**Autor:** @Ssalazarp420
+
+- **Integración:** la rama `feature/web-real-data` junta el trabajo de los dos.
+  - **Marco** (`feature/compare_analysis`): base global de ~164 000 celdas en 43 regiones, 15 objetivos de la Luna y Marte, y el nuevo `compare.py` con tolerancias físicas. Su README técnico pasó a `docs/PIPELINE_COMPARADOR.md`.
+  - **Santiago** (`feature/planetary-analysis`): CSV de `data/features/`, ranking PAI, scripts y su documento técnico (`docs/CONTEXTO_TECNICO_SANTIAGO.md`). No se trajeron los GeoTIFF, las series crudas ni las figuras.
+- **Decisión de alcance:** búsqueda en **todo el mundo** (base de Marco), con Colombia destacada. Se agregaron al catálogo los 5 sitios colombianos de Santiago: La Guajira, Nevado del Ruiz, Nevado Santa Isabel, Volcán Puracé y La Candelaria.
+- **`src/export_web.py` reescrito.** Usa `compare.py` sin cambiar la fórmula y aplica tres reglas (ver [DATOS_WEB.md](DATOS_WEB.md)):
+  - La elevación no se compara: cada cuerpo mide la altura desde un cero distinto.
+  - Una variable que ningún lugar de la Tierra alcanza se apaga para ese cuerpo y se muestra como límite. En la Luna se apagan la temperatura media y la amplitud térmica; en Marte, la amplitud térmica.
+  - Los descubrimientos se eligen por región.
+- **Problema encontrado y corregido:** con la configuración por defecto, los 20 mejores lugares de los 15 objetivos salían **todos** del norte de Groenlandia. Mandaban la temperatura (la Luna está a 50–125 K) y la elevación (con ceros distintos). Con las reglas anteriores aparecen el Desierto Occidental de Egipto y Fezzan (Libia) para la Luna, y Groenlandia, el Sahara central y el Tíbet para Marte.
+- **Validación:** los análogos conocidos (controles) quedan arriba. Las mejores celdas del planeta para la Luna y Marte están en la Antártida, y McMurdo queda #171 de 164 000 para Jezero.
+- **Web:**
+  - Mapa de similitud en el globo de la Tierra.
+  - Ranking con un lugar por región; al hacer clic, el globo vuela al lugar.
+  - Botones "Comparar por: Todo · Relieve · Superficie · Clima y agua".
+  - Etiqueta "fuera del rango de la Tierra" en las variables apagadas.
+  - Posición del sitio entre todas las celdas de la Tierra.
+  - Caracterización de Santiago en la ficha de los sitios colombianos.
+- **Corrección:** los marcadores del otro lado del planeta se veían a través del globo; ahora quedan ocultos.
+- **Entorno:** se agregaron a `requirements.txt` y `environment.yml` las librerías que usan los scripts (`scipy`, `pyproj`, `requests`, `h5py`, `pyhdf`, `earthaccess`). Earth Engine (API de Python) quedó configurado en la máquina de @Ssalazarp420.
+- **Pendientes** (detalle en [DATOS_WEB.md](DATOS_WEB.md#pendientes-conocidos)):
+  - Regiones para Timanfaya y Lava Beds.
+  - Relieve a 200 m en todos los cuerpos.
+  - Revisar la tolerancia de la precipitación y la lluvia de IMERG en latitudes altas.
+  - Máscara de mar en La Guajira.
+  - Temperatura de Diviner para los sitios de Artemis de Santiago.
+  - Procesar EMIT.
+
 ## 2026-11-14 · Release v0.2.0 a producción
 **Autor:** @Ssalazarp420
 
