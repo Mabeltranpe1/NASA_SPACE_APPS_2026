@@ -14,6 +14,12 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.3.1 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #13 (ventana para comparar imágenes) y se publicó `v0.3.1` en `main`.
+- **Producción:** https://icy-flower-03890400f.5.azurestaticapps.net
+
 ## 2026-11-15 · Ventana para comparar imágenes
 **Autor:** @Ssalazarp420
 
