@@ -1,0 +1,1528 @@
+{
+ "generated_at": "2026-11-15T14:58:36+00:00",
+ "aliases": {
+  "shackleton-floor": "shackleton"
+ },
+ "places": {
+  "jezero": [
+   {
+    "key": "PIA24485",
+    "file": "jezero/1.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "El delta del antiguo lago de Jezero visto por Perseverance",
+     "en": "The delta of Jezero's ancient lake seen by Perseverance"
+    },
+    "title": "Perseverance View of the Delta in Jezero Crater",
+    "date": "2021-03-05",
+    "credit": "NASA/JPL-Caltech/ASU/MSSS",
+    "source_url": "https://images.nasa.gov/details/PIA24485",
+    "width": 1600,
+    "height": 1191
+   },
+   {
+    "key": "PIA24309",
+    "file": "jezero/2.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Panorama del cráter Jezero desde el rover",
+     "en": "Panorama of Jezero crater from the rover"
+    },
+    "title": "Exploring Majestic Jezero Crater (Illustration)",
+    "date": "2021-01-27",
+    "credit": "NASA/JPL-Caltech",
+    "source_url": "https://images.nasa.gov/details/PIA24309",
+    "width": 1600,
+    "height": 900
+   },
+   {
+    "key": "PIA24744",
+    "file": "jezero/3.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "El final de un trayecto de Perseverance",
+     "en": "The end of one of Perseverance's drives"
+    },
+    "title": "The End of One Drive by Perseverance on the Floor of Jezero Crater",
+    "date": "2021-07-21",
+    "credit": "NASA/JPL-Caltech",
+    "source_url": "https://images.nasa.gov/details/PIA24744",
+    "width": 1600,
+    "height": 667
+   },
+   {
+    "key": "PIA26479",
+    "file": "jezero/4.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Terreno resbaladizo en el borde del cráter",
+     "en": "Slippery terrain on the crater rim"
+    },
+    "title": "Perseverance Views Slippery Terrain",
+    "date": "2024-12-12",
+    "credit": "NASA/JPL-Caltech",
+    "source_url": "https://images.nasa.gov/details/PIA26479",
+    "width": 1600,
+    "height": 1200
+   },
+   {
+    "key": "PIA24331",
+    "file": "jezero/5.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "El sitio de aterrizaje de Perseverance visto desde órbita",
+     "en": "Perseverance's landing spot seen from orbit"
+    },
+    "title": "Perseverance's Landing Spot in Jezero Crater",
+    "date": "2021-02-22",
+    "credit": "NASA/JPL-Caltech/University of Arizona",
+    "source_url": "https://images.nasa.gov/details/PIA24331",
+    "width": 1600,
+    "height": 950
+   }
+  ],
+  "gale": [
+   {
+    "key": "PIA20844",
+    "file": "gale/1.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Autorretrato de Curiosity en Murray Buttes",
+     "en": "Curiosity self-portrait at Murray Buttes"
+    },
+    "title": "Curiosity Self-Portrait at Murray Buttes.",
+    "date": "2016-10-03",
+    "credit": "NASA/JPL-Caltech/MSSS",
+    "source_url": "https://images.nasa.gov/details/PIA20844",
+    "width": 1600,
+    "height": 953
+   },
+   {
+    "key": "PIA21043",
+    "file": "gale/2.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Capas de arenisca en las mesas de Murray Buttes",
+     "en": "Layered sandstone in the Murray Buttes mesas"
+    },
+    "title": "Farewell to Murray Buttes Image 3",
+    "date": "2016-09-09",
+    "credit": "NASA/JPL-Caltech/MSSS",
+    "source_url": "https://images.nasa.gov/details/PIA21043",
+    "width": 1344,
+    "height": 1200
+   },
+   {
+    "key": "PIA20332",
+    "file": "gale/3.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Vista de 360° desde la meseta Naukluft",
+     "en": "Full-circle vista from Naukluft Plateau"
+    },
+    "title": "Full-Circle Vista from Naukluft Plateau on Mars",
+    "date": "2016-04-27",
+    "credit": "NASA/JPL-Caltech/MSSS",
+    "source_url": "https://images.nasa.gov/details/PIA20332",
+    "width": 1600,
+    "height": 667
+   },
+   {
+    "key": "PIA21041",
+    "file": "gale/4.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Despedida de Murray Buttes, al pie del monte Sharp",
+     "en": "Farewell to Murray Buttes, at the foot of Mount Sharp"
+    },
+    "title": "Farewell to Murray Buttes Image 1",
+    "date": "2016-09-09",
+    "credit": "NASA/JPL-Caltech/MSSS",
+    "source_url": "https://images.nasa.gov/details/PIA21041",
+    "width": 1344,
+    "height": 1200
+   },
+   {
+    "key": "PIA15101",
+    "file": "gale/5.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Vista oblicua del cráter Gale (relieve exagerado)",
+     "en": "Oblique view of Gale crater (exaggerated relief)"
+    },
+    "title": "Oblique View of Gale Crater, Mars, with Vertical Exaggeration",
+    "date": "2011-11-28",
+    "credit": "NASA/JPL-Caltech/ESA/DLR/FU Berlin/MSSS",
+    "source_url": "https://images.nasa.gov/details/PIA15101",
+    "width": 1600,
+    "height": 900
+   }
+  ],
+  "gusev": [
+   {
+    "key": "PIA07997",
+    "file": "gusev/1.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Atardecer en el cráter Gusev visto por Spirit",
+     "en": "Sunset at Gusev crater seen by Spirit"
+    },
+    "title": "A Moment Frozen in Time",
+    "date": "2005-06-10",
+    "credit": "NASA/JPL/Texas A&M/Cornell",
+    "source_url": "https://images.nasa.gov/details/PIA07997",
+    "width": 1600,
+    "height": 1232
+   },
+   {
+    "key": "PIA03274",
+    "file": "gusev/2.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Depósitos de arena con ondulaciones",
+     "en": "Intricately rippled sand deposits"
+    },
+    "title": "Intricately Rippled Sand Deposits",
+    "date": "2006-01-04",
+    "credit": "NASA/JPL-Caltech/Cornell",
+    "source_url": "https://images.nasa.gov/details/PIA03274",
+    "width": 1600,
+    "height": 667
+   },
+   {
+    "key": "PIA05283",
+    "file": "gusev/3.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "La roca laminada «Mimi»",
+     "en": "The flaky rock 'Mimi'"
+    },
+    "title": "Flaky \"Mimi\"",
+    "date": "2004-02-13",
+    "credit": "NASA/JPL/Cornell",
+    "source_url": "https://images.nasa.gov/details/PIA05283",
+    "width": 1024,
+    "height": 1024
+   }
+  ],
+  "meridiani": [
+   {
+    "key": "PIA03270",
+    "file": "meridiani/1.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Opportunity en el borde del cráter Erebus",
+     "en": "Opportunity on the rim of Erebus crater"
+    },
+    "title": "On the Rim of Erebus",
+    "date": "2006-01-03",
+    "credit": "NASA/JPL-Caltech/Cornell",
+    "source_url": "https://images.nasa.gov/details/PIA03270",
+    "width": 1600,
+    "height": 667
+   },
+   {
+    "key": "PIA09104",
+    "file": "meridiani/2.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Panorama desde Cabo Verde, en el cráter Victoria",
+     "en": "Panorama from Cape Verde, Victoria crater"
+    },
+    "title": "Panorama from Cape Verde",
+    "date": "2007-01-03",
+    "credit": "NASA/JPL-Caltech/Cornell",
+    "source_url": "https://images.nasa.gov/details/PIA09104",
+    "width": 1600,
+    "height": 667
+   },
+   {
+    "key": "PIA03279",
+    "file": "meridiani/3.jpg",
+    "kind": "rover",
+    "caption": {
+     "es": "Estratificación cruzada en rocas formadas en agua",
+     "en": "Festoon cross-bedding in rocks formed in water"
+    },
+    "title": "Festoon Pattern in Meridiani Outcrop",
+    "date": "2006-01-06",
+    "credit": "NASA/JPL-Caltech/Cornell",
+    "source_url": "https://images.nasa.gov/details/PIA03279",
+    "width": 1016,
+    "height": 1023
+   },
+   {
+    "key": "PIA13196",
+    "file": "meridiani/4.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Opportunity entre cráteres, visto desde órbita",
+     "en": "Opportunity amid craters, seen from orbit"
+    },
+    "title": "Opportunity Amid Mars Craters",
+    "date": "2010-06-29",
+    "credit": "NASA/JPL-Caltech/Malin Space Science Systems",
+    "source_url": "https://images.nasa.gov/details/PIA13196",
+    "width": 1584,
+    "height": 1600
+   }
+  ],
+  "phoenix": [
+   {
+    "key": "PIA12105",
+    "file": "phoenix/1.jpg",
+    "kind": "lander",
+    "caption": {
+     "es": "Vista compuesta desde el módulo Phoenix",
+     "en": "Composite view from the Phoenix lander"
+    },
+    "title": "Composite View from Phoenix Lander",
+    "date": "2009-07-02",
+    "credit": "NASA/JPL-Caltech/University of Arizona/Texas A&M University",
+    "source_url": "https://images.nasa.gov/details/PIA12105",
+    "width": 1200,
+    "height": 1600
+   },
+   {
+    "key": "PIA12107",
+    "file": "phoenix/2.jpg",
+    "kind": "lander",
+    "caption": {
+     "es": "Zanjas excavadas por Phoenix hasta el hielo",
+     "en": "Trenches dug by Phoenix down to the ice"
+    },
+    "title": "Composite View of Phoenix Trenches",
+    "date": "2009-07-02",
+    "credit": "NASA/JPL-Caltech/University of Arizona/Texas A&M University",
+    "source_url": "https://images.nasa.gov/details/PIA12107",
+    "width": 1600,
+    "height": 1129
+   },
+   {
+    "key": "PIA10701",
+    "file": "phoenix/3.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Phoenix en la superficie, fotografiado por HiRISE",
+     "en": "Phoenix on the surface, imaged by HiRISE"
+    },
+    "title": "Color Image of Phoenix Lander on Mars Surface",
+    "date": "2008-05-27",
+    "credit": "NASA/JPL-Caltech/University of Arizona",
+    "source_url": "https://images.nasa.gov/details/PIA10701",
+    "width": 508,
+    "height": 600
+   }
+  ],
+  "utopia": [
+   {
+    "key": "PIA00568",
+    "file": "utopia/1.jpg",
+    "kind": "lander",
+    "caption": {
+     "es": "Primera imagen en color de Viking 2 en Utopia Planitia",
+     "en": "Viking 2's first color image in Utopia Planitia"
+    },
+    "title": "First Color Image of the Viking Lander 2 Site",
+    "date": "1997-02-28",
+    "credit": "NASA/JPL",
+    "source_url": "https://images.nasa.gov/details/PIA00568",
+    "width": 626,
+    "height": 512
+   },
+   {
+    "key": "PIA09509",
+    "file": "utopia/2.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Llanuras al oeste del módulo Viking 2",
+     "en": "Plains west of the Viking 2 lander"
+    },
+    "title": "Plains West of Viking Lander 2",
+    "date": "2006-12-27",
+    "credit": "NASA/JPL/Univ. of Arizona",
+    "source_url": "https://images.nasa.gov/details/PIA09509",
+    "width": 1200,
+    "height": 1600
+   }
+  ],
+  "chryse": [
+   {
+    "key": "PIA00563",
+    "file": "chryse/1.jpg",
+    "kind": "lander",
+    "caption": {
+     "es": "Primera imagen en color desde la superficie de Marte (Viking 1)",
+     "en": "First color image from the surface of Mars (Viking 1)"
+    },
+    "title": "First Color Image From Viking Lander 1",
+    "date": "1997-02-28",
+    "credit": "NASA/JPL",
+    "source_url": "https://images.nasa.gov/details/PIA00563",
+    "width": 563,
+    "height": 512
+   },
+   {
+    "key": "PIA00567",
+    "file": "chryse/2.jpg",
+    "kind": "lander",
+    "caption": {
+     "es": "Atardecer en el sitio de Viking 1",
+     "en": "Sunset at the Viking 1 site"
+    },
+    "title": "Sunset at the Viking Lander 1 Site",
+    "date": "1997-02-28",
+    "credit": "NASA/JPL",
+    "source_url": "https://images.nasa.gov/details/PIA00567",
+    "width": 498,
+    "height": 512
+   }
+  ],
+  "elysium": [
+   {
+    "key": "PIA23202",
+    "file": "elysium/1.jpg",
+    "kind": "lander",
+    "caption": {
+     "es": "Atardecer en Elysium Planitia visto por InSight",
+     "en": "Sunset over Elysium Planitia seen by InSight"
+    },
+    "title": "InSight Images a Sunset on Mars",
+    "date": "2019-05-01",
+    "credit": "NASA/JPL-Caltech",
+    "source_url": "https://images.nasa.gov/details/PIA23202",
+    "width": 1024,
+    "height": 1024
+   },
+   {
+    "key": "PIA23180",
+    "file": "elysium/2.jpg",
+    "kind": "lander",
+    "caption": {
+     "es": "El sismómetro de InSight sobre la llanura",
+     "en": "InSight's seismometer on the plain"
+    },
+    "title": "InSight Images Clouds on Mars",
+    "date": "2019-05-01",
+    "credit": "NASA/JPL-Caltech",
+    "source_url": "https://images.nasa.gov/details/PIA23180",
+    "width": 1024,
+    "height": 1024
+   },
+   {
+    "key": "PIA25287",
+    "file": "elysium/3.jpg",
+    "kind": "lander",
+    "caption": {
+     "es": "Último autorretrato de InSight, cubierto de polvo",
+     "en": "InSight's final, dusty selfie"
+    },
+    "title": "InSight's Final Selfie",
+    "date": "2022-05-23",
+    "credit": "NASA/JPL-Caltech",
+    "source_url": "https://images.nasa.gov/details/PIA25287",
+    "width": 1600,
+    "height": 753
+   }
+  ],
+  "arcadia": [
+   {
+    "key": "PIA25083",
+    "file": "arcadia/1.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Acantilados de hielo y cráteres (HiRISE)",
+     "en": "Icy cliffs and impact craters (HiRISE)"
+    },
+    "title": "Icy Cliffs and Impact Craters",
+    "date": "2021-12-20",
+    "credit": "NASA/JPL-Caltech/University of Arizona",
+    "source_url": "https://images.nasa.gov/details/PIA25083",
+    "width": 1600,
+    "height": 1000
+   },
+   {
+    "key": "PIA26044",
+    "file": "arcadia/2.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Un impacto reciente que dejó hielo al descubierto",
+     "en": "A recent impact that exposed ice"
+    },
+    "title": "Ice-Exposing Impact Crater Surrounded by Polygon Terrain",
+    "date": "2023-10-26",
+    "credit": "NASA/JPL-Caltech/University of Arizona",
+    "source_url": "https://images.nasa.gov/details/PIA26044",
+    "width": 1600,
+    "height": 865
+   },
+   {
+    "key": "PIA23077",
+    "file": "arcadia/3.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "«Terreno cerebral» ligado al hielo del subsuelo",
+     "en": "'Brain terrain' linked to buried ice"
+    },
+    "title": "The Slow Charm of Brain Terrain",
+    "date": "2019-03-04",
+    "credit": "NASA/JPL-Caltech/University of Arizona",
+    "source_url": "https://images.nasa.gov/details/PIA23077",
+    "width": 1600,
+    "height": 1000
+   }
+  ],
+  "eberswalde": [
+   {
+    "key": "PIA04293",
+    "file": "eberswalde/1.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "El delta de Eberswalde en alta resolución",
+     "en": "The Eberswalde delta in high resolution"
+    },
+    "title": "Eberswalde Delta in High Resolution",
+    "date": "2005-09-20",
+    "credit": "NASA/JPL/MSSS",
+    "source_url": "https://images.nasa.gov/details/PIA04293",
+    "width": 1417,
+    "height": 1600
+   },
+   {
+    "key": "PIA22683",
+    "file": "eberswalde/2.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Abanico con canales invertidos",
+     "en": "A fan with inverted channels"
+    },
+    "title": "A Fan with Inverted Channels",
+    "date": "2018-09-04",
+    "credit": "NASA/JPL-Caltech/Univ. of Arizona",
+    "source_url": "https://images.nasa.gov/details/PIA22683",
+    "width": 1600,
+    "height": 1000
+   }
+  ],
+  "medusae": [
+   {
+    "key": "PIA00801",
+    "file": "medusae/1.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Sedimentos erosionados por el viento",
+     "en": "Wind-eroded sediments"
+    },
+    "title": "Medusae Fossae #2",
+    "date": "1998-03-13",
+    "credit": "NASA/JPL/Malin Space Science Systems",
+    "source_url": "https://images.nasa.gov/details/PIA00801",
+    "width": 573,
+    "height": 764
+   },
+   {
+    "key": "PIA01698",
+    "file": "medusae/2.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Cráteres en pedestal y estrías del viento",
+     "en": "Pedestal craters and wind streaks"
+    },
+    "title": "Pedestal Craters and Wind Streaks, South Medusae Fossae",
+    "date": "2000-06-14",
+    "credit": "NASA/JPL/MSSS",
+    "source_url": "https://images.nasa.gov/details/PIA01698",
+    "width": 540,
+    "height": 720
+   },
+   {
+    "key": "PIA23522",
+    "file": "medusae/3.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "La formación Medusae Fossae desde órbita",
+     "en": "The Medusae Fossae formation from orbit"
+    },
+    "title": "Medusae Fossae",
+    "date": "2019-10-29",
+    "credit": "NASA/JPL-Caltech/ASU",
+    "source_url": "https://images.nasa.gov/details/PIA23522",
+    "width": 652,
+    "height": 869
+   }
+  ],
+  "sirenum": [
+   {
+    "key": "PIA01923",
+    "file": "sirenum/1.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Cárcavas en Terra Sirenum",
+     "en": "Gullies in Terra Sirenum"
+    },
+    "title": "Gullies in Sirenum Terra, Mars",
+    "date": "2006-10-16",
+    "credit": "NASA/JPL/Univ. of Arizona",
+    "source_url": "https://images.nasa.gov/details/PIA01923",
+    "width": 1016,
+    "height": 996
+   },
+   {
+    "key": "PIA06681",
+    "file": "sirenum/2.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Una ladera en Terra Sirenum",
+     "en": "A slope in Terra Sirenum"
+    },
+    "title": "Terra Sirenum Slope",
+    "date": "2004-07-16",
+    "credit": "NASA/JPL/Malin Space Science Systems",
+    "source_url": "https://images.nasa.gov/details/PIA06681",
+    "width": 836,
+    "height": 1114
+   },
+   {
+    "key": "PIA04599",
+    "file": "sirenum/3.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Cárcavas en la pared de un cráter",
+     "en": "Gullies on a crater wall"
+    },
+    "title": "Gullies in Terra Sirenum",
+    "date": "2003-07-01",
+    "credit": "NASA/JPL/Malin Space Science Systems",
+    "source_url": "https://images.nasa.gov/details/PIA04599",
+    "width": 540,
+    "height": 720
+   }
+  ],
+  "arsia": [
+   {
+    "key": "PIA09929",
+    "file": "arsia/1.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Siete posibles entradas a cuevas en Arsia Mons",
+     "en": "Seven possible cave skylights on Arsia Mons"
+    },
+    "title": "Seven Possible Cave Skylights on Mars",
+    "date": "2007-09-22",
+    "credit": "NASA/JPL-Caltech/ASU/USGS",
+    "source_url": "https://images.nasa.gov/details/PIA09929",
+    "width": 1395,
+    "height": 938
+   },
+   {
+    "key": "PIA03948",
+    "file": "arsia/2.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "La caldera de Arsia Mons",
+     "en": "The caldera of Arsia Mons"
+    },
+    "title": "Arsia Mons Mosaic",
+    "date": "2005-06-13",
+    "credit": "NASA/JPL/Arizona State University",
+    "source_url": "https://images.nasa.gov/details/PIA03948",
+    "width": 1160,
+    "height": 1546
+   },
+   {
+    "key": "PIA24149",
+    "file": "arsia/3.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Cráteres de colapso en los volcanes de Tharsis",
+     "en": "Pit craters on the Tharsis volcanoes"
+    },
+    "title": "Pit Craters and Giant Volcanoes",
+    "date": "2020-10-12",
+    "credit": "NASA/JPL-Caltech/University of Arizona",
+    "source_url": "https://images.nasa.gov/details/PIA24149",
+    "width": 1600,
+    "height": 1000
+   }
+  ],
+  "shackleton": [
+   {
+    "key": "PIA13523",
+    "file": "shackleton/1.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "El polo sur de la Luna",
+     "en": "The lunar south pole"
+    },
+    "title": "The Lunar South Pole",
+    "date": "2010-09-27",
+    "credit": "NASA/GSFC/Arizona State University",
+    "source_url": "https://images.nasa.gov/details/PIA13523",
+    "width": 1520,
+    "height": 1520
+   },
+   {
+    "key": "svs-5013-sites2.0960_print.jpg",
+    "file": "shackleton/2.jpg",
+    "kind": "visualization",
+    "caption": {
+     "es": "Las 13 regiones candidatas de Artemis III alrededor del polo",
+     "en": "The 13 Artemis III candidate regions around the pole"
+    },
+    "title": "Artemis III Landing Region Candidates",
+    "date": "2022-08-19",
+    "credit": "NASA's Scientific Visualization Studio (LRO data)",
+    "source_url": "https://svs.gsfc.nasa.gov/5013",
+    "width": 1024,
+    "height": 576
+   },
+   {
+    "key": "svs-5013-group5.0105_print.jpg",
+    "file": "shackleton/3.jpg",
+    "kind": "visualization",
+    "caption": {
+     "es": "La cumbre cerca de Shackleton y el borde de Faustini",
+     "en": "The peak near Shackleton and Faustini rim"
+    },
+    "title": "Artemis III Landing Region Candidates",
+    "date": "2022-08-19",
+    "credit": "NASA's Scientific Visualization Studio (LRO data)",
+    "source_url": "https://svs.gsfc.nasa.gov/5013",
+    "width": 1024,
+    "height": 576
+   },
+   {
+    "key": "PIA00001",
+    "file": "shackleton/4.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "La región del polo sur vista por Clementine",
+     "en": "The south pole region seen by Clementine"
+    },
+    "title": "South Pole Region of the Moon as Seen by Clementine",
+    "date": "1996-06-03",
+    "credit": "NASA/JPL/USGS",
+    "source_url": "https://images.nasa.gov/details/PIA00001",
+    "width": 1600,
+    "height": 1600
+   }
+  ],
+  "de-gerlache": [
+   {
+    "key": "svs-5013-group1.0180_print.jpg",
+    "file": "de-gerlache/1.jpg",
+    "kind": "visualization",
+    "caption": {
+     "es": "El borde de de Gerlache y la cresta Connecting Ridge",
+     "en": "De Gerlache rim and Connecting Ridge"
+    },
+    "title": "Artemis III Landing Region Candidates",
+    "date": "2022-08-19",
+    "credit": "NASA's Scientific Visualization Studio (LRO data)",
+    "source_url": "https://svs.gsfc.nasa.gov/5013",
+    "width": 1024,
+    "height": 489
+   },
+   {
+    "key": "svs-5013-sites2.0960_print.jpg",
+    "file": "de-gerlache/2.jpg",
+    "kind": "visualization",
+    "caption": {
+     "es": "Las regiones candidatas de Artemis III",
+     "en": "The Artemis III candidate regions"
+    },
+    "title": "Artemis III Landing Region Candidates",
+    "date": "2022-08-19",
+    "credit": "NASA's Scientific Visualization Studio (LRO data)",
+    "source_url": "https://svs.gsfc.nasa.gov/5013",
+    "width": 1024,
+    "height": 576
+   },
+   {
+    "key": "PIA13523",
+    "file": "de-gerlache/3.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "El polo sur de la Luna",
+     "en": "The lunar south pole"
+    },
+    "title": "The Lunar South Pole",
+    "date": "2010-09-27",
+    "credit": "NASA/GSFC/Arizona State University",
+    "source_url": "https://images.nasa.gov/details/PIA13523",
+    "width": 1520,
+    "height": 1520
+   }
+  ],
+  "haworth": [
+   {
+    "key": "svs-5013-group2.0105_print.jpg",
+    "file": "haworth/1.jpg",
+    "kind": "visualization",
+    "caption": {
+     "es": "Las regiones de Haworth y el macizo de Malapert",
+     "en": "The Haworth and Malapert Massif regions"
+    },
+    "title": "Artemis III Landing Region Candidates",
+    "date": "2022-08-19",
+    "credit": "NASA's Scientific Visualization Studio (LRO data)",
+    "source_url": "https://svs.gsfc.nasa.gov/5013",
+    "width": 1024,
+    "height": 576
+   },
+   {
+    "key": "svs-5013-sites2.0960_print.jpg",
+    "file": "haworth/2.jpg",
+    "kind": "visualization",
+    "caption": {
+     "es": "Las regiones candidatas de Artemis III",
+     "en": "The Artemis III candidate regions"
+    },
+    "title": "Artemis III Landing Region Candidates",
+    "date": "2022-08-19",
+    "credit": "NASA's Scientific Visualization Studio (LRO data)",
+    "source_url": "https://svs.gsfc.nasa.gov/5013",
+    "width": 1024,
+    "height": 576
+   }
+  ],
+  "faustini": [
+   {
+    "key": "svs-5013-group5.0105_print.jpg",
+    "file": "faustini/1.jpg",
+    "kind": "visualization",
+    "caption": {
+     "es": "El borde de Faustini y la cumbre cerca de Shackleton",
+     "en": "Faustini rim and the peak near Shackleton"
+    },
+    "title": "Artemis III Landing Region Candidates",
+    "date": "2022-08-19",
+    "credit": "NASA's Scientific Visualization Studio (LRO data)",
+    "source_url": "https://svs.gsfc.nasa.gov/5013",
+    "width": 1024,
+    "height": 576
+   },
+   {
+    "key": "svs-5013-sites2.0960_print.jpg",
+    "file": "faustini/2.jpg",
+    "kind": "visualization",
+    "caption": {
+     "es": "Las regiones candidatas de Artemis III",
+     "en": "The Artemis III candidate regions"
+    },
+    "title": "Artemis III Landing Region Candidates",
+    "date": "2022-08-19",
+    "credit": "NASA's Scientific Visualization Studio (LRO data)",
+    "source_url": "https://svs.gsfc.nasa.gov/5013",
+    "width": 1024,
+    "height": 576
+   }
+  ],
+  "mons-mouton": [
+   {
+    "key": "svs-5013-sites2.0960_print.jpg",
+    "file": "mons-mouton/1.jpg",
+    "kind": "visualization",
+    "caption": {
+     "es": "Las regiones candidatas de Artemis III alrededor del polo",
+     "en": "The Artemis III candidate regions around the pole"
+    },
+    "title": "Artemis III Landing Region Candidates",
+    "date": "2022-08-19",
+    "credit": "NASA's Scientific Visualization Studio (LRO data)",
+    "source_url": "https://svs.gsfc.nasa.gov/5013",
+    "width": 1024,
+    "height": 576
+   },
+   {
+    "key": "PIA13523",
+    "file": "mons-mouton/2.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "El polo sur de la Luna",
+     "en": "The lunar south pole"
+    },
+    "title": "The Lunar South Pole",
+    "date": "2010-09-27",
+    "credit": "NASA/GSFC/Arizona State University",
+    "source_url": "https://images.nasa.gov/details/PIA13523",
+    "width": 1520,
+    "height": 1520
+   }
+  ],
+  "tranquillitatis": [
+   {
+    "key": "as11-40-5927",
+    "file": "tranquillitatis/1.jpg",
+    "kind": "apollo",
+    "caption": {
+     "es": "El módulo lunar del Apolo 11 en el Mar de la Tranquilidad",
+     "en": "The Apollo 11 lunar module in the Sea of Tranquility"
+    },
+    "title": "View Apollo 11 Lunar Module as it rested on lunar surface",
+    "date": "1969-07-20",
+    "credit": "NASA",
+    "source_url": "https://images.nasa.gov/details/as11-40-5927",
+    "width": 1600,
+    "height": 1459
+   },
+   {
+    "key": "as11-40-5931",
+    "file": "tranquillitatis/2.jpg",
+    "kind": "apollo",
+    "caption": {
+     "es": "Buzz Aldrin prepara un experimento",
+     "en": "Buzz Aldrin sets up an experiment"
+    },
+    "title": "Astronaut Edwin Aldrin prepares to deploy EASEP on surface of moon",
+    "date": "1969-07-20",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/as11-40-5931",
+    "width": 1547,
+    "height": 1600
+   },
+   {
+    "key": "as11-40-5880",
+    "file": "tranquillitatis/3.jpg",
+    "kind": "apollo",
+    "caption": {
+     "es": "Huella de un astronauta en el regolito",
+     "en": "An astronaut's footprint in the regolith"
+    },
+    "title": "Close-up view of astronauts foot and footprint in lunar soil",
+    "date": "1969-07-20",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/as11-40-5880",
+    "width": 1593,
+    "height": 1600
+   },
+   {
+    "key": "GSFC_20171208_Archive_e001029",
+    "file": "tranquillitatis/4.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Un pozo lunar que podría llevar a una cueva",
+     "en": "A lunar pit that might lead to a cave"
+    },
+    "title": "Peeking Into Lunar Pits",
+    "date": "2017-12-08",
+    "credit": "NASA/GSFC/Arizona State University",
+    "source_url": "https://images.nasa.gov/details/GSFC_20171208_Archive_e001029",
+    "width": 640,
+    "height": 640
+   }
+  ],
+  "marius": [
+   {
+    "key": "PIA12954",
+    "file": "marius/1.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "El pozo de Marius Hills: posible tubo de lava",
+     "en": "The Marius Hills pit: a possible lava tube"
+    },
+    "title": "Marius Hills Pit -- Lava Tube Skylight?",
+    "date": "2010-03-01",
+    "credit": "NASA/GSFC/Arizona State University",
+    "source_url": "https://images.nasa.gov/details/PIA12954",
+    "width": 1000,
+    "height": 1000
+   },
+   {
+    "key": "GSFC_20171208_Archive_e001029",
+    "file": "marius/2.jpg",
+    "kind": "orbital",
+    "caption": {
+     "es": "Pozos lunares vistos por el LRO",
+     "en": "Lunar pits seen by LRO"
+    },
+    "title": "Peeking Into Lunar Pits",
+    "date": "2017-12-08",
+    "credit": "NASA/GSFC/Arizona State University",
+    "source_url": "https://images.nasa.gov/details/GSFC_20171208_Archive_e001029",
+    "width": 640,
+    "height": 640
+   }
+  ],
+  "atacama-yungay": [
+   {
+    "key": "PIA16191",
+    "file": "atacama-yungay/1.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "Cauce seco en un abanico aluvial del desierto de Atacama",
+     "en": "Dry streambed on an alluvial fan in the Atacama Desert"
+    },
+    "title": "Dry Streambed on Alluvial Fan in Northern Chile",
+    "date": "2012-09-27",
+    "credit": "NASA/UC Berkeley",
+    "source_url": "https://images.nasa.gov/details/PIA16191",
+    "width": 965,
+    "height": 720
+   }
+  ],
+  "mcmurdo-dry-valleys": [
+   {
+    "key": "PIA12461",
+    "file": "mcmurdo-dry-valleys/1.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "Los Valles Secos vistos por el satélite Terra",
+     "en": "The Dry Valleys seen by the Terra satellite"
+    },
+    "title": "Dry Valleys, Antarctica",
+    "date": "2009-11-02",
+    "credit": "NASA/GSFC/METI/ERSDAC/JAROS, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA12461",
+    "width": 1440,
+    "height": 1600
+   },
+   {
+    "key": "ARC-1996-AC94-0206",
+    "file": "mcmurdo-dry-valleys/2.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "Trabajo de campo de la NASA en la Antártida",
+     "en": "NASA fieldwork in Antarctica"
+    },
+    "title": "ARC-1996-AC94-0206",
+    "date": "1996-09-26",
+    "credit": "NASA/ARC",
+    "source_url": "https://images.nasa.gov/details/ARC-1996-AC94-0206",
+    "width": 1600,
+    "height": 1067
+   }
+  ],
+  "haughton-crater": [
+   {
+    "key": "ARC-2007-ACD07-0170-002",
+    "file": "haughton-crater/1.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "El rover K10 de la NASA probado en el cráter Haughton",
+     "en": "NASA's K10 rover tested at Haughton crater"
+    },
+    "title": "ARC-2007-ACD07-0170-002",
+    "date": "2007-07-18",
+    "credit": "NASA/ARC",
+    "source_url": "https://images.nasa.gov/details/ARC-2007-ACD07-0170-002",
+    "width": 1600,
+    "height": 1071
+   },
+   {
+    "key": "ARC-2007-ACD07-0170-005",
+    "file": "haughton-crater/2.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "Dos rovers K10 explorando el cráter",
+     "en": "Two K10 rovers exploring the crater"
+    },
+    "title": "ARC-2007-ACD07-0170-005",
+    "date": "2007-07-19",
+    "credit": "NASA/ARC",
+    "source_url": "https://images.nasa.gov/details/ARC-2007-ACD07-0170-005",
+    "width": 1600,
+    "height": 1071
+   },
+   {
+    "key": "ARC-2007-ACD09-0255-001",
+    "file": "haughton-crater/3.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "Rover de prueba junto a una formación rocosa en la isla Devon",
+     "en": "Test rover by a rock formation on Devon Island"
+    },
+    "title": "ARC-2007-ACD09-0255-001",
+    "date": "2007-07-15",
+    "credit": "NASA/ARC",
+    "source_url": "https://images.nasa.gov/details/ARC-2007-ACD09-0255-001",
+    "width": 1600,
+    "height": 1200
+   }
+  ],
+  "death-valley": [
+   {
+    "key": "PIA26675",
+    "file": "death-valley/1.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "Investigadores prueban un dron para Marte en el Valle de la Muerte",
+     "en": "Researchers test a Mars drone in Death Valley"
+    },
+    "title": "Researchers Monitor Drone Testing in Death Valley",
+    "date": "2025-12-03",
+    "credit": "NASA/JPL-Caltech",
+    "source_url": "https://images.nasa.gov/details/PIA26675",
+    "width": 1600,
+    "height": 1067
+   },
+   {
+    "key": "PIA26197",
+    "file": "death-valley/2.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "Badwater, el punto más bajo de Norteamérica",
+     "en": "Badwater, the lowest point in North America"
+    },
+    "title": "Badwater, Death Valley",
+    "date": "2023-12-14",
+    "credit": "NASA/METI/AIST/Japan Space Systems, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA26197",
+    "width": 1347,
+    "height": 1600
+   },
+   {
+    "key": "PIA12091",
+    "file": "death-valley/3.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "El Valle de la Muerte visto por el satélite Terra",
+     "en": "Death Valley seen by the Terra satellite"
+    },
+    "title": "Death Valley, California",
+    "date": "2009-06-29",
+    "credit": "NASA/GSFC/METI/ERSDAC/JAROS, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA12091",
+    "width": 1488,
+    "height": 1493
+   }
+  ],
+  "mauna-kea": [
+   {
+    "key": "PIA22219",
+    "file": "mauna-kea/1.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "Franjas de rocas creadas por congelamiento en Mauna Kea",
+     "en": "Rock stripes made by freeze-thaw on Mauna Kea"
+    },
+    "title": "Rock Stripe Pattern on Hawaii's Mauna Kea",
+    "date": "2018-02-15",
+    "credit": "Washington University in St. Louis/NASA",
+    "source_url": "https://images.nasa.gov/details/PIA22219",
+    "width": 1600,
+    "height": 1053
+   },
+   {
+    "key": "iss019e011922",
+    "file": "mauna-kea/2.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "El volcán Mauna Kea desde la Estación Espacial",
+     "en": "Mauna Kea volcano from the Space Station"
+    },
+    "title": "Earth Observation taken by the Expedition 19 crew",
+    "date": "2009-04-28",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss019e011922",
+    "width": 1600,
+    "height": 1093
+   }
+  ],
+  "rio-tinto": [
+   {
+    "key": "PIA13365",
+    "file": "rio-tinto/1.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "Río Tinto visto por el satélite Terra",
+     "en": "Río Tinto seen by the Terra satellite"
+    },
+    "title": "Rio Tinto, Spain",
+    "date": "2010-09-02",
+    "credit": "NASA/GSFC/METI/ERSDAC/JAROS, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA13365",
+    "width": 1584,
+    "height": 1600
+   }
+  ],
+  "timanfaya": [
+   {
+    "key": "PIA23526",
+    "file": "timanfaya/1.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "Lanzarote y los campos de lava de Timanfaya",
+     "en": "Lanzarote and the Timanfaya lava fields"
+    },
+    "title": "Lanzarote, Spanish Canary Islands",
+    "date": "2019-10-21",
+    "credit": "NASA/METI/AIST/Japan Space Systems, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA23526",
+    "width": 1200,
+    "height": 1600
+   }
+  ],
+  "uyuni": [
+   {
+    "key": "iss074e0319935",
+    "file": "uyuni/1.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "El salar de Uyuni desde la Estación Espacial",
+     "en": "The Salar de Uyuni from the Space Station"
+    },
+    "title": "The Salar de Uyuni in Bolivia is the world's largest salt flat",
+    "date": "2026-02-21",
+    "credit": "NASA/Jessica Meir",
+    "source_url": "https://images.nasa.gov/details/iss074e0319935",
+    "width": 1600,
+    "height": 1067
+   }
+  ],
+  "pilbara": [
+   {
+    "key": "PIA23551",
+    "file": "pilbara/1.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "Investigadores estudian estromatolitos antiguos en Pilbara",
+     "en": "Researchers study ancient stromatolites in the Pilbara"
+    },
+    "title": "Researching Outback Stromatolites",
+    "date": "2019-11-15",
+    "credit": "NASA/JPL-Caltech",
+    "source_url": "https://images.nasa.gov/details/PIA23551",
+    "width": 1600,
+    "height": 1200
+   },
+   {
+    "key": "PIA24240",
+    "file": "pilbara/2.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "Un estromatolito: rastro de vida microbiana muy antigua",
+     "en": "A stromatolite: a trace of very ancient microbial life"
+    },
+    "title": "Tumbiana Stromatolite",
+    "date": "2021-02-17",
+    "credit": "NASA/JPL-Caltech",
+    "source_url": "https://images.nasa.gov/details/PIA24240",
+    "width": 1600,
+    "height": 1067
+   },
+   {
+    "key": "PIA25122",
+    "file": "pilbara/3.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "Pilbara en falso color (satélite Terra)",
+     "en": "The Pilbara in false color (Terra satellite)"
+    },
+    "title": "Pilbara, NW Australia",
+    "date": "2022-02-04",
+    "credit": "NASA/METI/AIST/Japan Space Systems, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA25122",
+    "width": 1463,
+    "height": 1600
+   }
+  ],
+  "svalbard-bockfjorden": [
+   {
+    "key": "PIA24048",
+    "file": "svalbard-bockfjorden/1.jpg",
+    "kind": "field",
+    "caption": {
+     "es": "Prueba en Svalbard del radar RIMFAX de Perseverance",
+     "en": "Testing Perseverance's RIMFAX radar in Svalbard"
+    },
+    "title": "Testing RIMFAX for NASA's Perseverance Rover",
+    "date": "2020-10-08",
+    "credit": "NASA/JPL",
+    "source_url": "https://images.nasa.gov/details/PIA24048",
+    "width": 1600,
+    "height": 1067
+   },
+   {
+    "key": "PIA10626",
+    "file": "svalbard-bockfjorden/2.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "Svalbard visto por el satélite Terra",
+     "en": "Svalbard seen by the Terra satellite"
+    },
+    "title": "Longyearbyen, Svalbard, Norway",
+    "date": "2008-03-10",
+    "credit": "NASA/GSFC/METI/ERSDAC/JAROS, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA10626",
+    "width": 1596,
+    "height": 1509
+   }
+  ],
+  "nevado-del-ruiz": [
+   {
+    "key": "iss023e027737",
+    "file": "nevado-del-ruiz/1.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "El Nevado del Ruiz desde la Estación Espacial",
+     "en": "Nevado del Ruiz from the Space Station"
+    },
+    "title": "Earth Observations taken by the Expedition 23 Crew",
+    "date": "2010-04-23",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss023e027737",
+    "width": 1600,
+    "height": 1095
+   },
+   {
+    "key": "PIA01827",
+    "file": "nevado-del-ruiz/2.jpg",
+    "kind": "radar",
+    "caption": {
+     "es": "La región volcánica Ruiz-Tolima en imagen de radar",
+     "en": "The Ruiz-Tolima volcanic region in a radar image"
+    },
+    "title": "Space Radar Image of Ruiz Volcano, Colombia",
+    "date": "1999-04-15",
+    "credit": "NASA/JPL",
+    "source_url": "https://images.nasa.gov/details/PIA01827",
+    "width": 1600,
+    "height": 1364
+   }
+  ],
+  "nevado-santa-isabel": [
+   {
+    "key": "PIA01827",
+    "file": "nevado-santa-isabel/1.jpg",
+    "kind": "radar",
+    "caption": {
+     "es": "La región volcánica Ruiz-Tolima, donde está el Santa Isabel",
+     "en": "The Ruiz-Tolima volcanic region, home to Santa Isabel"
+    },
+    "title": "Space Radar Image of Ruiz Volcano, Colombia",
+    "date": "1999-04-15",
+    "credit": "NASA/JPL",
+    "source_url": "https://images.nasa.gov/details/PIA01827",
+    "width": 1600,
+    "height": 1364
+   },
+   {
+    "key": "iss023e027737",
+    "file": "nevado-santa-isabel/2.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "El vecino Nevado del Ruiz desde la Estación Espacial",
+     "en": "Neighboring Nevado del Ruiz from the Space Station"
+    },
+    "title": "Earth Observations taken by the Expedition 23 Crew",
+    "date": "2010-04-23",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss023e027737",
+    "width": 1600,
+    "height": 1095
+   }
+  ],
+  "la-guajira": [
+   {
+    "key": "iss073e0379768",
+    "file": "la-guajira/1.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "La península de La Guajira desde la Estación Espacial",
+     "en": "La Guajira Peninsula from the Space Station"
+    },
+    "title": "Colombia's La Guajira Peninsula on the Caribbean Sea",
+    "date": "2025-07-16",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss073e0379768",
+    "width": 1600,
+    "height": 1067
+   }
+  ],
+  "region:tibesti": [
+   {
+    "key": "iss073e0906087",
+    "file": "region_tibesti/1.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "Las montañas del Tibesti, en el Sahara",
+     "en": "The Tibesti Mountains in the Sahara"
+    },
+    "title": "The Tibesti Mountains in the Sahara",
+    "date": "2025-09-28",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss073e0906087",
+    "width": 1600,
+    "height": 1067
+   },
+   {
+    "key": "iss068e053501",
+    "file": "region_tibesti/2.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "El volcán Toussidé y la depresión Trou au Natron",
+     "en": "Toussidé volcano and the Trou au Natron depression"
+    },
+    "title": "iss068e053501",
+    "date": "2023-02-12",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss068e053501",
+    "width": 1600,
+    "height": 1067
+   },
+   {
+    "key": "iss064e000448",
+    "file": "region_tibesti/3.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "Emi Koussi, el pico más alto del Sahara",
+     "en": "Emi Koussi, the highest peak in the Sahara"
+    },
+    "title": "iss064e000448",
+    "date": "2020-10-25",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss064e000448",
+    "width": 1600,
+    "height": 1067
+   }
+  ],
+  "region:djourab_chad": [
+   {
+    "key": "iss021e026475",
+    "file": "region_djourab_chad/1.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "Los lagos de Ounianga, en el desierto del norte de Chad",
+     "en": "The Ounianga lakes in the desert of northern Chad"
+    },
+    "title": "Earth Observations taken by the Expedition 21 Crew",
+    "date": "2009-11-14",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss021e026475",
+    "width": 1600,
+    "height": 1093
+   },
+   {
+    "key": "iss068e029498",
+    "file": "region_djourab_chad/2.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "El volcán Emi Koussi, al norte de esta región",
+     "en": "Emi Koussi volcano, north of this region"
+    },
+    "title": "iss068e029498",
+    "date": "2022-12-13",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss068e029498",
+    "width": 1600,
+    "height": 1067
+   }
+  ],
+  "region:tenere_niger": [
+   {
+    "key": "iss022e005258",
+    "file": "region_tenere_niger/1.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "Dunas del erg de Fachi-Bilma, en el Ténéré",
+     "en": "Dunes of the Fachi-Bilma erg in the Ténéré"
+    },
+    "title": "Earth Observations taken by the Expedition 22 Crew",
+    "date": "2009-12-01",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss022e005258",
+    "width": 1600,
+    "height": 1093
+   }
+  ],
+  "region:egypt_western_desert": [
+   {
+    "key": "iss043e182398",
+    "file": "region_egypt_western_desert/1.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "Dunas paralelas del Gran Mar de Arena, en el oeste de Egipto",
+     "en": "Parallel dunes of the Great Sand Sea, western Egypt"
+    },
+    "title": "Earth observation taken by the Expedition 43 crew",
+    "date": "2015-05-08",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss043e182398",
+    "width": 1600,
+    "height": 1064
+   },
+   {
+    "key": "iss067e141205",
+    "file": "region_egypt_western_desert/2.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "El Desierto Occidental, donde se unen Egipto, Libia y Sudán",
+     "en": "The Western Desert, where Egypt, Libya and Sudan meet"
+    },
+    "title": "iss067e141205",
+    "date": "2022-06-19",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss067e141205",
+    "width": 1600,
+    "height": 898
+   }
+  ],
+  "region:taklamakan": [
+   {
+    "key": "iss074e0316083",
+    "file": "region_taklamakan/1.jpg",
+    "kind": "astronaut",
+    "caption": {
+     "es": "El borde occidental del desierto de Taklamakán",
+     "en": "The western edge of the Taklamakan Desert"
+    },
+    "title": "The far western edge of the Taklamakan Desert meets the Pamir Mountains in China",
+    "date": "2026-02-18",
+    "credit": "NASA/JSC",
+    "source_url": "https://images.nasa.gov/details/iss074e0316083",
+    "width": 1600,
+    "height": 898
+   },
+   {
+    "key": "PIA12070",
+    "file": "region_taklamakan/2.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "Un abanico aluvial en el borde sur del Taklamakán",
+     "en": "An alluvial fan on the southern edge of the Taklamakan"
+    },
+    "title": "Alluvial Fan, China",
+    "date": "2004-10-11",
+    "credit": "NASA/GSFC/METI/ERSDAC/JAROS, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA12070",
+    "width": 1478,
+    "height": 1600
+   }
+  ],
+  "region:north_greenland": [
+   {
+    "key": "PIA11169",
+    "file": "region_north_greenland/1.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "Peary Land, la tierra más al norte del mundo",
+     "en": "Peary Land, the northernmost land in the world"
+    },
+    "title": "Northern Greenland",
+    "date": "2008-09-16",
+    "credit": "NASA/GSFC/METI/ERSDAC/JAROS, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA11169",
+    "width": 1600,
+    "height": 1409
+   }
+  ],
+  "region:ellesmere_north": [
+   {
+    "key": "PIA18966",
+    "file": "region_ellesmere_north/1.jpg",
+    "kind": "satellite",
+    "caption": {
+     "es": "La isla de Ellesmere vista por el satélite Terra",
+     "en": "Ellesmere Island seen by the Terra satellite"
+    },
+    "title": "Ellesmere Island, Canada",
+    "date": "2014-11-24",
+    "credit": "NASA/GSFC/METI/ERSDAC/JAROS, and U.S./Japan ASTER Science Team",
+    "source_url": "https://images.nasa.gov/details/PIA18966",
+    "width": 1600,
+    "height": 1268
+   }
+  ]
+ }
+}

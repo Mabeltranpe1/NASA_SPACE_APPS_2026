@@ -1,0 +1,186 @@
+{
+ "_doc": "Curated image gallery of the app. Every image was chosen by hand after checking its NASA description (place shown, not an artist's rendering). kind: rover | lander | apollo | orbital | visualization (Moon/Mars); field | astronaut | satellite | radar (Earth). Keys: Moon/Mars target ids (homologue ids in web/src/data/sites.ts), Earth catalog site ids, and region:<region> for the discoveries of the global search. Built by src/export_gallery.py. See docs/DATOS_WEB.md.",
+ "aliases": {
+  "shackleton-floor": "shackleton"
+ },
+ "places": {
+  "jezero": [
+   {"nasa_id": "PIA24485", "kind": "rover", "es": "El delta del antiguo lago de Jezero visto por Perseverance", "en": "The delta of Jezero's ancient lake seen by Perseverance"},
+   {"nasa_id": "PIA24309", "kind": "rover", "es": "Panorama del cráter Jezero desde el rover", "en": "Panorama of Jezero crater from the rover"},
+   {"nasa_id": "PIA24744", "kind": "rover", "es": "El final de un trayecto de Perseverance", "en": "The end of one of Perseverance's drives"},
+   {"nasa_id": "PIA26479", "kind": "rover", "es": "Terreno resbaladizo en el borde del cráter", "en": "Slippery terrain on the crater rim"},
+   {"nasa_id": "PIA24331", "kind": "orbital", "es": "El sitio de aterrizaje de Perseverance visto desde órbita", "en": "Perseverance's landing spot seen from orbit"}
+  ],
+  "gale": [
+   {"nasa_id": "PIA20844", "kind": "rover", "es": "Autorretrato de Curiosity en Murray Buttes", "en": "Curiosity self-portrait at Murray Buttes"},
+   {"nasa_id": "PIA21043", "kind": "rover", "es": "Capas de arenisca en las mesas de Murray Buttes", "en": "Layered sandstone in the Murray Buttes mesas"},
+   {"nasa_id": "PIA20332", "kind": "rover", "es": "Vista de 360° desde la meseta Naukluft", "en": "Full-circle vista from Naukluft Plateau"},
+   {"nasa_id": "PIA21041", "kind": "rover", "es": "Despedida de Murray Buttes, al pie del monte Sharp", "en": "Farewell to Murray Buttes, at the foot of Mount Sharp"},
+   {"nasa_id": "PIA15101", "kind": "orbital", "es": "Vista oblicua del cráter Gale (relieve exagerado)", "en": "Oblique view of Gale crater (exaggerated relief)"}
+  ],
+  "gusev": [
+   {"nasa_id": "PIA07997", "kind": "rover", "es": "Atardecer en el cráter Gusev visto por Spirit", "en": "Sunset at Gusev crater seen by Spirit"},
+   {"nasa_id": "PIA03274", "kind": "rover", "es": "Depósitos de arena con ondulaciones", "en": "Intricately rippled sand deposits"},
+   {"nasa_id": "PIA05283", "kind": "rover", "es": "La roca laminada «Mimi»", "en": "The flaky rock 'Mimi'"}
+  ],
+  "meridiani": [
+   {"nasa_id": "PIA03270", "kind": "rover", "es": "Opportunity en el borde del cráter Erebus", "en": "Opportunity on the rim of Erebus crater"},
+   {"nasa_id": "PIA09104", "kind": "rover", "es": "Panorama desde Cabo Verde, en el cráter Victoria", "en": "Panorama from Cape Verde, Victoria crater"},
+   {"nasa_id": "PIA03279", "kind": "rover", "es": "Estratificación cruzada en rocas formadas en agua", "en": "Festoon cross-bedding in rocks formed in water"},
+   {"nasa_id": "PIA13196", "kind": "orbital", "es": "Opportunity entre cráteres, visto desde órbita", "en": "Opportunity amid craters, seen from orbit"}
+  ],
+  "phoenix": [
+   {"nasa_id": "PIA12105", "kind": "lander", "es": "Vista compuesta desde el módulo Phoenix", "en": "Composite view from the Phoenix lander"},
+   {"nasa_id": "PIA12107", "kind": "lander", "es": "Zanjas excavadas por Phoenix hasta el hielo", "en": "Trenches dug by Phoenix down to the ice"},
+   {"nasa_id": "PIA10701", "kind": "orbital", "es": "Phoenix en la superficie, fotografiado por HiRISE", "en": "Phoenix on the surface, imaged by HiRISE"}
+  ],
+  "utopia": [
+   {"nasa_id": "PIA00568", "kind": "lander", "es": "Primera imagen en color de Viking 2 en Utopia Planitia", "en": "Viking 2's first color image in Utopia Planitia"},
+   {"nasa_id": "PIA09509", "kind": "orbital", "es": "Llanuras al oeste del módulo Viking 2", "en": "Plains west of the Viking 2 lander"}
+  ],
+  "chryse": [
+   {"nasa_id": "PIA00563", "kind": "lander", "es": "Primera imagen en color desde la superficie de Marte (Viking 1)", "en": "First color image from the surface of Mars (Viking 1)"},
+   {"nasa_id": "PIA00567", "kind": "lander", "es": "Atardecer en el sitio de Viking 1", "en": "Sunset at the Viking 1 site"}
+  ],
+  "elysium": [
+   {"nasa_id": "PIA23202", "kind": "lander", "es": "Atardecer en Elysium Planitia visto por InSight", "en": "Sunset over Elysium Planitia seen by InSight"},
+   {"nasa_id": "PIA23180", "kind": "lander", "es": "El sismómetro de InSight sobre la llanura", "en": "InSight's seismometer on the plain"},
+   {"nasa_id": "PIA25287", "kind": "lander", "es": "Último autorretrato de InSight, cubierto de polvo", "en": "InSight's final, dusty selfie"}
+  ],
+  "arcadia": [
+   {"nasa_id": "PIA25083", "kind": "orbital", "es": "Acantilados de hielo y cráteres (HiRISE)", "en": "Icy cliffs and impact craters (HiRISE)"},
+   {"nasa_id": "PIA26044", "kind": "orbital", "es": "Un impacto reciente que dejó hielo al descubierto", "en": "A recent impact that exposed ice"},
+   {"nasa_id": "PIA23077", "kind": "orbital", "es": "«Terreno cerebral» ligado al hielo del subsuelo", "en": "'Brain terrain' linked to buried ice"}
+  ],
+  "eberswalde": [
+   {"nasa_id": "PIA04293", "kind": "orbital", "es": "El delta de Eberswalde en alta resolución", "en": "The Eberswalde delta in high resolution"},
+   {"nasa_id": "PIA22683", "kind": "orbital", "es": "Abanico con canales invertidos", "en": "A fan with inverted channels"}
+  ],
+  "medusae": [
+   {"nasa_id": "PIA00801", "kind": "orbital", "es": "Sedimentos erosionados por el viento", "en": "Wind-eroded sediments"},
+   {"nasa_id": "PIA01698", "kind": "orbital", "es": "Cráteres en pedestal y estrías del viento", "en": "Pedestal craters and wind streaks"},
+   {"nasa_id": "PIA23522", "kind": "orbital", "es": "La formación Medusae Fossae desde órbita", "en": "The Medusae Fossae formation from orbit"}
+  ],
+  "sirenum": [
+   {"nasa_id": "PIA01923", "kind": "orbital", "es": "Cárcavas en Terra Sirenum", "en": "Gullies in Terra Sirenum"},
+   {"nasa_id": "PIA06681", "kind": "orbital", "es": "Una ladera en Terra Sirenum", "en": "A slope in Terra Sirenum"},
+   {"nasa_id": "PIA04599", "kind": "orbital", "es": "Cárcavas en la pared de un cráter", "en": "Gullies on a crater wall"}
+  ],
+  "arsia": [
+   {"nasa_id": "PIA09929", "kind": "orbital", "es": "Siete posibles entradas a cuevas en Arsia Mons", "en": "Seven possible cave skylights on Arsia Mons"},
+   {"nasa_id": "PIA03948", "kind": "orbital", "es": "La caldera de Arsia Mons", "en": "The caldera of Arsia Mons"},
+   {"nasa_id": "PIA24149", "kind": "orbital", "es": "Cráteres de colapso en los volcanes de Tharsis", "en": "Pit craters on the Tharsis volcanoes"}
+  ],
+  "shackleton": [
+   {"nasa_id": "PIA13523", "kind": "orbital", "es": "El polo sur de la Luna", "en": "The lunar south pole"},
+   {"svs": "5013", "file": "sites2.0960_print.jpg", "kind": "visualization", "es": "Las 13 regiones candidatas de Artemis III alrededor del polo", "en": "The 13 Artemis III candidate regions around the pole"},
+   {"svs": "5013", "file": "group5.0105_print.jpg", "kind": "visualization", "es": "La cumbre cerca de Shackleton y el borde de Faustini", "en": "The peak near Shackleton and Faustini rim"},
+   {"nasa_id": "PIA00001", "kind": "orbital", "es": "La región del polo sur vista por Clementine", "en": "The south pole region seen by Clementine"}
+  ],
+  "de-gerlache": [
+   {"svs": "5013", "file": "group1.0180_print.jpg", "kind": "visualization", "es": "El borde de de Gerlache y la cresta Connecting Ridge", "en": "De Gerlache rim and Connecting Ridge"},
+   {"svs": "5013", "file": "sites2.0960_print.jpg", "kind": "visualization", "es": "Las regiones candidatas de Artemis III", "en": "The Artemis III candidate regions"},
+   {"nasa_id": "PIA13523", "kind": "orbital", "es": "El polo sur de la Luna", "en": "The lunar south pole"}
+  ],
+  "haworth": [
+   {"svs": "5013", "file": "group2.0105_print.jpg", "kind": "visualization", "es": "Las regiones de Haworth y el macizo de Malapert", "en": "The Haworth and Malapert Massif regions"},
+   {"svs": "5013", "file": "sites2.0960_print.jpg", "kind": "visualization", "es": "Las regiones candidatas de Artemis III", "en": "The Artemis III candidate regions"}
+  ],
+  "faustini": [
+   {"svs": "5013", "file": "group5.0105_print.jpg", "kind": "visualization", "es": "El borde de Faustini y la cumbre cerca de Shackleton", "en": "Faustini rim and the peak near Shackleton"},
+   {"svs": "5013", "file": "sites2.0960_print.jpg", "kind": "visualization", "es": "Las regiones candidatas de Artemis III", "en": "The Artemis III candidate regions"}
+  ],
+  "mons-mouton": [
+   {"svs": "5013", "file": "sites2.0960_print.jpg", "kind": "visualization", "es": "Las regiones candidatas de Artemis III alrededor del polo", "en": "The Artemis III candidate regions around the pole"},
+   {"nasa_id": "PIA13523", "kind": "orbital", "es": "El polo sur de la Luna", "en": "The lunar south pole"}
+  ],
+  "tranquillitatis": [
+   {"nasa_id": "as11-40-5927", "kind": "apollo", "es": "El módulo lunar del Apolo 11 en el Mar de la Tranquilidad", "en": "The Apollo 11 lunar module in the Sea of Tranquility"},
+   {"nasa_id": "as11-40-5931", "kind": "apollo", "es": "Buzz Aldrin prepara un experimento", "en": "Buzz Aldrin sets up an experiment"},
+   {"nasa_id": "as11-40-5880", "kind": "apollo", "es": "Huella de un astronauta en el regolito", "en": "An astronaut's footprint in the regolith"},
+   {"nasa_id": "GSFC_20171208_Archive_e001029", "kind": "orbital", "es": "Un pozo lunar que podría llevar a una cueva", "en": "A lunar pit that might lead to a cave"}
+  ],
+  "marius": [
+   {"nasa_id": "PIA12954", "kind": "orbital", "es": "El pozo de Marius Hills: posible tubo de lava", "en": "The Marius Hills pit: a possible lava tube"},
+   {"nasa_id": "GSFC_20171208_Archive_e001029", "kind": "orbital", "es": "Pozos lunares vistos por el LRO", "en": "Lunar pits seen by LRO"}
+  ],
+
+  "atacama-yungay": [
+   {"nasa_id": "PIA16191", "kind": "field", "es": "Cauce seco en un abanico aluvial del desierto de Atacama", "en": "Dry streambed on an alluvial fan in the Atacama Desert"}
+  ],
+  "mcmurdo-dry-valleys": [
+   {"nasa_id": "PIA12461", "kind": "satellite", "es": "Los Valles Secos vistos por el satélite Terra", "en": "The Dry Valleys seen by the Terra satellite"},
+   {"nasa_id": "ARC-1996-AC94-0206", "kind": "field", "es": "Trabajo de campo de la NASA en la Antártida", "en": "NASA fieldwork in Antarctica"}
+  ],
+  "haughton-crater": [
+   {"nasa_id": "ARC-2007-ACD07-0170-002", "kind": "field", "es": "El rover K10 de la NASA probado en el cráter Haughton", "en": "NASA's K10 rover tested at Haughton crater"},
+   {"nasa_id": "ARC-2007-ACD07-0170-005", "kind": "field", "es": "Dos rovers K10 explorando el cráter", "en": "Two K10 rovers exploring the crater"},
+   {"nasa_id": "ARC-2007-ACD09-0255-001", "kind": "field", "es": "Rover de prueba junto a una formación rocosa en la isla Devon", "en": "Test rover by a rock formation on Devon Island"}
+  ],
+  "death-valley": [
+   {"nasa_id": "PIA26675", "kind": "field", "es": "Investigadores prueban un dron para Marte en el Valle de la Muerte", "en": "Researchers test a Mars drone in Death Valley"},
+   {"nasa_id": "PIA26197", "kind": "satellite", "es": "Badwater, el punto más bajo de Norteamérica", "en": "Badwater, the lowest point in North America"},
+   {"nasa_id": "PIA12091", "kind": "satellite", "es": "El Valle de la Muerte visto por el satélite Terra", "en": "Death Valley seen by the Terra satellite"}
+  ],
+  "mauna-kea": [
+   {"nasa_id": "PIA22219", "kind": "field", "es": "Franjas de rocas creadas por congelamiento en Mauna Kea", "en": "Rock stripes made by freeze-thaw on Mauna Kea"},
+   {"nasa_id": "iss019e011922", "kind": "astronaut", "es": "El volcán Mauna Kea desde la Estación Espacial", "en": "Mauna Kea volcano from the Space Station"}
+  ],
+  "rio-tinto": [
+   {"nasa_id": "PIA13365", "kind": "satellite", "es": "Río Tinto visto por el satélite Terra", "en": "Río Tinto seen by the Terra satellite"}
+  ],
+  "timanfaya": [
+   {"nasa_id": "PIA23526", "kind": "satellite", "es": "Lanzarote y los campos de lava de Timanfaya", "en": "Lanzarote and the Timanfaya lava fields"}
+  ],
+  "uyuni": [
+   {"nasa_id": "iss074e0319935", "kind": "astronaut", "es": "El salar de Uyuni desde la Estación Espacial", "en": "The Salar de Uyuni from the Space Station"}
+  ],
+  "pilbara": [
+   {"nasa_id": "PIA23551", "kind": "field", "es": "Investigadores estudian estromatolitos antiguos en Pilbara", "en": "Researchers study ancient stromatolites in the Pilbara"},
+   {"nasa_id": "PIA24240", "kind": "field", "es": "Un estromatolito: rastro de vida microbiana muy antigua", "en": "A stromatolite: a trace of very ancient microbial life"},
+   {"nasa_id": "PIA25122", "kind": "satellite", "es": "Pilbara en falso color (satélite Terra)", "en": "The Pilbara in false color (Terra satellite)"}
+  ],
+  "svalbard-bockfjorden": [
+   {"nasa_id": "PIA24048", "kind": "field", "es": "Prueba en Svalbard del radar RIMFAX de Perseverance", "en": "Testing Perseverance's RIMFAX radar in Svalbard"},
+   {"nasa_id": "PIA10626", "kind": "satellite", "es": "Svalbard visto por el satélite Terra", "en": "Svalbard seen by the Terra satellite"}
+  ],
+  "nevado-del-ruiz": [
+   {"nasa_id": "iss023e027737", "kind": "astronaut", "es": "El Nevado del Ruiz desde la Estación Espacial", "en": "Nevado del Ruiz from the Space Station"},
+   {"nasa_id": "PIA01827", "kind": "radar", "es": "La región volcánica Ruiz-Tolima en imagen de radar", "en": "The Ruiz-Tolima volcanic region in a radar image"}
+  ],
+  "nevado-santa-isabel": [
+   {"nasa_id": "PIA01827", "kind": "radar", "es": "La región volcánica Ruiz-Tolima, donde está el Santa Isabel", "en": "The Ruiz-Tolima volcanic region, home to Santa Isabel"},
+   {"nasa_id": "iss023e027737", "kind": "astronaut", "es": "El vecino Nevado del Ruiz desde la Estación Espacial", "en": "Neighboring Nevado del Ruiz from the Space Station"}
+  ],
+  "la-guajira": [
+   {"nasa_id": "iss073e0379768", "kind": "astronaut", "es": "La península de La Guajira desde la Estación Espacial", "en": "La Guajira Peninsula from the Space Station"}
+  ],
+
+  "region:tibesti": [
+   {"nasa_id": "iss073e0906087", "kind": "astronaut", "es": "Las montañas del Tibesti, en el Sahara", "en": "The Tibesti Mountains in the Sahara"},
+   {"nasa_id": "iss068e053501", "kind": "astronaut", "es": "El volcán Toussidé y la depresión Trou au Natron", "en": "Toussidé volcano and the Trou au Natron depression"},
+   {"nasa_id": "iss064e000448", "kind": "astronaut", "es": "Emi Koussi, el pico más alto del Sahara", "en": "Emi Koussi, the highest peak in the Sahara"}
+  ],
+  "region:djourab_chad": [
+   {"nasa_id": "iss021e026475", "kind": "astronaut", "es": "Los lagos de Ounianga, en el desierto del norte de Chad", "en": "The Ounianga lakes in the desert of northern Chad"},
+   {"nasa_id": "iss068e029498", "kind": "astronaut", "es": "El volcán Emi Koussi, al norte de esta región", "en": "Emi Koussi volcano, north of this region"}
+  ],
+  "region:tenere_niger": [
+   {"nasa_id": "iss022e005258", "kind": "astronaut", "es": "Dunas del erg de Fachi-Bilma, en el Ténéré", "en": "Dunes of the Fachi-Bilma erg in the Ténéré"}
+  ],
+  "region:egypt_western_desert": [
+   {"nasa_id": "iss043e182398", "kind": "astronaut", "es": "Dunas paralelas del Gran Mar de Arena, en el oeste de Egipto", "en": "Parallel dunes of the Great Sand Sea, western Egypt"},
+   {"nasa_id": "iss067e141205", "kind": "astronaut", "es": "El Desierto Occidental, donde se unen Egipto, Libia y Sudán", "en": "The Western Desert, where Egypt, Libya and Sudan meet"}
+  ],
+  "region:taklamakan": [
+   {"nasa_id": "iss074e0316083", "kind": "astronaut", "es": "El borde occidental del desierto de Taklamakán", "en": "The western edge of the Taklamakan Desert"},
+   {"nasa_id": "PIA12070", "kind": "satellite", "es": "Un abanico aluvial en el borde sur del Taklamakán", "en": "An alluvial fan on the southern edge of the Taklamakan"}
+  ],
+  "region:north_greenland": [
+   {"nasa_id": "PIA11169", "kind": "satellite", "es": "Peary Land, la tierra más al norte del mundo", "en": "Peary Land, the northernmost land in the world"}
+  ],
+  "region:ellesmere_north": [
+   {"nasa_id": "PIA18966", "kind": "satellite", "es": "La isla de Ellesmere vista por el satélite Terra", "en": "Ellesmere Island seen by the Terra satellite"}
+  ]
+ }
+}

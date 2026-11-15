@@ -62,6 +62,7 @@ flowchart LR
 ```
 
 - **`src/export_images.py`**: genera las imágenes de cerca de la Tierra (Sentinel-2 de Microsoft Planetary Computer, uniendo teselas de la misma pasada y con escala ampliada en superficies muy claras) en `web/public/images/earth/`, con un `index.json` que cita la escena y la fecha. Ver [DATOS_WEB.md](DATOS_WEB.md#imágenes-de-cerca-de-la-tierra).
+- **`src/export_gallery.py`**: descarga la galería curada (`data/gallery_sources.json`, 96 fotos de la NASA para 40 lugares) a `web/public/images/gallery/` y escribe `web/public/data/gallery.json` con el pie de foto, el crédito y la fuente.
 - **Salida actual:** **datos reales** (15 objetivos, 17 sitios del catálogo, 50 descubrimientos). Los CSV de muestra (`data/sample_*.csv`) quedan solo para los tests.
 - **Reglas:**
   - Los datos crudos van en `data/raw/` y los procesados en `data/processed/`. **No se suben a git.**
@@ -94,7 +95,9 @@ web/src/
 │   ├── SiteCard.tsx         # Ficha del lugar (panel izquierdo) y caracterización de Santiago
 │   ├── InsightPanel.tsx     # Panel derecho: miniaturas de terreno con candados e índice de similitud
 │   ├── DetailImage.tsx      # Imagen de detalle: snapshot Landsat/MODIS o vista cercana Luna/Marte
-│   ├── ImageCompareModal.tsx # Ventana emergente: imagen de la Tierra a la izquierda y del homólogo a la derecha
+│   ├── ImageCompareModal.tsx # Ventana emergente: carrusel de la Tierra a la izquierda y del homólogo a la derecha
+│   ├── Carousel.tsx         # Carrusel genérico: flechas, puntos, teclado, deslizamiento, tipo de imagen y crédito
+│   ├── PlaceCarousels.tsx   # Carruseles de un lugar: Tierra (Sentinel-2 + fotos) y Luna/Marte (fotos + vista 3D)
 │   ├── ComparisonPanel.tsx  # Comparación detallada: puntaje, pesos, valores, ranking, límites
 │   ├── MethodView.tsx       # Vista «Método»: fórmula, reglas, fuentes, límites y equipo
 │   ├── IntroOverlay.tsx     # Pantalla de bienvenida con las cifras del proyecto
@@ -116,6 +119,7 @@ web/src/
 │   ├── sites.en.ts          # Textos del catálogo en inglés
 │   ├── comparisons.ts       # Tipos del JSON, carga y recálculo del puntaje con pesos
 │   ├── focus.ts             # Descubrimientos por cuerpo y conversión de un descubrimiento en «sitio»
+│   ├── gallery.ts           # Carga de gallery.json e imágenes de cada lugar
 │   └── tour.ts              # Pasos del recorrido guiado (ES/EN)
 ├── App.css                  # Estilos de la app (paneles de vidrio, barra de navegación, versión móvil)
 └── index.css                # Variables de color y tipografía (tema oscuro; Inter y Space Grotesk)
@@ -123,6 +127,8 @@ web/src/
 web/public/data/comparisons.json   # Generado por src/export_web.py
 web/public/data/heatmap/*.json     # Mapa de similitud por objetivo (mismo script)
 web/public/images/earth/*.jpg      # Imágenes de cerca de la Tierra (src/export_images.py) + index.json
+web/public/images/gallery/         # Galería de fotos de la NASA (src/export_gallery.py)
+web/public/data/gallery.json       # Pie de foto, tipo, crédito y fuente de cada foto
 ```
 
 **Modelo de datos (`AnalogSite`):**

@@ -1525,7 +1525,7 @@
   display: grid;
   grid-template-columns: repeat(var(--cols, 2), 1fr);
   gap: 12px;
-  height: 320px;
+  height: 400px;
 }
 
 .detail-image {
@@ -2355,6 +2355,218 @@
 }
 
 /* =====================================================================
+   Photo carousel (gallery of each place)
+   ===================================================================== */
+
+.carousel {
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #05070d;
+  outline-offset: -2px;
+}
+
+.carousel-empty {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.carousel-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+/* Blurred copy of the photo behind it, so any aspect ratio fills the frame. */
+.carousel-backdrop {
+  position: absolute;
+  inset: -30px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(26px) brightness(0.45) saturate(1.2);
+}
+
+.carousel-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: fade-in 0.35s ease-out;
+  user-select: none;
+}
+
+.carousel-node {
+  position: absolute;
+  inset: 0;
+}
+
+.carousel-node .detail-image {
+  position: absolute;
+  inset: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.carousel-node .detail-image figcaption {
+  display: none;
+}
+
+.kind-badge,
+.carousel-note {
+  position: absolute;
+  z-index: 3;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+.kind-badge {
+  top: 10px;
+  background: rgba(6, 10, 18, 0.72);
+  border: 1px solid var(--border-strong);
+  color: var(--accent-strong);
+}
+
+.kind-badge.ground {
+  border-color: rgba(224, 162, 58, 0.55);
+  color: #f0c77e;
+}
+
+.carousel-note {
+  top: 40px;
+  background: rgba(24, 16, 4, 0.85);
+  border: 1px solid rgba(224, 162, 58, 0.45);
+  color: #f0c77e;
+}
+
+.carousel-arrow {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: rgba(6, 10, 18, 0.62);
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  opacity: 0.75;
+  transition:
+    opacity 0.2s,
+    background 0.2s;
+}
+
+.carousel:hover .carousel-arrow,
+.carousel-arrow:focus-visible {
+  opacity: 1;
+}
+
+.carousel-arrow:hover {
+  background: rgba(165, 216, 255, 0.22);
+}
+
+.carousel-arrow.prev {
+  left: 10px;
+}
+
+.carousel-arrow.next {
+  right: 10px;
+}
+
+.carousel-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 10px 14px 11px;
+  background: rgba(8, 11, 19, 0.92);
+  border-top: 1px solid var(--border);
+}
+
+.carousel-text {
+  min-width: 0;
+}
+
+.carousel-text strong {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.carousel-text small {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.carousel-text a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.carousel-text a:hover {
+  text-decoration: underline;
+}
+
+.carousel-dots {
+  flex: none;
+  display: flex;
+  gap: 5px;
+  padding-bottom: 3px;
+}
+
+.carousel-dots button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+}
+
+.carousel-dots button.active {
+  width: 18px;
+  border-radius: 4px;
+  background: var(--accent);
+}
+
+.gallery-button {
+  margin-top: 10px;
+}
+
+/* The analysis page shows the carousels in a row of fixed height. */
+.details .carousel {
+  min-height: 0;
+}
+
+/* =====================================================================
    Medium screens: narrower panels
    ===================================================================== */
 
@@ -2527,6 +2739,10 @@
 
   .detail-image {
     height: 240px;
+  }
+
+  .details .carousel {
+    height: 320px;
   }
 
   .intro-card {
