@@ -1,0 +1,7 @@
+region,planet,latitude,longitude,emit_granules,emit_available,source
+Tatacoa,earth,3.23,-75.17,18,True,NASA EMIT L2B
+La_Guajira,earth,12.43653,-71.60899,33,True,NASA EMIT L2B
+Nevado_del_Ruiz,earth,4.895,-75.322,13,True,NASA EMIT L2B
+Volcan_Purace,earth,2.3095,-76.3948,5,True,NASA EMIT L2B
+La_Candelaria,earth,5.5368,-73.6163,16,True,NASA EMIT L2B
+Nevado_Santa_Isabel,earth,4.818,-75.365,11,True,NASA EMIT L2B

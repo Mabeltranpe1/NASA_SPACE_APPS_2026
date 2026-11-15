@@ -1,5 +1,6 @@
 name: analogos
 channels:
+  - conda-forge
   - defaults
 dependencies:
   - scikit-learn
@@ -13,3 +14,10 @@ dependencies:
   - xarray
   - numpy
   - pytest
+  # Descarga y lectura de datos (scripts de src/)
+  - scipy
+  - pyproj
+  - requests
+  - h5py
+  - pyhdf
+  - earthaccess
