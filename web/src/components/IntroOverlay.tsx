@@ -6,7 +6,7 @@ import { IconPlay, LogoMark } from './Icons'
 import { Stat } from './MethodView'
 
 const TEXT = {
-  eyebrow: { es: 'NASA Space Apps Challenge 2026', en: 'NASA Space Apps Challenge 2026' },
+  eyebrow: { es: 'GeoAnalog · NASA Space Apps Challenge 2026', en: 'GeoAnalog · NASA Space Apps Challenge 2026' },
   title: {
     es: '¿Dónde en la Tierra se ensaya vivir en la Luna y en Marte?',
     en: 'Where on Earth can we rehearse living on the Moon and Mars?',

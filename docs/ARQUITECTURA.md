@@ -1,4 +1,4 @@
-# Arquitectura
+# Arquitectura de GeoAnalog
 
 ## Vista general
 

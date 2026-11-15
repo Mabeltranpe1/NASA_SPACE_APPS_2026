@@ -1,4 +1,4 @@
-# Objetivo de la plataforma web de análogos terrestres
+# Objetivo de GeoAnalog, la plataforma web de análogos terrestres
 
 Este documento describe **qué busca la plataforma web**, cómo responde al reto de NASA Space Apps 2026 y qué falta para considerarla terminada.
 

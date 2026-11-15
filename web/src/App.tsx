@@ -780,7 +780,15 @@ export default function App() {
         {view === 'finder' && (
           <div className="page finder-page">
             <Suspense fallback={<p className="hint">{t('cmp.loading')}</p>}>
-              <AnalogFinder />
+              <AnalogFinder
+                onShowOnGlobe={(p) => {
+                  // Fly the Earth globe of the Discover view to the place and mark it.
+                  setDiscoveryKey(null)
+                  setActiveBody('tierra')
+                  goView('discover')
+                  setPlace(p)
+                }}
+              />
             </Suspense>
           </div>
         )}
