@@ -43,3 +43,7 @@ _to_delete/
 
 # Bloqueos de LibreOffice
 .~lock.*
+
+# Region files of the worldwide grid search (2x2 degree areas, e.g. libya_24n_014e.csv).
+# Too many to keep in git; rebuild them with outputs/grid_search/ scripts.
+data/regions/*_[0-9][0-9][ns]_[0-9][0-9][0-9][ew].csv
