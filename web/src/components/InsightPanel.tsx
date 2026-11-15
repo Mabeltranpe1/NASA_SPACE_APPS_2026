@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { homologueFor, type AnalogSite, type Body, type Target } from '../data/types'
 import { rankForTarget, useComparisons, type ComparisonData, type ComparisonTarget } from '../data/comparisons'
-import { bodiesOf, comparedTarget, discoveryAsSite } from '../data/focus'
+import { bodiesOf, comparedTarget, discoveryAsSite, placeName } from '../data/focus'
 import { dumbbellScale, featureLabel, formatCoords, makeFmt } from '../data/format'
 import type { Place } from './ComparisonPanel'
 import EarthThumb from './EarthThumb'
@@ -195,6 +195,26 @@ function SimilarityContent({
 
       {site.caseStudy && <p className="note-line">{t('insight.caseStudy')}</p>}
 
+      {result.dims && data.dimensions && (
+        <>
+          <h4 className="panel-sub">{t('insight.dims')}</h4>
+          <ul className="dim-bars">
+            {data.dimensions.map((d) => {
+              const v = result.dims?.[d.id]
+              return (
+                <li key={d.id} className={v == null ? 'off' : ''} title={v == null ? t('insight.dimNATitle') : undefined}>
+                  <span className="dim-name">{d.label[lang]}</span>
+                  <span className="mini-track">
+                    {v != null && <span className="mini-fill" style={{ width: `${v * 100}%`, background: SIMILARITY_COLOR }} />}
+                  </span>
+                  <span className="dim-value">{v == null ? t('insight.dimNA') : Math.round(v * 100)}</span>
+                </li>
+              )
+            })}
+          </ul>
+        </>
+      )}
+
       <h4 className="panel-sub">{t('cmp.values')}</h4>
       <p className="legend-line small">
         <span>
@@ -319,8 +339,8 @@ function SimilarPlaces({
   const top = useMemo(() => rankForTarget(data, target.id, defaults).slice(0, 5), [data, target, defaults])
   if (!top.length) return null
   const best = top[0]
-  const bestSite = discoveryAsSite({ site: best.site, target, score: best.score ?? 0 })
-  const go = (r: (typeof top)[number]) => onGoTo({ lat: r.site.lat, lng: r.site.lng, name: r.site.name })
+  const bestSite = discoveryAsSite({ site: best.site, target, score: best.score ?? 0 }, lang)
+  const go = (r: (typeof top)[number]) => onGoTo({ lat: r.site.lat, lng: r.site.lng, name: placeName(r.site, lang) })
   const tag = (r: (typeof top)[number]) =>
     r.site.kind === 'discovery' ? t('cmp.discovery') : r.site.known ? t('cmp.known') : null
 
@@ -329,11 +349,11 @@ function SimilarPlaces({
       <h4 className="panel-sub">{t('cmp.ranking', { target: target.name })}</h4>
       <button className="best-place" onClick={() => go(best)} title={t('cmp.goTo')}>
         <span className="best-thumb">
-          <EarthThumb site={bestSite} alt={best.site.name} />
+          <EarthThumb site={bestSite} alt={placeName(best.site, lang)} />
           <span className="best-badge">#1</span>
         </span>
         <span className="best-text">
-          <strong>{best.site.name}</strong>
+          <strong>{placeName(best.site, lang)}</strong>
           <small>{formatCoords(best.site.lat, best.site.lng, lang)}</small>
           {tag(best) && <small>{tag(best)}</small>}
         </span>
@@ -348,7 +368,7 @@ function SimilarPlaces({
             <button onClick={() => go(r)} title={t('cmp.goTo')}>
               <span className="place-pos">{i + 2}</span>
               <span className="place-text">
-                <strong>{r.site.name}</strong>
+                <strong>{placeName(r.site, lang)}</strong>
                 <small>
                   {formatCoords(r.site.lat, r.site.lng, lang)}
                   {tag(r) && ` · ${tag(r)}`}

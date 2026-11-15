@@ -75,11 +75,11 @@ Verificar:
 pytest -q tests
 python src/compare.py --earth data/sample_earth.csv --targets data/sample_targets.csv --top 5
 
-# Regenerar los datos reales que muestra la app (~2 min)
+# Regenerar los datos reales que muestra la app (~12 min, ~1 GB de memoria)
 python src/export_web.py
 
-# Imágenes de cerca de la Tierra (Sentinel-2, solo las que falten)
-python src/export_images.py
+# Imágenes de cerca de la Tierra (Sentinel-2: las que falten; borra las que sobran)
+python src/export_images.py --prune --size 768
 
 # Galería de fotos de la NASA (lista curada en data/gallery_sources.json)
 python src/export_gallery.py

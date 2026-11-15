@@ -620,7 +620,7 @@
 .disc-list button {
   width: 100%;
   display: grid;
-  grid-template-columns: 1.4em 1fr auto;
+  grid-template-columns: 52px 1fr auto;
   gap: 10px;
   align-items: center;
   text-align: left;
@@ -637,10 +637,106 @@
   border-color: var(--border);
 }
 
+/* Thumbnail of a discovery, with its position in the list on top */
+.disc-thumb {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.disc-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .disc-rank {
-  color: var(--muted);
-  font-size: 0.78rem;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  min-width: 1.5em;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-align: center;
   font-variant-numeric: tabular-nums;
+}
+
+.disc-body {
+  min-width: 0;
+}
+
+.disc-body .robust {
+  color: var(--ok);
+}
+
+/* Tabs of ranked lists (overall / one dimension) and the sort chips of the analogs */
+.list-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin: 10px 0 4px;
+}
+
+.country-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 2px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.country-select select {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-solid);
+  color: var(--text);
+  font: inherit;
+}
+
+/* Score per dimension in the right panel */
+.dim-bars {
+  list-style: none;
+  margin: 4px 0 8px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.dim-bars li {
+  display: grid;
+  grid-template-columns: 8.6em 1fr 3.2em;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.dim-bars li.off {
+  color: var(--muted);
+}
+
+.dim-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.dim-bars li.off .dim-value {
+  font-weight: 400;
+  font-size: 0.68rem;
 }
 
 .disc-body strong {

@@ -1,0 +1,25 @@
+target,set,rank,region,lat,lon,score,best_match,worst_match,top_used,earth_photo,earth_photo_same_cell_other_target
+Jezero crater (Perseverance),new,1,egypt_western_desert,25.375,29.575,0.2488,precip_mm,temp_mean_K,all,maps/07_mars_jezero_crater_A1_earth_egypt_western_desert_photo.png,
+Jezero crater (Perseverance),new,2,fezzan_libya,24.375,14.925,0.247,slope_deg,temp_mean_K,all,maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png,
+Jezero crater (Perseverance),new,3,taklamakan,38.675,84.625,0.1974,slope_deg,precip_mm,all,maps/07_mars_jezero_crater_A3_earth_taklamakan_photo.png,
+Jezero crater (Perseverance),known,1,transantarctic_mts,-85.125,166.925,0.2276,ndvi,precip_mm,200,,
+Gale crater (Curiosity),new,1,egypt_western_desert,25.375,29.575,0.2455,precip_mm,temp_mean_K,all,,maps/07_mars_jezero_crater_A1_earth_egypt_western_desert_photo.png
+Gale crater (Curiosity),new,2,fezzan_libya,24.375,14.925,0.2382,albedo,temp_mean_K,all,,maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png
+Gale crater (Curiosity),new,3,taklamakan,38.675,84.625,0.1978,roughness,precip_mm,all,,maps/07_mars_jezero_crater_A3_earth_taklamakan_photo.png
+Gale crater (Curiosity),known,1,transantarctic_mts,-85.125,166.925,0.2468,ndvi,precip_mm,200,,
+Vastitas Borealis (Phoenix),new,1,fezzan_libya,24.425,14.975,0.1312,precip_mm,temp_mean_K,all,,maps/07_mars_jezero_crater_A2_earth_fezzan_libya_photo.png
+Vastitas Borealis (Phoenix),new,2,egypt_western_desert,25.175,28.725,0.1295,slope_deg,temp_mean_K,all,,
+Vastitas Borealis (Phoenix),new,3,kumtag_lop_nur,42.025,90.925,0.1211,albedo,temp_mean_K,all,,
+Vastitas Borealis (Phoenix),known,1,transantarctic_mts,-85.125,166.875,0.1566,ndvi,precip_mm,200,,
+Shackleton rim,new,1,ellesmere_north,81.275,-71.275,0.0519,albedo,precip_mm,200,maps/01_moon_shackleton_rim_A1_earth_ellesmere_north_photo.png,
+Shackleton rim,new,2,north_greenland,81.875,-34.825,0.0506,slope_deg,precip_mm,200,maps/01_moon_shackleton_rim_A2_earth_north_greenland_photo.png,
+Shackleton rim,new,3,pamir,39.225,73.475,0.0499,albedo,temp_mean_K,200,maps/01_moon_shackleton_rim_A3_earth_pamir_photo.png,
+Shackleton rim,known,1,transantarctic_mts,-85.125,166.725,0.0873,ndvi,temp_range_K,200,,
+de Gerlache rim,new,1,ellesmere_north,81.325,-71.525,0.0544,slope_deg,precip_mm,200,,maps/01_moon_shackleton_rim_A1_earth_ellesmere_north_photo.png
+de Gerlache rim,new,2,north_greenland,81.625,-34.275,0.0534,ndvi,precip_mm,200,,
+de Gerlache rim,new,3,changtang_tibet,34.575,82.775,0.0516,slope_deg,temp_mean_K,200,,
+de Gerlache rim,known,1,transantarctic_mts,-85.225,167.125,0.0906,ndvi,temp_range_K,200,,
+Mons Mouton summit,new,1,ellesmere_north,81.425,-70.775,0.0522,ndvi,precip_mm,200,,
+Mons Mouton summit,new,2,north_greenland,81.825,-34.925,0.0521,slope_deg,precip_mm,200,,maps/01_moon_shackleton_rim_A2_earth_north_greenland_photo.png
+Mons Mouton summit,new,3,changtang_tibet,34.875,83.225,0.0514,slope_deg,temp_mean_K,200,,
+Mons Mouton summit,known,1,transantarctic_mts,-85.125,166.925,0.0893,ndvi,temp_mean_K,200,,

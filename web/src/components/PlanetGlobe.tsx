@@ -245,6 +245,9 @@ export default function PlanetGlobe({
     if (!viewer) return
     const ellipsoid = BODIES[body].ellipsoid
     viewer.entities.removeAll()
+    // A few markers get their name; repeated names (e.g. nine places in "Algeria") would only overlap.
+    const repeats = new Map<string, number>()
+    for (const m of markers) repeats.set(m.label, (repeats.get(m.label) ?? 0) + 1)
     for (const m of markers) {
       const isSelected = m.id === selectedId
       const color = Color.fromCssColorString(m.color)
@@ -270,7 +273,7 @@ export default function PlanetGlobe({
                 horizontalOrigin: HorizontalOrigin.LEFT,
                 verticalOrigin: VerticalOrigin.CENTER,
                 pixelOffset: new Cartesian2(12, 0),
-                show: isSelected || markers.length <= 10,
+                show: isSelected || (markers.length <= 10 && repeats.get(m.label) === 1),
                 translucencyByDistance: new NearFarScalar(1.5e6, 1, 4e7, 0.6),
               }
             : undefined,

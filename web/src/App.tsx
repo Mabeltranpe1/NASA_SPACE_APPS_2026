@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { SITES } from './data/sites'
 import {
-  DIMENSION_LABELS,
   ENVIRONMENT_LABELS,
   homologueFor,
   siteTargets,
   type AnalogSite,
   type Body,
-  type Dimension,
   type Environment,
   type Target,
 } from './data/types'
@@ -32,14 +30,16 @@ import {
   IconSearch,
   LogoMark,
 } from './components/Icons'
-import { loadHeatmap, useComparisons, type ComparisonData, type Heatmap } from './data/comparisons'
-import { bestScore, bodiesOf, discoveriesFor, discoveryAsSite, type Discovery } from './data/focus'
+import { loadHeatmap, useComparisons, type ComparisonData, type Heatmap, type RankingId } from './data/comparisons'
+import { bestScore, bodiesOf, discoveriesFor, discoveryAsSite, placeCountry, placeName, type Discovery } from './data/focus'
+import DiscoverList, { type DiscoverItem } from './components/DiscoverList'
+import { formatCoords } from './data/format'
 import type { TourStep } from './data/tour'
 import { BODY_COLORS, SIMILARITY_COLOR } from './theme'
 import { BASE_LAYERS, OVERLAY_LAYERS, type BaseLayerId, type OverlayLayerId } from './map/gibs'
 import { localizeSite } from './data/sites.en'
 import { useLang } from './i18n/useLang'
-import { BODY_NAMES, DIMENSION_NAMES, ENVIRONMENT_NAMES } from './i18n/strings'
+import { BODY_NAMES, ENVIRONMENT_NAMES } from './i18n/strings'
 import './App.css'
 
 type View = 'discover' | 'sites' | 'analysis' | 'method'
@@ -124,6 +124,9 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(startsOnSite ? initialSite : null)
   const [discoveryKey, setDiscoveryKey] = useState<{ siteId: string; targetId: string } | null>(null)
   const [discoverBody, setDiscoverBody] = useState<Target>('marte')
+  const [discoverList, setDiscoverList] = useState<RankingId>('general')
+  const [discoverCountry, setDiscoverCountry] = useState('')
+  const [sortList, setSortList] = useState<RankingId>('general')
   const [place, setPlace] = useState<Place | null>(null)
   const [showIntro, setShowIntro] = useState(() => readStorage(INTRO_KEY) !== '1' && !startsOnSite)
   const [touring, setTouring] = useState(false)
@@ -132,25 +135,21 @@ export default function App() {
 
   // ---------- Filters (reference analogs) ----------
   const [environments, setEnvironments] = useState<Environment[]>([])
-  const [dimensions, setDimensions] = useState<Dimension[]>([])
   const [onlyLesserKnown, setOnlyLesserKnown] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
-  const filterCount = environments.length + dimensions.length + (onlyLesserKnown ? 1 : 0)
+  const filterCount = environments.length + (onlyLesserKnown ? 1 : 0)
   const resetFilters = () => {
     setEnvironments([])
-    setDimensions([])
     setOnlyLesserKnown(false)
   }
   const filtered = useMemo(
     () =>
       sites.filter((s) => {
         if (environments.length && !environments.some((e) => s.environments.includes(e))) return false
-        if (dimensions.length && !dimensions.every((d) => s.dimensions[d] === 'alta' || s.dimensions[d] === 'media'))
-          return false
         if (onlyLesserKnown && s.wellKnown) return false
         return true
       }),
-    [sites, environments, dimensions, onlyLesserKnown],
+    [sites, environments, onlyLesserKnown],
   )
 
   // ---------- Earth layers ----------
@@ -159,7 +158,27 @@ export default function App() {
   const [showLayers, setShowLayers] = useState(false)
 
   // ---------- Focus: the selected place of the current globe view ----------
-  const discoveries = useMemo(() => (data ? discoveriesFor(data, discoverBody) : []), [data, discoverBody])
+  // Ranked places of the worldwide search: the chosen list, then the country filter.
+  const fullList = useMemo(
+    () => (data ? discoveriesFor(data, discoverBody, Infinity, discoverList) : []),
+    [data, discoverBody, discoverList],
+  )
+  const countries = useMemo(() => {
+    const count = new Map<string, number>()
+    for (const d of fullList) {
+      const c = placeCountry(d.site, lang)
+      if (c) count.set(c, (count.get(c) ?? 0) + 1)
+    }
+    return [...count].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], lang))
+  }, [fullList, lang])
+  const discoverItems = useMemo<DiscoverItem[]>(
+    () =>
+      fullList
+        .map((d, i) => ({ d, rank: i + 1 }))
+        .filter(({ d }) => !discoverCountry || placeCountry(d.site, lang) === discoverCountry),
+    [fullList, discoverCountry, lang],
+  )
+  const discoveries = useMemo(() => discoverItems.map((x) => x.d), [discoverItems])
   const discovery = useMemo<Discovery | null>(() => {
     if (!data || !discoveryKey) return null
     const site = data.sites.find((s) => s.id === discoveryKey.siteId)
@@ -167,7 +186,7 @@ export default function App() {
     const score = site?.results.find((r) => r.target === discoveryKey.targetId)?.score
     return site && target ? { site, target, score: score ?? 0 } : null
   }, [data, discoveryKey])
-  const discoverySite = useMemo(() => (discovery ? discoveryAsSite(discovery) : null), [discovery])
+  const discoverySite = useMemo(() => (discovery ? discoveryAsSite(discovery, lang) : null), [discovery, lang])
   const selectedSite = useMemo(() => sites.find((s) => s.id === selectedId) ?? null, [sites, selectedId])
 
   const focusKind: GlobeView = view === 'discover' || view === 'sites' ? view : globeView
@@ -198,9 +217,12 @@ export default function App() {
   }
   const selectDiscovery = (d: Discovery, stay = false) => {
     setDiscoveryKey({ siteId: d.site.id, targetId: d.target.id })
-    setDiscoverBody(d.target.body)
+    if (d.target.body !== discoverBody) {
+      setDiscoverBody(d.target.body)
+      setDiscoverCountry('')
+    }
     setPlace(null)
-    keepBodyFor(discoveryAsSite(d))
+    keepBodyFor(discoveryAsSite(d, lang))
     setMapTarget({ id: d.target.id, name: d.target.name, body: d.target.body })
     setGlobeView('discover')
     if (!stay) setView('discover')
@@ -247,7 +269,7 @@ export default function App() {
     if (focusKind === 'discover') {
       if (shownBody === 'tierra') {
         for (const d of discoveries)
-          list.push({ id: `disc:${d.site.id}:${d.target.id}`, lat: d.site.lat, lng: d.site.lng, color: SIMILARITY_COLOR, label: d.site.name })
+          list.push({ id: `disc:${d.site.id}:${d.target.id}`, lat: d.site.lat, lng: d.site.lng, color: SIMILARITY_COLOR, label: placeName(d.site, lang) })
       } else if (data) {
         for (const tg of data.targets)
           if (tg.body === shownBody && tg.lat != null && tg.lng != null)
@@ -275,7 +297,7 @@ export default function App() {
     }
     if (place && shownBody === 'tierra') list.push({ id: 'place', lat: place.lat, lng: place.lng, color: '#ffffff', label: place.name })
     return { markers: list, highlightId: highlight }
-  }, [focusKind, shownBody, discoveries, data, filtered, focus, place])
+  }, [focusKind, shownBody, discoveries, data, filtered, focus, place, lang])
 
   const cameraFocus = useMemo(() => {
     if (shownBody === 'tierra' && place) return place
@@ -307,6 +329,8 @@ export default function App() {
     resetFilters()
     if (step.discovery && data) {
       const d = discoveriesFor(data, step.discovery, 1)[0]
+      setDiscoverList('general')
+      setDiscoverCountry('')
       if (d) selectDiscovery(d, true)
     } else if (step.siteId) {
       const s = sites.find((x) => x.id === step.siteId)
@@ -351,11 +375,11 @@ export default function App() {
       })
     if (data)
       for (const body of ['marte', 'luna'] as Target[])
-        for (const d of discoveriesFor(data, body, 20))
+        for (const d of discoveriesFor(data, body))
           items.push({
             key: `${body}-${d.site.id}`,
-            label: d.site.name,
-            sub: `${t('search.discovery', { body: BODY_NAMES[lang][body] })} · ${d.target.name}`,
+            label: placeName(d.site, lang),
+            sub: `${[placeCountry(d.site, lang), d.site.grid ? formatCoords(d.site.lat, d.site.lng, lang) : ''].filter(Boolean).join(' · ')} · ${t('search.discovery', { body: BODY_NAMES[lang][body] })} · ${d.target.name}`,
             color: SIMILARITY_COLOR,
             pick: () => selectDiscovery(d),
           })
@@ -364,8 +388,8 @@ export default function App() {
 
   // Most similar first, so the most compatible place is on top (no score yet: last).
   const scores = useMemo(
-    () => new Map(data ? sites.map((s) => [s.id, bestScore(data, s)] as const) : []),
-    [data, sites],
+    () => new Map(data ? sites.map((s) => [s.id, bestScore(data, s, sortList)] as const) : []),
+    [data, sites, sortList],
   )
   const byScore = (list: AnalogSite[]) =>
     [...list].sort((a, b) => (scores.get(b.id)?.score ?? -1) - (scores.get(a.id)?.score ?? -1))
@@ -481,33 +505,25 @@ export default function App() {
                 <>
                   <p className="eyebrow">{t('nav.discover')}</p>
                   <h2 className="panel-heading">{t('side.discoveries')}</h2>
-                  <div className="seg" role="group" aria-label={t('disc.for')}>
-                    <span>{t('disc.for')}</span>
-                    {(['luna', 'marte'] as Target[]).map((b) => (
-                      <button key={b} className={discoverBody === b ? 'active' : ''} aria-pressed={discoverBody === b} onClick={() => setDiscoverBody(b)}>
-                        <span className="dot" style={{ background: BODY_COLORS[b] }} />
-                        {BODY_NAMES[lang][b]}
-                      </button>
-                    ))}
-                  </div>
-                  <ol className="disc-list">
-                    {discoveries.map((d, i) => (
-                      <li key={d.site.region}>
-                        <button onClick={() => selectDiscovery(d)} title={d.site.note ?? undefined}>
-                          <span className="disc-rank">{i + 1}</span>
-                          <span className="disc-body">
-                            <strong>{d.site.name}</strong>
-                            <small>≈ {d.target.name}</small>
-                            <span className="mini-track">
-                              <span className="mini-fill" style={{ width: `${d.score * 100}%`, background: SIMILARITY_COLOR }} />
-                            </span>
-                          </span>
-                          <span className="disc-score">{Math.round(d.score * 100)}</span>
-                        </button>
-                      </li>
-                    ))}
-                    {!data && <li className="hint">{t('cmp.loading')}</li>}
-                  </ol>
+                  {data ? (
+                    <DiscoverList
+                      data={data}
+                      body={discoverBody}
+                      onBody={(b) => {
+                        setDiscoverBody(b)
+                        setDiscoverCountry('')
+                      }}
+                      list={discoverList}
+                      onList={setDiscoverList}
+                      country={discoverCountry}
+                      onCountry={setDiscoverCountry}
+                      items={discoverItems}
+                      countries={countries}
+                      onPick={(d) => selectDiscovery(d)}
+                    />
+                  ) : (
+                    <p className="hint">{t('cmp.loading')}</p>
+                  )}
                   {data && (
                     <p className="muted small">
                       {t('disc.stats', {
@@ -546,14 +562,6 @@ export default function App() {
                           </button>
                         ))}
                       </div>
-                      <h3 className="panel-sub">{t('filters.dimension')}</h3>
-                      <div className="chips">
-                        {(Object.keys(DIMENSION_LABELS) as Dimension[]).map((d) => (
-                          <button key={d} className={`chip ${dimensions.includes(d) ? 'active' : ''}`} onClick={() => setDimensions((p) => toggle(p, d))}>
-                            {DIMENSION_NAMES[lang][d]}
-                          </button>
-                        ))}
-                      </div>
                       <label className="checkbox">
                         <input type="checkbox" checked={onlyLesserKnown} onChange={(e) => setOnlyLesserKnown(e.target.checked)} />
                         {t('filters.lesserKnown')}
@@ -565,7 +573,28 @@ export default function App() {
                       )}
                     </div>
                   )}
-                  {data && <p className="hint">{t('side.sortedHint')}</p>}
+                  {data && (
+                    <>
+                      <div className="chips list-chips" role="group" aria-label={t('side.sortBy')}>
+                        <span className="muted small">{t('side.sortBy')}</span>
+                        {(['general', ...(data.dimensions ?? []).map((d) => d.id)] as RankingId[]).map((id) => (
+                          <button
+                            key={id}
+                            className={`chip ${sortList === id ? 'active' : ''}`}
+                            aria-pressed={sortList === id}
+                            onClick={() => setSortList(id)}
+                          >
+                            {id === 'general' ? t('disc.list.general') : data.dimensions?.find((d) => d.id === id)?.label[lang]}
+                          </button>
+                        ))}
+                      </div>
+                      <p className="hint">
+                        {sortList === 'general'
+                          ? t('side.sortedHint')
+                          : t('side.sortedHintDim', { dim: data.dimensions?.find((d) => d.id === sortList)?.label[lang].toLowerCase() ?? '' })}
+                      </p>
+                    </>
+                  )}
                   <SiteList items={mainSites} scores={scores} onPick={pickSite} />
                   {filtered.length === 0 && <p className="hint">{t('results.empty')}</p>}
                   {caseStudies.length > 0 && (
@@ -711,7 +740,7 @@ export default function App() {
                               {Math.round(d.score * 100)}
                             </span>
                             <span>
-                              <strong>{d.site.name}</strong>
+                              <strong>{placeName(d.site, lang)}</strong>
                               <small>
                                 <span className="dot" style={{ background: BODY_COLORS[b] }} /> {d.target.name}
                               </small>

@@ -1,0 +1,38 @@
+{
+ "01": {
+  "file": "images/01_mars_jezero_perseverance.tif",
+  "width": 9238,
+  "height": 2451,
+  "size_mb": 49.37
+ },
+ "02": {
+  "file": "images/02_mars_gale_mount_sharp.jpg",
+  "width": 14576,
+  "height": 2018,
+  "size_mb": 2.08
+ },
+ "03": {
+  "file": "images/03_mars_vastitas_phoenix.tif",
+  "width": 640,
+  "height": 360,
+  "size_mb": 0.69
+ },
+ "04": {
+  "file": "images/04_moon_shackleton_rim.png",
+  "width": 3750,
+  "height": 3750,
+  "size_mb": 0.47
+ },
+ "05": {
+  "file": "images/05_moon_de_gerlache_ridge.png",
+  "width": 1100,
+  "height": 1100,
+  "size_mb": 0.6
+ },
+ "06": {
+  "file": "images/06_moon_mons_mouton_im2.jpg",
+  "width": 15500,
+  "height": 5000,
+  "size_mb": 12.28
+ }
+}

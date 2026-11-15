@@ -1,8 +1,8 @@
 # What each file in data/ is
 
 ## The database (inputs)
-- `earth_all.csv` – ALL Earth places (one row = one 0.05° cell, ~5.5 km), with the 9 variables. Column `known` = yes for famous analogs (controls). **Main Earth file.**
-- `regions/<name>.csv` – the same, one file per region. `earth_all.csv` is made from these.
+- `earth_all.csv.gz` – ALL Earth places (compressed CSV; pandas reads it directly) (one row = one 0.05° cell, ~5.5 km), with the 9 variables. Column `known` = yes for famous analogs (controls). **Main Earth file.**
+- `regions/<name>.csv` – the same, one file per region. `earth_all.csv.gz` is made from these.
 - `regions_catalog.csv` – list of regions (box, elevation source, known yes/no, why). Add a row and run `python src/build_database.py`.
 - `targets.csv` – all Moon and Mars sites together. **Main target file.**
 - `targets_moon.csv`, `targets_mars.csv` – the same, split by body (built by `build_moon_targets.py` / `build_mars_targets.py`).
