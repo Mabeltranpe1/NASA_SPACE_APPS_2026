@@ -32,9 +32,19 @@ Other data sources (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, etc
 ## 1. The result in short
 
 - **Earth database:** 691,035 places (cells of 0.05° ≈ 5.5 km) in **727 regions** of the world's drylands, polar deserts and high plateaus (`data/earth_all.csv.gz`). 133 regions are famous analogs (Atacama, Devon Island, Dry Valleys, Iceland…); they are kept as **controls** and left out of the rankings.
-- **Targets:** 6 Moon south pole sites (Shackleton rim, de Gerlache rim, Haworth rim, Faustini rim, Mons Mouton summit, and the shadowed Shackleton floor as a contrast site) and 9 Mars sites (the landing sites of Perseverance, Curiosity, InSight, Opportunity, Spirit, Viking 1 and 2, Phoenix, plus Arcadia Planitia, a candidate for human missions) in `data/targets.csv`.
+- **Targets:** 22 Moon south pole sites and 9 Mars sites in `data/targets.csv`. Moon: the **9 regions NASA kept in October 2024 as Artemis III candidate landing regions** (Peak near Cabeus B, Haworth, Malapert Massif, Mons Mouton Plateau, Mons Mouton, Nobile Rim 1, Nobile Rim 2, de Gerlache Rim 2, Slater Plain), the **7 regions of the first 2022 list that were dropped** (Peak near Shackleton, Connecting Ridge, Connecting Ridge Extension, de Gerlache Rim 1, de Gerlache-Kocher Massif, Faustini Rim A, Amundsen Rim), and 6 crater-scale sites (Shackleton, de Gerlache, Haworth and Faustini rims, Mons Mouton summit, and the shadowed Shackleton floor as a contrast site). Why each site matters and where it comes from: `data/moon_sites_sources.csv` and section 1.1. Mars: 9 sites (the landing sites of Perseverance, Curiosity, InSight, Opportunity, Spirit, Viking 1 and 2, Phoenix, plus Arcadia Planitia, a candidate for human missions).
 - **Every place is described by the same 9 numbers** (section 2), measured the same way on the three bodies.
 - **Outputs:** for every Moon/Mars site its best Earth analogs in 5 different parts of the world, a top 100 for the Moon and a top 100 for Mars (`outputs/results/top200_analogos.csv/.json`), the best months for a field campaign, side by side relief maps and photos (`maps/`), and one JSON file for the web app (`web/public/data/analogos.json`).
+
+
+### 1.1 Why the Moon sites are all near the south pole
+
+NASA plans the first Artemis landings and the Artemis Base Camp at the lunar south pole: crater rims and peaks there get sunlight for most of the year (solar power, milder temperatures), and the permanently shadowed craters next to them hold water ice. China and Russia (ILRS, Chang'e-7/8) and ESA also target the south pole, around Shackleton. So the south pole is where permanent bases are planned, not a bias of this project.
+
+- **Artemis regions** (each about 15 × 15 km). NASA names the regions ([2024 update](https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/)) but publishes no table of coordinates. We take the 130 candidate landing sites inside the regions from Wueller et al. 2026 (JGR Planets, doi:10.1029/2025JE009434; data on [Zenodo](https://zenodo.org/records/17084058), CC-BY-4.0). Each region becomes a disk: centre = mean of its landing sites, radius = farthest landing site + 2 km (their exploration area). The centre latitudes agree within ~0.2° with the "centerpoint latitudes" NASA lists from Lunar QuickMap (NTRS 20250007692). `python src/artemis_regions.py` recomputes them.
+- **Leibnitz Beta Plateau** (2022 list) is the old name of Mons Mouton, so it is the same place as Mons Mouton Plateau and is not repeated.
+- Every feature is measured exactly like the other Moon sites (LOLA 80 m terrain at 200 m pixels, Diviner PRP temperature, LOLA albedo, rock type from `src/composition.py`). All regions are feldspathic highlands; Haworth and Faustini Rim A, closer to the South Pole–Aitken basin, get a slightly more pyroxene-rich rock value.
+- Not added yet (need new downloads): a north pole site (Peary crater rim, LOLA/Diviner north files, ~0.9 GB) and lava tube skylights (Marius Hills, Mare Tranquillitatis pit), which need global LOLA and Diviner maps.
 
 ---
 
@@ -94,7 +104,7 @@ Important details that make the comparison fair:
 6. **Explanation per variable.** For every feature `sim_<feature> = exp(–|dᵢ|)` (0–1), plus `best_match` (where the analogy is strongest) and `worst_match` (where it **breaks**). This is how we show *why* a place got its score and *where the analogy stops*.
 7. **Missing data.** If a target has no value for a feature, that feature is not used for that target. An Earth cell must have data for **all** the features the target uses (`--min-coverage 1.0`); otherwise a cell could win only because its bad feature was skipped.
 8. **Famous analogs left out.** Earth places in regions with `known = yes` in `data/regions_catalog.csv` are removed before ranking (the challenge asks for less-studied places). `--include-known` puts them back, for example to use them as controls.
-9. **Overall ranking.** `overall_ranking()` averages over all sites of one body: `mean_score`, mean `sim_*`, and `conditions_met` = how many features have a mean similarity ≥ 0.5 (for example "5 of 8"). Places that meet more conditions come first. The shadowed Shackleton floor is left out of the Moon average (it is a contrast site, not a base site).
+9. **Overall ranking.** `overall_ranking()` averages over all sites of one body: `mean_score`, mean `sim_*`, and `conditions_met` = how many features have a mean similarity ≥ 0.5 (for example "5 of 8"). Places that meet more conditions come first. The shadowed Shackleton floor is left out of the Moon average (it is a contrast site, not a base site). With 21 Moon sites in the average, 16 of them Artemis regions, the Moon ranking mostly reflects the Artemis landing regions.
 10. **Sensitivity check (optional).** `--sensitivity 200` repeats the ranking 200 times with every weight multiplied by a random factor between 0.5 and 1.5 (`--spread 0.5`) and reports `top_share`: the share of runs in which the place stays in the top N. 1.0 = robust analog, not a lucky choice of weights.
 11. **Variety in the results.** The best 20 cells of a site are often all in the same desert. `make_results.py` therefore also keeps the best place of each region and picks **5 regions at least 800 km apart** for every site (`MIN_SEPARATION_KM`). The top 100 lists keep places **at least 300 km apart**.
 
@@ -129,7 +139,7 @@ Always run from the project folder, with the environment active.
 | 1b | `python src/download_earth.py --dem cop90 --region W S E N --download` | Copernicus DEM on AWS (no login) | `data/raw/COP90/` |
 | 2 | `python src/build_earth.py --dem cop90 --name NAME --region W S E N --out data/regions/NAME.csv` | `data/raw/` | one region file |
 | 3 | `python src/build_database.py` | `data/regions_catalog.csv` | `data/regions/*.csv` (missing ones) and **`data/earth_all.csv.gz`** |
-| 4 | `python src/build_moon_targets.py` | LOLA + Diviner (PDS, downloaded once to `data/raw/moon/`) | `data/targets_moon.csv` |
+| 4 | `python src/build_moon_targets.py` | LOLA + Diviner (PDS, downloaded once to `data/raw/moon/`) | `data/targets_moon.csv` (22 sites; Artemis region centres from `src/artemis_regions.py`) |
 | 5 | `python src/build_mars_targets.py` | HRSC+MOLA DEM (read over the internet), TES albedo, Mars Climate Database | `data/targets_mars.csv` |
 | 6 | `python src/composition.py --write` | `data/earth_all.csv.gz` (ASTER anchors) | `em_contrast` in `data/targets*.csv`, `data/composition_targets.csv` |
 | 7 | `python src/make_results.py` | `data/earth_all.csv.gz`, `data/targets.csv` | `outputs/results/results_*.csv`, `seasons_*.csv` (calls `src/seasons.py`) |
@@ -185,7 +195,9 @@ The download script covers NASADEM, MOD11C3, MCD43C3, GPM IMERG and Copernicus. 
 | LRO Diviner polar resource product (PRP) south | yearly mean and max temperature (~500 m) | https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/ |
 | Diviner Christiansen feature (literature: Greenhagen et al. 2010) | rock type (`em_contrast`) | [docs/COMPOSICION.md](docs/COMPOSICION.md) |
 | LROC WAC south pole mosaic (100 m) | grey image of each site (`maps/*_B_moon_photo.png`) | https://pds.lroc.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/ |
-| USGS Gazetteer of Planetary Nomenclature | site centres and crater diameters | https://planetarynames.wr.usgs.gov/ |
+| USGS Gazetteer of Planetary Nomenclature | crater-scale site centres and diameters | https://planetarynames.wr.usgs.gov/ |
+| NASA Artemis III candidate landing regions (2022 list of 13, 2024 list of 9) | which Moon sites to use | https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/ |
+| Wueller et al. 2026, candidate landing sites in the Artemis regions (`LandingSites.shp`) | centre and size of each Artemis region | https://zenodo.org/records/17084058 (to `data/raw/moon/artemis_sites/`) |
 | LROC NAC oblique image, Apollo 12/15/16/17 Hasselblad photos | surface photos in the web app | https://www.lroc.asu.edu/ and https://images.nasa.gov/ |
 
 ### Mars

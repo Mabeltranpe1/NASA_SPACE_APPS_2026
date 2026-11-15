@@ -55,9 +55,25 @@ def main():
     earth, targets = compare.load_inputs("data/earth_all.csv.gz", "data/targets.csv")
     earth = earth[earth["known"] != "yes"].reset_index(drop=True)
     print(f"Comparing {len(earth):,} little-known Earth places with {len(targets)} Moon/Mars sites ...")
-    results = compare.compare_all(earth, targets, weights=WEIGHTS)
+    # One target at a time: the full table (every site x every Earth place) no longer
+    # fits in memory with 20+ Moon sites. The tolerance scale does not depend on the
+    # other targets, so the scores are exactly the same as comparing all at once.
+    keys = [c for c in ("region", "place_hint", "lat", "lon") if c in earth.columns]
+    sims = [f"sim_{f}" for f in compare.FEATURES]
+    pairs, best, slim = [], [], []
+    for i in range(len(targets)):
+        res = compare.compare_all(earth, targets.iloc[[i]], weights=WEIGHTS)
+        pairs.append(res[res["rank"] <= 20])
+        best.append(res.drop_duplicates(["target", "region"]))   # already best first
+        part = res[["target", "body"] + keys + ["score"] + sims].copy()
+        slim.append(part)
+        del res
+    slim = pd.concat(slim, ignore_index=True)
+    for col in ("target", "body", "region", "place_hint"):
+        if col in slim.columns:
+            slim[col] = slim[col].astype("category")
 
-    pairs = results[results["rank"] <= 20].drop(
+    pairs = pd.concat(pairs, ignore_index=True).drop(
         columns=["water_frac", "known", "sim_elev_m",
                  "target_elev_m"], errors="ignore")
     pairs.round(4).to_csv("outputs/results/results_pairs_top20.csv", index=False)
@@ -68,14 +84,18 @@ def main():
     # With the worldwide grid many regions are neighbours (2 x 2 degree areas), so we
     # also ask the 5 regions to be at least MIN_SEPARATION_KM apart: 5 DIFFERENT parts
     # of the world instead of 5 squares of the same desert.
-    best = results.sort_values(["target", "rank"]).drop_duplicates(["target", "region"])
+    best = pd.concat(best, ignore_index=True).sort_values(["target", "rank"])
     by_region = pd.concat([spread_out(g, 5, MIN_SEPARATION_KM) for _, g in best.groupby("target", sort=False)])
     by_region = by_region.drop(
         columns=["water_frac", "known", "sim_elev_m", "target_elev_m"], errors="ignore")
     by_region.round(4).to_csv("outputs/results/results_per_target_top_regions.csv", index=False)
 
     for body in ("Mars", "Moon"):
-        overall = compare.overall_ranking(results[results["body"] == body],
+        part = slim[slim["body"] == body].copy()
+        for col in ("target", "region", "place_hint"):
+            if col in part.columns:
+                part[col] = part[col].astype(str)
+        overall = compare.overall_ranking(part,
                                           exclude=LEAVE_OUT_OF_OVERALL.get(body, []))
         overall.drop(columns="n_met").head(1000).round(4).to_csv(
             f"outputs/results/results_{body.lower()}_overall.csv", index=False)

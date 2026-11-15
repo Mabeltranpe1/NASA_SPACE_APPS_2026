@@ -1,5 +1,6 @@
 """
-build_moon_targets.py - Measure the features of Moon south pole sites.
+build_moon_targets.py - Measure the features of Moon south pole sites
+(crater rims and all NASA Artemis III candidate landing regions).
 
 It downloads (once) three NASA files from the Planetary Data System (PDS):
     LOLA  ldem_80s_80m   elevation of the south pole, 80 m pixels   (231 MB)
@@ -70,6 +71,34 @@ SITES = [
     ("Faustini rim",             -87.18,  84.31, "rim",  42.48),
     ("Mons Mouton summit",       -84.60,  31.00, "disk",  5.0),
     ("Shackleton floor (shadow)", -89.67, 129.78, "disk",  3.0),
+
+    # --- NASA Artemis III candidate landing regions -----------------------
+    # The 9 regions NASA kept in October 2024 ("Artemis III" in the name) and
+    # the 7 regions of the first 2022 list that were dropped ("Artemis 2022").
+    # Centre = mean of the candidate landing sites inside the region, from
+    # Wueller et al. 2026 (JGR Planets, doi:10.1029/2025JE009434), data on
+    # Zenodo doi:10.5281/zenodo.17084058 (LandingSites.shp). Radius = farthest
+    # landing site from the centre + 2 km (their exploration area), so the
+    # disk covers every place where astronauts would land and walk.
+    # The centre latitudes agree within ~0.2 deg with the NASA "centerpoint
+    # latitudes" (Lunar QuickMap, NTRS 20250007692). Made with
+    # src/artemis_regions.py. Sources and reasons: data/moon_sites_sources.csv.
+    ("Peak near Cabeus B (Artemis III)",        -83.576,  -69.076, "disk", 11.8),
+    ("Haworth (Artemis III)",                   -86.799,  -22.898, "disk", 18.4),
+    ("Malapert Massif (Artemis III)",           -86.047,    0.149, "disk", 10.1),
+    ("Mons Mouton Plateau (Artemis III)",       -84.534,   30.656, "disk", 33.8),
+    ("Mons Mouton (Artemis III)",               -85.399,   31.180, "disk", 13.4),
+    ("Nobile Rim 1 (Artemis III)",              -85.188,   37.240, "disk", 12.9),
+    ("Nobile Rim 2 (Artemis III)",              -83.888,   58.403, "disk", 11.3),
+    ("de Gerlache Rim 2 (Artemis III)",         -88.174,  -68.787, "disk", 11.7),
+    ("Slater Plain (Artemis III)",              -87.207,  126.606, "disk", 12.3),
+    ("Peak near Shackleton (Artemis 2022)",     -88.887,  127.425, "disk",  8.2),
+    ("Connecting Ridge (Artemis 2022)",         -89.489, -135.390, "disk",  9.0),
+    ("Connecting Ridge Extension (Artemis 2022)", -88.941, -106.097, "disk", 13.4),
+    ("de Gerlache Rim 1 (Artemis 2022)",        -88.610,  -65.426, "disk", 13.7),
+    ("de Gerlache-Kocher Massif (Artemis 2022)", -85.704, -115.359, "disk", 11.0),
+    ("Faustini Rim A (Artemis 2022)",           -87.932,   90.946, "disk", 13.5),
+    ("Amundsen Rim (Artemis 2022)",             -84.250,   68.692, "disk", 10.4),
 ]
 RIM_INNER, RIM_OUTER = 0.9, 1.3   # ring from 0.9 to 1.3 times the crater radius
 

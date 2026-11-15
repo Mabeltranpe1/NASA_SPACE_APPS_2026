@@ -8,11 +8,12 @@
 - `regions_catalog.csv` – one row per region: `name, west, south, east, north, dem (nasadem | cop90), known (yes | no), why`. Add a row and run `python src/build_database.py` to add a region.
 
 ## The Moon and Mars sites
-- `targets.csv` – **main target file.** All 6 Moon and 9 Mars sites: `name, body, site_lat, site_lon, area`, the 9 features, `n_dem_pixels, n_temp_points`.
+- `targets.csv` – **main target file.** All 22 Moon and 9 Mars sites: `name, body, site_lat, site_lon, area`, the 9 features, `n_dem_pixels, n_temp_points`.
 - `targets_moon.csv`, `targets_mars.csv` – the same rows split by body, written by `src/build_moon_targets.py` / `src/build_mars_targets.py`.
+- `moon_sites_sources.csv` – one row per Moon site: kind (crater rim, landing region…), program (NASA Artemis III 2024 list, 2022 list only, or crater-scale site), centre, area, **why it matters** and **source**.
 - `composition_targets.csv` – rock type of every site: lithology, Christiansen feature (CF) and its uncertainty, `em_contrast` and its uncertainty, and the evidence (papers, missions). Written by `python src/composition.py --write`; method in [docs/COMPOSICION.md](../docs/COMPOSICION.md).
 
 ## Other
 - `sample_earth.csv`, `sample_targets.csv` – **FAKE** example data with only 7 features, used by `tests/test_compare.py` and to try the code. Never use their results.
-- `raw/` – downloaded files, not in git (~9 GB): `NASADEM_HGT/`, `COP90/`, `MOD11C3/`, `MCD43C3/`, `MOD13C2/`, `GPM_3IMERGM/`, `MERRA2_FLX/`, `AG5KMMOH/`, `moon/` (LOLA, Diviner), `mars/` (TES albedo, Mars Climate Database). Sources and versions: main README, section 6.
+- `raw/` – downloaded files, not in git (~9 GB): `NASADEM_HGT/`, `COP90/`, `MOD11C3/`, `MCD43C3/`, `MOD13C2/`, `GPM_3IMERGM/`, `MERRA2_FLX/`, `AG5KMMOH/`, `moon/` (LOLA, Diviner; `moon/artemis_sites/` = Wueller et al. 2026 landing sites from Zenodo), `mars/` (TES albedo, Mars Climate Database). Sources and versions: main README, section 6.
 - `processed/` – free space for processed data (not in git).
