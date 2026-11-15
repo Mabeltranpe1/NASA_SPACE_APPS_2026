@@ -93,7 +93,8 @@ web/src/
 ├── components/
 │   ├── PlanetGlobe.tsx      # Visor Cesium genérico (globo, vista de detalle o miniatura; giro lento en reposo)
 │   ├── SiteCard.tsx         # Ficha del lugar (panel izquierdo) y caracterización de Santiago
-│   ├── InsightPanel.tsx     # Panel derecho: miniaturas de terreno con candados e índice de similitud
+│   ├── EarthThumb.tsx       # Miniatura de Sentinel-2 de un lugar (lista de análogos y mejores lugares)
+│   ├── InsightPanel.tsx     # Panel derecho: miniaturas con candados, índice, valores reales y mejores lugares de la Tierra
 │   ├── DetailImage.tsx      # Imagen de detalle: snapshot Landsat/MODIS o vista cercana Luna/Marte
 │   ├── ImageCompareModal.tsx # Ventana emergente: carrusel de la Tierra a la izquierda y del homólogo a la derecha
 │   ├── Carousel.tsx         # Carrusel genérico: flechas, puntos, teclado, deslizamiento, tipo de imagen y crédito
@@ -119,6 +120,7 @@ web/src/
 │   ├── sites.en.ts          # Textos del catálogo en inglés
 │   ├── comparisons.ts       # Tipos del JSON, carga y recálculo del puntaje con pesos
 │   ├── focus.ts             # Descubrimientos por cuerpo y conversión de un descubrimiento en «sitio»; `comparedTarget`/`bestScore` (índice con el que se ordenan los análogos)
+│   ├── format.ts            # Formato de números y coordenadas; escala fija de los gráficos de valores reales
 │   ├── gallery.ts           # Carga de gallery.json e imágenes de cada lugar
 │   └── tour.ts              # Pasos del recorrido guiado (ES/EN)
 ├── App.css                  # Estilos de la app (paneles de vidrio, barra de navegación, versión móvil)

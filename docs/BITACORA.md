@@ -14,6 +14,21 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.4.2 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #17 (valores reales y lugares parecidos en la vista principal) y se publicó `v0.4.2` en `main`.
+
+## 2026-11-15 · Valores reales y lugares parecidos en la vista principal
+**Autor:** @Ssalazarp420
+
+- **Pedido:** (1) indicar en la lista si cada sitio es poco o muy estudiado, solo como texto; (2) llevar el gráfico «Valores reales» del análisis detallado a la vista principal; (3) idea de Marco: ver los otros lugares parecidos con sus coordenadas y una miniatura del mejor, también en la lista de Análogos.
+- **Qué se hizo:**
+  - **Lista de Análogos:** cada fila tiene la miniatura de Sentinel-2 del sitio, con los puntos de la Luna o Marte encima, y el texto «Muy estudiado» o «Poco estudiado». El orden por similitud no cambia.
+  - **Panel derecho:** las barras de similitud por variable se reemplazaron por los **valores reales**. Cada variable muestra el valor de la Tierra y el de la Luna o Marte sobre la misma escala física. Siguen ordenadas de la más parecida a la menos parecida, con las marcas ✓ y ⚠.
+  - **Panel derecho, «Mejores lugares de la Tierra para …»:** los 5 mejores lugares (uno por región) con sus coordenadas y su índice. El primero lleva una miniatura. Al tocar uno, el globo vuela a ese lugar y lo marca.
+- **Código:** el formato de números, la escala del gráfico y las coordenadas están en `web/src/data/format.ts`, compartidos con el análisis detallado. La miniatura de la Tierra es `components/EarthThumb.tsx`.
+
 ## 2026-11-15 · Release v0.4.1 a producción
 **Autor:** @Ssalazarp420
 
