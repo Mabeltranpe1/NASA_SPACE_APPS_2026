@@ -14,6 +14,11 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v0.4.1 a producción
+**Autor:** @Ssalazarp420
+
+- Se fusionó el PR #16 (análogos ordenados de más a menos similar) y se publicó `v0.4.1` en `main`.
+
 ## 2026-11-15 · Análogos ordenados de más a menos similar
 **Autor:** @Ssalazarp420
 
