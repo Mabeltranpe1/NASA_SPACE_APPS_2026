@@ -51,7 +51,7 @@ export interface ComparisonResult {
   stability: number | null
 }
 
-/** Detailed 10 x 10 km characterization (Santiago). Descriptive: not part of the score. */
+/** Detailed 10 x 10 km characterization. Descriptive: not part of the score. */
 export interface Characterization {
   source: string
   window_km: number

@@ -1,17 +1,17 @@
 """
 export_web.py - Turn the comparison results into the JSON files the web app reads.
 
-It does NOT change how similarity is computed: it calls compare.py (Marco's
-comparator, with the weights of make_results.py) and only decides WHAT goes to
+It does NOT change how similarity is computed: it calls the similarity
+comparator (compare.py, with the weights of make_results.py) and only decides WHAT goes to
 the web and in which format. Data contract: docs/DATOS_WEB.md.
 
 Inputs (defaults):
-    data/earth_all.csv.gz     Earth grid, one row per 0.05 deg cell, 727 regions (Marco)
-    data/targets.csv          Moon and Mars sites, with rock composition (Marco)
-    data/regions_catalog.csv  description of each Earth region (Marco)
+    data/earth_all.csv.gz     Earth grid, one row per 0.05 deg cell, 727 regions
+    data/targets.csv          Moon and Mars sites, with rock composition
+    data/regions_catalog.csv  description of each Earth region
     web/src/data/sites.ts     catalog sites shown in the app (their lat/lng)
     data/features/*.csv       detailed characterization of the Colombian
-                              sites at 200 m (Santiago, descriptive only)
+                              sites at 200 m (descriptive only)
 
 Outputs (web/public/data/):
     comparisons.json          catalog sites + best little-known places
@@ -29,7 +29,7 @@ One scoring for everything (catalog, Colombia and discoveries). Rules
        the app shows it as a limit of the analogy instead of letting it
        decide the score.
     3. Discoveries: best cell of each little-known region, then places at
-       least SPREAD_KM apart (Marco's rule in make_top_analogos.py), so one
+       least SPREAD_KM apart (the rule of make_top_analogos.py), so one
        very good area cannot fill the whole list.
     4. Besides the overall score, every result has one score per DIMENSION
        (relief, temperature, surface, aridity), computed with the same
@@ -61,7 +61,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # 1. Settings
 # ---------------------------------------------------------------------------
 
-# Weights: the same as Marco's results (make_results.WEIGHTS): no elevation,
+# Weights: the same as the comparison results (make_results.WEIGHTS): no elevation,
 # rock composition at half weight (it is a calibrated estimate on the Moon/Mars).
 WEB_WEIGHTS = dict(WEIGHTS)
 
@@ -130,8 +130,8 @@ TARGET_IDS = {
 
 BODY_IDS = {"moon": "luna", "luna": "luna", "mars": "marte", "marte": "marte"}
 
-# Santiago's region names -> catalog ids in web/src/data/sites.ts.
-SANTIAGO_SITES = {
+# Region names of the Colombian study windows -> catalog ids in web/src/data/sites.ts.
+COLOMBIA_SITES = {
     "Tatacoa": "tatacoa",
     "La_Guajira": "la-guajira",
     "Nevado_del_Ruiz": "nevado-del-ruiz",
@@ -322,7 +322,7 @@ def stability(earth_scaled, target_scaled, weights, cells, rng):
         score, _ = compare.score_cells(earth_scaled, target_scaled, base * factors)
         score = np.nan_to_num(score, nan=-1.0)
         # The N-th best score of the planet, without sorting all cells
-        # (np.partition; idea from Santiago's integration branch).
+        # (np.partition).
         n = min(STABILITY_TOP, len(score))
         cutoff = np.partition(score, len(score) - n)[len(score) - n]
         inside += (score[cells] >= cutoff) & (score[cells] >= 0)
@@ -330,7 +330,7 @@ def stability(earth_scaled, target_scaled, weights, cells, rng):
 
 
 # ---------------------------------------------------------------------------
-# 5. Santiago's characterization of the Colombian sites
+# 5. Detailed characterization of the Colombian sites
 # ---------------------------------------------------------------------------
 
 def read_csv_if_exists(path):
@@ -338,9 +338,9 @@ def read_csv_if_exists(path):
     return pd.read_csv(path) if path.exists() else None
 
 
-def santiago_characterization(features_dir):
+def colombia_characterization(features_dir):
     """
-    Detailed 10 x 10 km characterization of the Colombian sites (Santiago),
+    Detailed 10 x 10 km characterization of the Colombian sites,
     keyed by catalog id. Descriptive only: it does not enter the score.
     """
     features_dir = Path(features_dir)
@@ -356,8 +356,8 @@ def santiago_characterization(features_dir):
         return hit.iloc[0] if len(hit) else None
 
     out = {}
-    for region, site_id in SANTIAGO_SITES.items():
-        info = {"source": "Santiago (feature/planetary-analysis)", "window_km": 10, "status": "experimental"}
+    for region, site_id in COLOMBIA_SITES.items():
+        info = {"source": "Estudio regional (data/features/)", "window_km": 10, "status": "experimental"}
         t = row(topo, region)
         if t is not None:
             info["topography"] = {
@@ -551,7 +551,7 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
             })
         print(f"  results {tg['id']}")
 
-    characterization = santiago_characterization(features_dir)
+    characterization = colombia_characterization(features_dir)
     sites = []
     for sid, i in site_cells.items():
         row = earth.iloc[i]

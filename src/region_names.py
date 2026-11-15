@@ -3,7 +3,7 @@ region_names.py - Readable names (Spanish and English) for the Earth regions of
 data/regions_catalog.csv, used by src/export_web.py.
 
 Two kinds of regions:
-    named regions   e.g. "egypt_western_desert": a hand-picked area (Marco)
+    named regions   e.g. "egypt_western_desert": a hand-picked area
     grid regions    e.g. "egypt_22n_032e": a 2 x 2 degree tile of the worldwide
                     drylands search; it gets the country name and the app shows
                     its coordinates next to it.
