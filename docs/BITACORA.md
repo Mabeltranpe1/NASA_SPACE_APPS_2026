@@ -14,6 +14,12 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · Release v1.1.1: README para el jurado
+
+- README reescrito como presentación del proyecto (qué hace, método, datos, cómo correrlo), sin nombres de personas ni notas internas.
+- La app ya no muestra nombres de personas: título del panel científico, nota de caracterización, fichas de Colombia (sin el PAI ni datos desactualizados) y Método («Qué incluye el proyecto»).
+- PR #23; publicado como `v1.1.1` en `main`.
+
 ## 2026-11-15 · Release v1.1.0 a producción
 **Autor:** @Ssalazarp420
 

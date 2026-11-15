@@ -19,8 +19,8 @@ def test_catalog_is_read_completely_from_sites_ts():
     ids = [s["id"] for s in sites]
     assert len(ids) == len(set(ids)) >= 12
     assert all(-90 <= s["lat"] <= 90 and -180 <= s["lng"] <= 180 for s in sites)
-    # Every Colombian site of Santiago must exist in the catalog.
-    assert set(export_web.SANTIAGO_SITES.values()) <= set(ids)
+    # Every Colombian study site must exist in the catalog.
+    assert set(export_web.COLOMBIA_SITES.values()) <= set(ids)
 
 
 def test_catalog_reader_fails_loudly_on_unexpected_format(tmp_path):

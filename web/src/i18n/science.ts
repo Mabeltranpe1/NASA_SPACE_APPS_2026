@@ -1,5 +1,5 @@
 const es = {
-  title: 'Investigación científica regional · Santiago',
+  title: 'Investigación científica regional',
   loading: 'Cargando la investigación regional…',
   error: 'No se pudo cargar esta investigación. Puedes volver a abrir el panel para reintentar.',
   support: 'Ventana de estudio propia; conserva sus unidades, geometría y calidad. No sustituye las celdas del índice global.',
@@ -39,7 +39,7 @@ const es = {
 }
 
 const en: Record<keyof typeof es, string> = {
-  title: 'Regional scientific research · Santiago',
+  title: 'Regional scientific research',
   loading: 'Loading regional research…',
   error: 'This research could not be loaded. Close and reopen the panel to retry.',
   support: 'Independent study window retaining its units, geometry and quality. It does not replace global-index cells.',

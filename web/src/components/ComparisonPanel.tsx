@@ -534,7 +534,7 @@ function Dumbbell({
   )
 }
 
-/** Santiago's regional windows that overlap this Moon/Mars target (descriptive, not part of the score). */
+/** Regional study windows that overlap this Moon/Mars target (descriptive, not part of the score). */
 function RelatedScience({ targetName }: { targetName: string }) {
   const { lang } = useLang()
   const refs = studiesForTarget(useScienceIndex(), targetName)

@@ -94,17 +94,17 @@ const TEXT = {
       en: 'Absolute scores are low because no place on Earth is the Moon or Mars: they are for comparing places with each other, not a percentage of likeness.',
     },
   ],
-  teamTitle: { es: 'Equipo', en: 'Team' },
+  teamTitle: { es: 'Qué incluye el proyecto', en: 'What the project includes' },
   team: [
     {
-      es: 'Marco · búsqueda mundial, sitios de Artemis III, comparador (compare.py) y API de análogos',
-      en: 'Marco · worldwide search, Artemis III sites, comparator (compare.py) and analog API',
+      es: 'Búsqueda mundial: 691 035 lugares de la Tierra frente a 31 sitios de la Luna y Marte, con el comparador de similitud y una API abierta',
+      en: 'Worldwide search: 691,035 places on Earth against 31 Moon and Mars sites, with the similarity comparator and an open API',
     },
     {
-      es: 'Santiago · estudios científicos de 18 ventanas (Colombia, Luna y Marte): relieve a 200 m, clima, geología, EMIT, CRISM, Diviner y TES',
-      en: 'Santiago · scientific studies of 18 windows (Colombia, Moon and Mars): 200 m terrain, climate, geology, EMIT, CRISM, Diviner and TES',
+      es: 'Estudios regionales de 18 ventanas (Colombia, Luna y Marte): relieve a 200 m, clima, geología, EMIT, CRISM, Diviner y TES',
+      en: 'Regional studies of 18 windows (Colombia, Moon and Mars): 200 m terrain, climate, geology, EMIT, CRISM, Diviner and TES',
     },
-    { es: 'Plataforma web · globos 3D, visualización y despliegue', en: 'Web platform · 3D globes, visualization and deployment' },
+    { es: 'Plataforma web: globo 3D, visualización y despliegue', en: 'Web platform: 3D globe, visualization and deployment' },
   ],
 } satisfies Record<string, unknown>
 
