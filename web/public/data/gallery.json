@@ -1,7 +1,23 @@
 {
- "generated_at": "2026-11-15T14:58:36+00:00",
+ "generated_at": "2026-11-15T20:17:22+00:00",
  "aliases": {
-  "shackleton-floor": "shackleton"
+  "shackleton-floor": "shackleton",
+  "peak-cabeus-b": "shackleton",
+  "haworth-artemis": "haworth",
+  "malapert": "haworth",
+  "mons-mouton-plateau": "mons-mouton",
+  "mons-mouton-artemis": "mons-mouton",
+  "nobile-rim-1": "shackleton",
+  "nobile-rim-2": "shackleton",
+  "slater-plain": "shackleton",
+  "amundsen-rim": "shackleton",
+  "de-gerlache-rim-1": "de-gerlache",
+  "de-gerlache-rim-2": "de-gerlache",
+  "de-gerlache-kocher": "de-gerlache",
+  "connecting-ridge": "de-gerlache",
+  "connecting-ridge-extension": "de-gerlache",
+  "peak-near-shackleton": "faustini",
+  "faustini-rim-a": "faustini"
  },
  "places": {
   "jezero": [

@@ -1,0 +1,593 @@
+{
+ "sites": [
+  {
+   "id": "shackleton",
+   "name": "Shackleton rim",
+   "body": "Moon",
+   "lat": -89.67,
+   "lon": 129.78,
+   "area": "rim 20.92 km",
+   "values": {
+    "elev_m": 916.3,
+    "slope_deg": 14.87,
+    "roughness": 44.36,
+    "temp_mean_K": 124.89,
+    "temp_range_K": 134.94,
+    "albedo": 0.3758,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "de-gerlache",
+   "name": "de Gerlache rim",
+   "body": "Moon",
+   "lat": -88.48,
+   "lon": -88.34,
+   "area": "rim 32.71 km",
+   "values": {
+    "elev_m": 248.1,
+    "slope_deg": 11.97,
+    "roughness": 35.1,
+    "temp_mean_K": 125.3,
+    "temp_range_K": 127.29,
+    "albedo": 0.3422,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "haworth",
+   "name": "Haworth rim",
+   "body": "Moon",
+   "lat": -87.45,
+   "lon": -5.17,
+   "area": "rim 51.42 km",
+   "values": {
+    "elev_m": -60.0,
+    "slope_deg": 10.54,
+    "roughness": 30.91,
+    "temp_mean_K": 78.11,
+    "temp_range_K": 151.47,
+    "albedo": 0.333,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0167
+   }
+  },
+  {
+   "id": "faustini",
+   "name": "Faustini rim",
+   "body": "Moon",
+   "lat": -87.18,
+   "lon": 84.31,
+   "area": "rim 42.48 km",
+   "values": {
+    "elev_m": 72.1,
+    "slope_deg": 8.3,
+    "roughness": 24.26,
+    "temp_mean_K": 98.8,
+    "temp_range_K": 127.94,
+    "albedo": 0.3579,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0167
+   }
+  },
+  {
+   "id": "mons-mouton",
+   "name": "Mons Mouton summit",
+   "body": "Moon",
+   "lat": -84.6,
+   "lon": 31.0,
+   "area": "disk 5.0 km",
+   "values": {
+    "elev_m": 5139.2,
+    "slope_deg": 5.6,
+    "roughness": 16.35,
+    "temp_mean_K": 113.26,
+    "temp_range_K": 107.82,
+    "albedo": 0.3204,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "shackleton-floor",
+   "name": "Shackleton floor (shadow)",
+   "body": "Moon",
+   "lat": -89.67,
+   "lon": 129.78,
+   "area": "disk 3.0 km",
+   "values": {
+    "elev_m": -2705.4,
+    "slope_deg": 7.93,
+    "roughness": 23.53,
+    "temp_mean_K": 51.26,
+    "temp_range_K": 32.21,
+    "albedo": 0.4176,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "peak-cabeus-b",
+   "name": "Peak near Cabeus B (Artemis III)",
+   "body": "Moon",
+   "lat": -83.576,
+   "lon": -69.076,
+   "area": "disk 11.8 km",
+   "values": {
+    "elev_m": 2597.9,
+    "slope_deg": 17.91,
+    "roughness": 53.43,
+    "temp_mean_K": 149.54,
+    "temp_range_K": 131.35,
+    "albedo": 0.322,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "haworth-artemis",
+   "name": "Haworth (Artemis III)",
+   "body": "Moon",
+   "lat": -86.799,
+   "lon": -22.898,
+   "area": "disk 18.4 km",
+   "values": {
+    "elev_m": 886.3,
+    "slope_deg": 10.53,
+    "roughness": 30.72,
+    "temp_mean_K": 104.46,
+    "temp_range_K": 138.81,
+    "albedo": 0.3323,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0167
+   }
+  },
+  {
+   "id": "malapert",
+   "name": "Malapert Massif (Artemis III)",
+   "body": "Moon",
+   "lat": -86.047,
+   "lon": 0.149,
+   "area": "disk 10.1 km",
+   "values": {
+    "elev_m": 3829.6,
+    "slope_deg": 16.06,
+    "roughness": 47.86,
+    "temp_mean_K": 138.24,
+    "temp_range_K": 129.52,
+    "albedo": 0.3175,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "mons-mouton-plateau",
+   "name": "Mons Mouton Plateau (Artemis III)",
+   "body": "Moon",
+   "lat": -84.534,
+   "lon": 30.656,
+   "area": "disk 33.8 km",
+   "values": {
+    "elev_m": 4767.6,
+    "slope_deg": 10.83,
+    "roughness": 31.91,
+    "temp_mean_K": 133.88,
+    "temp_range_K": 117.54,
+    "albedo": 0.3182,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "mons-mouton-artemis",
+   "name": "Mons Mouton (Artemis III)",
+   "body": "Moon",
+   "lat": -85.399,
+   "lon": 31.18,
+   "area": "disk 13.4 km",
+   "values": {
+    "elev_m": 5293.0,
+    "slope_deg": 12.21,
+    "roughness": 35.97,
+    "temp_mean_K": 117.56,
+    "temp_range_K": 131.28,
+    "albedo": 0.3271,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "nobile-rim-1",
+   "name": "Nobile Rim 1 (Artemis III)",
+   "body": "Moon",
+   "lat": -85.188,
+   "lon": 37.24,
+   "area": "disk 12.9 km",
+   "values": {
+    "elev_m": 5529.9,
+    "slope_deg": 14.0,
+    "roughness": 41.71,
+    "temp_mean_K": 131.59,
+    "temp_range_K": 125.36,
+    "albedo": 0.3203,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "nobile-rim-2",
+   "name": "Nobile Rim 2 (Artemis III)",
+   "body": "Moon",
+   "lat": -83.888,
+   "lon": 58.403,
+   "area": "disk 11.3 km",
+   "values": {
+    "elev_m": 785.6,
+    "slope_deg": 11.13,
+    "roughness": 32.82,
+    "temp_mean_K": 123.32,
+    "temp_range_K": 118.47,
+    "albedo": 0.3135,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "de-gerlache-rim-2",
+   "name": "de Gerlache Rim 2 (Artemis III)",
+   "body": "Moon",
+   "lat": -88.174,
+   "lon": -68.787,
+   "area": "disk 11.7 km",
+   "values": {
+    "elev_m": -211.4,
+    "slope_deg": 11.39,
+    "roughness": 33.33,
+    "temp_mean_K": 125.79,
+    "temp_range_K": 122.52,
+    "albedo": 0.3358,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "slater-plain",
+   "name": "Slater Plain (Artemis III)",
+   "body": "Moon",
+   "lat": -87.207,
+   "lon": 126.606,
+   "area": "disk 12.3 km",
+   "values": {
+    "elev_m": -125.3,
+    "slope_deg": 8.16,
+    "roughness": 23.82,
+    "temp_mean_K": 99.16,
+    "temp_range_K": 120.74,
+    "albedo": 0.3314,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "peak-near-shackleton",
+   "name": "Peak near Shackleton (Artemis 2022)",
+   "body": "Moon",
+   "lat": -88.887,
+   "lon": 127.425,
+   "area": "disk 8.2 km",
+   "values": {
+    "elev_m": 1010.3,
+    "slope_deg": 9.63,
+    "roughness": 28.05,
+    "temp_mean_K": 118.96,
+    "temp_range_K": 114.92,
+    "albedo": 0.3653,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "connecting-ridge",
+   "name": "Connecting Ridge (Artemis 2022)",
+   "body": "Moon",
+   "lat": -89.489,
+   "lon": -135.39,
+   "area": "disk 9.0 km",
+   "values": {
+    "elev_m": 1154.2,
+    "slope_deg": 12.0,
+    "roughness": 35.34,
+    "temp_mean_K": 120.62,
+    "temp_range_K": 126.22,
+    "albedo": 0.38,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "connecting-ridge-extension",
+   "name": "Connecting Ridge Extension (Artemis 2022)",
+   "body": "Moon",
+   "lat": -88.941,
+   "lon": -106.097,
+   "area": "disk 13.4 km",
+   "values": {
+    "elev_m": -126.8,
+    "slope_deg": 13.19,
+    "roughness": 38.8,
+    "temp_mean_K": 111.57,
+    "temp_range_K": 141.76,
+    "albedo": 0.352,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "de-gerlache-rim-1",
+   "name": "de Gerlache Rim 1 (Artemis 2022)",
+   "body": "Moon",
+   "lat": -88.61,
+   "lon": -65.426,
+   "area": "disk 13.7 km",
+   "values": {
+    "elev_m": 216.3,
+    "slope_deg": 13.08,
+    "roughness": 38.37,
+    "temp_mean_K": 117.1,
+    "temp_range_K": 139.5,
+    "albedo": 0.3503,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "de-gerlache-kocher",
+   "name": "de Gerlache-Kocher Massif (Artemis 2022)",
+   "body": "Moon",
+   "lat": -85.704,
+   "lon": -115.359,
+   "area": "disk 11.0 km",
+   "values": {
+    "elev_m": 1963.1,
+    "slope_deg": 14.07,
+    "roughness": 41.5,
+    "temp_mean_K": 121.24,
+    "temp_range_K": 132.32,
+    "albedo": 0.3373,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "faustini-rim-a",
+   "name": "Faustini Rim A (Artemis 2022)",
+   "body": "Moon",
+   "lat": -87.932,
+   "lon": 90.946,
+   "area": "disk 13.5 km",
+   "values": {
+    "elev_m": -559.3,
+    "slope_deg": 9.74,
+    "roughness": 28.53,
+    "temp_mean_K": 83.62,
+    "temp_range_K": 135.83,
+    "albedo": 0.3607,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0167
+   }
+  },
+  {
+   "id": "amundsen-rim",
+   "name": "Amundsen Rim (Artemis 2022)",
+   "body": "Moon",
+   "lat": -84.25,
+   "lon": 68.692,
+   "area": "disk 10.4 km",
+   "values": {
+    "elev_m": -86.4,
+    "slope_deg": 12.13,
+    "roughness": 35.76,
+    "temp_mean_K": 130.53,
+    "temp_range_K": 129.21,
+    "albedo": 0.3284,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  },
+  {
+   "id": "jezero",
+   "name": "Jezero crater (Perseverance)",
+   "body": "Mars",
+   "lat": 18.44,
+   "lon": 77.45,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -2490.1,
+    "slope_deg": 3.37,
+    "roughness": 9.86,
+    "temp_mean_K": 223.74,
+    "temp_range_K": 63.14,
+    "albedo": 0.1744,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0411
+   }
+  },
+  {
+   "id": "gale",
+   "name": "Gale crater (Curiosity)",
+   "body": "Mars",
+   "lat": -4.59,
+   "lon": 137.44,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -4367.5,
+    "slope_deg": 3.52,
+    "roughness": 10.24,
+    "temp_mean_K": 222.48,
+    "temp_range_K": 69.95,
+    "albedo": 0.2365,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0148
+   }
+  },
+  {
+   "id": "elysium",
+   "name": "Elysium Planitia (InSight)",
+   "body": "Mars",
+   "lat": 4.5,
+   "lon": 135.62,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -2620.7,
+    "slope_deg": 0.29,
+    "roughness": 0.87,
+    "temp_mean_K": 222.78,
+    "temp_range_K": 67.02,
+    "albedo": 0.2409,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0017
+   }
+  },
+  {
+   "id": "meridiani",
+   "name": "Meridiani Planum (Opportunity)",
+   "body": "Mars",
+   "lat": -1.95,
+   "lon": -5.53,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -1380.6,
+    "slope_deg": 1.33,
+    "roughness": 3.87,
+    "temp_mean_K": 227.1,
+    "temp_range_K": 71.16,
+    "albedo": 0.1308,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0017
+   }
+  },
+  {
+   "id": "gusev",
+   "name": "Gusev crater (Spirit)",
+   "body": "Mars",
+   "lat": -14.57,
+   "lon": 175.47,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -1958.7,
+    "slope_deg": 2.9,
+    "roughness": 8.41,
+    "temp_mean_K": 216.65,
+    "temp_range_K": 81.1,
+    "albedo": 0.2225,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.028
+   }
+  },
+  {
+   "id": "chryse",
+   "name": "Chryse Planitia (Viking 1)",
+   "body": "Mars",
+   "lat": 22.27,
+   "lon": -47.95,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -3630.0,
+    "slope_deg": 0.42,
+    "roughness": 1.22,
+    "temp_mean_K": 220.47,
+    "temp_range_K": 59.89,
+    "albedo": 0.2176,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": -0.0017
+   }
+  },
+  {
+   "id": "utopia",
+   "name": "Utopia Planitia (Viking 2)",
+   "body": "Mars",
+   "lat": 47.64,
+   "lon": 134.29,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -4510.6,
+    "slope_deg": 2.14,
+    "roughness": 6.25,
+    "temp_mean_K": 195.55,
+    "temp_range_K": 75.96,
+    "albedo": 0.2388,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0377
+   }
+  },
+  {
+   "id": "phoenix",
+   "name": "Vastitas Borealis (Phoenix)",
+   "body": "Mars",
+   "lat": 68.22,
+   "lon": -125.75,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -4120.0,
+    "slope_deg": 0.7,
+    "roughness": 2.02,
+    "temp_mean_K": 178.26,
+    "temp_range_K": 79.97,
+    "albedo": 0.2024,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0377
+   }
+  },
+  {
+   "id": "arcadia",
+   "name": "Arcadia Planitia (human candidate)",
+   "body": "Mars",
+   "lat": 40.0,
+   "lon": -160.0,
+   "area": "disk 10 km",
+   "values": {
+    "elev_m": -3918.4,
+    "slope_deg": 0.33,
+    "roughness": 0.97,
+    "temp_mean_K": 203.24,
+    "temp_range_K": 74.8,
+    "albedo": 0.244,
+    "precip_mm": 0.0,
+    "ndvi": 0.0,
+    "em_contrast": 0.0245
+   }
+  }
+ ]
+}

@@ -100,6 +100,23 @@ TARGET_IDS = {
     "Faustini rim": "faustini",
     "Mons Mouton summit": "mons-mouton",
     "Shackleton floor (shadow)": "shackleton-floor",
+    # Artemis III candidate regions (NASA 2024) and the regions dropped from the 2022 list.
+    "Peak near Cabeus B (Artemis III)": "peak-cabeus-b",
+    "Haworth (Artemis III)": "haworth-artemis",
+    "Malapert Massif (Artemis III)": "malapert",
+    "Mons Mouton Plateau (Artemis III)": "mons-mouton-plateau",
+    "Mons Mouton (Artemis III)": "mons-mouton-artemis",
+    "Nobile Rim 1 (Artemis III)": "nobile-rim-1",
+    "Nobile Rim 2 (Artemis III)": "nobile-rim-2",
+    "de Gerlache Rim 2 (Artemis III)": "de-gerlache-rim-2",
+    "Slater Plain (Artemis III)": "slater-plain",
+    "Peak near Shackleton (Artemis 2022)": "peak-near-shackleton",
+    "Connecting Ridge (Artemis 2022)": "connecting-ridge",
+    "Connecting Ridge Extension (Artemis 2022)": "connecting-ridge-extension",
+    "de Gerlache Rim 1 (Artemis 2022)": "de-gerlache-rim-1",
+    "de Gerlache-Kocher Massif (Artemis 2022)": "de-gerlache-kocher",
+    "Faustini Rim A (Artemis 2022)": "faustini-rim-a",
+    "Amundsen Rim (Artemis 2022)": "amundsen-rim",
     "Jezero crater (Perseverance)": "jezero",
     "Gale crater (Curiosity)": "gale",
     "Elysium Planitia (InSight)": "elysium",
@@ -303,8 +320,12 @@ def stability(earth_scaled, target_scaled, weights, cells, rng):
     for _ in range(STABILITY_RUNS):
         factors = rng.uniform(1 - STABILITY_SPREAD, 1 + STABILITY_SPREAD, size=len(base))
         score, _ = compare.score_cells(earth_scaled, target_scaled, base * factors)
-        rank = global_rank(score)
-        inside += rank[cells] <= STABILITY_TOP
+        score = np.nan_to_num(score, nan=-1.0)
+        # The N-th best score of the planet, without sorting all cells
+        # (np.partition; idea from Santiago's integration branch).
+        n = min(STABILITY_TOP, len(score))
+        cutoff = np.partition(score, len(score) - n)[len(score) - n]
+        inside += (score[cells] >= cutoff) & (score[cells] >= 0)
     return inside / STABILITY_RUNS
 
 
@@ -454,9 +475,12 @@ def build(earth_path, targets_path, regions_path, sites_ts, features_dir, seed=0
         web_body = BODY_IDS.get(body.lower(), body.lower())
 
         def best_of(arrays):
+            """Best target of each cell for one score. Ties (e.g. aridity, the same
+            for every Moon site) go to the target with the higher overall score."""
             stack = np.vstack([np.nan_to_num(a, nan=-1.0) for a in arrays])
-            arg = stack.argmax(axis=0)
-            best = stack.max(axis=0)
+            overall = np.vstack([np.nan_to_num(tg["score"], nan=0.0) for tg in group])
+            arg = (np.round(stack, 3) + 1e-4 * overall).argmax(axis=0)
+            best = stack[arg, np.arange(stack.shape[1])]
             return np.where(best < 0, np.nan, best), np.array([group[k]["pos"] for k in range(len(group))])[arg]
 
         body_lists = {}

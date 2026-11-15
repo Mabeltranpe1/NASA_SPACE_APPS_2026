@@ -8,6 +8,8 @@ import { useLang } from '../i18n/useLang'
 import { BODY_NAMES, ENVIRONMENT_NAMES } from '../i18n/strings'
 import { IconExpand, IconExternal } from './Icons'
 import ImageCompareModal from './ImageCompareModal'
+import ScientificPanel from './ScientificPanel'
+import { studyForSite, useScienceIndex } from '../data/science'
 
 interface Props {
   site: AnalogSite
@@ -118,7 +120,7 @@ export default function SiteCard({ site, discovery = false, onBack, onBody, comp
           <p>{site.limitations}</p>
           <h3 className="panel-sub">{t('detail.missionUse')}</h3>
           <p>{site.missionUse}</p>
-          <SiteCharacterization siteId={site.id} />
+          <RegionalResearch siteId={site.id} />
         </>
       )}
 
@@ -189,4 +191,10 @@ function SiteCharacterization({ siteId }: { siteId: string }) {
       {c.mineralogy && <p className="hint">{t('char.mineralogy', { n: c.mineralogy.emit_granules })}</p>}
     </details>
   )
+}
+
+/** Santiago's full study when it exists (Colombia), else the summary of his characterization. */
+function RegionalResearch({ siteId }: { siteId: string }) {
+  const study = studyForSite(useScienceIndex(), siteId)
+  return study ? <ScientificPanel key={siteId} reference={study} /> : <SiteCharacterization siteId={siteId} />
 }

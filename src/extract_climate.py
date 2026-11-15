@@ -17,8 +17,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = BASE_DIR / "data" / "features"
 RAW_DIR = BASE_DIR / "data" / "raw" / "climate"
 
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-RAW_DIR.mkdir(parents=True, exist_ok=True)
 
 START = "20210101"
 END = "20251231"
@@ -177,73 +175,80 @@ def extract_climate(region, lat, lon):
 # 4. PROCESAMIENTO AUTOMATICO
 # ==================================================
 
-results = []
+def main():
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    results = []
 
-for region, (lat, lon) in LOCATIONS.items():
+    for region, (lat, lon) in LOCATIONS.items():
 
-    print(f"\nProcesando: {region}")
+        print(f"\nProcesando: {region}")
 
-    try:
+        try:
 
-        features = extract_climate(
-            region, lat, lon
+            features = extract_climate(
+                region, lat, lon
+            )
+
+            results.append(features)
+
+            print(
+                "Temperatura del aire:",
+                round(features["air_temperature_mean_c"], 2),
+                "C"
+            )
+
+            print(
+                "Humedad relativa:",
+                round(features["relative_humidity_mean_pct"], 2),
+                "%"
+            )
+
+            print(
+                "Presion atmosferica:",
+                round(features["surface_pressure_mean_kpa"], 2),
+                "kPa"
+            )
+
+            print(
+                "Radiacion solar:",
+                round(features["solar_radiation_daily_mean"], 2),
+                features["solar_radiation_unit"]
+            )
+
+            print("Estado: OK")
+
+        except Exception as error:
+
+            print(f"ERROR: {error}")
+
+        time.sleep(2)
+
+
+    # 5. EXPORTAR DATASET
+    # ==================================================
+
+    if results:
+
+        df = pd.DataFrame(results)
+
+        output = OUTPUT_DIR / "climate_features.csv"
+
+        df.to_csv(
+            output,
+            index=False,
+            float_format="%.5f"
         )
 
-        results.append(features)
+        print("\nDATASET CLIMATICO GENERADO")
+        print("Regiones:", len(df))
+        print("Columnas:", len(df.columns))
+        print("Archivo:", output)
 
-        print(
-            "Temperatura del aire:",
-            round(features["air_temperature_mean_c"], 2),
-            "C"
-        )
+    else:
 
-        print(
-            "Humedad relativa:",
-            round(features["relative_humidity_mean_pct"], 2),
-            "%"
-        )
-
-        print(
-            "Presion atmosferica:",
-            round(features["surface_pressure_mean_kpa"], 2),
-            "kPa"
-        )
-
-        print(
-            "Radiacion solar:",
-            round(features["solar_radiation_daily_mean"], 2),
-            features["solar_radiation_unit"]
-        )
-
-        print("Estado: OK")
-
-    except Exception as error:
-
-        print(f"ERROR: {error}")
-
-    time.sleep(2)
+        print("No se obtuvieron datos climaticos.")
 
 
-# 5. EXPORTAR DATASET
-# ==================================================
-
-if results:
-
-    df = pd.DataFrame(results)
-
-    output = OUTPUT_DIR / "climate_features.csv"
-
-    df.to_csv(
-        output,
-        index=False,
-        float_format="%.5f"
-    )
-
-    print("\nDATASET CLIMATICO GENERADO")
-    print("Regiones:", len(df))
-    print("Columnas:", len(df.columns))
-    print("Archivo:", output)
-
-else:
-
-    print("No se obtuvieron datos climaticos.")
+if __name__ == "__main__":
+    main()

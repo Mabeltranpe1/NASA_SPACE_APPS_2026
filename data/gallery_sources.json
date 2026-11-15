@@ -1,7 +1,23 @@
 {
  "_doc": "Curated image gallery of the app. Every image was chosen by hand after checking its NASA description (place shown, not an artist's rendering). kind: rover | lander | apollo | orbital | visualization (Moon/Mars); field | astronaut | satellite | radar (Earth). Keys: Moon/Mars target ids (homologue ids in web/src/data/sites.ts), Earth catalog site ids, and region:<region> for the discoveries of the global search. Built by src/export_gallery.py. See docs/DATOS_WEB.md.",
  "aliases": {
-  "shackleton-floor": "shackleton"
+  "shackleton-floor": "shackleton",
+  "peak-cabeus-b": "shackleton",
+  "haworth-artemis": "haworth",
+  "malapert": "haworth",
+  "mons-mouton-plateau": "mons-mouton",
+  "mons-mouton-artemis": "mons-mouton",
+  "nobile-rim-1": "shackleton",
+  "nobile-rim-2": "shackleton",
+  "slater-plain": "shackleton",
+  "amundsen-rim": "shackleton",
+  "de-gerlache-rim-1": "de-gerlache",
+  "de-gerlache-rim-2": "de-gerlache",
+  "de-gerlache-kocher": "de-gerlache",
+  "connecting-ridge": "de-gerlache",
+  "connecting-ridge-extension": "de-gerlache",
+  "peak-near-shackleton": "faustini",
+  "faustini-rim-a": "faustini"
  },
  "places": {
   "jezero": [

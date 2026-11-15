@@ -97,12 +97,12 @@ const TEXT = {
   teamTitle: { es: 'Equipo', en: 'Team' },
   team: [
     {
-      es: 'Marco · búsqueda global y comparador (compare.py)',
-      en: 'Marco · global search and comparator (compare.py)',
+      es: 'Marco · búsqueda mundial, sitios de Artemis III, comparador (compare.py) y API de análogos',
+      en: 'Marco · worldwide search, Artemis III sites, comparator (compare.py) and analog API',
     },
     {
-      es: 'Santiago · caracterización detallada de Colombia: relieve a 200 m, clima, Sentinel-2 y EMIT',
-      en: 'Santiago · detailed Colombian characterization: 200 m terrain, climate, Sentinel-2 and EMIT',
+      es: 'Santiago · estudios científicos de 18 ventanas (Colombia, Luna y Marte): relieve a 200 m, clima, geología, EMIT, CRISM, Diviner y TES',
+      en: 'Santiago · scientific studies of 18 windows (Colombia, Moon and Mars): 200 m terrain, climate, geology, EMIT, CRISM, Diviner and TES',
     },
     { es: 'Plataforma web · globos 3D, visualización y despliegue', en: 'Web platform · 3D globes, visualization and deployment' },
   ],
