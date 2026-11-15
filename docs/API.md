@@ -87,7 +87,8 @@ Solo necesita pandas y numpy. `compare.py` ahora importa scikit-learn únicament
 
 - **Apartado «Buscar»** en la barra lateral (`view=finder`). `AnalogFinder` se carga de forma diferida (`React.lazy`): ni el componente ni la base de 7 MB se descargan hasta abrirlo. Un enlace `#buscar?site=...` abre el apartado directamente («Copiar enlace»).
 - **Lógica sin React:** `web/src/comparator/compare.ts` (`loadComparator`, `findAnalogs`, `queryPoint`, `toGeoJSON`, `toKML`, `toWaypoints`).
-- **Pendiente:** pintar los resultados en el globo 3D (hoy usa un mapa plano de GIBS) y mover sus textos a `i18n/strings.ts`.
+- **Globo 3D:** cada resultado tiene «Ver en el globo 3D», que abre Descubrir con el globo de la Tierra sobre ese lugar. El mapa plano de GIBS del apartado se mantiene como vista general de los 10 resultados.
+- Sus textos viven en el propio componente (`TEXT`, en español e inglés) y no en `i18n/strings.ts`; funcionan igual con el selector ES/EN.
 - **Peso del despliegue:** ~9 MB (7 de la base + 2 de la API estática).
 
 ## Regenerar

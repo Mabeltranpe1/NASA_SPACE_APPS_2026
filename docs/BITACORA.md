@@ -14,6 +14,18 @@ Formato sugerido:
 
 ---
 
+## 2026-11-15 · GeoAnalog: nombre de la app y cierre del MVP
+**Autor:** @Ssalazarp420
+
+- **Nombre:** la app se llama **GeoAnalog** (propuesta de Santiago). Cambia el título de la pestaña, el encabezado, la bienvenida, el README y los títulos de la documentación. Los recursos de Azure no cambian de nombre (renombrarlos con Terraform los recrearía y cambiaría la URL).
+- **Pendientes resueltos (solo trabajo nuestro):**
+  - **Buscar → globo 3D:** cada resultado del buscador tiene «Ver en el globo 3D», que abre Descubrir con el globo sobre ese lugar y lo marca.
+  - Los botones «Buscar análogos» y «Consultar punto» usan el estilo principal de la app (antes usaban una clase de la versión vieja y se veían grises).
+  - **Catálogo de regiones:** se queda el de Marco, que es el que generó la base; queda documentado en DATOS_WEB.
+  - Se quitó `web/tests/scientific-integration.spec.ts` de Santiago: probaba partes de su rama que no se integraron (ranking global, su contrato de `comparisons.json`) y necesitaba Playwright como dependencia y una configuración que no están en el proyecto. Sus 16 pruebas de Python, que cubren los datos científicos, siguen.
+  - Se borraron estilos que ya no se usaban (`.dims`, `.level`, `.tour-button`).
+- **Ramas:** todo queda en `main` (v1.0.0). Las ramas de Marco y Santiago (`feature/compare_analysis`, `feature/analog-finder`, `feature/colombia-scientific-integration`, `feature/planetary-analysis`) se dejan en GitHub como referencia; lo que se usó de ellas ya está en `main`.
+
 ## 2026-11-15 · Release v0.6.0 a producción
 **Autor:** @Ssalazarp420
 

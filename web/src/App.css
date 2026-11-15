@@ -267,10 +267,6 @@
   align-items: center;
 }
 
-.tour-button {
-  white-space: nowrap;
-}
-
 .lang-switch {
   display: inline-flex;
   border: 1px solid var(--border);
@@ -1319,35 +1315,11 @@
   font-weight: 600;
 }
 
-.dims {
-  list-style: none;
-  margin: 8px 0 0;
-  padding: 0;
-  display: grid;
-  gap: 4px;
-}
 
-.dims li {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.82rem;
-}
 
-.level {
-  font-weight: 600;
-}
 
-.level.alta {
-  color: var(--ok);
-}
 
-.level.media {
-  color: var(--warn);
-}
 
-.level.baja {
-  color: var(--bad);
-}
 
 .characterization h4 {
   margin: 12px 0 4px;

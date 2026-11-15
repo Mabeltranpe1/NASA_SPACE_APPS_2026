@@ -65,7 +65,7 @@ CREDIT = "Copernicus Sentinel-2 (ESA) · Microsoft Planetary Computer"
 MAX_PASSES = 5  # satellite passes tried per place, least cloudy first
 
 session = requests.Session()
-session.headers["User-Agent"] = "earth-analogs-app/1.0 (NASA Space Apps 2026)"
+session.headers["User-Agent"] = "geoanalog/1.0 (NASA Space Apps 2026)"
 
 
 def request(method, url, retries=4, **kwargs):
