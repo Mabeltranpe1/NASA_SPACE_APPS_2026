@@ -39,7 +39,7 @@ Formato sugerido:
 - **Entorno:** se agregaron a `requirements.txt` y `environment.yml` las librerías que usan los scripts (`scipy`, `pyproj`, `requests`, `h5py`, `pyhdf`, `earthaccess`). Earth Engine (API de Python) quedó configurado en la máquina de @Ssalazarp420.
 - **Pendientes** (detalle en [DATOS_WEB.md](DATOS_WEB.md#pendientes-conocidos)):
   - Regiones para Timanfaya y Lava Beds.
-  - Revisar la tolerancia de la precipitación y la lluvia de IMERG en latitudes altas.
+  - Revisar la lluvia de IMERG en latitudes altas (menos confiable por encima de 60°). La tolerancia estricta de la precipitación es intencional: Marco buscó lugares casi sin lluvia, como la Luna y Marte.
   - Máscara de mar en La Guajira.
   - Temperatura de Diviner para los sitios de Artemis de Santiago.
   - Procesar EMIT.

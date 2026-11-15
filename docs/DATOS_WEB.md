@@ -56,7 +56,8 @@ El puntaje es el de `compare.py` (Marco), sin cambios en la fórmula. El exporta
 
    Sin esta regla, para la Luna ganaba siempre el lugar más frío del planeta (el norte de Groenlandia), sin importar el relieve. En la app estas variables aparecen con la etiqueta **"fuera del rango de la Tierra"**.
 3. **Descubrimientos por región.** Para cada objetivo se toma la mejor celda de cada región **poco conocida** (`known = no`) y se guardan las 6 mejores regiones. Así una sola región no llena toda la lista. Las regiones conocidas (Antártida, Atacama, Islandia, Hawái…) quedan como **control**: el método debe ponerlas arriba, y lo hace.
-4. **Estabilidad:** en cuántas de 100 variaciones aleatorias de los pesos (±50 %) el lugar sigue entre los 500 mejores de la Tierra.
+4. **La precipitación es exigente a propósito.** En la Luna y en Marte no llueve, así que Marco definió una tolerancia estricta (escala logarítmica, tolerancia 1): solo los lugares casi sin lluvia se parecen en esta variable (con 20 mm al año, la similitud ya es de 0,05). Por eso los sitios lluviosos, como la Tatacoa, tienen un puntaje completo bajo aunque su relieve se parezca. El botón "Relieve" de la app muestra esa otra mirada.
+5. **Estabilidad:** en cuántas de 100 variaciones aleatorias de los pesos (±50 %) el lugar sigue entre los 500 mejores de la Tierra.
 
 ## Qué muestra la app
 
@@ -72,7 +73,6 @@ El puntaje es el de `compare.py` (Marco), sin cambios en la fórmula. El exporta
 | Pendiente | Quién | Detalle |
 |---|---|---|
 | Timanfaya y Lava Beds no tienen datos | Marco | Están fuera de las regiones de `regions_catalog.csv`. Basta con agregar una región que las contenga |
-| Peso de la precipitación | Marco | Con la tolerancia actual (escala logarítmica, 1), 20 mm al año ya dan una similitud de 0,05 en esa variable. Esto favorece mucho los desiertos hiperáridos. Revisar si es la intención |
 | Lluvia en latitudes altas | Marco | IMERG es menos confiable por encima de 60°. El norte de Groenlandia sale como gran análogo de Marte en parte por eso |
 | La Guajira | Santiago | Su ventana puede incluir mar: está marcada como provisional en la ficha |
 | Sitios lunares de Artemis de Santiago | Marco + Santiago | Connecting Ridge, Peak near Shackleton, Leibnitz Beta y Malapert solo tienen relieve. Falta la temperatura de Diviner para sumarlos a `targets.csv` |
