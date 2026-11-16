@@ -14,6 +14,7 @@ import {
 } from '../comparator/compare'
 import {
   MISSION_IDS,
+  missionAvailable,
   missionFits,
   missionReference,
   missionWeights,
@@ -213,9 +214,15 @@ type Form = {
   mission: MissionId | ''
 }
 
+/** The mission, if it makes sense for this body (no thermal tests on the Moon, whose temperature is not compared). */
+function missionFor(db: ComparatorDB, body: Body, mission: MissionId | ''): MissionId | '' {
+  return mission && missionAvailable(missionWeights(db.meta, body, mission), mission) ? mission : ''
+}
+
 /** Weights to start from: the mission's, or the model's for this body. */
 function startWeights(db: ComparatorDB, body: Body, mission: MissionId | '') {
-  return mission ? missionWeights(db.meta, body, mission) : { ...db.meta.weights[body] }
+  const m = missionFor(db, body, mission)
+  return m ? missionWeights(db.meta, body, m) : { ...db.meta.weights[body] }
 }
 
 function siteStrings(db: ComparatorDB, id: string): Record<string, string> {
@@ -243,7 +250,7 @@ function formFromHash(db: ComparatorDB): Partial<Form> | null {
   const body: Body = (p.get('body') ?? s?.body) === 'Moon' ? 'Moon' : 'Mars'
   const mission = (MISSION_IDS as string[]).includes(p.get('mission') ?? '') ? (p.get('mission') as MissionId) : ''
   return {
-    mission,
+    mission: missionFor(db, body, mission),
     site: s && !Object.keys(values).length ? s.id : '',
     body,
     values: { ...(s ? siteStrings(db, s.id) : {}), ...values },
@@ -364,7 +371,7 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
   const pickSite = (id: string) => {
     if (!id) return set({ site: '' })
     const s = db.meta.sites.find((x) => x.id === id)!
-    const f = { ...form, site: id, body: s.body, values: siteStrings(db, id), weights: startWeights(db, s.body, form.mission) }
+    const f = { ...form, site: id, body: s.body, values: siteStrings(db, id), mission: missionFor(db, s.body, form.mission), weights: startWeights(db, s.body, form.mission) }
     setForm(f)
     run(db, f)
   }
@@ -479,7 +486,7 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
               <span className="finder-body">{t('custom')}</span>
               {(['Moon', 'Mars'] as Body[]).map((b) => (
                 <button key={b} className={`chip ${!form.site && form.body === b ? 'active' : ''}`}
-                  onClick={() => set({ site: '', body: b, weights: startWeights(db, b, form.mission) })}>
+                  onClick={() => set({ site: '', body: b, mission: missionFor(db, b, form.mission), weights: startWeights(db, b, form.mission) })}>
                   {bodyName(b)}
                 </button>
               ))}
@@ -492,7 +499,7 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
             <button className={`chip ${!form.mission && usingDefaults ? 'active' : ''}`} onClick={() => pickMission('')}>
               {mu('all')}
             </button>
-            {MISSION_IDS.map((m) => (
+            {MISSION_IDS.filter((m) => missionFor(db, form.body, m)).map((m) => (
               <button key={m} className={`chip mission-chip ${form.mission === m ? 'active' : ''}`} onClick={() => pickMission(m)}
                 aria-pressed={form.mission === m}>
                 <MissionIcon id={m} /> {mt(m).name}
@@ -508,7 +515,7 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
                   <p><strong>{mt(form.mission).name}.</strong> {mt(form.mission).why}</p>
                   <p className="muted small">
                     {mu('priorities', { list: priorities(form.mission) })}
-                    {form.body === 'Moon' && (form.mission === 'thermal' || form.mission === 'habitat') && <> · {mu('moonTemp')}</>}
+                    {form.body === 'Moon' && form.mission === 'habitat' && <> · {mu('moonTemp')}</>}
                   </p>
                   {mt(form.mission).note && <p className="mission-note small">⚠ {mt(form.mission).note}</p>}
                 </div>

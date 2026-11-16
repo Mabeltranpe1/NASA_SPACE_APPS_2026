@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { fitsWithWeights, topMissions } from '../comparator/missions'
+import { fitsWithWeights, switchedOffFor, topMissions } from '../comparator/missions'
 import { useMissionData } from '../data/missionData'
 import type { Target } from '../data/types'
 import { MISSION_TEXT, MISSION_UI } from '../i18n/missions'
@@ -18,7 +18,8 @@ export default function MissionFits({ targetId, body, sim }: { targetId: string;
   const data = useMissionData()
   const [all, setAll] = useState(false)
   if (!data) return null
-  const fits = fitsWithWeights(data.weights[body === 'luna' ? 'Moon' : 'Mars'], sim, data.reference[targetId])
+  const weights = data.weights[body === 'luna' ? 'Moon' : 'Mars']
+  const fits = fitsWithWeights(weights, sim, data.reference[targetId])
   if (!fits.length) return null
   const top = topMissions(fits)
   const ui = MISSION_UI[lang]
@@ -30,9 +31,12 @@ export default function MissionFits({ targetId, body, sim }: { targetId: string;
       .replace('{rel}', String(pct(m.relative)))
       .replace(/ ?Clic.*$| ?Click.*$/, '')
   const notes = top.map((m) => MISSION_TEXT[lang][m.mission].note).filter((n): n is string => Boolean(n))
+  // e.g. "habitats" on the Moon: it weighs the temperature, which is not compared there.
+  if (top.some((m) => switchedOffFor(weights[m.mission], m.mission).length > 0)) notes.push(ui.moonTemp)
   return (
     <div className="mission-panel">
       <h4 className="panel-sub">{ui.panelTitle}</h4>
+      {top.length === 0 && <p className="muted small">{ui.panelNone}</p>}
       <p className="mission-fits">
         {top.map((m) => (
           <span key={m.mission} className="pill mission static" title={tip(m)}>
@@ -56,7 +60,7 @@ export default function MissionFits({ targetId, body, sim }: { targetId: string;
         </ul>
       )}
       <button className="link small" onClick={() => setAll((v) => !v)}>
-        {all ? ui.panelFewer : ui.panelAll}
+        {all ? ui.panelFewer : ui.panelAll.replace('{n}', String(fits.length))}
       </button>
       {all && <p className="muted small">{ui.panelHint}</p>}
       {notes.map((n) => (

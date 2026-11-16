@@ -44,6 +44,31 @@ export const MISSION_PROFILES: Record<MissionId, MissionProfile> = {
   landing: { slope_deg: 3, roughness: 3, temp_mean_K: 0.25, temp_range_K: 0.5, albedo: 0.5, precip_mm: 0.5, ndvi: 1, em_contrast: 0.25 },
 }
 
+/**
+ * Variables a mission cannot do without. If all of them are switched off for a body (the Moon's
+ * temperature: no place on Earth reaches it), the mission is not offered for that body, because its
+ * score would be decided by other variables than the ones it is about.
+ */
+export const MISSION_REQUIRES: Partial<Record<MissionId, string[]>> = {
+  thermal: ['temp_mean_K', 'temp_range_K'],
+}
+
+/** A mission's weights (missionWeights) still contain the variables it cannot do without. */
+export function missionAvailable(weights: Record<string, number>, mission: MissionId) {
+  const need = MISSION_REQUIRES[mission]
+  return !need || need.some((f) => (weights[f] ?? 0) > 0)
+}
+
+/**
+ * Variables a mission weighs a lot (factor >= 2) but that are switched off for this body, e.g. the
+ * temperature of "habitats" on the Moon. The app warns about them.
+ */
+export function switchedOffFor(weights: Record<string, number>, mission: MissionId) {
+  return Object.entries(MISSION_PROFILES[mission])
+    .filter(([f, factor]) => factor >= 2 && !((weights[f] ?? 0) > 0))
+    .map(([f]) => f)
+}
+
 /** Highest weight a slider shows (AnalogFinder's range input goes 0..3). */
 const MAX_WEIGHT = 3
 
@@ -123,18 +148,24 @@ export function fitsWithWeights(
   for (const [f, v] of Object.entries(similarity)) if (v != null) sim[f] = v
   const out: MissionFit[] = []
   for (const m of MISSION_IDS) {
-    const s = weights[m] ? scoreFromSimilarity(sim, weights[m]) : null
+    if (!weights[m] || !missionAvailable(weights[m], m)) continue
+    const s = scoreFromSimilarity(sim, weights[m])
     if (s != null) out.push({ mission: m, score: s, relative: ref?.[m] ? s / ref[m] : s })
   }
   return out.sort((a, b) => b.relative - a.relative || MISSION_IDS.indexOf(a.mission) - MISSION_IDS.indexOf(b.mission))
 }
 
+/** A place is "suitable for" a mission only if it reaches this share of the best place on Earth for it. */
+export const SUITABLE_MIN = 0.5
+
 /**
- * The 2-3 missions a place is best suited for ("suitable for" badge): always the best two, and the
- * third only when it is close to the second (within 0.03).
+ * The 2-3 missions a place is best suited for ("suitable for" badge): the best two, and the third
+ * only when it is close to the second (within 0.03). Missions below SUITABLE_MIN of the best place
+ * on Earth are never suggested, so a poor match gets no badge instead of a misleading one.
  */
-export function topMissions(fits: MissionFit[], closeTo = 0.03): MissionFit[] {
-  const top = fits.slice(0, 2)
-  if (fits.length > 2 && fits[1].relative - fits[2].relative <= closeTo) top.push(fits[2])
+export function topMissions(fits: MissionFit[], closeTo = 0.03, minRelative = SUITABLE_MIN): MissionFit[] {
+  const good = fits.filter((f) => f.relative >= minRelative)
+  const top = good.slice(0, 2)
+  if (good.length > 2 && good[1].relative - good[2].relative <= closeTo) top.push(good[2])
   return top
 }

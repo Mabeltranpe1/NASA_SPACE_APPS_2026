@@ -83,6 +83,14 @@ Rutas del servidor (solo GET, con CORS abierto):
 
 Solo necesita pandas y numpy: `compare.py` importa scikit-learn únicamente para `--scaling robust`, que la API no usa.
 
+## Tipos de misión
+
+Siete perfiles de pesos sobre las mismas variables (`web/src/comparator/missions.ts`): rovers, minería e ISRU, hábitats, pruebas térmicas, astrobiología, drones, y aterrizaje y lanzamiento. Cada misión multiplica los pesos del modelo, así que la fórmula y las variables apagadas no cambian (`web/scripts/check-missions.ts` lo comprueba).
+
+- **«Apto para»**: cada lugar muestra hasta 3 misiones. El valor de cada misión se compara con el mejor lugar de la Tierra para esa misión (100), y solo se sugieren las que llegan a **50 o más**. Si ninguna llega, el panel lo dice.
+- **Misiones que no aplican**: si un cuerpo tiene apagadas todas las variables que una misión necesita, esa misión no se ofrece. Es el caso de las pruebas térmicas en la Luna, donde la temperatura no se compara. Los hábitats lunares llevan un aviso por la misma razón.
+- `public/data/missions.json` guarda los pesos y el mejor valor de la Tierra por sitio y misión (`web/scripts/export-missions.ts`), así el panel no carga la base de 7 MB.
+
 ## Integración en la web
 
 - **Apartado «Buscar»** en la barra lateral (`view=finder`). `AnalogFinder` se carga de forma diferida (`React.lazy`): ni el componente ni la base de 7 MB se descargan hasta abrirlo. Un enlace `#buscar?site=...` abre el apartado directamente («Copiar enlace»).
