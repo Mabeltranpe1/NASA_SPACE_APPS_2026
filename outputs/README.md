@@ -1,6 +1,6 @@
 # What each folder in outputs/ is
 
-`outputs/` holds **results**: everything here can be made again from `data/` with the scripts in `src/`. Famous analog regions (`known = yes`) are always left out. Method: main [README](../README.md), section 3.
+`outputs/` holds **results**: everything here can be made again from `data/` with the scripts in `src/`. Famous analog regions (`known = yes`) are always left out. Method: [docs/DATOS_Y_METODO.md](../docs/DATOS_Y_METODO.md), section 3. The web app's own data (`comparisons.json`, heatmaps, the «Buscar» database and the static API in `web/public/data/`) are made by `src/export_web.py` and `src/analog_api.py`; see [docs/DATOS_WEB.md](../docs/DATOS_WEB.md).
 
 ## results/ (made by `python src/make_results.py` and `python src/make_top_analogos.py`)
 Official weights: `elev_m` 0, `em_contrast` 0.5, the rest as in `compare.py`.
