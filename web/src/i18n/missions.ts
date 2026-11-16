@@ -92,6 +92,10 @@ export const MISSION_UI = {
     suitable: 'Apto para',
     fitTip: '{mission}: {score}/100 con los pesos de esta misión · {rel} % de lo mejor de la Tierra para esta misión. Clic para filtrar.',
     custom: 'Pesos propios',
+    panelTitle: 'Misiones que se pueden probar aquí',
+    panelAll: 'Ver las 7 misiones',
+    panelFewer: 'Ver menos',
+    panelHint: '100 = el mejor lugar de la Tierra para esa misión, con el mismo puntaje de la app y los pesos de cada misión. Solo cambian los pesos: no hay datos de polvo, hielo, cuevas ni iluminación.',
   },
   en: {
     title: 'Mission type',
@@ -102,5 +106,9 @@ export const MISSION_UI = {
     suitable: 'Suitable for',
     fitTip: '{mission}: {score}/100 with this mission\'s weights · {rel}% of the best on Earth for this mission. Click to filter.',
     custom: 'Custom weights',
+    panelTitle: 'Missions that could be tested here',
+    panelAll: 'Show all 7 missions',
+    panelFewer: 'Show fewer',
+    panelHint: '100 = the best place on Earth for that mission, with the app\'s same score and each mission\'s weights. Only the weights change: there is no data on dust, ice, caves or lighting.',
   },
 } as const

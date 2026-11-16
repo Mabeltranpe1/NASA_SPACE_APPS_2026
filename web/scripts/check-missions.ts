@@ -3,7 +3,9 @@
  *   1. findAnalogs with a mission's weights gives the same score as scoreFromSimilarity
  *      (so the "suitable for" badge is the real score with that mission's weights);
  *   2. elevation stays at 0 and the variables switched off for a body stay off;
- *   3. prints how often each mission is in a place's top 2-3, to spot a profile that never wins.
+ *   3. public/data/missions.json is up to date (same weights; its best-on-Earth reference is at
+ *      least every score the comparator finds), otherwise run export-missions.ts;
+ *   4. prints how often each mission is in a place's top 2-3, to spot a profile that never wins.
  *
  *   node --experimental-strip-types web/scripts/check-missions.ts
  *
@@ -32,6 +34,13 @@ for (const body of ['Moon', 'Mars'] as const) {
   }
 }
 
+const file = JSON.parse(readFileSync(fileURLToPath(new URL('../public/data/missions.json', import.meta.url)), 'utf8'))
+for (const body of ['Moon', 'Mars'] as const)
+  for (const m of MISSION_IDS)
+    for (const [f, w] of Object.entries(missionWeights(meta, body, m)))
+      if (Math.abs((file.weights[body]?.[m]?.[f] ?? NaN) - w) > 1e-6) failures.push(`missions.json is stale: ${body}/${m}/${f} (run export-missions.ts)`)
+for (const s of meta.sites) if (!file.reference[s.id]) failures.push(`missions.json has no reference for ${s.id} (run export-missions.ts)`)
+
 const sites = meta.sites.filter((s, i) => i % 3 === 0)
 for (const s of sites) {
   // Model weights: where do the "suitable for" badges land?
@@ -46,6 +55,8 @@ for (const s of sites) {
       const err = again == null ? Infinity : Math.abs(again - r.score)
       maxErr = Math.max(maxErr, err)
       checked++
+      if (r.rank === 1 && Math.abs(file.reference[s.id]?.[m] - r.score) > 1e-6 && !res.query.include_known && r.score > file.reference[s.id]?.[m])
+        failures.push(`${s.id}/${m}: comparator found ${r.score} above missions.json ${file.reference[s.id]?.[m]}`)
       if (err > 1e-9) failures.push(`${s.id}/${m} #${r.rank}: ${r.score} vs ${again}`)
     }
   }

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import type { MissionId } from '../comparator/missions'
+import './Missions.css'
 
 /**
  * One small line icon per mission type, drawn like Icons.tsx (24 × 24 grid, 1.7 stroke,

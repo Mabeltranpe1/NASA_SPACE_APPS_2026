@@ -24,6 +24,7 @@ import {
 import { useLang } from '../i18n/useLang'
 import { MISSION_TEXT, MISSION_UI } from '../i18n/missions'
 import { MissionIcon } from './MissionIcons'
+import { useMissionData } from '../data/missionData'
 import { BODY_NAMES, type Lang } from '../i18n/strings'
 import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
 import './AnalogFinder.css'
@@ -339,18 +340,22 @@ export default function AnalogFinder({ onShowOnGlobe }: { onShowOnGlobe?: (place
   }, [db, form])
 
   // Yardstick for "suitable for": best score Earth has for each mission, for the searched target.
-  // Depends only on the target (values + body), not on the weights, so a mission change reuses it.
-  const refKey = result ? `${result.query.body}|${JSON.stringify(result.query.values)}` : ''
-  const missionRef = useMemo(
-    () => (db && result ? missionReference(db, result.query.values, result.query.body) : null),
+  // Known sites read it from public/data/missions.json (full scan, same as the site panel); custom
+  // values get it from a sample of Earth. It depends only on the target, not on the weights.
+  const missionData = useMissionData()
+  const refKey = result ? `${result.query.site ?? ''}|${result.query.body}|${JSON.stringify(result.query.values)}` : ''
+  const missionRef = useMemo(() => {
+    if (!db || !result) return null
+    const known = result.query.site ? missionData?.reference[result.query.site] : undefined
+    return known ?? missionReference(db, result.query.values, result.query.body)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [db, refKey],
-  )
-  const pointSite = pointResult?.results[0] ? db?.meta.sites.find((s) => s.id === pointResult.results[0].site) : undefined
-  const pointRef = useMemo(
-    () => (db && pointSite ? missionReference(db, pointSite.values, pointSite.body) : null),
-    [db, pointSite],
-  )
+  }, [db, refKey, missionData])
+  const pointSiteId = pointResult?.results[0]?.site
+  const pointRef = useMemo(() => {
+    const s = pointSiteId ? db?.meta.sites.find((x) => x.id === pointSiteId) : undefined
+    if (!db || !s) return null
+    return missionData?.reference[s.id] ?? missionReference(db, s.values, s.body)
+  }, [db, pointSiteId, missionData])
 
   if (error && !db) return <section className="comparison muted-box">{t('loadError')} ({error})</section>
   if (!db || !form) return <section className="comparison muted-box">{t('loading')}</section>

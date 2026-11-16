@@ -86,6 +86,7 @@ export function scoreFromSimilarity(similarity: Record<string, number>, weights:
  * It is the yardstick for "suitable for": a place is suited to a mission when it comes close to the
  * best Earth has for that mission, not just when its mission score is high (flat, dry places score
  * high on terrain for almost every target, so raw scores would always say "rovers" and "landing").
+ * For the known sites it is precomputed with step = 1 in public/data/missions.json (export-missions.ts).
  */
 export function missionReference(db: ComparatorDB, values: Values, body: Body, step = 10): Record<MissionId, number> {
   const ref = {} as Record<MissionId, number>
@@ -109,9 +110,20 @@ export interface MissionFit {
 export function missionFits(
   meta: ComparatorMeta, body: Body, similarity: Record<string, number>, ref?: Record<MissionId, number>,
 ): MissionFit[] {
+  const weights = {} as Record<MissionId, Record<string, number>>
+  for (const m of MISSION_IDS) weights[m] = missionWeights(meta, body, m)
+  return fitsWithWeights(weights, similarity, ref)
+}
+
+/** Same as missionFits with the weights already computed (public/data/missions.json). */
+export function fitsWithWeights(
+  weights: Record<MissionId, Record<string, number>>, similarity: Record<string, number | null>, ref?: Record<MissionId, number>,
+): MissionFit[] {
+  const sim: Record<string, number> = {}
+  for (const [f, v] of Object.entries(similarity)) if (v != null) sim[f] = v
   const out: MissionFit[] = []
   for (const m of MISSION_IDS) {
-    const s = scoreFromSimilarity(similarity, missionWeights(meta, body, m))
+    const s = weights[m] ? scoreFromSimilarity(sim, weights[m]) : null
     if (s != null) out.push({ mission: m, score: s, relative: ref?.[m] ? s / ref[m] : s })
   }
   return out.sort((a, b) => b.relative - a.relative || MISSION_IDS.indexOf(a.mission) - MISSION_IDS.indexOf(b.mission))
