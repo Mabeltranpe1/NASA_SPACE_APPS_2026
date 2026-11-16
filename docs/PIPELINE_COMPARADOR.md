@@ -1,4 +1,6 @@
 > Documentación técnica del comparador escrita por Marco (originalmente el README de la rama `feature/compare_analysis`). Se movió aquí al integrar su trabajo; el README principal del proyecto sigue en la raíz. Las rutas relativas se escribieron pensando en la raíz del repositorio.
+>
+> **Versión histórica (14 de noviembre).** Algunas partes ya no valen: la escala por defecto es la de tolerancias físicas (`TOLERANCE`), no `RobustScaler`; la base tiene 727 regiones y 31 sitios; hay 13 tests. La versión al día es [DATOS_Y_METODO.md](DATOS_Y_METODO.md), y la API, [API.md](API.md).
 
 # Earth Analogs for Moon and Mars Base Sites
 
@@ -27,7 +29,7 @@ The goal is to find places on Earth that look like the places where we want to b
 | Subsurface | Caves, lava tubes |
 | Operations | Landing, mobility, navigation, construction |
 
-Other data sources (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, etc.) are listed in [RECURSOS.md](RECURSOS.md).
+Other data sources (PDS, LRO/Diviner, Earthdata, Copernicus, RADARSAT, JAXA, etc.) are listed in [RECURSOS.md](../RECURSOS.md).
 
 
 ---
@@ -69,7 +71,7 @@ Missing data is handled like this:
 | **MCD43C3** v061 | surface albedo (daily product) | 0.05 degree, global | 12 files (the 15th of each month) |
 | **GPM_3IMERGM** v07 | precipitation, monthly | 0.1 degree, global | 12 files (one per month) |
 
-The Moon and Mars target values are not downloaded by a script yet (see "Status and next steps"). More data sources are listed in [RECURSOS.md](RECURSOS.md).
+The Moon and Mars target values are not downloaded by a script yet (see "Status and next steps"). More data sources are listed in [RECURSOS.md](../RECURSOS.md).
 
 ---
 
@@ -77,7 +79,7 @@ The Moon and Mars target values are not downloaded by a script yet (see "Status 
 
 ```
 NASA_SPACE_APPS_2026/
-├── README.md              <- this file
+├── README.md              <- main README (Spanish): how to use the app, the API and the setup
 ├── RECURSOS.md            <- catalog of data sources
 ├── CONTRIBUTING.md        <- git flow workflow (read before working)
 ├── environment.yml        <- conda environment "analogos"
@@ -125,7 +127,7 @@ npm install
 npm run dev                  # http://localhost:5173
 ```
 
-Deployment to Azure is explained in [infra/README.md](infra/README.md).
+Deployment to Azure is explained in [infra/README.md](../infra/README.md).
 
 ---
 
@@ -325,12 +327,12 @@ Size guide: the 12 MCD43C3 albedo files are about 2.4 GB and the 12 MOD11C3 file
 
 ## 10. Documentation
 
-- [docs/OBJETIVO.md](docs/OBJETIVO.md): detailed goal of the platform and challenge criteria
-- [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): components, CI/CD, security and costs
-- [docs/BITACORA.md](docs/BITACORA.md): log of decisions and progress
-- [docs/GOOGLE_MAPS_API_KEY.md](docs/GOOGLE_MAPS_API_KEY.md): how to create and test a Google Maps API key
-- [RECURSOS.md](RECURSOS.md): data sources
+- [docs/OBJETIVO.md](OBJETIVO.md): detailed goal of the platform and challenge criteria
+- [docs/ARQUITECTURA.md](ARQUITECTURA.md): components, CI/CD, security and costs
+- [docs/BITACORA.md](BITACORA.md): log of decisions and progress
+- [docs/GOOGLE_MAPS_API_KEY.md](GOOGLE_MAPS_API_KEY.md): how to create and test a Google Maps API key
+- [RECURSOS.md](../RECURSOS.md): data sources
 
 ## 11. How to collaborate
 
-We use **git flow**. Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start working.
+We use **git flow**. Read [CONTRIBUTING.md](../CONTRIBUTING.md) before you start working.

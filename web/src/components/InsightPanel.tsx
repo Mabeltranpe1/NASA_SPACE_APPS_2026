@@ -10,6 +10,7 @@ import { BODY_COLORS, SIMILARITY_COLOR } from '../theme'
 import { useLang } from '../i18n/useLang'
 import { BODY_NAMES } from '../i18n/strings'
 import PlanetGlobe from './PlanetGlobe'
+import MissionFits from './MissionFits'
 import { IconImages, IconLock } from './Icons'
 import ImageCompareModal from './ImageCompareModal'
 import { useGalleryCount } from '../data/gallery'
@@ -257,6 +258,8 @@ function SimilarityContent({
           </ul>
         </>
       )}
+
+      <MissionFits targetId={target.id} body={compareBody} sim={result.sim} />
 
       <h4 className="panel-sub">{t('cmp.values')}</h4>
       <p className="legend-line small">

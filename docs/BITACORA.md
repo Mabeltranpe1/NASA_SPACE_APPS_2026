@@ -14,6 +14,19 @@ Formato sugerido:
 
 ---
 
+## 2026-11-16 · Release v1.2.0 a producción
+
+- PR #24 (tipos de misión y documentación al día); publicado como `v1.2.0` en `main`.
+
+## 2026-11-16 · Tipos de misión y documentación al día
+
+- **Tipos de misión** (rama `feature/filtros-mision`): 7 perfiles de pesos (rovers, minería e ISRU, hábitats, pruebas térmicas, astrobiología, drones, aterrizaje y lanzamiento). En «Buscar» hay un filtro por misión e insignias «Apto para»; en el panel de cada lugar, «Misiones que se pueden probar aquí». La fórmula no cambia.
+- **Ajustes al integrarlo:**
+  - Solo se sugieren misiones que llegan a 50 de 100 frente al mejor lugar de la Tierra para esa misión. Antes, Haughton ≈ Shackleton recibía «Minería, Pruebas térmicas, Astrobiología» con 9, 6 y 6 de 100; ahora el panel dice que ninguna misión destaca.
+  - Las pruebas térmicas no se ofrecen para la Luna, donde la temperatura no se compara (su puntaje quedaba decidido por el albedo y la lluvia). Los hábitats lunares llevan un aviso.
+- **Documentación** (rama `feature/docs-api-readmes`): enlaces relativos en `docs/`, salidas de datos al día y `compare.py` sin depender de scikit-learn salvo para `--scaling robust`. En el README se conserva la versión para el jurado y se suma la sección «API para investigadores».
+- **Video:** el paso de «Buscar» muestra Jezero filtrado por «Movilidad de rovers».
+
 ## 2026-11-15 · Release v1.1.1: README para el jurado
 
 - README reescrito como presentación del proyecto (qué hace, método, datos, cómo correrlo), sin nombres de personas ni notas internas.

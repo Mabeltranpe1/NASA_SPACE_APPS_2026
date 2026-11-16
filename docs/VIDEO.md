@@ -22,7 +22,7 @@ Otra opción es abrir directamente `…/?lang=en&demo=1`: arranca solo al cargar
 | 12–16 | Análogos conocidos y la Luna | Haughton ≈ Shackleton; el globo vuela al **polo sur lunar** |
 | 16–20 | Fotos reales, lado a lado | La ventana de fotos: la Tierra a la izquierda, la Luna o Marte a la derecha |
 | 20–24 | Análisis honesto | Análisis detallado: fotos, puntaje, valores reales, ranking y límites |
-| 24–28 | Busca tus propios análogos | El apartado **Buscar** con Mons Mouton (API, descargas) |
+| 24–28 | Análogos para cada misión | El apartado **Buscar** con Jezero filtrado por «Movilidad de rovers» (insignias «Apto para», descargas) |
 | 28–31 | GeoAnalog · método abierto | La vista **Método**: fórmula, reglas y fuentes |
 
 ## Texto para la voz o los subtítulos (opcional)
