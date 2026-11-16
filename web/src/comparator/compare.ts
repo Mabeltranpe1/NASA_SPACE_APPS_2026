@@ -336,6 +336,20 @@ function bestWorst(features: string[], sims: Float64Array): [string, string] {
   return [best < 0 ? '' : features[best], worst < 0 ? '' : features[worst]]
 }
 
+/**
+ * Scores of an even sample of Earth cells (every `step`-th cell, famous regions included), with the
+ * same formula as findAnalogs. Used as a reference to say how unusual a score is (missions.ts).
+ */
+export function sampleScores(db: ComparatorDB, values: Values, weights: Record<string, number>, step = 25): number[] {
+  const p = prepare(db, values, weights)
+  const out: number[] = []
+  for (let i = 0; i < db.n; i += step) {
+    const s = scoreCell(db, p, i, db.meta.min_coverage)
+    if (!Number.isNaN(s)) out.push(s)
+  }
+  return out
+}
+
 // ---------------------------------------------------------------------------
 // 1. Find analogs
 // ---------------------------------------------------------------------------
