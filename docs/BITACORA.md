@@ -14,6 +14,10 @@ Formato sugerido:
 
 ---
 
+## 2026-11-16 · Release v1.2.0 a producción
+
+- PR #24 (tipos de misión y documentación al día); publicado como `v1.2.0` en `main`.
+
 ## 2026-11-16 · Tipos de misión y documentación al día
 
 - **Tipos de misión** (rama `feature/filtros-mision`): 7 perfiles de pesos (rovers, minería e ISRU, hábitats, pruebas térmicas, astrobiología, drones, aterrizaje y lanzamiento). En «Buscar» hay un filtro por misión e insignias «Apto para»; en el panel de cada lugar, «Misiones que se pueden probar aquí». La fórmula no cambia.
