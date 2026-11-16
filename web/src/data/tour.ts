@@ -19,8 +19,9 @@ export interface TourStep {
   list?: RankingId
   /** Open the photo gallery of the selected place. */
   gallery?: boolean
-  /** "Find" view: Moon/Mars site searched on arrival. */
+  /** "Find" view: Moon/Mars site searched on arrival, and the mission type to filter by. */
   finderSite?: string
+  finderMission?: string
   /** Duration of the step in seconds (default 12). */
   seconds?: number
   title: Record<Lang, string>
@@ -208,12 +209,13 @@ export const DEMO_STEPS: TourStep[] = [
     view: 'finder',
     siteId: null,
     body: 'tierra',
-    finderSite: 'mons-mouton',
+    finderSite: 'jezero',
+    finderMission: 'rover',
     seconds: 4,
-    title: { es: 'Busca tus propios análogos', en: 'Find your own analogs' },
+    title: { es: 'Análogos para cada misión', en: 'Analogs for each mission' },
     text: {
-      es: 'Cualquier sitio o tus propios valores; descarga en GeoJSON, KML o para drones.',
-      en: 'Any site or your own values; download as GeoJSON, KML or drone waypoints.',
+      es: 'Rovers, minería, hábitats, drones o aterrizaje: el buscador ordena por misión y descarga en GeoJSON o KML.',
+      en: 'Rovers, mining, habitats, drones or landing: the finder ranks by mission and downloads GeoJSON or KML.',
     },
   },
   {

@@ -16,7 +16,8 @@ GeoAnalog encuentra lugares de la Tierra que se parecen a los sitios donde se pl
 - **Fotos reales, lado a lado:** imágenes Sentinel-2 del lugar exacto junto a fotos de rovers, módulos de aterrizaje y órbita de la NASA.
 - **Análisis detallado:** valores reales de cada variable, ranking mundial, pesos ajustables y lo que la Tierra no puede reproducir (gravedad, vacío, radiación).
 - **Estudios regionales:** caracterización detallada de 18 ventanas de 10 × 10 km en Colombia, la Luna y Marte (geología, minerales, temperatura, hielo), como contexto descriptivo.
-- **Buscador y API abierta:** busca análogos de cualquier sitio o de valores propios y descarga los resultados en GeoJSON, KML o waypoints para drones. Los mismos datos están en `/data/api/v1/`.
+- **Buscador y API abierta:** busca análogos de cualquier sitio o de valores propios, o pregunta a qué se parece un punto de la Tierra, y descarga los resultados en GeoJSON, KML o waypoints para drones.
+- **Tipos de misión:** rovers, minería e ISRU, hábitats, pruebas térmicas, astrobiología, drones, y aterrizaje y lanzamiento. Cada lugar indica para qué misiones sirve como análogo, y el buscador puede ordenar por misión.
 - **Español e inglés**, enlaces que se pueden compartir y un recorrido guiado.
 
 ## Cómo medimos el parecido
@@ -47,6 +48,20 @@ El detalle está en la vista **Método** de la app y en [docs/DATOS_WEB.md](docs
 
 Imágenes: NASA GIBS, Moon Trek y Mars Trek (globo), Sentinel-2 vía Microsoft Planetary Computer (vista de cerca) y la NASA Image and Video Library (fotos). Ubicación de las regiones de Artemis: Wueller et al. (2026). Catálogo completo de fuentes: [RECURSOS.md](RECURSOS.md).
 
+## API para investigadores
+
+Los mismos resultados de la app se pueden usar desde otras herramientas, con el mismo puntaje ([docs/API.md](docs/API.md)):
+
+- **API estática en la web publicada**, sin servidor: `https://icy-flower-03890400f.5.azurestaticapps.net/data/api/v1/sites.json` y `.../data/api/v1/analogs/<sitio>.json`, `.geojson`, `.kml` o `.waypoints` (por ejemplo `jezero.geojson`). QGIS abre el GeoJSON por URL (*Capa → Añadir capa vectorial → Protocolo HTTP*) y Google Earth abre el KML.
+- **Consultas libres en Python** (valores propios o un punto de la Tierra), como librería, en la línea de comandos o como servidor local de solo lectura:
+
+```bash
+python src/analog_api.py find --site jezero --top 10 --format geojson > jezero.geojson
+python src/analog_api.py find --body Mars --value temp_mean_K=215 --value albedo=0.15
+python src/analog_api.py point --lat 25.4 --lon 29.4
+python src/analog_api.py serve --port 8000     # http://127.0.0.1:8000/api/v1/sites
+```
+
 ## Cómo correrlo
 
 **App web** (React, Vite y CesiumJS):
@@ -60,7 +75,8 @@ npm run dev          # http://localhost:5173
 ```bash
 uv venv --python 3.12 && uv pip install -r requirements.txt
 source .venv/bin/activate
-pytest -q tests                                  # pruebas
+pytest -q tests                                  # pruebas (test_web_port.py necesita Node.js 22 o más)
+python src/make_results.py                       # tablas de resultados (outputs/results/)
 python src/export_web.py                         # datos de la app (~12 min)
 python src/export_images.py --prune --size 768   # imágenes Sentinel-2
 python src/export_science.py                     # estudios regionales

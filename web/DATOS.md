@@ -1,6 +1,8 @@
-# Datos para el aplicativo web
+# Datos para el aplicativo web (`analogos.json`, contrato histórico)
 
-Todos los resultados están en un solo archivo: **`web/public/data/analogos.json`**.
+> **Estado (v0.6.0):** la app **ya no usa** este archivo. Sus datos vienen de `src/export_web.py` → `comparisons.json` y mapas de calor, y el apartado «Buscar» y la API usan `src/analog_api.py` → `public/data/comparator/` y `public/data/api/v1/`. Ver [docs/DATOS_WEB.md](../docs/DATOS_WEB.md) y [docs/API.md](../docs/API.md). `analogos.json` se conserva como fotografía del contrato anterior (15 sitios: 6 de la Luna y 9 de Marte, antes de los 22 sitios de Artemis III).
+
+Este archivo describía el formato de **`web/public/data/analogos.json`**.
 Sus tipos de TypeScript están en **`web/src/data/analogos.ts`** (`AnalogData`).
 
 ```ts

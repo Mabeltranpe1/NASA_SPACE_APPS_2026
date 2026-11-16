@@ -42,7 +42,7 @@ La API, el apartado «Buscar» y el resto de la app usan **la misma regla** (`sr
 `python tests/test_web_port.py` corre 38 búsquedas (todos los sitios y casos especiales) y 3 puntos en Node con el código del navegador y en Python con `compare.py`:
 
 - **Mismo cálculo:** con los mismos valores guardados, la diferencia es 1e-16.
-- **Contra la base completa sin redondear:** la diferencia máxima de puntaje es 7e-4.
+- **Contra la base completa sin redondear:** la diferencia máxima de puntaje es 3e-5 (comprobado con la versión 0.6.0: 31 sitios, sin cambios de orden).
 - **Empates prácticos:** a veces dos lugares quedan prácticamente empatados (por ejemplo, 0,03280 frente a 0,03280) y el redondeo puede cambiar cuál sale primero. Con la regla de 300 km, ese cambio puede mover otros lugares de la lista. El script los lista.
 
 ## Para investigadores
@@ -81,7 +81,15 @@ Rutas del servidor (solo GET, con CORS abierto):
 | `/api/v1/analogs` | `site` o `body`; valores con el nombre de la variable (`temp_mean_K=215`); pesos con `w_<variable>`; `top`, `per_region`, `min_km`, `include_known`, `format=json\|geojson\|kml\|waypoints` |
 | `/api/v1/point` | `lat`, `lon`, `max_km` (25 por defecto), `format` |
 
-Solo necesita pandas y numpy. `compare.py` ahora importa scikit-learn únicamente para `--scaling robust`.
+Solo necesita pandas y numpy: `compare.py` importa scikit-learn únicamente para `--scaling robust`, que la API no usa.
+
+## Tipos de misión
+
+Siete perfiles de pesos sobre las mismas variables (`web/src/comparator/missions.ts`): rovers, minería e ISRU, hábitats, pruebas térmicas, astrobiología, drones, y aterrizaje y lanzamiento. Cada misión multiplica los pesos del modelo, así que la fórmula y las variables apagadas no cambian (`web/scripts/check-missions.ts` lo comprueba).
+
+- **«Apto para»**: cada lugar muestra hasta 3 misiones. El valor de cada misión se compara con el mejor lugar de la Tierra para esa misión (100), y solo se sugieren las que llegan a **50 o más**. Si ninguna llega, el panel lo dice.
+- **Misiones que no aplican**: si un cuerpo tiene apagadas todas las variables que una misión necesita, esa misión no se ofrece. Es el caso de las pruebas térmicas en la Luna, donde la temperatura no se compara. Los hábitats lunares llevan un aviso por la misma razón.
+- `public/data/missions.json` guarda los pesos y el mejor valor de la Tierra por sitio y misión (`web/scripts/export-missions.ts`), así el panel no carga la base de 7 MB.
 
 ## Integración en la web
 

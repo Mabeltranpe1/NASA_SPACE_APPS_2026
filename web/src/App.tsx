@@ -354,7 +354,8 @@ export default function App() {
     setGalleryOpen(false)
     if (step.discoverBody) setDiscoverBody(step.discoverBody)
     if (step.list) setDiscoverList(step.list)
-    if (step.finderSite) window.location.hash = `#buscar?site=${step.finderSite}`
+    if (step.finderSite)
+      window.location.hash = `#buscar?site=${step.finderSite}${step.finderMission ? `&mission=${step.finderMission}` : ''}`
     if (step.discovery && data) {
       const d = discoveriesFor(data, step.discovery, 1)[0]
       setDiscoverList('general')
